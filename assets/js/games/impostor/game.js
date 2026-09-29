@@ -95,8 +95,6 @@ function showSecretReveal() {
     }
 
     document.getElementById('reveal-player-title').innerText = `Rola dla: ${player.name}`;
-    const cardInner = document.getElementById('secret-card-inner');
-    cardInner.style.transform = 'rotateY(0deg)';
 
     const badge = document.getElementById('secret-badge');
     const wordDisplay = document.getElementById('secret-word-display');
@@ -127,15 +125,16 @@ function showSecretReveal() {
         desc.innerText = 'Znajdź impostora, który nie zna tego hasła!';
     }
 
+    if (typeof resetRevealCardPresentation === 'function') resetRevealCardPresentation();
+    if (typeof syncRevealRolePresentation === 'function') syncRevealRolePresentation();
     goToScreen('reveal');
 }
 
 function revealSecret(reveal) {
-    const cardInner = document.getElementById('secret-card-inner');
     const finishBtn = document.getElementById('finish-reveal-btn');
+    if (!finishBtn) return;
 
     if (reveal) {
-        cardInner.style.transform = 'rotateY(180deg)';
         playSound('click');
         clearTimeout(revealUnlockTimer);
         revealUnlockTimer = setTimeout(() => {
@@ -143,12 +142,9 @@ function revealSecret(reveal) {
             finishBtn.className = 'w-full max-w-xs bg-gradient-to-r from-teal-600 to-cyan-600 text-white font-bold py-3.5 px-6 rounded-2xl shadow-xl border border-teal-400/30';
             revealUnlockTimer = null;
         }, 300);
-    } else {
-        cardInner.style.transform = 'rotateY(0deg)';
-        if (revealUnlockTimer) {
-            clearTimeout(revealUnlockTimer);
-            revealUnlockTimer = null;
-        }
+    } else if (revealUnlockTimer) {
+        clearTimeout(revealUnlockTimer);
+        revealUnlockTimer = null;
     }
 }
 
