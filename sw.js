@@ -1,11 +1,12 @@
-const STATIC_CACHE = 'party-games-static-v5';
-const RUNTIME_CACHE = 'party-games-runtime-v5';
+const STATIC_CACHE = 'party-games-static-v6';
+const RUNTIME_CACHE = 'party-games-runtime-v6';
 
 const LOCAL_ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './assets/css/styles.css',
+  './assets/css/impostor.css',
   './assets/icons/icon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
