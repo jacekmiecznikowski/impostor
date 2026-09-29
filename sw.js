@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'party-games-static-v4';
-const RUNTIME_CACHE = 'party-games-runtime-v4';
+const STATIC_CACHE = 'party-games-static-v5';
+const RUNTIME_CACHE = 'party-games-runtime-v5';
 
 const LOCAL_ASSETS = [
   './',
@@ -10,14 +10,17 @@ const LOCAL_ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
-  './assets/js/data.js',
-  './assets/js/state.js',
-  './assets/js/audio.js',
-  './assets/js/background.js',
-  './assets/js/ui.js',
-  './assets/js/setup.js',
-  './assets/js/game.js',
-  './assets/js/scoreboard.js',
+  './assets/js/shared/audio.js',
+  './assets/js/shared/background.js',
+  './assets/js/shared/platform.js',
+  './assets/js/shared/ui.js',
+  './assets/js/shared/hub.js',
+  './assets/js/games/impostor/data.js',
+  './assets/js/games/impostor/state.js',
+  './assets/js/games/impostor/setup.js',
+  './assets/js/games/impostor/game.js',
+  './assets/js/games/impostor/presentation.js',
+  './assets/js/games/impostor/scoreboard.js',
   './assets/js/app.js'
 ];
 
@@ -84,7 +87,6 @@ self.addEventListener('fetch', event => {
           }
           return response;
         });
-
         return cached || networkFetch;
       })
     );
@@ -101,7 +103,6 @@ self.addEventListener('fetch', event => {
           }
           return response;
         }).catch(() => cached);
-
         return cached || networkFetch;
       })
     );

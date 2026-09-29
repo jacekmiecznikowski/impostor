@@ -60,9 +60,7 @@ function updateShellContext(screenName) {
         shellLogo.appendChild(icon);
     }
 
-    if (typeof setGameAwakeMode === 'function') {
-        setGameAwakeMode(!isGameHub);
-    }
+    if (typeof setGameAwakeMode === 'function') setGameAwakeMode(!isGameHub);
 }
 
 function goToGameHub() {
