@@ -1,7 +1,7 @@
 {
-  "name": "Impostor - Gra Party",
-  "short_name": "Impostor",
-  "description": "Mobilna gra imprezowa typu znajdź impostora.",
+  "name": "Party Games - Gry imprezowe",
+  "short_name": "Party Games",
+  "description": "Mobilna kolekcja gier imprezowych. Obecnie dostępny jest Impostor.",
   "lang": "pl",
   "start_url": "./",
   "scope": "./",
