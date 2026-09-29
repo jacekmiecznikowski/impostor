@@ -1,61 +1,8 @@
-# Party Games – mobilne gry imprezowe
+# Partyjniak – gry imprezowe
 
-Statyczna aplikacja webowa/PWA będąca bazą pod kolekcję gier imprezowych na jeden telefon. Obecnie dostępny jest **Impostor**, a ekran główny jest przygotowany pod kolejne gry, m.in. **Czółko** i **Tabu**.
-
-## Architektura
-
-Kod jest rozdzielony na warstwę wspólną oraz osobne gry:
-
-```text
-assets/js/
-├── app.js                         # bootstrap aplikacji
-├── shared/
-│   ├── audio.js                   # wspólne dźwięki
-│   ├── background.js              # animowane tło
-│   ├── platform.js                # PWA, instalacja, Screen Wake Lock
-│   ├── ui.js                      # routing ekranów, modale, shell
-│   └── hub.js                     # ekran główny i katalog gier
-└── games/
-    └── impostor/
-        ├── data.js                # hasła, kategorie, wskazówki
-        ├── state.js               # stan i localStorage
-        ├── setup.js               # konfiguracja graczy/rundy
-        ├── game.js                # logika rundy i punktacja
-        ├── presentation.js        # UI specyficzny dla Impostora
-        └── scoreboard.js          # tabela wyników
-```
-
-Przy kolejnej grze dodaj nowy katalog w `assets/js/games/`, zamiast dopisywać jej logikę do plików Impostora.
-
-## Impostor
-
-- 3–12 graczy,
-- 1–3 impostorów z ograniczeniem dla małych grup,
-- podpowiedzi: brak / zawsze / 50%,
-- wiele kategorii haseł,
-- opcjonalny timer dyskusji,
-- przekazywanie jednego telefonu między graczami,
-- ukryte odkrywanie roli przez przytrzymanie karty,
-- grupowe głosowanie,
-- punktacja i tabela wyników,
-- zapis sesji w `localStorage`,
-- możliwość wznowienia poprzedniej sesji.
-
-## Android / PWA
-
-Aplikacja jest przygotowana do instalacji jako PWA na Androidzie:
-
-- manifest z ikonami 192/512 px i ikoną maskowalną,
-- `display: standalone`,
-- obsługa `safe-area` i `100dvh`,
-- Service Worker z cache lokalnych plików,
-- Screen Wake Lock podczas aktywnej gry, aby telefon nie wygaszał ekranu podczas przekazywania go między graczami.
-
-Wake Lock wymaga bezpiecznego kontekstu (HTTPS). `localhost` działa w developmentcie, ale wejście z telefonu na zwykły adres `http://192.168.x.x:8080` może nie udostępniać tej funkcji.
+**Partyjniak** to mobilna aplikacja/PWA z grami imprezowymi na jeden telefon. Obecnie dostępny jest **Impostor**; architektura i ekran główny są przygotowane pod kolejne gry, m.in. Czółko i Tabu.
 
 ## Uruchomienie lokalne
-
-### Python
 
 W katalogu repozytorium:
 
@@ -63,21 +10,15 @@ W katalogu repozytorium:
 python3 -m http.server 8080
 ```
 
-Następnie otwórz:
-
-```text
-http://localhost:8080
-```
-
-### npm
+albo:
 
 ```bash
 npm run serve
 ```
 
-Skrypt uruchamia ten sam serwer Pythona na porcie `8080`.
+Następnie otwórz `http://localhost:8080`.
 
-Nie uruchamiaj aplikacji bezpośrednio przez `file://`, ponieważ Service Worker i część API przeglądarki wymagają HTTP/HTTPS.
+Nie uruchamiaj aplikacji przez `file://` — Service Worker, instalacja PWA i część API urządzenia wymagają HTTP/HTTPS.
 
 ## Testy
 
@@ -85,23 +26,94 @@ Nie uruchamiaj aplikacji bezpośrednio przez `file://`, ponieważ Service Worker
 npm test
 ```
 
-Testy obejmują podstawową logikę Impostora oraz kontrolę struktury projektu i wymaganych plików prezentacji.
+## Architektura
 
-## Dodawanie kolejnej gry
+```text
+assets/js/
+├── app.js
+├── shared/
+│   ├── audio.js
+│   ├── background.js            # Phaser i kontekstowe tło
+│   ├── platform.js              # PWA + Screen Wake Lock
+│   ├── ui.js                    # routing i shell
+│   ├── hub.js                   # Partyjniak + katalog gier
+│   └── content-repository.js    # opcjonalne zdalne źródło treści
+└── games/
+    └── impostor/
+        ├── data.js              # lokalny fallback offline
+        ├── content-provider.js  # mapowanie zdalnych danych na model gry
+        ├── state.js
+        ├── setup.js
+        ├── game.js
+        ├── presentation.js
+        └── scoreboard.js
+```
 
-1. Dodaj wpis w `GAME_CATALOG` w `assets/js/shared/hub.js`.
-2. Utwórz katalog, np. `assets/js/games/heads-up/`.
-3. Trzymaj stan, logikę i prezentację nowej gry w tym katalogu.
-4. Wspólne funkcje urządzenia/UI dodawaj do `assets/js/shared/`, tylko jeśli faktycznie są używane przez więcej niż jedną grę.
-5. Dodaj lokalne pliki gry do `LOCAL_ASSETS` w `sw.js`.
+## Branding i mobilny shell
 
-## Zależności
+- nazwa aplikacji: **Partyjniak – gry imprezowe**,
+- własne logo i ikony PWA 192/512/maskable,
+- ekran główny jest hubem gier,
+- wewnątrz gry shell jest lekki i kontekstowy,
+- podczas właściwej rundy przechodzi w tryb immersyjny i nie zabiera pionowej przestrzeni,
+- Screen Wake Lock działa w tle bez komunikatów technicznych dla gracza.
 
-Interfejs nadal używa zewnętrznych CDN:
+## Tło Phaser
 
-- Tailwind CSS,
-- Phaser 3,
-- Font Awesome,
-- Google Fonts (Inter).
+Tło jest wspólną warstwą Partyjniaka. Tryb wizualny zmienia się zależnie od etapu aplikacji (`party`, `impostor`, `mystery`, `discussion`, `vote`, `celebrate`). Animacje są celowo subtelne, ograniczone do 45 FPS i respektują `prefers-reduced-motion`.
 
-Service Worker buforuje je best-effort po pierwszym uruchomieniu. Docelowo, przed opakowaniem aplikacji jako natywny APK/AAB, warto przenieść te zależności do repozytorium, aby gra działała w pełni offline.
+## Treści / API kategorii i słów
+
+Obecna baza Impostora w `assets/js/games/impostor/data.js` pozostaje lokalnym fallbackiem, dlatego gra działa bez zewnętrznego API.
+
+Dodatkowo `ContentRepository` umożliwia podpięcie zewnętrznego źródła JSON bez zmiany logiki rundy. Ustaw bazowy URL przed uruchomieniem aplikacji:
+
+```js
+window.PARTYJNIAK_CONTENT_API = 'https://example.com/partyjniak-content';
+```
+
+lub w konsoli/deweloperskim panelu:
+
+```js
+PartyjniakContent.setRemoteBaseUrl('https://example.com/partyjniak-content');
+```
+
+Dla Impostora aplikacja pobierze:
+
+```text
+https://example.com/partyjniak-content/impostor.pl.json
+```
+
+Minimalny kontrakt:
+
+```json
+{
+  "schemaVersion": 1,
+  "game": "impostor",
+  "locale": "pl",
+  "categories": [
+    {
+      "id": "jedzenie",
+      "name": "Jedzenie",
+      "icon": "fa-burger",
+      "desc": "Potrawy i przysmaki",
+      "words": [
+        { "word": "Pizza", "hint": "Ser" }
+      ]
+    }
+  ],
+  "discussionTips": ["Zaczynajcie od ogólnych pytań."]
+}
+```
+
+Jeśli endpoint nie odpowiada, aplikacja automatycznie używa danych lokalnych. Ostatnia poprawna odpowiedź zdalna jest również zachowywana jako cache w `localStorage`.
+
+Dzięki temu backend można później zrealizować np. przez Supabase, Firebase, własne API albo prosty statyczny katalog JSON.
+
+## Android / PWA
+
+Partyjniak jest przygotowany do instalacji jako PWA na Androidzie. Podczas aktywnej gry aplikacja używa Screen Wake Lock, żeby telefon nie wygaszał ekranu przy przekazywaniu go między graczami. Wake Lock wymaga HTTPS (localhost jest wyjątkiem developerskim).
+
+## Kolejne gry
+
+Nową grę dodawaj jako osobny katalog pod `assets/js/games/` oraz wpis w `GAME_CATALOG` w `assets/js/shared/hub.js`. Wspólne funkcje urządzenia, shell, audio, tło i treści powinny pozostawać w `assets/js/shared/`.

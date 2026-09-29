@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'party-games-static-v11';
-const RUNTIME_CACHE = 'party-games-runtime-v11';
+const STATIC_CACHE = 'partyjniak-static-v12';
+const RUNTIME_CACHE = 'partyjniak-runtime-v12';
 
 const LOCAL_ASSETS = [
   './',
@@ -9,6 +9,7 @@ const LOCAL_ASSETS = [
   './assets/css/impostor.css',
   './assets/css/impostor-reveal.css',
   './assets/css/impostor-role.css',
+  './assets/css/partyjniak.css',
   './assets/icons/icon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
@@ -18,7 +19,9 @@ const LOCAL_ASSETS = [
   './assets/js/shared/platform.js',
   './assets/js/shared/ui.js',
   './assets/js/shared/hub.js',
+  './assets/js/shared/content-repository.js',
   './assets/js/games/impostor/data.js',
+  './assets/js/games/impostor/content-provider.js',
   './assets/js/games/impostor/state.js',
   './assets/js/games/impostor/setup.js',
   './assets/js/games/impostor/game.js',
@@ -64,7 +67,6 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-
   const requestUrl = new URL(event.request.url);
 
   if (event.request.mode === 'navigate') {
@@ -89,7 +91,7 @@ self.addEventListener('fetch', event => {
             caches.open(STATIC_CACHE).then(cache => cache.put(event.request, copy));
           }
           return response;
-        });
+        }).catch(() => cached);
         return cached || networkFetch;
       })
     );

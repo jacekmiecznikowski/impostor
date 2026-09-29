@@ -1,4 +1,26 @@
-function initializeApp() {
+function loadRuntimeScript(src) {
+    return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) return resolve();
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = () => reject(new Error(`Nie udało się załadować ${src}`));
+        document.head.appendChild(script);
+    });
+}
+
+async function initializeContentLayer() {
+    try {
+        await loadRuntimeScript('./assets/js/shared/content-repository.js');
+        await loadRuntimeScript('./assets/js/games/impostor/content-provider.js');
+        if (typeof initializeImpostorRemoteContent === 'function') await initializeImpostorRemoteContent();
+    } catch (error) {
+        console.warn('Zdalna warstwa treści nie została uruchomiona. Używam danych lokalnych.', error);
+    }
+}
+
+async function initializeApp() {
+    await initializeContentLayer();
     setupGameHub();
     setupImpostorPresentation();
     loadSession();
@@ -18,6 +40,7 @@ function initializeApp() {
 
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
+            if (typeof closeShellMenu === 'function') closeShellMenu();
             document.querySelectorAll('[id$="-modal"].flex').forEach(modal => closeModal(modal.id));
         }
     });
@@ -27,6 +50,13 @@ function initializeApp() {
             if (event.target === modal) closeModal(modal.id);
         });
     });
+
+    document.addEventListener('pointerdown', event => {
+        const popover = document.getElementById('shell-menu-popover');
+        const button = document.getElementById('shell-more-btn');
+        if (!popover || popover.classList.contains('hidden')) return;
+        if (!popover.contains(event.target) && !button?.contains(event.target)) closeShellMenu();
+    }, { passive: true });
 
     const requestedGame = new URLSearchParams(window.location.search).get('game');
     if (requestedGame && GAME_CATALOG.some(game => game.id === requestedGame && game.status === 'available')) {
