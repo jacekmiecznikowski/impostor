@@ -7,7 +7,11 @@ function setupImpostorPresentation() {
 }
 
 function ensureImpostorStylesheet() {
-    ['./assets/css/impostor.css', './assets/css/impostor-reveal.css'].forEach(href => {
+    [
+        './assets/css/impostor.css',
+        './assets/css/impostor-reveal.css',
+        './assets/css/impostor-role.css'
+    ].forEach(href => {
         if (document.querySelector(`link[href="${href}"]`)) return;
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -35,7 +39,8 @@ function setupRevealPresentation() {
     card.setAttribute('role', 'button');
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', 'Przytrzymaj kartę, aby odkryć swoją rolę');
-    ['onmousedown', 'onmouseup', 'onmouseleave', 'ontouchstart', 'ontouchend', 'ontouchcancel'].forEach(attr => card.removeAttribute(attr));
+    ['onmousedown', 'onmouseup', 'onmouseleave', 'ontouchstart', 'ontouchend', 'ontouchcancel']
+        .forEach(attr => card.removeAttribute(attr));
 
     const front = cardInner.children[0];
     const back = cardInner.children[1];
@@ -51,7 +56,7 @@ function setupRevealPresentation() {
 
         const subtitle = document.createElement('p');
         subtitle.className = 'reveal-card-subtitle';
-        subtitle.textContent = 'Przytrzymaj w dowolnym miejscu. Treść ustawi się z dala od Twojego palca.';
+        subtitle.textContent = 'Dotknij w dowolnym miejscu. Treść odsunie się od palca.';
 
         const fingerprint = document.createElement('span');
         fingerprint.className = 'fingerprint-orb';
@@ -69,11 +74,11 @@ function setupRevealPresentation() {
         back.className = 'reveal-card-face reveal-card-back';
         back.setAttribute('aria-hidden', 'true');
 
-        const badge = document.getElementById('secret-badge');
+        const legacyBadge = document.getElementById('secret-badge');
         const secretBlock = document.getElementById('secret-word-display')?.parentElement;
         const description = document.getElementById('secret-desc');
 
-        badge?.classList.add('reveal-role-badge');
+        if (legacyBadge) legacyBadge.hidden = true;
         document.getElementById('secret-label-type')?.classList.add('reveal-secret-label');
         document.getElementById('secret-word-display')?.classList.add('reveal-secret-word');
         description?.classList.add('reveal-secret-description');
@@ -88,7 +93,7 @@ function setupRevealPresentation() {
                 <span class="reveal-role-copy">
                     <small>Twoja rola</small>
                     <strong id="reveal-role-title">ZWYKŁY GRACZ</strong>
-                    <span id="reveal-role-message">Znasz wspólne hasło</span>
+                    <span id="reveal-role-message"></span>
                 </span>`;
         }
 
@@ -99,7 +104,7 @@ function setupRevealPresentation() {
             back.prepend(backContent);
         }
 
-        [roleHero, badge, secretBlock, description].forEach(element => {
+        [roleHero, secretBlock, description].forEach(element => {
             if (element) backContent.appendChild(element);
         });
 
@@ -271,38 +276,21 @@ function syncRevealRolePresentation() {
     const roleTitle = document.getElementById('reveal-role-title');
     const roleMessage = document.getElementById('reveal-role-message');
     const roleIcon = document.getElementById('reveal-role-icon');
-    const badge = document.getElementById('secret-badge');
     const label = document.getElementById('secret-label-type');
     const description = document.getElementById('secret-desc');
 
     if (isImpostor) {
         if (roleTitle) roleTitle.textContent = 'IMPOSTOR';
-        if (roleMessage) roleMessage.textContent = 'Nie znasz prawdziwego hasła';
+        if (roleMessage) roleMessage.textContent = 'Nie znasz hasła';
         if (roleIcon) roleIcon.innerHTML = '<i class="fa-solid fa-user-secret" aria-hidden="true"></i>';
-
-        if (badge) {
-            badge.className = 'reveal-role-badge impostor-warning-badge';
-            badge.textContent = hasHint ? 'TO TYLKO PODPOWIEDŹ' : 'NIE MASZ PODPOWIEDZI';
-        }
-
-        if (label) label.textContent = hasHint ? 'PODPOWIEDŹ — TO NIE JEST HASŁO' : 'NIE ZNASZ TAJNEGO SŁOWA';
-        if (description) {
-            description.textContent = hasHint
-                ? 'Jesteś impostorem. To słowo jest tylko wskazówką — właściwego hasła nie znasz.'
-                : 'Jesteś impostorem i nie znasz hasła. Słuchaj innych, blefuj i spróbuj się nie zdradzić.';
-        }
+        if (label) label.textContent = hasHint ? 'PODPOWIEDŹ' : 'BRAK PODPOWIEDZI';
+        if (description) description.textContent = 'Słuchaj innych i blefuj.';
     } else {
         if (roleTitle) roleTitle.textContent = 'ZWYKŁY GRACZ';
-        if (roleMessage) roleMessage.textContent = 'Znasz wspólne tajne słowo';
+        if (roleMessage) roleMessage.textContent = '';
         if (roleIcon) roleIcon.innerHTML = '<i class="fa-solid fa-user-check" aria-hidden="true"></i>';
-
-        if (badge) {
-            badge.className = 'reveal-role-badge player-role-badge';
-            badge.textContent = 'ZNACIE TO SAMO HASŁO';
-        }
-
-        if (label) label.textContent = 'TAJNE SŁOWO';
-        if (description) description.textContent = 'Zapamiętaj hasło i znajdź impostora, który go nie zna.';
+        if (label) label.textContent = 'HASŁO';
+        if (description) description.textContent = 'Znajdź impostora.';
     }
 }
 
