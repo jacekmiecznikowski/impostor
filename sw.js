@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'party-games-static-v6';
-const RUNTIME_CACHE = 'party-games-runtime-v6';
+const STATIC_CACHE = 'party-games-static-v7';
+const RUNTIME_CACHE = 'party-games-runtime-v7';
 
 const LOCAL_ASSETS = [
   './',
