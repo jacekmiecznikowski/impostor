@@ -1,16 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Party Games">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0d9488"/>
-      <stop offset="0.5" stop-color="#0891b2"/>
-      <stop offset="1" stop-color="#10b981"/>
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="0.5" stop-color="#c026d3"/>
+      <stop offset="1" stop-color="#f43f5e"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="112" fill="#020617"/>
-  <circle cx="256" cy="230" r="150" fill="url(#g)"/>
-  <path d="M176 236c18-82 142-82 160 0-12 74-49 126-80 126s-68-52-80-126Z" fill="#fff" opacity=".96"/>
-  <path d="M210 228c20-19 72-19 92 0-8 25-25 39-46 39s-38-14-46-39Z" fill="#020617"/>
-  <circle cx="230" cy="229" r="8" fill="#2dd4bf"/>
-  <circle cx="282" cy="229" r="8" fill="#2dd4bf"/>
-  <path d="M168 147c28-39 63-59 88-59s60 20 88 59c-28-13-56-18-88-18s-60 5-88 18Z" fill="#0f172a"/>
+  <rect x="104" y="104" width="304" height="304" rx="80" fill="url(#g)" transform="rotate(-8 256 256)"/>
+  <g fill="#fff">
+    <circle cx="190" cy="187" r="24"/>
+    <circle cx="322" cy="187" r="24"/>
+    <circle cx="256" cy="256" r="24"/>
+    <circle cx="190" cy="325" r="24"/>
+    <circle cx="322" cy="325" r="24"/>
+  </g>
 </svg>
