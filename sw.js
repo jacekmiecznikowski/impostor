@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'party-games-static-v7';
-const RUNTIME_CACHE = 'party-games-runtime-v7';
+const STATIC_CACHE = 'party-games-static-v8';
+const RUNTIME_CACHE = 'party-games-runtime-v8';
 
 const LOCAL_ASSETS = [
   './',
@@ -7,6 +7,7 @@ const LOCAL_ASSETS = [
   './manifest.webmanifest',
   './assets/css/styles.css',
   './assets/css/impostor.css',
+  './assets/css/impostor-reveal.css',
   './assets/icons/icon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
