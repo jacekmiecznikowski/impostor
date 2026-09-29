@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'party-games-static-v9';
-const RUNTIME_CACHE = 'party-games-runtime-v9';
+const STATIC_CACHE = 'party-games-static-v10';
+const RUNTIME_CACHE = 'party-games-runtime-v10';
 
 const LOCAL_ASSETS = [
   './',
@@ -8,6 +8,7 @@ const LOCAL_ASSETS = [
   './assets/css/styles.css',
   './assets/css/impostor.css',
   './assets/css/impostor-reveal.css',
+  './assets/css/impostor-role.css',
   './assets/icons/icon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
