@@ -1,7 +1,8 @@
+let revealCardController = null;
+
 function setupImpostorPresentation() {
     ensureImpostorStylesheet();
     setupRevealPresentation();
-    installRevealRolePresentationHook();
     setupVotingPresentation();
 }
 
@@ -40,7 +41,7 @@ function setupRevealPresentation() {
     const back = cardInner.children[1];
 
     if (front) {
-        front.className = 'reveal-card-face reveal-card-front';
+        front.className = 'reveal-card-face reveal-card-front is-visible';
         front.setAttribute('aria-hidden', 'false');
         front.replaceChildren();
 
@@ -50,7 +51,7 @@ function setupRevealPresentation() {
 
         const subtitle = document.createElement('p');
         subtitle.className = 'reveal-card-subtitle';
-        subtitle.textContent = 'Przytrzymaj w dowolnym miejscu. Treść odsunie się od Twojego palca.';
+        subtitle.textContent = 'Przytrzymaj w dowolnym miejscu. Treść ustawi się z dala od Twojego palca.';
 
         const fingerprint = document.createElement('span');
         fingerprint.className = 'fingerprint-orb';
@@ -111,31 +112,104 @@ function setupRevealPresentation() {
     }
 
     let isHolding = false;
+    let visibleBack = false;
+    let desiredBack = false;
+    let animating = false;
+    let animationGeneration = 0;
     let resetAnchorTimer = null;
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const OUT_MS = reducedMotion ? 20 : 170;
+    const IN_MS = reducedMotion ? 20 : 220;
 
-    const setFaceAccessibility = revealed => {
+    const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
+
+    const setVisibleFace = revealed => {
+        visibleBack = revealed;
+        front?.classList.toggle('is-visible', !revealed);
+        back?.classList.toggle('is-visible', revealed);
         front?.setAttribute('aria-hidden', String(revealed));
         back?.setAttribute('aria-hidden', String(!revealed));
+    };
+
+    const clearFlipClasses = () => {
+        card.classList.remove('flip-out', 'flip-in-prep', 'flip-in', 'flip-abort');
+    };
+
+    const runFlip = async targetBack => {
+        if (animating || targetBack === visibleBack) return;
+
+        animating = true;
+        const generation = ++animationGeneration;
+        clearFlipClasses();
+        card.classList.add('flip-out');
+        await wait(OUT_MS);
+
+        if (generation !== animationGeneration) return;
+
+        if (desiredBack !== targetBack) {
+            card.classList.remove('flip-out');
+            card.classList.add('flip-abort');
+            await wait(OUT_MS);
+            if (generation !== animationGeneration) return;
+            clearFlipClasses();
+            animating = false;
+            if (desiredBack !== visibleBack) runFlip(desiredBack);
+            return;
+        }
+
+        setVisibleFace(targetBack);
+        card.classList.remove('flip-out');
+        card.classList.add('flip-in-prep');
+        void card.offsetWidth;
+
+        requestAnimationFrame(() => {
+            if (generation !== animationGeneration) return;
+            card.classList.remove('flip-in-prep');
+            card.classList.add('flip-in');
+        });
+
+        await wait(IN_MS + 20);
+        if (generation !== animationGeneration) return;
+
+        clearFlipClasses();
+        animating = false;
+        if (desiredBack !== visibleBack) runFlip(desiredBack);
+    };
+
+    const requestFace = reveal => {
+        desiredBack = reveal;
+        if (!animating && desiredBack !== visibleBack) runFlip(desiredBack);
     };
 
     const updateTouchAnchor = event => {
         const rect = card.getBoundingClientRect();
         const y = Number.isFinite(event?.clientY) ? event.clientY - rect.top : rect.height * 0.72;
-        const isUpperTouch = y < rect.height * 0.48;
+        const isUpperTouch = y < rect.height * 0.5;
         card.classList.toggle('hold-upper', isUpperTouch);
         card.classList.toggle('hold-lower', !isUpperTouch);
+    };
+
+    const reset = () => {
+        animationGeneration++;
+        animating = false;
+        isHolding = false;
+        desiredBack = false;
+        clearTimeout(resetAnchorTimer);
+        clearFlipClasses();
+        card.classList.remove('is-holding', 'hold-upper', 'hold-lower');
+        setVisibleFace(false);
     };
 
     const hideRole = () => {
         if (!isHolding) return;
         isHolding = false;
         revealSecret(false);
-        setFaceAccessibility(false);
         card.classList.remove('is-holding');
+        requestFace(false);
         clearTimeout(resetAnchorTimer);
         resetAnchorTimer = setTimeout(() => {
-            card.classList.remove('hold-upper', 'hold-lower');
-        }, 460);
+            if (!isHolding) card.classList.remove('hold-upper', 'hold-lower');
+        }, OUT_MS + IN_MS + 80);
     };
 
     const showRole = event => {
@@ -144,7 +218,6 @@ function setupRevealPresentation() {
         isHolding = true;
         clearTimeout(resetAnchorTimer);
         updateTouchAnchor(event);
-        setFaceAccessibility(true);
         card.classList.add('is-holding');
 
         if (event.pointerId !== undefined && card.setPointerCapture) {
@@ -152,12 +225,10 @@ function setupRevealPresentation() {
         }
 
         revealSecret(true);
+        requestFace(true);
     };
 
     card.addEventListener('pointerdown', showRole);
-    card.addEventListener('pointermove', event => {
-        if (isHolding) updateTouchAnchor(event);
-    });
     card.addEventListener('pointerup', hideRole);
     card.addEventListener('pointercancel', hideRole);
     card.addEventListener('lostpointercapture', hideRole);
@@ -167,8 +238,8 @@ function setupRevealPresentation() {
             event.preventDefault();
             isHolding = true;
             card.classList.add('hold-lower', 'is-holding');
-            setFaceAccessibility(true);
             revealSecret(true);
+            requestFace(true);
         }
     });
     card.addEventListener('keyup', event => {
@@ -176,20 +247,13 @@ function setupRevealPresentation() {
     });
     card.addEventListener('blur', hideRole);
 
+    revealCardController = { reset, requestFace };
+    reset();
     document.getElementById('finish-reveal-btn')?.classList.add('reveal-next-btn');
 }
 
-function installRevealRolePresentationHook() {
-    if (window.__impostorRevealPresentationHookInstalled || typeof window.showSecretReveal !== 'function') return;
-
-    const originalShowSecretReveal = window.showSecretReveal;
-    window.showSecretReveal = function (...args) {
-        const result = originalShowSecretReveal.apply(this, args);
-        syncRevealRolePresentation();
-        return result;
-    };
-
-    window.__impostorRevealPresentationHookInstalled = true;
+function resetRevealCardPresentation() {
+    revealCardController?.reset();
 }
 
 function syncRevealRolePresentation() {
@@ -203,7 +267,6 @@ function syncRevealRolePresentation() {
 
     card.classList.toggle('is-impostor', isImpostor);
     card.classList.toggle('is-player', !isImpostor);
-    card.classList.remove('hold-upper', 'hold-lower', 'is-holding');
 
     const roleTitle = document.getElementById('reveal-role-title');
     const roleMessage = document.getElementById('reveal-role-message');
