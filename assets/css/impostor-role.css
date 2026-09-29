@@ -1,19 +1,15 @@
-/* Role reveal privacy layer: keep both roles similarly dark to avoid leaking role by reflected screen color. */
+/* Unified role reveal layout: identical geometry for player, impostor with hint and impostor without hint. */
 
 .reveal-card-back {
-  background:
-    radial-gradient(circle at 50% 10%, rgba(148, 163, 184, .055), transparent 34%),
-    linear-gradient(155deg, #0b1323 0%, #0d1525 48%, #070d18 100%) !important;
   border-color: rgba(71, 85, 105, .62) !important;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, .48) !important;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(148, 163, 184, .045), transparent 30%),
+    linear-gradient(180deg, #0c1526 0%, #0a1221 52%, #070d18 100%) !important;
+  box-shadow: 0 24px 58px rgba(0, 0, 0, .42) !important;
 }
 
 .reveal-card-back::after {
   display: none !important;
-}
-
-.reveal-role-copy > span:last-child:empty {
-  display: none;
 }
 
 .reveal-role-badge,
@@ -21,125 +17,282 @@
   display: none !important;
 }
 
-.reveal-secret-block {
-  background: rgba(15, 23, 42, .72) !important;
-  border: 1px solid rgba(71, 85, 105, .52) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+/* One stable content frame for every role state. */
+.reveal-back-content,
+.reveal-card.hold-upper .reveal-back-content,
+.reveal-card.hold-lower .reveal-back-content {
+  position: absolute !important;
+  top: 1.35rem !important;
+  right: 1.35rem !important;
+  bottom: 4.65rem !important;
+  left: 1.35rem !important;
+  transform: none !important;
+  display: grid !important;
+  grid-template-rows: 4.6rem 7.8rem minmax(2.5rem, auto) !important;
+  align-content: start !important;
+  align-items: center !important;
+  gap: 1rem !important;
 }
 
-.reveal-secret-word {
-  color: rgb(248 250 252) !important;
+.reveal-role-hero {
+  width: 100%;
+  min-height: 4.6rem;
+  display: grid !important;
+  grid-template-columns: 3.35rem minmax(0, 1fr) !important;
+  align-items: center !important;
+  justify-content: stretch !important;
+  gap: .95rem !important;
+  text-align: left !important;
+}
+
+.reveal-role-icon,
+.reveal-card.hold-upper .reveal-role-icon {
+  width: 3.35rem !important;
+  height: 3.35rem !important;
+  border-radius: 1rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.18rem !important;
+  box-shadow: none !important;
+}
+
+.reveal-role-copy {
+  min-width: 0;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: .22rem !important;
+  line-height: 1 !important;
+}
+
+.reveal-role-copy small {
+  font-size: .58rem !important;
+  line-height: .78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .16em !important;
+  text-transform: uppercase !important;
+  color: rgb(148 163 184) !important;
+  opacity: .9 !important;
+}
+
+.reveal-role-copy strong,
+.reveal-card.hold-upper .reveal-role-copy strong {
+  margin: 0 !important;
+  max-width: 100%;
+  font-size: clamp(1.6rem, 7vw, 2.15rem) !important;
+  line-height: .98 !important;
+  font-weight: 950 !important;
+  letter-spacing: -.045em !important;
+  text-wrap: balance;
   text-shadow: none !important;
 }
 
-.reveal-secret-description {
+/* Reserve the same subtitle space even when the player copy is intentionally empty. */
+.reveal-role-copy > span:last-child {
+  display: block !important;
+  min-height: .95rem !important;
+  margin: .12rem 0 0 !important;
+  font-size: .69rem !important;
+  line-height: .95rem !important;
+  font-weight: 700 !important;
+  color: rgb(148 163 184) !important;
+  opacity: .9 !important;
+}
+
+.reveal-role-copy > span:last-child:empty::after {
+  content: '\00a0';
+}
+
+/* The word/hint tile is exactly the same size in every state. */
+.reveal-secret-block,
+.reveal-card.hold-upper .reveal-secret-block {
+  width: 100% !important;
+  height: 7.8rem !important;
+  min-height: 7.8rem !important;
+  margin: 0 !important;
+  padding: 1.05rem 1rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .48rem !important;
+  border-radius: 1.35rem !important;
+  border: 1px solid rgba(71, 85, 105, .48) !important;
+  background: linear-gradient(180deg, rgba(15, 23, 42, .78), rgba(8, 15, 28, .88)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025) !important;
+}
+
+.reveal-secret-label {
+  display: block !important;
+  margin: 0 !important;
+  min-height: .9rem !important;
+  font-size: .6rem !important;
+  line-height: .9rem !important;
+  font-weight: 950 !important;
+  letter-spacing: .17em !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+
+.reveal-secret-word,
+.reveal-card.hold-upper .reveal-secret-word {
+  width: 100%;
+  margin: 0 !important;
+  font-size: clamp(2.65rem, 11vw, 3.6rem) !important;
+  line-height: .98 !important;
+  font-weight: 950 !important;
+  letter-spacing: -.05em !important;
+  color: rgb(248 250 252) !important;
+  text-align: center !important;
+  text-shadow: none !important;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.reveal-secret-description,
+.reveal-card.hold-upper .reveal-secret-description {
+  min-height: 2.5rem !important;
+  max-width: 15rem !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: .74rem !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
   color: rgb(148 163 184) !important;
 }
 
-/* Player: teal is only an accent, not the card background. */
+/* The release control always occupies the same position. */
+.reveal-release-hint {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 1.3rem !important;
+  transform: translateX(-50%) !important;
+  min-height: 2.35rem !important;
+  margin: 0 !important;
+  padding: .58rem .8rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .42rem !important;
+  border-radius: 999px !important;
+  white-space: nowrap !important;
+  font-size: .66rem !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+}
+
+/* Player: same dark surface, teal only as a low-energy accent. */
 .reveal-card.is-player .reveal-card-back {
+  border-color: rgba(45, 212, 191, .32) !important;
   background:
-    radial-gradient(circle at 50% 10%, rgba(45, 212, 191, .045), transparent 34%),
-    linear-gradient(155deg, #0b1323 0%, #0d1525 48%, #070d18 100%) !important;
-  border-color: rgba(45, 212, 191, .36) !important;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, .48) !important;
+    radial-gradient(circle at 50% 8%, rgba(45, 212, 191, .04), transparent 30%),
+    linear-gradient(180deg, #0c1526 0%, #0a1221 52%, #070d18 100%) !important;
 }
 
 .reveal-card.is-player .reveal-role-icon {
   color: rgb(153 246 228) !important;
-  background: rgba(13, 148, 136, .13) !important;
-  border-color: rgba(45, 212, 191, .28) !important;
-  box-shadow: none !important;
+  background: rgba(13, 148, 136, .12) !important;
+  border: 1px solid rgba(45, 212, 191, .24) !important;
 }
 
 .reveal-card.is-player .reveal-role-copy strong {
   color: rgb(153 246 228) !important;
-  text-shadow: none !important;
 }
 
-.reveal-card.is-player .reveal-secret-label {
+.reveal-card.is-player .reveal-secret-label,
+.reveal-card.is-player .reveal-release-hint {
   color: rgb(94 234 212) !important;
 }
 
 .reveal-card.is-player .reveal-release-hint {
-  color: rgb(94 234 212) !important;
-  border-color: rgba(45, 212, 191, .19) !important;
-  background: rgba(13, 148, 136, .055) !important;
+  border-color: rgba(45, 212, 191, .18) !important;
+  background: rgba(13, 148, 136, .05) !important;
 }
 
-/* Impostor: neutral-dark surface with muted violet accent.
-   Average brightness stays close to the player card for better privacy in reflections. */
+/* Impostor: same luminance as the player card; identity comes from typography/icon, not a red screen. */
 .reveal-card.is-impostor .reveal-card-back {
+  border-color: rgba(167, 139, 250, .34) !important;
   background:
-    radial-gradient(circle at 50% 10%, rgba(167, 139, 250, .055), transparent 34%),
-    linear-gradient(155deg, #0b1323 0%, #0d1525 48%, #070d18 100%) !important;
-  border-color: rgba(167, 139, 250, .40) !important;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, .48) !important;
+    radial-gradient(circle at 50% 8%, rgba(167, 139, 250, .045), transparent 30%),
+    linear-gradient(180deg, #0c1526 0%, #0a1221 52%, #070d18 100%) !important;
 }
 
 .reveal-card.is-impostor .reveal-role-icon {
-  color: rgb(196 181 253) !important;
-  background: rgba(109, 40, 217, .13) !important;
-  border-color: rgba(167, 139, 250, .30) !important;
-  box-shadow: none !important;
+  color: rgb(221 214 254) !important;
+  background: rgba(109, 40, 217, .12) !important;
+  border: 1px solid rgba(167, 139, 250, .24) !important;
+}
+
+.reveal-card.is-impostor .reveal-role-copy strong,
+.reveal-card.is-impostor .reveal-secret-label,
+.reveal-card.is-impostor .reveal-release-hint {
+  color: rgb(216 180 254) !important;
 }
 
 .reveal-card.is-impostor .reveal-role-copy small,
-.reveal-card.is-impostor .reveal-role-copy > span:last-child {
-  color: rgb(148 163 184) !important;
-}
-
-.reveal-card.is-impostor .reveal-role-copy strong {
-  color: rgb(216 180 254) !important;
-  text-shadow: none !important;
-}
-
-.reveal-card.is-impostor .reveal-secret-label {
-  color: rgb(196 181 253) !important;
-}
-
+.reveal-card.is-impostor .reveal-role-copy > span:last-child,
 .reveal-card.is-impostor .reveal-secret-description {
   color: rgb(148 163 184) !important;
 }
 
 .reveal-card.is-impostor .reveal-release-hint {
-  color: rgb(196 181 253) !important;
-  border-color: rgba(167, 139, 250, .20) !important;
-  background: rgba(109, 40, 217, .055) !important;
+  border-color: rgba(167, 139, 250, .18) !important;
+  background: rgba(109, 40, 217, .045) !important;
 }
 
-/* With shorter copy we can give the role and word more breathing room. */
-.reveal-back-content {
-  gap: .9rem !important;
-}
-
-.reveal-role-copy strong {
-  font-size: clamp(1.55rem, 7vw, 2.05rem) !important;
-}
-
-.reveal-secret-block {
-  margin-top: .3rem !important;
-  padding-top: 1rem !important;
-  padding-bottom: 1.05rem !important;
-}
-
-.reveal-secret-label {
-  font-size: .58rem !important;
-  letter-spacing: .16em !important;
-}
-
-.reveal-secret-description {
-  margin-top: .05rem !important;
-  font-size: .7rem !important;
-}
-
-@media (max-height: 680px) {
-  .reveal-back-content {
-    gap: .6rem !important;
+/* Shorter screens keep the same proportions instead of changing the composition. */
+@media (max-height: 720px) {
+  .reveal-back-content,
+  .reveal-card.hold-upper .reveal-back-content,
+  .reveal-card.hold-lower .reveal-back-content {
+    top: 1.05rem !important;
+    right: 1.1rem !important;
+    bottom: 4.15rem !important;
+    left: 1.1rem !important;
+    grid-template-rows: 4.2rem 7rem minmax(2.1rem, auto) !important;
+    gap: .72rem !important;
   }
 
-  .reveal-secret-block {
-    padding-top: .75rem !important;
-    padding-bottom: .8rem !important;
+  .reveal-role-hero {
+    min-height: 4.2rem !important;
+    grid-template-columns: 3rem minmax(0, 1fr) !important;
+    gap: .8rem !important;
+  }
+
+  .reveal-role-icon,
+  .reveal-card.hold-upper .reveal-role-icon {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+
+  .reveal-role-copy strong,
+  .reveal-card.hold-upper .reveal-role-copy strong {
+    font-size: clamp(1.45rem, 6.5vw, 1.9rem) !important;
+  }
+
+  .reveal-secret-block,
+  .reveal-card.hold-upper .reveal-secret-block {
+    height: 7rem !important;
+    min-height: 7rem !important;
+    padding: .85rem .8rem !important;
+  }
+
+  .reveal-secret-word,
+  .reveal-card.hold-upper .reveal-secret-word {
+    font-size: clamp(2.3rem, 10vw, 3.15rem) !important;
+  }
+
+  .reveal-secret-description,
+  .reveal-card.hold-upper .reveal-secret-description {
+    min-height: 2.1rem !important;
+    font-size: .69rem !important;
+  }
+
+  .reveal-release-hint {
+    bottom: 1rem !important;
   }
 }
