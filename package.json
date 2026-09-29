@@ -1,8 +1,8 @@
 {
-  "name": "impostor-party-game",
-  "version": "2.0.0",
+  "name": "party-games",
+  "version": "2.1.0",
   "private": true,
-  "description": "Mobilna gra party typu znajdź impostora.",
+  "description": "Mobilna kolekcja gier party. Obecnie dostępny jest Impostor.",
   "scripts": {
     "test": "node tests/core.test.cjs",
     "serve": "python3 -m http.server 8080"
