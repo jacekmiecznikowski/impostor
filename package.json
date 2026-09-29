@@ -2,9 +2,9 @@
   "name": "party-games-mobile",
   "version": "3.1.0",
   "private": true,
-  "description": "Mobilna kolekcja gier party, obecnie z grą Impostor.",
+  "description": "Mobilna kolekcja gier imprezowych na jeden telefon.",
   "scripts": {
-    "test": "node tests/core.test.cjs",
+    "test": "node tests/core.test.cjs && node tests/structure.test.cjs",
     "serve": "python3 -m http.server 8080"
   }
 }
