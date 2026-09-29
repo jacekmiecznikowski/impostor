@@ -1,6 +1,17 @@
 function setupImpostorPresentation() {
+    ensureImpostorStylesheet();
     setupRevealPresentation();
     setupVotingPresentation();
+}
+
+function ensureImpostorStylesheet() {
+    const href = './assets/css/impostor.css';
+    if (document.querySelector(`link[href="${href}"]`)) return;
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    document.head.appendChild(link);
 }
 
 function setupRevealPresentation() {
@@ -103,7 +114,34 @@ function setupVotingPresentation() {
     const title = header.querySelector('h2');
     const description = header.querySelector('p:last-child');
     if (title) title.textContent = 'Kogo wskazuje grupa?';
-    if (description) description.textContent = 'Wybierz gracza, który otrzymał najwięcej głosów.';
+    if (description) description.textContent = 'Wybierz jedną osobę wskazaną przez większość.';
+
+    if (!document.getElementById('vote-selection-summary')) {
+        const summary = document.createElement('div');
+        summary.id = 'vote-selection-summary';
+        summary.className = 'vote-selection-summary';
+        summary.setAttribute('aria-live', 'polite');
+        header.insertAdjacentElement('afterend', summary);
+    }
+
+    updateVoteSelectionSummary();
+}
+
+function updateVoteSelectionSummary() {
+    const summary = document.getElementById('vote-selection-summary');
+    if (!summary) return;
+
+    const selected = state.players.find(player => player.id === state.selectedVotedPlayerId);
+    summary.classList.toggle('has-selection', Boolean(selected));
+    summary.replaceChildren();
+
+    const label = document.createElement('span');
+    label.textContent = selected ? 'Wybrana osoba' : 'Wybór grupy';
+
+    const value = document.createElement('strong');
+    value.textContent = selected ? selected.name : 'Jeszcze nikogo nie wskazano';
+
+    summary.append(label, value);
 }
 
 function renderGroupVotingScreen() {
@@ -111,17 +149,14 @@ function renderGroupVotingScreen() {
     if (!grid) return;
     grid.replaceChildren();
 
-    state.players.forEach((player, index) => {
+    state.players.forEach(player => {
         const isSelected = state.selectedVotedPlayerId === player.id;
         const card = document.createElement('button');
         card.type = 'button';
         card.className = `vote-card${isSelected ? ' is-selected' : ''}`;
         card.setAttribute('aria-pressed', String(isSelected));
+        card.setAttribute('aria-label', `${isSelected ? 'Wybrano' : 'Wybierz'} gracza ${player.name}`);
         card.onclick = () => selectGroupVoteTarget(player.id);
-
-        const number = document.createElement('span');
-        number.className = 'vote-number';
-        number.textContent = String(index + 1).padStart(2, '0');
 
         const avatar = document.createElement('span');
         avatar.className = 'vote-avatar';
@@ -145,7 +180,9 @@ function renderGroupVotingScreen() {
             ? '<i class="fa-solid fa-check" aria-hidden="true"></i>'
             : '<span class="vote-marker-dot" aria-hidden="true"></span>';
 
-        card.append(number, avatar, copy, marker);
+        card.append(avatar, copy, marker);
         grid.appendChild(card);
     });
+
+    updateVoteSelectionSummary();
 }
