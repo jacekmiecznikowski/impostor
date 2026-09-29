@@ -1,17 +1,18 @@
 function setupImpostorPresentation() {
     ensureImpostorStylesheet();
     setupRevealPresentation();
+    installRevealRolePresentationHook();
     setupVotingPresentation();
 }
 
 function ensureImpostorStylesheet() {
-    const href = './assets/css/impostor.css';
-    if (document.querySelector(`link[href="${href}"]`)) return;
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    document.head.appendChild(link);
+    ['./assets/css/impostor.css', './assets/css/impostor-reveal.css'].forEach(href => {
+        if (document.querySelector(`link[href="${href}"]`)) return;
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = href;
+        document.head.appendChild(link);
+    });
 }
 
 function setupRevealPresentation() {
@@ -30,15 +31,13 @@ function setupRevealPresentation() {
 
     const card = cardInner.parentElement;
     card.className = 'reveal-card select-none';
-    card.removeAttribute('role');
-    card.removeAttribute('tabindex');
-    card.removeAttribute('aria-label');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', 'Przytrzymaj kartę, aby odkryć swoją rolę');
     ['onmousedown', 'onmouseup', 'onmouseleave', 'ontouchstart', 'ontouchend', 'ontouchcancel'].forEach(attr => card.removeAttribute(attr));
 
     const front = cardInner.children[0];
     const back = cardInner.children[1];
-
-    let holdControl = null;
 
     if (front) {
         front.className = 'reveal-card-face reveal-card-front';
@@ -47,34 +46,61 @@ function setupRevealPresentation() {
 
         const title = document.createElement('strong');
         title.className = 'reveal-card-title';
-        title.textContent = 'Przytrzymaj odcisk, aby odkryć rolę';
+        title.textContent = 'Przytrzymaj kartę, aby odkryć rolę';
 
         const subtitle = document.createElement('p');
         subtitle.className = 'reveal-card-subtitle';
-        subtitle.textContent = 'Trzymaj palec na przycisku poniżej. Puść, aby znowu ukryć kartę.';
+        subtitle.textContent = 'Przytrzymaj w dowolnym miejscu. Treść odsunie się od Twojego palca.';
 
-        holdControl = document.createElement('button');
-        holdControl.type = 'button';
-        holdControl.className = 'fingerprint-orb';
-        holdControl.setAttribute('aria-label', 'Przytrzymaj, aby odkryć swoją rolę');
-        holdControl.innerHTML = '<i class="fa-solid fa-fingerprint" aria-hidden="true"></i><span>Przytrzymaj</span>';
+        const fingerprint = document.createElement('span');
+        fingerprint.className = 'fingerprint-orb';
+        fingerprint.setAttribute('aria-hidden', 'true');
+        fingerprint.innerHTML = '<i class="fa-solid fa-fingerprint"></i><span>Przytrzymaj kartę</span>';
 
         const privacy = document.createElement('small');
         privacy.className = 'reveal-card-privacy';
         privacy.innerHTML = '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i><span>Nie pokazuj ekranu innym graczom</span>';
 
-        front.append(title, subtitle, holdControl, privacy);
+        front.append(title, subtitle, fingerprint, privacy);
     }
 
     if (back) {
         back.className = 'reveal-card-face reveal-card-back';
         back.setAttribute('aria-hidden', 'true');
 
-        document.getElementById('secret-badge')?.classList.add('reveal-role-badge');
+        const badge = document.getElementById('secret-badge');
+        const secretBlock = document.getElementById('secret-word-display')?.parentElement;
+        const description = document.getElementById('secret-desc');
+
+        badge?.classList.add('reveal-role-badge');
         document.getElementById('secret-label-type')?.classList.add('reveal-secret-label');
         document.getElementById('secret-word-display')?.classList.add('reveal-secret-word');
-        document.getElementById('secret-desc')?.classList.add('reveal-secret-description');
-        document.getElementById('secret-word-display')?.parentElement?.classList.add('reveal-secret-block');
+        description?.classList.add('reveal-secret-description');
+        secretBlock?.classList.add('reveal-secret-block');
+
+        let roleHero = back.querySelector('.reveal-role-hero');
+        if (!roleHero) {
+            roleHero = document.createElement('div');
+            roleHero.className = 'reveal-role-hero';
+            roleHero.innerHTML = `
+                <span id="reveal-role-icon" class="reveal-role-icon"><i class="fa-solid fa-user-check" aria-hidden="true"></i></span>
+                <span class="reveal-role-copy">
+                    <small>Twoja rola</small>
+                    <strong id="reveal-role-title">ZWYKŁY GRACZ</strong>
+                    <span id="reveal-role-message">Znasz wspólne hasło</span>
+                </span>`;
+        }
+
+        let backContent = back.querySelector('.reveal-back-content');
+        if (!backContent) {
+            backContent = document.createElement('div');
+            backContent.className = 'reveal-back-content';
+            back.prepend(backContent);
+        }
+
+        [roleHero, badge, secretBlock, description].forEach(element => {
+            if (element) backContent.appendChild(element);
+        });
 
         if (!back.querySelector('.reveal-release-hint')) {
             const releaseHint = document.createElement('small');
@@ -84,63 +110,137 @@ function setupRevealPresentation() {
         }
     }
 
-    if (holdControl) {
-        let isHolding = false;
+    let isHolding = false;
+    let resetAnchorTimer = null;
 
-        const setFaceAccessibility = revealed => {
-            front?.setAttribute('aria-hidden', String(revealed));
-            back?.setAttribute('aria-hidden', String(!revealed));
-        };
+    const setFaceAccessibility = revealed => {
+        front?.setAttribute('aria-hidden', String(revealed));
+        back?.setAttribute('aria-hidden', String(!revealed));
+    };
 
-        const hideRole = () => {
-            if (!isHolding) return;
-            isHolding = false;
-            revealSecret(false);
-            setFaceAccessibility(false);
-            holdControl.classList.remove('is-holding');
-        };
+    const updateTouchAnchor = event => {
+        const rect = card.getBoundingClientRect();
+        const y = Number.isFinite(event?.clientY) ? event.clientY - rect.top : rect.height * 0.72;
+        const isUpperTouch = y < rect.height * 0.48;
+        card.classList.toggle('hold-upper', isUpperTouch);
+        card.classList.toggle('hold-lower', !isUpperTouch);
+    };
 
-        const showRole = event => {
+    const hideRole = () => {
+        if (!isHolding) return;
+        isHolding = false;
+        revealSecret(false);
+        setFaceAccessibility(false);
+        card.classList.remove('is-holding');
+        clearTimeout(resetAnchorTimer);
+        resetAnchorTimer = setTimeout(() => {
+            card.classList.remove('hold-upper', 'hold-lower');
+        }, 460);
+    };
+
+    const showRole = event => {
+        event.preventDefault();
+        if (isHolding) return;
+        isHolding = true;
+        clearTimeout(resetAnchorTimer);
+        updateTouchAnchor(event);
+        setFaceAccessibility(true);
+        card.classList.add('is-holding');
+
+        if (event.pointerId !== undefined && card.setPointerCapture) {
+            try { card.setPointerCapture(event.pointerId); } catch (_) { /* no-op */ }
+        }
+
+        revealSecret(true);
+    };
+
+    card.addEventListener('pointerdown', showRole);
+    card.addEventListener('pointermove', event => {
+        if (isHolding) updateTouchAnchor(event);
+    });
+    card.addEventListener('pointerup', hideRole);
+    card.addEventListener('pointercancel', hideRole);
+    card.addEventListener('lostpointercapture', hideRole);
+    card.addEventListener('contextmenu', event => event.preventDefault());
+    card.addEventListener('keydown', event => {
+        if ((event.code === 'Space' || event.code === 'Enter') && !isHolding) {
             event.preventDefault();
-            if (isHolding) return;
             isHolding = true;
+            card.classList.add('hold-lower', 'is-holding');
             setFaceAccessibility(true);
-            holdControl.classList.add('is-holding');
-
-            if (event.pointerId !== undefined && holdControl.setPointerCapture) {
-                try { holdControl.setPointerCapture(event.pointerId); } catch (_) { /* no-op */ }
-            }
-
             revealSecret(true);
-        };
-
-        holdControl.addEventListener('pointerdown', showRole);
-        holdControl.addEventListener('pointerup', hideRole);
-        holdControl.addEventListener('pointercancel', hideRole);
-        holdControl.addEventListener('lostpointercapture', hideRole);
-        holdControl.addEventListener('contextmenu', event => event.preventDefault());
-
-        card.addEventListener('pointerup', hideRole);
-        card.addEventListener('pointercancel', hideRole);
-
-        holdControl.addEventListener('keydown', event => {
-            if ((event.code === 'Space' || event.code === 'Enter') && !isHolding) {
-                event.preventDefault();
-                isHolding = true;
-                setFaceAccessibility(true);
-                holdControl.classList.add('is-holding');
-                revealSecret(true);
-            }
-        });
-
-        holdControl.addEventListener('keyup', event => {
-            if (event.code === 'Space' || event.code === 'Enter') hideRole();
-        });
-
-        holdControl.addEventListener('blur', hideRole);
-    }
+        }
+    });
+    card.addEventListener('keyup', event => {
+        if (event.code === 'Space' || event.code === 'Enter') hideRole();
+    });
+    card.addEventListener('blur', hideRole);
 
     document.getElementById('finish-reveal-btn')?.classList.add('reveal-next-btn');
+}
+
+function installRevealRolePresentationHook() {
+    if (window.__impostorRevealPresentationHookInstalled || typeof window.showSecretReveal !== 'function') return;
+
+    const originalShowSecretReveal = window.showSecretReveal;
+    window.showSecretReveal = function (...args) {
+        const result = originalShowSecretReveal.apply(this, args);
+        syncRevealRolePresentation();
+        return result;
+    };
+
+    window.__impostorRevealPresentationHookInstalled = true;
+}
+
+function syncRevealRolePresentation() {
+    const player = state.players[state.currentTurnPlayerIndex];
+    const role = player ? state.playerRoles[player.id] : null;
+    const card = document.querySelector('.reveal-card');
+    if (!role || !card) return;
+
+    const isImpostor = Boolean(role.isImpostor);
+    const hasHint = isImpostor && role.word !== 'Brak podpowiedzi';
+
+    card.classList.toggle('is-impostor', isImpostor);
+    card.classList.toggle('is-player', !isImpostor);
+    card.classList.remove('hold-upper', 'hold-lower', 'is-holding');
+
+    const roleTitle = document.getElementById('reveal-role-title');
+    const roleMessage = document.getElementById('reveal-role-message');
+    const roleIcon = document.getElementById('reveal-role-icon');
+    const badge = document.getElementById('secret-badge');
+    const label = document.getElementById('secret-label-type');
+    const description = document.getElementById('secret-desc');
+
+    if (isImpostor) {
+        if (roleTitle) roleTitle.textContent = 'IMPOSTOR';
+        if (roleMessage) roleMessage.textContent = 'Nie znasz prawdziwego hasła';
+        if (roleIcon) roleIcon.innerHTML = '<i class="fa-solid fa-user-secret" aria-hidden="true"></i>';
+
+        if (badge) {
+            badge.className = 'reveal-role-badge impostor-warning-badge';
+            badge.textContent = hasHint ? 'TO TYLKO PODPOWIEDŹ' : 'NIE MASZ PODPOWIEDZI';
+        }
+
+        if (label) label.textContent = hasHint ? 'PODPOWIEDŹ — TO NIE JEST HASŁO' : 'NIE ZNASZ TAJNEGO SŁOWA';
+        if (description) {
+            description.textContent = hasHint
+                ? 'Jesteś impostorem. To słowo jest tylko wskazówką — właściwego hasła nie znasz.'
+                : 'Jesteś impostorem i nie znasz hasła. Słuchaj innych, blefuj i spróbuj się nie zdradzić.';
+        }
+    } else {
+        if (roleTitle) roleTitle.textContent = 'ZWYKŁY GRACZ';
+        if (roleMessage) roleMessage.textContent = 'Znasz wspólne tajne słowo';
+        if (roleIcon) roleIcon.innerHTML = '<i class="fa-solid fa-user-check" aria-hidden="true"></i>';
+
+        if (badge) {
+            badge.className = 'reveal-role-badge player-role-badge';
+            badge.textContent = 'ZNACIE TO SAMO HASŁO';
+        }
+
+        if (label) label.textContent = 'TAJNE SŁOWO';
+        if (description) description.textContent = 'Zapamiętaj hasło i znajdź impostora, który go nie zna.';
+    }
 }
 
 function setupVotingPresentation() {
