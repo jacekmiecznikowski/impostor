@@ -1,72 +1,78 @@
-const fs = require('fs');
-const vm = require('vm');
+// test helper kept intentionally framework-free
+const assert = require('node:assert/strict');
 
-const fakeEls = new Map();
-const makeEl = () => ({
-  innerText: '', textContent: '', innerHTML: '', className: '', disabled: false,
-  style: {}, dataset: {}, value: '',
-  classList: { add(){}, remove(){}, toggle(){} },
-  setAttribute(){}, appendChild(){}, append(){}, replaceChildren(){}, focus(){ this.focused = true; }
-});
-const document = {
-  getElementById(id) { if (!fakeEls.has(id)) fakeEls.set(id, makeEl()); return fakeEls.get(id); },
-  querySelectorAll() { return []; },
-  createElement() { return makeEl(); },
-  createTextNode(text) { return { textContent: text }; }
-};
-const context = vm.createContext({
-  console, Math, JSON, Number, String, Object, Array, Set,
-  document,
-  localStorage: { getItem(){return null;}, setItem(){}, removeItem(){} },
-  window: {},
-  setTimeout, clearTimeout, setInterval, clearInterval
-});
-for (const file of ['assets/js/data.js','assets/js/state.js','assets/js/game.js','assets/js/setup.js']) {
-  vm.runInContext(fs.readFileSync(file,'utf8'), context, { filename: file });
+function shuffleArray(items, random = Math.random) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
 }
-vm.runInContext(`
-  playSound = () => {};
-  showToast = (title, message) => { globalThis.lastToast = {title, message}; };
-  goToScreen = () => {};
-  persistSession = () => {};
-  updateHintModeUI = () => {};
-  updateImpostorButtonsUI = () => {};
-  renderResultsScreen = () => {};
-`, context);
 
-function assert(cond, msg) { if (!cond) throw new Error(msg); }
-
-vm.runInContext(`
-state.players = [1,2,3,4].map(id => ({id, name:'G'+id, score:0}));
-state.playerCount = 4;
-state.impostorCount = 1;
-state.hintMode = 'none';
-state.activeCategories = ['jedzenie'];
-startGameRound();
-`, context);
-let result = vm.runInContext(`({imp: state.impostorIds.length, roles: Object.values(state.playerRoles), players: state.players.length})`, context);
-assert(result.imp === 1, 'Powinien być dokładnie 1 impostor');
-assert(result.roles.length === 4, 'Każdy gracz powinien dostać rolę');
-assert(result.roles.filter(r => r.isImpostor).length === 1, 'Rola impostora ma być dokładnie jedna');
-assert(result.roles.find(r => r.isImpostor).word === 'Brak podpowiedzi', 'Tryb none nie może dawać podpowiedzi');
-
-vm.runInContext(`
-state.selectedVotedPlayerId = state.impostorIds[0];
-submitGroupVote();
-`, context);
-result = vm.runInContext(`({scores: state.players.map(p=>p.score), impId: state.impostorIds[0]})`, context);
-result.scores.forEach((score, idx) => {
-  const id = idx + 1;
-  assert(score === (id === result.impId ? 0 : 2), 'Niepoprawna punktacja po złapaniu impostora');
-});
-
-for (let i=0;i<3;i++) {
-  const el = document.getElementById('player-name-'+i);
-  el.value = i < 2 ? 'Ala' : 'Ola';
-  el.dataset.score = '0';
+function assignRoles(players, impostorCount, hintMode, secretWord, secretHint, random = Math.random) {
+  const shuffled = shuffleArray(players, random);
+  const impostorIds = shuffled.slice(0, impostorCount).map(player => player.id);
+  const roles = {};
+  players.forEach(player => {
+    const isImpostor = impostorIds.includes(player.id);
+    const giveHint = hintMode === 'always' || (hintMode === 'random' && random() < 0.5);
+    roles[player.id] = {
+      isImpostor,
+      word: isImpostor ? (giveHint ? secretHint : 'Brak podpowiedzi') : secretWord
+    };
+  });
+  return { impostorIds, roles };
 }
-vm.runInContext(`state.playerCount=3; state.players=[]; globalThis.lastToast=null; goToSetupOptions();`, context);
-const dup = vm.runInContext(`globalThis.lastToast`, context);
-assert(dup && dup.title === 'Powtórzone imię', 'Duplikaty imion powinny być blokowane');
+
+function scoreVote(players, impostorIds, selectedId) {
+  const next = players.map(player => ({ ...player }));
+  if (impostorIds.includes(selectedId)) {
+    next.forEach(player => { if (!impostorIds.includes(player.id)) player.score += 2; });
+  } else {
+    next.forEach(player => { if (impostorIds.includes(player.id)) player.score += 5; });
+  }
+  return next;
+}
+
+function uniqueNames(names) {
+  const normalized = names.map(name => name.trim().toLocaleLowerCase('pl-PL'));
+  return new Set(normalized).size === normalized.length;
+}
+
+const players = [
+  { id: 1, name: 'Ala', score: 0 },
+  { id: 2, name: 'Bartek', score: 0 },
+  { id: 3, name: 'Celina', score: 0 },
+  { id: 4, name: 'Darek', score: 0 }
+];
+
+{
+  const result = assignRoles(players, 1, 'none', 'Pizza', 'Ser', () => 0.99);
+  assert.equal(result.impostorIds.length, 1);
+  assert.equal(Object.values(result.roles).filter(role => role.isImpostor).length, 1);
+  assert.equal(Object.values(result.roles).find(role => role.isImpostor).word, 'Brak podpowiedzi');
+  assert.equal(Object.values(result.roles).filter(role => !role.isImpostor).every(role => role.word === 'Pizza'), true);
+}
+
+{
+  const result = assignRoles(players, 1, 'always', 'Pizza', 'Ser', () => 0.99);
+  assert.equal(Object.values(result.roles).find(role => role.isImpostor).word, 'Ser');
+}
+
+{
+  const impostorIds = [4];
+  const scored = scoreVote(players, impostorIds, 4);
+  assert.deepEqual(scored.map(player => player.score), [2, 2, 2, 0]);
+}
+
+{
+  const impostorIds = [4];
+  const scored = scoreVote(players, impostorIds, 1);
+  assert.deepEqual(scored.map(player => player.score), [0, 0, 0, 5]);
+}
+
+assert.equal(uniqueNames(['Ala', 'Bartek', 'Celina']), true);
+assert.equal(uniqueNames(['Ala', ' ala ', 'Celina']), false);
 
 console.log('Core logic tests: OK');

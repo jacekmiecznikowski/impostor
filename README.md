@@ -1,79 +1,99 @@
 # Impostor – mobilna gra party
 
-Statyczna aplikacja webowa do gry „znajdź impostora”, przygotowana tak, aby działała bez procesu buildowania i mogła być publikowana bezpośrednio na GitHub Pages.
+Pełna statyczna aplikacja webowa do gry „znajdź impostora”. Nie wymaga procesu buildowania ani backendu — logika gry działa w przeglądarce.
 
-## Struktura
+## Funkcje
+
+- 3–12 graczy,
+- 1–3 impostorów z ograniczeniem dla małych grup,
+- tryby podpowiedzi dla impostora: brak / zawsze / 50%,
+- wiele kategorii haseł,
+- opcjonalny timer dyskusji,
+- przekazywanie telefonu i ukryte odkrywanie roli,
+- głosowanie grupy i punktacja,
+- tabela wyników sesji,
+- zapis ustawień i wyników w `localStorage`,
+- opcja wznowienia poprzedniej sesji,
+- mobilny interfejs, dźwięki WebAudio i animowane tło Phaser,
+- podstawowe testy logiki.
+
+## Uruchomienie lokalne
+
+Najprościej uruchomić aplikację przez lokalny serwer HTTP.
+
+### Python
+
+W katalogu repozytorium:
+
+```bash
+python3 -m http.server 8080
+```
+
+Potem otwórz:
+
+```text
+http://localhost:8080
+```
+
+### npm
+
+Jeśli masz Node.js i Pythona:
+
+```bash
+npm run serve
+```
+
+To uruchomi ten sam serwer na porcie `8080`.
+
+Nie zalecam otwierania aplikacji bezpośrednio przez `file://.../index.html`, ponieważ Service Worker i część zachowań przeglądarki wymagają HTTP/HTTPS.
+
+## Testy
+
+Testy nie wymagają instalowania zależności npm:
+
+```bash
+npm test
+```
+
+Obejmują m.in. generowanie ról, tryby podpowiedzi, punktację i walidację powtarzających się imion.
+
+## Struktura projektu
 
 ```text
 .
 ├── index.html
 ├── manifest.webmanifest
 ├── sw.js
+├── package.json
 ├── assets/
 │   ├── css/styles.css
 │   ├── icons/icon.svg
 │   └── js/
-│       ├── data.js        # baza haseł i kategorii
-│       ├── state.js       # stan, zapis sesji, helpery
-│       ├── audio.js       # dźwięki WebAudio
-│       ├── background.js  # animowane tło Phaser
-│       ├── ui.js          # ekrany, modale i komunikaty
-│       ├── setup.js       # konfiguracja graczy i rundy
-│       ├── game.js        # logika rundy, role, głosowanie
-│       ├── scoreboard.js  # tabela wyników
-│       └── app.js         # inicjalizacja aplikacji
-├── tests/core.test.cjs
-├── package.json
-└── .github/workflows/pages.yml
+│       ├── data.js
+│       ├── state.js
+│       ├── audio.js
+│       ├── background.js
+│       ├── ui.js
+│       ├── setup.js
+│       ├── game.js
+│       ├── scoreboard.js
+│       └── app.js
+└── tests/core.test.cjs
 ```
 
-## Uruchomienie lokalne
+## Zależności
 
-Najprościej uruchomić lokalny serwer HTTP z katalogu projektu:
+Kod gry znajduje się w repozytorium. Warstwa interfejsu korzysta z bibliotek ładowanych z CDN:
 
-```bash
-python3 -m http.server 8080
-```
+- Tailwind CSS,
+- Phaser 3,
+- Font Awesome,
+- Google Fonts (Inter).
 
-Potem otwórz `http://localhost:8080`. Możesz też użyć `npm run serve`.
+Przy pierwszym uruchomieniu potrzebne jest połączenie z internetem, aby pobrać te zasoby.
 
-Nie uruchamiaj gry przez samo `file://.../index.html`, bo Service Worker i część zachowań przeglądarki wymagają serwera HTTP/HTTPS.
+## Dane lokalne
 
-## Publikacja na GitHub Pages
+Gra zapisuje ustawienia, graczy i wyniki sesji w `localStorage` pod kluczem `impostor.session.v2`.
 
-Projekt zawiera workflow `.github/workflows/pages.yml`. Po wypchnięciu plików na gałąź `main` lub `master`:
-
-1. Wejdź w **Settings → Pages** w repozytorium.
-2. W sekcji **Build and deployment → Source** wybierz **GitHub Actions**.
-3. Wypchnij commit lub uruchom workflow ręcznie w zakładce **Actions**.
-4. Po poprawnym deployu adres strony pojawi się w podsumowaniu joba i w **Settings → Pages**.
-
-Aplikacja używa wyłącznie ścieżek względnych (`./...`), więc działa także pod adresem typu `https://uzytkownik.github.io/nazwa-repo/`.
-
-## Najważniejsze poprawki względem wersji jednoplikowej
-
-- rozdzielenie monolitycznego HTML na logiczne pliki,
-- walidacja unikalnych imion graczy,
-- bezpieczniejsze renderowanie nazw graczy bez wstrzykiwania HTML,
-- poprawiony mechanizm „przytrzymaj, aby odkryć rolę”,
-- reset przycisku głosowania między rundami,
-- uczciwsze tasowanie graczy algorytmem Fisher–Yates,
-- zapis graczy, punktów i ustawień w `localStorage` oraz opcja wznowienia sesji,
-- łagodna degradacja, gdy Phaser nie załaduje się z CDN,
-- poprawki dostępności (zoom strony, `focus-visible`, ograniczenie animacji przy `prefers-reduced-motion`),
-- manifest i Service Worker dla wygodniejszego używania na telefonie,
-- gotowy workflow GitHub Pages.
-
-## Zależności z CDN
-
-Interfejs nadal korzysta z Tailwind CSS, Phaser, Google Fonts i Font Awesome przez CDN. Sama logika gry jest lokalna. Przy braku internetu po pierwszym uruchomieniu część lokalnych zasobów może działać z cache, ale zewnętrzne biblioteki nie są bundlowane do repozytorium.
-
-## Testy logiki
-
-Bez dodatkowych zależności:
-
-```bash
-npm test
-```
-
-Test obejmuje generowanie ról, tryb podpowiedzi, punktację po złapaniu impostora i blokowanie duplikatów imion.
+Podczas developmentu po zmianach w kodzie może być potrzebne twarde odświeżenie strony, ponieważ aplikacja rejestruje Service Worker.

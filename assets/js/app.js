@@ -7,9 +7,7 @@ function initializeApp() {
     if (playerCount) playerCount.innerText = state.playerCount;
 
     const audioIcon = document.getElementById('audio-icon');
-    if (audioIcon) {
-        audioIcon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
-    }
+    if (audioIcon) audioIcon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
 
     updateHintModeUI();
     setDiscussionTimer(state.discussionTime, { silent: true });

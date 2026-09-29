@@ -20,7 +20,7 @@ function renderScoreboardModal() {
         left.className = 'flex items-center space-x-3';
 
         const position = document.createElement('span');
-        position.className = `w-7 h-7 rounded-full ${idx === 0 ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30' : (idx === 1 ? 'bg-slate-300 text-slate-950' : (idx === 2 ? 'bg-amber-700 text-white' : 'bg-slate-800 text-slate-400'))} flex items-center justify-center font-black text-xs`;
+        position.className = `w-7 h-7 rounded-full ${idx === 0 ? 'bg-amber-500 text-slate-950' : (idx === 1 ? 'bg-slate-300 text-slate-950' : (idx === 2 ? 'bg-amber-700 text-white' : 'bg-slate-800 text-slate-400'))} flex items-center justify-center font-black text-xs`;
         position.textContent = String(idx + 1);
 
         const name = document.createElement('span');

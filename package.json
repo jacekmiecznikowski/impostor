@@ -2,7 +2,7 @@
   "name": "impostor-party-game",
   "version": "2.0.0",
   "private": true,
-  "description": "Mobilna gra party typu znajdź impostora, gotowa do publikacji na GitHub Pages.",
+  "description": "Mobilna gra party typu znajdź impostora.",
   "scripts": {
     "test": "node tests/core.test.cjs",
     "serve": "python3 -m http.server 8080"

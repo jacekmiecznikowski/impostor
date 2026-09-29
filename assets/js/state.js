@@ -6,13 +6,13 @@ const DEFAULT_STATE = {
     impostorCount: 1,
     hintMode: 'random',
     discussionTime: 0,
-    activeCategories: ["jedzenie", "zwierzeta", "miejsca", "przedmioty", "zawody", "popkultura"],
+    activeCategories: ['jedzenie', 'zwierzeta', 'miejsca', 'przedmioty', 'zawody', 'popkultura'],
     currentTurnPlayerIndex: 0,
-    secretWord: "",
-    secretHint: "",
+    secretWord: '',
+    secretHint: '',
     impostorIds: [],
     playerRoles: {},
-    startingPlayerName: "",
+    startingPlayerName: '',
     selectedVotedPlayerId: null
 };
 
@@ -64,7 +64,6 @@ function loadSession() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return false;
-
         const saved = JSON.parse(raw);
         if (!saved || !Array.isArray(saved.players)) return false;
 

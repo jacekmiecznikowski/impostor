@@ -5,7 +5,11 @@ function goToScreen(screenName) {
         timerInterval = null;
     }
 
-    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.add('hidden');
+        screen.classList.remove('flex');
+    });
+
     const targetScreen = document.getElementById(`screen-${screenName}`);
     if (targetScreen) {
         targetScreen.classList.remove('hidden');
@@ -21,8 +25,7 @@ function goToScreen(screenName) {
         document.getElementById('starting-player-name').innerText = randomPlayer.name;
 
         const randomTip = DISCUSSION_TIPS[Math.floor(Math.random() * DISCUSSION_TIPS.length)];
-        document.getElementById('discussion-tip').innerText = `"${randomTip}"`;
-
+        document.getElementById('discussion-tip').innerText = `“${randomTip}”`;
         setupDiscussionTimer();
     } else if (screenName === 'group-voting') {
         renderGroupVotingScreen();
@@ -32,20 +35,18 @@ function goToScreen(screenName) {
 function openModal(modalId) {
     playSound('click');
     const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        if (modalId === 'score-modal') renderScoreboardModal();
-    }
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    if (modalId === 'score-modal') renderScoreboardModal();
 }
 
 function closeModal(modalId) {
     playSound('click');
     const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-    }
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
 }
 
 function showToast(title, message, iconClass = 'fa-solid fa-circle-exclamation') {
@@ -59,5 +60,4 @@ function showToast(title, message, iconClass = 'fa-solid fa-circle-exclamation')
     modal.classList.remove('hidden');
     modal.classList.add('flex');
     playSound('click');
-
 }

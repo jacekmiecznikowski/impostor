@@ -1,10 +1,11 @@
 let audioCtx = null;
 
 function getAudioContext() {
-    if (audioCtx) return audioCtx;
-    const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextCtor) return null;
-    audioCtx = new AudioContextCtor();
+    if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return null;
+        audioCtx = new AudioContextClass();
+    }
     return audioCtx;
 }
 
@@ -14,12 +15,13 @@ function playSound(type) {
         const context = getAudioContext();
         if (!context) return;
         if (context.state === 'suspended') context.resume();
+
         const osc = context.createOscillator();
         const gain = context.createGain();
         osc.connect(gain);
         gain.connect(context.destination);
-
         const now = context.currentTime;
+
         if (type === 'click') {
             osc.type = 'sine';
             osc.frequency.setValueAtTime(440, now);
@@ -63,11 +65,7 @@ function playSound(type) {
 function toggleAudio() {
     soundEnabled = !soundEnabled;
     const icon = document.getElementById('audio-icon');
-    if (soundEnabled) {
-        icon.className = 'fa-solid fa-volume-high';
-        playSound('click');
-    } else {
-        icon.className = 'fa-solid fa-volume-xmark';
-    }
+    if (icon) icon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    if (soundEnabled) playSound('click');
     persistSession();
 }
