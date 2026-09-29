@@ -1,19 +1,63 @@
 {
-  "name": "Party Games - Gry imprezowe",
+  "id": "./",
+  "name": "Party Games – Gry imprezowe",
   "short_name": "Party Games",
-  "description": "Mobilna kolekcja gier imprezowych. Obecnie dostępny jest Impostor.",
+  "description": "Mobilna kolekcja gier imprezowych na jeden telefon.",
   "lang": "pl",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait-primary",
   "background_color": "#020617",
   "theme_color": "#020617",
+  "categories": [
+    "games",
+    "entertainment"
+  ],
+  "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "./assets/icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Impostor",
+      "short_name": "Impostor",
+      "description": "Uruchom grę Impostor",
+      "url": "./?game=impostor",
+      "icons": [
+        {
+          "src": "./assets/icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

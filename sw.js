@@ -1,10 +1,15 @@
-const CACHE_NAME = 'party-games-v3';
+const STATIC_CACHE = 'party-games-static-v4';
+const RUNTIME_CACHE = 'party-games-runtime-v4';
+
 const LOCAL_ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
   './assets/css/styles.css',
   './assets/icons/icon.svg',
+  './assets/icons/icon-192.png',
+  './assets/icons/icon-512.png',
+  './assets/icons/icon-maskable-512.png',
   './assets/js/data.js',
   './assets/js/state.js',
   './assets/js/audio.js',
@@ -16,27 +21,89 @@ const LOCAL_ASSETS = [
   './assets/js/app.js'
 ];
 
+const EXTERNAL_ASSETS = [
+  'https://cdn.tailwindcss.com',
+  'https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
+];
+
+async function warmExternalCache() {
+  const cache = await caches.open(RUNTIME_CACHE);
+  await Promise.allSettled(EXTERNAL_ASSETS.map(async url => {
+    const response = await fetch(url, { mode: 'no-cors' });
+    await cache.put(url, response);
+  }));
+}
+
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(LOCAL_ASSETS)));
+  event.waitUntil(
+    caches.open(STATIC_CACHE)
+      .then(cache => cache.addAll(LOCAL_ASSETS))
+      .then(() => warmExternalCache())
+  );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
+    caches.keys().then(keys => Promise.all(
+      keys
+        .filter(key => ![STATIC_CACHE, RUNTIME_CACHE].includes(key))
+        .map(key => caches.delete(key))
+    ))
   );
   self.clients.claim();
 });
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
-  event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-      if (response && response.status === 200 && response.type === 'basic') {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
-      }
-      return response;
-    }))
-  );
+
+  const requestUrl = new URL(event.request.url);
+
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(STATIC_CACHE).then(cache => cache.put('./index.html', copy));
+          return response;
+        })
+        .catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+
+  if (requestUrl.origin === self.location.origin) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        const networkFetch = fetch(event.request).then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(STATIC_CACHE).then(cache => cache.put(event.request, copy));
+          }
+          return response;
+        });
+
+        return cached || networkFetch;
+      })
+    );
+    return;
+  }
+
+  if (['script', 'style', 'font'].includes(event.request.destination)) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        const networkFetch = fetch(event.request).then(response => {
+          if (response && (response.ok || response.type === 'opaque')) {
+            const copy = response.clone();
+            caches.open(RUNTIME_CACHE).then(cache => cache.put(event.request, copy));
+          }
+          return response;
+        }).catch(() => cached);
+
+        return cached || networkFetch;
+      })
+    );
+  }
 });

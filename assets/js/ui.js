@@ -59,9 +59,16 @@ function updateShellContext(screenName) {
         icon.className = isGameHub ? 'fa-solid fa-dice text-white' : 'fa-solid fa-user-secret text-white';
         shellLogo.appendChild(icon);
     }
+
+    if (typeof setGameAwakeMode === 'function') {
+        setGameAwakeMode(!isGameHub);
+    }
 }
 
 function goToGameHub() {
+    if (window.location.search) {
+        window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`);
+    }
     goToScreen('home');
 }
 
