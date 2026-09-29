@@ -1,4 +1,4 @@
-const CACHE_NAME = 'impostor-v2';
+const CACHE_NAME = 'party-games-v3';
 const LOCAL_ASSETS = [
   './',
   './index.html',
