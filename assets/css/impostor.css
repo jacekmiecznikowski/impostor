@@ -35,77 +35,220 @@
   height: clamp(22rem, 53dvh, 27rem) !important;
   position: relative;
   margin: .2rem auto !important;
-  touch-action: none;
   outline: none;
+  perspective: 1400px;
+  -webkit-perspective: 1400px;
 }
 
 #secret-card-inner {
   width: 100%;
   height: 100%;
+  position: relative;
   border-radius: 2rem !important;
+  transform-style: preserve-3d !important;
+  -webkit-transform-style: preserve-3d !important;
+  transition: transform 430ms cubic-bezier(.2, .72, .18, 1) !important;
+  will-change: transform;
 }
 
 .reveal-card-face {
+  position: absolute !important;
+  inset: 0;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding: 2.25rem 1.75rem !important;
   border-radius: 2rem !important;
+  overflow: hidden;
   box-shadow: 0 28px 80px rgba(0, 0, 0, .42) !important;
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  isolation: isolate;
+}
+
+.reveal-card-face::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .035), transparent 38%);
 }
 
 .reveal-card-front {
-  justify-content: center !important;
+  justify-content: flex-start !important;
   gap: .5rem !important;
   border: 1px solid rgba(71, 85, 105, .78) !important;
   background:
-    radial-gradient(circle at 50% 58%, rgba(45, 212, 191, .09), transparent 34%),
+    radial-gradient(circle at 50% 72%, rgba(45, 212, 191, .09), transparent 32%),
     radial-gradient(circle at 20% 0%, rgba(8, 145, 178, .07), transparent 28%),
     linear-gradient(155deg, rgba(15, 23, 42, .99), rgba(5, 11, 24, .99)) !important;
+  transform: rotateY(0deg) translateZ(1px) !important;
+  -webkit-transform: rotateY(0deg) translateZ(1px) !important;
+}
+
+.reveal-card-back {
+  justify-content: flex-start !important;
+  gap: .7rem !important;
+  border: 1px solid rgba(45, 212, 191, .48) !important;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(45, 212, 191, .18), transparent 34%),
+    linear-gradient(155deg, #063b38, #0f172a 56%, #020617) !important;
+  transform: rotateY(180deg) translateZ(1px) !important;
+  -webkit-transform: rotateY(180deg) translateZ(1px) !important;
+}
+
+.reveal-card-title,
+.reveal-card-subtitle,
+.fingerprint-orb,
+.reveal-card-privacy,
+.reveal-role-badge,
+.reveal-secret-block,
+.reveal-secret-description,
+.reveal-release-hint {
+  position: relative;
+  z-index: 1;
 }
 
 .reveal-card-title {
   max-width: 17rem !important;
+  margin-top: .2rem;
   font-size: 1.18rem !important;
   line-height: 1.35 !important;
   letter-spacing: -.015em;
+  color: rgb(248 250 252);
+  font-weight: 900;
 }
 
 .reveal-card-subtitle {
   max-width: 17rem !important;
   color: rgb(100 116 139) !important;
   font-size: .76rem !important;
+  line-height: 1.45;
 }
 
 .fingerprint-orb {
-  order: 3;
-  width: 5.75rem !important;
-  height: 5.75rem !important;
-  margin-top: 1.55rem !important;
-  border-radius: 1.9rem !important;
-  font-size: 2.8rem !important;
+  width: 6.2rem !important;
+  height: 6.2rem !important;
+  margin-top: auto !important;
+  border-radius: 2rem !important;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
   color: rgb(45 212 191) !important;
-  border: 1px solid rgba(45, 212, 191, .28) !important;
+  border: 1px solid rgba(45, 212, 191, .32) !important;
   background:
-    radial-gradient(circle at 35% 25%, rgba(94, 234, 212, .12), transparent 36%),
-    rgba(13, 148, 136, .10) !important;
+    radial-gradient(circle at 35% 25%, rgba(94, 234, 212, .13), transparent 36%),
+    rgba(13, 148, 136, .11) !important;
   box-shadow:
     0 0 0 9px rgba(20, 184, 166, .03),
-    0 22px 48px rgba(13, 148, 136, .14) !important;
+    0 22px 48px rgba(13, 148, 136, .16) !important;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .14s ease, background .14s ease, border-color .14s ease, box-shadow .14s ease;
+}
+
+.fingerprint-orb i {
+  font-size: 2.65rem;
+  line-height: 1;
+}
+
+.fingerprint-orb span {
+  font-size: .58rem;
+  line-height: .8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: rgb(94 234 212);
+}
+
+.fingerprint-orb:active,
+.fingerprint-orb.is-holding {
+  transform: scale(.94);
+  border-color: rgba(94, 234, 212, .65) !important;
+  background: rgba(13, 148, 136, .2) !important;
+  box-shadow:
+    0 0 0 12px rgba(20, 184, 166, .05),
+    0 12px 36px rgba(13, 148, 136, .24) !important;
+}
+
+.fingerprint-orb:focus-visible {
+  outline: 2px solid rgb(94 234 212);
+  outline-offset: 5px;
 }
 
 .reveal-card-privacy {
-  order: 4;
-  margin-top: 1.3rem !important;
+  margin-top: .95rem !important;
   padding: .48rem .72rem;
   border-radius: 999px;
   border: 1px solid rgba(51, 65, 85, .65);
   background: rgba(15, 23, 42, .56);
   color: rgb(100 116 139) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: .42rem;
+  font-size: .68rem;
 }
 
-.reveal-card-back {
-  gap: .9rem !important;
-  background:
-    radial-gradient(circle at 50% 28%, rgba(45, 212, 191, .18), transparent 38%),
-    linear-gradient(155deg, #063b38, #0f172a 56%, #020617) !important;
+.reveal-role-badge {
+  margin-top: .15rem;
+  max-width: 100%;
+}
+
+.reveal-secret-block {
+  width: 100%;
+  margin-top: 1.7rem;
+}
+
+.reveal-secret-label {
+  display: block !important;
+  margin: 0 !important;
+  color: rgb(148 163 184) !important;
+  font-size: .65rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase;
+}
+
+.reveal-secret-word {
+  margin-top: .45rem !important;
+  font-size: clamp(2.3rem, 10vw, 3.35rem) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -.045em;
+  color: rgb(248 250 252) !important;
+  overflow-wrap: anywhere;
+}
+
+.reveal-secret-description {
+  max-width: 18rem;
+  margin-top: .45rem !important;
+  color: rgb(148 163 184) !important;
+  font-size: .78rem !important;
+  line-height: 1.5;
+}
+
+.reveal-release-hint {
+  margin-top: auto;
+  min-height: 2.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .48rem .72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(45, 212, 191, .18);
+  background: rgba(13, 148, 136, .07);
+  color: rgb(94 234 212);
+  font-size: .66rem;
+  font-weight: 700;
 }
 
 #finish-reveal-btn {
@@ -314,17 +457,22 @@
 
 @media (max-height: 680px) {
   .reveal-card {
-    height: clamp(18.8rem, 50dvh, 22rem) !important;
+    height: clamp(19rem, 52dvh, 22rem) !important;
+  }
+
+  .reveal-card-face {
+    padding-top: 1.65rem !important;
+    padding-bottom: 1.4rem !important;
   }
 
   .fingerprint-orb {
-    width: 4.75rem !important;
-    height: 4.75rem !important;
-    margin-top: 1rem !important;
-    font-size: 2.25rem !important;
+    width: 5.15rem !important;
+    height: 5.15rem !important;
   }
 
-  .reveal-card-privacy { margin-top: .8rem !important; }
+  .fingerprint-orb i { font-size: 2.25rem; }
+  .reveal-card-privacy { margin-top: .65rem !important; }
+  .reveal-secret-block { margin-top: 1.05rem; }
   .voting-header { padding-bottom: .45rem; }
   .voting-icon { width: 2.85rem !important; height: 2.85rem !important; }
   .vote-card { min-height: 4rem !important; padding-top: .58rem !important; padding-bottom: .58rem !important; }
