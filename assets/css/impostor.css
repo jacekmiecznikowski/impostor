@@ -1,0 +1,331 @@
+/* Impostor-only presentation layer. Loaded by games/impostor/presentation.js. */
+
+.reveal-screen {
+  min-height: 0;
+  justify-content: space-between !important;
+  gap: 1.1rem !important;
+  padding-top: .9rem !important;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+}
+
+.reveal-heading {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .3rem;
+}
+
+.reveal-heading .step-label {
+  font-size: .66rem;
+  letter-spacing: .16em;
+  color: rgb(94 234 212);
+}
+
+.reveal-heading h2 {
+  margin: 0;
+  color: rgb(203 213 225);
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.reveal-card {
+  width: min(100%, 23rem) !important;
+  height: clamp(22rem, 53dvh, 27rem) !important;
+  position: relative;
+  margin: .2rem auto !important;
+  touch-action: none;
+  outline: none;
+}
+
+#secret-card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem !important;
+}
+
+.reveal-card-face {
+  padding: 2.25rem 1.75rem !important;
+  border-radius: 2rem !important;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, .42) !important;
+}
+
+.reveal-card-front {
+  justify-content: center !important;
+  gap: .5rem !important;
+  border: 1px solid rgba(71, 85, 105, .78) !important;
+  background:
+    radial-gradient(circle at 50% 58%, rgba(45, 212, 191, .09), transparent 34%),
+    radial-gradient(circle at 20% 0%, rgba(8, 145, 178, .07), transparent 28%),
+    linear-gradient(155deg, rgba(15, 23, 42, .99), rgba(5, 11, 24, .99)) !important;
+}
+
+.reveal-card-title {
+  max-width: 17rem !important;
+  font-size: 1.18rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: -.015em;
+}
+
+.reveal-card-subtitle {
+  max-width: 17rem !important;
+  color: rgb(100 116 139) !important;
+  font-size: .76rem !important;
+}
+
+.fingerprint-orb {
+  order: 3;
+  width: 5.75rem !important;
+  height: 5.75rem !important;
+  margin-top: 1.55rem !important;
+  border-radius: 1.9rem !important;
+  font-size: 2.8rem !important;
+  color: rgb(45 212 191) !important;
+  border: 1px solid rgba(45, 212, 191, .28) !important;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(94, 234, 212, .12), transparent 36%),
+    rgba(13, 148, 136, .10) !important;
+  box-shadow:
+    0 0 0 9px rgba(20, 184, 166, .03),
+    0 22px 48px rgba(13, 148, 136, .14) !important;
+}
+
+.reveal-card-privacy {
+  order: 4;
+  margin-top: 1.3rem !important;
+  padding: .48rem .72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(51, 65, 85, .65);
+  background: rgba(15, 23, 42, .56);
+  color: rgb(100 116 139) !important;
+}
+
+.reveal-card-back {
+  gap: .9rem !important;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(45, 212, 191, .18), transparent 38%),
+    linear-gradient(155deg, #063b38, #0f172a 56%, #020617) !important;
+}
+
+#finish-reveal-btn {
+  flex: 0 0 auto;
+  max-width: 23rem !important;
+  min-height: 3.65rem !important;
+  border-radius: 1.15rem !important;
+}
+
+/* Voting redesign */
+.voting-screen {
+  min-height: 0;
+  display: flex !important;
+  flex-direction: column;
+  gap: .85rem !important;
+  padding-top: .65rem !important;
+  padding-bottom: max(.8rem, env(safe-area-inset-bottom)) !important;
+  overflow: hidden !important;
+}
+
+.voting-header {
+  flex: 0 0 auto;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "icon eyebrow"
+    "icon title"
+    "icon desc";
+  column-gap: .85rem;
+  row-gap: .08rem;
+  align-items: center;
+  text-align: left !important;
+  padding: .4rem .15rem .65rem;
+  border-bottom: 1px solid rgba(30, 41, 59, .75);
+}
+
+.voting-icon {
+  grid-area: icon;
+  width: 3.25rem !important;
+  height: 3.25rem !important;
+  margin: 0 !important;
+  border-radius: 1.05rem !important;
+  font-size: 1.15rem !important;
+}
+
+.voting-header .step-label {
+  grid-area: eyebrow;
+  margin: 0 !important;
+  font-size: .62rem;
+}
+
+.voting-header h2 {
+  grid-area: title;
+  margin: 0 !important;
+  font-size: clamp(1.22rem, 5vw, 1.55rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.025em;
+}
+
+.voting-header > p:last-child {
+  grid-area: desc;
+  margin: .12rem 0 0 !important;
+  font-size: .72rem !important;
+  line-height: 1.3;
+  color: rgb(100 116 139) !important;
+}
+
+.vote-selection-summary {
+  flex: 0 0 auto;
+  min-height: 2.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .55rem .75rem;
+  border-radius: .9rem;
+  border: 1px solid rgba(30, 41, 59, .78);
+  background: rgba(15, 23, 42, .62);
+  color: rgb(148 163 184);
+  font-size: .71rem;
+}
+
+.vote-selection-summary strong {
+  color: rgb(226 232 240);
+  font-size: .76rem;
+}
+
+.vote-selection-summary.has-selection {
+  border-color: rgba(45, 212, 191, .28);
+  background: rgba(13, 148, 136, .08);
+}
+
+.vote-selection-summary.has-selection strong { color: rgb(94 234 212); }
+
+#group-voting-players-grid {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: .58rem !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  padding: .1rem .1rem .45rem !important;
+  scrollbar-gutter: stable;
+}
+
+.vote-card {
+  width: 100%;
+  min-height: 4.35rem !important;
+  flex: 0 0 auto;
+  display: grid !important;
+  grid-template-columns: 2.8rem minmax(0, 1fr) 2rem !important;
+  grid-template-areas:
+    "avatar copy marker"
+    "avatar copy marker";
+  align-items: center !important;
+  gap: .72rem !important;
+  padding: .72rem .78rem !important;
+  border-radius: 1.15rem !important;
+  border: 1px solid rgba(51, 65, 85, .72) !important;
+  background:
+    linear-gradient(145deg, rgba(15, 23, 42, .96), rgba(8, 15, 28, .98)) !important;
+  color: white;
+  text-align: left;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .10) !important;
+  transition: transform .12s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.vote-card:hover { border-color: rgba(71, 85, 105, .95) !important; }
+.vote-card:active { transform: scale(.988); }
+
+.vote-card.is-selected {
+  border-color: rgba(45, 212, 191, .72) !important;
+  background:
+    radial-gradient(circle at 8% 50%, rgba(45, 212, 191, .12), transparent 24%),
+    linear-gradient(145deg, rgba(6, 78, 59, .42), rgba(8, 47, 73, .30)) !important;
+  box-shadow: 0 12px 30px rgba(13, 148, 136, .12), inset 0 0 0 1px rgba(45, 212, 191, .05) !important;
+}
+
+.vote-number { display: none !important; }
+
+.vote-avatar {
+  grid-area: avatar;
+  width: 2.8rem !important;
+  height: 2.8rem !important;
+  border-radius: .9rem !important;
+  background: rgb(30 41 59) !important;
+  color: rgb(226 232 240) !important;
+  border: 1px solid rgba(71, 85, 105, .38) !important;
+  font-size: .98rem !important;
+}
+
+.vote-card.is-selected .vote-avatar {
+  background: linear-gradient(145deg, #0d9488, #0891b2) !important;
+  color: white !important;
+  border-color: rgba(94, 234, 212, .32) !important;
+}
+
+.vote-copy {
+  grid-area: copy;
+  min-width: 0;
+  gap: .08rem !important;
+}
+
+.vote-player-name {
+  font-size: .95rem !important;
+  line-height: 1.2rem !important;
+}
+
+.vote-player-hint {
+  font-size: .67rem !important;
+  line-height: .95rem !important;
+}
+
+.vote-marker {
+  grid-area: marker;
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  border: 1px solid rgb(51 65 85) !important;
+  background: rgba(2, 6, 23, .35);
+}
+
+.vote-card.is-selected .vote-marker {
+  border-color: rgb(45 212 191) !important;
+  background: rgb(45 212 191) !important;
+  color: #022c22 !important;
+}
+
+#confirm-group-vote-btn {
+  flex: 0 0 auto !important;
+  min-height: 3.55rem !important;
+  margin: 0 !important;
+  border-radius: 1.08rem !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .18);
+}
+
+@media (min-width: 640px) and (min-height: 760px) {
+  #group-voting-players-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    align-content: start !important;
+  }
+
+  .vote-card { min-height: 4.5rem !important; }
+}
+
+@media (max-height: 680px) {
+  .reveal-card {
+    height: clamp(18.8rem, 50dvh, 22rem) !important;
+  }
+
+  .fingerprint-orb {
+    width: 4.75rem !important;
+    height: 4.75rem !important;
+    margin-top: 1rem !important;
+    font-size: 2.25rem !important;
+  }
+
+  .reveal-card-privacy { margin-top: .8rem !important; }
+  .voting-header { padding-bottom: .45rem; }
+  .voting-icon { width: 2.85rem !important; height: 2.85rem !important; }
+  .vote-card { min-height: 4rem !important; padding-top: .58rem !important; padding-bottom: .58rem !important; }
+}
