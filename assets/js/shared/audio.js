@@ -39,6 +39,14 @@ function playSound(type) {
             gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
             osc.start(now);
             osc.stop(now + 0.3);
+        } else if (type === 'failure') {
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(246.94, now);
+            osc.frequency.exponentialRampToValueAtTime(110, now + 0.42);
+            gain.gain.setValueAtTime(0.07, now);
+            gain.gain.exponentialRampToValueAtTime(0.003, now + 0.48);
+            osc.start(now);
+            osc.stop(now + 0.48);
         } else if (type === 'reveal') {
             osc.type = 'sine';
             osc.frequency.setValueAtTime(587.33, now);
