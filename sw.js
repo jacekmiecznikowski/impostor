@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v18';
+const CACHE_VERSION = 'v19';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -23,11 +23,9 @@ const LOCAL_ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
-  './assets/audio/impostor-win-evil-laugh.ogg',
-  './assets/audio/detectives-win-relief.ogg',
   './assets/js/shared/view-loader.js',
   './assets/js/shared/audio.js',
-  './assets/js/shared/outcome-audio.js',
+  './assets/js/shared/outcome-audio.js?v=3',
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
   './assets/js/shared/content-repository.js',
@@ -51,7 +49,9 @@ const EXTERNAL_ASSETS = [
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap',
+  'https://opengameart.org/sites/default/files/laugh-evil-1_0.ogg',
+  'https://opengameart.org/sites/default/files/Well%20Done%20CCBY3.ogg'
 ];
 
 async function warmExternalCache() {
@@ -102,7 +102,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if (['script', 'style', 'font'].includes(event.request.destination)) {
+  if (['script', 'style', 'font', 'audio'].includes(event.request.destination)) {
     event.respondWith((async () => {
       const cached = await caches.match(event.request);
       const networkPromise = fetch(event.request).then(response => {
