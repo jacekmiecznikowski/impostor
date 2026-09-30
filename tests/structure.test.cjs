@@ -49,7 +49,7 @@ assert.match(index, /assets\/css\/impostor-reveal-layout\.css/);
 assert.match(index, /assets\/css\/navigation\.css/);
 assert.match(index, /assets\/css\/navigation-android\.css/);
 assert.match(index, /assets\/js\/shared\/view-loader\.js/);
-assert.match(index, /assets\/js\/shared\/outcome-audio\.js/);
+assert.match(index, /assets\/js\/shared\/outcome-audio\.js\?v=3/);
 assert.match(index, /assets\/js\/shared\/navigation-behavior\.js/);
 assert.match(index, /assets\/js\/shared\/game-themes\.js/);
 assert.match(index, /assets\/js\/games\/impostor\/reveal-fit\.js/);
@@ -89,9 +89,11 @@ assert.match(revealFit, /ResizeObserver/);
 assert.match(revealFit, /font-size/);
 
 const outcomeAudio = read('assets/js/shared/outcome-audio.js');
-assert.match(outcomeAudio, /impostor-win-evil-laugh\.ogg/);
-assert.match(outcomeAudio, /detectives-win-relief\.ogg/);
+assert.match(outcomeAudio, /opengameart\.org\/sites\/default\/files\/laugh-evil-1_0\.ogg/);
+assert.match(outcomeAudio, /opengameart\.org\/sites\/default\/files\/Well%20Done%20CCBY3\.ogg/);
 assert.match(outcomeAudio, /function playOutcomeSound/);
+assert.match(outcomeAudio, /function playOutcomeFallback/);
+assert.doesNotMatch(outcomeAudio, /playSound\(config\.fallback\)/);
 
 const hub = read('assets/js/shared/hub.js');
 assert.match(hub, /navigation-sheet/);
@@ -110,15 +112,16 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v18'/);
+assert.match(sw, /CACHE_VERSION = 'v19'/);
 assert.match(sw, /assets\/icons\/icon-32\.png/);
 assert.match(sw, /assets\/css\/brand-theme\.css/);
 assert.match(sw, /assets\/css\/impostor-reveal-layout\.css/);
 assert.match(sw, /assets\/js\/shared\/game-themes\.js/);
-assert.match(sw, /assets\/js\/shared\/outcome-audio\.js/);
+assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=3/);
 assert.match(sw, /assets\/js\/games\/impostor\/reveal-fit\.js/);
-assert.match(sw, /assets\/audio\/impostor-win-evil-laugh\.ogg/);
-assert.match(sw, /assets\/audio\/detectives-win-relief\.ogg/);
+assert.match(sw, /opengameart\.org\/sites\/default\/files\/laugh-evil-1_0\.ogg/);
+assert.match(sw, /opengameart\.org\/sites\/default\/files\/Well%20Done%20CCBY3\.ogg/);
+assert.match(sw, /'audio'/);
 
 const manifest = JSON.parse(read('manifest.webmanifest'));
 assert.equal(manifest.short_name, 'Partyjniak');
