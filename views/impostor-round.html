@@ -1,0 +1,41 @@
+<section class="screen hidden flex-col items-center justify-center flex-1 py-10 gap-8 text-center" id="screen-pass">
+<div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-teal-600 to-cyan-500 flex items-center justify-center shadow-2xl"><i class="fa-solid fa-mobile-screen-button text-4xl"></i></div>
+<div><p class="step-label mb-2">Przekaż telefon</p><h2 class="text-3xl font-black" id="pass-player-name">Gracz 1</h2><p class="text-sm text-slate-400 mt-3 max-w-xs">Tylko wskazana osoba powinna patrzeć na ekran.</p></div>
+<button class="primary-btn max-w-xs" onclick="showSecretReveal()" type="button"><span>Odbieram telefon</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section class="screen hidden flex-col items-center justify-between flex-1 py-4 gap-4 text-center" id="screen-reveal">
+<div><p class="step-label" id="reveal-player-title">Rola gracza</p><h2 class="text-sm text-slate-300">Przytrzymaj kartę, aby odsłonić rolę</h2></div>
+<div class="w-full max-w-xs h-60 relative perspective-1000 cursor-pointer my-auto select-none" onmousedown="revealSecret(true)" onmouseleave="revealSecret(false)" onmouseup="revealSecret(false)" ontouchcancel="revealSecret(false)" ontouchend="revealSecret(false)" ontouchstart="revealSecret(true)">
+<div class="w-full h-full relative transition-transform duration-300 transform-style-3d rounded-3xl" id="secret-card-inner">
+<div class="absolute inset-0 panel flex flex-col items-center justify-center gap-4 backface-hidden border-2 border-slate-700"><i class="fa-solid fa-fingerprint text-5xl text-teal-400"></i><strong>Trzymaj palec, aby czytać</strong><small class="text-slate-500">Nie pokazuj roli innym.</small></div>
+<div class="absolute inset-0 bg-gradient-to-br from-teal-950 via-slate-900 to-slate-950 border-2 border-teal-500/60 rounded-3xl flex flex-col items-center justify-center p-6 gap-3 backface-hidden rotate-y-180">
+<div class="pill" id="secret-badge">Zwykły gracz</div>
+<div><span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold block" id="secret-label-type">Tajne słowo</span><h3 class="text-3xl font-black" id="secret-word-display">PIZZA</h3></div>
+<p class="text-xs text-slate-400" id="secret-desc">Zapamiętaj rolę.</p>
+</div>
+</div>
+</div>
+<button class="w-full max-w-xs bg-slate-900 text-slate-500 font-bold py-3.5 px-6 rounded-2xl cursor-not-allowed border border-slate-800" disabled id="finish-reveal-btn" onclick="nextPlayerTurn()" type="button"><span>Zapamiętałem, podaj dalej</span></button>
+</section>
+
+<section class="screen hidden flex-col items-center justify-center flex-1 py-8 gap-6 text-center" id="screen-discussion">
+<div class="w-20 h-20 rounded-3xl bg-gradient-to-tr from-teal-600 to-cyan-500 flex items-center justify-center shadow-xl"><i class="fa-solid fa-comments text-3xl"></i></div>
+<div class="max-w-xs"><p class="step-label">Faza dyskusji</p><h2 class="text-2xl font-black">Czas na rozmowę!</h2><div class="panel mt-4"><small class="text-teal-300 uppercase">Rozmowę zaczyna:</small><p class="font-black" id="starting-player-name">Gracz 1</p></div></div>
+<div class="hidden panel w-full max-w-xs flex items-center justify-between" id="timer-display-box"><span class="text-xs text-cyan-400 font-bold">Pozostały czas</span><span class="text-xl font-black" id="timer-countdown">01:00</span></div>
+<div class="panel w-full max-w-xs text-left"><p class="text-xs text-amber-400 font-bold mb-2"><i class="fa-solid fa-lightbulb"></i> Wskazówka</p><p class="text-xs text-slate-400 italic" id="discussion-tip">Zaczynajcie od ogólnych pytań.</p></div>
+<button class="primary-btn max-w-xs" onclick="goToGroupVotingScreen()" type="button"><span>Przejdź do werdyktu</span><i class="fa-solid fa-gavel"></i></button>
+</section>
+
+<section class="screen hidden flex-col flex-1 py-4 gap-5" id="screen-group-voting">
+<div class="text-center"><p class="step-label">Werdykt grupy</p><h2 class="text-2xl font-black">Kto dostał najwięcej głosów?</h2><p class="text-xs text-slate-400 mt-2">Wskaż osobę wybraną przez grupę.</p></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1 overflow-y-auto p-1" id="group-voting-players-grid"></div>
+<button class="w-full bg-slate-900 text-slate-500 font-bold py-4 px-6 rounded-2xl cursor-not-allowed border border-slate-800" disabled id="confirm-group-vote-btn" onclick="submitGroupVote()" type="button"><span>Zatwierdź wybór</span></button>
+</section>
+
+<section class="screen hidden flex-col items-center justify-center flex-1 py-6 gap-6 text-center" id="screen-results">
+<div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-teal-600 to-emerald-600 flex items-center justify-center shadow-2xl" id="result-icon-container"><i class="fa-solid fa-trophy text-4xl" id="result-icon"></i></div>
+<div><span class="pill" id="result-badge">Wynik rundy</span><h2 class="text-3xl font-black mt-3" id="result-title">Wynik</h2><p class="text-xs text-slate-400 mt-2">Hasło: <strong class="text-white" id="result-secret-word">PIZZA</strong></p><p class="text-xs text-slate-400 mt-1" id="result-subtitle"></p></div>
+<div class="panel w-full max-w-xs text-left space-y-3"><div><small class="text-slate-400 uppercase">Werdykt grupy</small><div class="text-xs mt-1" id="majority-vote-summary"></div></div><div class="border-t border-slate-800 pt-3"><small class="text-slate-400 uppercase">Impostorzy</small><div class="flex flex-wrap gap-2 pt-2" id="result-impostors-list"></div></div></div>
+<div class="w-full max-w-xs space-y-2"><button class="primary-btn" onclick="startNextRound()" type="button"><i class="fa-solid fa-rotate-right"></i><span>Następna runda</span></button><button class="secondary-btn" onclick="openModal('score-modal')" type="button"><i class="fa-solid fa-trophy"></i><span>Tabela wyników</span></button><button class="secondary-btn" onclick="goToScreen('setup-count')" type="button"><i class="fa-solid fa-users-gear"></i><span>Zmień graczy / ustawienia</span></button></div>
+</section>
