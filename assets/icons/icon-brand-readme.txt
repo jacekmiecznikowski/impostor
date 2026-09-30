@@ -1,1 +1,0 @@
-Partyjniak icon assets are generated from assets/icons/brand-source.svg.
