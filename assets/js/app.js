@@ -20,7 +20,7 @@ async function initializeApp() {
     await initializeContentLayer();
     setupGameHub();
     setupImpostorPresentation();
-    setupRevealWordFitting?.();
+    if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
     setupSystemBackHandling();
     loadSession();
     normalizeActiveCategories();
