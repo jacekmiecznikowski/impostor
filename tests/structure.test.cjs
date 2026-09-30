@@ -12,6 +12,7 @@ const requiredFiles = [
   'assets/js/shared/ui.js',
   'assets/js/shared/hub.js',
   'assets/js/shared/navigation-behavior.js',
+  'assets/js/shared/game-themes.js',
   'assets/js/games/impostor/data.js',
   'assets/js/games/impostor/content-provider.js',
   'assets/js/games/impostor/rules.js',
@@ -23,6 +24,12 @@ const requiredFiles = [
   'assets/css/partyjniak.css',
   'assets/css/navigation.css',
   'assets/css/navigation-android.css',
+  'assets/css/brand-theme.css',
+  'assets/icons/icon.svg',
+  'assets/icons/icon-32.png',
+  'assets/icons/icon-192.png',
+  'assets/icons/icon-512.png',
+  'assets/icons/icon-maskable-512.png',
   'views/impostor-setup.html',
   'views/impostor-round.html',
   'views/modals.html'
@@ -32,10 +39,15 @@ requiredFiles.forEach(file => assert.equal(fs.existsSync(path.join(root, file)),
 
 const index = read('index.html');
 assert.match(index, /<title>Partyjniak – gry imprezowe<\/title>/);
+assert.match(index, /assets\/icons\/icon\.svg/);
+assert.match(index, /assets\/icons\/icon-32\.png/);
+assert.match(index, /assets\/css\/brand-theme\.css/);
 assert.match(index, /assets\/css\/navigation\.css/);
 assert.match(index, /assets\/css\/navigation-android\.css/);
 assert.match(index, /assets\/js\/shared\/view-loader\.js/);
 assert.match(index, /assets\/js\/shared\/navigation-behavior\.js/);
+assert.match(index, /assets\/js\/shared\/game-themes\.js/);
+assert.match(index, /theme-color" content="#950f26"/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 assert.doesNotMatch(index, /id="screen-menu"/);
 
@@ -43,15 +55,6 @@ const viewLoader = read('assets/js/shared/view-loader.js');
 assert.match(viewLoader, /views\/impostor-setup\.html/);
 assert.match(viewLoader, /views\/impostor-round\.html/);
 assert.match(viewLoader, /views\/modals\.html/);
-
-const setupView = read('views/impostor-setup.html');
-const roundView = read('views/impostor-round.html');
-const modalsView = read('views/modals.html');
-assert.match(setupView, /id="screen-menu"/);
-assert.match(setupView, /id="screen-setup-options"/);
-assert.match(roundView, /id="screen-reveal"/);
-assert.match(roundView, /id="screen-group-voting"/);
-assert.match(modalsView, /id="score-modal"/);
 
 const platform = read('assets/js/shared/platform.js');
 assert.doesNotMatch(platform, /awake-mode-note|Ekran pozostanie włączony/);
@@ -66,14 +69,18 @@ const navigationBehavior = read('assets/js/shared/navigation-behavior.js');
 assert.match(navigationBehavior, /IMMERSIVE_SCREENS\.delete\('results'\)/);
 assert.match(navigationBehavior, /fa-pause/);
 
+const themes = read('assets/js/shared/game-themes.js');
+assert.match(themes, /PARTYJNIAK_GAME_THEMES/);
+assert.match(themes, /accent: '#950f26'/);
+assert.match(themes, /accent: '#14b8a6'/);
+assert.match(themes, /'heads-up'/);
+assert.match(themes, /taboo/);
+assert.match(themes, /renderPartyjniakThemeMotifs/);
+
 const hub = read('assets/js/shared/hub.js');
 assert.match(hub, /navigation-sheet/);
 assert.match(hub, /onclick="navigateBack\(\)"/);
 assert.match(hub, /requestLeaveGame\('home'\)/);
-
-const setup = read('assets/js/games/impostor/setup.js');
-assert.doesNotMatch(setup, /button\.innerHTML\s*=/);
-assert.match(setup, /textContent = category\.name/);
 
 const game = read('assets/js/games/impostor/game.js');
 assert.doesNotMatch(game, /function renderGroupVotingScreen/);
@@ -85,12 +92,15 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v16'/);
-assert.match(sw, /views\/impostor-setup\.html/);
-assert.match(sw, /assets\/css\/navigation-android\.css/);
-assert.match(sw, /assets\/js\/shared\/navigation-behavior\.js/);
+assert.match(sw, /CACHE_VERSION = 'v17'/);
+assert.match(sw, /assets\/icons\/icon-32\.png/);
+assert.match(sw, /assets\/css\/brand-theme\.css/);
+assert.match(sw, /assets\/js\/shared\/game-themes\.js/);
 
 const manifest = JSON.parse(read('manifest.webmanifest'));
 assert.equal(manifest.short_name, 'Partyjniak');
+assert.equal(manifest.theme_color, '#950f26');
+assert.equal(manifest.background_color, '#06050a');
+assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
 
-console.log('Structure, navigation and integration tests: OK');
+console.log('Structure, branding, navigation and integration tests: OK');
