@@ -1,6 +1,6 @@
 # Partyjniak – gry imprezowe
 
-**Partyjniak** to mobilna aplikacja/PWA z grami imprezowymi na jeden telefon. Obecnie dostępny jest **Impostor**; architektura i ekran główny są przygotowane pod kolejne gry, m.in. Czółko i Tabu.
+**Partyjniak** to mobilna aplikacja webowa/PWA z grami imprezowymi na jeden telefon. Obecnie dostępny jest **Impostor**; architektura jest przygotowana pod kolejne gry, m.in. Czółko i Tabu.
 
 ## Uruchomienie lokalne
 
@@ -18,13 +18,19 @@ npm run serve
 
 Następnie otwórz `http://localhost:8080`.
 
-Nie uruchamiaj aplikacji przez `file://` — Service Worker, instalacja PWA i część API urządzenia wymagają HTTP/HTTPS.
+Nie uruchamiaj aplikacji przez `file://`, ponieważ Service Worker i część API przeglądarki wymagają HTTP/HTTPS.
 
 ## Testy
 
 ```bash
 npm test
 ```
+
+Testy obejmują:
+
+- produkcyjne reguły Impostora (`rules.js`) – przydział ról i punktację,
+- walidację zdalnych danych/kategorii,
+- krytyczne zależności struktury aplikacji i PWA.
 
 ## Architektura
 
@@ -33,58 +39,40 @@ assets/js/
 ├── app.js
 ├── shared/
 │   ├── audio.js
-│   ├── background.js            # Phaser i kontekstowe tło
-│   ├── platform.js              # PWA + Screen Wake Lock
-│   ├── ui.js                    # routing i shell
-│   ├── hub.js                   # Partyjniak + katalog gier
-│   └── content-repository.js    # opcjonalne zdalne źródło treści
+│   ├── background.js
+│   ├── content-repository.js
+│   ├── hub.js
+│   ├── platform.js
+│   └── ui.js
 └── games/
     └── impostor/
-        ├── data.js              # lokalny fallback offline
-        ├── content-provider.js  # mapowanie zdalnych danych na model gry
-        ├── state.js
-        ├── setup.js
+        ├── content-provider.js
+        ├── data.js
         ├── game.js
         ├── presentation.js
-        └── scoreboard.js
+        ├── rules.js
+        ├── scoreboard.js
+        ├── setup.js
+        └── state.js
 ```
 
-## Branding i mobilny shell
+`rules.js` zawiera czystą logikę domenową i jest bezpośrednio używany zarówno przez grę, jak i testy. `presentation.js` odpowiada za specyficzny UI Impostora, natomiast shell, tło i funkcje urządzenia są współdzielone.
 
-- nazwa aplikacji: **Partyjniak – gry imprezowe**,
-- własne logo i ikony PWA 192/512/maskable,
-- ekran główny jest hubem gier,
-- wewnątrz gry shell jest lekki i kontekstowy,
-- podczas właściwej rundy przechodzi w tryb immersyjny i nie zabiera pionowej przestrzeni,
-- Screen Wake Lock działa w tle bez komunikatów technicznych dla gracza.
+## Treści: kategorie i hasła
 
-## Tło Phaser
+Obecne hasła w `assets/js/games/impostor/data.js` są fallbackiem offline. Aplikacja ma też warstwę `ContentRepository`, dzięki której można podpiąć zewnętrzne źródło bez zmiany logiki gry.
 
-Tło jest wspólną warstwą Partyjniaka. Tryb wizualny zmienia się zależnie od etapu aplikacji (`party`, `impostor`, `mystery`, `discussion`, `vote`, `celebrate`). Animacje są celowo subtelne, ograniczone do 45 FPS i respektują `prefers-reduced-motion`.
+### Kontrakt API
 
-## Treści / API kategorii i słów
-
-Obecna baza Impostora w `assets/js/games/impostor/data.js` pozostaje lokalnym fallbackiem, dlatego gra działa bez zewnętrznego API.
-
-Dodatkowo `ContentRepository` umożliwia podpięcie zewnętrznego źródła JSON bez zmiany logiki rundy. Ustaw bazowy URL przed uruchomieniem aplikacji:
-
-```js
-window.PARTYJNIAK_CONTENT_API = 'https://example.com/partyjniak-content';
-```
-
-lub w konsoli/deweloperskim panelu:
-
-```js
-PartyjniakContent.setRemoteBaseUrl('https://example.com/partyjniak-content');
-```
-
-Dla Impostora aplikacja pobierze:
+Endpoint powinien być dostępny jako:
 
 ```text
-https://example.com/partyjniak-content/impostor.pl.json
+<BASE_URL>/impostor.pl.json
 ```
 
-Minimalny kontrakt:
+i zwracać JSON zgodny z `content/examples/impostor.pl.json`.
+
+Najważniejsze pola:
 
 ```json
 {
@@ -102,18 +90,41 @@ Minimalny kontrakt:
       ]
     }
   ],
-  "discussionTips": ["Zaczynajcie od ogólnych pytań."]
+  "discussionTips": ["Przykładowa wskazówka"]
 }
 ```
 
-Jeśli endpoint nie odpowiada, aplikacja automatycznie używa danych lokalnych. Ostatnia poprawna odpowiedź zdalna jest również zachowywana jako cache w `localStorage`.
+Dane są walidowane przed użyciem. Jeśli API jest niedostępne albo zwróci błędne dane, Partyjniak użyje cache lub lokalnego fallbacku.
 
-Dzięki temu backend można później zrealizować np. przez Supabase, Firebase, własne API albo prosty statyczny katalog JSON.
+### Ustawienie zewnętrznego źródła
+
+W konsoli developerskiej lub z przyszłego panelu administracyjnego:
+
+```js
+PartyjniakContent.setRemoteBaseUrl('https://example.com/content');
+```
+
+Usunięcie konfiguracji:
+
+```js
+PartyjniakContent.clearRemoteBaseUrl();
+```
+
+Można też ustawić przed startem aplikacji globalne `window.PARTYJNIAK_CONTENT_API`.
 
 ## Android / PWA
 
-Partyjniak jest przygotowany do instalacji jako PWA na Androidzie. Podczas aktywnej gry aplikacja używa Screen Wake Lock, żeby telefon nie wygaszał ekranu przy przekazywaniu go między graczami. Wake Lock wymaga HTTPS (localhost jest wyjątkiem developerskim).
+- manifest z ikonami 192/512 i maskable,
+- tryb `standalone`,
+- `safe-area` i `100dvh`,
+- Service Worker i cache lokalnych zasobów,
+- Screen Wake Lock podczas właściwej rundy (przekazywanie telefonu, rola, dyskusja, głosowanie),
+- mechanizm Wake Lock działa bez dodatkowych komunikatów w interfejsie.
 
-## Kolejne gry
+Wake Lock wymaga bezpiecznego kontekstu HTTPS. `localhost` jest wyjątkiem developerskim.
 
-Nową grę dodawaj jako osobny katalog pod `assets/js/games/` oraz wpis w `GAME_CATALOG` w `assets/js/shared/hub.js`. Wspólne funkcje urządzenia, shell, audio, tło i treści powinny pozostawać w `assets/js/shared/`.
+## Zależności
+
+Aplikacja nadal korzysta z CDN dla Tailwind CSS, Phasera, Font Awesome i Google Fonts. Brak Phasera nie blokuje już uruchomienia aplikacji – wyłączane jest wyłącznie animowane tło.
+
+Docelowo przed publikacją jako natywny APK/AAB warto przenieść zależności do repozytorium, aby pierwsze uruchomienie także działało całkowicie offline.

@@ -1,23 +1,25 @@
 function startNewGameFlow() {
-    state = { ...DEFAULT_STATE, activeCategories: [...DEFAULT_STATE.activeCategories] };
+    state = {
+        ...DEFAULT_STATE,
+        activeCategories: getDefaultActiveCategories()
+    };
     try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
-    document.getElementById('player-slider').value = 4;
-    document.getElementById('player-count-big').innerText = 4;
+    document.getElementById('player-slider').value = state.playerCount;
+    document.getElementById('player-count-big').innerText = state.playerCount;
     updateResumeButton();
     goToScreen('setup-count');
 }
 
-function onPlayerSliderChange(val) {
-    state.playerCount = Number.parseInt(val, 10);
+function onPlayerSliderChange(value) {
+    state.playerCount = Number.parseInt(value, 10);
     document.getElementById('player-count-big').innerText = state.playerCount;
     playSound('click');
 }
 
 function adjustPlayerCount(delta) {
-    const newVal = Math.min(12, Math.max(3, state.playerCount + delta));
-    state.playerCount = newVal;
-    document.getElementById('player-slider').value = newVal;
-    document.getElementById('player-count-big').innerText = newVal;
+    state.playerCount = Math.min(12, Math.max(3, state.playerCount + delta));
+    document.getElementById('player-slider').value = state.playerCount;
+    document.getElementById('player-count-big').innerText = state.playerCount;
     playSound('click');
 }
 
@@ -45,6 +47,7 @@ function goToSetupNames() {
         input.className = 'flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 transition-all shadow-inner';
         input.placeholder = 'Imię gracza...';
         input.autocomplete = 'off';
+        input.enterKeyHint = i === state.playerCount - 1 ? 'done' : 'next';
 
         row.append(indexBadge, input);
         container.appendChild(row);
@@ -68,13 +71,16 @@ function goToSetupOptions() {
         }
         usedNames.add(normalizedName);
 
-        const score = Number.parseInt(input?.dataset.score || '0', 10) || 0;
-        nextPlayers.push({ id: i + 1, name, score });
+        nextPlayers.push({
+            id: i + 1,
+            name,
+            score: Number.parseInt(input?.dataset.score || '0', 10) || 0
+        });
     }
 
     state.players = nextPlayers;
     if (state.playerCount < 5 && state.impostorCount > 1) state.impostorCount = 1;
-
+    normalizeActiveCategories();
     updateHintModeUI();
     persistSession();
     goToScreen('setup-options');
@@ -96,33 +102,31 @@ function setImpostorCount(count) {
 }
 
 function updateImpostorButtonsUI() {
-    const btn2 = document.getElementById('imp-btn-2');
-    const btn3 = document.getElementById('imp-btn-3');
     const notice = document.getElementById('impostor-notice');
+    const smallGroup = state.playerCount < 5;
+    if (smallGroup) state.impostorCount = 1;
 
-    if (state.playerCount < 5) {
-        if (btn2) { btn2.disabled = true; btn2.className = 'impostor-btn py-2.5 rounded-xl text-xs font-bold border transition-all bg-slate-950/40 text-slate-700 border-slate-900 cursor-not-allowed'; }
-        if (btn3) { btn3.disabled = true; btn3.className = 'impostor-btn py-2.5 rounded-xl text-xs font-bold border transition-all bg-slate-950/40 text-slate-700 border-slate-900 cursor-not-allowed'; }
-        if (notice) notice.classList.remove('hidden');
-        state.impostorCount = 1;
-    } else {
-        if (btn2) { btn2.disabled = false; }
-        if (btn3) { btn3.disabled = false; }
-        if (notice) notice.classList.add('hidden');
-    }
+    [2, 3].forEach(count => {
+        const button = document.getElementById(`imp-btn-${count}`);
+        if (button) button.disabled = smallGroup;
+    });
+    notice?.classList.toggle('hidden', !smallGroup);
 
-    document.getElementById('impostor-count-label').innerText = `${state.impostorCount} ${state.impostorCount === 1 ? 'Impostor' : 'Impostorów'}`;
-    document.querySelectorAll('.impostor-btn').forEach(btn => {
-        const count = parseInt(btn.getAttribute('data-count'));
-        if (count === state.impostorCount) {
-            btn.className = 'impostor-btn py-2.5 rounded-xl text-xs font-bold border transition-all bg-teal-600 text-white border-teal-500 shadow-md';
-        } else if (!btn.disabled) {
-            btn.className = 'impostor-btn py-2.5 rounded-xl text-xs font-bold border transition-all bg-slate-950 text-slate-400 border-slate-800 hover:bg-slate-800';
-        }
+    const label = document.getElementById('impostor-count-label');
+    if (label) label.innerText = `${state.impostorCount} ${state.impostorCount === 1 ? 'Impostor' : 'Impostorów'}`;
+
+    document.querySelectorAll('.impostor-btn').forEach(button => {
+        const count = Number.parseInt(button.dataset.count, 10);
+        const active = count === state.impostorCount;
+        button.className = button.disabled
+            ? 'impostor-btn option-btn opacity-40 cursor-not-allowed'
+            : `impostor-btn ${active ? 'option-active' : 'option-btn'}`;
+        button.setAttribute('aria-pressed', String(active));
     });
 }
 
 function setHintMode(mode) {
+    if (!['none', 'always', 'random'].includes(mode)) return;
     state.hintMode = mode;
     playSound('click');
     updateHintModeUI();
@@ -130,39 +134,37 @@ function setHintMode(mode) {
 }
 
 function updateHintModeUI() {
-    document.querySelectorAll('.hint-mode-btn').forEach(btn => {
-        const mode = btn.getAttribute('data-mode');
-        if (mode === state.hintMode) {
-            btn.className = 'hint-mode-btn py-2.5 rounded-xl text-xs font-bold border transition-all bg-teal-600 text-white border-teal-500 shadow-md';
-        } else {
-            btn.className = 'hint-mode-btn py-2.5 rounded-xl text-xs font-bold border transition-all bg-slate-950 text-slate-400 border-slate-800 hover:bg-slate-800';
-        }
+    document.querySelectorAll('.hint-mode-btn').forEach(button => {
+        const active = button.dataset.mode === state.hintMode;
+        button.className = `hint-mode-btn ${active ? 'option-active' : 'option-btn'}`;
+        button.setAttribute('aria-pressed', String(active));
     });
 }
 
 function setDiscussionTimer(seconds, options = {}) {
+    if (![0, 60, 120, 180].includes(seconds)) return;
     state.discussionTime = seconds;
     if (!options.silent) playSound('click');
-    document.querySelectorAll('.timer-btn').forEach(btn => {
-        const time = parseInt(btn.getAttribute('data-time'));
-        if (time === seconds) {
-            btn.className = 'timer-btn py-2 rounded-xl text-xs font-bold border transition-all bg-teal-600 text-white border-teal-500 shadow';
-        } else {
-            btn.className = 'timer-btn py-2 rounded-xl text-xs font-bold border transition-all bg-slate-950 text-slate-400 border-slate-800 hover:bg-slate-800';
-        }
+
+    document.querySelectorAll('.timer-btn').forEach(button => {
+        const active = Number.parseInt(button.dataset.time, 10) === seconds;
+        button.className = `timer-btn ${active ? 'option-active' : 'option-btn'}`;
+        button.setAttribute('aria-pressed', String(active));
     });
-    const label = seconds === 0 ? 'Wyłączony' : `${seconds / 60} min`;
-    document.getElementById('timer-label').innerText = label;
+
+    const label = document.getElementById('timer-label');
+    if (label) label.innerText = seconds === 0 ? 'Wyłączony' : `${seconds / 60} min`;
     if (!options.silent) persistSession();
 }
 
 function toggleCategory(key) {
+    if (!Object.hasOwn(CATEGORY_NAMES, key)) return;
     if (state.activeCategories.includes(key)) {
         if (state.activeCategories.length <= 1) {
             showToast('Kategorie', 'Musisz wybrać co najmniej jedną kategorię.');
             return;
         }
-        state.activeCategories = state.activeCategories.filter(k => k !== key);
+        state.activeCategories = state.activeCategories.filter(categoryKey => categoryKey !== key);
     } else {
         state.activeCategories.push(key);
     }
@@ -172,36 +174,66 @@ function toggleCategory(key) {
 }
 
 function toggleAllCategories(select) {
-    state.activeCategories = select ? Object.keys(CATEGORY_NAMES) : ['jedzenie'];
+    const available = getAvailableCategoryIds();
+    state.activeCategories = select ? available : available.slice(0, 1);
     playSound('click');
     renderCategoriesGrid();
     persistSession();
 }
 
 function filterCategories(query) {
-    renderCategoriesGrid(query.toLowerCase());
+    renderCategoriesGrid(String(query || '').trim().toLocaleLowerCase('pl-PL'));
+}
+
+function createCategoryButton(key, category, active, wordCount) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `w-full text-left flex items-center justify-between p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${active ? 'bg-teal-950/40 border-teal-500 text-teal-300 shadow-md shadow-teal-500/10' : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700'}`;
+    button.setAttribute('aria-pressed', String(active));
+    button.addEventListener('click', () => toggleCategory(key));
+
+    const left = document.createElement('span');
+    left.className = 'flex items-center space-x-2';
+
+    const iconBox = document.createElement('span');
+    iconBox.className = `w-7 h-7 rounded-lg ${active ? 'bg-teal-600 text-white' : 'bg-slate-900 text-slate-400'} flex items-center justify-center text-xs`;
+    const icon = document.createElement('i');
+    icon.className = `fa-solid ${category.icon}`;
+    iconBox.appendChild(icon);
+
+    const copy = document.createElement('span');
+    const name = document.createElement('span');
+    name.className = 'block font-bold text-white text-xs';
+    name.textContent = category.name;
+    const count = document.createElement('span');
+    count.className = 'block text-[10px] text-slate-400 font-normal';
+    count.textContent = `${wordCount} haseł`;
+    copy.append(name, count);
+    left.append(iconBox, copy);
+
+    const marker = document.createElement('span');
+    marker.className = `w-4 h-4 rounded-full border ${active ? 'border-teal-500 bg-teal-500 text-slate-950' : 'border-slate-700'} flex items-center justify-center text-[10px]`;
+    if (active) {
+        const check = document.createElement('i');
+        check.className = 'fa-solid fa-check';
+        marker.appendChild(check);
+    }
+
+    button.append(left, marker);
+    return button;
 }
 
 function renderCategoriesGrid(filter = '') {
-    const catGrid = document.getElementById('categories-grid');
-    catGrid.innerHTML = '';
-    Object.keys(CATEGORY_NAMES).forEach(key => {
-        const cat = CATEGORY_NAMES[key];
-        if (filter && !cat.name.toLowerCase().includes(filter) && !cat.desc.toLowerCase().includes(filter)) return;
+    const grid = document.getElementById('categories-grid');
+    if (!grid) return;
+    normalizeActiveCategories();
+    grid.replaceChildren();
 
-        const active = state.activeCategories.includes(key);
-        const wordCount = WORD_DATABASE[key]?.length || 0;
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.onclick = () => toggleCategory(key);
-        btn.setAttribute('aria-pressed', String(active));
-        btn.className = `w-full text-left flex items-center justify-between p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${active ? 'bg-teal-950/40 border-teal-500 text-teal-300 shadow-md shadow-teal-500/10' : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700'}`;
-        btn.innerHTML = `
-            <div class="flex items-center space-x-2">
-                <div class="w-7 h-7 rounded-lg ${active ? 'bg-teal-600 text-white' : 'bg-slate-900 text-slate-400'} flex items-center justify-center text-xs"><i class="fa-solid ${cat.icon}"></i></div>
-                <div><p class="font-bold text-white text-xs">${cat.name}</p><span class="text-[10px] text-slate-400 font-normal">${wordCount} haseł</span></div>
-            </div>
-            <div class="w-4 h-4 rounded-full border ${active ? 'border-teal-500 bg-teal-500 text-slate-950 flex items-center justify-center text-[10px]' : 'border-slate-700'}">${active ? '<i class="fa-solid fa-check"></i>' : ''}</div>`;
-        catGrid.appendChild(btn);
+    Object.entries(CATEGORY_NAMES).forEach(([key, category]) => {
+        const searchable = `${category.name} ${category.desc || ''}`.toLocaleLowerCase('pl-PL');
+        if (filter && !searchable.includes(filter)) return;
+        const words = WORD_DATABASE[key];
+        if (!Array.isArray(words) || words.length === 0) return;
+        grid.appendChild(createCategoryButton(key, category, state.activeCategories.includes(key), words.length));
     });
 }

@@ -1,5 +1,6 @@
-const STATIC_CACHE = 'partyjniak-static-v12';
-const RUNTIME_CACHE = 'partyjniak-runtime-v12';
+const CACHE_VERSION = 'v13';
+const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
 const LOCAL_ASSETS = [
   './',
@@ -17,11 +18,12 @@ const LOCAL_ASSETS = [
   './assets/js/shared/audio.js',
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
+  './assets/js/shared/content-repository.js',
   './assets/js/shared/ui.js',
   './assets/js/shared/hub.js',
-  './assets/js/shared/content-repository.js',
   './assets/js/games/impostor/data.js',
   './assets/js/games/impostor/content-provider.js',
+  './assets/js/games/impostor/rules.js',
   './assets/js/games/impostor/state.js',
   './assets/js/games/impostor/setup.js',
   './assets/js/games/impostor/game.js',
@@ -49,7 +51,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then(cache => cache.addAll(LOCAL_ASSETS))
-      .then(() => warmExternalCache())
+      .then(warmExternalCache)
   );
   self.skipWaiting();
 });
@@ -73,8 +75,10 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          const copy = response.clone();
-          caches.open(STATIC_CACHE).then(cache => cache.put('./index.html', copy));
+          if (response?.ok) {
+            const copy = response.clone();
+            event.waitUntil(caches.open(STATIC_CACHE).then(cache => cache.put('./index.html', copy)));
+          }
           return response;
         })
         .catch(() => caches.match('./index.html'))
@@ -83,33 +87,35 @@ self.addEventListener('fetch', event => {
   }
 
   if (requestUrl.origin === self.location.origin) {
-    event.respondWith(
-      caches.match(event.request).then(cached => {
-        const networkFetch = fetch(event.request).then(response => {
-          if (response && response.ok) {
+    event.respondWith((async () => {
+      const cached = await caches.match(event.request);
+      const networkPromise = fetch(event.request)
+        .then(response => {
+          if (response?.ok) {
             const copy = response.clone();
-            caches.open(STATIC_CACHE).then(cache => cache.put(event.request, copy));
+            event.waitUntil(caches.open(STATIC_CACHE).then(cache => cache.put(event.request, copy)));
           }
           return response;
-        }).catch(() => cached);
-        return cached || networkFetch;
-      })
-    );
+        })
+        .catch(() => cached);
+      return cached || networkPromise;
+    })());
     return;
   }
 
   if (['script', 'style', 'font'].includes(event.request.destination)) {
-    event.respondWith(
-      caches.match(event.request).then(cached => {
-        const networkFetch = fetch(event.request).then(response => {
+    event.respondWith((async () => {
+      const cached = await caches.match(event.request);
+      const networkPromise = fetch(event.request)
+        .then(response => {
           if (response && (response.ok || response.type === 'opaque')) {
             const copy = response.clone();
-            caches.open(RUNTIME_CACHE).then(cache => cache.put(event.request, copy));
+            event.waitUntil(caches.open(RUNTIME_CACHE).then(cache => cache.put(event.request, copy)));
           }
           return response;
-        }).catch(() => cached);
-        return cached || networkFetch;
-      })
-    );
+        })
+        .catch(() => cached);
+      return cached || networkPromise;
+    })());
   }
 });

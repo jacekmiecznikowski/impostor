@@ -1,19 +1,8 @@
-function loadRuntimeScript(src) {
-    return new Promise((resolve, reject) => {
-        if (document.querySelector(`script[src="${src}"]`)) return resolve();
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = resolve;
-        script.onerror = () => reject(new Error(`Nie udało się załadować ${src}`));
-        document.head.appendChild(script);
-    });
-}
-
 async function initializeContentLayer() {
     try {
-        await loadRuntimeScript('./assets/js/shared/content-repository.js');
-        await loadRuntimeScript('./assets/js/games/impostor/content-provider.js');
-        if (typeof initializeImpostorRemoteContent === 'function') await initializeImpostorRemoteContent();
+        if (typeof initializeImpostorRemoteContent === 'function') {
+            await initializeImpostorRemoteContent();
+        }
     } catch (error) {
         console.warn('Zdalna warstwa treści nie została uruchomiona. Używam danych lokalnych.', error);
     }
@@ -24,6 +13,7 @@ async function initializeApp() {
     setupGameHub();
     setupImpostorPresentation();
     loadSession();
+    normalizeActiveCategories();
 
     const slider = document.getElementById('player-slider');
     const playerCount = document.getElementById('player-count-big');
@@ -40,7 +30,7 @@ async function initializeApp() {
 
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape') {
-            if (typeof closeShellMenu === 'function') closeShellMenu();
+            closeShellMenu?.();
             document.querySelectorAll('[id$="-modal"].flex').forEach(modal => closeModal(modal.id));
         }
     });
@@ -55,7 +45,7 @@ async function initializeApp() {
         const popover = document.getElementById('shell-menu-popover');
         const button = document.getElementById('shell-more-btn');
         if (!popover || popover.classList.contains('hidden')) return;
-        if (!popover.contains(event.target) && !button?.contains(event.target)) closeShellMenu();
+        if (!popover.contains(event.target) && !button?.contains(event.target)) closeShellMenu?.();
     }, { passive: true });
 
     const requestedGame = new URLSearchParams(window.location.search).get('game');
@@ -70,8 +60,8 @@ async function initializeApp() {
             navigator.serviceWorker.register('./sw.js').catch(error => {
                 console.warn('Service Worker nie został zarejestrowany:', error);
             });
-        });
+        }, { once: true });
     }
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp);
+document.addEventListener('DOMContentLoaded', initializeApp, { once: true });

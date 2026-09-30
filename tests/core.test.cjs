@@ -1,44 +1,5 @@
-// test helper kept intentionally framework-free
 const assert = require('node:assert/strict');
-
-function shuffleArray(items, random = Math.random) {
-  const result = [...items];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
-
-function assignRoles(players, impostorCount, hintMode, secretWord, secretHint, random = Math.random) {
-  const shuffled = shuffleArray(players, random);
-  const impostorIds = shuffled.slice(0, impostorCount).map(player => player.id);
-  const roles = {};
-  players.forEach(player => {
-    const isImpostor = impostorIds.includes(player.id);
-    const giveHint = hintMode === 'always' || (hintMode === 'random' && random() < 0.5);
-    roles[player.id] = {
-      isImpostor,
-      word: isImpostor ? (giveHint ? secretHint : 'Brak podpowiedzi') : secretWord
-    };
-  });
-  return { impostorIds, roles };
-}
-
-function scoreVote(players, impostorIds, selectedId) {
-  const next = players.map(player => ({ ...player }));
-  if (impostorIds.includes(selectedId)) {
-    next.forEach(player => { if (!impostorIds.includes(player.id)) player.score += 2; });
-  } else {
-    next.forEach(player => { if (impostorIds.includes(player.id)) player.score += 5; });
-  }
-  return next;
-}
-
-function uniqueNames(names) {
-  const normalized = names.map(name => name.trim().toLocaleLowerCase('pl-PL'));
-  return new Set(normalized).size === normalized.length;
-}
+const { assignRoles, scoreVote, shuffle } = require('../assets/js/games/impostor/rules.js');
 
 const players = [
   { id: 1, name: 'Ala', score: 0 },
@@ -46,6 +7,11 @@ const players = [
   { id: 3, name: 'Celina', score: 0 },
   { id: 4, name: 'Darek', score: 0 }
 ];
+
+{
+  const result = shuffle([1, 2, 3, 4], () => 0.99);
+  assert.deepEqual(result, [1, 2, 3, 4]);
+}
 
 {
   const result = assignRoles(players, 1, 'none', 'Pizza', 'Ser', () => 0.99);
@@ -61,18 +27,18 @@ const players = [
 }
 
 {
-  const impostorIds = [4];
-  const scored = scoreVote(players, impostorIds, 4);
-  assert.deepEqual(scored.map(player => player.score), [2, 2, 2, 0]);
+  const copy = players.map(player => ({ ...player }));
+  assert.equal(scoreVote(copy, [4], 4), true);
+  assert.deepEqual(copy.map(player => player.score), [2, 2, 2, 0]);
 }
 
 {
-  const impostorIds = [4];
-  const scored = scoreVote(players, impostorIds, 1);
-  assert.deepEqual(scored.map(player => player.score), [0, 0, 0, 5]);
+  const copy = players.map(player => ({ ...player }));
+  assert.equal(scoreVote(copy, [4], 1), false);
+  assert.deepEqual(copy.map(player => player.score), [0, 0, 0, 5]);
 }
 
-assert.equal(uniqueNames(['Ala', 'Bartek', 'Celina']), true);
-assert.equal(uniqueNames(['Ala', ' ala ', 'Celina']), false);
+assert.throws(() => assignRoles(players, 4, 'none', 'A', 'B'), /liczba impostorów/i);
+assert.throws(() => assignRoles(players, 1, 'invalid', 'A', 'B'), /tryb podpowiedzi/i);
 
-console.log('Core logic tests: OK');
+console.log('Core production rules tests: OK');

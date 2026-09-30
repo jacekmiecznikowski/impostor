@@ -1,10 +1,10 @@
 {
   "name": "partyjniak",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
   "description": "Partyjniak – mobilne gry imprezowe na jeden telefon.",
   "scripts": {
-    "test": "node tests/core.test.cjs && node tests/structure.test.cjs",
+    "test": "node tests/core.test.cjs && node tests/content.test.cjs && node tests/structure.test.cjs",
     "serve": "python3 -m http.server 8080"
   }
 }

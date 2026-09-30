@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "game": "impostor",
+  "locale": "pl",
+  "categories": [
+    {
+      "id": "jedzenie",
+      "name": "Jedzenie",
+      "icon": "fa-burger",
+      "desc": "Potrawy i przysmaki",
+      "words": [
+        { "word": "Pizza", "hint": "Ser" },
+        { "word": "Pierogi", "hint": "Farsz" }
+      ]
+    }
+  ],
+  "discussionTips": [
+    "Zaczynajcie od ogólnych pytań, żeby nie zdradzić hasła."
+  ]
+}

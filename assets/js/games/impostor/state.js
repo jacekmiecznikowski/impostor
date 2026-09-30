@@ -30,13 +30,23 @@ function escapeHtml(value) {
         .replaceAll("'", '&#039;');
 }
 
-function shuffleArray(items) {
-    const result = [...items];
-    for (let i = result.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [result[i], result[j]] = [result[j], result[i]];
-    }
-    return result;
+function getAvailableCategoryIds() {
+    return Object.keys(CATEGORY_NAMES).filter(key => Array.isArray(WORD_DATABASE[key]) && WORD_DATABASE[key].length > 0);
+}
+
+function getDefaultActiveCategories() {
+    const available = getAvailableCategoryIds();
+    const preferred = DEFAULT_STATE.activeCategories.filter(key => available.includes(key));
+    return (preferred.length ? preferred : available).slice(0, 6);
+}
+
+function normalizeActiveCategories() {
+    const available = new Set(getAvailableCategoryIds());
+    const normalized = Array.isArray(state.activeCategories)
+        ? [...new Set(state.activeCategories.filter(key => available.has(key)))]
+        : [];
+    state.activeCategories = normalized.length ? normalized : getDefaultActiveCategories();
+    return state.activeCategories;
 }
 
 function getPersistableSession() {
@@ -52,6 +62,7 @@ function getPersistableSession() {
 }
 
 function persistSession() {
+    normalizeActiveCategories();
     try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(getPersistableSession()));
     } catch (error) {
@@ -63,16 +74,22 @@ function persistSession() {
 function loadSession() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return false;
+        if (!raw) {
+            normalizeActiveCategories();
+            return false;
+        }
         const saved = JSON.parse(raw);
-        if (!saved || !Array.isArray(saved.players)) return false;
+        if (!saved || !Array.isArray(saved.players)) {
+            normalizeActiveCategories();
+            return false;
+        }
 
         const validPlayers = saved.players
             .filter(player => player && Number.isInteger(player.id) && typeof player.name === 'string')
             .slice(0, 12)
             .map(player => ({
                 id: player.id,
-                name: player.name.slice(0, 15),
+                name: player.name.trim().slice(0, 15) || `Gracz ${player.id}`,
                 score: Number.isFinite(player.score) ? player.score : 0
             }));
 
@@ -81,17 +98,16 @@ function loadSession() {
         state.impostorCount = [1, 2, 3].includes(saved.impostorCount) ? saved.impostorCount : 1;
         state.hintMode = ['none', 'always', 'random'].includes(saved.hintMode) ? saved.hintMode : 'random';
         state.discussionTime = [0, 60, 120, 180].includes(saved.discussionTime) ? saved.discussionTime : 0;
-        state.activeCategories = Array.isArray(saved.activeCategories)
-            ? saved.activeCategories.filter(key => Object.hasOwn(CATEGORY_NAMES, key))
-            : [...DEFAULT_STATE.activeCategories];
-        if (state.activeCategories.length === 0) state.activeCategories = ['jedzenie'];
+        state.activeCategories = Array.isArray(saved.activeCategories) ? saved.activeCategories : getDefaultActiveCategories();
         soundEnabled = saved.soundEnabled !== false;
 
+        normalizeActiveCategories();
         if (state.playerCount < 5) state.impostorCount = 1;
         if (state.impostorCount >= state.playerCount) state.impostorCount = 1;
         return validPlayers.length >= 3;
     } catch (error) {
         console.warn('Nie udało się odczytać zapisanej sesji:', error);
+        normalizeActiveCategories();
         return false;
     }
 }
@@ -114,6 +130,7 @@ function resumeSavedSession() {
         return;
     }
 
+    normalizeActiveCategories();
     document.getElementById('player-slider').value = state.playerCount;
     document.getElementById('player-count-big').innerText = state.playerCount;
     updateHintModeUI();
