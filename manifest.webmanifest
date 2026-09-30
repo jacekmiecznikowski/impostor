@@ -9,8 +9,8 @@
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait-primary",
-  "background_color": "#020617",
-  "theme_color": "#020617",
+  "background_color": "#06050a",
+  "theme_color": "#950f26",
   "categories": ["games", "entertainment"],
   "prefer_related_applications": false,
   "icons": [
