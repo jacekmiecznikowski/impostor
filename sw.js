@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v15';
+const CACHE_VERSION = 'v16';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -6,6 +6,9 @@ const LOCAL_ASSETS = [
   './',
   './index.html',
   './manifest.webmanifest',
+  './views/impostor-setup.html',
+  './views/impostor-round.html',
+  './views/modals.html',
   './assets/css/styles.css',
   './assets/css/impostor.css',
   './assets/css/impostor-reveal.css',
@@ -17,6 +20,7 @@ const LOCAL_ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
+  './assets/js/shared/view-loader.js',
   './assets/js/shared/audio.js',
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
