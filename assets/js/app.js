@@ -12,6 +12,7 @@ async function initializeApp() {
     await initializeContentLayer();
     setupGameHub();
     setupImpostorPresentation();
+    setupSystemBackHandling();
     loadSession();
     normalizeActiveCategories();
 
@@ -29,10 +30,8 @@ async function initializeApp() {
     updateResumeButton();
 
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-            closeShellMenu?.();
-            document.querySelectorAll('[id$="-modal"].flex').forEach(modal => closeModal(modal.id));
-        }
+        if (event.key !== 'Escape') return;
+        if (!navigateBack()) closeShellMenu?.();
     });
 
     document.querySelectorAll('[id$="-modal"]').forEach(modal => {
@@ -49,6 +48,12 @@ async function initializeApp() {
     }, { passive: true });
 
     const requestedGame = new URLSearchParams(window.location.search).get('game');
+    if (requestedGame) {
+        try {
+            window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.hash}`);
+        } catch (_) {}
+    }
+
     if (requestedGame && GAME_CATALOG.some(game => game.id === requestedGame && game.status === 'available')) {
         openGame(requestedGame, { silent: true });
     } else {
