@@ -140,6 +140,7 @@ function showSecretReveal() {
 
     resetRevealCardPresentation?.();
     syncRevealRolePresentation?.();
+    scheduleRevealWordFit?.();
     goToScreen('reveal');
 }
 
@@ -189,11 +190,16 @@ function submitGroupVote() {
     const votedPlayer = state.players.find(player => player.id === state.selectedVotedPlayerId);
     if (!votedPlayer) return;
 
-    playSound('success');
     const caughtImpostor = ImpostorRules.scoreVote(state.players, state.impostorIds, state.selectedVotedPlayerId);
     persistSession();
     goToScreen('results');
     renderResultsScreen(caughtImpostor, votedPlayer);
+
+    if (typeof playOutcomeSound === 'function') {
+        playOutcomeSound(caughtImpostor ? 'detectives' : 'impostor');
+    } else {
+        playSound(caughtImpostor ? 'success' : 'failure');
+    }
 }
 
 function renderResultsScreen(caughtImpostor, votedPlayer) {
