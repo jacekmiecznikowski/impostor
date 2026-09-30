@@ -1,8 +1,10 @@
 # Dźwięki wyników rundy
 
-Dwa krótkie efekty końca rundy są generowane lokalnie dla Partyjniaka i przechowywane w repozytorium, dzięki czemu działają offline i nie wymagają zewnętrznego hostingu ani dodatkowej licencji.
+Dźwięki końca rundy są pobierane z OpenGameArt i preloadowane przez aplikację. Oba źródła mają licencję CC0, więc nie wymagają atrybucji.
 
-- `impostor-win-evil-laugh.ogg` — stylizowany, syntetyczny evil laugh dla wygranej impostora.
-- `detectives-win-relief.ogg` — krótki, pozytywny relief/success cue dla wygranej zwykłych graczy.
+- Wygrana impostora: `Evil Laugh` — AntumDeluge, CC0  
+  https://opengameart.org/content/evil-laugh
+- Wygrana zwykłych graczy: `Well Done` — qubodup, CC0  
+  https://opengameart.org/content/well-done
 
-Oba pliki są częścią projektu Partyjniak i mogą być modyfikowane razem z kodem aplikacji.
+Aplikacja używa bezpośrednich adresów plików OGG i cache'uje je przez Service Workera. Jeśli przeglądarka nie może odtworzyć sampla, `assets/js/shared/outcome-audio.js` uruchamia dedykowany fallback WebAudio. Nie używa już ogólnego dźwięku `success`/`failure`, żeby błędu sampla nie maskowało stare „plumkanie”.
