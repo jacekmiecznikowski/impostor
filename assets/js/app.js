@@ -9,6 +9,14 @@ async function initializeContentLayer() {
 }
 
 async function initializeApp() {
+    try {
+        await loadAppViews();
+    } catch (error) {
+        console.error('Nie udało się załadować widoków Partyjniaka:', error);
+        document.body.innerHTML = '<main class="min-h-dvh flex items-center justify-center p-6 text-center bg-slate-950 text-slate-100"><div><h1 class="text-2xl font-black">Partyjniak</h1><p class="mt-3 text-sm text-slate-400">Nie udało się załadować interfejsu. Odśwież aplikację.</p></div></main>';
+        return;
+    }
+
     await initializeContentLayer();
     setupGameHub();
     setupImpostorPresentation();
