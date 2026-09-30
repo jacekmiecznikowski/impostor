@@ -198,7 +198,7 @@ function submitGroupVote() {
     if (typeof playOutcomeSound === 'function') {
         playOutcomeSound(caughtImpostor ? 'detectives' : 'impostor');
     } else {
-        playSound(caughtImpostor ? 'success' : 'failure');
+        console.warn('Moduł dźwięku wyniku nie został załadowany.');
     }
 }
 
