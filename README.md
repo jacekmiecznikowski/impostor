@@ -26,11 +26,18 @@ Nie uruchamiaj aplikacji przez `file://`, ponieważ Service Worker i część AP
 npm test
 ```
 
-Testy obejmują:
+Testy obejmują produkcyjne reguły Impostora, walidację zdalnych danych/kategorii oraz krytyczne zależności struktury aplikacji, PWA i nawigacji.
 
-- produkcyjne reguły Impostora (`rules.js`) – przydział ról i punktację,
-- walidację zdalnych danych/kategorii,
-- krytyczne zależności struktury aplikacji i PWA.
+## Nawigacja na Androidzie
+
+Partyjniak używa lekkiego, kontekstowego shella zamiast stałej ciężkiej belki:
+
+- na ekranie głównym branding jest częścią treści, a w prawym górnym rogu zostaje tylko menu `…`,
+- w menu gry i konfiguracji działa kontekstowy top bar z dużym celem dotykowym **Wstecz**,
+- podczas aktywnej rundy shell nie zajmuje pionowej przestrzeni — zostaje tylko pływające menu,
+- systemowy przycisk/gest Android **Wstecz** jest obsługiwany wewnątrz aplikacji,
+- podczas aktywnej rundy cofnięcie otwiera dolny arkusz potwierdzenia zamiast wracać do poprzedniej roli,
+- na ekranie głównym Back nie jest przechwytywany, więc użytkownik może normalnie opuścić PWA.
 
 ## Architektura
 
@@ -62,55 +69,19 @@ assets/js/
 
 Obecne hasła w `assets/js/games/impostor/data.js` są fallbackiem offline. Aplikacja ma też warstwę `ContentRepository`, dzięki której można podpiąć zewnętrzne źródło bez zmiany logiki gry.
 
-### Kontrakt API
-
 Endpoint powinien być dostępny jako:
 
 ```text
 <BASE_URL>/impostor.pl.json
 ```
 
-i zwracać JSON zgodny z `content/examples/impostor.pl.json`.
+i zwracać JSON z polami `schemaVersion`, `game`, `locale`, `categories` i opcjonalnym `discussionTips`. Jeśli API jest niedostępne albo zwróci błędne dane, Partyjniak użyje cache lub lokalnego fallbacku.
 
-Najważniejsze pola:
-
-```json
-{
-  "schemaVersion": 1,
-  "game": "impostor",
-  "locale": "pl",
-  "categories": [
-    {
-      "id": "jedzenie",
-      "name": "Jedzenie",
-      "icon": "fa-burger",
-      "desc": "Potrawy i przysmaki",
-      "words": [
-        { "word": "Pizza", "hint": "Ser" }
-      ]
-    }
-  ],
-  "discussionTips": ["Przykładowa wskazówka"]
-}
-```
-
-Dane są walidowane przed użyciem. Jeśli API jest niedostępne albo zwróci błędne dane, Partyjniak użyje cache lub lokalnego fallbacku.
-
-### Ustawienie zewnętrznego źródła
-
-W konsoli developerskiej lub z przyszłego panelu administracyjnego:
+Zewnętrzne źródło można ustawić przez:
 
 ```js
 PartyjniakContent.setRemoteBaseUrl('https://example.com/content');
 ```
-
-Usunięcie konfiguracji:
-
-```js
-PartyjniakContent.clearRemoteBaseUrl();
-```
-
-Można też ustawić przed startem aplikacji globalne `window.PARTYJNIAK_CONTENT_API`.
 
 ## Android / PWA
 
@@ -118,13 +89,13 @@ Można też ustawić przed startem aplikacji globalne `window.PARTYJNIAK_CONTENT
 - tryb `standalone`,
 - `safe-area` i `100dvh`,
 - Service Worker i cache lokalnych zasobów,
-- Screen Wake Lock podczas właściwej rundy (przekazywanie telefonu, rola, dyskusja, głosowanie),
+- Screen Wake Lock podczas właściwej rundy,
 - mechanizm Wake Lock działa bez dodatkowych komunikatów w interfejsie.
 
 Wake Lock wymaga bezpiecznego kontekstu HTTPS. `localhost` jest wyjątkiem developerskim.
 
 ## Zależności
 
-Aplikacja nadal korzysta z CDN dla Tailwind CSS, Phasera, Font Awesome i Google Fonts. Brak Phasera nie blokuje już uruchomienia aplikacji – wyłączane jest wyłącznie animowane tło.
+Aplikacja nadal korzysta z CDN dla Tailwind CSS, Phasera, Font Awesome i Google Fonts. Brak Phasera nie blokuje uruchomienia aplikacji – wyłączane jest wyłącznie animowane tło.
 
 Docelowo przed publikacją jako natywny APK/AAB warto przenieść zależności do repozytorium, aby pierwsze uruchomienie także działało całkowicie offline.
