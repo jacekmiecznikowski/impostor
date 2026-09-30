@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v17';
+const CACHE_VERSION = 'v18';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -13,6 +13,7 @@ const LOCAL_ASSETS = [
   './assets/css/impostor.css',
   './assets/css/impostor-reveal.css',
   './assets/css/impostor-role.css',
+  './assets/css/impostor-reveal-layout.css',
   './assets/css/partyjniak.css',
   './assets/css/navigation.css',
   './assets/css/navigation-android.css',
@@ -22,8 +23,11 @@ const LOCAL_ASSETS = [
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
+  './assets/audio/impostor-win-evil-laugh.ogg',
+  './assets/audio/detectives-win-relief.ogg',
   './assets/js/shared/view-loader.js',
   './assets/js/shared/audio.js',
+  './assets/js/shared/outcome-audio.js',
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
   './assets/js/shared/content-repository.js',
@@ -38,6 +42,7 @@ const LOCAL_ASSETS = [
   './assets/js/games/impostor/setup.js',
   './assets/js/games/impostor/game.js',
   './assets/js/games/impostor/presentation.js',
+  './assets/js/games/impostor/reveal-fit.js',
   './assets/js/games/impostor/scoreboard.js',
   './assets/js/app.js'
 ];
