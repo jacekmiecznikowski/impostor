@@ -1,0 +1,78 @@
+/* Android-first refinements layered after navigation.css. */
+
+.app-shell.is-home .shell-frame {
+  width: 100% !important;
+}
+
+.app-shell.is-home #shell-more-btn {
+  margin-left: auto;
+  box-shadow: 0 10px 28px rgba(0,0,0,.22);
+}
+
+.app-shell.is-immersive #shell-more-btn.is-pause-action {
+  width: 3.15rem !important;
+  height: 3.15rem !important;
+  min-width: 3.15rem;
+  min-height: 3.15rem;
+  border-radius: 1rem;
+  color: rgb(226 232 240);
+  background: rgba(8, 15, 29, .68) !important;
+  border-color: rgba(100, 116, 139, .32) !important;
+  box-shadow: 0 12px 34px rgba(0,0,0,.28);
+}
+
+body[data-screen="results"] .app-shell {
+  position: sticky;
+  top: 0;
+}
+
+.navigation-sheet {
+  touch-action: manipulation;
+  overscroll-behavior: contain;
+}
+
+.navigation-sheet-card {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.navigation-sheet-actions .primary-btn,
+.navigation-sheet-actions .secondary-btn,
+.navigation-sheet-link {
+  min-height: 3.25rem;
+}
+
+@media (max-height: 700px) {
+  .app-shell.is-menu,
+  .app-shell.is-contextual {
+    padding-top: max(.35rem, env(safe-area-inset-top));
+  }
+
+  .app-shell.is-menu .shell-frame,
+  .app-shell.is-contextual .shell-frame {
+    min-height: 3.2rem !important;
+  }
+
+  .navigation-sheet-card {
+    padding-top: .5rem;
+  }
+
+  .navigation-sheet-card > p {
+    margin-bottom: .75rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .navigation-sheet-card {
+    max-width: 36rem;
+    display: grid;
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    column-gap: .9rem;
+    text-align: left;
+  }
+
+  .navigation-sheet-handle { display: none; }
+  .navigation-sheet-icon { margin: 0; grid-row: 1 / span 2; }
+  .navigation-sheet-card h2 { align-self: end; }
+  .navigation-sheet-card > p { margin: .25rem 0 .75rem; }
+  .navigation-sheet-actions { grid-column: 1 / -1; }
+}
