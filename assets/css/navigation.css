@@ -1,0 +1,234 @@
+/* Navigation and Android shell – intentionally separate from per-game styles. */
+
+.app-shell { --shell-touch: 3rem; }
+
+.shell-context {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  padding: .15rem .35rem;
+  pointer-events: none;
+}
+
+.shell-frame { min-height: 3.55rem !important; }
+
+.shell-icon-button {
+  width: var(--shell-touch) !important;
+  height: var(--shell-touch) !important;
+  min-width: var(--shell-touch);
+  min-height: var(--shell-touch);
+}
+
+.app-shell.is-home {
+  position: absolute;
+  inset: 0 0 auto 0;
+  pointer-events: none;
+}
+
+.app-shell.is-home .shell-frame {
+  display: flex !important;
+  justify-content: flex-end;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none;
+}
+
+.app-shell.is-home #shell-back-btn,
+.app-shell.is-home .shell-context { display: none !important; }
+
+.app-shell.is-home #shell-more-btn {
+  display: inline-flex;
+  pointer-events: auto;
+  background: rgba(8, 15, 29, .58);
+  border-color: rgba(71, 85, 105, .36);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.app-shell.is-menu,
+.app-shell.is-contextual {
+  position: sticky;
+  top: 0;
+  z-index: 35;
+  padding-bottom: .25rem;
+  background: linear-gradient(180deg, rgba(2, 6, 23, .94), rgba(2, 6, 23, .72) 76%, transparent);
+}
+
+.app-shell.is-menu .shell-frame,
+.app-shell.is-contextual .shell-frame {
+  border-color: transparent !important;
+  background: rgba(8, 15, 29, .42) !important;
+  box-shadow: none !important;
+}
+
+.app-shell.is-contextual .shell-logo { display: none; }
+.app-shell.is-contextual .shell-brand-copy { text-align: center; }
+.app-shell.is-contextual .shell-brand-copy strong { font-size: .9rem; }
+.app-shell.is-contextual .shell-brand-copy small { font-size: .55rem; }
+
+.app-shell.is-immersive {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 45;
+  pointer-events: none;
+}
+
+.app-shell.is-immersive .shell-frame {
+  display: flex !important;
+  justify-content: flex-end;
+  width: 100% !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  pointer-events: none;
+}
+
+.app-shell.is-immersive #shell-back-btn,
+.app-shell.is-immersive .shell-context { display: none !important; }
+
+.app-shell.is-immersive #shell-more-btn {
+  pointer-events: auto;
+  background: rgba(8, 15, 29, .62) !important;
+  border-color: rgba(71, 85, 105, .38) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.shell-popover {
+  transform-origin: top right;
+  animation: shell-popover-in 140ms cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes shell-popover-in {
+  from { opacity: 0; transform: translateY(-.35rem) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+#screen-setup-count > div:first-child > div:first-child > .icon-btn,
+#screen-setup-names > div:first-child > div:first-child > .icon-btn,
+#screen-setup-options > div:first-child > div:first-child > .icon-btn { display: none !important; }
+
+#screen-setup-count > div:first-child > div:first-child,
+#screen-setup-names > div:first-child > div:first-child,
+#screen-setup-options > div:first-child > div:first-child {
+  justify-content: center;
+  text-align: center;
+}
+
+.screen-enter-forward { animation: party-screen-forward 190ms cubic-bezier(.2,.72,.2,1) both; }
+.screen-enter-back { animation: party-screen-back 170ms cubic-bezier(.2,.72,.2,1) both; }
+
+@keyframes party-screen-forward {
+  from { opacity: 0; transform: translate3d(.7rem, .15rem, 0) scale(.992); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes party-screen-back {
+  from { opacity: 0; transform: translate3d(-.55rem, .1rem, 0) scale(.995); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.navigation-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1rem max(1rem, env(safe-area-inset-right)) max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+  background: rgba(2, 6, 23, .72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.navigation-sheet-card {
+  width: min(100%, 31rem);
+  border: 1px solid rgba(71, 85, 105, .72);
+  border-radius: 1.65rem;
+  padding: .7rem 1rem 1rem;
+  background: linear-gradient(180deg, rgba(15, 23, 42, .99), rgba(7, 13, 25, .995));
+  box-shadow: 0 -20px 70px rgba(0,0,0,.48);
+  text-align: center;
+  animation: navigation-sheet-in 210ms cubic-bezier(.2,.8,.2,1);
+}
+
+.navigation-sheet-handle {
+  display: block;
+  width: 2.8rem;
+  height: .26rem;
+  margin: .15rem auto 1rem;
+  border-radius: 999px;
+  background: rgb(71 85 105);
+}
+
+.navigation-sheet-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto .85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  color: rgb(196 181 253);
+  border: 1px solid rgba(139, 92, 246, .22);
+  background: rgba(124, 58, 237, .10);
+}
+
+.navigation-sheet-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: rgb(248 250 252);
+}
+
+.navigation-sheet-card > p {
+  max-width: 23rem;
+  margin: .55rem auto 1rem;
+  color: rgb(148 163 184);
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.navigation-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+
+.navigation-sheet-link {
+  min-height: 2.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  color: rgb(148 163 184);
+  font-size: .76rem;
+  font-weight: 800;
+  border-radius: .9rem;
+}
+
+.navigation-sheet-link:active { background: rgba(30, 41, 59, .55); }
+
+@keyframes navigation-sheet-in {
+  from { opacity: 0; transform: translateY(1.5rem) scale(.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+main { overscroll-behavior-y: contain; }
+
+@media (prefers-reduced-motion: reduce) {
+  .screen-enter-forward,
+  .screen-enter-back,
+  .navigation-sheet-card,
+  .shell-popover { animation-duration: 1ms !important; }
+}
