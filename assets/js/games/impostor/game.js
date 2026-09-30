@@ -140,7 +140,7 @@ function showSecretReveal() {
 
     resetRevealCardPresentation?.();
     syncRevealRolePresentation?.();
-    scheduleRevealWordFit?.();
+    if (typeof scheduleRevealWordFit === 'function') scheduleRevealWordFit();
     goToScreen('reveal');
 }
 
