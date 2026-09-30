@@ -1,5 +1,25 @@
 const IMMERSIVE_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting', 'results']);
+const ROUND_GUARDED_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting']);
 const WAKE_LOCK_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting']);
+const SCREEN_BACK_TARGET = {
+    menu: 'home',
+    'setup-count': 'menu',
+    'setup-names': 'setup-count',
+    'setup-options': 'setup-names',
+    results: 'menu'
+};
+const SHELL_CONTEXT_BY_SCREEN = {
+    home: { title: 'Partyjniak', subtitle: 'gry imprezowe', mode: 'home' },
+    menu: { title: 'Impostor', subtitle: 'Menu gry', mode: 'menu' },
+    'setup-count': { title: 'Liczba graczy', subtitle: 'Impostor • krok 1 z 3', mode: 'contextual' },
+    'setup-names': { title: 'Imiona graczy', subtitle: 'Impostor • krok 2 z 3', mode: 'contextual' },
+    'setup-options': { title: 'Ustawienia rundy', subtitle: 'Impostor • krok 3 z 3', mode: 'contextual' },
+    pass: { title: 'Impostor', subtitle: 'Rozgrywka', mode: 'immersive' },
+    reveal: { title: 'Impostor', subtitle: 'Rozgrywka', mode: 'immersive' },
+    discussion: { title: 'Impostor', subtitle: 'Dyskusja', mode: 'immersive' },
+    'group-voting': { title: 'Impostor', subtitle: 'Głosowanie', mode: 'immersive' },
+    results: { title: 'Impostor', subtitle: 'Wynik rundy', mode: 'immersive' }
+};
 const BACKGROUND_MODE_BY_SCREEN = {
     home: 'party',
     menu: 'impostor',
@@ -13,14 +33,36 @@ const BACKGROUND_MODE_BY_SCREEN = {
     results: 'celebrate'
 };
 
-function goToScreen(screenName, { silent = false } = {}) {
+let systemBackGuardArmed = false;
+let suppressNextPopState = false;
+
+function getCurrentScreenName() {
+    return document.body.dataset.screen || 'home';
+}
+
+function isRoundInProgress() {
+    return ROUND_GUARDED_SCREENS.has(getCurrentScreenName());
+}
+
+function animateScreenEntry(screen, direction) {
+    if (!screen || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    screen.classList.remove('screen-enter-forward', 'screen-enter-back');
+    void screen.offsetWidth;
+    const className = direction === 'back' ? 'screen-enter-back' : 'screen-enter-forward';
+    screen.classList.add(className);
+    screen.addEventListener('animationend', () => screen.classList.remove(className), { once: true });
+}
+
+function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) {
     const targetScreen = document.getElementById(`screen-${screenName}`);
     if (!targetScreen) {
         console.warn(`Nie znaleziono ekranu: ${screenName}`);
         return false;
     }
 
-    if (!silent) playSound('click');
+    const previousScreen = getCurrentScreenName();
+    if (!silent && previousScreen !== screenName) playSound('click');
+
     if (timerInterval) {
         clearInterval(timerInterval);
         timerInterval = null;
@@ -28,12 +70,18 @@ function goToScreen(screenName, { silent = false } = {}) {
 
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.add('hidden');
-        screen.classList.remove('flex');
+        screen.classList.remove('flex', 'screen-enter-forward', 'screen-enter-back');
     });
 
     targetScreen.classList.remove('hidden');
     targetScreen.classList.add('flex');
+    animateScreenEntry(targetScreen, direction);
+
+    const main = document.querySelector('main');
+    if (main) main.scrollTop = 0;
+
     updateShellContext(screenName);
+    syncSystemBackGuard(screenName);
 
     if (screenName === 'setup-options') {
         renderCategoriesGrid();
@@ -59,7 +107,8 @@ function goToScreen(screenName, { silent = false } = {}) {
 }
 
 function updateShellContext(screenName) {
-    const isGameHub = screenName === 'home';
+    const context = SHELL_CONTEXT_BY_SCREEN[screenName] || SHELL_CONTEXT_BY_SCREEN.home;
+    const isHome = screenName === 'home';
     const immersive = IMMERSIVE_SCREENS.has(screenName);
     const shell = document.getElementById('app-shell');
     const backButton = document.getElementById('shell-back-btn');
@@ -68,30 +117,35 @@ function updateShellContext(screenName) {
     const shellLogo = document.getElementById('shell-logo');
     const scoreAction = document.getElementById('shell-score-action');
     const rulesAction = document.getElementById('shell-rules-action');
+    const gameMenuAction = document.getElementById('shell-game-menu-action');
     const exitAction = document.getElementById('shell-exit-action');
 
     document.body.dataset.screen = screenName;
-    shell?.classList.toggle('is-home', isGameHub);
-    shell?.classList.toggle('is-game', !isGameHub);
+    shell?.setAttribute('data-mode', context.mode);
+    shell?.classList.toggle('is-home', isHome);
+    shell?.classList.toggle('is-game', !isHome);
     shell?.classList.toggle('is-immersive', immersive);
+    shell?.classList.toggle('is-contextual', context.mode === 'contextual');
+    shell?.classList.toggle('is-menu', context.mode === 'menu');
 
     if (backButton) {
-        const showBackToHub = screenName === 'menu';
-        backButton.classList.toggle('hidden', !showBackToHub);
-        backButton.setAttribute('aria-label', 'Wróć do wyboru gier');
+        const canGoBack = Boolean(SCREEN_BACK_TARGET[screenName]) && !immersive;
+        backButton.classList.toggle('hidden', !canGoBack);
+        backButton.setAttribute('aria-label', screenName === 'menu' ? 'Wróć do wyboru gier' : 'Wróć');
     }
 
-    scoreAction?.classList.toggle('hidden', isGameHub);
-    rulesAction?.classList.toggle('hidden', isGameHub);
-    exitAction?.classList.toggle('hidden', isGameHub);
+    scoreAction?.classList.toggle('hidden', isHome);
+    rulesAction?.classList.toggle('hidden', isHome);
+    gameMenuAction?.classList.toggle('hidden', isHome || screenName === 'menu');
+    exitAction?.classList.toggle('hidden', isHome);
 
-    if (shellTitle) shellTitle.textContent = isGameHub ? 'Partyjniak' : 'Impostor';
-    if (shellSubtitle) shellSubtitle.textContent = isGameHub ? 'gry imprezowe' : 'Partyjniak';
+    if (shellTitle) shellTitle.textContent = context.title;
+    if (shellSubtitle) shellSubtitle.textContent = context.subtitle;
 
     if (shellLogo) {
-        shellLogo.className = `shell-logo${isGameHub ? '' : ' is-game'}`;
+        shellLogo.className = `shell-logo${isHome ? '' : ' is-game'}`;
         shellLogo.replaceChildren();
-        if (isGameHub) {
+        if (isHome) {
             const image = document.createElement('img');
             image.src = './assets/icons/icon.svg';
             image.alt = '';
@@ -110,11 +164,126 @@ function updateShellContext(screenName) {
     setGameAwakeMode?.(WAKE_LOCK_SCREENS.has(screenName));
 }
 
-function goToGameHub() {
-    if (window.location.search) {
-        window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`);
+function navigateBack({ fromSystem = false } = {}) {
+    const openSheet = document.getElementById('navigation-sheet');
+    if (openSheet && !openSheet.classList.contains('hidden')) {
+        closeNavigationSheet();
+        return true;
     }
-    goToScreen('home');
+
+    const openModalElement = [...document.querySelectorAll('[id$="-modal"].flex')].at(-1);
+    if (openModalElement) {
+        closeModal(openModalElement.id);
+        return true;
+    }
+
+    const popover = document.getElementById('shell-menu-popover');
+    if (popover && !popover.classList.contains('hidden')) {
+        closeShellMenu?.();
+        return true;
+    }
+
+    const currentScreen = getCurrentScreenName();
+    if (ROUND_GUARDED_SCREENS.has(currentScreen)) {
+        openNavigationSheet();
+        return true;
+    }
+
+    const target = SCREEN_BACK_TARGET[currentScreen];
+    if (target) {
+        goToScreen(target, { direction: 'back' });
+        return true;
+    }
+
+    return !fromSystem;
+}
+
+function requestLeaveGame(destination = 'home') {
+    closeShellMenu?.();
+    if (isRoundInProgress()) {
+        openNavigationSheet(destination);
+        return;
+    }
+    goToScreen(destination === 'menu' ? 'menu' : 'home', { direction: 'back' });
+}
+
+function clearTransientRoundState() {
+    if (typeof state !== 'object' || !state) return;
+    state.currentTurnPlayerIndex = 0;
+    state.secretWord = '';
+    state.secretHint = '';
+    state.impostorIds = [];
+    state.playerRoles = {};
+    state.startingPlayerName = '';
+    state.selectedVotedPlayerId = null;
+    if (typeof resetRevealCardPresentation === 'function') resetRevealCardPresentation();
+}
+
+function leaveActiveRound(destination) {
+    clearTransientRoundState();
+    closeNavigationSheet();
+    setGameAwakeMode?.(false);
+    goToScreen(destination === 'home' ? 'home' : 'menu', { direction: 'back' });
+}
+
+function openNavigationSheet(preferredDestination = 'menu') {
+    const sheet = document.getElementById('navigation-sheet');
+    if (!sheet) return;
+    sheet.dataset.preferredDestination = preferredDestination;
+    sheet.classList.remove('hidden');
+    sheet.classList.add('flex');
+    closeShellMenu?.();
+    requestAnimationFrame(() => sheet.querySelector('[data-sheet-primary]')?.focus());
+}
+
+function closeNavigationSheet() {
+    const sheet = document.getElementById('navigation-sheet');
+    if (!sheet) return;
+    sheet.classList.add('hidden');
+    sheet.classList.remove('flex');
+}
+
+function armSystemBackGuard() {
+    if (systemBackGuardArmed || getCurrentScreenName() === 'home') return;
+    try {
+        window.history.pushState({ partyjniakBackGuard: true }, '', window.location.href);
+        systemBackGuardArmed = true;
+    } catch (_) {}
+}
+
+function disarmSystemBackGuard() {
+    if (!systemBackGuardArmed) return;
+    systemBackGuardArmed = false;
+    suppressNextPopState = true;
+    try {
+        window.history.back();
+    } catch (_) {
+        suppressNextPopState = false;
+    }
+}
+
+function syncSystemBackGuard(screenName) {
+    if (screenName === 'home') disarmSystemBackGuard();
+    else armSystemBackGuard();
+}
+
+function setupSystemBackHandling() {
+    window.addEventListener('popstate', () => {
+        if (suppressNextPopState) {
+            suppressNextPopState = false;
+            return;
+        }
+
+        systemBackGuardArmed = false;
+        const handled = navigateBack({ fromSystem: true });
+        if (handled && getCurrentScreenName() !== 'home') {
+            queueMicrotask(armSystemBackGuard);
+        }
+    });
+}
+
+function goToGameHub() {
+    requestLeaveGame('home');
 }
 
 function openModal(modalId) {
