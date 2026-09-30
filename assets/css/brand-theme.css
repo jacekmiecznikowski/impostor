@@ -1,0 +1,144 @@
+:root {
+  --party-brand: #950f26;
+  --party-brand-strong: #720b1d;
+  --party-brand-bright: #c61d3a;
+  --party-brand-rgb: 149, 15, 38;
+}
+
+body {
+  background: radial-gradient(circle at 50% -12%, rgba(149,15,38,.18), transparent 30rem), #06050a;
+  transition: background .45s ease;
+}
+
+body[data-bg-mode="party"] {
+  background:
+    radial-gradient(circle at 50% -10%, rgba(149,15,38,.25), transparent 30rem),
+    radial-gradient(circle at 8% 72%, rgba(198,29,58,.07), transparent 23rem),
+    #06050a;
+}
+
+body[data-bg-mode="impostor"],
+body[data-bg-mode="mystery"],
+body[data-bg-mode="discussion"],
+body[data-bg-mode="vote"],
+body[data-bg-mode="celebrate"] {
+  background: radial-gradient(circle at 50% -12%, rgba(20,184,166,.13), transparent 29rem), #020617;
+}
+
+body[data-bg-mode="heads-up"] {
+  background: radial-gradient(circle at 50% -12%, rgba(139,92,246,.17), transparent 30rem), #05040a;
+}
+
+body[data-bg-mode="taboo"] {
+  background: radial-gradient(circle at 50% -12%, rgba(245,158,11,.15), transparent 30rem), #080604;
+}
+
+#phaser-bg { opacity: .82 !important; }
+
+.home-screen { gap: 1.3rem !important; padding-top: 1rem !important; padding-bottom: 1.6rem !important; }
+.home-hero { gap: .62rem !important; padding-top: .45rem !important; }
+
+.home-logo-lockup {
+  width: 6.45rem !important;
+  height: 6.45rem !important;
+  border-radius: 2rem !important;
+  box-shadow:
+    0 24px 62px rgba(149,15,38,.30),
+    0 0 0 8px rgba(149,15,38,.05),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+.home-kicker { color: rgb(254 205 211) !important; }
+.home-title { text-shadow: 0 10px 36px rgba(149,15,38,.22); }
+
+.app-shell.is-home #shell-more-btn {
+  border-color: rgba(198,29,58,.24) !important;
+  background: rgba(48,8,15,.5) !important;
+}
+
+.install-partyjniak-btn,
+#install-app-btn {
+  border-color: rgba(198,29,58,.3) !important;
+  background: rgba(149,15,38,.07) !important;
+}
+#install-app-btn i { color: #fb7185 !important; }
+
+.game-card-primary,
+.upcoming-card {
+  --game-accent: #14b8a6;
+  --game-rgb: 20, 184, 166;
+}
+
+.game-card-primary {
+  border-color: rgba(var(--game-rgb), .3) !important;
+  background:
+    radial-gradient(circle at 0% 50%, rgba(var(--game-rgb), .15), transparent 37%),
+    linear-gradient(145deg, rgba(12,27,41,.96), rgba(7,13,25,.985)) !important;
+}
+.game-card-primary:hover,
+.game-card-primary:focus-visible {
+  outline: none;
+  border-color: rgba(var(--game-rgb), .62) !important;
+  box-shadow: 0 20px 52px rgba(var(--game-rgb), .12), 0 18px 42px rgba(0,0,0,.28) !important;
+}
+.game-card-icon {
+  background: linear-gradient(145deg, rgba(var(--game-rgb), .98), rgba(var(--game-rgb), .68)) !important;
+  border-color: rgba(var(--game-rgb), .42) !important;
+  box-shadow: 0 12px 30px rgba(var(--game-rgb), .16);
+}
+.game-card-arrow {
+  color: var(--game-accent) !important;
+  background: rgba(var(--game-rgb), .10) !important;
+  border-color: rgba(var(--game-rgb), .20) !important;
+}
+
+.upcoming-grid { gap: .72rem !important; }
+.upcoming-card {
+  display: grid !important;
+  grid-template-columns: 2.45rem minmax(0,1fr) !important;
+  gap: .72rem !important;
+  align-items: start !important;
+  text-align: left !important;
+  min-height: 7.3rem !important;
+  border-color: rgba(var(--game-rgb), .18) !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(var(--game-rgb), .08), transparent 55%),
+    rgba(10,17,31,.62) !important;
+}
+.upcoming-card:hover,
+.upcoming-card:focus-visible {
+  outline: none;
+  border-color: rgba(var(--game-rgb), .42) !important;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(var(--game-rgb), .14), transparent 58%),
+    rgba(10,17,31,.72) !important;
+}
+.upcoming-card > i { display: none; }
+.upcoming-card::before {
+  content: '';
+  width: 2.35rem;
+  height: 2.35rem;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  border-radius: .8rem;
+  background: rgba(var(--game-rgb), .11);
+  border: 1px solid rgba(var(--game-rgb), .18);
+  box-shadow: inset 0 0 0 .7rem rgba(5,8,15,.35);
+}
+.upcoming-card strong,
+.upcoming-card small { grid-column: 2; }
+.upcoming-card strong { color: rgb(226 232 240) !important; }
+.upcoming-card[data-game-id="heads-up"] strong { color: #ddd6fe !important; }
+.upcoming-card[data-game-id="taboo"] strong { color: #fde68a !important; }
+
+.shell-logo:not(.is-game) { box-shadow: 0 8px 24px rgba(149,15,38,.24) !important; }
+
+@media (max-width: 380px) {
+  .home-logo-lockup { width: 5.8rem !important; height: 5.8rem !important; }
+  .upcoming-grid { grid-template-columns: 1fr !important; }
+  .upcoming-card { min-height: auto !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { transition: none; }
+}
