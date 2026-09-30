@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v14';
+const CACHE_VERSION = 'v15';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -12,6 +12,7 @@ const LOCAL_ASSETS = [
   './assets/css/impostor-role.css',
   './assets/css/partyjniak.css',
   './assets/css/navigation.css',
+  './assets/css/navigation-android.css',
   './assets/icons/icon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
@@ -22,6 +23,7 @@ const LOCAL_ASSETS = [
   './assets/js/shared/content-repository.js',
   './assets/js/shared/ui.js',
   './assets/js/shared/hub.js',
+  './assets/js/shared/navigation-behavior.js',
   './assets/js/games/impostor/data.js',
   './assets/js/games/impostor/content-provider.js',
   './assets/js/games/impostor/rules.js',
