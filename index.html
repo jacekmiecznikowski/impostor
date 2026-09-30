@@ -112,7 +112,7 @@
         <div class="flex items-center gap-3"><button type="button" onclick="goToSetupNames()" class="icon-btn"><i class="fa-solid fa-arrow-left"></i></button><div><p class="step-label">Krok 3 z 3</p><h2 class="text-xl font-black">Ustawienia rundy</h2></div></div>
 
         <div class="panel space-y-3">
-          <div class="flex justify-between items-center"><strong class="text-sm">Liczba impostorów </strong><span id="impostor-count-label" class="pill">1 Impostor</span></div>
+          <div class="flex justify-between items-center"><strong class="text-sm">Liczba impostorów</strong><span id="impostor-count-label" class="pill">1 Impostor</span></div>
           <div class="grid grid-cols-3 gap-2">
             <button type="button" onclick="setImpostorCount(1)" data-count="1" class="impostor-btn option-active">1 Impostor</button>
             <button id="imp-btn-2" type="button" onclick="setImpostorCount(2)" data-count="2" class="impostor-btn option-btn">2 Impostorów</button>
@@ -156,14 +156,14 @@
     </section>
 
     <section id="screen-reveal" class="screen hidden flex-col items-center justify-between flex-1 py-4 gap-4 text-center">
-      <div><p id="reveal-player-title" class="step-label">Rola gracza</p><h2 class="text-sm text-slate-300">Przytrzymaj kartę, aby odsłoni� rolę</h2></div>
+      <div><p id="reveal-player-title" class="step-label">Rola gracza</p><h2 class="text-sm text-slate-300">Przytrzymaj kartę, aby odsłonić rolę</h2></div>
       <div class="w-full max-w-xs h-60 relative perspective-1000 cursor-pointer my-auto select-none" onmousedown="revealSecret(true)" onmouseup="revealSecret(false)" onmouseleave="revealSecret(false)" ontouchstart="revealSecret(true)" ontouchend="revealSecret(false)" ontouchcancel="revealSecret(false)">
         <div id="secret-card-inner" class="w-full h-full relative transition-transform duration-300 transform-style-3d rounded-3xl">
           <div class="absolute inset-0 panel flex flex-col items-center justify-center gap-4 backface-hidden border-2 border-slate-700"><i class="fa-solid fa-fingerprint text-5xl text-teal-400"></i><strong>Trzymaj palec, aby czytać</strong><small class="text-slate-500">Nie pokazuj roli innym.</small></div>
-          <div class="absolute inset-0 bg-gradient-to-br from-teal-950 via-slate-900 to-slate-950 border-2 border-teal-500/60 rounded-3xl flex flex-col items-center justify-center p6 gap-3 backface-hidden rotate-y-180">
+          <div class="absolute inset-0 bg-gradient-to-br from-teal-950 via-slate-900 to-slate-950 border-2 border-teal-500/60 rounded-3xl flex flex-col items-center justify-center p-6 gap-3 backface-hidden rotate-y-180">
             <div id="secret-badge" class="pill">Zwykły gracz</div>
             <div><span id="secret-label-type" class="text-[10px] text-slate-400 uppercase tracking-widest font-bold block">Tajne słowo</span><h3 id="secret-word-display" class="text-3xl font-black">PIZZA</h3></div>
-            <p id="secret-desc" class="text-xs text-slate-400">Zapamk�taj rolę.</p>
+            <p id="secret-desc" class="text-xs text-slate-400">Zapamiętaj rolę.</p>
           </div>
         </div>
       </div>
