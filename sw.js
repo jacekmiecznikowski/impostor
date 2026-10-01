@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v22';
+const CACHE_VERSION = 'v23';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -24,10 +24,14 @@ const LOCAL_ASSETS = [
   './assets/icons/icon-512.png',
   './assets/icons/icon-maskable-512.png',
   './assets/audio/crewmates-win.mp3.b64',
-  './assets/audio/impostor-win.mp3.b64',
+  './assets/audio/impostor-win.0.b64',
+  './assets/audio/impostor-win.1.b64',
+  './assets/audio/impostor-win.2.b64',
+  './assets/audio/impostor-win.3.b64',
+  './assets/audio/impostor-win.4.b64',
   './assets/js/shared/view-loader.js',
   './assets/js/shared/audio.js',
-  './assets/js/shared/outcome-audio.js?v=5',
+  './assets/js/shared/outcome-audio.js?v=6',
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
   './assets/js/shared/content-repository.js',
