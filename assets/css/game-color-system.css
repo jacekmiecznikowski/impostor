@@ -101,10 +101,25 @@ body[data-bg-mode="bomb-alert"] {
   box-shadow: 0 0 0 3px rgba(var(--ui-accent-rgb), .08);
 }
 
-.reveal-card:focus-visible,
-.shell-icon-button:focus-visible,
-.icon-btn:focus-visible {
+:focus-visible {
   outline-color: var(--ui-accent-text) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--ui-accent-rgb), .48) !important;
+}
+
+body {
+  scrollbar-color: rgba(var(--ui-accent-rgb), .48) rgba(0,0,0,.2);
+}
+
+@keyframes partyjniak-theme-pulse {
+  0%, 100% { box-shadow: 0 0 25px rgba(var(--ui-accent-rgb), .30); }
+  50% { box-shadow: 0 0 50px rgba(var(--ui-accent-rgb), .62); }
+}
+
+.animate-pulse-glow {
+  animation-name: partyjniak-theme-pulse !important;
 }
 
 /* Same shell geometry, different game identity. */
@@ -175,4 +190,8 @@ body[data-screen="home"] #install-app-btn {
 body[data-game="home"] #install-app-btn i,
 body[data-screen="home"] #install-app-btn i {
   color: #fb7185 !important;
+}
+
+.upcoming-card[data-game-id="taboo"] strong {
+  color: #fecdd3 !important;
 }
