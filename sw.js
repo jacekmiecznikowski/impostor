@@ -26,6 +26,7 @@ const LOCAL_ASSETS = [
   './assets/css/navigation.css',
   './assets/css/navigation-android.css',
   './assets/css/brand-theme.css',
+  './assets/css/screen-layout-system.css?v=1',
   './assets/icons/icon.svg',
   './assets/icons/icon-32.png',
   './assets/icons/icon-192.png',
