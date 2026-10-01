@@ -146,6 +146,8 @@ const bombState = read('assets/js/games/ticking-bomb/state.js');
 assert.match(bombState, /hasSavedSession: false/);
 assert.match(bombState, /function resetBombSession/);
 assert.match(bombState, /removeItem\(BOMB_SESSION_STORAGE_KEY\)/);
+assert.match(bombState, /manualLoserId: null/);
+assert.doesNotMatch(bombState, /manualWinnerId/);
 
 const bombContentProvider = read('assets/js/games/ticking-bomb/content-provider.js');
 assert.match(bombContentProvider, /function formatBombPromptLabel/);
@@ -162,6 +164,9 @@ assert.match(tickingBombView, /id="bomb-visual"[^>]*bomb-ignite-control/);
 assert.match(tickingBombView, /onclick="igniteBomb\(\)"/);
 assert.match(tickingBombView, /DOTKNIJ, ABY ODPALIĆ/);
 assert.doesNotMatch(tickingBombView, /id="bomb-ignite-btn"/);
+assert.match(tickingBombView, /U KOGO WYBUCHŁA BOMBA\?/);
+assert.match(tickingBombView, /id="bomb-manual-loser-list"/);
+assert.doesNotMatch(tickingBombView, /KTO WYGRYWA TĘ RUNDĘ\?/);
 
 const bombGame = read('assets/js/games/ticking-bomb/game.js');
 assert.match(bombGame, /resultTimeoutId/);
@@ -173,6 +178,10 @@ assert.match(bombGame, /czas rundy pozostaje całkowicie ukryty/i);
 assert.match(bombGame, /BOMB_FUSE_PRESETS\.unstable/);
 assert.match(bombGame, /answerBtn\.disabled = true/);
 assert.match(bombGame, /answerBtn\.disabled = false/);
+assert.match(bombGame, /function applyBombLoss/);
+assert.match(bombGame, /manualLoserId/);
+assert.match(bombGame, /function commitBombManualLoser/);
+assert.doesNotMatch(bombGame, /manualWinnerId|commitBombManualWinner|selectBombManualWinner/);
 
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 assert.match(bombIntegration, /Zasady Impostora/);
@@ -218,7 +227,7 @@ assert.match(background, /motif: 'ticking-bomb'/);
 assert.match(background, /clearPartyjniakThemeMotifs/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v31'/);
+assert.match(sw, /CACHE_VERSION = 'v32'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
