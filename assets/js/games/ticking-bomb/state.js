@@ -12,7 +12,8 @@ const bombState = {
     currentPlayerIndex: 0,
     lastLoserId: null,
     manualWinnerId: null,
-    roundNumber: 0
+    roundNumber: 0,
+    hasSavedSession: false
 };
 
 const BOMB_FUSE_PRESETS = Object.freeze({
@@ -42,6 +43,7 @@ function normalizeBombActiveCategories() {
 }
 
 function persistBombSession() {
+    bombState.hasSavedSession = true;
     try {
         localStorage.setItem(BOMB_SESSION_STORAGE_KEY, JSON.stringify({
             playerCount: bombState.playerCount,
@@ -55,6 +57,7 @@ function persistBombSession() {
 }
 
 function loadBombSession() {
+    bombState.hasSavedSession = false;
     try {
         const parsed = JSON.parse(localStorage.getItem(BOMB_SESSION_STORAGE_KEY) || 'null');
         if (!parsed || typeof parsed !== 'object') throw new Error('Brak sesji');
@@ -73,6 +76,7 @@ function loadBombSession() {
         bombState.activeCategories = Array.isArray(parsed.activeCategories) ? parsed.activeCategories.map(String) : [];
         bombState.roundNumber = Number(parsed.roundNumber) || 0;
         if (bombState.players.length !== count) createBombPlayers(count, bombState.players);
+        bombState.hasSavedSession = bombState.players.length >= 2;
     } catch (_) {
         createBombPlayers(BOMB_DEFAULT_PLAYER_COUNT, []);
     }
@@ -85,4 +89,17 @@ function resetBombRoundState() {
     bombState.currentPlayerIndex = 0;
     bombState.lastLoserId = null;
     bombState.manualWinnerId = null;
+}
+
+function resetBombSession() {
+    bombState.playerCount = BOMB_DEFAULT_PLAYER_COUNT;
+    bombState.players = [];
+    bombState.mode = 'tracked';
+    bombState.fusePreset = 'normal';
+    bombState.activeCategories = BOMB_CATEGORIES.map(category => category.id);
+    bombState.roundNumber = 0;
+    bombState.hasSavedSession = false;
+    createBombPlayers(BOMB_DEFAULT_PLAYER_COUNT, []);
+    resetBombRoundState();
+    try { localStorage.removeItem(BOMB_SESSION_STORAGE_KEY); } catch (_) {}
 }
