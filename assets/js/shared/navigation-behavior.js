@@ -8,7 +8,7 @@
 
     if (!originalUpdateShellContext) return;
 
-    const ACTIVE_ROUND_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting']);
+    const ACTIVE_ROUND_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting', 'bomb-play']);
 
     function syncMobileShellAction(screenName) {
         const button = document.getElementById('shell-more-btn');
