@@ -5,7 +5,7 @@ const bombState = {
     playerCount: BOMB_DEFAULT_PLAYER_COUNT,
     players: [],
     mode: 'tracked',
-    fusePreset: 'normal',
+    fusePreset: 'unstable',
     activeCategories: [],
     currentPrompt: null,
     currentCategoryId: null,
@@ -17,9 +17,27 @@ const bombState = {
 };
 
 const BOMB_FUSE_PRESETS = Object.freeze({
-    quick: { id: 'quick', label: 'Szybka', minSeconds: 18, maxSeconds: 32, description: 'Krótko i nerwowo' },
-    normal: { id: 'normal', label: 'Klasyczna', minSeconds: 28, maxSeconds: 52, description: 'Najlepsza na start' },
-    long: { id: 'long', label: 'Długa', minSeconds: 42, maxSeconds: 72, description: 'Więcej czasu na odpowiedzi' }
+    unstable: {
+        id: 'unstable',
+        label: 'Niestabilny ładunek',
+        minSeconds: 5,
+        maxSeconds: 120,
+        description: 'Pełny chaos — wybuch może nadejść niemal od razu albo bardzo późno'
+    },
+    short: {
+        id: 'short',
+        label: 'Krótki lont',
+        minSeconds: 5,
+        maxSeconds: 30,
+        description: 'Krótka, szybka runda z dużą presją'
+    },
+    long: {
+        id: 'long',
+        label: 'Długi lont',
+        minSeconds: 30,
+        maxSeconds: 120,
+        description: 'Więcej czasu na odpowiedzi i podawanie telefonu'
+    }
 });
 
 function createBombPlayers(count, previousPlayers = bombState.players) {
@@ -72,7 +90,11 @@ function loadBombSession() {
             }))
             : [];
         bombState.mode = parsed.mode === 'manual' ? 'manual' : 'tracked';
-        bombState.fusePreset = BOMB_FUSE_PRESETS[parsed.fusePreset] ? parsed.fusePreset : 'normal';
+        const legacyFuseMap = { quick: 'short', normal: 'unstable', long: 'long' };
+        const restoredFuse = BOMB_FUSE_PRESETS[parsed.fusePreset]
+            ? parsed.fusePreset
+            : legacyFuseMap[parsed.fusePreset];
+        bombState.fusePreset = restoredFuse || 'unstable';
         bombState.activeCategories = Array.isArray(parsed.activeCategories) ? parsed.activeCategories.map(String) : [];
         bombState.roundNumber = Number(parsed.roundNumber) || 0;
         if (bombState.players.length !== count) createBombPlayers(count, bombState.players);
@@ -95,7 +117,7 @@ function resetBombSession() {
     bombState.playerCount = BOMB_DEFAULT_PLAYER_COUNT;
     bombState.players = [];
     bombState.mode = 'tracked';
-    bombState.fusePreset = 'normal';
+    bombState.fusePreset = 'unstable';
     bombState.activeCategories = BOMB_CATEGORIES.map(category => category.id);
     bombState.roundNumber = 0;
     bombState.hasSavedSession = false;
