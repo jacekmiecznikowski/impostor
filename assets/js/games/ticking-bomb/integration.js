@@ -40,8 +40,8 @@ Object.assign(BACKGROUND_MODE_BY_SCREEN, {
     'bomb-result': 'bomb-alert'
 });
 Object.assign(BACKGROUND_MODES, {
-    'ticking-bomb': { colors: [0xf97316, 0xfbbf24, 0xea580c, 0xfef3c7], alpha: [0.065, 0.19], speed: 0.74, confetti: false },
-    'bomb-alert': { colors: [0xf97316, 0xef4444, 0xfbbf24, 0xfef3c7], alpha: [0.08, 0.23], speed: 0.94, confetti: false }
+    'ticking-bomb': { colors: [0xf97316, 0xfbbf24, 0xea580c, 0xfb923c], alpha: [0.075, 0.21], speed: 0.78, confetti: false },
+    'bomb-alert': { colors: [0xf97316, 0xef4444, 0xfbbf24, 0xfb923c], alpha: [0.10, 0.27], speed: 1.02, confetti: false }
 });
 
 function getActiveGameId() {
@@ -214,12 +214,86 @@ renderPartyjniakThemeMotifs = function bombAwareThemeMotifs(modeName) {
     motifMode = modeName;
     clearPartyjniakThemeMotifs();
     if (scene.reducedMotion) return;
+
     const w = scene.scale.width;
     const h = scene.scale.height;
-    [[.12,.22,48],[.88,.31,66],[.74,.82,42]].forEach(([xr,yr,r], index) => {
-        const ring = scene.add.circle(w*xr,h*yr,r,0xf97316,.003).setStrokeStyle(1.2,index===1?0xfbbf24:0xf97316,.13);
-        addFloatingMotif(scene, ring, { x:w*xr, y:h*yr, dx:index%2?-15:13, dy:18, duration:6200+index*700 });
-        const spark = scene.add.rectangle(w*xr+r*.72,h*yr-r*.72,18,2,index===1?0xfde047:0xfb923c,.18).setAngle(-38+index*18);
-        addFloatingMotif(scene, spark, { x:spark.x, y:spark.y, dx:index%2?-11:9, dy:12, duration:4800+index*500, rotation:.04 });
+    const alertMode = modeName === 'bomb-alert';
+    const bursts = alertMode
+        ? [[.09, .18, 42], [.88, .28, 58], [.17, .72, 66], [.82, .82, 38]]
+        : [[.10, .20, 34], [.87, .30, 48], [.18, .74, 56], [.80, .84, 30]];
+
+    bursts.forEach(([xr, yr, radius], index) => {
+        const x = w * xr;
+        const y = h * yr;
+        const warm = index % 2 === 0 ? 0xf97316 : 0xfbbf24;
+        const hot = index % 2 === 0 ? 0xfbbf24 : 0xfb923c;
+        const direction = index % 2 === 0 ? 1 : -1;
+        const duration = (alertMode ? 4700 : 6200) + index * 520;
+
+        const halo = scene.add.circle(x, y, radius * .64, warm, alertMode ? .018 : .010)
+            .setStrokeStyle(alertMode ? 1.8 : 1.2, warm, alertMode ? .24 : .15);
+        const shockwave = scene.add.circle(x, y, radius, hot, .002)
+            .setStrokeStyle(alertMode ? 2.1 : 1.35, hot, alertMode ? .22 : .12);
+        const burst = scene.add.star(x, y, 10, radius * .30, radius * .72, warm, alertMode ? .030 : .017)
+            .setStrokeStyle(1, hot, alertMode ? .24 : .14)
+            .setAngle(index * 13 - 8);
+
+        addFloatingMotif(scene, halo, {
+            x, y, dx: 10 * direction, dy: 14, duration: duration + 500, rotation: .025 * direction
+        });
+        addFloatingMotif(scene, shockwave, {
+            x, y, dx: 12 * direction, dy: 18, duration: duration + 900, rotation: -.02 * direction
+        });
+        addFloatingMotif(scene, burst, {
+            x, y, dx: 15 * direction, dy: 16, duration, rotation: .075 * direction
+        });
+
+        const shardCount = alertMode ? 5 : 3;
+        for (let shardIndex = 0; shardIndex < shardCount; shardIndex += 1) {
+            const angle = ((Math.PI * 2) / shardCount) * shardIndex + index * .45;
+            const distance = radius * (.82 + (shardIndex % 2) * .22);
+            const sx = x + Math.cos(angle) * distance;
+            const sy = y + Math.sin(angle) * distance;
+            const shard = scene.add.rectangle(
+                sx,
+                sy,
+                shardIndex % 2 ? 13 : 18,
+                shardIndex % 2 ? 2.2 : 3,
+                shardIndex % 2 ? hot : warm,
+                alertMode ? .24 : .15
+            ).setAngle(angle * 180 / Math.PI);
+            addFloatingMotif(scene, shard, {
+                x: sx,
+                y: sy,
+                dx: Math.cos(angle) * 10,
+                dy: Math.sin(angle) * 10 + 8,
+                duration: duration - 350 + shardIndex * 180,
+                rotation: .045 * direction
+            });
+        }
+    });
+
+    const sparkPositions = alertMode
+        ? [[.31,.16],[.69,.13],[.56,.47],[.33,.58],[.67,.66],[.48,.87]]
+        : [[.30,.15],[.70,.17],[.57,.48],[.34,.60],[.66,.67],[.50,.88]];
+
+    sparkPositions.forEach(([xr, yr], index) => {
+        const spark = scene.add.star(
+            w * xr,
+            h * yr,
+            4,
+            alertMode ? 2.2 : 1.6,
+            alertMode ? 7 : 5.2,
+            index % 2 ? 0xfbbf24 : 0xfb923c,
+            alertMode ? .28 : .16
+        ).setAngle(45 + index * 17);
+        addFloatingMotif(scene, spark, {
+            x: w * xr,
+            y: h * yr,
+            dx: index % 2 ? -9 : 9,
+            dy: index % 3 === 0 ? -12 : 13,
+            duration: (alertMode ? 3600 : 5200) + index * 310,
+            rotation: index % 2 ? -.11 : .11
+        });
     });
 };
