@@ -154,6 +154,9 @@ assert.match(bombIntegration, /Zasady Impostora/);
 assert.match(bombIntegration, /Menu Impostora/);
 assert.match(bombIntegration, /stopAllBombAudio/);
 assert.match(bombIntegration, /bombAwareToggleAudio/);
+assert.match(bombIntegration, /scene\.add\.star/);
+assert.match(bombIntegration, /shockwave/);
+assert.match(bombIntegration, /sparkPositions/);
 
 const bombMobileCss = read('assets/css/ticking-bomb-mobile.css');
 assert.match(bombMobileCss, /#screen-bomb-play \.bomb-answer-btn/);
@@ -173,7 +176,7 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v26'/);
+assert.match(sw, /CACHE_VERSION = 'v27'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
