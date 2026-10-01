@@ -31,11 +31,49 @@ const PARTYJNIAK_GAME_THEMES = Object.freeze({
     }
 });
 
-/* Core Partyjniak backgrounds live in background.js.
-   Only future game modes are extended here so existing palettes are never overwritten. */
+/* background.js owns geometry and animation.
+   This registry owns the final palette for every game/mode. */
 Object.assign(BACKGROUND_MODES, {
-    'heads-up': { colors: [0x8b5cf6, 0xc084fc, 0xec4899, 0x38bdf8], alpha: [0.07, 0.21], speed: 0.78, confetti: false, motif: 'heads-up' },
-    taboo: { colors: [0xe11d48, 0xfb7185, 0xf43f5e, 0xfda4af], alpha: [0.07, 0.20], speed: 0.70, confetti: false, motif: 'taboo' }
+    party: {
+        colors: [0x950f26, 0xd9465f, 0x8b5cf6, 0xf8fafc],
+        alpha: [0.04, 0.16], speed: 0.82, confetti: false, motif: 'party'
+    },
+    impostor: {
+        colors: [0x14b8a6, 0x06b6d4, 0x5eead4, 0x334155],
+        alpha: [0.05, 0.15], speed: 0.62, confetti: false, motif: 'impostor'
+    },
+    mystery: {
+        colors: [0x0f766e, 0x0891b2, 0x38bdf8, 0x475569],
+        alpha: [0.04, 0.12], speed: 0.48, confetti: false, motif: 'impostor'
+    },
+    discussion: {
+        colors: [0x14b8a6, 0x06b6d4, 0x22d3ee, 0x334155],
+        alpha: [0.04, 0.13], speed: 0.58, confetti: false, motif: 'discussion'
+    },
+    vote: {
+        colors: [0x0f766e, 0x14b8a6, 0x0891b2, 0x1e293b],
+        alpha: [0.04, 0.12], speed: 0.54, confetti: false, motif: 'vote'
+    },
+    celebrate: {
+        colors: [0x14b8a6, 0x22d3ee, 0x5eead4, 0xf8fafc],
+        alpha: [0.07, 0.20], speed: 0.92, confetti: true, motif: 'impostor'
+    },
+    'ticking-bomb': {
+        colors: [0xf97316, 0xfbbf24, 0xfb923c, 0xef4444],
+        alpha: [0.06, 0.18], speed: 0.74, confetti: false, motif: 'ticking-bomb'
+    },
+    'bomb-alert': {
+        colors: [0xef4444, 0xf97316, 0xfbbf24, 0xfb923c],
+        alpha: [0.09, 0.23], speed: 1.02, confetti: false, motif: 'bomb-alert'
+    },
+    'heads-up': {
+        colors: [0x8b5cf6, 0xc084fc, 0xec4899, 0x38bdf8],
+        alpha: [0.07, 0.21], speed: 0.78, confetti: false, motif: 'heads-up'
+    },
+    taboo: {
+        colors: [0xe11d48, 0xfb7185, 0xf43f5e, 0xfda4af],
+        alpha: [0.07, 0.20], speed: 0.70, confetti: false, motif: 'taboo'
+    }
 });
 
 let partyjniakThemeMotifs = [];
@@ -82,8 +120,7 @@ function renderPartyjniakThemeMotifs(modeName) {
     motifMode = modeName;
     clearPartyjniakThemeMotifs();
 
-    /* These modes already render their complete abstract language inside BackgroundScene.
-       Do not stack the legacy motif layer over them. */
+    /* Core modes already render their full abstract language inside BackgroundScene. */
     if (NATIVE_BACKGROUND_MOTIFS.has(modeName) || scene.reducedMotion) return;
 
     const w = scene.scale.width;
