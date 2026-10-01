@@ -6,8 +6,14 @@ function isPartyjniakNative() {
     }
 }
 
+if (isPartyjniakNative()) {
+    document.documentElement.classList.add('partyjniak-native', 'partyjniak-native-android');
+}
+
 function setupNativeAndroidIntegration() {
     if (!isPartyjniakNative()) return;
+
+    document.documentElement.classList.add('partyjniak-native', 'partyjniak-native-android');
 
     const nativeApp = window.Capacitor?.Plugins?.App;
     if (!nativeApp?.addListener) return;
