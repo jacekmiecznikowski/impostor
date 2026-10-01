@@ -58,21 +58,25 @@ function renderBombPlayScreen(picked = null) {
     const categoryEl = document.getElementById('bomb-play-category');
     const promptEl = document.getElementById('bomb-play-prompt');
     const statusEl = document.getElementById('bomb-play-status');
-    const startBtn = document.getElementById('bomb-ignite-btn');
     const changeBtn = document.getElementById('bomb-change-prompt-btn');
+    const answerBtn = document.querySelector('#bomb-tracked-controls .bomb-answer-btn');
     const trackedControls = document.getElementById('bomb-tracked-controls');
     const manualHint = document.getElementById('bomb-manual-hint');
     const bombVisual = document.getElementById('bomb-visual');
 
     if (categoryEl) categoryEl.textContent = category;
     if (promptEl) promptEl.textContent = bombState.currentPrompt || '—';
-    if (statusEl) statusEl.textContent = 'Bomba jest rozbrojona';
-    if (startBtn) startBtn.classList.remove('hidden');
+    if (statusEl) statusEl.textContent = 'Dotknij bomby, kiedy wszyscy są gotowi';
     if (changeBtn) changeBtn.classList.remove('hidden');
+    if (answerBtn) answerBtn.disabled = true;
     trackedControls?.classList.toggle('hidden', bombState.mode !== 'tracked');
     manualHint?.classList.toggle('hidden', bombState.mode !== 'manual');
     bombVisual?.classList.remove('is-live', 'is-hot', 'is-exploded');
     bombVisual?.style.removeProperty('--bomb-progress');
+    if (bombVisual) {
+        bombVisual.disabled = false;
+        bombVisual.setAttribute('aria-label', 'Odpal bombę');
+    }
     renderBombCurrentPlayer();
     updateBombUndoButton();
 }
@@ -89,21 +93,25 @@ function rerollBombPrompt() {
 
 async function igniteBomb() {
     if (bombRuntime.active || bombRuntime.exploded) return;
-    const preset = BOMB_FUSE_PRESETS[bombState.fusePreset] || BOMB_FUSE_PRESETS.normal;
+    const preset = BOMB_FUSE_PRESETS[bombState.fusePreset] || BOMB_FUSE_PRESETS.unstable;
     const seconds = secureRandomBetween(preset.minSeconds, preset.maxSeconds);
     bombRuntime.durationMs = Math.round(seconds * 1000);
     bombRuntime.active = true;
     bombRuntime.passHistory = [];
     bombRuntime.lastPassAt = 0;
 
-    const startBtn = document.getElementById('bomb-ignite-btn');
     const changeBtn = document.getElementById('bomb-change-prompt-btn');
+    const answerBtn = document.querySelector('#bomb-tracked-controls .bomb-answer-btn');
     const statusEl = document.getElementById('bomb-play-status');
     const bombVisual = document.getElementById('bomb-visual');
-    if (startBtn) startBtn.classList.add('hidden');
     if (changeBtn) changeBtn.classList.add('hidden');
+    if (answerBtn) answerBtn.disabled = false;
     if (statusEl) statusEl.textContent = bombState.mode === 'tracked' ? 'Odpowiedz i podaj dalej!' : 'Mówcie po kolei i podawajcie telefon!';
-    bombVisual?.classList.add('is-live');
+    if (bombVisual) {
+        bombVisual.classList.add('is-live');
+        bombVisual.disabled = true;
+        bombVisual.setAttribute('aria-label', 'Bomba odpalona');
+    }
 
     primeBombAudio();
     await startBombTicking();
