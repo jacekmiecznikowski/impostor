@@ -68,11 +68,21 @@
   </div>
 
   <div class="bomb-stage">
-    <div id="bomb-visual" class="bomb-visual" aria-hidden="true">
-      <div class="bomb-fuse"><span class="bomb-spark"></span></div>
-      <div class="bomb-body"><i class="fa-solid fa-bomb"></i><span class="bomb-glow"></span></div>
-      <div class="bomb-shockwave"></div>
-    </div>
+    <button id="bomb-visual" type="button" class="bomb-visual bomb-ignite-control" onclick="igniteBomb()" aria-label="Odpal bombę">
+      <span class="bomb-device" aria-hidden="true">
+        <span class="bomb-body">
+          <span class="bomb-body-shine"></span>
+          <span class="bomb-cap"></span>
+          <span class="bomb-glow"></span>
+        </span>
+        <span class="bomb-fuse"><span class="bomb-spark"></span></span>
+        <span class="bomb-shockwave"></span>
+      </span>
+      <span class="bomb-ignite-copy">
+        <strong>DOTKNIJ, ABY ODPALIĆ</strong>
+        <small>Losowy czas • bez odliczania</small>
+      </span>
+    </button>
     <p id="bomb-play-status" class="bomb-play-status">Bomba jest rozbrojona</p>
 
     <div id="bomb-tracked-controls" class="bomb-tracked-controls">
@@ -85,9 +95,8 @@
     <div id="bomb-manual-hint" class="bomb-manual-hint hidden"><i class="fa-solid fa-arrows-rotate"></i><span>Odpowiedz → podaj telefon następnej osobie.</span></div>
   </div>
 
-  <div class="bomb-play-actions">
+  <div class="bomb-play-actions bomb-play-actions-secondary">
     <button id="bomb-change-prompt-btn" type="button" class="bomb-ghost-btn" onclick="rerollBombPrompt()"><i class="fa-solid fa-shuffle"></i><span>Inne pytanie</span></button>
-    <button id="bomb-ignite-btn" type="button" class="bomb-primary-btn" onclick="igniteBomb()"><i class="fa-solid fa-fire"></i><span>Odpal bombę</span></button>
   </div>
 </section>
 
