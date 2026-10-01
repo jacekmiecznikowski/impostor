@@ -2,10 +2,10 @@ const bombRuntime = {
     active: false,
     exploded: false,
     timeoutId: null,
-    progressInterval: null,
-    startedAt: 0,
+    resultTimeoutId: null,
     durationMs: 0,
-    passHistory: []
+    passHistory: [],
+    lastPassAt: 0
 };
 
 function secureRandomBetween(min, max) {
@@ -42,6 +42,7 @@ function prepareBombRound() {
     bombState.lastLoserId = null;
     bombState.manualWinnerId = null;
     bombRuntime.passHistory = [];
+    bombRuntime.lastPassAt = 0;
     bombRuntime.exploded = false;
 
     if (bombState.mode === 'tracked') {
@@ -71,7 +72,7 @@ function renderBombPlayScreen(picked = null) {
     trackedControls?.classList.toggle('hidden', bombState.mode !== 'tracked');
     manualHint?.classList.toggle('hidden', bombState.mode !== 'manual');
     bombVisual?.classList.remove('is-live', 'is-hot', 'is-exploded');
-    bombVisual?.style.setProperty('--bomb-progress', '0');
+    bombVisual?.style.removeProperty('--bomb-progress');
     renderBombCurrentPlayer();
     updateBombUndoButton();
 }
@@ -91,9 +92,9 @@ async function igniteBomb() {
     const preset = BOMB_FUSE_PRESETS[bombState.fusePreset] || BOMB_FUSE_PRESETS.normal;
     const seconds = secureRandomBetween(preset.minSeconds, preset.maxSeconds);
     bombRuntime.durationMs = Math.round(seconds * 1000);
-    bombRuntime.startedAt = performance.now();
     bombRuntime.active = true;
     bombRuntime.passHistory = [];
+    bombRuntime.lastPassAt = 0;
 
     const startBtn = document.getElementById('bomb-ignite-btn');
     const changeBtn = document.getElementById('bomb-change-prompt-btn');
@@ -108,28 +109,16 @@ async function igniteBomb() {
     await startBombTicking();
     if (!bombRuntime.active) return;
 
+    // Czas rundy pozostaje całkowicie ukryty: bez paska postępu,
+    // przyspieszania tykania ani wizualnego sygnału, że wybuch jest blisko.
     bombRuntime.timeoutId = setTimeout(explodeBomb, bombRuntime.durationMs);
-    bombRuntime.progressInterval = setInterval(updateBombProgress, 120);
-    updateBombProgress();
-}
-
-function updateBombProgress() {
-    if (!bombRuntime.active) return;
-    const elapsed = Math.max(0, performance.now() - bombRuntime.startedAt);
-    const progress = Math.min(1, elapsed / Math.max(1, bombRuntime.durationMs));
-    const visual = document.getElementById('bomb-visual');
-    visual?.style.setProperty('--bomb-progress', progress.toFixed(3));
-    visual?.classList.toggle('is-hot', progress > 0.68);
-
-    let rate = 1;
-    if (progress > 0.84) rate = 1.7;
-    else if (progress > 0.68) rate = 1.42;
-    else if (progress > 0.46) rate = 1.18;
-    setBombTickRate(rate);
 }
 
 function bombPass() {
     if (!bombRuntime.active || bombState.mode !== 'tracked' || bombState.players.length < 2) return;
+    const now = performance.now();
+    if (now - bombRuntime.lastPassAt < 250) return;
+    bombRuntime.lastPassAt = now;
     bombRuntime.passHistory.push(bombState.currentPlayerIndex);
     bombState.currentPlayerIndex = (bombState.currentPlayerIndex + 1) % bombState.players.length;
     renderBombCurrentPlayer();
@@ -140,6 +129,7 @@ function bombPass() {
 function bombUndoPass() {
     if (!bombRuntime.active || bombState.mode !== 'tracked' || bombRuntime.passHistory.length === 0) return;
     bombState.currentPlayerIndex = bombRuntime.passHistory.pop();
+    bombRuntime.lastPassAt = 0;
     renderBombCurrentPlayer();
     updateBombUndoButton();
     playSound('click');
@@ -158,10 +148,11 @@ function updateBombUndoButton() {
 
 function cancelBombRound({ silent = false } = {}) {
     if (bombRuntime.timeoutId) clearTimeout(bombRuntime.timeoutId);
-    if (bombRuntime.progressInterval) clearInterval(bombRuntime.progressInterval);
+    if (bombRuntime.resultTimeoutId) clearTimeout(bombRuntime.resultTimeoutId);
     bombRuntime.timeoutId = null;
-    bombRuntime.progressInterval = null;
+    bombRuntime.resultTimeoutId = null;
     bombRuntime.active = false;
+    bombRuntime.lastPassAt = 0;
     stopBombTicking?.();
     if (!silent) playSound('click');
 }
@@ -169,9 +160,7 @@ function cancelBombRound({ silent = false } = {}) {
 function explodeBomb() {
     if (!bombRuntime.active) return;
     if (bombRuntime.timeoutId) clearTimeout(bombRuntime.timeoutId);
-    if (bombRuntime.progressInterval) clearInterval(bombRuntime.progressInterval);
     bombRuntime.timeoutId = null;
-    bombRuntime.progressInterval = null;
     bombRuntime.active = false;
     bombRuntime.exploded = true;
     stopBombTicking();
@@ -192,10 +181,11 @@ function explodeBomb() {
     }
     bombState.roundNumber += 1;
     persistBombSession();
-    setTimeout(() => showBombResult(), 420);
+    bombRuntime.resultTimeoutId = setTimeout(showBombResult, 420);
 }
 
 function showBombResult() {
+    bombRuntime.resultTimeoutId = null;
     renderBombResultScreen();
     goToScreen('bomb-result');
 }
