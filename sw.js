@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v23';
+const CACHE_VERSION = 'v24';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -8,12 +8,16 @@ const LOCAL_ASSETS = [
   './manifest.webmanifest',
   './views/impostor-setup.html',
   './views/impostor-round.html',
+  './views/ticking-bomb.html',
+  './views/ticking-bomb-modals.html',
   './views/modals.html',
+  './content/ticking-bomb.pl.json',
   './assets/css/styles.css',
   './assets/css/impostor.css',
   './assets/css/impostor-reveal.css',
   './assets/css/impostor-role.css',
   './assets/css/impostor-reveal-layout.css',
+  './assets/css/ticking-bomb.css',
   './assets/css/partyjniak.css',
   './assets/css/navigation.css',
   './assets/css/navigation-android.css',
@@ -29,6 +33,8 @@ const LOCAL_ASSETS = [
   './assets/audio/impostor-win.2.b64',
   './assets/audio/impostor-win.3.b64',
   './assets/audio/impostor-win.4.b64',
+  './assets/audio/bomb-tick.b64',
+  './assets/audio/bomb-explosion.b64',
   './assets/js/shared/view-loader.js',
   './assets/js/shared/audio.js',
   './assets/js/shared/outcome-audio.js?v=6',
@@ -49,6 +55,13 @@ const LOCAL_ASSETS = [
   './assets/js/games/impostor/presentation.js',
   './assets/js/games/impostor/reveal-fit.js',
   './assets/js/games/impostor/scoreboard.js',
+  './assets/js/games/ticking-bomb/content-provider.js',
+  './assets/js/games/ticking-bomb/state.js',
+  './assets/js/games/ticking-bomb/audio.js',
+  './assets/js/games/ticking-bomb/setup.js',
+  './assets/js/games/ticking-bomb/game.js',
+  './assets/js/games/ticking-bomb/scoreboard.js',
+  './assets/js/games/ticking-bomb/integration.js',
   './assets/js/app.js'
 ];
 
