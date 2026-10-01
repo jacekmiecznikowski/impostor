@@ -15,7 +15,8 @@ const requiredFiles = [
   'assets/js/shared/game-themes.js',
   'assets/js/shared/native-android.js',
   'assets/js/shared/outcome-audio.js',
-  'assets/js/shared/outcome-audio-user.js',
+  'assets/audio/crewmates-win.mp3.b64',
+  'assets/audio/impostor-win.mp3.b64',
   'assets/js/games/impostor/data.js',
   'assets/js/games/impostor/content-provider.js',
   'assets/js/games/impostor/rules.js',
@@ -54,8 +55,8 @@ assert.match(index, /assets\/css\/impostor-reveal-layout\.css/);
 assert.match(index, /assets\/css\/navigation\.css/);
 assert.match(index, /assets\/css\/navigation-android\.css/);
 assert.match(index, /assets\/js\/shared\/view-loader\.js/);
-assert.match(index, /assets\/js\/shared\/outcome-audio-user\.js\?v=1/);
-assert.match(index, /assets\/js\/shared\/outcome-audio\.js\?v=4/);
+assert.match(index, /assets\/js\/shared\/outcome-audio\.js\?v=5/);
+assert.doesNotMatch(index, /outcome-audio-user/);
 assert.match(index, /assets\/js\/shared\/native-android\.js/);
 assert.match(index, /assets\/js\/shared\/navigation-behavior\.js/);
 assert.match(index, /assets\/js\/shared\/game-themes\.js/);
@@ -87,9 +88,11 @@ assert.match(revealFit, /function fitRevealSecretWord/);
 assert.match(revealFit, /ResizeObserver/);
 
 const outcomeAudio = read('assets/js/shared/outcome-audio.js');
-assert.match(outcomeAudio, /PARTYJNIAK_USER_OUTCOME_AUDIO/);
+assert.match(outcomeAudio, /crewmates-win\.mp3\.b64/);
+assert.match(outcomeAudio, /impostor-win\.mp3\.b64/);
 assert.match(outcomeAudio, /function playOutcomeSound/);
-assert.doesNotMatch(outcomeAudio, /playSound\(/);
+assert.match(outcomeAudio, /decodeBase64Bytes/);
+assert.doesNotMatch(outcomeAudio, /PARTYJNIAK_USER_OUTCOME_AUDIO|playSound\(/);
 
 const game = read('assets/js/games/impostor/game.js');
 assert.doesNotMatch(game, /function renderGroupVotingScreen/);
@@ -103,10 +106,11 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v21'/);
-assert.match(sw, /assets\/js\/shared\/native-android\.js/);
-assert.match(sw, /assets\/js\/shared\/outcome-audio-user\.js\?v=1/);
-assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=4/);
+assert.match(sw, /CACHE_VERSION = 'v22'/);
+assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
+assert.match(sw, /assets\/audio\/impostor-win\.mp3\.b64/);
+assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=5/);
+assert.doesNotMatch(sw, /outcome-audio-user/);
 
 const capacitor = JSON.parse(read('capacitor.config.json'));
 assert.equal(capacitor.appId, 'pl.partyjniak.app');
@@ -125,4 +129,4 @@ assert.equal(manifest.theme_color, '#950f26');
 assert.equal(manifest.background_color, '#06050a');
 assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
 
-console.log('Structure, Android wrapper, reveal UX, audio, navigation and integration tests: OK');
+console.log('Structure, Android wrapper, reveal UX, uploaded audio, navigation and integration tests: OK');
