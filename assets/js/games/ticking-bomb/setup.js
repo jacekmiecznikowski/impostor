@@ -6,14 +6,17 @@ function openBombGameMenu({ silent = false } = {}) {
 
 function startNewBombGame() {
     stopAllBombAudio?.();
-    bombState.playerCount = Math.max(2, bombState.playerCount || BOMB_DEFAULT_PLAYER_COUNT);
-    createBombPlayers(bombState.playerCount, bombState.players);
-    resetBombRoundState();
+    resetBombSession();
     renderBombPlayerSetup();
+    updateBombResumeButton();
     goToScreen('bomb-players');
 }
 
 function resumeBombGame() {
+    if (!bombState.hasSavedSession) {
+        startNewBombGame();
+        return;
+    }
     normalizeBombActiveCategories();
     renderBombOptions();
     goToScreen('bomb-options');
@@ -23,7 +26,7 @@ function updateBombResumeButton() {
     const button = document.getElementById('bomb-resume-btn');
     if (!button) return;
     const hasPlayers = Array.isArray(bombState.players) && bombState.players.length >= 2;
-    button.classList.toggle('hidden', !hasPlayers);
+    button.classList.toggle('hidden', !bombState.hasSavedSession || !hasPlayers);
 }
 
 function setBombPlayerCount(value) {
@@ -81,20 +84,21 @@ function bombProceedToOptions() {
     bombState.players.forEach((player, index) => { player.name = names[index]; });
     persistBombSession();
     renderBombOptions();
+    updateBombResumeButton();
     goToScreen('bomb-options');
 }
 
 function selectBombMode(mode) {
     bombState.mode = mode === 'manual' ? 'manual' : 'tracked';
     renderBombModeOptions();
-    persistBombSession();
+    if (bombState.hasSavedSession) persistBombSession();
 }
 
 function selectBombFusePreset(preset) {
     if (!BOMB_FUSE_PRESETS[preset]) return;
     bombState.fusePreset = preset;
     renderBombFuseOptions();
-    persistBombSession();
+    if (bombState.hasSavedSession) persistBombSession();
 }
 
 function toggleBombCategory(categoryId) {
@@ -110,7 +114,7 @@ function toggleBombCategory(categoryId) {
     }
     bombState.activeCategories = [...active];
     renderBombCategories();
-    persistBombSession();
+    if (bombState.hasSavedSession) persistBombSession();
 }
 
 function toggleAllBombCategories() {
@@ -118,7 +122,7 @@ function toggleAllBombCategories() {
     const allSelected = allIds.length > 0 && allIds.every(id => bombState.activeCategories.includes(id));
     bombState.activeCategories = allSelected ? [allIds[0]] : allIds;
     renderBombCategories();
-    persistBombSession();
+    if (bombState.hasSavedSession) persistBombSession();
 }
 
 function renderBombOptions() {
