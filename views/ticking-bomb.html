@@ -1,0 +1,117 @@
+<section id="screen-bomb-menu" class="screen bomb-screen hidden flex-col flex-1">
+  <div class="bomb-menu-hero">
+    <span class="bomb-kicker">Szybkie odpowiedzi • ukryty czas</span>
+    <div class="bomb-menu-icon" aria-hidden="true"><i class="fa-solid fa-bomb"></i></div>
+    <h1>Tykająca Bomba</h1>
+    <p>Odpowiadajcie po kolei i podawajcie telefon dalej. Nikt nie wie, kiedy nastąpi BOOM.</p>
+  </div>
+  <div class="bomb-menu-actions">
+    <button type="button" class="bomb-primary-btn" onclick="startNewBombGame()"><i class="fa-solid fa-play"></i><span>Nowa gra</span></button>
+    <button id="bomb-resume-btn" type="button" class="bomb-secondary-btn hidden" onclick="resumeBombGame()"><i class="fa-solid fa-rotate-right"></i><span>Graj z ostatnią ekipą</span></button>
+    <div class="bomb-menu-grid">
+      <button type="button" class="bomb-mini-action" onclick="openCurrentRules()"><i class="fa-solid fa-book-open"></i><span>Zasady</span></button>
+      <button type="button" class="bomb-mini-action" onclick="openCurrentScoreboard()"><i class="fa-solid fa-ranking-star"></i><span>Wyniki</span></button>
+    </div>
+  </div>
+  <div class="bomb-mode-preview">
+    <article><i class="fa-solid fa-people-arrows-left-right"></i><div><strong>Podawaj telefon</strong><span>Po wybuchu grupa ręcznie wybiera zwycięzcę rundy.</span></div></article>
+    <article><i class="fa-solid fa-hand-pointer"></i><div><strong>Śledź kolejkę</strong><span>Każdy potwierdza odpowiedź. Bomba wie, na kim wybuchła.</span></div></article>
+  </div>
+</section>
+
+<section id="screen-bomb-players" class="screen bomb-screen hidden flex-col flex-1">
+  <div class="bomb-section-heading"><span class="bomb-step">KROK 1 Z 2</span><h2>Kto gra?</h2><p>Dodajcie imiona. Wyniki zostaną zapisane między rundami.</p></div>
+  <div class="bomb-setup-card">
+    <div class="bomb-player-count-row"><div><span>Liczba graczy</span><strong id="bomb-player-count-value">4</strong></div><span class="bomb-range-label">2–12</span></div>
+    <input id="bomb-player-count" class="bomb-range" type="range" min="2" max="12" value="4" oninput="setBombPlayerCount(this.value)">
+  </div>
+  <div id="bomb-player-names" class="bomb-name-list"></div>
+  <button type="button" class="bomb-primary-btn bomb-sticky-action" onclick="bombProceedToOptions()"><span>Dalej</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-bomb-options" class="screen bomb-screen hidden flex-col flex-1">
+  <div class="bomb-section-heading"><span class="bomb-step">KROK 2 Z 2</span><h2>Ustaw rundę</h2><p>Wybierz sposób podawania, długość lontu i paczki pytań.</p></div>
+
+  <div class="bomb-setup-group">
+    <div class="bomb-group-label"><span>TRYB GRY</span></div>
+    <div class="bomb-mode-grid">
+      <button type="button" data-bomb-mode="manual" class="bomb-mode-card" onclick="selectBombMode('manual')">
+        <span class="bomb-mode-icon"><i class="fa-solid fa-people-arrows-left-right"></i></span><strong>Podawaj telefon</strong><small>Bez śledzenia kolejki. Po BOOM wybieracie zwycięzcę ręcznie.</small><span class="bomb-selection-dot"></span>
+      </button>
+      <button type="button" data-bomb-mode="tracked" class="bomb-mode-card" onclick="selectBombMode('tracked')">
+        <span class="bomb-mode-icon"><i class="fa-solid fa-hand-pointer"></i></span><strong>Śledź kolejkę</strong><small>Tap po odpowiedzi. Aplikacja pamięta, czyja jest tura.</small><span class="bomb-selection-dot"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="bomb-setup-group">
+    <div class="bomb-group-label"><span>DŁUGOŚĆ LONTU</span><small>Czas jest losowy i ukryty</small></div>
+    <div class="bomb-fuse-grid">
+      <button type="button" data-bomb-fuse="quick" onclick="selectBombFusePreset('quick')"><strong>Szybka</strong><small>18–32 s</small></button>
+      <button type="button" data-bomb-fuse="normal" onclick="selectBombFusePreset('normal')"><strong>Klasyczna</strong><small>28–52 s</small></button>
+      <button type="button" data-bomb-fuse="long" onclick="selectBombFusePreset('long')"><strong>Długa</strong><small>42–72 s</small></button>
+    </div>
+  </div>
+
+  <div class="bomb-setup-group">
+    <div class="bomb-group-label"><span>KATEGORIE</span><button id="bomb-toggle-all-categories" type="button" onclick="toggleAllBombCategories()">Wybierz wszystkie</button></div>
+    <div id="bomb-category-grid" class="bomb-category-grid"></div>
+  </div>
+
+  <button type="button" class="bomb-primary-btn bomb-sticky-action" onclick="startBombFromSetup()"><i class="fa-solid fa-fire-flame-curved"></i><span>Przygotuj bombę</span></button>
+</section>
+
+<section id="screen-bomb-play" class="screen bomb-screen bomb-play-screen hidden flex-col flex-1">
+  <div class="bomb-prompt-card">
+    <span id="bomb-play-category" class="bomb-play-category">Kategoria</span>
+    <h2 id="bomb-play-prompt">Wymieniajcie ssaki.</h2>
+  </div>
+
+  <div class="bomb-stage">
+    <div id="bomb-visual" class="bomb-visual" aria-hidden="true">
+      <div class="bomb-fuse"><span class="bomb-spark"></span></div>
+      <div class="bomb-body"><i class="fa-solid fa-bomb"></i><span class="bomb-glow"></span></div>
+      <div class="bomb-shockwave"></div>
+    </div>
+    <p id="bomb-play-status" class="bomb-play-status">Bomba jest rozbrojona</p>
+
+    <div id="bomb-tracked-controls" class="bomb-tracked-controls">
+      <span class="bomb-turn-label">TERAZ ODPOWIADA</span>
+      <strong id="bomb-current-player" class="bomb-current-player">Gracz 1</strong>
+      <button type="button" class="bomb-answer-btn" onclick="bombPass()"><i class="fa-solid fa-check"></i><span>Odpowiedziałem — dalej</span></button>
+      <button id="bomb-undo-btn" type="button" class="bomb-undo-btn" onclick="bombUndoPass()" disabled><i class="fa-solid fa-arrow-rotate-left"></i><span>Cofnij ostatnie podanie</span></button>
+    </div>
+
+    <div id="bomb-manual-hint" class="bomb-manual-hint hidden"><i class="fa-solid fa-arrows-rotate"></i><span>Odpowiedz → podaj telefon następnej osobie.</span></div>
+  </div>
+
+  <div class="bomb-play-actions">
+    <button id="bomb-change-prompt-btn" type="button" class="bomb-ghost-btn" onclick="rerollBombPrompt()"><i class="fa-solid fa-shuffle"></i><span>Inne pytanie</span></button>
+    <button id="bomb-ignite-btn" type="button" class="bomb-primary-btn" onclick="igniteBomb()"><i class="fa-solid fa-fire"></i><span>Odpal bombę</span></button>
+  </div>
+</section>
+
+<section id="screen-bomb-result" class="screen bomb-screen bomb-result-screen hidden flex-col flex-1">
+  <div class="bomb-result-hero">
+    <span class="bomb-result-burst" aria-hidden="true"><i class="fa-solid fa-burst"></i></span>
+    <span class="bomb-result-kicker">KONIEC RUNDY</span>
+    <h2 id="bomb-result-title">BOOM!</h2>
+    <p id="bomb-result-subtitle">Bomba wybuchła.</p>
+  </div>
+
+  <div id="bomb-loser-card" class="bomb-loser-card hidden">
+    <span class="bomb-loser-icon"><i class="fa-solid fa-bomb"></i></span>
+    <div><small>BOMBA ZŁAPAŁA</small><strong data-bomb-loser-name>Gracz 1</strong><span>Pozostali gracze dostają +1 pkt.</span></div>
+  </div>
+
+  <div id="bomb-manual-winner-block" class="bomb-manual-winner-block hidden">
+    <div class="bomb-group-label"><span>KTO WYGRYWA TĘ RUNDĘ?</span><small>Wybierzcie wspólnie</small></div>
+    <div id="bomb-manual-winner-list" class="bomb-result-player-list"></div>
+    <p class="bomb-result-note">Wybrany gracz otrzyma +1 pkt.</p>
+  </div>
+
+  <div class="bomb-result-actions">
+    <button id="bomb-next-round-btn" type="button" class="bomb-primary-btn" onclick="startNextBombRound()"><i class="fa-solid fa-rotate-right"></i><span>Następna runda</span></button>
+    <button type="button" class="bomb-secondary-btn" onclick="openCurrentScoreboard()"><i class="fa-solid fa-ranking-star"></i><span>Zobacz wyniki</span></button>
+  </div>
+</section>
