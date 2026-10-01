@@ -40,7 +40,7 @@ function prepareBombRound() {
     bombState.currentPrompt = picked.prompt;
     bombState.currentCategoryId = picked.categoryId;
     bombState.lastLoserId = null;
-    bombState.manualWinnerId = null;
+    bombState.manualLoserId = null;
     bombRuntime.passHistory = [];
     bombRuntime.lastPassAt = 0;
     bombRuntime.exploded = false;
@@ -165,6 +165,17 @@ function cancelBombRound({ silent = false } = {}) {
     if (!silent) playSound('click');
 }
 
+function applyBombLoss(loserId) {
+    const loser = bombState.players.find(player => player.id === loserId);
+    if (!loser) return false;
+    bombState.lastLoserId = loser.id;
+    loser.losses += 1;
+    bombState.players.forEach(player => {
+        if (player.id !== loser.id) player.score += 1;
+    });
+    return true;
+}
+
 function explodeBomb() {
     if (!bombRuntime.active) return;
     if (bombRuntime.timeoutId) clearTimeout(bombRuntime.timeoutId);
@@ -179,13 +190,7 @@ function explodeBomb() {
 
     if (bombState.mode === 'tracked') {
         const loser = bombState.players[bombState.currentPlayerIndex];
-        if (loser) {
-            bombState.lastLoserId = loser.id;
-            loser.losses += 1;
-            bombState.players.forEach(player => {
-                if (player.id !== loser.id) player.score += 1;
-            });
-        }
+        if (loser) applyBombLoss(loser.id);
     }
     bombState.roundNumber += 1;
     persistBombSession();
@@ -202,7 +207,7 @@ function renderBombResultScreen() {
     const title = document.getElementById('bomb-result-title');
     const subtitle = document.getElementById('bomb-result-subtitle');
     const loserCard = document.getElementById('bomb-loser-card');
-    const manualBlock = document.getElementById('bomb-manual-winner-block');
+    const manualBlock = document.getElementById('bomb-manual-loser-block');
     const nextBtn = document.getElementById('bomb-next-round-btn');
 
     if (bombState.mode === 'tracked') {
@@ -218,25 +223,25 @@ function renderBombResultScreen() {
         if (nextBtn) nextBtn.disabled = false;
     } else {
         if (title) title.textContent = 'BOOM!';
-        if (subtitle) subtitle.textContent = 'Grupa rozstrzyga rundę.';
+        if (subtitle) subtitle.textContent = 'U kogo wybuchła bomba?';
         loserCard?.classList.add('hidden');
         manualBlock?.classList.remove('hidden');
-        renderBombManualWinnerChoices();
-        if (nextBtn) nextBtn.disabled = !bombState.manualWinnerId;
+        renderBombManualLoserChoices();
+        if (nextBtn) nextBtn.disabled = !bombState.manualLoserId;
     }
 }
 
-function renderBombManualWinnerChoices() {
-    const list = document.getElementById('bomb-manual-winner-list');
+function renderBombManualLoserChoices() {
+    const list = document.getElementById('bomb-manual-loser-list');
     if (!list) return;
     list.replaceChildren();
     bombState.players.forEach(player => {
-        const selected = bombState.manualWinnerId === player.id;
+        const selected = bombState.manualLoserId === player.id;
         const button = document.createElement('button');
         button.type = 'button';
         button.className = `bomb-result-player${selected ? ' is-selected' : ''}`;
         button.setAttribute('aria-pressed', String(selected));
-        button.onclick = () => selectBombManualWinner(player.id);
+        button.onclick = () => selectBombManualLoser(player.id);
         const initial = document.createElement('span');
         initial.className = 'bomb-result-avatar';
         initial.textContent = player.name.charAt(0).toUpperCase();
@@ -244,33 +249,31 @@ function renderBombManualWinnerChoices() {
         name.textContent = player.name;
         const marker = document.createElement('span');
         marker.className = 'bomb-result-check';
-        marker.innerHTML = selected ? '<i class="fa-solid fa-check"></i>' : '';
+        marker.innerHTML = selected ? '<i class="fa-solid fa-bomb"></i>' : '';
         button.append(initial, name, marker);
         list.appendChild(button);
     });
 }
 
-function selectBombManualWinner(playerId) {
-    if (bombState.manualWinnerId === playerId) return;
-    bombState.manualWinnerId = playerId;
-    renderBombManualWinnerChoices();
+function selectBombManualLoser(playerId) {
+    if (bombState.manualLoserId === playerId) return;
+    bombState.manualLoserId = playerId;
+    renderBombManualLoserChoices();
     const button = document.getElementById('bomb-next-round-btn');
     if (button) button.disabled = false;
     playSound('click');
 }
 
-function commitBombManualWinner() {
-    if (bombState.mode !== 'manual' || !bombState.manualWinnerId) return true;
-    const winner = bombState.players.find(player => player.id === bombState.manualWinnerId);
-    if (!winner) return false;
-    winner.score += 1;
+function commitBombManualLoser() {
+    if (bombState.mode !== 'manual' || !bombState.manualLoserId) return true;
+    if (!applyBombLoss(bombState.manualLoserId)) return false;
     persistBombSession();
     return true;
 }
 
 function startNextBombRound() {
-    if (bombState.mode === 'manual' && !commitBombManualWinner()) {
-        showToast('Zwycięzca', 'Wybierz zwycięzcę rundy.');
+    if (bombState.mode === 'manual' && !commitBombManualLoser()) {
+        showToast('Przegrany', 'Wskaż osobę, u której wybuchła bomba.');
         return;
     }
     prepareBombRound();
