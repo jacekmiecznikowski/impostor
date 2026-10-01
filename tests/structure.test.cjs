@@ -46,6 +46,7 @@ const requiredFiles = [
   'assets/css/brand-theme.css',
   'assets/css/impostor-reveal-layout.css',
   'assets/css/ticking-bomb.css',
+  'assets/css/ticking-bomb-mobile.css',
   'assets/icons/icon.svg',
   'assets/icons/icon-32.png',
   'assets/icons/icon-192.png',
@@ -70,6 +71,7 @@ assert.match(index, /assets\/icons\/icon-32\.png/);
 assert.match(index, /assets\/css\/brand-theme\.css/);
 assert.match(index, /assets\/css\/impostor-reveal-layout\.css/);
 assert.match(index, /assets\/css\/ticking-bomb\.css/);
+assert.match(index, /assets\/css\/ticking-bomb-mobile\.css/);
 assert.match(index, /assets\/css\/navigation\.css/);
 assert.match(index, /assets\/css\/navigation-android\.css/);
 assert.match(index, /assets\/js\/shared\/view-loader\.js/);
@@ -153,6 +155,14 @@ assert.match(bombIntegration, /Menu Impostora/);
 assert.match(bombIntegration, /stopAllBombAudio/);
 assert.match(bombIntegration, /bombAwareToggleAudio/);
 
+const bombMobileCss = read('assets/css/ticking-bomb-mobile.css');
+assert.match(bombMobileCss, /#screen-bomb-play \.bomb-answer-btn/);
+assert.match(bombMobileCss, /min-height: 4\.6rem/);
+assert.match(bombMobileCss, /body\[data-screen="bomb-play"\] #app-main/);
+assert.match(bombMobileCss, /#screen-bomb-result \.bomb-result-player-list/);
+assert.match(bombMobileCss, /max-height: min\(42vh, 19rem\)/);
+assert.match(bombMobileCss, /@media \(max-height: 760px\)/);
+
 const bombContent = JSON.parse(read('content/ticking-bomb.pl.json'));
 assert.equal(bombContent.game, 'ticking-bomb');
 assert.equal(bombContent.categories.length, 8);
@@ -163,13 +173,14 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v25'/);
+assert.match(sw, /CACHE_VERSION = 'v26'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
 assert.match(sw, /assets\/audio\/bomb-tick\.b64/);
 assert.match(sw, /assets\/audio\/bomb-explosion\.b64/);
 assert.match(sw, /content\/ticking-bomb\.pl\.json/);
+assert.match(sw, /assets\/css\/ticking-bomb-mobile\.css/);
 assert.match(sw, /assets\/js\/games\/ticking-bomb\/integration\.js/);
 assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=6/);
 assert.doesNotMatch(sw, /outcome-audio-user/);
@@ -191,4 +202,4 @@ assert.equal(manifest.theme_color, '#950f26');
 assert.equal(manifest.background_color, '#06050a');
 assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
 
-console.log('Partyjniak structure, Android, Impostor and Tykająca Bomba flow tests: OK');
+console.log('Partyjniak structure, Android, Impostor and Tykająca Bomba mobile UI tests: OK');
