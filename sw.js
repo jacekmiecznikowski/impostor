@@ -20,7 +20,7 @@ const LOCAL_ASSETS = [
   './assets/css/ticking-bomb.css',
   './assets/css/ticking-bomb-mobile.css',
   './assets/css/ticking-bomb-theme.css',
-  './assets/css/ticking-bomb-visual.css?v=2',
+  './assets/css/ticking-bomb-visual.css?v=3',
   './assets/css/game-color-system.css',
   './assets/css/partyjniak.css',
   './assets/css/navigation.css',
