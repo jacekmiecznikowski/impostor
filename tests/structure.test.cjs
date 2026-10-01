@@ -47,6 +47,7 @@ const requiredFiles = [
   'assets/css/impostor-reveal-layout.css',
   'assets/css/ticking-bomb.css',
   'assets/css/ticking-bomb-mobile.css',
+  'assets/css/ticking-bomb-theme.css',
   'assets/icons/icon.svg',
   'assets/icons/icon-32.png',
   'assets/icons/icon-192.png',
@@ -72,6 +73,7 @@ assert.match(index, /assets\/css\/brand-theme\.css/);
 assert.match(index, /assets\/css\/impostor-reveal-layout\.css/);
 assert.match(index, /assets\/css\/ticking-bomb\.css/);
 assert.match(index, /assets\/css\/ticking-bomb-mobile\.css/);
+assert.match(index, /assets\/css\/ticking-bomb-theme\.css/);
 assert.match(index, /assets\/css\/navigation\.css/);
 assert.match(index, /assets\/css\/navigation-android\.css/);
 assert.match(index, /assets\/js\/shared\/view-loader\.js/);
@@ -166,6 +168,12 @@ assert.match(bombMobileCss, /#screen-bomb-result \.bomb-result-player-list/);
 assert.match(bombMobileCss, /max-height: min\(42vh, 19rem\)/);
 assert.match(bombMobileCss, /@media \(max-height: 760px\)/);
 
+const bombThemeCss = read('assets/css/ticking-bomb-theme.css');
+assert.match(bombThemeCss, /body\[data-game="ticking-bomb"\] \.shell-logo\.is-game/);
+assert.match(bombThemeCss, /#score-modal \.primary-btn/);
+assert.match(bombThemeCss, /#f97316/);
+assert.doesNotMatch(bombThemeCss, /#0d9488|#0891b2/);
+
 const bombContent = JSON.parse(read('content/ticking-bomb.pl.json'));
 assert.equal(bombContent.game, 'ticking-bomb');
 assert.equal(bombContent.categories.length, 8);
@@ -176,7 +184,7 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v27'/);
+assert.match(sw, /CACHE_VERSION = 'v28'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
@@ -184,6 +192,7 @@ assert.match(sw, /assets\/audio\/bomb-tick\.b64/);
 assert.match(sw, /assets\/audio\/bomb-explosion\.b64/);
 assert.match(sw, /content\/ticking-bomb\.pl\.json/);
 assert.match(sw, /assets\/css\/ticking-bomb-mobile\.css/);
+assert.match(sw, /assets\/css\/ticking-bomb-theme\.css/);
 assert.match(sw, /assets\/js\/games\/ticking-bomb\/integration\.js/);
 assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=6/);
 assert.doesNotMatch(sw, /outcome-audio-user/);
