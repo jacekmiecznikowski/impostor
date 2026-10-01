@@ -65,6 +65,9 @@ openGame = function partyjniakOpenGame(gameId, options = {}) {
 
 const baseGoToScreen = goToScreen;
 goToScreen = function partyjniakGoToScreen(screenName, options = {}) {
+    const previousScreen = getCurrentScreenName();
+    if (previousScreen === 'bomb-result' && screenName !== 'bomb-result') stopAllBombAudio?.();
+
     if (screenName.startsWith('bomb-')) document.body.dataset.game = 'ticking-bomb';
     else if (screenName === 'home') document.body.dataset.game = 'home';
     else document.body.dataset.game = 'impostor';
@@ -105,16 +108,21 @@ const baseUpdateShellContext = updateShellContext;
 updateShellContext = function bombAwareShellContext(screenName) {
     baseUpdateShellContext(screenName);
     const isBomb = screenName.startsWith('bomb-');
-    if (!isBomb) return;
+    const rulesLabel = document.querySelector('#shell-rules-action span');
+    const menuLabel = document.querySelector('#shell-game-menu-action span');
+
+    if (!isBomb) {
+        if (rulesLabel) rulesLabel.textContent = 'Zasady Impostora';
+        if (menuLabel) menuLabel.textContent = 'Menu Impostora';
+        return;
+    }
 
     const shellLogo = document.getElementById('shell-logo');
     if (shellLogo) {
         shellLogo.className = 'shell-logo is-game';
         shellLogo.innerHTML = '<i class="fa-solid fa-bomb" aria-hidden="true"></i>';
     }
-    const rulesLabel = document.querySelector('#shell-rules-action span');
     if (rulesLabel) rulesLabel.textContent = 'Zasady Tykającej Bomby';
-    const menuLabel = document.querySelector('#shell-game-menu-action span');
     if (menuLabel) menuLabel.textContent = 'Menu Tykającej Bomby';
 }
 
@@ -124,8 +132,14 @@ function openCurrentRules() {
 }
 
 function openCurrentScoreboard() {
+    const gameId = getActiveGameId();
     openModal('score-modal');
-    if (getActiveGameId() === 'ticking-bomb') renderBombScoreboardModal();
+    const title = document.getElementById('score-modal-title');
+    if (gameId === 'ticking-bomb') {
+        renderBombScoreboardModal();
+    } else if (title) {
+        title.textContent = 'Tabela wyników • Impostor';
+    }
 }
 
 function resetCurrentScores() {
@@ -158,6 +172,7 @@ requestLeaveGame = function bombAwareRequestLeave(destination = 'home') {
         openNavigationSheet(destination);
         return;
     }
+    stopAllBombAudio?.();
     goToScreen(destination === 'menu' ? 'bomb-menu' : 'home', { direction: 'back' });
 };
 
@@ -170,6 +185,16 @@ leaveActiveRound = function bombAwareLeaveRound(destination) {
     closeNavigationSheet();
     setGameAwakeMode?.(false);
     goToScreen(destination === 'home' ? 'home' : 'bomb-menu', { direction: 'back' });
+};
+
+const baseToggleAudio = toggleAudio;
+toggleAudio = function bombAwareToggleAudio() {
+    baseToggleAudio();
+    if (!soundEnabled) {
+        stopAllBombAudio?.();
+    } else if (getCurrentScreenName() === 'bomb-play' && bombRuntime?.active) {
+        startBombTicking?.();
+    }
 };
 
 const baseApplyThemeMeta = applyPartyjniakThemeMeta;
