@@ -7,13 +7,13 @@ const packagePath = path.join(root, 'android', 'app', 'src', 'main', 'java', 'pl
 const mainActivityPath = path.join(packagePath, 'MainActivity.java');
 const manifestPath = path.join(root, 'android', 'app', 'src', 'main', 'AndroidManifest.xml');
 const drawableDir = path.join(root, 'android', 'app', 'src', 'main', 'res', 'drawable');
-const iconSource = path.join(root, 'dist', 'assets', 'icons', 'icon-512.png');
+const iconSource = path.join(root, 'dist', 'assets', 'icons', 'icon-maskable-512.png');
 const iconTarget = path.join(drawableDir, 'partyjniak_icon.png');
 
 await mkdir(packagePath, { recursive: true });
 await mkdir(drawableDir, { recursive: true });
 
-await writeFile(mainActivityPath, `package pl.partyjniak.app;\n\nimport android.os.Bundle;\nimport android.view.WindowManager;\nimport com.getcapacitor.BridgeActivity;\n\npublic class MainActivity extends BridgeActivity {\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);\n    }\n}\n`, 'utf8');
+await writeFile(mainActivityPath, `package pl.partyjniak.app;\n\nimport android.graphics.Color;\nimport android.os.Bundle;\nimport android.view.WindowManager;\nimport androidx.core.view.WindowCompat;\nimport com.getcapacitor.BridgeActivity;\n\npublic class MainActivity extends BridgeActivity {\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n\n        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);\n        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);\n        getWindow().setStatusBarColor(Color.parseColor(\"#06111D\"));\n        getWindow().setNavigationBarColor(Color.parseColor(\"#020617\"));\n\n        if (getBridge() != null && getBridge().getWebView() != null) {\n            getBridge().getWebView().setHapticFeedbackEnabled(false);\n            getBridge().getWebView().setOnLongClickListener(view -> true);\n        }\n    }\n}\n`, 'utf8');
 
 await copyFile(iconSource, iconTarget);
 
@@ -27,4 +27,4 @@ manifest = manifest
   });
 await writeFile(manifestPath, manifest, 'utf8');
 
-console.log('Applied Partyjniak Android native settings: icon, portrait mode, KEEP_SCREEN_ON.');
+console.log('Applied Partyjniak Android native settings: cropped launcher icon, portrait mode, KEEP_SCREEN_ON, system insets and disabled WebView long-press haptics.');
