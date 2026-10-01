@@ -44,6 +44,7 @@ const requiredFiles = [
   'assets/css/navigation.css',
   'assets/css/navigation-android.css',
   'assets/css/brand-theme.css',
+  'assets/css/game-color-system.css',
   'assets/css/impostor-reveal-layout.css',
   'assets/css/ticking-bomb.css',
   'assets/css/ticking-bomb-mobile.css',
@@ -70,6 +71,7 @@ assert.match(index, /<title>Partyjniak – gry imprezowe<\/title>/);
 assert.match(index, /assets\/icons\/icon\.svg/);
 assert.match(index, /assets\/icons\/icon-32\.png/);
 assert.match(index, /assets\/css\/brand-theme\.css/);
+assert.match(index, /assets\/css\/game-color-system\.css/);
 assert.match(index, /assets\/css\/impostor-reveal-layout\.css/);
 assert.match(index, /assets\/css\/ticking-bomb\.css/);
 assert.match(index, /assets\/css\/ticking-bomb-mobile\.css/);
@@ -188,9 +190,10 @@ assert.match(bombIntegration, /Zasady Impostora/);
 assert.match(bombIntegration, /Menu Impostora/);
 assert.match(bombIntegration, /stopAllBombAudio/);
 assert.match(bombIntegration, /bombAwareToggleAudio/);
-assert.match(bombIntegration, /scene\.add\.star/);
-assert.match(bombIntegration, /shockwave/);
-assert.match(bombIntegration, /sparkPositions/);
+assert.match(bombIntegration, /updateBombAwareNavigationIcons/);
+assert.match(bombIntegration, /fa-bomb/);
+assert.doesNotMatch(bombIntegration, /Object\.assign\(BACKGROUND_MODES/);
+assert.doesNotMatch(bombIntegration, /bombAwareThemeMotifs|sparkPositions|shockwave/);
 
 const bombMobileCss = read('assets/css/ticking-bomb-mobile.css');
 assert.match(bombMobileCss, /#screen-bomb-play \.bomb-answer-btn/);
@@ -210,6 +213,16 @@ assert.match(bombThemeCss, /#score-modal \.primary-btn/);
 assert.match(bombThemeCss, /#f97316/);
 assert.doesNotMatch(bombThemeCss, /#0d9488|#0891b2/);
 
+const colorSystem = read('assets/css/game-color-system.css');
+assert.match(colorSystem, /body\[data-game="home"\]/);
+assert.match(colorSystem, /body\[data-game="impostor"\]/);
+assert.match(colorSystem, /body\[data-game="ticking-bomb"\]/);
+assert.match(colorSystem, /--ui-accent: #950f26/);
+assert.match(colorSystem, /--ui-accent: #14b8a6/);
+assert.match(colorSystem, /--ui-accent: #f97316/);
+assert.match(colorSystem, /navigation-sheet-icon/);
+assert.match(colorSystem, /body\[data-bg-mode="bomb-alert"\]/);
+
 const bombContent = JSON.parse(read('content/ticking-bomb.pl.json'));
 assert.equal(bombContent.game, 'ticking-bomb');
 assert.equal(bombContent.categories.length, 8);
@@ -221,13 +234,18 @@ assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 assert.match(background, /buildPartyBackdrop/);
 assert.match(background, /buildImpostorBackdrop/);
 assert.match(background, /buildBombBackdrop/);
-assert.match(background, /motif: 'party'/);
-assert.match(background, /motif: 'impostor'/);
-assert.match(background, /motif: 'ticking-bomb'/);
-assert.match(background, /clearPartyjniakThemeMotifs/);
+
+const gameThemes = read('assets/js/shared/game-themes.js');
+assert.match(gameThemes, /'ticking-bomb': \{/);
+assert.match(gameThemes, /motif: 'ticking-bomb'/);
+assert.match(gameThemes, /celebrate:[\s\S]*motif: 'impostor'/);
+assert.match(gameThemes, /NATIVE_BACKGROUND_MOTIFS/);
+assert.match(gameThemes, /name === 'Tykająca Bomba'/);
+assert.doesNotMatch(gameThemes, /celebrate:[\s\S]{0,220}0xf59e0b/);
+assert.doesNotMatch(gameThemes, /impostor:[\s\S]{0,220}0x8b5cf6/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v32'/);
+assert.match(sw, /CACHE_VERSION = 'v33'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
@@ -236,6 +254,7 @@ assert.match(sw, /assets\/audio\/bomb-explosion\.b64/);
 assert.match(sw, /content\/ticking-bomb\.pl\.json/);
 assert.match(sw, /assets\/css\/ticking-bomb-mobile\.css/);
 assert.match(sw, /assets\/css\/ticking-bomb-theme\.css/);
+assert.match(sw, /assets\/css\/game-color-system\.css/);
 assert.match(sw, /assets\/js\/games\/ticking-bomb\/integration\.js/);
 assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=6/);
 assert.doesNotMatch(sw, /outcome-audio-user/);
@@ -257,4 +276,4 @@ assert.equal(manifest.theme_color, '#950f26');
 assert.equal(manifest.background_color, '#06050a');
 assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
 
-console.log('Partyjniak structure, Android, Impostor and Tykająca Bomba mobile UI tests: OK');
+console.log('Partyjniak structure, Android, per-game colors, Impostor and Tykająca Bomba mobile UI tests: OK');
