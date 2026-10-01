@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="bomb-mode-preview">
-    <article><i class="fa-solid fa-people-arrows-left-right"></i><div><strong>Podawaj telefon</strong><span>Po wybuchu grupa ręcznie wybiera zwycięzcę rundy.</span></div></article>
+    <article><i class="fa-solid fa-people-arrows-left-right"></i><div><strong>Podawaj telefon</strong><span>Po wybuchu wskażcie osobę, u której bomba wybuchła.</span></div></article>
     <article><i class="fa-solid fa-hand-pointer"></i><div><strong>Śledź kolejkę</strong><span>Każdy potwierdza odpowiedź. Bomba wie, na kim wybuchła.</span></div></article>
   </div>
 </section>
@@ -36,7 +36,7 @@
     <div class="bomb-group-label"><span>TRYB GRY</span></div>
     <div class="bomb-mode-grid">
       <button type="button" data-bomb-mode="manual" class="bomb-mode-card" onclick="selectBombMode('manual')">
-        <span class="bomb-mode-icon"><i class="fa-solid fa-people-arrows-left-right"></i></span><strong>Podawaj telefon</strong><small>Bez śledzenia kolejki. Po BOOM wybieracie zwycięzcę ręcznie.</small><span class="bomb-selection-dot"></span>
+        <span class="bomb-mode-icon"><i class="fa-solid fa-people-arrows-left-right"></i></span><strong>Podawaj telefon</strong><small>Bez śledzenia kolejki. Po BOOM wskazujecie osobę, u której wybuchła bomba.</small><span class="bomb-selection-dot"></span>
       </button>
       <button type="button" data-bomb-mode="tracked" class="bomb-mode-card" onclick="selectBombMode('tracked')">
         <span class="bomb-mode-icon"><i class="fa-solid fa-hand-pointer"></i></span><strong>Śledź kolejkę</strong><small>Tap po odpowiedzi. Aplikacja pamięta, czyja jest tura.</small><span class="bomb-selection-dot"></span>
@@ -113,10 +113,10 @@
     <div><small>BOMBA ZŁAPAŁA</small><strong data-bomb-loser-name>Gracz 1</strong><span>Pozostali gracze dostają +1 pkt.</span></div>
   </div>
 
-  <div id="bomb-manual-winner-block" class="bomb-manual-winner-block hidden">
-    <div class="bomb-group-label"><span>KTO WYGRYWA TĘ RUNDĘ?</span><small>Wybierzcie wspólnie</small></div>
-    <div id="bomb-manual-winner-list" class="bomb-result-player-list"></div>
-    <p class="bomb-result-note">Wybrany gracz otrzyma +1 pkt.</p>
+  <div id="bomb-manual-loser-block" class="bomb-manual-winner-block hidden">
+    <div class="bomb-group-label"><span>U KOGO WYBUCHŁA BOMBA?</span><small>Wskaż przegranego rundy</small></div>
+    <div id="bomb-manual-loser-list" class="bomb-result-player-list"></div>
+    <p class="bomb-result-note">Pozostali gracze dostaną +1 pkt.</p>
   </div>
 
   <div class="bomb-result-actions">
