@@ -147,6 +147,12 @@ assert.match(bombState, /hasSavedSession: false/);
 assert.match(bombState, /function resetBombSession/);
 assert.match(bombState, /removeItem\(BOMB_SESSION_STORAGE_KEY\)/);
 
+const bombContentProvider = read('assets/js/games/ticking-bomb/content-provider.js');
+assert.match(bombContentProvider, /function formatBombPromptLabel/);
+assert.match(bombContentProvider, /wymieniajcie\|mówcie/);
+assert.match(bombContentProvider, /toLocaleUpperCase\('pl-PL'\)/);
+assert.match(bombContentProvider, /normalizeBombPromptContent/);
+
 const bombSetup = read('assets/js/games/ticking-bomb/setup.js');
 assert.match(bombSetup, /resetBombSession\(\)/);
 assert.match(bombSetup, /bombState\.hasSavedSession/);
@@ -192,7 +198,7 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v29'/);
+assert.match(sw, /CACHE_VERSION = 'v30'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
