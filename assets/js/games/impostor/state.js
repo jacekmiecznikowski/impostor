@@ -126,7 +126,7 @@ function updateResumeButton() {
 
 function resumeSavedSession() {
     if (!hasSavedSession()) {
-        showToast('Brak zapisu', 'Nie znaleziono poprzedniej sesji do wznowienia.');
+        showToast('Poprzednia ekipa', 'Nie znaleziono zapisanej poprzedniej ekipy. Rozpocznij nową grę.');
         return;
     }
 
