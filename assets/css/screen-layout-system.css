@@ -1,0 +1,203 @@
+/* Partyjniak shared screen geometry.
+   Visual identity may differ per game, but spacing, content width and vertical rhythm do not. */
+
+:root {
+  --party-content-max: 29rem;
+  --party-landing-home-top: clamp(5rem, 15dvh, 7.5rem);
+  --party-landing-game-top: clamp(2.5rem, 8dvh, 4rem);
+  --party-section-top: clamp(.75rem, 2.4dvh, 1.35rem);
+  --party-result-top: clamp(.85rem, 2.8dvh, 1.6rem);
+  --party-screen-bottom: max(1.1rem, env(safe-area-inset-bottom));
+  --party-landing-mark: 5.85rem;
+  --party-landing-gap: 1.2rem;
+}
+
+.screen {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Landing screens deliberately start from a shared visual baseline.
+   Home has no game shell occupying the top zone, so it receives a larger offset. */
+#screen-home,
+#screen-menu,
+#screen-bomb-menu {
+  width: 100%;
+  max-width: var(--party-content-max);
+  margin-inline: auto;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  gap: var(--party-landing-gap) !important;
+  padding-bottom: var(--party-screen-bottom) !important;
+}
+
+#screen-home {
+  padding-top: var(--party-landing-home-top) !important;
+}
+
+#screen-menu,
+#screen-bomb-menu {
+  padding-top: var(--party-landing-game-top) !important;
+}
+
+/* The three entry screens use the same hero proportions. */
+#screen-home .home-hero,
+#screen-bomb-menu .bomb-menu-hero,
+#screen-menu > div:nth-child(2) {
+  width: 100%;
+  max-width: 24rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .5rem !important;
+}
+
+#screen-home .home-hero,
+#screen-bomb-menu .bomb-menu-hero {
+  padding: 0 .25rem !important;
+}
+
+/* One mark size across Home / Impostor / Tykająca Bomba. */
+#screen-home .home-logo-lockup,
+#screen-menu > div:first-child,
+#screen-bomb-menu .bomb-menu-icon {
+  width: var(--party-landing-mark) !important;
+  height: var(--party-landing-mark) !important;
+  min-width: var(--party-landing-mark) !important;
+  min-height: var(--party-landing-mark) !important;
+  margin: 0 auto .2rem !important;
+  border-radius: 1.75rem !important;
+  flex: 0 0 auto;
+}
+
+#screen-menu > div:first-child i,
+#screen-bomb-menu .bomb-menu-icon i {
+  font-size: 2.55rem !important;
+}
+
+/* Bomb used to put the kicker above the icon, unlike the other entry screens. */
+#screen-bomb-menu .bomb-menu-icon { order: -2; }
+#screen-bomb-menu .bomb-kicker { order: -1; }
+
+#screen-home .home-kicker,
+#screen-menu > div:nth-child(2) > p:first-child,
+#screen-bomb-menu .bomb-kicker {
+  margin: 0 !important;
+  min-height: .9rem;
+  font-size: .66rem !important;
+  line-height: .9rem !important;
+  letter-spacing: .17em !important;
+}
+
+#screen-home .home-title,
+#screen-menu h1,
+#screen-bomb-menu h1 {
+  margin: 0 !important;
+  font-size: clamp(2.35rem, 9.4vw, 3.2rem) !important;
+  line-height: .96 !important;
+  letter-spacing: -.05em !important;
+  text-wrap: balance;
+}
+
+#screen-home .home-subtitle,
+#screen-menu > div:nth-child(2) > p:last-child,
+#screen-bomb-menu .bomb-menu-hero > p:last-child {
+  width: 100%;
+  max-width: 23.5rem !important;
+  margin: .12rem auto 0 !important;
+  font-size: .86rem !important;
+  line-height: 1.5 !important;
+  text-wrap: balance;
+}
+
+/* Primary menu content shares one usable width instead of Impostor being much narrower. */
+#screen-home .game-library,
+#screen-menu > .w-full.max-w-xs,
+#screen-bomb-menu .bomb-menu-actions,
+#screen-bomb-menu .bomb-mode-preview {
+  width: 100% !important;
+  max-width: var(--party-content-max) !important;
+  margin-inline: auto !important;
+}
+
+#screen-menu > .w-full.max-w-xs,
+#screen-bomb-menu .bomb-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem !important;
+}
+
+#screen-menu .primary-btn,
+#screen-menu .secondary-btn,
+#screen-bomb-menu .bomb-primary-btn,
+#screen-bomb-menu .bomb-secondary-btn {
+  min-height: 3.75rem;
+}
+
+#screen-bomb-menu .bomb-mode-preview {
+  margin-top: .1rem !important;
+  gap: .65rem !important;
+}
+
+/* Setup/configuration screens share the same offset below the contextual shell. */
+#screen-setup-count,
+#screen-setup-names,
+#screen-setup-options,
+#screen-bomb-players,
+#screen-bomb-options {
+  padding-top: var(--party-section-top) !important;
+  padding-bottom: var(--party-screen-bottom) !important;
+}
+
+#screen-bomb-players .bomb-section-heading,
+#screen-bomb-options .bomb-section-heading {
+  padding-top: 0 !important;
+}
+
+/* Results are compact screens: start predictably below their shell, never vertically centered. */
+#screen-results,
+#screen-bomb-result {
+  justify-content: flex-start !important;
+  padding-top: var(--party-result-top) !important;
+  padding-bottom: var(--party-screen-bottom) !important;
+}
+
+/* Immersive rounds retain their game-specific composition but share the same outer box model. */
+#screen-pass,
+#screen-reveal,
+#screen-discussion,
+#screen-group-voting,
+#screen-bomb-play {
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+@media (max-height: 720px) {
+  :root {
+    --party-landing-home-top: clamp(2.5rem, 8dvh, 4rem);
+    --party-landing-game-top: clamp(1rem, 3dvh, 1.75rem);
+    --party-landing-mark: 4.85rem;
+    --party-landing-gap: .85rem;
+  }
+
+  #screen-menu > div:first-child i,
+  #screen-bomb-menu .bomb-menu-icon i {
+    font-size: 2.15rem !important;
+  }
+
+  #screen-home .home-title,
+  #screen-menu h1,
+  #screen-bomb-menu h1 {
+    font-size: clamp(2rem, 8.6vw, 2.7rem) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --party-content-max: 100%;
+    --party-landing-mark: 5.15rem;
+  }
+}
