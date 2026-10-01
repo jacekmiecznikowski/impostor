@@ -1,5 +1,9 @@
 /* Android-first refinements layered after navigation.css. */
 
+:root.partyjniak-native-android {
+  --partyjniak-status-safe: max(env(safe-area-inset-top, 0px), 2.35rem);
+}
+
 .app-shell.is-home .shell-frame {
   width: 100% !important;
 }
@@ -19,6 +23,22 @@
   background: rgba(8, 15, 29, .68) !important;
   border-color: rgba(100, 116, 139, .32) !important;
   box-shadow: 0 12px 34px rgba(0,0,0,.28);
+}
+
+.partyjniak-native-android body[data-screen="pass"] #app-main,
+.partyjniak-native-android body[data-screen="reveal"] #app-main,
+.partyjniak-native-android body[data-screen="discussion"] #app-main,
+.partyjniak-native-android body[data-screen="group-voting"] #app-main,
+.partyjniak-native-android body[data-screen="results"] #app-main {
+  padding-top: calc(var(--partyjniak-status-safe) + .85rem) !important;
+}
+
+.partyjniak-native-android .app-shell.is-immersive {
+  top: calc(var(--partyjniak-status-safe) + .25rem) !important;
+}
+
+.partyjniak-native-android #screen-reveal .reveal-heading {
+  margin-top: .2rem !important;
 }
 
 body[data-screen="results"] .app-shell {
