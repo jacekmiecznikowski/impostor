@@ -11,6 +11,12 @@ const PARTYJNIAK_GAME_THEMES = Object.freeze({
         rgb: '20, 184, 166',
         backgroundMode: 'impostor'
     },
+    'ticking-bomb': {
+        id: 'ticking-bomb',
+        accent: '#f97316',
+        rgb: '249, 115, 22',
+        backgroundMode: 'ticking-bomb'
+    },
     'heads-up': {
         id: 'heads-up',
         accent: '#8b5cf6',
@@ -19,21 +25,17 @@ const PARTYJNIAK_GAME_THEMES = Object.freeze({
     },
     taboo: {
         id: 'taboo',
-        accent: '#f59e0b',
-        rgb: '245, 158, 11',
+        accent: '#e11d48',
+        rgb: '225, 29, 72',
         backgroundMode: 'taboo'
     }
 });
 
+/* Core Partyjniak backgrounds live in background.js.
+   Only future game modes are extended here so existing palettes are never overwritten. */
 Object.assign(BACKGROUND_MODES, {
-    party: { colors: [0x950f26, 0xc61d3a, 0xffffff, 0xf59e0b], alpha: [0.08, 0.22], speed: 0.86, confetti: true },
-    impostor: { colors: [0x14b8a6, 0x06b6d4, 0x5eead4, 0x64748b], alpha: [0.07, 0.19], speed: 0.72, confetti: false },
-    mystery: { colors: [0x14b8a6, 0x0f766e, 0x38bdf8, 0x475569], alpha: [0.055, 0.15], speed: 0.46, confetti: false },
-    discussion: { colors: [0x14b8a6, 0x06b6d4, 0x22c55e, 0x94a3b8], alpha: [0.065, 0.18], speed: 0.62, confetti: false },
-    vote: { colors: [0x14b8a6, 0xf59e0b, 0x0ea5e9, 0x64748b], alpha: [0.06, 0.17], speed: 0.54, confetti: false },
-    celebrate: { colors: [0x14b8a6, 0x5eead4, 0xf59e0b, 0xffffff], alpha: [0.08, 0.24], speed: 0.95, confetti: true },
-    'heads-up': { colors: [0x8b5cf6, 0xc084fc, 0xec4899, 0x38bdf8], alpha: [0.07, 0.21], speed: 0.78, confetti: false },
-    taboo: { colors: [0xf59e0b, 0xfb923c, 0xef4444, 0xfef3c7], alpha: [0.07, 0.20], speed: 0.70, confetti: false }
+    'heads-up': { colors: [0x8b5cf6, 0xc084fc, 0xec4899, 0x38bdf8], alpha: [0.07, 0.21], speed: 0.78, confetti: false, motif: 'heads-up' },
+    taboo: { colors: [0xe11d48, 0xfb7185, 0xf43f5e, 0xfda4af], alpha: [0.07, 0.20], speed: 0.70, confetti: false, motif: 'taboo' }
 });
 
 let partyjniakThemeMotifs = [];
@@ -62,6 +64,17 @@ function addFloatingMotif(scene, item, { x, y, dx = 12, dy = 18, duration = 6500
     });
 }
 
+const NATIVE_BACKGROUND_MOTIFS = new Set([
+    'party',
+    'impostor',
+    'mystery',
+    'discussion',
+    'vote',
+    'celebrate',
+    'ticking-bomb',
+    'bomb-alert'
+]);
+
 function renderPartyjniakThemeMotifs(modeName) {
     const scene = typeof backgroundScene !== 'undefined' ? backgroundScene : null;
     if (!scene || !scene.add || motifMode === modeName) return;
@@ -69,27 +82,14 @@ function renderPartyjniakThemeMotifs(modeName) {
     motifMode = modeName;
     clearPartyjniakThemeMotifs();
 
-    if (scene.reducedMotion) return;
+    /* These modes already render their complete abstract language inside BackgroundScene.
+       Do not stack the legacy motif layer over them. */
+    if (NATIVE_BACKGROUND_MOTIFS.has(modeName) || scene.reducedMotion) return;
+
     const w = scene.scale.width;
     const h = scene.scale.height;
 
-    if (modeName === 'party') {
-        const cards = [
-            [w * .08, h * .24, -12], [w * .90, h * .18, 16], [w * .16, h * .78, 12], [w * .84, h * .72, -18]
-        ];
-        cards.forEach(([x, y, angle], index) => {
-            const color = index % 2 ? 0xc61d3a : 0x950f26;
-            const card = scene.add.rectangle(x, y, 46, 66, color, .018).setStrokeStyle(1, color, .13).setAngle(angle);
-            const pip = scene.add.circle(x, y, 3.2, 0xffffff, .13);
-            addFloatingMotif(scene, card, { x, y, dx: index % 2 ? -16 : 13, dy: 22, duration: 6800 + index * 500, rotation: .08 });
-            addFloatingMotif(scene, pip, { x, y, dx: index % 2 ? -16 : 13, dy: 22, duration: 6800 + index * 500 });
-        });
-    } else if (['impostor', 'mystery', 'discussion', 'vote', 'celebrate'].includes(modeName)) {
-        [[.13, .20, 44], [.88, .34, 64], [.72, .82, 38]].forEach(([xr, yr, radius], index) => {
-            const ring = scene.add.circle(w * xr, h * yr, radius, 0x14b8a6, .003).setStrokeStyle(1.1, 0x14b8a6, .10);
-            addFloatingMotif(scene, ring, { x: w * xr, y: h * yr, dx: index % 2 ? -12 : 12, dy: 14, duration: 7200 + index * 800 });
-        });
-    } else if (modeName === 'heads-up') {
+    if (modeName === 'heads-up') {
         [[.12, .24, 34], [.83, .18, 54], [.75, .78, 42], [.18, .72, 24]].forEach(([xr, yr, radius], index) => {
             const bubble = scene.add.circle(w * xr, h * yr, radius, index % 2 ? 0xc084fc : 0x8b5cf6, .012)
                 .setStrokeStyle(1, index % 2 ? 0xec4899 : 0x8b5cf6, .12);
@@ -97,7 +97,7 @@ function renderPartyjniakThemeMotifs(modeName) {
         });
     } else if (modeName === 'taboo') {
         [[.12, .22, -24], [.82, .18, 28], [.78, .76, -18], [.14, .70, 32]].forEach(([xr, yr, angle], index) => {
-            const color = index % 2 ? 0xfb923c : 0xf59e0b;
+            const color = index % 2 ? 0xfb7185 : 0xe11d48;
             const slash = scene.add.rectangle(w * xr, h * yr, 92, 3, color, .13).setAngle(angle);
             addFloatingMotif(scene, slash, { x: w * xr, y: h * yr, dx: index % 2 ? -18 : 16, dy: 14, duration: 6200 + index * 550, rotation: .04 });
         });
@@ -108,8 +108,15 @@ function applyPartyjniakThemeMeta(modeName) {
     const meta = document.querySelector('meta[name="theme-color"]');
     const colors = {
         party: '#950f26',
-        impostor: '#063b38', mystery: '#062e2c', discussion: '#063b38', vote: '#063b38', celebrate: '#063b38',
-        'heads-up': '#4c1d95', taboo: '#7c2d12'
+        impostor: '#063b38',
+        mystery: '#062e2c',
+        discussion: '#063b38',
+        vote: '#063b38',
+        celebrate: '#063b38',
+        'ticking-bomb': '#7c2d12',
+        'bomb-alert': '#7f1d1d',
+        'heads-up': '#4c1d95',
+        taboo: '#881337'
     };
     document.body.dataset.bgMode = modeName;
     if (meta) meta.setAttribute('content', colors[modeName] || '#020617');
@@ -126,7 +133,15 @@ function decorateGameCards() {
     const cards = [...document.querySelectorAll('.game-card-primary, .upcoming-card')];
     cards.forEach(card => {
         const name = card.querySelector('strong')?.textContent?.trim();
-        const gameId = name === 'Impostor' ? 'impostor' : name === 'Czółko' ? 'heads-up' : name === 'Tabu' ? 'taboo' : null;
+        const gameId = name === 'Impostor'
+            ? 'impostor'
+            : name === 'Tykająca Bomba'
+                ? 'ticking-bomb'
+                : name === 'Czółko'
+                    ? 'heads-up'
+                    : name === 'Tabu'
+                        ? 'taboo'
+                        : null;
         const theme = gameId ? PARTYJNIAK_GAME_THEMES[gameId] : null;
         if (!theme || card.dataset.themeReady === 'true') return;
 
