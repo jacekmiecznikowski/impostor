@@ -125,6 +125,31 @@
   filter: drop-shadow(0 0 12px rgba(251,191,36,.18));
 }
 
+/* Result modes are mutually exclusive. The mobile result-card rule has higher
+   specificity than Tailwind's .hidden, so enforce the invariant explicitly. */
+#screen-bomb-result #bomb-manual-loser-block.hidden,
+#screen-bomb-result #bomb-loser-card.hidden {
+  display: none !important;
+}
+
+/* Keep result actions in the normal reading flow instead of leaving a large
+   empty area or pushing CTAs outside the useful viewport. */
+#screen-bomb-result .bomb-result-actions {
+  width: 100%;
+  margin-top: .2rem !important;
+  padding-top: .1rem;
+  display: flex !important;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: .65rem;
+}
+
+#screen-bomb-result .bomb-result-actions .bomb-primary-btn,
+#screen-bomb-result .bomb-result-actions .bomb-secondary-btn {
+  width: 100%;
+  min-height: 3.8rem;
+}
+
 @keyframes bomb-v2-idle {
   0%, 100% { transform: translateY(0) rotate(-.6deg); }
   50% { transform: translateY(-.18rem) rotate(.6deg); }
