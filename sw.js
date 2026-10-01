@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v32';
+const CACHE_VERSION = 'v33';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -20,6 +20,7 @@ const LOCAL_ASSETS = [
   './assets/css/ticking-bomb.css',
   './assets/css/ticking-bomb-mobile.css',
   './assets/css/ticking-bomb-theme.css',
+  './assets/css/game-color-system.css',
   './assets/css/partyjniak.css',
   './assets/css/navigation.css',
   './assets/css/navigation-android.css',
