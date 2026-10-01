@@ -1,5 +1,6 @@
-# no dependencies are installed by default
 node_modules/
+dist/
+android/
 .DS_Store
 Thumbs.db
 .vscode/

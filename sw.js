@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v20';
+const CACHE_VERSION = 'v21';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -34,6 +34,7 @@ const LOCAL_ASSETS = [
   './assets/js/shared/hub.js',
   './assets/js/shared/navigation-behavior.js',
   './assets/js/shared/game-themes.js',
+  './assets/js/shared/native-android.js',
   './assets/js/games/impostor/data.js',
   './assets/js/games/impostor/content-provider.js',
   './assets/js/games/impostor/rules.js',

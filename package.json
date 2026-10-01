@@ -1,10 +1,21 @@
 {
   "name": "partyjniak",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "private": true,
   "description": "Partyjniak – mobilne gry imprezowe na jeden telefon.",
   "scripts": {
     "test": "node tests/core.test.cjs && node tests/content.test.cjs && node tests/structure.test.cjs",
-    "serve": "python3 -m http.server 8080"
+    "serve": "python3 -m http.server 8080",
+    "build:web": "node scripts/prepare-web.mjs",
+    "android:prepare": "npm run build:web && npx cap sync android",
+    "android:debug": "npm run android:prepare && node scripts/patch-android.mjs && cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/core": "8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2"
   }
 }

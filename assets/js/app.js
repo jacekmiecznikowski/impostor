@@ -22,6 +22,7 @@ async function initializeApp() {
     setupImpostorPresentation();
     if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
     setupSystemBackHandling();
+    setupNativeAndroidIntegration?.();
     loadSession();
     normalizeActiveCategories();
 
@@ -69,7 +70,8 @@ async function initializeApp() {
         goToScreen('home', { silent: true });
     }
 
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
+    if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('./sw.js').catch(error => {
                 console.warn('Service Worker nie został zarejestrowany:', error);
