@@ -88,6 +88,8 @@ assert.match(index, /assets\/js\/games\/impostor\/reveal-fit\.js/);
 assert.match(index, /assets\/js\/games\/ticking-bomb\/integration\.js/);
 assert.match(index, /assets\/js\/games\/ticking-bomb\/game\.js/);
 assert.match(index, /theme-color" content="#950f26"/);
+assert.match(index, /bomb: \{ 400: '#fbbf24'/);
+assert.doesNotMatch(index, /accent: \{ 500:/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 assert.doesNotMatch(index, /id="screen-menu"/);
 
@@ -222,6 +224,8 @@ assert.match(colorSystem, /--ui-accent: #14b8a6/);
 assert.match(colorSystem, /--ui-accent: #f97316/);
 assert.match(colorSystem, /navigation-sheet-icon/);
 assert.match(colorSystem, /body\[data-bg-mode="bomb-alert"\]/);
+assert.match(colorSystem, /::-webkit-scrollbar-thumb/);
+assert.match(colorSystem, /partyjniak-theme-pulse/);
 
 const bombContent = JSON.parse(read('content/ticking-bomb.pl.json'));
 assert.equal(bombContent.game, 'ticking-bomb');
@@ -245,7 +249,7 @@ assert.doesNotMatch(gameThemes, /celebrate:[\s\S]{0,220}0xf59e0b/);
 assert.doesNotMatch(gameThemes, /impostor:[\s\S]{0,220}0x8b5cf6/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v33'/);
+assert.match(sw, /CACHE_VERSION = 'v34'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
