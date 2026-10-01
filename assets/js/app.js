@@ -3,6 +3,9 @@ async function initializeContentLayer() {
         if (typeof initializeImpostorRemoteContent === 'function') {
             await initializeImpostorRemoteContent();
         }
+        if (typeof initializeTickingBombContent === 'function') {
+            await initializeTickingBombContent();
+        }
     } catch (error) {
         console.warn('Zdalna warstwa treści nie została uruchomiona. Używam danych lokalnych.', error);
     }
@@ -18,6 +21,8 @@ async function initializeApp() {
     }
 
     await initializeContentLayer();
+    if (typeof loadBombSession === 'function') loadBombSession();
+
     setupGameHub();
     setupImpostorPresentation();
     if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
@@ -38,6 +43,7 @@ async function initializeApp() {
     setDiscussionTimer(state.discussionTime, { silent: true });
     updateImpostorButtonsUI();
     updateResumeButton();
+    if (typeof updateBombResumeButton === 'function') updateBombResumeButton();
 
     document.addEventListener('keydown', event => {
         if (event.key !== 'Escape') return;
