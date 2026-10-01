@@ -1,171 +1,178 @@
-/* Final bomb illustration layer: mechanically connected fuse + natural spark. */
+/* Tykająca Bomba v2 — one coherent SVG asset, no DOM-assembled fuse parts. */
 
-#screen-bomb-play .bomb-body {
+#screen-bomb-play .bomb-device-v2 {
+  position: relative;
+  width: 11.4rem;
+  height: 11.4rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  filter: none;
+  transform-origin: 50% 60%;
+}
+
+#screen-bomb-play .bomb-art {
+  width: 100%;
+  height: 100%;
+  display: block;
   overflow: visible;
-}
-
-#screen-bomb-play .bomb-cap {
-  top: -.38rem;
-  right: 1.05rem;
-  width: 2.18rem;
-  height: 1.08rem;
-  border-radius: .58rem .68rem .38rem .46rem;
-  transform: rotate(18deg);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.13), transparent 32%),
-    linear-gradient(180deg, #77716b 0%, #49433e 55%, #292522 100%);
-  border-color: rgba(214,211,209,.24);
-}
-
-#screen-bomb-play .bomb-cap::before {
-  content: "";
-  position: absolute;
-  left: -.34rem;
-  bottom: .12rem;
-  width: .68rem;
-  height: .72rem;
-  border-radius: .25rem .15rem .15rem .28rem;
-  background: linear-gradient(180deg, #57534e, #292524);
-  border: 1px solid rgba(214,211,209,.16);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
-}
-
-#screen-bomb-play .bomb-cap::after {
-  inset: .22rem .30rem;
-  border-radius: .25rem;
-  border-top: 1px solid rgba(255,255,255,.12);
-  border-bottom: 1px solid rgba(0,0,0,.34);
-}
-
-/* Fuse is re-parented into .bomb-body by visual.js, so this geometry is stable. */
-#screen-bomb-play .bomb-fuse {
-  position: absolute;
-  z-index: 6;
-  top: -2.08rem;
-  right: -1.82rem;
-  width: 4.05rem;
-  height: 3.15rem;
-  border: 0;
-  border-radius: 0;
-  transform: none;
-  box-shadow: none;
   pointer-events: none;
 }
 
-#screen-bomb-play .bomb-fuse::before,
-#screen-bomb-play .bomb-fuse::after {
-  content: "";
-  position: absolute;
-  height: .36rem;
-  border-radius: 999px;
-  transform-origin: left center;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.10), transparent 35%),
-    repeating-linear-gradient(90deg, #8b6849 0 .28rem, #6f5037 .28rem .52rem);
-  box-shadow:
-    0 .08rem .12rem rgba(0,0,0,.42),
-    inset 0 -.08rem 0 rgba(57,37,24,.34);
+#screen-bomb-play .bomb-art-object,
+#screen-bomb-play .bomb-art-shell,
+#screen-bomb-play .bomb-art-rim,
+#screen-bomb-play .bomb-art-aura,
+#screen-bomb-play .bomb-art-fuse,
+#screen-bomb-play .bomb-art-fuse-thread,
+#screen-bomb-play .bomb-art-tip,
+#screen-bomb-play .bomb-art-spark {
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
-#screen-bomb-play .bomb-fuse::before {
-  left: .14rem;
-  bottom: .40rem;
-  width: 2.62rem;
-  transform: rotate(-31deg);
+#screen-bomb-play .bomb-art-aura {
+  opacity: .08;
+  transition: opacity .18s ease, stroke-width .18s ease;
 }
 
-#screen-bomb-play .bomb-fuse::after {
-  left: 2.31rem;
-  top: .66rem;
-  width: 1.48rem;
-  transform: rotate(18deg);
+#screen-bomb-play .bomb-art-shell {
+  transition: filter .18s ease, stroke .18s ease;
 }
 
-/* Before ignition this is only a charred fuse tip — no fake glowing square. */
-#screen-bomb-play .bomb-spark {
-  position: absolute;
-  z-index: 8;
-  top: .80rem;
-  right: -.02rem;
-  width: .54rem;
-  height: .54rem;
-  border-radius: 50%;
-  transform: none;
-  background: radial-gradient(circle, #3f2d1e 0 48%, #21150e 50% 100%);
-  box-shadow: none;
-  opacity: 1;
+#screen-bomb-play .bomb-art-fuse-thread {
+  opacity: .35;
 }
 
-#screen-bomb-play .bomb-spark::before,
-#screen-bomb-play .bomb-spark::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 1.55rem;
-  height: .13rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent 0 14%, #fde68a 42% 58%, transparent 86% 100%);
+#screen-bomb-play .bomb-art-spark {
   opacity: 0;
-  transform: translate(-50%, -50%) rotate(28deg) scale(.55);
+  transform: scale(.45) rotate(-8deg);
+  transition: opacity .14s ease, transform .14s ease;
+}
+
+#screen-bomb-play .bomb-art-tip {
+  opacity: 1;
   transition: opacity .12s ease;
 }
 
-#screen-bomb-play .bomb-spark::after {
-  transform: translate(-50%, -50%) rotate(-38deg) scale(.55);
+/* Idle = calm, obviously unlit, but still inviting to tap. */
+#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded) .bomb-device-v2 {
+  animation: bomb-v2-idle 2.5s ease-in-out infinite;
 }
 
-#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded):active .bomb-spark {
-  background: radial-gradient(circle, #3f2d1e 0 48%, #21150e 50% 100%);
-  box-shadow: none;
+#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded):active .bomb-device-v2 {
+  transform: scale(.965);
 }
 
-#screen-bomb-play .bomb-ignite-control.is-live .bomb-spark {
-  width: .72rem;
-  height: .72rem;
-  top: .71rem;
-  right: -.10rem;
-  background:
-    radial-gradient(circle, #fff7c2 0 18%, #fde047 20% 40%, #f97316 42% 66%, rgba(239,68,68,.20) 68% 100%);
-  box-shadow:
-    0 0 0 .18rem rgba(250,204,21,.10),
-    0 0 .95rem .24rem rgba(249,115,22,.62);
-  animation: bomb-natural-spark .28s ease-in-out infinite alternate;
+#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded):active .bomb-art-aura {
+  opacity: .18;
+  stroke-width: 3;
 }
 
-#screen-bomb-play .bomb-ignite-control.is-live .bomb-spark::before,
-#screen-bomb-play .bomb-ignite-control.is-live .bomb-spark::after {
-  opacity: .92;
+/* Live = fuse is clearly lit, but no animation reveals remaining time. */
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-device-v2 {
+  animation: bomb-v2-live 1.05s ease-in-out infinite;
 }
 
-#screen-bomb-play .bomb-ignite-control.is-hot .bomb-spark {
-  box-shadow:
-    0 0 0 .22rem rgba(250,204,21,.13),
-    0 0 1.25rem .34rem rgba(239,68,68,.68);
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-art-aura {
+  opacity: .26;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 7px rgba(249,115,22,.46));
 }
 
-@keyframes bomb-natural-spark {
-  from {
-    transform: scale(.78) translate(-.02rem, .02rem);
-    filter: brightness(.96);
-  }
-  to {
-    transform: scale(1.16) translate(.03rem, -.03rem);
-    filter: brightness(1.24);
-  }
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-art-shell {
+  stroke: #71717a;
+  filter: drop-shadow(0 0 9px rgba(249,115,22,.10));
+}
+
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-art-tip {
+  opacity: 0;
+}
+
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-art-spark {
+  opacity: 1;
+  animation: bomb-v2-spark .32s ease-in-out infinite alternate;
+}
+
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-art-fuse-thread {
+  opacity: .72;
+  stroke: #fed7aa;
+  animation: bomb-v2-fuse-shimmer .72s linear infinite;
+}
+
+#screen-bomb-play .bomb-ignite-control.is-hot .bomb-art-aura {
+  opacity: .38;
+  filter: drop-shadow(0 0 10px rgba(239,68,68,.52));
+}
+
+#screen-bomb-play .bomb-ignite-control.is-hot .bomb-art-spark {
+  filter: drop-shadow(0 0 8px rgba(239,68,68,.80));
+}
+
+/* Explosion remains short and punchy before the result screen appears. */
+#screen-bomb-play .bomb-ignite-control.is-exploded .bomb-art-object {
+  animation: bomb-v2-pop .42s cubic-bezier(.16,.84,.28,1) both;
+}
+
+#screen-bomb-play .bomb-ignite-control.is-exploded .bomb-art-spark {
+  opacity: 0;
+}
+
+#screen-bomb-play .bomb-ignite-control.is-exploded .bomb-art-aura {
+  opacity: .52;
+  stroke-width: 5;
+}
+
+#screen-bomb-play .bomb-ignite-control:focus-visible .bomb-device-v2 {
+  filter: drop-shadow(0 0 12px rgba(251,191,36,.18));
+}
+
+@keyframes bomb-v2-idle {
+  0%, 100% { transform: translateY(0) rotate(-.6deg); }
+  50% { transform: translateY(-.18rem) rotate(.6deg); }
+}
+
+@keyframes bomb-v2-live {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-.08rem) scale(1.012); }
+}
+
+@keyframes bomb-v2-spark {
+  from { transform: scale(.78) rotate(-9deg); filter: brightness(.96); }
+  to { transform: scale(1.16) rotate(9deg); filter: brightness(1.25); }
+}
+
+@keyframes bomb-v2-fuse-shimmer {
+  to { stroke-dashoffset: -18; }
+}
+
+@keyframes bomb-v2-pop {
+  0% { transform: scale(1); opacity: 1; }
+  38% { transform: scale(.90); opacity: 1; }
+  72% { transform: scale(1.15); opacity: .84; }
+  100% { transform: scale(1.32); opacity: 0; }
 }
 
 @media (max-height: 760px) {
-  #screen-bomb-play .bomb-fuse {
-    top: -1.78rem;
-    right: -1.58rem;
-    transform: scale(.84);
-    transform-origin: left bottom;
+  #screen-bomb-play .bomb-device-v2 {
+    width: 8.7rem;
+    height: 8.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  #screen-bomb-play .bomb-device-v2 {
+    width: 9.4rem;
+    height: 9.4rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #screen-bomb-play .bomb-ignite-control.is-live .bomb-spark {
+  #screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded) .bomb-device-v2,
+  #screen-bomb-play .bomb-ignite-control.is-live .bomb-device-v2,
+  #screen-bomb-play .bomb-ignite-control.is-live .bomb-art-spark,
+  #screen-bomb-play .bomb-ignite-control.is-live .bomb-art-fuse-thread,
+  #screen-bomb-play .bomb-ignite-control.is-exploded .bomb-art-object {
     animation: none !important;
   }
 }
