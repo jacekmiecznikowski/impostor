@@ -25,8 +25,7 @@
 #screen-bomb-play .bomb-art-aura,
 #screen-bomb-play .bomb-art-fuse,
 #screen-bomb-play .bomb-art-fuse-thread,
-#screen-bomb-play .bomb-art-tip,
-#screen-bomb-play .bomb-art-spark {
+#screen-bomb-play .bomb-art-tip {
   transform-box: fill-box;
   transform-origin: center;
 }
@@ -46,8 +45,7 @@
 
 #screen-bomb-play .bomb-art-spark {
   opacity: 0;
-  transform: scale(.45) rotate(-8deg);
-  transition: opacity .14s ease, transform .14s ease;
+  transition: opacity .14s ease, filter .14s ease;
 }
 
 #screen-bomb-play .bomb-art-tip {
@@ -138,8 +136,8 @@
 }
 
 @keyframes bomb-v2-spark {
-  from { transform: scale(.78) rotate(-9deg); filter: brightness(.96); }
-  to { transform: scale(1.16) rotate(9deg); filter: brightness(1.25); }
+  from { filter: brightness(.92) drop-shadow(0 0 1px rgba(249,115,22,.42)); opacity: .72; }
+  to { filter: brightness(1.30) drop-shadow(0 0 5px rgba(249,115,22,.92)); opacity: 1; }
 }
 
 @keyframes bomb-v2-fuse-shimmer {
