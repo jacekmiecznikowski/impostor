@@ -1,13 +1,19 @@
 /* Final reveal layout polish: centered roles + fixed secret panel for auto-fitted words. */
 
+.reveal-card, .reveal-card * {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
 .reveal-role-hero {
   width: 100%;
-  min-height: 6.25rem;
+  min-height: 6.35rem !important;
   display: flex !important;
   flex-direction: column;
   align-items: center !important;
   justify-content: center !important;
-  gap: .48rem !important;
+  gap: .4rem !important;
   text-align: center !important;
 }
 
@@ -33,6 +39,19 @@
 .reveal-role-copy strong {
   max-width: 100%;
   text-wrap: balance;
+}
+
+.reveal-role-copy > span:last-child {
+  min-height: 1.1rem !important;
+  margin-top: .28rem !important;
+  line-height: 1.05rem !important;
+}
+
+.reveal-back-content,
+.reveal-card.hold-upper .reveal-back-content,
+.reveal-card.hold-lower .reveal-back-content {
+  grid-template-rows: minmax(6.35rem, auto) 7.8rem minmax(2.5rem, auto) !important;
+  gap: .8rem !important;
 }
 
 .reveal-secret-block {
@@ -78,14 +97,19 @@
 }
 
 .reveal-card.hold-upper .reveal-role-hero {
-  min-height: 4.75rem;
-  gap: .3rem !important;
+  min-height: 5.35rem !important;
+  gap: .24rem !important;
 }
 
 .reveal-card.hold-upper .reveal-role-icon {
   width: 2.35rem;
   height: 2.35rem;
   border-radius: .78rem;
+}
+
+.reveal-card.hold-upper .reveal-back-content {
+  grid-template-rows: minmax(5.35rem, auto) 6.55rem minmax(2.1rem, auto) !important;
+  gap: .58rem !important;
 }
 
 .reveal-card.hold-upper .reveal-secret-block {
@@ -97,13 +121,19 @@
 
 @media (max-height: 680px) {
   .reveal-role-hero {
-    min-height: 5.2rem;
-    gap: .32rem !important;
+    min-height: 5.55rem !important;
+    gap: .25rem !important;
   }
 
   .reveal-role-icon {
     width: 2.45rem;
     height: 2.45rem;
+  }
+
+  .reveal-back-content,
+  .reveal-card.hold-lower .reveal-back-content {
+    grid-template-rows: minmax(5.55rem, auto) 6.8rem minmax(2rem, auto) !important;
+    gap: .55rem !important;
   }
 
   .reveal-secret-block {
