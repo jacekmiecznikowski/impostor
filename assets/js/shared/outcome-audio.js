@@ -1,13 +1,13 @@
 const PARTYJNIAK_OUTCOME_AUDIO = Object.freeze({
     impostor: {
-        src: PARTYJNIAK_USER_OUTCOME_AUDIO.impostor,
-        volume: 0.58,
-        label: 'evil laugh'
+        src: './assets/audio/impostor-win.mp3.b64',
+        volume: 0.35,
+        label: 'impostor win'
     },
     detectives: {
-        src: PARTYJNIAK_USER_OUTCOME_AUDIO.detectives,
+        src: './assets/audio/crewmates-win.mp3.b64',
         volume: 1.0,
-        label: 'applause'
+        label: 'crewmates win'
     }
 });
 
@@ -15,9 +15,21 @@ const outcomeAudioBuffers = new Map();
 const outcomeAudioLoads = new Map();
 let outcomeAudioPrimed = false;
 
+function decodeBase64Bytes(base64) {
+    const normalized = base64.replace(/\s+/g, '');
+    const binary = atob(normalized);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) {
+        bytes[index] = binary.charCodeAt(index);
+    }
+    return bytes.buffer;
+}
+
 async function decodeOutcomeAudio(context, source) {
-    const response = await fetch(source);
-    const bytes = await response.arrayBuffer();
+    const response = await fetch(source, { cache: 'force-cache' });
+    if (!response.ok) throw new Error(`HTTP ${response.status} dla ${source}`);
+    const base64 = await response.text();
+    const bytes = decodeBase64Bytes(base64);
     return context.decodeAudioData(bytes.slice(0));
 }
 
