@@ -69,13 +69,69 @@
 
   <div class="bomb-stage">
     <button id="bomb-visual" type="button" class="bomb-visual bomb-ignite-control" onclick="igniteBomb()" aria-label="Odpal bombę">
-      <span class="bomb-device" aria-hidden="true">
-        <span class="bomb-body">
-          <span class="bomb-body-shine"></span>
-          <span class="bomb-cap"></span>
-          <span class="bomb-glow"></span>
-        </span>
-        <span class="bomb-fuse"><span class="bomb-spark"></span></span>
+      <span class="bomb-device bomb-device-v2" aria-hidden="true">
+        <svg class="bomb-art" viewBox="0 0 220 220" role="presentation" focusable="false">
+          <defs>
+            <radialGradient id="bomb-shell-gradient" cx="34%" cy="28%" r="76%">
+              <stop offset="0%" stop-color="#3f3f46"/>
+              <stop offset="48%" stop-color="#202126"/>
+              <stop offset="100%" stop-color="#0b0c0f"/>
+            </radialGradient>
+            <linearGradient id="bomb-rim-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#71717a"/>
+              <stop offset="48%" stop-color="#29292f"/>
+              <stop offset="100%" stop-color="#09090b"/>
+            </linearGradient>
+            <linearGradient id="bomb-cap-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a1a1aa"/>
+              <stop offset="42%" stop-color="#52525b"/>
+              <stop offset="100%" stop-color="#27272a"/>
+            </linearGradient>
+            <linearGradient id="bomb-fuse-gradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#9a6a45"/>
+              <stop offset="50%" stop-color="#b98252"/>
+              <stop offset="100%" stop-color="#7c5135"/>
+            </linearGradient>
+            <radialGradient id="bomb-spark-gradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fffde8"/>
+              <stop offset="28%" stop-color="#fde047"/>
+              <stop offset="62%" stop-color="#f97316"/>
+              <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="bomb-soft-shadow" x="-35%" y="-35%" width="170%" height="180%">
+              <feDropShadow dx="0" dy="10" stdDeviation="11" flood-color="#000000" flood-opacity="0.42"/>
+            </filter>
+            <filter id="bomb-spark-glow" x="-180%" y="-180%" width="460%" height="460%">
+              <feGaussianBlur stdDeviation="5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <g class="bomb-art-object" filter="url(#bomb-soft-shadow)">
+            <circle class="bomb-art-aura" cx="104" cy="124" r="76" fill="none" stroke="#f97316" stroke-width="2" opacity="0.10"/>
+            <circle class="bomb-art-rim" cx="104" cy="124" r="63" fill="url(#bomb-rim-gradient)"/>
+            <circle class="bomb-art-shell" cx="104" cy="124" r="59" fill="url(#bomb-shell-gradient)" stroke="#52525b" stroke-width="1.4"/>
+            <ellipse class="bomb-art-highlight" cx="82" cy="99" rx="14" ry="22" fill="#ffffff" opacity="0.055" transform="rotate(30 82 99)"/>
+            <circle cx="77" cy="91" r="5" fill="#ffffff" opacity="0.12"/>
+
+            <g class="bomb-art-cap" transform="translate(128 55) rotate(14)">
+              <rect x="0" y="0" width="33" height="18" rx="7" fill="url(#bomb-cap-gradient)" stroke="#a1a1aa" stroke-opacity="0.32"/>
+              <rect x="5" y="4" width="23" height="2" rx="1" fill="#ffffff" opacity="0.13"/>
+              <rect x="9" y="14" width="17" height="7" rx="3" fill="#27272a"/>
+            </g>
+
+            <path class="bomb-art-fuse-shadow" d="M151 62 C164 49 170 42 181 40 C189 38 193 33 194 26" fill="none" stroke="#291c14" stroke-width="9" stroke-linecap="round"/>
+            <path class="bomb-art-fuse" d="M151 62 C164 49 170 42 181 40 C189 38 193 33 194 26" fill="none" stroke="url(#bomb-fuse-gradient)" stroke-width="6.2" stroke-linecap="round"/>
+            <path class="bomb-art-fuse-thread" d="M151 62 C164 49 170 42 181 40 C189 38 193 33 194 26" fill="none" stroke="#d7a271" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="4 5" opacity="0.48"/>
+            <circle class="bomb-art-tip" cx="194" cy="26" r="3.8" fill="#24150f"/>
+
+            <g class="bomb-art-spark" transform="translate(194 26)" opacity="0">
+              <circle r="13" fill="url(#bomb-spark-gradient)" filter="url(#bomb-spark-glow)" opacity="0.78"/>
+              <circle r="4.2" fill="#fff7c2"/>
+              <path d="M0 -13 L0 -20 M0 13 L0 19 M-13 0 L-20 0 M13 0 L20 0 M-9 -9 L-14 -14 M9 9 L14 14 M9 -9 L15 -15 M-9 9 L-15 15" stroke="#fde047" stroke-width="2.4" stroke-linecap="round"/>
+            </g>
+          </g>
+        </svg>
         <span class="bomb-shockwave"></span>
       </span>
       <span class="bomb-ignite-copy">
