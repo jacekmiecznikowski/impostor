@@ -1,0 +1,54 @@
+/* Tykająca Bomba: game-specific shell and shared modal theming. */
+body[data-game="ticking-bomb"] {
+  --bomb-shell-accent: #f97316;
+  --bomb-shell-accent-2: #fbbf24;
+}
+
+body[data-game="ticking-bomb"] .app-shell.is-menu .shell-frame,
+body[data-game="ticking-bomb"] .app-shell.is-contextual .shell-frame {
+  border-color: rgba(249, 115, 22, .24) !important;
+  background:
+    linear-gradient(180deg, rgba(67, 20, 7, .18), rgba(8, 15, 29, .58)) !important;
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, .18),
+    inset 0 1px 0 rgba(251, 191, 36, .04) !important;
+}
+
+body[data-game="ticking-bomb"] .shell-logo.is-game {
+  color: #1c0a00;
+  background: linear-gradient(145deg, #fbbf24 0%, #f97316 58%, #ea580c 100%);
+  border-color: rgba(253, 186, 116, .58);
+  box-shadow: 0 8px 24px rgba(249, 115, 22, .22);
+}
+
+body[data-game="ticking-bomb"] .app-shell.is-menu .shell-icon-button,
+body[data-game="ticking-bomb"] .app-shell.is-contextual .shell-icon-button {
+  border-color: rgba(249, 115, 22, .22);
+}
+
+body[data-game="ticking-bomb"] .app-shell.is-menu .shell-icon-button:hover,
+body[data-game="ticking-bomb"] .app-shell.is-contextual .shell-icon-button:hover {
+  border-color: rgba(251, 146, 60, .42);
+  background: rgba(67, 20, 7, .24);
+}
+
+body[data-game="ticking-bomb"] #score-modal .primary-btn {
+  color: #1c0a00;
+  border-color: rgba(253, 186, 116, .58);
+  background: linear-gradient(135deg, #fbbf24 0%, #f97316 58%, #ea580c 100%);
+  box-shadow: 0 12px 28px rgba(249, 115, 22, .20);
+}
+
+body[data-game="ticking-bomb"] #score-modal .primary-btn:hover {
+  filter: brightness(1.06);
+}
+
+body[data-game="ticking-bomb"] #score-modal .secondary-btn {
+  border-color: rgba(249, 115, 22, .20);
+  color: #fed7aa;
+  background: rgba(30, 20, 12, .72);
+}
+
+body[data-game="ticking-bomb"] #score-modal .icon-btn {
+  border-color: rgba(249, 115, 22, .20);
+}
