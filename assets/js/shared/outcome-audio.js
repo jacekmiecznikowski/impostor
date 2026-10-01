@@ -1,6 +1,12 @@
 const PARTYJNIAK_OUTCOME_AUDIO = Object.freeze({
     impostor: {
-        src: './assets/audio/impostor-win.mp3.b64',
+        src: [
+            './assets/audio/impostor-win.0.b64',
+            './assets/audio/impostor-win.1.b64',
+            './assets/audio/impostor-win.2.b64',
+            './assets/audio/impostor-win.3.b64',
+            './assets/audio/impostor-win.4.b64'
+        ],
         volume: 0.35,
         label: 'impostor win'
     },
@@ -14,6 +20,9 @@ const PARTYJNIAK_OUTCOME_AUDIO = Object.freeze({
 const outcomeAudioBuffers = new Map();
 const outcomeAudioLoads = new Map();
 let outcomeAudioPrimed = false;
+let activeOutcomeSource = null;
+let activeOutcomeGain = null;
+let outcomePlaybackRequest = 0;
 
 function decodeBase64Bytes(base64) {
     const normalized = base64.replace(/\s+/g, '');
@@ -25,10 +34,18 @@ function decodeBase64Bytes(base64) {
     return bytes.buffer;
 }
 
+async function fetchBase64Source(source) {
+    const sources = Array.isArray(source) ? source : [source];
+    const parts = await Promise.all(sources.map(async url => {
+        const response = await fetch(url, { cache: 'force-cache' });
+        if (!response.ok) throw new Error(`HTTP ${response.status} dla ${url}`);
+        return response.text();
+    }));
+    return parts.join('');
+}
+
 async function decodeOutcomeAudio(context, source) {
-    const response = await fetch(source, { cache: 'force-cache' });
-    if (!response.ok) throw new Error(`HTTP ${response.status} dla ${source}`);
-    const base64 = await response.text();
+    const base64 = await fetchBase64Source(source);
     const bytes = decodeBase64Bytes(base64);
     return context.decodeAudioData(bytes.slice(0));
 }
@@ -56,6 +73,22 @@ async function loadOutcomeAudioBuffer(outcome) {
     return load;
 }
 
+function stopOutcomeSound() {
+    const source = activeOutcomeSource;
+    const gain = activeOutcomeGain;
+    activeOutcomeSource = null;
+    activeOutcomeGain = null;
+
+    if (source) {
+        source.onended = null;
+        try { source.stop(0); } catch (_) { /* already stopped */ }
+        try { source.disconnect(); } catch (_) { /* no-op */ }
+    }
+    if (gain) {
+        try { gain.disconnect(); } catch (_) { /* no-op */ }
+    }
+}
+
 function primeOutcomeAudio() {
     if (outcomeAudioPrimed || !soundEnabled) return;
     outcomeAudioPrimed = true;
@@ -74,6 +107,9 @@ function primeOutcomeAudio() {
 }
 
 async function playOutcomeSound(outcome) {
+    const requestId = ++outcomePlaybackRequest;
+    stopOutcomeSound();
+
     if (!soundEnabled) return false;
     const config = PARTYJNIAK_OUTCOME_AUDIO[outcome];
     if (!config) return false;
@@ -84,7 +120,7 @@ async function playOutcomeSound(outcome) {
         if (context.state === 'suspended') await context.resume();
 
         const buffer = await loadOutcomeAudioBuffer(outcome);
-        if (!buffer) return false;
+        if (!buffer || requestId !== outcomePlaybackRequest) return false;
 
         const source = context.createBufferSource();
         const gain = context.createGain();
@@ -92,9 +128,21 @@ async function playOutcomeSound(outcome) {
         source.buffer = buffer;
         source.connect(gain);
         gain.connect(context.destination);
+
+        activeOutcomeSource = source;
+        activeOutcomeGain = gain;
+        source.onended = () => {
+            if (activeOutcomeSource !== source) return;
+            activeOutcomeSource = null;
+            activeOutcomeGain = null;
+            try { source.disconnect(); } catch (_) { /* no-op */ }
+            try { gain.disconnect(); } catch (_) { /* no-op */ }
+        };
+
         source.start(0);
         return true;
     } catch (error) {
+        if (requestId === outcomePlaybackRequest) stopOutcomeSound();
         console.warn(`Nie udało się odtworzyć sampla „${config.label}”.`, error);
         return false;
     }
