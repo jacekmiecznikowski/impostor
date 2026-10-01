@@ -1,13 +1,11 @@
 const PARTYJNIAK_OUTCOME_AUDIO = Object.freeze({
     impostor: {
-        src: './assets/audio/impostor-win-evil-laugh.mp3',
-        embeddedFallback: PARTYJNIAK_USER_OUTCOME_AUDIO?.impostor,
+        src: PARTYJNIAK_USER_OUTCOME_AUDIO.impostor,
         volume: 0.58,
         label: 'evil laugh'
     },
     detectives: {
-        src: './assets/audio/detectives-win-applause.mp3',
-        embeddedFallback: PARTYJNIAK_USER_OUTCOME_AUDIO?.detectives,
+        src: PARTYJNIAK_USER_OUTCOME_AUDIO.detectives,
         volume: 1.0,
         label: 'applause'
     }
@@ -19,7 +17,6 @@ let outcomeAudioPrimed = false;
 
 async function decodeOutcomeAudio(context, source) {
     const response = await fetch(source);
-    if (!response.ok && response.type !== 'basic') throw new Error(`Audio HTTP ${response.status}`);
     const bytes = await response.arrayBuffer();
     return context.decodeAudioData(bytes.slice(0));
 }
@@ -32,16 +29,10 @@ async function loadOutcomeAudioBuffer(outcome) {
     if (!config) return null;
 
     const load = (async () => {
-        const context = getAudioContext();
-        if (!context) return null;
-
         try {
+            const context = getAudioContext();
+            if (!context) return null;
             const buffer = await decodeOutcomeAudio(context, config.src);
-            outcomeAudioBuffers.set(outcome, buffer);
-            return buffer;
-        } catch (localError) {
-            if (!config.embeddedFallback) throw localError;
-            const buffer = await decodeOutcomeAudio(context, config.embeddedFallback);
             outcomeAudioBuffers.set(outcome, buffer);
             return buffer;
         } finally {
