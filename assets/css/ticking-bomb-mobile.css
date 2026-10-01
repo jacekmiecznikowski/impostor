@@ -352,3 +352,309 @@ body[data-game="ticking-bomb"] .bomb-prompt-card {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Interactive bomb: the object itself is the primary ignite action. */
+#screen-bomb-play .bomb-ignite-control {
+  -webkit-appearance: none;
+  appearance: none;
+  width: clamp(11.8rem, 46vw, 13.6rem);
+  height: auto;
+  min-height: 14rem;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .72rem;
+  padding: .35rem .25rem .15rem;
+  border: 0;
+  border-radius: 2rem;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  overflow: visible;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#screen-bomb-play .bomb-ignite-control:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+#screen-bomb-play .bomb-ignite-control:focus-visible {
+  outline: 2px solid rgba(251, 191, 36, .9);
+  outline-offset: .35rem;
+}
+
+#screen-bomb-play .bomb-device {
+  position: relative;
+  width: 10.8rem;
+  height: 10.8rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, .34));
+}
+
+#screen-bomb-play .bomb-body {
+  position: relative;
+  width: 8.7rem;
+  height: 8.7rem;
+  border-radius: 50%;
+  display: block;
+  background:
+    radial-gradient(circle at 31% 24%, rgba(255,255,255,.18) 0 4%, transparent 5%),
+    radial-gradient(circle at 35% 30%, #57534e 0%, #292524 35%, #171412 72%, #0c0a09 100%);
+  border: 1px solid rgba(168, 162, 158, .28);
+  box-shadow:
+    inset -1rem -1.2rem 2rem rgba(0,0,0,.38),
+    inset .45rem .5rem 1.1rem rgba(255,255,255,.045),
+    0 0 0 1px rgba(249,115,22,.06),
+    0 18px 44px rgba(0,0,0,.30);
+}
+
+#screen-bomb-play .bomb-body-shine {
+  position: absolute;
+  left: 1.35rem;
+  top: 1.15rem;
+  width: 2.15rem;
+  height: 1.15rem;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,.13), transparent 70%);
+  transform: rotate(-35deg);
+  pointer-events: none;
+}
+
+#screen-bomb-play .bomb-cap {
+  position: absolute;
+  z-index: 4;
+  top: -.48rem;
+  right: 1.18rem;
+  width: 2.25rem;
+  height: 1.15rem;
+  border-radius: .48rem .62rem .35rem .45rem;
+  transform: rotate(24deg);
+  background: linear-gradient(180deg, #78716c, #44403c 54%, #292524);
+  border: 1px solid rgba(214,211,209,.22);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 .25rem .6rem rgba(0,0,0,.32);
+}
+
+#screen-bomb-play .bomb-cap::after {
+  content: "";
+  position: absolute;
+  inset: .22rem .32rem;
+  border-radius: .28rem;
+  border-top: 1px solid rgba(255,255,255,.12);
+  border-bottom: 1px solid rgba(0,0,0,.32);
+}
+
+#screen-bomb-play .bomb-fuse {
+  position: absolute;
+  z-index: 5;
+  top: .08rem;
+  right: -.2rem;
+  width: 4.05rem;
+  height: 3.05rem;
+  border-top: .38rem solid #7c5b3e;
+  border-right: .38rem solid #7c5b3e;
+  border-radius: 0 2.7rem 0 0;
+  transform: rotate(-20deg);
+  transform-origin: left bottom;
+  box-shadow: inset 0 .08rem 0 rgba(255,255,255,.10);
+}
+
+#screen-bomb-play .bomb-fuse::after {
+  content: "";
+  position: absolute;
+  inset: -.31rem -.31rem auto auto;
+  width: .34rem;
+  height: .34rem;
+  border-radius: 50%;
+  background: #3f2d1e;
+}
+
+#screen-bomb-play .bomb-spark {
+  position: absolute;
+  z-index: 7;
+  right: -.72rem;
+  top: -.76rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: .22rem;
+  transform: rotate(45deg);
+  background: #fef08a;
+  box-shadow:
+    0 0 0 .23rem rgba(250,204,21,.14),
+    0 0 1.2rem .35rem rgba(249,115,22,.55);
+  opacity: .42;
+}
+
+#screen-bomb-play .bomb-spark::before,
+#screen-bomb-play .bomb-spark::after {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 1.7rem;
+  height: .18rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #fde047, transparent);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+#screen-bomb-play .bomb-spark::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+#screen-bomb-play .bomb-glow {
+  position: absolute;
+  inset: -.95rem;
+  border-radius: 50%;
+  border: 1px solid rgba(251,146,60,.15);
+  box-shadow: 0 0 2.8rem rgba(249,115,22,.05);
+  opacity: .52;
+  pointer-events: none;
+}
+
+#screen-bomb-play .bomb-shockwave {
+  position: absolute;
+  inset: .7rem;
+  border: 2px solid rgba(251,146,60,0);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+#screen-bomb-play .bomb-ignite-copy {
+  min-height: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .18rem;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+#screen-bomb-play .bomb-ignite-copy strong {
+  color: #fbbf24;
+  font-size: .73rem;
+  font-weight: 950;
+  letter-spacing: .12em;
+}
+
+#screen-bomb-play .bomb-ignite-copy small {
+  color: #78716c;
+  font-size: .63rem;
+  font-weight: 700;
+}
+
+#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded) .bomb-device {
+  animation: bomb-ready-float 1.9s ease-in-out infinite;
+}
+
+#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded):active .bomb-body {
+  transform: scale(.955);
+  filter: brightness(1.09);
+}
+
+#screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded):active .bomb-spark {
+  opacity: .85;
+}
+
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-ignite-copy,
+#screen-bomb-play .bomb-ignite-control.is-exploded .bomb-ignite-copy {
+  opacity: 0;
+  transform: translateY(-.25rem);
+}
+
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-body {
+  box-shadow:
+    inset -1rem -1.2rem 2rem rgba(0,0,0,.38),
+    inset .45rem .5rem 1.1rem rgba(255,255,255,.045),
+    0 0 0 1px rgba(251,146,60,.16),
+    0 18px 44px rgba(0,0,0,.30),
+    0 0 2.8rem rgba(249,115,22,.10);
+}
+
+#screen-bomb-play .bomb-ignite-control.is-live .bomb-spark {
+  opacity: 1;
+  animation: bomb-spark-live .34s ease-in-out infinite alternate;
+}
+
+#screen-bomb-play .bomb-play-actions-secondary {
+  display: flex;
+  justify-content: center;
+}
+
+#screen-bomb-play .bomb-play-actions-secondary .bomb-ghost-btn {
+  width: min(100%, 13.5rem);
+  min-height: 3.15rem;
+}
+
+@keyframes bomb-ready-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-.28rem) rotate(1deg); }
+}
+
+@keyframes bomb-spark-live {
+  from {
+    transform: rotate(40deg) scale(.82);
+    filter: brightness(.95);
+    box-shadow: 0 0 0 .18rem rgba(250,204,21,.12), 0 0 .85rem .22rem rgba(249,115,22,.42);
+  }
+  to {
+    transform: rotate(50deg) scale(1.15);
+    filter: brightness(1.25);
+    box-shadow: 0 0 0 .3rem rgba(250,204,21,.18), 0 0 1.35rem .42rem rgba(249,115,22,.72);
+  }
+}
+
+@media (max-height: 760px) {
+  #screen-bomb-play .bomb-ignite-control {
+    width: 9.5rem;
+    min-height: 10.9rem;
+    gap: .36rem;
+  }
+
+  #screen-bomb-play .bomb-device {
+    width: 8.45rem;
+    height: 8.45rem;
+    transform: scale(.88);
+  }
+
+  #screen-bomb-play .bomb-body {
+    width: 6.9rem;
+    height: 6.9rem;
+  }
+
+  #screen-bomb-play .bomb-cap {
+    top: -.4rem;
+    right: .9rem;
+    transform: rotate(24deg) scale(.84);
+  }
+
+  #screen-bomb-play .bomb-fuse {
+    top: -.05rem;
+    right: -.65rem;
+    transform: rotate(-20deg) scale(.78);
+    transform-origin: left bottom;
+  }
+
+  #screen-bomb-play .bomb-ignite-copy {
+    min-height: 2.15rem;
+  }
+
+  #screen-bomb-play .bomb-ignite-copy strong {
+    font-size: .65rem;
+  }
+
+  #screen-bomb-play .bomb-ignite-copy small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #screen-bomb-play .bomb-ignite-control:not(.is-live):not(.is-exploded) .bomb-device,
+  #screen-bomb-play .bomb-ignite-control.is-live .bomb-spark {
+    animation: none !important;
+  }
+}
