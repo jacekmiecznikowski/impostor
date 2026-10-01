@@ -1,0 +1,354 @@
+/* Mobile-first polish for Tykająca Bomba. Loaded after ticking-bomb.css. */
+
+body[data-game="ticking-bomb"] {
+  overscroll-behavior-y: none;
+}
+
+body[data-game="ticking-bomb"] button,
+body[data-game="ticking-bomb"] .bomb-visual,
+body[data-game="ticking-bomb"] .bomb-prompt-card {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Active round: keep the important information inside one phone viewport. */
+#screen-bomb-play {
+  min-height: 100%;
+  gap: .65rem;
+  padding-bottom: max(.7rem, env(safe-area-inset-bottom));
+}
+
+#screen-bomb-play .bomb-prompt-card {
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 auto;
+  padding: .9rem 1rem 1rem;
+  border-color: rgba(251, 191, 36, .30);
+  background:
+    radial-gradient(circle at 50% -70%, rgba(251, 191, 36, .18), transparent 62%),
+    linear-gradient(180deg, rgba(124, 45, 18, .22), rgba(15, 12, 10, .72));
+  box-shadow: 0 14px 36px rgba(67, 20, 7, .20), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+#screen-bomb-play .bomb-prompt-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 18% 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(251,191,36,.45), transparent);
+}
+
+#screen-bomb-play .bomb-play-category {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.55rem;
+  padding: 0 .65rem;
+  border-radius: 999px;
+  letter-spacing: .14em;
+  color: #fde68a;
+  background: rgba(251, 191, 36, .08);
+  border: 1px solid rgba(251, 191, 36, .12);
+}
+
+#screen-bomb-play .bomb-prompt-card h2 {
+  max-width: 23rem;
+  margin-top: .55rem;
+  font-size: clamp(1.42rem, 6vw, 2.15rem);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+#screen-bomb-play .bomb-stage {
+  min-height: 0;
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: .72rem;
+  padding: .1rem 0;
+}
+
+#screen-bomb-play .bomb-visual {
+  flex: 0 0 auto;
+  width: clamp(8.8rem, 36vw, 11rem);
+  height: clamp(8.8rem, 36vw, 11rem);
+}
+
+#screen-bomb-play .bomb-body {
+  width: clamp(6.8rem, 28vw, 8.2rem);
+  height: clamp(6.8rem, 28vw, 8.2rem);
+  font-size: clamp(2.8rem, 12vw, 3.5rem);
+  box-shadow:
+    0 0 0 1px rgba(253,186,116,.38),
+    0 16px 40px rgba(249,115,22,.20),
+    0 0 42px rgba(251,191,36,.07);
+}
+
+#screen-bomb-play .bomb-play-status {
+  min-height: 1rem;
+  font-size: .72rem;
+  line-height: 1.25;
+  color: #a8a29e;
+}
+
+#screen-bomb-play .bomb-tracked-controls {
+  max-width: 24rem;
+  gap: .42rem;
+  padding: .8rem;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(249,115,22,.16);
+  background: rgba(15,12,10,.48);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+#screen-bomb-play .bomb-turn-label {
+  font-size: .64rem;
+  color: #fb923c;
+}
+
+#screen-bomb-play .bomb-current-player {
+  max-width: 100%;
+  padding: .05rem .4rem .18rem;
+  font-size: clamp(1.75rem, 8.5vw, 2.55rem);
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#screen-bomb-play .bomb-answer-btn {
+  min-height: 4.6rem;
+  margin-top: .25rem;
+  padding: .8rem 1.1rem;
+  border-radius: 1.35rem;
+  font-size: 1rem;
+  font-weight: 950;
+  letter-spacing: -.01em;
+  box-shadow: 0 14px 28px rgba(249,115,22,.18), inset 0 1px 0 rgba(255,255,255,.30);
+}
+
+#screen-bomb-play .bomb-answer-btn i {
+  width: 1.9rem;
+  height: 1.9rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(28,10,0,.10);
+}
+
+#screen-bomb-play .bomb-undo-btn {
+  min-height: 2.9rem;
+  padding: 0 .8rem;
+  border-radius: .9rem;
+  color: #d6d3d1;
+  font-size: .72rem;
+}
+
+#screen-bomb-play .bomb-undo-btn:not(:disabled) {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(120,113,108,.14);
+}
+
+#screen-bomb-play .bomb-manual-hint {
+  max-width: 23rem;
+  min-height: 3.3rem;
+  justify-content: center;
+  border-radius: 1.1rem;
+  padding: .75rem 1rem;
+  text-align: center;
+  font-size: .76rem;
+  line-height: 1.35;
+}
+
+#screen-bomb-play .bomb-play-actions {
+  flex: 0 0 auto;
+  gap: .55rem;
+  padding-top: .15rem;
+}
+
+#screen-bomb-play .bomb-play-actions .bomb-primary-btn,
+#screen-bomb-play .bomb-play-actions .bomb-ghost-btn {
+  min-height: 3.65rem;
+  border-radius: 1.1rem;
+  font-size: .8rem;
+}
+
+/* Result screen: strong BOOM hierarchy and comfortable selection on small phones. */
+#screen-bomb-result {
+  justify-content: flex-start;
+  gap: .85rem;
+  padding-top: .45rem;
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+#screen-bomb-result .bomb-result-hero {
+  flex: 0 0 auto;
+  padding: .55rem 0 .15rem;
+}
+
+#screen-bomb-result .bomb-result-burst {
+  width: 4.7rem;
+  height: 4.7rem;
+  margin-bottom: .65rem;
+  box-shadow: 0 16px 42px rgba(249,115,22,.26), 0 0 54px rgba(251,191,36,.08);
+}
+
+#screen-bomb-result #bomb-result-title {
+  margin: .3rem 0 .15rem;
+  font-size: clamp(2.7rem, 14vw, 4rem);
+  line-height: .9;
+  letter-spacing: -.06em;
+  color: #fff7ed;
+}
+
+#screen-bomb-result #bomb-result-subtitle {
+  margin: .4rem 0 0;
+  color: #a8a29e;
+  font-size: .84rem;
+}
+
+#screen-bomb-result .bomb-loser-card {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(249,115,22,.28);
+  background: linear-gradient(145deg, rgba(124,45,18,.22), rgba(15,12,10,.70));
+  box-shadow: 0 16px 36px rgba(67,20,7,.18);
+}
+
+#screen-bomb-result .bomb-loser-card strong {
+  overflow-wrap: anywhere;
+}
+
+#screen-bomb-result .bomb-manual-winner-block {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: .95rem;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(249,115,22,.18);
+  background: rgba(15,12,10,.52);
+}
+
+#screen-bomb-result .bomb-result-player-list {
+  max-height: min(42vh, 19rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding-right: .15rem;
+}
+
+#screen-bomb-result .bomb-result-player {
+  min-height: 3.55rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#screen-bomb-result .bomb-result-actions {
+  margin-top: auto;
+  padding-top: .15rem;
+}
+
+#screen-bomb-result .bomb-result-actions .bomb-primary-btn,
+#screen-bomb-result .bomb-result-actions .bomb-secondary-btn {
+  min-height: 3.8rem;
+}
+
+/* Android WebView: reserve the real status/navigation insets for the immersive round. */
+.partyjniak-native-android body[data-screen="bomb-play"] #app-main {
+  padding-top: calc(var(--partyjniak-status-safe) + .7rem) !important;
+  padding-bottom: max(.65rem, env(safe-area-inset-bottom)) !important;
+}
+
+.partyjniak-native-android body[data-screen="bomb-result"] #app-main {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+}
+
+/* Short devices: compress decoration, never the primary action. */
+@media (max-height: 760px) {
+  #screen-bomb-play {
+    gap: .42rem;
+  }
+
+  #screen-bomb-play .bomb-prompt-card {
+    padding: .72rem .85rem .8rem;
+  }
+
+  #screen-bomb-play .bomb-prompt-card h2 {
+    margin-top: .42rem;
+    font-size: clamp(1.25rem, 5.6vw, 1.75rem);
+  }
+
+  #screen-bomb-play .bomb-stage {
+    gap: .42rem;
+  }
+
+  #screen-bomb-play .bomb-visual {
+    width: 7.8rem;
+    height: 7.8rem;
+  }
+
+  #screen-bomb-play .bomb-body {
+    width: 6rem;
+    height: 6rem;
+    font-size: 2.55rem;
+  }
+
+  #screen-bomb-play .bomb-fuse {
+    transform: rotate(-18deg) scale(.82);
+  }
+
+  #screen-bomb-play .bomb-tracked-controls {
+    padding: .62rem .72rem;
+    gap: .3rem;
+  }
+
+  #screen-bomb-play .bomb-current-player {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+  }
+
+  #screen-bomb-play .bomb-answer-btn {
+    min-height: 4.15rem;
+  }
+
+  #screen-bomb-play .bomb-undo-btn {
+    min-height: 2.45rem;
+  }
+
+  #screen-bomb-result .bomb-result-burst {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  #screen-bomb-result #bomb-result-title {
+    font-size: clamp(2.4rem, 12vw, 3.25rem);
+  }
+
+  #screen-bomb-result .bomb-result-player-list {
+    max-height: 34vh;
+  }
+}
+
+@media (max-width: 360px) {
+  #screen-bomb-play .bomb-play-actions {
+    grid-template-columns: 1fr;
+  }
+
+  #screen-bomb-play .bomb-ghost-btn {
+    order: 2;
+  }
+
+  #screen-bomb-play .bomb-prompt-card h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #screen-bomb-play .bomb-visual.is-live .bomb-body,
+  #screen-bomb-play .bomb-visual.is-live .bomb-spark,
+  #screen-bomb-play .bomb-visual.is-exploded .bomb-body,
+  #screen-bomb-play .bomb-visual.is-exploded .bomb-shockwave {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
