@@ -157,6 +157,12 @@ const bombSetup = read('assets/js/games/ticking-bomb/setup.js');
 assert.match(bombSetup, /resetBombSession\(\)/);
 assert.match(bombSetup, /bombState\.hasSavedSession/);
 
+const tickingBombView = read('views/ticking-bomb.html');
+assert.match(tickingBombView, /id="bomb-visual"[^>]*bomb-ignite-control/);
+assert.match(tickingBombView, /onclick="igniteBomb\(\)"/);
+assert.match(tickingBombView, /DOTKNIJ, ABY ODPALIĆ/);
+assert.doesNotMatch(tickingBombView, /id="bomb-ignite-btn"/);
+
 const bombGame = read('assets/js/games/ticking-bomb/game.js');
 assert.match(bombGame, /resultTimeoutId/);
 assert.match(bombGame, /clearTimeout\(bombRuntime\.resultTimeoutId\)/);
@@ -164,6 +170,9 @@ assert.match(bombGame, /now - bombRuntime\.lastPassAt < 250/);
 assert.doesNotMatch(bombGame, /setInterval\(updateBombProgress/);
 assert.doesNotMatch(bombGame, /setBombTickRate\(/);
 assert.match(bombGame, /czas rundy pozostaje całkowicie ukryty/i);
+assert.match(bombGame, /BOMB_FUSE_PRESETS\.unstable/);
+assert.match(bombGame, /answerBtn\.disabled = true/);
+assert.match(bombGame, /answerBtn\.disabled = false/);
 
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 assert.match(bombIntegration, /Zasady Impostora/);
@@ -181,6 +190,10 @@ assert.match(bombMobileCss, /body\[data-screen="bomb-play"\] #app-main/);
 assert.match(bombMobileCss, /#screen-bomb-result \.bomb-result-player-list/);
 assert.match(bombMobileCss, /max-height: min\(42vh, 19rem\)/);
 assert.match(bombMobileCss, /@media \(max-height: 760px\)/);
+assert.match(bombMobileCss, /\.bomb-ignite-control/);
+assert.match(bombMobileCss, /\.bomb-device/);
+assert.match(bombMobileCss, /\.bomb-cap/);
+assert.match(bombMobileCss, /bomb-spark-live/);
 
 const bombThemeCss = read('assets/css/ticking-bomb-theme.css');
 assert.match(bombThemeCss, /body\[data-game="ticking-bomb"\] \.shell-logo\.is-game/);
@@ -196,9 +209,16 @@ assert.equal(bombContent.categories.reduce((sum, category) => sum + category.wor
 const background = read('assets/js/shared/background.js');
 assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
+assert.match(background, /buildPartyBackdrop/);
+assert.match(background, /buildImpostorBackdrop/);
+assert.match(background, /buildBombBackdrop/);
+assert.match(background, /motif: 'party'/);
+assert.match(background, /motif: 'impostor'/);
+assert.match(background, /motif: 'ticking-bomb'/);
+assert.match(background, /clearPartyjniakThemeMotifs/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v30'/);
+assert.match(sw, /CACHE_VERSION = 'v31'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
