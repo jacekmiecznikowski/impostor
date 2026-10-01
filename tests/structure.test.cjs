@@ -89,6 +89,14 @@ assert.match(index, /theme-color" content="#950f26"/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 assert.doesNotMatch(index, /id="screen-menu"/);
 
+const impostorSetupView = read('views/impostor-setup.html');
+assert.match(impostorSetupView, /GRAJ Z POPRZEDNIĄ EKIPĄ/);
+assert.doesNotMatch(impostorSetupView, /Wznów ostatnią sesję/);
+
+const impostorState = read('assets/js/games/impostor/state.js');
+assert.match(impostorState, /Poprzednia ekipa/);
+assert.match(impostorState, /zapisanej poprzedniej ekipy/);
+
 const platform = read('assets/js/shared/platform.js');
 assert.doesNotMatch(platform, /awake-mode-note|Ekran pozostanie włączony/);
 
@@ -184,7 +192,7 @@ assert.match(background, /if \(!PhaserLib\)/);
 assert.doesNotMatch(background, /class BackgroundScene extends Phaser\.Scene/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v28'/);
+assert.match(sw, /CACHE_VERSION = 'v29'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
