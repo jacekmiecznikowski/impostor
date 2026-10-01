@@ -22,6 +22,30 @@ const BOMB_FALLBACK_CONTENT = {
     discussionTips: []
 };
 
+function formatBombPromptLabel(value) {
+    return String(value || '')
+        .trim()
+        .replace(/^(wymieniajcie|mówcie)\s+/i, '')
+        .replace(/[.!?]+$/g, '')
+        .toLocaleUpperCase('pl-PL');
+}
+
+function normalizeBombPromptContent(content) {
+    if (!content || !Array.isArray(content.categories)) return content;
+    return {
+        ...content,
+        categories: content.categories.map(category => ({
+            ...category,
+            words: Array.isArray(category.words)
+                ? category.words.map(entry => ({
+                    ...entry,
+                    word: formatBombPromptLabel(entry?.word)
+                }))
+                : []
+        }))
+    };
+}
+
 async function initializeTickingBombContent() {
     let localContent = BOMB_FALLBACK_CONTENT;
 
@@ -40,7 +64,7 @@ async function initializeTickingBombContent() {
         remoteContent = await contentRepository.loadRemote('ticking-bomb', 'pl');
     } catch (_) {}
 
-    BOMB_CONTENT = remoteContent || localContent;
+    BOMB_CONTENT = normalizeBombPromptContent(remoteContent || localContent);
     BOMB_CATEGORIES = BOMB_CONTENT.categories || [];
     normalizeBombActiveCategories?.();
 }
