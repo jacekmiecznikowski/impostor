@@ -213,7 +213,7 @@ function renderBombResultScreen() {
     if (bombState.mode === 'tracked') {
         const loser = bombState.players.find(player => player.id === bombState.lastLoserId);
         if (title) title.textContent = 'BOOM!';
-        if (subtitle) subtitle.textContent = 'Bomba wybuchła w tej turze:';
+        if (subtitle) subtitle.textContent = 'Bomba wybuchła u:';
         if (loserCard) {
             loserCard.classList.remove('hidden');
             const name = loserCard.querySelector('[data-bomb-loser-name]');
