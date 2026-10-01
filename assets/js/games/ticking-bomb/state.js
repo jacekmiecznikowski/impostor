@@ -11,7 +11,7 @@ const bombState = {
     currentCategoryId: null,
     currentPlayerIndex: 0,
     lastLoserId: null,
-    manualWinnerId: null,
+    manualLoserId: null,
     roundNumber: 0,
     hasSavedSession: false
 };
@@ -110,7 +110,7 @@ function resetBombRoundState() {
     bombState.currentCategoryId = null;
     bombState.currentPlayerIndex = 0;
     bombState.lastLoserId = null;
-    bombState.manualWinnerId = null;
+    bombState.manualLoserId = null;
 }
 
 function resetBombSession() {
