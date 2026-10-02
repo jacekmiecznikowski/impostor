@@ -21,29 +21,17 @@ async function initializeApp() {
     }
 
     await initializeContentLayer();
-    if (typeof loadBombSession === 'function') loadBombSession();
+    loadGameSessions();
 
     setupGameHub();
     setupImpostorPresentation();
     if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
     setupSystemBackHandling();
     setupNativeAndroidIntegration?.();
-    loadSession();
-    normalizeActiveCategories();
-
-    const slider = document.getElementById('player-slider');
-    const playerCount = document.getElementById('player-count-big');
-    if (slider) slider.value = state.playerCount;
-    if (playerCount) playerCount.innerText = state.playerCount;
+    syncGameSessionUi();
 
     const audioIcon = document.getElementById('audio-icon');
     if (audioIcon) audioIcon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
-
-    updateHintModeUI();
-    setDiscussionTimer(state.discussionTime, { silent: true });
-    updateImpostorButtonsUI();
-    updateResumeButton();
-    if (typeof updateBombResumeButton === 'function') updateBombResumeButton();
 
     document.addEventListener('keydown', event => {
         if (event.key !== 'Escape') return;
