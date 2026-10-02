@@ -17,6 +17,8 @@ assert.doesNotMatch(bombView, /id="bomb-ignite-btn"/);
 assert.match(bombView, /U KOGO WYBUCHŁA BOMBA\?/);
 assert.match(bombView, /id="bomb-manual-loser-list"/);
 assert.doesNotMatch(bombView, /KTO WYGRYWA TĘ RUNDĘ\?/);
+assert.match(bombView, /bomb-art-cap" transform="translate\(145 80\) rotate\(45\)"/);
+assert.match(bombView, /M151 74 C160 62 166 52 178 46 C187 42 192 35 194 26/);
 
 const bombGame = read('assets/js/games/ticking-bomb/game.js');
 assert.doesNotMatch(bombGame, /setInterval\(\s*updateBombProgress/);
