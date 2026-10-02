@@ -67,7 +67,10 @@ assert.deepEqual(restored.activeCategories, ['food']);
 assert.equal(restored.roundNumber, 7);
 assert.equal(restored.hasSavedSession, true);
 
+// Symulacja świeżego startu aplikacji z uszkodzonym localStorage: stan pamięci
+// nie może dziedziczyć kategorii z wcześniejszego scenariusza testowego.
 storage.set(storageKey, '{invalid json');
+run('bombState.activeCategories = []');
 run('loadBombSession()');
 const fallback = snapshot();
 assert.equal(fallback.playerCount, 4);
