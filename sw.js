@@ -46,7 +46,7 @@ const LOCAL_ASSETS = [
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
   './assets/js/shared/content-repository.js',
-  './assets/js/shared/game-registry.js',
+  './assets/js/shared/game-registry.js?v=1',
   './assets/js/shared/ui.js',
   './assets/js/shared/hub.js',
   './assets/js/shared/navigation-behavior.js',
@@ -61,15 +61,15 @@ const LOCAL_ASSETS = [
   './assets/js/games/impostor/presentation.js',
   './assets/js/games/impostor/reveal-fit.js',
   './assets/js/games/impostor/scoreboard.js',
-  './assets/js/games/impostor/integration.js',
+  './assets/js/games/impostor/integration.js?v=1',
   './assets/js/games/ticking-bomb/content-provider.js',
   './assets/js/games/ticking-bomb/state.js',
   './assets/js/games/ticking-bomb/audio.js',
   './assets/js/games/ticking-bomb/setup.js',
   './assets/js/games/ticking-bomb/game.js',
   './assets/js/games/ticking-bomb/scoreboard.js',
-  './assets/js/games/ticking-bomb/integration.js',
-  './assets/js/app.js'
+  './assets/js/games/ticking-bomb/integration.js?v=1',
+  './assets/js/app.js?v=1'
 ];
 
 const EXTERNAL_ASSETS = [
