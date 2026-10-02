@@ -27,9 +27,9 @@ vm.createContext(sandbox);
 vm.runInContext(`${source}\n;globalThis.__pwaTest = { CACHE_VERSION, STATIC_CACHE, RUNTIME_CACHE, LOCAL_ASSETS: [...LOCAL_ASSETS], EXTERNAL_ASSETS: [...EXTERNAL_ASSETS] };`, sandbox);
 
 const config = sandbox.__pwaTest;
-assert.equal(config.CACHE_VERSION, 'v39');
-assert.equal(config.STATIC_CACHE, 'partyjniak-static-v39');
-assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v39');
+assert.equal(config.CACHE_VERSION, 'v40');
+assert.equal(config.STATIC_CACHE, 'partyjniak-static-v40');
+assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v40');
 assert.equal(new Set(config.LOCAL_ASSETS).size, config.LOCAL_ASSETS.length, 'precache should not contain duplicates');
 
 [
@@ -40,7 +40,9 @@ assert.equal(new Set(config.LOCAL_ASSETS).size, config.LOCAL_ASSETS.length, 'pre
   './assets/audio/bomb-explosion.b64',
   './assets/audio/crewmates-win.mp3.b64',
   './assets/css/game-color-system.css',
+  './assets/css/player-setup.css',
   './assets/css/brand-theme.css',
+  './assets/js/shared/player-setup.js',
   './assets/js/shared/game-themes.js',
   './assets/js/shared/game-registry.js?v=2',
   './assets/js/games/index.js?v=1',
