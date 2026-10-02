@@ -74,17 +74,12 @@ export function registerImpostorGame() {
             },
             'setup-count': {
                 backTarget: 'menu',
-                shell: { title: 'Liczba graczy', subtitle: 'Impostor • krok 1 z 3', mode: 'contextual' },
-                background: 'impostor'
-            },
-            'setup-names': {
-                backTarget: 'setup-count',
-                shell: { title: 'Imiona graczy', subtitle: 'Impostor • krok 2 z 3', mode: 'contextual' },
+                shell: { title: 'Gracze', subtitle: 'Impostor • krok 1 z 2', mode: 'contextual' },
                 background: 'impostor'
             },
             'setup-options': {
-                backTarget: 'setup-names',
-                shell: { title: 'Ustawienia rundy', subtitle: 'Impostor • krok 3 z 3', mode: 'contextual' },
+                backTarget: 'setup-count',
+                shell: { title: 'Ustawienia rundy', subtitle: 'Impostor • krok 2 z 2', mode: 'contextual' },
                 background: 'impostor'
             },
             pass: {
@@ -124,10 +119,7 @@ export function registerImpostorGame() {
             getPlayers: () => state.players,
             syncUi() {
                 normalizeActiveCategories();
-                const slider = document.getElementById('player-slider');
-                const playerCount = document.getElementById('player-count-big');
-                if (slider) slider.value = state.playerCount;
-                if (playerCount) playerCount.innerText = state.playerCount;
+                renderImpostorPlayerSetup();
                 updateHintModeUI();
                 setDiscussionTimer(state.discussionTime, { silent: true });
                 updateImpostorButtonsUI();
