@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const TickingBombRules = require('../assets/js/games/ticking-bomb/rules.js');
 
 const source = fs.readFileSync(path.join(__dirname, '../assets/js/games/ticking-bomb/state.js'), 'utf8');
 const storage = new Map();
@@ -11,6 +12,7 @@ const sandbox = {
   console,
   Math,
   Date,
+  TickingBombRules,
   BOMB_CATEGORIES: [
     { id: 'animals', name: 'Zwierzęta' },
     { id: 'food', name: 'Jedzenie' }
