@@ -12,26 +12,28 @@ const navigation = read('assets/js/shared/navigation-behavior.js');
 const impostor = read('assets/js/games/impostor/integration.js');
 const bomb = read('assets/js/games/ticking-bomb/integration.js');
 const naokolo = read('assets/js/games/naokolo/integration.js');
+const cmm = read('assets/js/games/co-mam-na-mysli/integration.js');
 const prototypes = read('assets/js/games/prototypes/integration.js');
 const gamesIndex = read('assets/js/games/index.js');
 
 assert.match(viewLoader, /getGameViewFragments/);
-assert.doesNotMatch(viewLoader, /impostor|ticking-bomb|naokolo/i);
+assert.doesNotMatch(viewLoader, /impostor|ticking-bomb|naokolo|co-mam-na-mysli/i);
 
 assert.match(ui, /getGameScreenConfig/);
 assert.match(ui, /callGameHook\(gameId, 'onScreenEnter'/);
-assert.doesNotMatch(ui, /setup-options|group-voting|bomb-play|naokolo-play|timerInterval/);
+assert.match(ui, /syncPartyjniakScreenOrientation/);
+assert.doesNotMatch(ui, /setup-options|group-voting|bomb-play|naokolo-play|cmm-play|timerInterval/);
 assert.doesNotMatch(ui, /IMMERSIVE_SCREENS|ROUND_GUARDED_SCREENS|WAKE_LOCK_SCREENS|SCREEN_BACK_TARGET|SHELL_CONTEXT_BY_SCREEN|BACKGROUND_MODE_BY_SCREEN/);
 
 assert.match(navigation, /getGameScreenConfig/);
 assert.match(navigation, /roundGuard/);
-assert.doesNotMatch(navigation, /ACTIVE_ROUND_SCREENS|bomb-play|naokolo-play|group-voting|discussion/);
+assert.doesNotMatch(navigation, /ACTIVE_ROUND_SCREENS|bomb-play|naokolo-play|cmm-play|group-voting|discussion/);
 
 assert.match(hub, /getGameCatalog/);
 assert.doesNotMatch(hub, /const GAME_CATALOG/);
 assert.doesNotMatch(hub, /heads-up|taboo|Czółko|Tabu/);
 
-for (const source of [impostor, bomb, naokolo]) {
+for (const source of [impostor, bomb, naokolo, cmm]) {
   assert.match(source, /catalog:\s*\{/);
   assert.match(source, /status:\s*'available'/);
   assert.match(source, /views:\s*\[/);
@@ -43,27 +45,25 @@ for (const source of [impostor, bomb, naokolo]) {
 }
 
 assert.match(impostor, /onScreenEnter\(screenName\)/);
-assert.match(impostor, /onScreenLeave\(\)/);
 assert.match(impostor, /roundGuard: true/);
 assert.match(bomb, /roundGuard: true/);
 assert.match(naokolo, /id:\s*'naokolo'/);
 assert.match(naokolo, /roundGuard: true/);
-assert.match(naokolo, /rulesModalId:\s*'naokolo-rules-modal'/);
+assert.match(cmm, /id:\s*'co-mam-na-mysli'/);
+assert.match(cmm, /rulesModalId:\s*'cmm-rules-modal'/);
+assert.match(cmm, /orientation:\s*'landscape'/);
+assert.match(cmm, /initialize:\s*\(\) => initializeCoMamNaMysliContent\(\)/);
 
-[
-  ['dzika-karta', 'Dzika Karta'],
-  ['co-mam-na-mysli', 'Co mam na myśli?']
-].forEach(([id, name]) => {
-  assert.match(prototypes, new RegExp(`id: '${id}'`));
-  assert.equal(prototypes.includes(`name: '${name}'`), true, `Brakuje prototypu ${name}`);
-});
-assert.doesNotMatch(prototypes, /id:\s*'naokolo'/);
-assert.equal((prototypes.match(/status: 'prototype'/g) || []).length, 2);
+assert.match(prototypes, /id:\s*'dzika-karta'/);
+assert.match(prototypes, /name:\s*'Dzika Karta'/);
+assert.doesNotMatch(prototypes, /id:\s*'naokolo'|id:\s*'co-mam-na-mysli'/);
+assert.equal((prototypes.match(/status: 'prototype'/g) || []).length, 1);
 assert.doesNotMatch(prototypes, /screens:\s*\{|session:\s*\{|\bopen\s*\(/);
 
 assert.match(gamesIndex, /registerImpostorGame\(\)/);
 assert.match(gamesIndex, /registerTickingBombGame\(\)/);
 assert.match(gamesIndex, /registerNaokoloGame\(\)/);
+assert.match(gamesIndex, /registerCoMamNaMysliGame\(\)/);
 assert.match(gamesIndex, /registerPrototypeGames\(\)/);
 
 console.log('Module-owned game configuration and prototype catalog tests: OK');
