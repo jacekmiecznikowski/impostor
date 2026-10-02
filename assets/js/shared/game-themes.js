@@ -132,7 +132,21 @@ function renderPartyjniakThemeMotifs(modeName) {
     }
 }
 
+function assignCatalogCardIds() {
+    const catalog = typeof getGameCatalog === 'function' ? getGameCatalog() : [];
+    const available = catalog.filter(game => game.status === 'available');
+    const prototypes = catalog.filter(game => game.status !== 'available');
+
+    document.querySelectorAll('.game-card-primary').forEach((card, index) => {
+        if (!card.dataset.gameId && available[index]) card.dataset.gameId = available[index].id;
+    });
+    document.querySelectorAll('.upcoming-card').forEach((card, index) => {
+        if (!card.dataset.gameId && prototypes[index]) card.dataset.gameId = prototypes[index].id;
+    });
+}
+
 function decorateGameCards() {
+    assignCatalogCardIds();
     document.querySelectorAll('[data-game-id]').forEach(card => {
         const gameId = card.dataset.gameId;
         const theme = getPartyjniakGameTheme(gameId);
@@ -176,10 +190,19 @@ function initializePartyjniakThemes() {
     queueMicrotask(decorateGameCards);
 }
 
-const themeObserver = new MutationObserver(() => {
-    if (themesInitialized) decorateGameCards();
+const themeObserver = new MutationObserver(mutations => {
+    if (!themesInitialized) return;
+    if (mutations.some(mutation => mutation.type === 'attributes' && mutation.attributeName === 'data-game')) {
+        applyPartyjniakGameTheme(document.body?.dataset?.game || 'home');
+    }
+    decorateGameCards();
 });
-themeObserver.observe(document.documentElement, { childList: true, subtree: true });
+themeObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-game']
+});
 
 window.addEventListener('load', () => {
     renderPartyjniakThemeMotifs(backgroundMode);
