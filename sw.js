@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v35';
+const CACHE_VERSION = 'v36';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -63,6 +63,7 @@ const LOCAL_ASSETS = [
   './assets/js/games/impostor/scoreboard.js',
   './assets/js/games/impostor/integration.js?v=1',
   './assets/js/games/ticking-bomb/content-provider.js',
+  './assets/js/games/ticking-bomb/rules.js',
   './assets/js/games/ticking-bomb/state.js',
   './assets/js/games/ticking-bomb/audio.js',
   './assets/js/games/ticking-bomb/setup.js',
