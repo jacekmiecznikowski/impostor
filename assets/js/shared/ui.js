@@ -47,11 +47,6 @@ function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) 
 
     if (!silent && previousScreen !== screenName) playSound('click');
 
-    if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-    }
-
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.add('hidden');
         screen.classList.remove('flex', 'screen-enter-forward', 'screen-enter-back');
