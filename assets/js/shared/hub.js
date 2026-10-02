@@ -1,9 +1,6 @@
-const GAME_CATALOG = [
-    { id: 'impostor', name: 'Impostor', description: 'Dedukcja, blef i szukanie osoby, która nie zna hasła.', icon: 'fa-user-secret', status: 'available' },
-    { id: 'ticking-bomb', name: 'Tykająca Bomba', description: 'Szybkie odpowiedzi, ukryty lont i telefon, którego nikt nie chce trzymać przy BOOM.', icon: 'fa-bomb', status: 'available' },
-    { id: 'heads-up', name: 'Czółko', description: 'Zgaduj hasło dzięki podpowiedziom znajomych.', icon: 'fa-face-grin-stars', status: 'coming-soon' },
-    { id: 'taboo', name: 'Tabu', description: 'Opisuj hasła bez używania zakazanych słów.', icon: 'fa-comment-slash', status: 'coming-soon' }
-];
+function getPartyjniakCatalog() {
+    return typeof getGameCatalog === 'function' ? getGameCatalog() : [];
+}
 
 function ensurePartyjniakStylesheet() {
     const href = './assets/css/partyjniak.css';
@@ -31,7 +28,7 @@ function ensureNavigationSheet() {
             <p>Możesz wrócić do gry albo zakończyć bieżącą rundę. Punkty i zapisani gracze zostaną zachowani.</p>
             <div class="navigation-sheet-actions">
                 <button type="button" data-sheet-primary class="primary-btn" onclick="closeNavigationSheet()"><i class="fa-solid fa-play" aria-hidden="true"></i><span>Graj dalej</span></button>
-                <button type="button" class="secondary-btn" onclick="leaveActiveRound('menu')"><i class="fa-solid fa-user-secret" aria-hidden="true"></i><span>Menu gry</span></button>
+                <button type="button" class="secondary-btn" onclick="leaveActiveRound('menu')"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span>Menu gry</span></button>
                 <button type="button" class="navigation-sheet-link" onclick="leaveActiveRound('home')"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i><span>Wszystkie gry</span></button>
             </div>
         </div>`;
@@ -64,7 +61,7 @@ function setupAppShell() {
             <button id="shell-rules-action" type="button" class="shell-menu-item hidden" onclick="openCurrentRules()"><i class="fa-solid fa-book-open"></i><span>Zasady gry</span></button>
             <div class="shell-menu-divider"></div>
             <button type="button" class="shell-menu-item" onclick="openModal('about-modal')"><i class="fa-solid fa-circle-info"></i><span>O Partyjniaku</span></button>
-            <button id="shell-game-menu-action" type="button" class="shell-menu-item hidden" onclick="requestLeaveGame('menu')"><i class="fa-solid fa-user-secret"></i><span>Menu gry</span></button>
+            <button id="shell-game-menu-action" type="button" class="shell-menu-item hidden" onclick="requestLeaveGame('menu')"><i class="fa-solid fa-gamepad"></i><span>Menu gry</span></button>
             <button id="shell-exit-action" type="button" class="shell-menu-item hidden" onclick="requestLeaveGame('home')"><i class="fa-solid fa-table-cells-large"></i><span>Wszystkie gry</span></button>
         </div>`;
 
@@ -77,6 +74,7 @@ function setupGameHub() {
 
     const main = document.querySelector('main');
     if (!main) return;
+    const catalog = getPartyjniakCatalog();
 
     if (!document.getElementById('screen-home')) {
         const home = document.createElement('section');
@@ -90,7 +88,7 @@ function setupGameHub() {
         const library = document.createElement('div');
         library.className = 'game-library';
 
-        GAME_CATALOG.filter(game => game.status === 'available').forEach(game => {
+        catalog.filter(game => game.status === 'available').forEach(game => {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'game-card-primary';
@@ -123,27 +121,30 @@ function setupGameHub() {
         installButton.innerHTML = '<i class="fa-solid fa-mobile-screen-button text-violet-300"></i><span>Zainstaluj Partyjniaka</span>';
         library.appendChild(installButton);
 
-        const upcomingLabel = document.createElement('p');
-        upcomingLabel.className = 'upcoming-label';
-        upcomingLabel.textContent = 'Następne gry';
-        library.appendChild(upcomingLabel);
+        const prototypes = catalog.filter(game => game.status !== 'available');
+        if (prototypes.length) {
+            const upcomingLabel = document.createElement('p');
+            upcomingLabel.className = 'upcoming-label';
+            upcomingLabel.textContent = 'Prototypy kolejnych gier';
+            library.appendChild(upcomingLabel);
 
-        const upcomingGrid = document.createElement('div');
-        upcomingGrid.className = 'upcoming-grid';
-        GAME_CATALOG.filter(game => game.status === 'coming-soon').forEach(game => {
-            const card = document.createElement('article');
-            card.className = 'upcoming-card';
-            const icon = document.createElement('i');
-            icon.className = `fa-solid ${game.icon}`;
-            icon.setAttribute('aria-hidden', 'true');
-            const name = document.createElement('strong');
-            name.textContent = game.name;
-            const description = document.createElement('small');
-            description.textContent = game.description;
-            card.append(icon, name, description);
-            upcomingGrid.appendChild(card);
-        });
-        library.appendChild(upcomingGrid);
+            const upcomingGrid = document.createElement('div');
+            upcomingGrid.className = 'upcoming-grid';
+            prototypes.forEach(game => {
+                const card = document.createElement('article');
+                card.className = 'upcoming-card';
+                const icon = document.createElement('i');
+                icon.className = `fa-solid ${game.icon}`;
+                icon.setAttribute('aria-hidden', 'true');
+                const name = document.createElement('strong');
+                name.textContent = game.name;
+                const description = document.createElement('small');
+                description.textContent = `Prototyp • ${game.description}`;
+                card.append(icon, name, description);
+                upcomingGrid.appendChild(card);
+            });
+            library.appendChild(upcomingGrid);
+        }
 
         home.append(hero, library);
         main.prepend(home);
@@ -151,8 +152,12 @@ function setupGameHub() {
 
     const about = document.querySelector('#about-modal .text-sm');
     if (about) {
-        const availableNames = GAME_CATALOG.filter(game => game.status === 'available').map(game => game.name);
-        about.innerHTML = `<p><strong>Partyjniak</strong> to kolekcja mobilnych gier imprezowych na jeden telefon.</p><p>Dostępne gry: <strong>${availableNames.join('</strong> i <strong>')}</strong>. Kolejne tryby będą korzystać z tego samego wspólnego huba.</p>`;
+        const availableNames = catalog.filter(game => game.status === 'available').map(game => game.name);
+        const prototypeNames = catalog.filter(game => game.status !== 'available').map(game => game.name);
+        const prototypesCopy = prototypeNames.length
+            ? `<p>W przygotowaniu: <strong>${prototypeNames.join('</strong>, <strong>')}</strong>.</p>`
+            : '';
+        about.innerHTML = `<p><strong>Partyjniak</strong> to kolekcja mobilnych gier imprezowych na jeden telefon.</p><p>Dostępne gry: <strong>${availableNames.join('</strong> i <strong>')}</strong>.</p>${prototypesCopy}`;
     }
 
     const resetButton = document.querySelector('#score-modal .secondary-btn');
@@ -181,17 +186,11 @@ function toggleShellMenu(force) {
 function closeShellMenu() { toggleShellMenu(false); }
 
 function openGame(gameId, { silent = false } = {}) {
-    const game = GAME_CATALOG.find(item => item.id === gameId);
+    const gameModule = getGameModule(gameId);
+    const game = gameModule?.catalog;
     if (!game) return;
     if (game.status !== 'available') {
-        showToast('Wkrótce', `${game.name} pojawi się w jednej z kolejnych wersji Partyjniaka.`, 'fa-solid fa-hourglass-half');
-        return;
-    }
-
-    const gameModule = getGameModule(gameId);
-    if (!gameModule) {
-        console.warn(`Brak zarejestrowanego modułu gry: ${gameId}`);
-        showToast('Gra niedostępna', 'Nie udało się uruchomić tego trybu. Odśwież aplikację i spróbuj ponownie.');
+        showToast('Prototyp', `${game.name} ma już zarezerwowane miejsce w Partyjniaku. Mechanikę dodamy w kolejnych etapach.`, 'fa-solid fa-flask');
         return;
     }
 
