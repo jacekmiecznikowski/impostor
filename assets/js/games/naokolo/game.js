@@ -171,6 +171,8 @@ function finishNaokoloTurn() {
         player.turns = (Number(player.turns) || 0) + 1;
     }
     naokoloState.roundNumber += 1;
+    const next = NaokoloRules.nextPlayerIndex(naokoloState.currentPlayerIndex, naokoloState.players.length);
+    if (next >= 0) naokoloState.currentPlayerIndex = next;
     persistNaokoloSession();
     renderNaokoloResult(summary, player);
     playSound?.('success');
@@ -192,10 +194,7 @@ function renderNaokoloResult(summary, player) {
 }
 
 function startNextNaokoloTurn() {
-    const next = NaokoloRules.nextPlayerIndex(naokoloState.currentPlayerIndex, naokoloState.players.length);
-    if (next < 0) return;
-    naokoloState.currentPlayerIndex = next;
-    persistNaokoloSession();
+    if (!naokoloState.players.length) return;
     resetNaokoloRuntime();
     renderNaokoloReadyScreen();
     goToScreen('naokolo-ready');
