@@ -31,6 +31,9 @@ assert.match(index, /assets\/js\/shared\/player-setup\.js/);
 assert.match(index, /assets\/js\/games\/naokolo\/game\.js/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 
+const prepareWeb = read('scripts/prepare-web.mjs');
+assert.match(prepareWeb, /\['assets', 'views', 'content'\]/, 'Android web bundle must include game content JSON files');
+
 const capacitor = JSON.parse(read('capacitor.config.json'));
 assert.equal(capacitor.appId, 'pl.partyjniak.app');
 assert.equal(capacitor.appName, 'Partyjniak');
@@ -54,5 +57,6 @@ assert.match(pkg.scripts.test, /game-theme-system\.test\.cjs/);
 assert.match(pkg.scripts.test, /player-setup\.test\.cjs/);
 assert.match(pkg.scripts.test, /naokolo-content\.test\.cjs/);
 assert.match(pkg.scripts.test, /naokolo-rules\.test\.cjs/);
+assert.match(pkg.scripts.test, /naokolo-state\.test\.cjs/);
 
 console.log('Partyjniak packaging and configuration smoke tests: OK');
