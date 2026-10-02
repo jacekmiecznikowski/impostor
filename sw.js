@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v39';
+const CACHE_VERSION = 'v40';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -21,6 +21,7 @@ const LOCAL_ASSETS = [
   './assets/css/ticking-bomb-mobile.css',
   './assets/css/ticking-bomb-visual.css?v=3',
   './assets/css/game-color-system.css',
+  './assets/css/player-setup.css',
   './assets/css/partyjniak.css',
   './assets/css/navigation.css',
   './assets/css/navigation-android.css',
@@ -41,6 +42,7 @@ const LOCAL_ASSETS = [
   './assets/audio/bomb-explosion.b64',
   './assets/js/shared/view-loader.js',
   './assets/js/shared/audio.js',
+  './assets/js/shared/player-setup.js',
   './assets/js/shared/outcome-audio.js?v=6',
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
