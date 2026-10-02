@@ -1,6 +1,6 @@
-import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js';
-import { registerImpostorGame } from './games/impostor/integration.js';
-import { registerTickingBombGame } from './games/ticking-bomb/integration.js';
+import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=1';
+import { registerImpostorGame } from './games/impostor/integration.js?v=1';
+import { registerTickingBombGame } from './games/ticking-bomb/integration.js?v=1';
 
 function registerGameModules() {
     registerImpostorGame();
