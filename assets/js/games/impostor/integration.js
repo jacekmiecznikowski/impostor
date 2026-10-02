@@ -88,6 +88,11 @@ export function registerImpostorGame() {
         open({ silent = false } = {}) {
             goToScreen('menu', { silent });
         },
+        onScreenLeave() {
+            if (!timerInterval) return;
+            clearInterval(timerInterval);
+            timerInterval = null;
+        },
         onScreenEnter(screenName) {
             if (screenName === 'setup-options') {
                 renderCategoriesGrid();
