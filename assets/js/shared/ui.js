@@ -1,37 +1,11 @@
-const IMMERSIVE_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting', 'results']);
-const ROUND_GUARDED_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting']);
-const WAKE_LOCK_SCREENS = new Set(['pass', 'reveal', 'discussion', 'group-voting']);
-const SCREEN_BACK_TARGET = {
-    menu: 'home',
-    'setup-count': 'menu',
-    'setup-names': 'setup-count',
-    'setup-options': 'setup-names',
-    results: 'menu'
-};
-const SHELL_CONTEXT_BY_SCREEN = {
-    home: { title: 'Partyjniak', subtitle: 'gry imprezowe', mode: 'home' },
-    menu: { title: 'Impostor', subtitle: 'Menu gry', mode: 'menu' },
-    'setup-count': { title: 'Liczba graczy', subtitle: 'Impostor • krok 1 z 3', mode: 'contextual' },
-    'setup-names': { title: 'Imiona graczy', subtitle: 'Impostor • krok 2 z 3', mode: 'contextual' },
-    'setup-options': { title: 'Ustawienia rundy', subtitle: 'Impostor • krok 3 z 3', mode: 'contextual' },
-    pass: { title: 'Impostor', subtitle: 'Rozgrywka', mode: 'immersive' },
-    reveal: { title: 'Impostor', subtitle: 'Rozgrywka', mode: 'immersive' },
-    discussion: { title: 'Impostor', subtitle: 'Dyskusja', mode: 'immersive' },
-    'group-voting': { title: 'Impostor', subtitle: 'Głosowanie', mode: 'immersive' },
-    results: { title: 'Impostor', subtitle: 'Wynik rundy', mode: 'immersive' }
-};
-const BACKGROUND_MODE_BY_SCREEN = {
-    home: 'party',
-    menu: 'impostor',
-    'setup-count': 'impostor',
-    'setup-names': 'impostor',
-    'setup-options': 'impostor',
-    pass: 'mystery',
-    reveal: 'mystery',
-    discussion: 'discussion',
-    'group-voting': 'vote',
-    results: 'celebrate'
-};
+const HOME_SCREEN_CONFIG = Object.freeze({
+    shell: { title: 'Partyjniak', subtitle: 'gry imprezowe', mode: 'home' },
+    background: 'party',
+    immersive: false,
+    roundGuard: false,
+    wakeLock: false,
+    backTarget: null
+});
 
 let systemBackGuardArmed = false;
 let suppressNextPopState = false;
@@ -40,8 +14,13 @@ function getCurrentScreenName() {
     return document.body.dataset.screen || 'home';
 }
 
+function getScreenUiConfig(screenName) {
+    if (!screenName || screenName === 'home') return HOME_SCREEN_CONFIG;
+    return getGameScreenConfig?.(screenName) || HOME_SCREEN_CONFIG;
+}
+
 function isRoundInProgress() {
-    return ROUND_GUARDED_SCREENS.has(getCurrentScreenName());
+    return Boolean(getScreenUiConfig(getCurrentScreenName()).roundGuard);
 }
 
 function animateScreenEntry(screen, direction) {
@@ -88,35 +67,19 @@ function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) 
     updateShellContext(screenName);
     syncSystemBackGuard(screenName);
 
-    if (screenName === 'setup-options') {
-        renderCategoriesGrid();
-        updateImpostorButtonsUI();
-    } else if (screenName === 'discussion' && state.players.length > 0) {
-        const randomPlayer = state.players[Math.floor(Math.random() * state.players.length)];
-        state.startingPlayerName = randomPlayer.name;
-        const starter = document.getElementById('starting-player-name');
-        if (starter) starter.innerText = randomPlayer.name;
-
-        const tips = Array.isArray(DISCUSSION_TIPS) && DISCUSSION_TIPS.length > 0
-            ? DISCUSSION_TIPS
-            : ['Zadawajcie pytania tak, żeby nie zdradzić hasła.'];
-        const randomTip = tips[Math.floor(Math.random() * tips.length)];
-        const tipElement = document.getElementById('discussion-tip');
-        if (tipElement) tipElement.innerText = `“${randomTip}”`;
-        setupDiscussionTimer();
-    } else if (screenName === 'group-voting') {
-        renderGroupVotingScreen();
-    }
+    const gameId = getGameIdForScreen(screenName);
+    if (gameId !== 'home') callGameHook(gameId, 'onScreenEnter', screenName, previousScreen);
 
     return true;
 }
 
 function updateShellContext(screenName) {
-    const context = SHELL_CONTEXT_BY_SCREEN[screenName] || SHELL_CONTEXT_BY_SCREEN.home;
+    const screenConfig = getScreenUiConfig(screenName);
+    const context = screenConfig.shell || HOME_SCREEN_CONFIG.shell;
     const gameId = getGameIdForScreen(screenName);
     const gameModule = gameId === 'home' ? null : getGameModule(gameId);
     const isHome = screenName === 'home';
-    const immersive = IMMERSIVE_SCREENS.has(screenName);
+    const immersive = Boolean(screenConfig.immersive);
     const shell = document.getElementById('app-shell');
     const backButton = document.getElementById('shell-back-btn');
     const shellTitle = document.getElementById('shell-title');
@@ -137,7 +100,7 @@ function updateShellContext(screenName) {
     shell?.classList.toggle('is-menu', context.mode === 'menu');
 
     if (backButton) {
-        const canGoBack = Boolean(SCREEN_BACK_TARGET[screenName]) && !immersive;
+        const canGoBack = Boolean(screenConfig.backTarget) && !immersive;
         backButton.classList.toggle('hidden', !canGoBack);
         backButton.setAttribute('aria-label', screenName === gameModule?.menuScreen ? 'Wróć do wyboru gier' : 'Wróć');
     }
@@ -179,8 +142,8 @@ function updateShellContext(screenName) {
     if (sheetMenuLabel) sheetMenuLabel.textContent = gameModule?.shellLabels?.menu || 'Menu gry';
 
     closeShellMenu?.();
-    setBackgroundMode?.(BACKGROUND_MODE_BY_SCREEN[screenName] || 'party');
-    setGameAwakeMode?.(WAKE_LOCK_SCREENS.has(screenName));
+    setBackgroundMode?.(screenConfig.background || 'party');
+    setGameAwakeMode?.(Boolean(screenConfig.wakeLock));
 }
 
 function navigateBack({ fromSystem = false } = {}) {
@@ -203,14 +166,14 @@ function navigateBack({ fromSystem = false } = {}) {
     }
 
     const currentScreen = getCurrentScreenName();
-    if (ROUND_GUARDED_SCREENS.has(currentScreen)) {
+    const screenConfig = getScreenUiConfig(currentScreen);
+    if (screenConfig.roundGuard) {
         openNavigationSheet();
         return true;
     }
 
-    const target = SCREEN_BACK_TARGET[currentScreen];
-    if (target) {
-        goToScreen(target, { direction: 'back' });
+    if (screenConfig.backTarget) {
+        goToScreen(screenConfig.backTarget, { direction: 'back' });
         return true;
     }
 
@@ -231,18 +194,6 @@ function requestLeaveGame(destination = 'home') {
     goToScreen(target || 'home', { direction: 'back' });
 }
 
-function clearTransientRoundState() {
-    if (typeof state !== 'object' || !state) return;
-    state.currentTurnPlayerIndex = 0;
-    state.secretWord = '';
-    state.secretHint = '';
-    state.impostorIds = [];
-    state.playerRoles = {};
-    state.startingPlayerName = '';
-    state.selectedVotedPlayerId = null;
-    if (typeof resetRevealCardPresentation === 'function') resetRevealCardPresentation();
-}
-
 function leaveActiveRound(destination) {
     const gameModule = getActiveGameModule();
     if (typeof gameModule?.leaveRound === 'function') {
@@ -250,7 +201,6 @@ function leaveActiveRound(destination) {
         return;
     }
 
-    clearTransientRoundState();
     closeNavigationSheet();
     setGameAwakeMode?.(false);
     goToScreen(destination === 'home' ? 'home' : (gameModule?.menuScreen || 'home'), { direction: 'back' });
@@ -326,7 +276,7 @@ function openModal(modalId) {
     if (modalId === 'score-modal') {
         const gameModule = getActiveGameModule();
         if (typeof gameModule?.renderScoreboard === 'function') gameModule.renderScoreboard();
-        else renderScoreboardModal?.();
+        else if (typeof renderScoreboardModal === 'function') renderScoreboardModal();
     }
     requestAnimationFrame(() => modal.querySelector('button')?.focus());
 }
