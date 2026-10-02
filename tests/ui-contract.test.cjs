@@ -8,6 +8,23 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const impostorSetup = read('views/impostor-setup.html');
 assert.match(impostorSetup, /GRAJ Z POPRZEDNIĄ EKIPĄ/);
 assert.doesNotMatch(impostorSetup, /Wznów ostatnią sesję/);
+assert.match(impostorSetup, /player-setup-screen/);
+assert.match(impostorSetup, /id="name-inputs-container"/);
+assert.doesNotMatch(impostorSetup, /id="screen-setup-names"/);
+assert.match(impostorSetup, /Krok 2 z 2/);
+
+const impostorPlayerSetup = read('assets/js/games/impostor/setup.js');
+const bombPlayerSetup = read('assets/js/games/ticking-bomb/setup.js');
+for (const source of [impostorPlayerSetup, bombPlayerSetup]) {
+  assert.match(source, /renderPlayerSetupNames\(/);
+  assert.match(source, /syncPlayerSetupCount\(/);
+  assert.match(source, /playPlayerSetupCountFeedback\(\)/);
+}
+
+const sharedPlayerSetup = read('assets/css/player-setup.css');
+assert.match(sharedPlayerSetup, /--ui-accent/);
+assert.match(sharedPlayerSetup, /\.player-setup-name-row/);
+assert.match(sharedPlayerSetup, /#screen-bomb-players \.bomb-setup-card/);
 
 const bombView = read('views/ticking-bomb.html');
 assert.match(bombView, /id="bomb-visual"[^>]*bomb-ignite-control/);
