@@ -9,6 +9,7 @@ const registry = read('assets/js/shared/game-registry.js');
 const app = read('assets/js/app.js');
 const impostorIntegration = read('assets/js/games/impostor/integration.js');
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
+const naokoloIntegration = read('assets/js/games/naokolo/integration.js');
 const impostorState = read('assets/js/games/impostor/state.js');
 
 assert.match(registry, /GAME_SESSION_METHODS/);
@@ -38,14 +39,18 @@ assert.match(bombIntegration, /reset:\s*\(\) => resetBombSession\(\)/);
 assert.match(bombIntegration, /hasResume:/);
 assert.match(bombIntegration, /getPlayers:\s*\(\) => bombState\.players/);
 
+assert.match(naokoloIntegration, /session:\s*\{/);
+assert.match(naokoloIntegration, /load:\s*\(\) => loadNaokoloSession\(\)/);
+assert.match(naokoloIntegration, /save:\s*\(\) => persistNaokoloSession\(\)/);
+assert.match(naokoloIntegration, /reset:\s*\(\) => resetNaokoloSession\(\)/);
+assert.match(naokoloIntegration, /hasResume:/);
+assert.match(naokoloIntegration, /getPlayers:\s*\(\) => naokoloState\.players/);
+
 assert.match(impostorState, /function resetImpostorSession/);
 assert.match(impostorState, /hasGameResume\('impostor'\)/);
-
 assert.match(app, /loadGameSessions\(\)/);
 assert.match(app, /syncGameSessionUi\(\)/);
-assert.doesNotMatch(app, /loadBombSession\(\)/);
-assert.doesNotMatch(app, /loadSession\(\)/);
-assert.doesNotMatch(app, /\bstate\./);
-assert.doesNotMatch(app, /\bbombState\./);
+assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadSession\(\)/);
+assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\./);
 
 console.log('Shared game session interface tests: OK');
