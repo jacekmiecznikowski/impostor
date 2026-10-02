@@ -1,17 +1,11 @@
-import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
-import { registerGameModules } from './games/index.js?v=2';
+import { getGameModule, initializeGameModules, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=3';
+import { registerGameModules } from './games/index.js?v=3';
 
 async function initializeContentLayer() {
     try {
-        if (typeof initializeImpostorRemoteContent === 'function') {
-            await initializeImpostorRemoteContent();
-        }
-        if (typeof initializeTickingBombContent === 'function') {
-            await initializeTickingBombContent();
-        }
-        if (typeof initializeNaokoloContent === 'function') {
-            await initializeNaokoloContent();
-        }
+        if (typeof initializeImpostorRemoteContent === 'function') await initializeImpostorRemoteContent();
+        if (typeof initializeTickingBombContent === 'function') await initializeTickingBombContent();
+        if (typeof initializeNaokoloContent === 'function') await initializeNaokoloContent();
     } catch (error) {
         console.warn('Warstwa treści nie została w pełni uruchomiona. Używam danych lokalnych lub awaryjnych.', error);
     }
@@ -30,6 +24,7 @@ async function initializeApp() {
     }
 
     await initializeContentLayer();
+    await initializeGameModules();
     loadGameSessions();
 
     setupGameHub();
@@ -76,15 +71,10 @@ async function initializeApp() {
     const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
     if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(error => {
-                console.warn('Service Worker nie został zarejestrowany:', error);
-            });
+            navigator.serviceWorker.register('./sw.js').catch(error => console.warn('Service Worker nie został zarejestrowany:', error));
         }, { once: true });
     }
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
-} else {
-    initializeApp();
-}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
+else initializeApp();
