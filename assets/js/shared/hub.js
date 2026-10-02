@@ -1,5 +1,6 @@
 const GAME_CATALOG = [
     { id: 'impostor', name: 'Impostor', description: 'Dedukcja, blef i szukanie osoby, która nie zna hasła.', icon: 'fa-user-secret', status: 'available' },
+    { id: 'ticking-bomb', name: 'Tykająca Bomba', description: 'Szybkie odpowiedzi, ukryty lont i telefon, którego nikt nie chce trzymać przy BOOM.', icon: 'fa-bomb', status: 'available' },
     { id: 'heads-up', name: 'Czółko', description: 'Zgaduj hasło dzięki podpowiedziom znajomych.', icon: 'fa-face-grin-stars', status: 'coming-soon' },
     { id: 'taboo', name: 'Tabu', description: 'Opisuj hasła bez używania zakazanych słów.', icon: 'fa-comment-slash', status: 'coming-soon' }
 ];
@@ -30,7 +31,7 @@ function ensureNavigationSheet() {
             <p>Możesz wrócić do gry albo zakończyć bieżącą rundę. Punkty i zapisani gracze zostaną zachowani.</p>
             <div class="navigation-sheet-actions">
                 <button type="button" data-sheet-primary class="primary-btn" onclick="closeNavigationSheet()"><i class="fa-solid fa-play" aria-hidden="true"></i><span>Graj dalej</span></button>
-                <button type="button" class="secondary-btn" onclick="leaveActiveRound('menu')"><i class="fa-solid fa-user-secret" aria-hidden="true"></i><span>Menu Impostora</span></button>
+                <button type="button" class="secondary-btn" onclick="leaveActiveRound('menu')"><i class="fa-solid fa-user-secret" aria-hidden="true"></i><span>Menu gry</span></button>
                 <button type="button" class="navigation-sheet-link" onclick="leaveActiveRound('home')"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i><span>Wszystkie gry</span></button>
             </div>
         </div>`;
@@ -59,11 +60,11 @@ function setupAppShell() {
         </div>
         <div id="shell-menu-popover" class="shell-popover hidden" role="menu">
             <button type="button" class="shell-menu-item" onclick="toggleAudio(); closeShellMenu()"><i id="audio-icon" class="fa-solid fa-volume-high"></i><span>Dźwięk</span></button>
-            <button id="shell-score-action" type="button" class="shell-menu-item hidden" onclick="openModal('score-modal')"><i class="fa-solid fa-trophy"></i><span>Wyniki</span></button>
-            <button id="shell-rules-action" type="button" class="shell-menu-item hidden" onclick="openModal('rules-modal')"><i class="fa-solid fa-book-open"></i><span>Zasady Impostora</span></button>
+            <button id="shell-score-action" type="button" class="shell-menu-item hidden" onclick="openCurrentScoreboard()"><i class="fa-solid fa-trophy"></i><span>Wyniki</span></button>
+            <button id="shell-rules-action" type="button" class="shell-menu-item hidden" onclick="openCurrentRules()"><i class="fa-solid fa-book-open"></i><span>Zasady gry</span></button>
             <div class="shell-menu-divider"></div>
             <button type="button" class="shell-menu-item" onclick="openModal('about-modal')"><i class="fa-solid fa-circle-info"></i><span>O Partyjniaku</span></button>
-            <button id="shell-game-menu-action" type="button" class="shell-menu-item hidden" onclick="requestLeaveGame('menu')"><i class="fa-solid fa-user-secret"></i><span>Menu Impostora</span></button>
+            <button id="shell-game-menu-action" type="button" class="shell-menu-item hidden" onclick="requestLeaveGame('menu')"><i class="fa-solid fa-user-secret"></i><span>Menu gry</span></button>
             <button id="shell-exit-action" type="button" class="shell-menu-item hidden" onclick="requestLeaveGame('home')"><i class="fa-solid fa-table-cells-large"></i><span>Wszystkie gry</span></button>
         </div>`;
 
@@ -148,10 +149,24 @@ function setupGameHub() {
         main.prepend(home);
     }
 
+    const about = document.querySelector('#about-modal .text-sm');
+    if (about) {
+        const availableNames = GAME_CATALOG.filter(game => game.status === 'available').map(game => game.name);
+        about.innerHTML = `<p><strong>Partyjniak</strong> to kolekcja mobilnych gier imprezowych na jeden telefon.</p><p>Dostępne gry: <strong>${availableNames.join('</strong> i <strong>')}</strong>. Kolejne tryby będą korzystać z tego samego wspólnego huba.</p>`;
+    }
+
+    const resetButton = document.querySelector('#score-modal .secondary-btn');
+    if (resetButton) {
+        resetButton.removeAttribute('onclick');
+        resetButton.onclick = resetCurrentScores;
+    }
+    const scoreTitle = document.querySelector('#score-modal h3');
+    if (scoreTitle) scoreTitle.id = 'score-modal-title';
+
     updateInstallButton();
     document.title = 'Partyjniak – gry imprezowe';
     const description = document.querySelector('meta[name="description"]');
-    if (description) description.setAttribute('content', 'Partyjniak – mobilne gry imprezowe na jeden telefon. Impostor, a wkrótce także Czółko, Tabu i kolejne tryby.');
+    if (description) description.setAttribute('content', 'Partyjniak – mobilne gry imprezowe na jeden telefon. Impostor, Tykająca Bomba i kolejne tryby.');
 }
 
 function toggleShellMenu(force) {
@@ -172,6 +187,32 @@ function openGame(gameId, { silent = false } = {}) {
         showToast('Wkrótce', `${game.name} pojawi się w jednej z kolejnych wersji Partyjniaka.`, 'fa-solid fa-hourglass-half');
         return;
     }
+
+    const gameModule = getGameModule(gameId);
+    if (!gameModule) {
+        console.warn(`Brak zarejestrowanego modułu gry: ${gameId}`);
+        showToast('Gra niedostępna', 'Nie udało się uruchomić tego trybu. Odśwież aplikację i spróbuj ponownie.');
+        return;
+    }
+
     closeShellMenu();
-    if (game.id === 'impostor') goToScreen('menu', { silent });
+    if (typeof gameModule.open === 'function') gameModule.open({ silent });
+    else if (gameModule.menuScreen) goToScreen(gameModule.menuScreen, { silent });
+}
+
+function openCurrentRules() {
+    const gameModule = getActiveGameModule();
+    if (!gameModule?.rulesModalId) return;
+    openModal(gameModule.rulesModalId);
+}
+
+function openCurrentScoreboard() {
+    const gameModule = getActiveGameModule();
+    if (!gameModule || typeof gameModule.renderScoreboard !== 'function') return;
+    openModal('score-modal');
+}
+
+function resetCurrentScores() {
+    const gameModule = getActiveGameModule();
+    callGameHook(gameModule, 'resetScoreboard');
 }
