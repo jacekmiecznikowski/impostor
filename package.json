@@ -4,7 +4,7 @@
   "private": true,
   "description": "Partyjniak – mobilne gry imprezowe na jeden telefon.",
   "scripts": {
-    "test": "node tests/core.test.cjs && node tests/content.test.cjs && node tests/structure.test.cjs && node tests/session-interface.test.cjs",
+    "test": "node tests/core.test.cjs && node tests/content.test.cjs && node tests/structure.test.cjs && node tests/session-interface.test.cjs && node tests/module-boundary.test.cjs",
     "serve": "python3 -m http.server 8080",
     "build:web": "node scripts/prepare-web.mjs",
     "android:prepare": "npm run build:web && npx cap sync android",
