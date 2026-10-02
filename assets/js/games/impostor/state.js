@@ -122,7 +122,12 @@ function resetImpostorSession() {
 }
 
 function hasSavedSession() {
-    return state.players.length >= 3;
+    if (state.players.length < 3) return false;
+    try {
+        return Boolean(localStorage.getItem(STORAGE_KEY));
+    } catch (_) {
+        return false;
+    }
 }
 
 function updateResumeButton() {
@@ -141,8 +146,11 @@ function resumeSavedSession() {
     }
 
     normalizeActiveCategories();
-    document.getElementById('player-slider').value = state.playerCount;
-    document.getElementById('player-count-big').innerText = state.playerCount;
+    syncPlayerSetupCount({
+        sliderId: 'player-slider',
+        labelId: 'player-count-big',
+        count: state.playerCount
+    });
     updateHintModeUI();
     setDiscussionTimer(state.discussionTime, { silent: true });
     goToScreen('setup-options');
