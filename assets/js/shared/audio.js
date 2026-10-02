@@ -76,4 +76,8 @@ function toggleAudio() {
     if (icon) icon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
     if (soundEnabled) playSound('click');
     persistSession();
+
+    if (typeof getActiveGameModule === 'function') {
+        callGameHook(getActiveGameModule(), 'onAudioChanged', soundEnabled);
+    }
 }
