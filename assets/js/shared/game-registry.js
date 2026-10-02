@@ -11,20 +11,82 @@ function normalizeGameSession(gameId, session) {
     return session;
 }
 
+function normalizeCatalog(gameId, catalog) {
+    if (!catalog) return null;
+    return Object.freeze({
+        id: gameId,
+        name: String(catalog.name || gameId),
+        description: String(catalog.description || ''),
+        icon: String(catalog.icon || 'fa-gamepad'),
+        status: String(catalog.status || 'prototype'),
+        order: Number.isFinite(Number(catalog.order)) ? Number(catalog.order) : 100
+    });
+}
+
+function normalizeScreens(screens) {
+    if (!screens) return new Map();
+    if (Array.isArray(screens)) {
+        return new Map(screens.map(screenName => [screenName, {}]));
+    }
+    if (typeof screens !== 'object') throw new Error('Konfiguracja ekranów gry musi być obiektem.');
+    return new Map(Object.entries(screens).map(([screenName, config]) => [screenName, { ...(config || {}) }]));
+}
+
+function normalizeViews(views) {
+    if (!Array.isArray(views)) return [];
+    return views.map(view => ({ target: String(view.target || ''), url: String(view.url || '') }))
+        .filter(view => view.target && view.url);
+}
+
 export function registerGameModule(config) {
     if (!config || typeof config.id !== 'string' || !config.id.trim()) {
         throw new Error('Moduł gry musi mieć poprawne id.');
     }
 
     const id = config.id.trim();
-    const screens = new Set(Array.isArray(config.screens) ? config.screens : []);
+    const screenConfig = normalizeScreens(config.screens);
     const session = normalizeGameSession(id, config.session);
-    GAME_MODULES.set(id, { ...config, id, screens, session });
-    return GAME_MODULES.get(id);
+    const catalog = normalizeCatalog(id, config.catalog);
+    const views = normalizeViews(config.views);
+    const module = {
+        ...config,
+        id,
+        catalog,
+        views,
+        screens: new Set(screenConfig.keys()),
+        screenConfig,
+        session
+    };
+    GAME_MODULES.set(id, module);
+    return module;
 }
 
 export function getGameModule(gameId) {
     return GAME_MODULES.get(gameId) || null;
+}
+
+export function listGameModules() {
+    return [...GAME_MODULES.values()];
+}
+
+export function getGameCatalog() {
+    return listGameModules()
+        .filter(gameModule => gameModule.catalog)
+        .map(gameModule => gameModule.catalog)
+        .sort((a, b) => a.order - b.order || a.name.localeCompare(b.name, 'pl'));
+}
+
+export function getGameViewFragments() {
+    return listGameModules().flatMap(gameModule => gameModule.views);
+}
+
+export function getGameScreenConfig(screenName) {
+    if (!screenName || screenName === 'home') return null;
+    for (const gameModule of GAME_MODULES.values()) {
+        const config = gameModule.screenConfig.get(screenName);
+        if (config) return { ...config, gameId: gameModule.id };
+    }
+    return null;
 }
 
 export function getGameSession(gameOrId) {
@@ -102,6 +164,10 @@ export function getGamePlayers(gameOrId) {
 const legacyBridge = {
     registerGameModule,
     getGameModule,
+    listGameModules,
+    getGameCatalog,
+    getGameViewFragments,
+    getGameScreenConfig,
     getGameSession,
     getGameIdForScreen,
     getActiveGameId,
