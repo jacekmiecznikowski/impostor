@@ -8,26 +8,19 @@ const bombRuntime = {
     lastPassAt: 0
 };
 
-function secureRandomBetween(min, max) {
-    if (max <= min) return min;
+function getBombRandomUnit() {
     try {
         const values = new Uint32Array(1);
         crypto.getRandomValues(values);
-        return min + (values[0] / 0x100000000) * (max - min);
+        return values[0] / 0x100000000;
     } catch (_) {
-        return min + Math.random() * (max - min);
+        return Math.random();
     }
 }
 
 function chooseBombPrompt() {
     normalizeBombActiveCategories();
-    const available = bombState.activeCategories
-        .map(getBombCategoryById)
-        .filter(category => category && Array.isArray(category.words) && category.words.length > 0);
-    if (!available.length) return null;
-    const category = available[Math.floor(secureRandomBetween(0, available.length))];
-    const entry = category.words[Math.floor(secureRandomBetween(0, category.words.length))];
-    return { categoryId: category.id, categoryName: category.name, prompt: entry.word };
+    return TickingBombRules.choosePrompt(BOMB_CATEGORIES, bombState.activeCategories, getBombRandomUnit);
 }
 
 function prepareBombRound() {
@@ -46,7 +39,10 @@ function prepareBombRound() {
     bombRuntime.exploded = false;
 
     if (bombState.mode === 'tracked') {
-        bombState.currentPlayerIndex = Math.floor(secureRandomBetween(0, bombState.players.length));
+        bombState.currentPlayerIndex = TickingBombRules.chooseStartingPlayerIndex(
+            bombState.players.length,
+            getBombRandomUnit
+        );
     }
 
     renderBombPlayScreen(picked);
@@ -93,9 +89,10 @@ function rerollBombPrompt() {
 
 async function igniteBomb() {
     if (bombRuntime.active || bombRuntime.exploded) return;
-    const preset = BOMB_FUSE_PRESETS[bombState.fusePreset] || BOMB_FUSE_PRESETS.unstable;
-    const seconds = secureRandomBetween(preset.minSeconds, preset.maxSeconds);
-    bombRuntime.durationMs = Math.round(seconds * 1000);
+    bombRuntime.durationMs = TickingBombRules.getFuseDurationMs(
+        bombState.fusePreset,
+        getBombRandomUnit
+    );
     bombRuntime.active = true;
     bombRuntime.passHistory = [];
     bombRuntime.lastPassAt = 0;
@@ -128,7 +125,10 @@ function bombPass() {
     if (now - bombRuntime.lastPassAt < 250) return;
     bombRuntime.lastPassAt = now;
     bombRuntime.passHistory.push(bombState.currentPlayerIndex);
-    bombState.currentPlayerIndex = (bombState.currentPlayerIndex + 1) % bombState.players.length;
+    bombState.currentPlayerIndex = TickingBombRules.nextPlayerIndex(
+        bombState.currentPlayerIndex,
+        bombState.players.length
+    );
     renderBombCurrentPlayer();
     updateBombUndoButton();
     playSound('click');
@@ -166,13 +166,10 @@ function cancelBombRound({ silent = false } = {}) {
 }
 
 function applyBombLoss(loserId) {
-    const loser = bombState.players.find(player => player.id === loserId);
-    if (!loser) return false;
-    bombState.lastLoserId = loser.id;
-    loser.losses += 1;
-    bombState.players.forEach(player => {
-        if (player.id !== loser.id) player.score += 1;
-    });
+    const result = TickingBombRules.scoreLoss(bombState.players, loserId);
+    if (!result) return false;
+    bombState.players = result.players;
+    bombState.lastLoserId = result.loserId;
     return true;
 }
 
