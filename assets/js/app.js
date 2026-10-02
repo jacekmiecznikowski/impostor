@@ -1,4 +1,4 @@
-import { getGameModule, initializeGameModules, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
+import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
 import { registerGameModules } from './games/index.js?v=3';
 
 async function initializeContentLayer() {
@@ -6,6 +6,7 @@ async function initializeContentLayer() {
         if (typeof initializeImpostorRemoteContent === 'function') await initializeImpostorRemoteContent();
         if (typeof initializeTickingBombContent === 'function') await initializeTickingBombContent();
         if (typeof initializeNaokoloContent === 'function') await initializeNaokoloContent();
+        if (typeof initializeCoMamNaMysliContent === 'function') await initializeCoMamNaMysliContent();
     } catch (error) {
         console.warn('Warstwa treści nie została w pełni uruchomiona. Używam danych lokalnych lub awaryjnych.', error);
     }
@@ -24,7 +25,6 @@ async function initializeApp() {
     }
 
     await initializeContentLayer();
-    await initializeGameModules();
     loadGameSessions();
 
     setupGameHub();
