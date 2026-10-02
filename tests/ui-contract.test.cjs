@@ -15,7 +15,8 @@ assert.match(impostorSetup, /Krok 2 z 2/);
 
 const impostorPlayerSetup = read('assets/js/games/impostor/setup.js');
 const bombPlayerSetup = read('assets/js/games/ticking-bomb/setup.js');
-for (const source of [impostorPlayerSetup, bombPlayerSetup]) {
+const naokoloPlayerSetup = read('assets/js/games/naokolo/setup.js');
+for (const source of [impostorPlayerSetup, bombPlayerSetup, naokoloPlayerSetup]) {
   assert.match(source, /renderPlayerSetupNames\(/);
   assert.match(source, /syncPlayerSetupCount\(/);
   assert.match(source, /playPlayerSetupCountFeedback\(\)/);
@@ -40,6 +41,18 @@ assert.match(bombView, /M151 74 C160 62 166 52 178 46 C187 42 192 35 194 26/);
 const bombGame = read('assets/js/games/ticking-bomb/game.js');
 assert.doesNotMatch(bombGame, /setInterval\(\s*updateBombProgress/);
 assert.doesNotMatch(bombGame, /setBombTickRate\(/);
+
+const naokoloView = read('views/naokolo.html');
+assert.match(naokoloView, /id="screen-naokolo-players"[^>]*player-setup-screen/);
+assert.match(naokoloView, /id="naokolo-player-count"[^>]*min="2"[^>]*max="12"/);
+assert.match(naokoloView, /markNaokoloCard\('guessed'\)/);
+assert.match(naokoloView, /markNaokoloCard\('skipped'\)/);
+assert.match(naokoloView, /markNaokoloCard\('forbidden'\)/);
+assert.match(naokoloView, /id="naokolo-timer-value"/);
+assert.match(naokoloView, /id="naokolo-forbidden-list"/);
+const naokoloGame = read('assets/js/games/naokolo/game.js');
+assert.match(naokoloGame, /setInterval\(updateNaokoloTimer, 200\)/);
+assert.match(naokoloGame, /NaokoloRules\.scoreTurn/);
 
 const colorSystem = read('assets/css/game-color-system.css');
 assert.match(colorSystem, /--ui-accent:/);
