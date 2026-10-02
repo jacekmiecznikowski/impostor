@@ -13,51 +13,48 @@ const registry = read('assets/js/shared/game-registry.js');
 const impostorIntegration = read('assets/js/games/impostor/integration.js');
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 const naokoloIntegration = read('assets/js/games/naokolo/integration.js');
+const cmmIntegration = read('assets/js/games/co-mam-na-mysli/integration.js');
 const prototypesIntegration = read('assets/js/games/prototypes/integration.js');
 const sw = read('sw.js');
 
 for (const [name, source] of [
-  ['app.js', app],
-  ['games/index.js', gamesIndex],
-  ['game-registry.js', registry],
-  ['impostor/integration.js', impostorIntegration],
-  ['ticking-bomb/integration.js', bombIntegration],
-  ['naokolo/integration.js', naokoloIntegration],
+  ['app.js', app], ['games/index.js', gamesIndex], ['game-registry.js', registry],
+  ['impostor/integration.js', impostorIntegration], ['ticking-bomb/integration.js', bombIntegration],
+  ['naokolo/integration.js', naokoloIntegration], ['co-mam-na-mysli/integration.js', cmmIntegration],
   ['prototypes/integration.js', prototypesIntegration]
 ]) {
   const result = spawnSync(process.execPath, ['--input-type=module', '--check'], { input: source, encoding: 'utf8' });
   assert.equal(result.status, 0, `${name} nie przechodzi kontroli składni ES module:\n${result.stderr}`);
 }
 
-assert.match(index, /<script type="module" src="\.\/assets\/js\/app\.js\?v=3"><\/script>/);
+assert.match(index, /<script type="module" src="\.\/assets\/js\/app\.js\?v=4"><\/script>/);
 assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/shared\/game-registry\.js\?v=2"/);
-assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/games\/index\.js\?v=2"/);
+assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/games\/index\.js\?v=3"/);
 assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/shared\/game-registry\.js[^\"]*"[^>]*defer/);
-assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/games\/(?:impostor|ticking-bomb|naokolo)\/integration\.js[^\"]*"[^>]*defer/);
+assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/games\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli)\/integration\.js[^\"]*"[^>]*defer/);
 
 assert.match(app, /from '\.\/shared\/game-registry\.js\?v=2'/);
-assert.match(app, /from '\.\/games\/index\.js\?v=2'/);
-assert.doesNotMatch(app, /games\/(?:impostor|ticking-bomb|naokolo)\/integration/);
+assert.match(app, /from '\.\/games\/index\.js\?v=3'/);
+assert.match(app, /initializeGameModules/);
+assert.doesNotMatch(app, /games\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli)\/integration/);
 assert.match(app, /registerGameModules\(\);[\s\S]*await loadAppViews\(\)/);
-assert.match(app, /getGameModule\(requestedGame\)/);
+assert.match(app, /await initializeGameModules\(\)/);
 
 assert.match(gamesIndex, /from '\.\/impostor\/integration\.js\?v=2'/);
 assert.match(gamesIndex, /from '\.\/ticking-bomb\/integration\.js\?v=2'/);
 assert.match(gamesIndex, /from '\.\/naokolo\/integration\.js\?v=1'/);
-assert.match(gamesIndex, /from '\.\/prototypes\/integration\.js\?v=1'/);
-assert.match(gamesIndex, /export function registerGameModules/);
+assert.match(gamesIndex, /from '\.\/co-mam-na-mysli\/integration\.js\?v=1'/);
+assert.match(gamesIndex, /from '\.\/prototypes\/integration\.js\?v=2'/);
+assert.match(gamesIndex, /registerCoMamNaMysliGame\(\)/);
 
 assert.match(registry, /export function registerGameModule/);
-assert.match(registry, /export function getGameModule/);
-assert.match(registry, /export function getGameCatalog/);
+assert.match(registry, /export async function initializeGameModules/);
 assert.match(registry, /export function getGameScreenConfig/);
-assert.match(registry, /export function getGameViewFragments/);
 assert.match(registry, /Object\.assign\(window, legacyBridge\)/);
 
 for (const [source, fn] of [
-  [impostorIntegration, 'registerImpostorGame'],
-  [bombIntegration, 'registerTickingBombGame'],
-  [naokoloIntegration, 'registerNaokoloGame']
+  [impostorIntegration, 'registerImpostorGame'], [bombIntegration, 'registerTickingBombGame'],
+  [naokoloIntegration, 'registerNaokoloGame'], [cmmIntegration, 'registerCoMamNaMysliGame']
 ]) {
   assert.match(source, /from '\.\.\/\.\.\/shared\/game-registry\.js\?v=2'/);
   assert.match(source, new RegExp(`export function ${fn}`));
@@ -66,11 +63,9 @@ for (const [source, fn] of [
 assert.match(prototypesIntegration, /export function registerPrototypeGames/);
 
 assert.match(sw, /assets\/js\/shared\/game-registry\.js\?v=2/);
-assert.match(sw, /assets\/js\/games\/index\.js\?v=2/);
-assert.match(sw, /assets\/js\/games\/impostor\/integration\.js\?v=2/);
-assert.match(sw, /assets\/js\/games\/ticking-bomb\/integration\.js\?v=2/);
-assert.match(sw, /assets\/js\/games\/naokolo\/integration\.js\?v=1/);
-assert.match(sw, /assets\/js\/games\/prototypes\/integration\.js\?v=1/);
-assert.match(sw, /assets\/js\/app\.js\?v=3/);
+assert.match(sw, /assets\/js\/games\/index\.js\?v=3/);
+assert.match(sw, /assets\/js\/games\/co-mam-na-mysli\/integration\.js\?v=1/);
+assert.match(sw, /assets\/js\/games\/prototypes\/integration\.js\?v=2/);
+assert.match(sw, /assets\/js\/app\.js\?v=4/);
 
 console.log('ES module boundary and PWA module revision tests: OK');
