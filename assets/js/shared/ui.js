@@ -4,6 +4,7 @@ const HOME_SCREEN_CONFIG = Object.freeze({
     immersive: false,
     roundGuard: false,
     wakeLock: false,
+    orientation: 'portrait',
     backTarget: null
 });
 
@@ -61,6 +62,7 @@ function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) 
 
     updateShellContext(screenName);
     syncSystemBackGuard(screenName);
+    syncPartyjniakScreenOrientation?.(screenName);
 
     const gameId = getGameIdForScreen(screenName);
     if (gameId !== 'home') callGameHook(gameId, 'onScreenEnter', screenName, previousScreen);
