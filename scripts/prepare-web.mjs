@@ -14,7 +14,7 @@ for (const file of ['index.html', 'manifest.webmanifest', 'sw.js']) {
   if (existsSync(source)) await copyFile(source, path.join(dist, file));
 }
 
-for (const directory of ['assets', 'views']) {
+for (const directory of ['assets', 'views', 'content']) {
   const source = path.join(root, directory);
   if (existsSync(source)) await cp(source, path.join(dist, directory), { recursive: true });
 }
