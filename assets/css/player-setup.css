@@ -1,18 +1,21 @@
 /* Shared player setup UI used by every Partyjniak game.
    Game-specific color comes only from the semantic theme tokens. */
 
-.player-setup-screen {
+.player-setup-screen,
+#screen-bomb-players {
   width: 100%;
   gap: 1rem;
   padding-bottom: max(1.1rem, env(safe-area-inset-bottom));
 }
 
-.player-setup-heading {
+.player-setup-heading,
+#screen-bomb-players .bomb-section-heading {
   padding: .7rem .15rem .2rem;
   text-align: left;
 }
 
-.player-setup-step {
+.player-setup-step,
+#screen-bomb-players .bomb-step {
   font-size: .68rem;
   line-height: 1;
   font-weight: 900;
@@ -21,7 +24,8 @@
   color: var(--ui-accent-text);
 }
 
-.player-setup-heading h2 {
+.player-setup-heading h2,
+#screen-bomb-players .bomb-section-heading h2 {
   margin: .4rem 0 .35rem;
   font-size: 1.9rem;
   line-height: 1;
@@ -30,14 +34,16 @@
   color: #f8fafc;
 }
 
-.player-setup-heading p {
+.player-setup-heading p,
+#screen-bomb-players .bomb-section-heading p {
   margin: 0;
   font-size: .82rem;
   line-height: 1.5;
   color: #94a3b8;
 }
 
-.player-setup-card {
+.player-setup-card,
+#screen-bomb-players .bomb-setup-card {
   border: 1px solid rgba(148, 163, 184, .18);
   background: rgba(2, 6, 23, .56);
   border-radius: 1.4rem;
@@ -45,44 +51,51 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
 }
 
-.player-setup-count-row {
+.player-setup-count-row,
+#screen-bomb-players .bomb-player-count-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: .85rem;
 }
 
-.player-setup-count-copy {
+.player-setup-count-copy,
+#screen-bomb-players .bomb-player-count-row > div {
   display: flex;
   align-items: baseline;
   gap: .65rem;
 }
 
-.player-setup-count-copy span {
+.player-setup-count-copy span,
+#screen-bomb-players .bomb-player-count-row > div > span {
   color: #94a3b8;
   font-size: .78rem;
   font-weight: 700;
 }
 
-.player-setup-count-copy strong {
+.player-setup-count-copy strong,
+#screen-bomb-players .bomb-player-count-row strong {
   font-size: 1.8rem;
   color: var(--ui-accent-text);
   line-height: 1;
 }
 
-.player-setup-range-label {
-  font-size: .66rem;
-  color: #64748b;
+.player-setup-range-label,
+#screen-bomb-players .bomb-range-label {
+  font-size: .66rem !important;
+  color: #64748b !important;
   font-weight: 750;
 }
 
-.player-setup-range {
+.player-setup-range,
+#screen-bomb-players .bomb-range {
   width: 100%;
   accent-color: var(--ui-accent);
   cursor: pointer;
 }
 
-.player-setup-name-list {
+.player-setup-name-list,
+#screen-bomb-players .bomb-name-list {
   display: flex;
   flex-direction: column;
   gap: .55rem;
@@ -134,7 +147,8 @@
   color: #64748b;
 }
 
-.player-setup-action {
+.player-setup-action,
+#screen-bomb-players .bomb-sticky-action {
   position: sticky;
   bottom: max(.3rem, env(safe-area-inset-bottom));
   margin-top: auto;
@@ -143,7 +157,11 @@
 }
 
 @media (max-height: 760px) {
-  .player-setup-heading { padding-top: .35rem; }
-  .player-setup-heading h2 { font-size: 1.65rem; }
+  .player-setup-heading,
+  #screen-bomb-players .bomb-section-heading { padding-top: .35rem; }
+
+  .player-setup-heading h2,
+  #screen-bomb-players .bomb-section-heading h2 { font-size: 1.65rem; }
+
   .player-setup-name-row input { min-height: 3rem; }
 }
