@@ -1,5 +1,5 @@
 /* Partyjniak semantic color system.
-   Shared UI keeps the same structure while each game owns its accent palette. */
+   Concrete game palettes are injected by each game module at runtime. */
 
 :root {
   --ui-accent: #950f26;
@@ -9,72 +9,21 @@
   --ui-accent-contrast: #ffffff;
   --ui-accent-rgb: 149, 15, 38;
   --ui-accent-surface-rgb: 76, 5, 20;
+  --page-bg: #06050a;
+  --page-glow-rgb: 149, 15, 38;
+  --page-glow-alt-rgb: 217, 70, 95;
+  --page-glow-alpha: .25;
+  --page-glow-alt-alpha: .065;
 }
 
-body[data-game="home"] {
-  --ui-accent: #950f26;
-  --ui-accent-strong: #720b1d;
-  --ui-accent-alt: #d9465f;
-  --ui-accent-text: #fda4af;
-  --ui-accent-contrast: #ffffff;
-  --ui-accent-rgb: 149, 15, 38;
-  --ui-accent-surface-rgb: 76, 5, 20;
-}
-
-body[data-game="impostor"] {
-  --ui-accent: #14b8a6;
-  --ui-accent-strong: #0d9488;
-  --ui-accent-alt: #0891b2;
-  --ui-accent-text: #5eead4;
-  --ui-accent-contrast: #ffffff;
-  --ui-accent-rgb: 20, 184, 166;
-  --ui-accent-surface-rgb: 6, 59, 56;
-}
-
-body[data-game="ticking-bomb"] {
-  --ui-accent: #f97316;
-  --ui-accent-strong: #ea580c;
-  --ui-accent-alt: #fbbf24;
-  --ui-accent-text: #fdba74;
-  --ui-accent-contrast: #1c0a00;
-  --ui-accent-rgb: 249, 115, 22;
-  --ui-accent-surface-rgb: 67, 20, 7;
-}
-
-/* Base canvases are intentionally different, not just recolored. */
-body[data-bg-mode="party"] {
+body {
   background:
-    radial-gradient(circle at 50% -10%, rgba(149,15,38,.25), transparent 30rem),
-    radial-gradient(circle at 8% 72%, rgba(217,70,95,.065), transparent 23rem),
-    #06050a !important;
+    radial-gradient(circle at 50% -10%, rgba(var(--page-glow-rgb), var(--page-glow-alpha)), transparent 30rem),
+    radial-gradient(circle at 8% 72%, rgba(var(--page-glow-alt-rgb), var(--page-glow-alt-alpha)), transparent 23rem),
+    var(--page-bg) !important;
+  transition: background .45s ease;
 }
 
-body[data-bg-mode="impostor"],
-body[data-bg-mode="mystery"],
-body[data-bg-mode="discussion"],
-body[data-bg-mode="vote"],
-body[data-bg-mode="celebrate"] {
-  background:
-    radial-gradient(circle at 50% -12%, rgba(20,184,166,.12), transparent 29rem),
-    radial-gradient(circle at 92% 72%, rgba(8,145,178,.045), transparent 22rem),
-    #020617 !important;
-}
-
-body[data-bg-mode="ticking-bomb"] {
-  background:
-    radial-gradient(circle at 50% -10%, rgba(249,115,22,.16), transparent 28rem),
-    radial-gradient(circle at 12% 78%, rgba(251,191,36,.045), transparent 20rem),
-    #0a0604 !important;
-}
-
-body[data-bg-mode="bomb-alert"] {
-  background:
-    radial-gradient(circle at 50% -10%, rgba(239,68,68,.17), transparent 27rem),
-    radial-gradient(circle at 80% 78%, rgba(249,115,22,.07), transparent 22rem),
-    #0d0503 !important;
-}
-
-/* Shared controls inherit the active game's accent. */
 .primary-btn {
   color: var(--ui-accent-contrast) !important;
   border-color: rgba(var(--ui-accent-rgb), .42) !important;
@@ -122,30 +71,33 @@ body {
   animation-name: partyjniak-theme-pulse !important;
 }
 
-/* Same shell geometry, different game identity. */
 .shell-logo.is-game {
   color: var(--ui-accent-contrast) !important;
-  background: linear-gradient(145deg, var(--ui-accent), var(--ui-accent-alt)) !important;
+  background: linear-gradient(145deg, var(--ui-accent-alt), var(--ui-accent), var(--ui-accent-strong)) !important;
   border-color: rgba(var(--ui-accent-rgb), .36) !important;
   box-shadow: 0 8px 24px rgba(var(--ui-accent-rgb), .18) !important;
 }
 
 .app-shell.is-menu .shell-frame,
 .app-shell.is-contextual .shell-frame {
-  border-color: rgba(var(--ui-accent-rgb), .13) !important;
-  background:
-    linear-gradient(180deg, rgba(var(--ui-accent-surface-rgb), .10), rgba(8,15,29,.46)) !important;
+  border-color: rgba(var(--ui-accent-rgb), .18) !important;
+  background: linear-gradient(180deg, rgba(var(--ui-accent-surface-rgb), .16), rgba(8,15,29,.50)) !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .18), inset 0 1px 0 rgba(var(--ui-accent-rgb), .04) !important;
+}
+
+.app-shell.is-menu .shell-icon-button,
+.app-shell.is-contextual .shell-icon-button {
+  border-color: rgba(var(--ui-accent-rgb), .18) !important;
 }
 
 .app-shell.is-menu .shell-icon-button:hover,
 .app-shell.is-contextual .shell-icon-button:hover {
-  border-color: rgba(var(--ui-accent-rgb), .30) !important;
-  background: rgba(var(--ui-accent-surface-rgb), .20) !important;
+  border-color: rgba(var(--ui-accent-rgb), .34) !important;
+  background: rgba(var(--ui-accent-surface-rgb), .22) !important;
 }
 
 .shell-menu-item:hover i { color: var(--ui-accent-text); }
 
-/* Pause/leave sheet follows the current game instead of being permanently violet. */
 .navigation-sheet-card {
   border-color: rgba(var(--ui-accent-rgb), .20) !important;
 }
@@ -157,14 +109,21 @@ body {
   box-shadow: 0 10px 28px rgba(var(--ui-accent-rgb), .08);
 }
 
-/* Shared score/rules modal actions remain visually related to the active game. */
 #score-modal .primary-btn,
 #rules-modal .primary-btn,
 #bomb-rules-modal .primary-btn {
   color: var(--ui-accent-contrast) !important;
   border-color: rgba(var(--ui-accent-rgb), .42) !important;
-  background: linear-gradient(100deg, var(--ui-accent-strong), var(--ui-accent), var(--ui-accent-alt)) !important;
+  background: linear-gradient(100deg, var(--ui-accent-alt), var(--ui-accent), var(--ui-accent-strong)) !important;
   box-shadow: 0 12px 28px rgba(var(--ui-accent-rgb), .18) !important;
+}
+
+#score-modal .secondary-btn,
+#rules-modal .secondary-btn,
+#bomb-rules-modal .secondary-btn {
+  border-color: rgba(var(--ui-accent-rgb), .20) !important;
+  color: var(--ui-accent-text) !important;
+  background: rgba(var(--ui-accent-surface-rgb), .36) !important;
 }
 
 #score-modal .icon-btn,
@@ -173,25 +132,13 @@ body {
   border-color: rgba(var(--ui-accent-rgb), .18) !important;
 }
 
-body[data-game="ticking-bomb"] #score-modal .secondary-btn,
-body[data-game="ticking-bomb"] #bomb-rules-modal .secondary-btn {
-  border-color: rgba(var(--ui-accent-rgb), .20) !important;
-  color: #fed7aa !important;
-  background: rgba(30,20,12,.72) !important;
+#install-app-btn {
+  border-color: rgba(var(--ui-accent-rgb), .30) !important;
+  background: rgba(var(--ui-accent-rgb), .07) !important;
 }
 
-/* Home itself stays burgundy. Individual game cards keep their own game accents. */
-body[data-game="home"] #install-app-btn,
-body[data-screen="home"] #install-app-btn {
-  border-color: rgba(198,29,58,.30) !important;
-  background: rgba(149,15,38,.07) !important;
-}
+#install-app-btn i { color: var(--ui-accent-text) !important; }
 
-body[data-game="home"] #install-app-btn i,
-body[data-screen="home"] #install-app-btn i {
-  color: #fb7185 !important;
-}
-
-.upcoming-card[data-game-id="taboo"] strong {
-  color: #fecdd3 !important;
+@media (prefers-reduced-motion: reduce) {
+  body { transition: none; }
 }
