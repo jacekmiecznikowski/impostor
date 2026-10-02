@@ -1,11 +1,12 @@
-const APP_VIEW_FRAGMENTS = [
-    { target: '#app-main', url: './views/impostor-setup.html' },
-    { target: '#app-main', url: './views/impostor-round.html' },
+const SHARED_VIEW_FRAGMENTS = [
     { target: '#modal-root', url: './views/modals.html' }
 ];
 
 async function loadAppViews() {
-    for (const fragment of APP_VIEW_FRAGMENTS) {
+    const gameFragments = typeof getGameViewFragments === 'function' ? getGameViewFragments() : [];
+    const fragments = [...gameFragments, ...SHARED_VIEW_FRAGMENTS];
+
+    for (const fragment of fragments) {
         const target = document.querySelector(fragment.target);
         if (!target) throw new Error(`Brak kontenera widoku: ${fragment.target}`);
 
