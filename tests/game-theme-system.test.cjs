@@ -12,15 +12,17 @@ const colors = read('assets/css/game-color-system.css');
 const brand = read('assets/css/brand-theme.css');
 const impostor = read('assets/js/games/impostor/integration.js');
 const bomb = read('assets/js/games/ticking-bomb/integration.js');
+const naokolo = read('assets/js/games/naokolo/integration.js');
 const prototypes = read('assets/js/games/prototypes/integration.js');
 
-for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['prototypes', prototypes]]) {
+for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['naokolo', naokolo], ['prototypes', prototypes]]) {
   assert.match(source, /theme:\s*\{/ , `${name} must own a theme`);
   assert.match(source, /palette:\s*\{/ , `${name} must own a palette`);
   assert.match(source, /backgrounds:\s*\{/ , `${name} must own background definitions`);
 }
 
-['naokolo', 'dzika-karta', 'co-mam-na-mysli'].forEach(id => {
+assert.match(naokolo, /id:\s*'naokolo'[\s\S]*?theme:/);
+['dzika-karta', 'co-mam-na-mysli'].forEach(id => {
   assert.match(prototypes, new RegExp(`id: '${id}'[\\s\\S]*?theme:`), `Prototype ${id} must define its theme`);
 });
 

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "game": "naokolo",
+  "locale": "pl",
+  "categories": [
+    {
+      "id": "codziennosc",
+      "name": "Codzienność",
+      "desc": "Rzeczy i sytuacje, które spotykasz każdego dnia.",
+      "icon": "fa-house",
+      "cards": [
+        {"word":"Parasol","forbidden":["deszcz","mokry","rozkładać","pogoda","rączka"]},
+        {"word":"Budzik","forbidden":["rano","dzwonić","wstawać","sen","alarm"]},
+        {"word":"Lodówka","forbidden":["zimno","jedzenie","kuchnia","drzwi","zamrażarka"]},
+        {"word":"Winda","forbidden":["piętro","góra","dół","budynek","przycisk"]},
+        {"word":"Szczoteczka do zębów","forbidden":["pasta","łazienka","myć","zęby","włosie"]},
+        {"word":"Pilot","forbidden":["telewizor","kanał","przycisk","kanapa","sterować"]},
+        {"word":"Plecak","forbidden":["szkoła","ramiona","torba","nosić","zamek"]},
+        {"word":"Ładowarka","forbidden":["telefon","bateria","prąd","kabel","gniazdko"]},
+        {"word":"Kalendarz","forbidden":["data","miesiąc","rok","dzień","termin"]},
+        {"word":"Kapcie","forbidden":["dom","stopy","buty","wygodne","podłoga"]}
+      ]
+    },
+    {
+      "id": "jedzenie",
+      "name": "Jedzenie",
+      "desc": "Smaki, produkty i kuchenne skojarzenia.",
+      "icon": "fa-utensils",
+      "cards": [
+        {"word":"Naleśnik","forbidden":["patelnia","ciasto","dżem","zwijać","mąka"]},
+        {"word":"Popcorn","forbidden":["kino","kukurydza","prażyć","słony","chrupać"]},
+        {"word":"Awokado","forbidden":["zielone","pestka","guacamole","owoc","tost"]},
+        {"word":"Rosół","forbidden":["zupa","makaron","kurczak","niedziela","bulion"]},
+        {"word":"Piernik","forbidden":["święta","ciastko","korzenny","miód","Toruń"]},
+        {"word":"Arbuz","forbidden":["czerwony","pestki","lato","owoc","soczysty"]},
+        {"word":"Tost","forbidden":["chleb","ser","opiekacz","kanapka","chrupiący"]},
+        {"word":"Ogórek kiszony","forbidden":["słoik","kwaśny","zalewa","warzywo","fermentacja"]},
+        {"word":"Kakao","forbidden":["czekolada","mleko","napój","brązowe","proszek"]},
+        {"word":"Frytki","forbidden":["ziemniaki","olej","sól","fast food","ketchup"]}
+      ]
+    },
+    {
+      "id": "miejsca",
+      "name": "Miejsca",
+      "desc": "Miejsca bliskie, dalekie i zupełnie zwyczajne.",
+      "icon": "fa-location-dot",
+      "cards": [
+        {"word":"Lotnisko","forbidden":["samolot","bagaż","odlot","terminal","paszport"]},
+        {"word":"Biblioteka","forbidden":["książki","czytać","cisza","wypożyczyć","regał"]},
+        {"word":"Kemping","forbidden":["namiot","las","wakacje","ognisko","spać"]},
+        {"word":"Aquapark","forbidden":["woda","basen","zjeżdżalnia","pływać","bilet"]},
+        {"word":"Piekarnia","forbidden":["chleb","bułka","piec","zapach","kupować"]},
+        {"word":"Stadion","forbidden":["mecz","kibice","trybuny","sport","boisko"]},
+        {"word":"Garaż","forbidden":["samochód","brama","parkować","dom","narzędzia"]},
+        {"word":"Schronisko górskie","forbidden":["góry","turysta","szlak","nocleg","plecak"]},
+        {"word":"Dworzec","forbidden":["pociąg","peron","bilet","podróż","odjazd"]},
+        {"word":"Plac zabaw","forbidden":["dzieci","huśtawka","zjeżdżalnia","piaskownica","park"]}
+      ]
+    },
+    {
+      "id": "rozrywka",
+      "name": "Rozrywka",
+      "desc": "Czas wolny, media, hobby i imprezowe klimaty.",
+      "icon": "fa-gamepad",
+      "cards": [
+        {"word":"Karaoke","forbidden":["śpiewać","mikrofon","piosenka","tekst","impreza"]},
+        {"word":"Podcast","forbidden":["słuchać","odcinek","rozmowa","internet","audio"]},
+        {"word":"Puzzle","forbidden":["kawałki","obrazek","układać","karton","pasować"]},
+        {"word":"Selfie","forbidden":["zdjęcie","telefon","twarz","aparat","ręka"]},
+        {"word":"Planszówka","forbidden":["gra","pionki","stół","kostka","karty"]},
+        {"word":"Serial","forbidden":["odcinek","telewizja","sezon","oglądać","bohater"]},
+        {"word":"Koncert","forbidden":["muzyka","scena","zespół","bilet","publiczność"]},
+        {"word":"Krzyżówka","forbidden":["hasło","litery","gazeta","pytanie","kratki"]},
+        {"word":"Escape room","forbidden":["zagadki","pokój","wyjście","czas","klucz"]},
+        {"word":"Stand-up","forbidden":["komik","żart","scena","publiczność","śmiech"]}
+      ]
+    },
+    {
+      "id": "dziwne",
+      "name": "Dziwne skojarzenia",
+      "desc": "Hasła, przy których trzeba trochę pokombinować.",
+      "icon": "fa-wand-magic-sparkles",
+      "cards": [
+        {"word":"Déjà vu","forbidden":["już","wcześniej","wrażenie","powtórka","pamięć"]},
+        {"word":"Drzemka","forbidden":["sen","krótko","spać","popołudnie","budzik"]},
+        {"word":"Plotka","forbidden":["mówić","sekret","ludzie","prawda","informacja"]},
+        {"word":"Pełnia księżyca","forbidden":["noc","okrągły","niebo","wilkołak","satelita"]},
+        {"word":"Kolejka","forbidden":["czekać","ludzie","sklep","pierwszy","stać"]},
+        {"word":"Echo","forbidden":["głos","powtarzać","góry","dźwięk","wracać"]},
+        {"word":"Kamuflaż","forbidden":["ukrywać","wojsko","kolory","niewidoczny","wzór"]},
+        {"word":"Przypadek","forbidden":["los","plan","niespodziewanie","zdarzenie","szczęście"]},
+        {"word":"Niezręczna cisza","forbidden":["milczeć","rozmowa","wstyd","cicho","pauza"]},
+        {"word":"Plan B","forbidden":["awaryjny","drugi","pomysł","nie udało się","zapasowy"]}
+      ]
+    }
+  ]
+}

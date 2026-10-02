@@ -2,32 +2,6 @@ import { getGameModule, registerGameModule } from '../../shared/game-registry.js
 
 const PROTOTYPE_GAMES = [
     {
-        id: 'naokolo',
-        catalog: {
-            name: 'Naokoło',
-            description: 'Opisuj hasło bez używania zakazanych słów.',
-            icon: 'fa-comments',
-            status: 'prototype',
-            order: 30
-        },
-        theme: {
-            palette: {
-                accent: '#6366f1', strong: '#4f46e5', alt: '#a78bfa', text: '#c4b5fd', contrast: '#ffffff',
-                rgb: '99, 102, 241', surfaceRgb: '49, 46, 129'
-            },
-            previewBackground: 'naokolo',
-            backgrounds: {
-                naokolo: {
-                    colors: [0x6366f1, 0xa78bfa, 0x38bdf8, 0xf8fafc],
-                    alpha: [0.06, 0.18], speed: 0.72, confetti: false, motif: 'party', overlayMotif: 'orbit',
-                    metaColor: '#312e81', pageBase: '#070716',
-                    pageGlowRgb: '99, 102, 241', pageGlowAltRgb: '167, 139, 250',
-                    pageGlowAlpha: '.16', pageGlowAltAlpha: '.06'
-                }
-            }
-        }
-    },
-    {
         id: 'dzika-karta',
         catalog: {
             name: 'Dzika Karta',

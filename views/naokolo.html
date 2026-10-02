@@ -1,0 +1,120 @@
+<section id="screen-naokolo-menu" class="screen naokolo-screen hidden flex-col flex-1">
+  <div class="naokolo-menu-hero">
+    <span class="naokolo-kicker">Mów dookoła • omijaj zakazane słowa</span>
+    <div class="naokolo-menu-icon" aria-hidden="true"><i class="fa-solid fa-comments"></i></div>
+    <h1>Naokoło</h1>
+    <p>Opisuj hasło tak, żeby inni je odgadli — ale ani razu nie użyj słów z listy zakazanej.</p>
+  </div>
+  <div class="naokolo-menu-actions">
+    <button type="button" class="primary-btn" onclick="startNewNaokoloGame()"><i class="fa-solid fa-play"></i><span>NOWA GRA</span></button>
+    <button id="naokolo-resume-btn" type="button" class="secondary-btn hidden" onclick="resumeNaokoloGame()"><i class="fa-solid fa-people-group"></i><span>GRAJ Z POPRZEDNIĄ EKIPĄ</span></button>
+    <div class="naokolo-menu-grid">
+      <button type="button" class="secondary-btn" onclick="openCurrentRules()"><i class="fa-solid fa-book-open"></i><span>Zasady</span></button>
+      <button type="button" class="secondary-btn" onclick="openCurrentScoreboard()"><i class="fa-solid fa-ranking-star"></i><span>Wyniki</span></button>
+    </div>
+  </div>
+  <div class="naokolo-howto">
+    <article><i class="fa-solid fa-bullseye"></i><div><strong>Hasło +1</strong><span>Gdy grupa odgadnie hasło, zdobywasz punkt i przechodzisz dalej.</span></div></article>
+    <article><i class="fa-solid fa-ban"></i><div><strong>Zakazane −1</strong><span>Jeśli użyjesz słowa z listy, zaznacz błąd i odejmij punkt.</span></div></article>
+  </div>
+</section>
+
+<section id="screen-naokolo-players" class="screen naokolo-screen player-setup-screen hidden flex-col flex-1">
+  <div class="player-setup-heading">
+    <span class="player-setup-step">KROK 1 Z 2</span>
+    <h2>Kto gra?</h2>
+    <p>Ustaw liczbę osób i wpisz imiona. Kolejne tury będą przechodziły po kolei między graczami.</p>
+  </div>
+  <div class="player-setup-card">
+    <div class="player-setup-count-row">
+      <div class="player-setup-count-copy"><span>Liczba graczy</span><strong id="naokolo-player-count-value">4</strong></div>
+      <span class="player-setup-range-label">2–12</span>
+    </div>
+    <input id="naokolo-player-count" class="player-setup-range" type="range" min="2" max="12" value="4" oninput="setNaokoloPlayerCount(this.value)">
+  </div>
+  <div id="naokolo-player-names" class="player-setup-name-list"></div>
+  <button type="button" class="primary-btn player-setup-action" onclick="naokoloProceedToOptions()"><span>Dalej: ustawienia</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-naokolo-options" class="screen naokolo-screen hidden flex-col flex-1">
+  <div class="naokolo-section-heading">
+    <span class="naokolo-kicker">KROK 2 Z 2</span>
+    <h2>Ustaw rundę</h2>
+    <p>Wybierz długość tury i paczki kart.</p>
+  </div>
+
+  <div class="naokolo-setup-card">
+    <div class="naokolo-group-label"><span>CZAS TURY</span><small>Widoczny podczas gry</small></div>
+    <div class="naokolo-time-grid">
+      <button type="button" data-naokolo-time="30" onclick="setNaokoloRoundTime(30)"><strong>30 s</strong><small>Sprint</small></button>
+      <button type="button" data-naokolo-time="45" onclick="setNaokoloRoundTime(45)"><strong>45 s</strong><small>Szybko</small></button>
+      <button type="button" data-naokolo-time="60" onclick="setNaokoloRoundTime(60)"><strong>60 s</strong><small>Klasycznie</small></button>
+      <button type="button" data-naokolo-time="90" onclick="setNaokoloRoundTime(90)"><strong>90 s</strong><small>Na luzie</small></button>
+    </div>
+  </div>
+
+  <div class="naokolo-setup-card">
+    <div class="naokolo-group-label"><span>KATEGORIE</span><button id="naokolo-toggle-all-categories" type="button" onclick="toggleAllNaokoloCategories()">Wybierz wszystkie</button></div>
+    <div id="naokolo-category-grid" class="naokolo-category-grid"></div>
+  </div>
+
+  <button type="button" class="primary-btn naokolo-sticky-action" onclick="prepareNaokoloGame()"><i class="fa-solid fa-circle-play"></i><span>Przejdź do pierwszej tury</span></button>
+</section>
+
+<section id="screen-naokolo-ready" class="screen naokolo-screen hidden flex-col flex-1 naokolo-ready-screen">
+  <div class="naokolo-ready-card">
+    <span id="naokolo-ready-round" class="naokolo-kicker">Tura 1</span>
+    <div class="naokolo-ready-icon" aria-hidden="true"><i class="fa-solid fa-comment-dots"></i></div>
+    <span class="naokolo-ready-label">TERAZ OPISUJE</span>
+    <strong id="naokolo-ready-player">Gracz 1</strong>
+    <p>Trzymaj telefon tak, żeby widzieć kartę. Reszta ekipy ma odgadnąć hasło.</p>
+    <div class="naokolo-ready-time"><i class="fa-solid fa-stopwatch"></i><span id="naokolo-ready-time">60 s</span></div>
+  </div>
+  <button type="button" class="primary-btn" onclick="startNaokoloTurn()"><i class="fa-solid fa-play"></i><span>START TURY</span></button>
+</section>
+
+<section id="screen-naokolo-play" class="screen naokolo-screen hidden flex-col flex-1 naokolo-play-screen">
+  <div class="naokolo-play-topbar">
+    <div><span class="naokolo-turn-label">OPISUJE</span><strong id="naokolo-current-player">Gracz 1</strong></div>
+    <div id="naokolo-timer-ring" class="naokolo-timer-ring"><span id="naokolo-timer-value">60</span><small>s</small></div>
+  </div>
+
+  <article class="naokolo-word-card">
+    <span id="naokolo-card-category" class="naokolo-card-category">Kategoria</span>
+    <h2 id="naokolo-card-word">Hasło</h2>
+    <div class="naokolo-forbidden-block">
+      <span>NIE MÓW:</span>
+      <ul id="naokolo-forbidden-list"></ul>
+    </div>
+  </article>
+
+  <div class="naokolo-live-stats" aria-label="Statystyki bieżącej tury">
+    <span><strong id="naokolo-live-guessed">0</strong><small>trafione</small></span>
+    <span><strong id="naokolo-live-skipped">0</strong><small>pominięte</small></span>
+    <span><strong id="naokolo-live-forbidden">0</strong><small>zakazane</small></span>
+  </div>
+
+  <div class="naokolo-actions">
+    <button type="button" class="naokolo-action naokolo-action-skip" onclick="markNaokoloCard('skipped')"><i class="fa-solid fa-forward"></i><span>Pomiń</span></button>
+    <button type="button" class="naokolo-action naokolo-action-forbidden" onclick="markNaokoloCard('forbidden')"><i class="fa-solid fa-ban"></i><span>Zakazane</span><small>−1</small></button>
+    <button type="button" class="naokolo-action naokolo-action-guessed" onclick="markNaokoloCard('guessed')"><i class="fa-solid fa-check"></i><span>Odgadnięte</span><small>+1</small></button>
+  </div>
+</section>
+
+<section id="screen-naokolo-result" class="screen naokolo-screen hidden flex-col flex-1 naokolo-result-screen">
+  <div class="naokolo-result-hero">
+    <span class="naokolo-result-icon"><i class="fa-solid fa-flag-checkered"></i></span>
+    <span class="naokolo-kicker">KONIEC TURY</span>
+    <h2 id="naokolo-result-player">Gracz 1</h2>
+    <strong id="naokolo-result-score" class="naokolo-result-score">+0 pkt</strong>
+  </div>
+  <div class="naokolo-result-stats">
+    <article><i class="fa-solid fa-check"></i><strong id="naokolo-result-guessed">0</strong><span>Odgadnięte</span></article>
+    <article><i class="fa-solid fa-forward"></i><strong id="naokolo-result-skipped">0</strong><span>Pominięte</span></article>
+    <article><i class="fa-solid fa-ban"></i><strong id="naokolo-result-forbidden">0</strong><span>Zakazane</span></article>
+  </div>
+  <div class="naokolo-result-actions">
+    <button type="button" class="primary-btn" onclick="startNextNaokoloTurn()"><i class="fa-solid fa-arrow-right"></i><span>Następny gracz</span></button>
+    <button type="button" class="secondary-btn" onclick="openCurrentScoreboard()"><i class="fa-solid fa-ranking-star"></i><span>Zobacz wyniki</span></button>
+  </div>
+</section>
