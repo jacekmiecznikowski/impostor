@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "game": "co-mam-na-mysli",
+  "locale": "pl",
+  "categories": [
+    {
+      "id": "zwierzeta",
+      "name": "Zwierzęta",
+      "desc": "Od domowych pupili po dzikie stworzenia.",
+      "icon": "fa-paw",
+      "words": [
+        {"word":"Pingwin"},{"word":"Żyrafa"},{"word":"Delfin"},{"word":"Jeż"},{"word":"Kangur"},{"word":"Papuga"},{"word":"Rekin"},{"word":"Wiewiórka"},{"word":"Panda"},{"word":"Bocian"},{"word":"Kameleon"},{"word":"Foka"},{"word":"Koala"},{"word":"Sowa"},{"word":"Hipopotam"}
+      ]
+    },
+    {
+      "id": "zawody",
+      "name": "Zawody",
+      "desc": "Kto robi co na co dzień?",
+      "icon": "fa-user-tie",
+      "words": [
+        {"word":"Strażak"},{"word":"Dentysta"},{"word":"Kucharz"},{"word":"Fotograf"},{"word":"Pilot"},{"word":"Fryzjer"},{"word":"Nauczyciel"},{"word":"Ratownik"},{"word":"Mechanik"},{"word":"Piekarz"},{"word":"Ogrodnik"},{"word":"Weterynarz"},{"word":"Architekt"},{"word":"Listonosz"},{"word":"Aktor"}
+      ]
+    },
+    {
+      "id": "jedzenie",
+      "name": "Jedzenie",
+      "desc": "Dania, przekąski i produkty.",
+      "icon": "fa-utensils",
+      "words": [
+        {"word":"Pizza"},{"word":"Pierogi"},{"word":"Sushi"},{"word":"Arbuz"},{"word":"Popcorn"},{"word":"Rosół"},{"word":"Naleśniki"},{"word":"Lody"},{"word":"Kebab"},{"word":"Ogórek"},{"word":"Pączek"},{"word":"Spaghetti"},{"word":"Ser"},{"word":"Tost"},{"word":"Czekolada"}
+      ]
+    },
+    {
+      "id": "miejsca",
+      "name": "Miejsca",
+      "desc": "Miejsca, które łatwo pokazać lub opisać.",
+      "icon": "fa-location-dot",
+      "words": [
+        {"word":"Lotnisko"},{"word":"Plaża"},{"word":"Biblioteka"},{"word":"Wesołe miasteczko"},{"word":"Szpital"},{"word":"Stadion"},{"word":"Kino"},{"word":"Las"},{"word":"Restauracja"},{"word":"Dworzec"},{"word":"Siłownia"},{"word":"Muzeum"},{"word":"Kemping"},{"word":"Basen"},{"word":"Supermarket"}
+      ]
+    },
+    {
+      "id": "przedmioty",
+      "name": "Przedmioty",
+      "desc": "Rzeczy z domu, ulicy i plecaka.",
+      "icon": "fa-box-open",
+      "words": [
+        {"word":"Parasol"},{"word":"Lodówka"},{"word":"Odkurzacz"},{"word":"Walizka"},{"word":"Latarka"},{"word":"Lustro"},{"word":"Kask"},{"word":"Pilot do telewizora"},{"word":"Budzik"},{"word":"Drabina"},{"word":"Poduszka"},{"word":"Nożyczki"},{"word":"Plecak"},{"word":"Suszarka"},{"word":"Czajnik"}
+      ]
+    },
+    {
+      "id": "czynnosci",
+      "name": "Czynności",
+      "desc": "Ruchy i sytuacje idealne do zgadywania.",
+      "icon": "fa-person-running",
+      "words": [
+        {"word":"Kichanie"},{"word":"Tańczenie"},{"word":"Gotowanie"},{"word":"Pływanie"},{"word":"Robienie selfie"},{"word":"Pakowanie walizki"},{"word":"Mycie zębów"},{"word":"Jazda na rowerze"},{"word":"Zasypianie"},{"word":"Otwieranie prezentu"},{"word":"Łowienie ryb"},{"word":"Malowanie ściany"},{"word":"Granie na gitarze"},{"word":"Bieganie"},{"word":"Robienie zakupów"}
+      ]
+    }
+  ]
+}
