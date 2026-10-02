@@ -1,37 +1,5 @@
-:root {
-  --party-brand: #950f26;
-  --party-brand-strong: #720b1d;
-  --party-brand-bright: #c61d3a;
-  --party-brand-rgb: 149, 15, 38;
-}
-
-body {
-  background: radial-gradient(circle at 50% -12%, rgba(149,15,38,.18), transparent 30rem), #06050a;
-  transition: background .45s ease;
-}
-
-body[data-bg-mode="party"] {
-  background:
-    radial-gradient(circle at 50% -10%, rgba(149,15,38,.25), transparent 30rem),
-    radial-gradient(circle at 8% 72%, rgba(198,29,58,.07), transparent 23rem),
-    #06050a;
-}
-
-body[data-bg-mode="impostor"],
-body[data-bg-mode="mystery"],
-body[data-bg-mode="discussion"],
-body[data-bg-mode="vote"],
-body[data-bg-mode="celebrate"] {
-  background: radial-gradient(circle at 50% -12%, rgba(20,184,166,.13), transparent 29rem), #020617;
-}
-
-body[data-bg-mode="heads-up"] {
-  background: radial-gradient(circle at 50% -12%, rgba(139,92,246,.17), transparent 30rem), #05040a;
-}
-
-body[data-bg-mode="taboo"] {
-  background: radial-gradient(circle at 50% -12%, rgba(245,158,11,.15), transparent 30rem), #080604;
-}
+/* Partyjniak home and catalog presentation.
+   Palette values come from the shared semantic theme variables. */
 
 #phaser-bg { opacity: .82 !important; }
 
@@ -43,30 +11,31 @@ body[data-bg-mode="taboo"] {
   height: 6.45rem !important;
   border-radius: 2rem !important;
   box-shadow:
-    0 24px 62px rgba(149,15,38,.30),
-    0 0 0 8px rgba(149,15,38,.05),
+    0 24px 62px rgba(var(--ui-accent-rgb), .30),
+    0 0 0 8px rgba(var(--ui-accent-rgb), .05),
     inset 0 1px 0 rgba(255,255,255,.06) !important;
 }
 
-.home-kicker { color: rgb(254 205 211) !important; }
-.home-title { text-shadow: 0 10px 36px rgba(149,15,38,.22); }
+.home-kicker { color: var(--ui-accent-text) !important; }
+.home-title { text-shadow: 0 10px 36px rgba(var(--ui-accent-rgb), .22); }
 
 .app-shell.is-home #shell-more-btn {
-  border-color: rgba(198,29,58,.24) !important;
-  background: rgba(48,8,15,.5) !important;
+  border-color: rgba(var(--ui-accent-rgb), .24) !important;
+  background: rgba(var(--ui-accent-surface-rgb), .5) !important;
 }
 
 .install-partyjniak-btn,
 #install-app-btn {
-  border-color: rgba(198,29,58,.3) !important;
-  background: rgba(149,15,38,.07) !important;
+  border-color: rgba(var(--ui-accent-rgb), .30) !important;
+  background: rgba(var(--ui-accent-rgb), .07) !important;
 }
-#install-app-btn i { color: #fb7185 !important; }
+#install-app-btn i { color: var(--ui-accent-text) !important; }
 
 .game-card-primary,
 .upcoming-card {
-  --game-accent: #14b8a6;
-  --game-rgb: 20, 184, 166;
+  --game-accent: var(--ui-accent);
+  --game-rgb: var(--ui-accent-rgb);
+  --game-text: var(--ui-accent-text);
 }
 
 .game-card-primary {
@@ -127,18 +96,12 @@ body[data-bg-mode="taboo"] {
 }
 .upcoming-card strong,
 .upcoming-card small { grid-column: 2; }
-.upcoming-card strong { color: rgb(226 232 240) !important; }
-.upcoming-card[data-game-id="heads-up"] strong { color: #ddd6fe !important; }
-.upcoming-card[data-game-id="taboo"] strong { color: #fde68a !important; }
+.upcoming-card strong { color: var(--game-text) !important; }
 
-.shell-logo:not(.is-game) { box-shadow: 0 8px 24px rgba(149,15,38,.24) !important; }
+.shell-logo:not(.is-game) { box-shadow: 0 8px 24px rgba(var(--ui-accent-rgb), .24) !important; }
 
 @media (max-width: 380px) {
   .home-logo-lockup { width: 5.8rem !important; height: 5.8rem !important; }
   .upcoming-grid { grid-template-columns: 1fr !important; }
   .upcoming-card { min-height: auto !important; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body { transition: none; }
 }
