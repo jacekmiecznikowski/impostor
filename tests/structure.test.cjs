@@ -9,6 +9,7 @@ const requiredFiles = [
   'assets/js/shared/view-loader.js',
   'assets/js/shared/platform.js',
   'assets/js/shared/content-repository.js',
+  'assets/js/shared/game-registry.js',
   'assets/js/shared/ui.js',
   'assets/js/shared/hub.js',
   'assets/js/shared/navigation-behavior.js',
@@ -32,6 +33,7 @@ const requiredFiles = [
   'assets/js/games/impostor/presentation.js',
   'assets/js/games/impostor/reveal-fit.js',
   'assets/js/games/impostor/scoreboard.js',
+  'assets/js/games/impostor/integration.js',
   'assets/js/games/ticking-bomb/content-provider.js',
   'assets/js/games/ticking-bomb/state.js',
   'assets/js/games/ticking-bomb/audio.js',
@@ -79,12 +81,14 @@ assert.match(index, /assets\/css\/ticking-bomb-theme\.css/);
 assert.match(index, /assets\/css\/navigation\.css/);
 assert.match(index, /assets\/css\/navigation-android\.css/);
 assert.match(index, /assets\/js\/shared\/view-loader\.js/);
+assert.match(index, /assets\/js\/shared\/game-registry\.js/);
 assert.match(index, /assets\/js\/shared\/outcome-audio\.js\?v=6/);
 assert.doesNotMatch(index, /outcome-audio-user/);
 assert.match(index, /assets\/js\/shared\/native-android\.js/);
 assert.match(index, /assets\/js\/shared\/navigation-behavior\.js/);
 assert.match(index, /assets\/js\/shared\/game-themes\.js/);
 assert.match(index, /assets\/js\/games\/impostor\/reveal-fit\.js/);
+assert.match(index, /assets\/js\/games\/impostor\/integration\.js/);
 assert.match(index, /assets\/js\/games\/ticking-bomb\/integration\.js/);
 assert.match(index, /assets\/js\/games\/ticking-bomb\/game\.js/);
 assert.match(index, /theme-color" content="#950f26"/);
@@ -104,11 +108,21 @@ assert.match(impostorState, /zapisanej poprzedniej ekipy/);
 const platform = read('assets/js/shared/platform.js');
 assert.doesNotMatch(platform, /awake-mode-note|Ekran pozostanie włączony/);
 
+const registry = read('assets/js/shared/game-registry.js');
+assert.match(registry, /const GAME_MODULES = new Map\(\)/);
+assert.match(registry, /function registerGameModule/);
+assert.match(registry, /function getGameModule/);
+assert.match(registry, /function getGameIdForScreen/);
+assert.match(registry, /function getActiveGameModule/);
+assert.match(registry, /function callGameHook/);
+
 const ui = read('assets/js/shared/ui.js');
 assert.match(ui, /function navigateBack/);
 assert.match(ui, /function setupSystemBackHandling/);
 assert.match(ui, /ROUND_GUARDED_SCREENS/);
 assert.match(ui, /openNavigationSheet/);
+assert.match(ui, /getGameIdForScreen/);
+assert.match(ui, /callGameHook/);
 
 const navigation = read('assets/js/shared/navigation-behavior.js');
 assert.match(navigation, /bomb-play/);
@@ -145,6 +159,12 @@ assert.match(game, /ImpostorRules\.assignRoles/);
 assert.match(game, /ImpostorRules\.scoreVote/);
 assert.match(game, /playOutcomeSound\(caughtImpostor \? 'detectives' : 'impostor'\)/);
 assert.doesNotMatch(game, /playSound\(caughtImpostor \? 'success' : 'failure'\)/);
+
+const impostorIntegration = read('assets/js/games/impostor/integration.js');
+assert.match(impostorIntegration, /registerGameModule/);
+assert.match(impostorIntegration, /id: 'impostor'/);
+assert.match(impostorIntegration, /rulesModalId: 'rules-modal'/);
+assert.match(impostorIntegration, /renderScoreboard/);
 
 const bombState = read('assets/js/games/ticking-bomb/state.js');
 assert.match(bombState, /hasSavedSession: false/);
@@ -188,12 +208,14 @@ assert.match(bombGame, /function commitBombManualLoser/);
 assert.doesNotMatch(bombGame, /manualWinnerId|commitBombManualWinner|selectBombManualWinner/);
 
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
-assert.match(bombIntegration, /Zasady Impostora/);
-assert.match(bombIntegration, /Menu Impostora/);
+assert.match(bombIntegration, /registerGameModule/);
+assert.match(bombIntegration, /id: 'ticking-bomb'/);
+assert.match(bombIntegration, /rulesModalId: 'bomb-rules-modal'/);
 assert.match(bombIntegration, /stopAllBombAudio/);
-assert.match(bombIntegration, /bombAwareToggleAudio/);
-assert.match(bombIntegration, /updateBombAwareNavigationIcons/);
+assert.match(bombIntegration, /onAudioChanged/);
 assert.match(bombIntegration, /fa-bomb/);
+assert.doesNotMatch(bombIntegration, /baseOpenGame|partyjniakOpenGame|bombAwareToggleAudio|updateBombAwareNavigationIcons/);
+assert.doesNotMatch(bombIntegration, /openGame\s*=|goToScreen\s*=|setupGameHub\s*=|updateShellContext\s*=|requestLeaveGame\s*=|leaveActiveRound\s*=|toggleAudio\s*=/);
 assert.doesNotMatch(bombIntegration, /Object\.assign\(BACKGROUND_MODES/);
 assert.doesNotMatch(bombIntegration, /bombAwareThemeMotifs|sparkPositions|shockwave/);
 
@@ -249,7 +271,7 @@ assert.doesNotMatch(gameThemes, /celebrate:[\s\S]{0,220}0xf59e0b/);
 assert.doesNotMatch(gameThemes, /impostor:[\s\S]{0,220}0x8b5cf6/);
 
 const sw = read('sw.js');
-assert.match(sw, /CACHE_VERSION = 'v34'/);
+assert.match(sw, /CACHE_VERSION = 'v35'/);
 assert.match(sw, /assets\/audio\/crewmates-win\.mp3\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.0\.b64/);
 assert.match(sw, /assets\/audio\/impostor-win\.4\.b64/);
@@ -259,6 +281,8 @@ assert.match(sw, /content\/ticking-bomb\.pl\.json/);
 assert.match(sw, /assets\/css\/ticking-bomb-mobile\.css/);
 assert.match(sw, /assets\/css\/ticking-bomb-theme\.css/);
 assert.match(sw, /assets\/css\/game-color-system\.css/);
+assert.match(sw, /assets\/js\/shared\/game-registry\.js/);
+assert.match(sw, /assets\/js\/games\/impostor\/integration\.js/);
 assert.match(sw, /assets\/js\/games\/ticking-bomb\/integration\.js/);
 assert.match(sw, /assets\/js\/shared\/outcome-audio\.js\?v=6/);
 assert.doesNotMatch(sw, /outcome-audio-user/);
@@ -280,4 +304,4 @@ assert.equal(manifest.theme_color, '#950f26');
 assert.equal(manifest.background_color, '#06050a');
 assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
 
-console.log('Partyjniak structure, Android, per-game colors, Impostor and Tykająca Bomba mobile UI tests: OK');
+console.log('Partyjniak structure, game registry, Android, per-game colors, Impostor and Tykająca Bomba mobile UI tests: OK');
