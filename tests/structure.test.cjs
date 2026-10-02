@@ -13,6 +13,7 @@ const requiredFiles = [
   'assets/js/app.js',
   'assets/js/shared/view-loader.js',
   'assets/js/shared/audio.js',
+  'assets/js/shared/player-setup.js',
   'assets/js/shared/outcome-audio.js',
   'assets/js/shared/background.js',
   'assets/js/shared/platform.js',
@@ -50,6 +51,7 @@ const requiredFiles = [
   'views/ticking-bomb-modals.html',
   'views/modals.html',
   'assets/css/styles.css',
+  'assets/css/player-setup.css',
   'assets/css/partyjniak.css',
   'assets/css/navigation.css',
   'assets/css/navigation-android.css',
@@ -81,6 +83,8 @@ assert.match(index, /<title>Partyjniak – gry imprezowe<\/title>/);
 assert.match(index, /theme-color" content="#950f26"/);
 assert.match(index, /manifest\.webmanifest/);
 assert.match(index, /assets\/icons\/icon\.svg/);
+assert.match(index, /assets\/css\/player-setup\.css/);
+assert.match(index, /assets\/js\/shared\/player-setup\.js/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 
 const capacitor = JSON.parse(read('capacitor.config.json'));
@@ -103,5 +107,6 @@ assert.equal(pkg.dependencies['@capacitor/app'], '8.1.1');
 assert.match(pkg.scripts['build:web'], /prepare-web/);
 assert.match(pkg.scripts.test, /game-module-config\.test\.cjs/);
 assert.match(pkg.scripts.test, /game-theme-system\.test\.cjs/);
+assert.match(pkg.scripts.test, /player-setup\.test\.cjs/);
 
 console.log('Partyjniak packaging and configuration smoke tests: OK');
