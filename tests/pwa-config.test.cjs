@@ -27,9 +27,9 @@ vm.createContext(sandbox);
 vm.runInContext(`${source}\n;globalThis.__pwaTest = { CACHE_VERSION, STATIC_CACHE, RUNTIME_CACHE, LOCAL_ASSETS: [...LOCAL_ASSETS], EXTERNAL_ASSETS: [...EXTERNAL_ASSETS] };`, sandbox);
 
 const config = sandbox.__pwaTest;
-assert.equal(config.CACHE_VERSION, 'v38');
-assert.equal(config.STATIC_CACHE, 'partyjniak-static-v38');
-assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v38');
+assert.equal(config.CACHE_VERSION, 'v39');
+assert.equal(config.STATIC_CACHE, 'partyjniak-static-v39');
+assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v39');
 assert.equal(new Set(config.LOCAL_ASSETS).size, config.LOCAL_ASSETS.length, 'precache should not contain duplicates');
 
 [
