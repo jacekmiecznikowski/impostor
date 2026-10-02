@@ -35,10 +35,10 @@ assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/games\/(?:impostor|
 
 assert.match(app, /from '\.\/shared\/game-registry\.js\?v=2'/);
 assert.match(app, /from '\.\/games\/index\.js\?v=3'/);
-assert.match(app, /initializeGameModules/);
+assert.doesNotMatch(app, /initializeGameModules/);
 assert.doesNotMatch(app, /games\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli)\/integration/);
 assert.match(app, /registerGameModules\(\);[\s\S]*await loadAppViews\(\)/);
-assert.match(app, /await initializeGameModules\(\)/);
+assert.match(app, /initializeCoMamNaMysliContent/);
 
 assert.match(gamesIndex, /from '\.\/impostor\/integration\.js\?v=2'/);
 assert.match(gamesIndex, /from '\.\/ticking-bomb\/integration\.js\?v=2'/);
@@ -48,7 +48,6 @@ assert.match(gamesIndex, /from '\.\/prototypes\/integration\.js\?v=2'/);
 assert.match(gamesIndex, /registerCoMamNaMysliGame\(\)/);
 
 assert.match(registry, /export function registerGameModule/);
-assert.match(registry, /export async function initializeGameModules/);
 assert.match(registry, /export function getGameScreenConfig/);
 assert.match(registry, /Object\.assign\(window, legacyBridge\)/);
 
