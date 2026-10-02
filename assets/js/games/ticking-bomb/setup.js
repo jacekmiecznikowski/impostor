@@ -95,7 +95,7 @@ function selectBombMode(mode) {
 }
 
 function selectBombFusePreset(preset) {
-    if (!BOMB_FUSE_PRESETS[preset]) return;
+    if (!TickingBombRules.FUSE_PRESETS[preset]) return;
     bombState.fusePreset = preset;
     renderBombFuseOptions();
     if (bombState.hasSavedSession) persistBombSession();
