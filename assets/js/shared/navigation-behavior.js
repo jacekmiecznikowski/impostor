@@ -20,3 +20,12 @@ function syncMobileShellAction(screenName) {
         button.onclick = () => toggleShellMenu();
     }
 }
+
+const mobileNavigationObserver = new MutationObserver(() => {
+    syncMobileShellAction(document.body.dataset.screen || 'home');
+});
+
+mobileNavigationObserver.observe(document.body, {
+    attributes: true,
+    attributeFilter: ['data-screen']
+});
