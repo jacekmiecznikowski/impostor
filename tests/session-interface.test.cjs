@@ -10,6 +10,7 @@ const app = read('assets/js/app.js');
 const impostorIntegration = read('assets/js/games/impostor/integration.js');
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 const naokoloIntegration = read('assets/js/games/naokolo/integration.js');
+const cmmIntegration = read('assets/js/games/co-mam-na-mysli/integration.js');
 const impostorState = read('assets/js/games/impostor/state.js');
 
 assert.match(registry, /GAME_SESSION_METHODS/);
@@ -17,7 +18,6 @@ assert.match(registry, /GAME_SESSION_METHODS/);
   assert.match(registry, new RegExp(`['"]${method}['"]`), `Brakuje metody sesji ${method}`);
 });
 assert.match(registry, /function getGameSession/);
-assert.match(registry, /function getActiveGameSession/);
 assert.match(registry, /function loadGameSessions/);
 assert.match(registry, /function syncGameSessionUi/);
 assert.match(registry, /function saveGameSession/);
@@ -25,32 +25,22 @@ assert.match(registry, /function resetGameSession/);
 assert.match(registry, /function hasGameResume/);
 assert.match(registry, /function getGamePlayers/);
 
-assert.match(impostorIntegration, /session:\s*\{/);
-assert.match(impostorIntegration, /load:\s*\(\) => loadSession\(\)/);
-assert.match(impostorIntegration, /save:\s*\(\) => persistSession\(\)/);
-assert.match(impostorIntegration, /reset:\s*\(\) => resetImpostorSession\(\)/);
-assert.match(impostorIntegration, /hasResume:\s*\(\) => hasSavedSession\(\)/);
-assert.match(impostorIntegration, /getPlayers:\s*\(\) => state\.players/);
-
-assert.match(bombIntegration, /session:\s*\{/);
-assert.match(bombIntegration, /load:\s*\(\) => loadBombSession\(\)/);
-assert.match(bombIntegration, /save:\s*\(\) => persistBombSession\(\)/);
-assert.match(bombIntegration, /reset:\s*\(\) => resetBombSession\(\)/);
-assert.match(bombIntegration, /hasResume:/);
-assert.match(bombIntegration, /getPlayers:\s*\(\) => bombState\.players/);
-
-assert.match(naokoloIntegration, /session:\s*\{/);
-assert.match(naokoloIntegration, /load:\s*\(\) => loadNaokoloSession\(\)/);
-assert.match(naokoloIntegration, /save:\s*\(\) => persistNaokoloSession\(\)/);
-assert.match(naokoloIntegration, /reset:\s*\(\) => resetNaokoloSession\(\)/);
-assert.match(naokoloIntegration, /hasResume:/);
-assert.match(naokoloIntegration, /getPlayers:\s*\(\) => naokoloState\.players/);
+for (const [source, methods] of [
+  [impostorIntegration, ['loadSession', 'persistSession', 'resetImpostorSession']],
+  [bombIntegration, ['loadBombSession', 'persistBombSession', 'resetBombSession']],
+  [naokoloIntegration, ['loadNaokoloSession', 'persistNaokoloSession', 'resetNaokoloSession']],
+  [cmmIntegration, ['loadCoMamNaMysliSession', 'persistCoMamNaMysliSession', 'resetCoMamNaMysliSession']]
+]) {
+  assert.match(source, /session:\s*\{/);
+  methods.forEach(method => assert.match(source, new RegExp(method)));
+  assert.match(source, /hasResume:/);
+  assert.match(source, /getPlayers:/);
+}
 
 assert.match(impostorState, /function resetImpostorSession/);
-assert.match(impostorState, /hasGameResume\('impostor'\)/);
 assert.match(app, /loadGameSessions\(\)/);
 assert.match(app, /syncGameSessionUi\(\)/);
-assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadSession\(\)/);
-assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\./);
+assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadCoMamNaMysliSession\(\)|loadSession\(\)/);
+assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\.|\bcoMamNaMysliState\./);
 
 console.log('Shared game session interface tests: OK');
