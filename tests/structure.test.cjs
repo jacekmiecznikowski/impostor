@@ -110,10 +110,14 @@ assert.doesNotMatch(platform, /awake-mode-note|Ekran pozostanie włączony/);
 
 const registry = read('assets/js/shared/game-registry.js');
 assert.match(registry, /const GAME_MODULES = new Map\(\)/);
+assert.match(registry, /GAME_SESSION_METHODS/);
 assert.match(registry, /function registerGameModule/);
 assert.match(registry, /function getGameModule/);
+assert.match(registry, /function getGameSession/);
 assert.match(registry, /function getGameIdForScreen/);
 assert.match(registry, /function getActiveGameModule/);
+assert.match(registry, /function loadGameSessions/);
+assert.match(registry, /function syncGameSessionUi/);
 assert.match(registry, /function callGameHook/);
 
 const ui = read('assets/js/shared/ui.js');
@@ -135,7 +139,9 @@ assert.match(nativeAndroid, /exitApp/);
 const app = read('assets/js/app.js');
 assert.match(app, /setupNativeAndroidIntegration/);
 assert.match(app, /initializeTickingBombContent/);
-assert.match(app, /loadBombSession/);
+assert.match(app, /loadGameSessions\(\)/);
+assert.match(app, /syncGameSessionUi\(\)/);
+assert.doesNotMatch(app, /loadBombSession\(\)|loadSession\(\)|\bstate\.|\bbombState\./);
 assert.match(app, /!nativeApp && 'serviceWorker' in navigator/);
 
 const revealFit = read('assets/js/games/impostor/reveal-fit.js');
@@ -163,6 +169,7 @@ assert.doesNotMatch(game, /playSound\(caughtImpostor \? 'success' : 'failure'\)/
 const impostorIntegration = read('assets/js/games/impostor/integration.js');
 assert.match(impostorIntegration, /registerGameModule/);
 assert.match(impostorIntegration, /id: 'impostor'/);
+assert.match(impostorIntegration, /session:\s*\{/);
 assert.match(impostorIntegration, /rulesModalId: 'rules-modal'/);
 assert.match(impostorIntegration, /renderScoreboard/);
 
@@ -210,6 +217,7 @@ assert.doesNotMatch(bombGame, /manualWinnerId|commitBombManualWinner|selectBombM
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 assert.match(bombIntegration, /registerGameModule/);
 assert.match(bombIntegration, /id: 'ticking-bomb'/);
+assert.match(bombIntegration, /session:\s*\{/);
 assert.match(bombIntegration, /rulesModalId: 'bomb-rules-modal'/);
 assert.match(bombIntegration, /stopAllBombAudio/);
 assert.match(bombIntegration, /onAudioChanged/);
@@ -297,6 +305,7 @@ assert.equal(pkg.dependencies['@capacitor/core'], '8.5.2');
 assert.equal(pkg.dependencies['@capacitor/android'], '8.5.2');
 assert.equal(pkg.dependencies['@capacitor/app'], '8.1.1');
 assert.match(pkg.scripts['build:web'], /prepare-web/);
+assert.match(pkg.scripts.test, /session-interface\.test\.cjs/);
 
 const manifest = JSON.parse(read('manifest.webmanifest'));
 assert.equal(manifest.short_name, 'Partyjniak');
@@ -304,4 +313,4 @@ assert.equal(manifest.theme_color, '#950f26');
 assert.equal(manifest.background_color, '#06050a');
 assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
 
-console.log('Partyjniak structure, game registry, Android, per-game colors, Impostor and Tykająca Bomba mobile UI tests: OK');
+console.log('Partyjniak structure, game registry, session interface, Android, per-game colors, Impostor and Tykająca Bomba mobile UI tests: OK');
