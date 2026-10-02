@@ -58,7 +58,6 @@ const requiredFiles = [
   'assets/css/impostor-reveal-layout.css',
   'assets/css/ticking-bomb.css',
   'assets/css/ticking-bomb-mobile.css',
-  'assets/css/ticking-bomb-theme.css',
   'assets/css/ticking-bomb-visual.css',
   'assets/css/screen-layout-system.css',
   'assets/icons/icon.svg',
@@ -73,6 +72,8 @@ const requiredFiles = [
 for (const file of requiredFiles) {
   assert.equal(fs.existsSync(path.join(root, file)), true, `Brakuje ${file}`);
 }
+
+assert.equal(fs.existsSync(path.join(root, 'assets/css/ticking-bomb-theme.css')), false);
 
 const index = read('index.html');
 assert.match(index, /<html lang="pl"/);
@@ -101,5 +102,6 @@ assert.equal(pkg.dependencies['@capacitor/android'], '8.5.2');
 assert.equal(pkg.dependencies['@capacitor/app'], '8.1.1');
 assert.match(pkg.scripts['build:web'], /prepare-web/);
 assert.match(pkg.scripts.test, /game-module-config\.test\.cjs/);
+assert.match(pkg.scripts.test, /game-theme-system\.test\.cjs/);
 
 console.log('Partyjniak packaging and configuration smoke tests: OK');
