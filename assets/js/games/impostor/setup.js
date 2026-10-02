@@ -1,58 +1,70 @@
+function createImpostorPlayers(count, previousPlayers = state.players) {
+    const safeCount = clampPlayerSetupCount(count, 3, 12, DEFAULT_STATE.playerCount);
+    const resized = resizePlayerSetupRoster(previousPlayers, safeCount, index => ({
+        id: index + 1,
+        name: `Gracz ${index + 1}`,
+        score: 0
+    }));
+
+    state.playerCount = safeCount;
+    state.players = resized.map((player, index) => ({
+        id: index + 1,
+        name: String(player?.name || `Gracz ${index + 1}`).slice(0, 15),
+        score: Number(player?.score) || 0
+    }));
+}
+
+function renderImpostorNameInputs() {
+    renderPlayerSetupNames({
+        containerId: 'name-inputs-container',
+        players: state.players,
+        maxLength: 15,
+        inputIdPrefix: 'player-name-',
+        onInput(index, value) {
+            if (state.players[index]) state.players[index].name = value;
+        }
+    });
+}
+
+function renderImpostorPlayerSetup() {
+    if (state.players.length !== state.playerCount) createImpostorPlayers(state.playerCount, state.players);
+    syncPlayerSetupCount({
+        sliderId: 'player-slider',
+        labelId: 'player-count-big',
+        count: state.playerCount
+    });
+    renderImpostorNameInputs();
+}
+
 function startNewGameFlow() {
     state = {
         ...DEFAULT_STATE,
         activeCategories: getDefaultActiveCategories()
     };
     try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
-    document.getElementById('player-slider').value = state.playerCount;
-    document.getElementById('player-count-big').innerText = state.playerCount;
+    createImpostorPlayers(state.playerCount, []);
+    renderImpostorPlayerSetup();
     updateResumeButton();
     goToScreen('setup-count');
 }
 
 function onPlayerSliderChange(value) {
-    state.playerCount = Number.parseInt(value, 10);
-    document.getElementById('player-count-big').innerText = state.playerCount;
-    playSound('click');
+    const count = clampPlayerSetupCount(value, 3, 12, state.playerCount);
+    createImpostorPlayers(count, state.players);
+    syncPlayerSetupCount({
+        sliderId: 'player-slider',
+        labelId: 'player-count-big',
+        count: state.playerCount
+    });
+    renderImpostorNameInputs();
+    playPlayerSetupCountFeedback();
 }
 
 function adjustPlayerCount(delta) {
-    state.playerCount = Math.min(12, Math.max(3, state.playerCount + delta));
-    document.getElementById('player-slider').value = state.playerCount;
-    document.getElementById('player-count-big').innerText = state.playerCount;
-    playSound('click');
-}
-
-function goToSetupNames() {
-    const container = document.getElementById('name-inputs-container');
-    container.replaceChildren();
-
-    for (let i = 0; i < state.playerCount; i++) {
-        const existingName = state.players[i]?.name || `Gracz ${i + 1}`;
-        const existingScore = state.players[i]?.score || 0;
-
-        const row = document.createElement('div');
-        row.className = 'flex items-center space-x-2';
-
-        const indexBadge = document.createElement('span');
-        indexBadge.className = 'w-8 h-8 rounded-xl bg-teal-950/80 border border-teal-800/60 text-teal-300 flex items-center justify-center font-bold text-xs';
-        indexBadge.textContent = String(i + 1);
-
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.id = `player-name-${i}`;
-        input.value = existingName;
-        input.maxLength = 15;
-        input.dataset.score = String(existingScore);
-        input.className = 'flex-1 bg-slate-900 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-teal-500 transition-all shadow-inner';
-        input.placeholder = 'Imię gracza...';
-        input.autocomplete = 'off';
-        input.enterKeyHint = i === state.playerCount - 1 ? 'done' : 'next';
-
-        row.append(indexBadge, input);
-        container.appendChild(row);
-    }
-    goToScreen('setup-names');
+    const count = clampPlayerSetupCount(state.playerCount + delta, 3, 12, state.playerCount);
+    createImpostorPlayers(count, state.players);
+    renderImpostorPlayerSetup();
+    playPlayerSetupCountFeedback();
 }
 
 function goToSetupOptions() {
@@ -61,7 +73,7 @@ function goToSetupOptions() {
 
     for (let i = 0; i < state.playerCount; i++) {
         const input = document.getElementById(`player-name-${i}`);
-        const name = input?.value.trim() || `Gracz ${i + 1}`;
+        const name = input?.value.trim() || state.players[i]?.name?.trim() || `Gracz ${i + 1}`;
         const normalizedName = name.toLocaleLowerCase('pl-PL');
 
         if (usedNames.has(normalizedName)) {
@@ -74,7 +86,7 @@ function goToSetupOptions() {
         nextPlayers.push({
             id: i + 1,
             name,
-            score: Number.parseInt(input?.dataset.score || '0', 10) || 0
+            score: Number(state.players[i]?.score) || 0
         });
     }
 
