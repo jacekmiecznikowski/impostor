@@ -57,7 +57,7 @@ export function registerImpostorGame() {
             results: {
                 backTarget: 'menu',
                 shell: { title: 'Impostor', subtitle: 'Wynik rundy', mode: 'immersive' },
-                background: 'celebrate', immersive: true
+                background: 'celebrate'
             }
         },
         menuScreen: 'menu',
