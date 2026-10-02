@@ -85,7 +85,7 @@ assert.equal(capacitor.appName, 'Partyjniak');
 assert.equal(capacitor.webDir, 'dist');
 
 const manifest = JSON.parse(read('manifest.webmanifest'));
-assert.equal(manifest.name, 'Partyjniak');
+assert.equal(manifest.name, 'Partyjniak – gry imprezowe');
 assert.equal(manifest.short_name, 'Partyjniak');
 assert.equal(manifest.theme_color, '#950f26');
 assert.equal(manifest.background_color, '#06050a');
