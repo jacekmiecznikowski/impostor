@@ -8,7 +8,7 @@ const coMamNaMysliRuntime = {
     endsAt: 0,
     correct: 0,
     passed: 0,
-    sensorEnabled: false,
+    sensorSource: null,
     sensorBaseline: null,
     sensorSamples: 0,
     gestureLocked: false,
@@ -34,10 +34,15 @@ function renderCoMamNaMysliReadyScreen() {
     if (round) round.textContent = `Tura ${coMamNaMysliState.roundNumber + 1}`;
 }
 
+function removeCoMamNaMysliSensorListeners() {
+    window.removeEventListener('devicemotion', handleCoMamNaMysliMotion);
+    window.removeEventListener('deviceorientation', handleCoMamNaMysliOrientation);
+}
+
 function resetCoMamNaMysliRuntime() {
     if (coMamNaMysliRuntime.timerId) clearInterval(coMamNaMysliRuntime.timerId);
     if (coMamNaMysliRuntime.countdownId) clearTimeout(coMamNaMysliRuntime.countdownId);
-    window.removeEventListener('deviceorientation', handleCoMamNaMysliOrientation);
+    removeCoMamNaMysliSensorListeners();
     Object.assign(coMamNaMysliRuntime, {
         active: false,
         countingDown: false,
@@ -48,7 +53,7 @@ function resetCoMamNaMysliRuntime() {
         endsAt: 0,
         correct: 0,
         passed: 0,
-        sensorEnabled: false,
+        sensorSource: null,
         sensorBaseline: null,
         sensorSamples: 0,
         gestureLocked: false,
@@ -56,23 +61,26 @@ function resetCoMamNaMysliRuntime() {
     });
 }
 
-async function requestCoMamNaMysliMotionPermission() {
-    if (typeof window.DeviceOrientationEvent === 'undefined') return false;
+async function requestCoMamNaMysliSensorPermission() {
+    let motionGranted = typeof window.DeviceMotionEvent !== 'undefined';
+    let orientationGranted = typeof window.DeviceOrientationEvent !== 'undefined';
     try {
-        if (typeof window.DeviceOrientationEvent.requestPermission === 'function') {
-            const status = await window.DeviceOrientationEvent.requestPermission();
-            return status === 'granted';
+        if (motionGranted && typeof window.DeviceMotionEvent.requestPermission === 'function') {
+            motionGranted = (await window.DeviceMotionEvent.requestPermission()) === 'granted';
         }
-        return true;
+        if (orientationGranted && typeof window.DeviceOrientationEvent.requestPermission === 'function') {
+            orientationGranted = (await window.DeviceOrientationEvent.requestPermission()) === 'granted';
+        }
     } catch (error) {
         console.warn('Nie udało się uzyskać dostępu do czujnika przechyłu.', error);
-        return false;
     }
+    if (motionGranted) return 'motion';
+    if (orientationGranted) return 'orientation';
+    return null;
 }
 
-function handleCoMamNaMysliOrientation(event) {
-    if (!coMamNaMysliRuntime.countingDown && !coMamNaMysliRuntime.active) return;
-    const value = CoMamNaMysliMotion.getTiltValue(event, getCoMamNaMysliOrientationAngle());
+function processCoMamNaMysliTiltValue(value) {
+    if (!Number.isFinite(value) || (!coMamNaMysliRuntime.countingDown && !coMamNaMysliRuntime.active)) return;
 
     if (coMamNaMysliRuntime.sensorBaseline == null) {
         coMamNaMysliRuntime.sensorBaseline = value;
@@ -81,7 +89,7 @@ function handleCoMamNaMysliOrientation(event) {
     }
 
     if (coMamNaMysliRuntime.countingDown) {
-        const samples = Math.min(20, coMamNaMysliRuntime.sensorSamples + 1);
+        const samples = Math.min(24, coMamNaMysliRuntime.sensorSamples + 1);
         coMamNaMysliRuntime.sensorBaseline = ((coMamNaMysliRuntime.sensorBaseline * (samples - 1)) + value) / samples;
         coMamNaMysliRuntime.sensorSamples = samples;
         return;
@@ -89,14 +97,22 @@ function handleCoMamNaMysliOrientation(event) {
 
     if (!coMamNaMysliRuntime.active || coMamNaMysliRuntime.finishing) return;
     if (coMamNaMysliRuntime.gestureLocked) {
-        if (CoMamNaMysliMotion.isNeutral(value, coMamNaMysliRuntime.sensorBaseline, 12)) {
-            coMamNaMysliRuntime.gestureLocked = false;
-        }
+        if (CoMamNaMysliMotion.isNeutral(value, coMamNaMysliRuntime.sensorBaseline, 12)) coMamNaMysliRuntime.gestureLocked = false;
         return;
     }
 
     const action = CoMamNaMysliMotion.classifyTilt(value, coMamNaMysliRuntime.sensorBaseline, 28);
     if (action) markCoMamNaMysliCard(action, { fromSensor: true });
+}
+
+function handleCoMamNaMysliMotion(event) {
+    const value = CoMamNaMysliMotion.getGravityTiltValue(event, getCoMamNaMysliOrientationAngle());
+    processCoMamNaMysliTiltValue(value);
+}
+
+function handleCoMamNaMysliOrientation(event) {
+    const value = CoMamNaMysliMotion.getTiltValue(event, getCoMamNaMysliOrientationAngle());
+    processCoMamNaMysliTiltValue(value);
 }
 
 async function startCoMamNaMysliRound() {
@@ -114,10 +130,10 @@ async function startCoMamNaMysliRound() {
         return;
     }
 
-    const sensorEnabled = await requestCoMamNaMysliMotionPermission();
+    const sensorSource = await requestCoMamNaMysliSensorPermission();
     resetCoMamNaMysliRuntime();
     coMamNaMysliRuntime.deck = deck;
-    coMamNaMysliRuntime.sensorEnabled = sensorEnabled;
+    coMamNaMysliRuntime.sensorSource = sensorSource;
     coMamNaMysliRuntime.countingDown = true;
 
     await setPartyjniakOrientation?.('landscape');
@@ -128,7 +144,8 @@ async function startCoMamNaMysliRound() {
     renderCoMamNaMysliLiveStats();
     updateCoMamNaMysliFallbackControls();
 
-    if (sensorEnabled) window.addEventListener('deviceorientation', handleCoMamNaMysliOrientation, { passive: true });
+    if (sensorSource === 'motion') window.addEventListener('devicemotion', handleCoMamNaMysliMotion, { passive: true });
+    else if (sensorSource === 'orientation') window.addEventListener('deviceorientation', handleCoMamNaMysliOrientation, { passive: true });
     runCoMamNaMysliCountdown(3);
 }
 
@@ -185,8 +202,9 @@ function renderCoMamNaMysliLiveStats() {
 function updateCoMamNaMysliFallbackControls() {
     const controls = document.getElementById('cmm-fallback-controls');
     const status = document.getElementById('cmm-sensor-status');
-    if (controls) controls.classList.toggle('hidden', coMamNaMysliRuntime.sensorEnabled);
-    if (status) status.textContent = coMamNaMysliRuntime.sensorEnabled
+    const enabled = Boolean(coMamNaMysliRuntime.sensorSource);
+    if (controls) controls.classList.toggle('hidden', enabled);
+    if (status) status.textContent = enabled
         ? 'Przechyl w dół: dobrze • w górę: pomiń'
         : 'Czujnik niedostępny — użyj przycisków awaryjnych';
 }
@@ -212,10 +230,9 @@ function showCoMamNaMysliGestureFeedback(action) {
 }
 
 function markCoMamNaMysliCard(action, { fromSensor = false } = {}) {
-    if (!coMamNaMysliRuntime.active || coMamNaMysliRuntime.finishing) return;
-    if (!['correct', 'passed'].includes(action)) return;
-
+    if (!coMamNaMysliRuntime.active || coMamNaMysliRuntime.finishing || !['correct', 'passed'].includes(action)) return;
     if (fromSensor) coMamNaMysliRuntime.gestureLocked = true;
+
     if (action === 'correct') {
         coMamNaMysliRuntime.correct += 1;
         playSound?.('success');
@@ -250,7 +267,7 @@ function finishCoMamNaMysliRound() {
     coMamNaMysliRuntime.finishing = true;
     if (coMamNaMysliRuntime.timerId) clearInterval(coMamNaMysliRuntime.timerId);
     if (coMamNaMysliRuntime.countdownId) clearTimeout(coMamNaMysliRuntime.countdownId);
-    window.removeEventListener('deviceorientation', handleCoMamNaMysliOrientation);
+    removeCoMamNaMysliSensorListeners();
     coMamNaMysliRuntime.timerId = null;
     coMamNaMysliRuntime.countdownId = null;
     coMamNaMysliRuntime.active = false;
