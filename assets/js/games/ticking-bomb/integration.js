@@ -39,6 +39,16 @@ registerGameModule({
         rules: 'Zasady Tykającej Bomby',
         menu: 'Menu Tykającej Bomby'
     },
+    session: {
+        load: () => loadBombSession(),
+        save: () => persistBombSession(),
+        reset: () => resetBombSession(),
+        hasResume: () => bombState.hasSavedSession && bombState.players.length >= 2,
+        getPlayers: () => bombState.players,
+        syncUi() {
+            updateBombResumeButton();
+        }
+    },
     open({ silent = false } = {}) {
         openBombGameMenu({ silent });
     },
