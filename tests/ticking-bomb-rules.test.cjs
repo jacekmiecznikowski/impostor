@@ -1,4 +1,6 @@
 const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
 const {
   FUSE_PRESETS,
   randomBetween,
@@ -77,5 +79,21 @@ assert.deepEqual(result.players.map(player => player.score), [3, 4, 1]);
 assert.deepEqual(result.players.map(player => player.losses), [0, 2, 2]);
 assert.equal(scoreLoss(players, 'missing'), null);
 assert.equal(scoreLoss(null, 'p1'), null);
+
+const root = path.join(__dirname, '..');
+const gameSource = fs.readFileSync(path.join(root, 'assets/js/games/ticking-bomb/game.js'), 'utf8');
+const stateSource = fs.readFileSync(path.join(root, 'assets/js/games/ticking-bomb/state.js'), 'utf8');
+const indexSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+
+['choosePrompt', 'chooseStartingPlayerIndex', 'getFuseDurationMs', 'nextPlayerIndex', 'scoreLoss'].forEach(method => {
+  assert.match(gameSource, new RegExp(`TickingBombRules\\.${method}`), `game.js powinien delegować ${method} do rules.js`);
+});
+assert.doesNotMatch(gameSource, /function secureRandomBetween/);
+assert.doesNotMatch(stateSource, /const BOMB_FUSE_PRESETS/);
+
+const rulesScript = indexSource.indexOf('./assets/js/games/ticking-bomb/rules.js');
+const stateScript = indexSource.indexOf('./assets/js/games/ticking-bomb/state.js');
+const gameScript = indexSource.indexOf('./assets/js/games/ticking-bomb/game.js');
+assert.ok(rulesScript >= 0 && rulesScript < stateScript && stateScript < gameScript, 'rules.js musi ładować się przed state.js i game.js');
 
 console.log('Ticking Bomb domain rules tests: OK');
