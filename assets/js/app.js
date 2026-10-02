@@ -1,4 +1,4 @@
-import { getGameModule, initializeGameModules, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=3';
+import { getGameModule, initializeGameModules, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
 import { registerGameModules } from './games/index.js?v=3';
 
 async function initializeContentLayer() {
@@ -62,11 +62,8 @@ async function initializeApp() {
         } catch (_) {}
     }
 
-    if (requestedGame && getGameModule(requestedGame)) {
-        openGame(requestedGame, { silent: true });
-    } else {
-        goToScreen('home', { silent: true });
-    }
+    if (requestedGame && getGameModule(requestedGame)) openGame(requestedGame, { silent: true });
+    else goToScreen('home', { silent: true });
 
     const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
     if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {
