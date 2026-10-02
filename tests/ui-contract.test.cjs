@@ -23,12 +23,13 @@ assert.doesNotMatch(bombGame, /setInterval\(\s*updateBombProgress/);
 assert.doesNotMatch(bombGame, /setBombTickRate\(/);
 
 const colorSystem = read('assets/css/game-color-system.css');
-assert.match(colorSystem, /body\[data-game="home"\]/);
-assert.match(colorSystem, /body\[data-game="impostor"\]/);
-assert.match(colorSystem, /body\[data-game="ticking-bomb"\]/);
-assert.match(colorSystem, /--ui-accent: #950f26/);
-assert.match(colorSystem, /--ui-accent: #14b8a6/);
-assert.match(colorSystem, /--ui-accent: #f97316/);
+assert.match(colorSystem, /--ui-accent:/);
+assert.match(colorSystem, /--ui-accent-strong:/);
+assert.match(colorSystem, /--ui-accent-alt:/);
+assert.match(colorSystem, /--ui-accent-rgb:/);
+assert.match(colorSystem, /--page-glow-rgb:/);
+assert.match(colorSystem, /var\(--ui-accent\)/);
+assert.doesNotMatch(colorSystem, /body\[data-game=/);
 
 const bombMobile = read('assets/css/ticking-bomb-mobile.css');
 assert.match(bombMobile, /\.bomb-ignite-control/);

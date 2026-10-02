@@ -1,83 +1,78 @@
-const PARTYJNIAK_GAME_THEMES = Object.freeze({
-    home: {
-        id: 'home',
+const PARTYJNIAK_HOME_THEME = Object.freeze({
+    palette: {
         accent: '#950f26',
+        strong: '#720b1d',
+        alt: '#d9465f',
+        text: '#fda4af',
+        contrast: '#ffffff',
         rgb: '149, 15, 38',
-        backgroundMode: 'party'
+        surfaceRgb: '76, 5, 20'
     },
-    impostor: {
-        id: 'impostor',
-        accent: '#14b8a6',
-        rgb: '20, 184, 166',
-        backgroundMode: 'impostor'
-    },
-    'ticking-bomb': {
-        id: 'ticking-bomb',
-        accent: '#f97316',
-        rgb: '249, 115, 22',
-        backgroundMode: 'ticking-bomb'
-    },
-    'heads-up': {
-        id: 'heads-up',
-        accent: '#8b5cf6',
-        rgb: '139, 92, 246',
-        backgroundMode: 'heads-up'
-    },
-    taboo: {
-        id: 'taboo',
-        accent: '#e11d48',
-        rgb: '225, 29, 72',
-        backgroundMode: 'taboo'
-    }
-});
-
-/* background.js owns geometry and animation.
-   This registry owns the final palette for every game/mode. */
-Object.assign(BACKGROUND_MODES, {
-    party: {
-        colors: [0x950f26, 0xd9465f, 0x8b5cf6, 0xf8fafc],
-        alpha: [0.04, 0.16], speed: 0.82, confetti: false, motif: 'party'
-    },
-    impostor: {
-        colors: [0x14b8a6, 0x06b6d4, 0x5eead4, 0x334155],
-        alpha: [0.05, 0.15], speed: 0.62, confetti: false, motif: 'impostor'
-    },
-    mystery: {
-        colors: [0x0f766e, 0x0891b2, 0x38bdf8, 0x475569],
-        alpha: [0.04, 0.12], speed: 0.48, confetti: false, motif: 'impostor'
-    },
-    discussion: {
-        colors: [0x14b8a6, 0x06b6d4, 0x22d3ee, 0x334155],
-        alpha: [0.04, 0.13], speed: 0.58, confetti: false, motif: 'discussion'
-    },
-    vote: {
-        colors: [0x0f766e, 0x14b8a6, 0x0891b2, 0x1e293b],
-        alpha: [0.04, 0.12], speed: 0.54, confetti: false, motif: 'vote'
-    },
-    celebrate: {
-        colors: [0x14b8a6, 0x22d3ee, 0x5eead4, 0xf8fafc],
-        alpha: [0.07, 0.20], speed: 0.92, confetti: true, motif: 'impostor'
-    },
-    'ticking-bomb': {
-        colors: [0xf97316, 0xfbbf24, 0xfb923c, 0xef4444],
-        alpha: [0.06, 0.18], speed: 0.74, confetti: false, motif: 'ticking-bomb'
-    },
-    'bomb-alert': {
-        colors: [0xef4444, 0xf97316, 0xfbbf24, 0xfb923c],
-        alpha: [0.09, 0.23], speed: 1.02, confetti: false, motif: 'bomb-alert'
-    },
-    'heads-up': {
-        colors: [0x8b5cf6, 0xc084fc, 0xec4899, 0x38bdf8],
-        alpha: [0.07, 0.21], speed: 0.78, confetti: false, motif: 'heads-up'
-    },
-    taboo: {
-        colors: [0xe11d48, 0xfb7185, 0xf43f5e, 0xfda4af],
-        alpha: [0.07, 0.20], speed: 0.70, confetti: false, motif: 'taboo'
+    previewBackground: 'party',
+    backgrounds: {
+        party: {
+            colors: [0x950f26, 0xd9465f, 0x8b5cf6, 0xf8fafc],
+            alpha: [0.04, 0.16],
+            speed: 0.82,
+            confetti: false,
+            motif: 'party',
+            metaColor: '#950f26',
+            pageBase: '#06050a',
+            pageGlowRgb: '149, 15, 38',
+            pageGlowAltRgb: '217, 70, 95',
+            pageGlowAlpha: '.25',
+            pageGlowAltAlpha: '.065'
+        }
     }
 });
 
 let partyjniakThemeMotifs = [];
 let motifMode = null;
+let themesInitialized = false;
+
+function getPartyjniakGameTheme(gameId) {
+    if (!gameId || gameId === 'home') return PARTYJNIAK_HOME_THEME;
+    return getGameModule?.(gameId)?.theme || null;
+}
+
+function registerPartyjniakBackgroundModes() {
+    Object.assign(BACKGROUND_MODES, PARTYJNIAK_HOME_THEME.backgrounds);
+    const catalog = typeof getGameCatalog === 'function' ? getGameCatalog() : [];
+    catalog.forEach(entry => {
+        const backgrounds = getGameModule?.(entry.id)?.theme?.backgrounds;
+        if (backgrounds && typeof backgrounds === 'object') Object.assign(BACKGROUND_MODES, backgrounds);
+    });
+}
+
+function setThemeVariable(name, value) {
+    if (value == null || !document.body) return;
+    document.body.style.setProperty(name, String(value));
+}
+
+function applyPartyjniakGameTheme(gameId) {
+    const theme = getPartyjniakGameTheme(gameId) || PARTYJNIAK_HOME_THEME;
+    const palette = theme.palette || PARTYJNIAK_HOME_THEME.palette;
+    document.body.dataset.themeGame = gameId || 'home';
+    setThemeVariable('--ui-accent', palette.accent);
+    setThemeVariable('--ui-accent-strong', palette.strong);
+    setThemeVariable('--ui-accent-alt', palette.alt);
+    setThemeVariable('--ui-accent-text', palette.text);
+    setThemeVariable('--ui-accent-contrast', palette.contrast);
+    setThemeVariable('--ui-accent-rgb', palette.rgb);
+    setThemeVariable('--ui-accent-surface-rgb', palette.surfaceRgb);
+}
+
+function applyPartyjniakBackgroundMeta(modeName) {
+    const mode = BACKGROUND_MODES[modeName] || BACKGROUND_MODES.party;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    document.body.dataset.bgMode = modeName;
+    setThemeVariable('--page-bg', mode.pageBase || '#020617');
+    setThemeVariable('--page-glow-rgb', mode.pageGlowRgb || '15, 23, 42');
+    setThemeVariable('--page-glow-alt-rgb', mode.pageGlowAltRgb || mode.pageGlowRgb || '15, 23, 42');
+    setThemeVariable('--page-glow-alpha', mode.pageGlowAlpha || '.12');
+    setThemeVariable('--page-glow-alt-alpha', mode.pageGlowAltAlpha || '.045');
+    if (meta) meta.setAttribute('content', mode.metaColor || '#020617');
+}
 
 function clearPartyjniakThemeMotifs() {
     partyjniakThemeMotifs.forEach(item => {
@@ -102,96 +97,75 @@ function addFloatingMotif(scene, item, { x, y, dx = 12, dy = 18, duration = 6500
     });
 }
 
-const NATIVE_BACKGROUND_MOTIFS = new Set([
-    'party',
-    'impostor',
-    'mystery',
-    'discussion',
-    'vote',
-    'celebrate',
-    'ticking-bomb',
-    'bomb-alert'
-]);
-
 function renderPartyjniakThemeMotifs(modeName) {
     const scene = typeof backgroundScene !== 'undefined' ? backgroundScene : null;
+    const mode = BACKGROUND_MODES[modeName];
+    const motif = mode?.overlayMotif || null;
     if (!scene || !scene.add || motifMode === modeName) return;
 
     motifMode = modeName;
     clearPartyjniakThemeMotifs();
-
-    /* Core modes already render their full abstract language inside BackgroundScene. */
-    if (NATIVE_BACKGROUND_MOTIFS.has(modeName) || scene.reducedMotion) return;
+    if (!motif || scene.reducedMotion) return;
 
     const w = scene.scale.width;
     const h = scene.scale.height;
+    const colors = Array.isArray(mode.colors) && mode.colors.length ? mode.colors : [0xffffff];
 
-    if (modeName === 'heads-up') {
+    if (motif === 'orbit') {
         [[.12, .24, 34], [.83, .18, 54], [.75, .78, 42], [.18, .72, 24]].forEach(([xr, yr, radius], index) => {
-            const bubble = scene.add.circle(w * xr, h * yr, radius, index % 2 ? 0xc084fc : 0x8b5cf6, .012)
-                .setStrokeStyle(1, index % 2 ? 0xec4899 : 0x8b5cf6, .12);
-            addFloatingMotif(scene, bubble, { x: w * xr, y: h * yr, dx: index % 2 ? -20 : 18, dy: -20, duration: 5600 + index * 650 });
+            const color = colors[index % colors.length];
+            const ring = scene.add.circle(w * xr, h * yr, radius, color, .010).setStrokeStyle(1, color, .16);
+            addFloatingMotif(scene, ring, { x: w * xr, y: h * yr, dx: index % 2 ? -20 : 18, dy: -20, duration: 5600 + index * 650 });
         });
-    } else if (modeName === 'taboo') {
+    } else if (motif === 'wild-cards') {
         [[.12, .22, -24], [.82, .18, 28], [.78, .76, -18], [.14, .70, 32]].forEach(([xr, yr, angle], index) => {
-            const color = index % 2 ? 0xfb7185 : 0xe11d48;
-            const slash = scene.add.rectangle(w * xr, h * yr, 92, 3, color, .13).setAngle(angle);
-            addFloatingMotif(scene, slash, { x: w * xr, y: h * yr, dx: index % 2 ? -18 : 16, dy: 14, duration: 6200 + index * 550, rotation: .04 });
+            const color = colors[index % colors.length];
+            const card = scene.add.rectangle(w * xr, h * yr, 72, 102, color, .025).setAngle(angle).setStrokeStyle(1, color, .16);
+            addFloatingMotif(scene, card, { x: w * xr, y: h * yr, dx: index % 2 ? -18 : 16, dy: 14, duration: 6200 + index * 550, rotation: .04 });
+        });
+    } else if (motif === 'thought') {
+        [[.14, .24, 30], [.82, .20, 46], [.74, .76, 38], [.20, .72, 24]].forEach(([xr, yr, radius], index) => {
+            const color = colors[index % colors.length];
+            const bubble = scene.add.circle(w * xr, h * yr, radius, color, .018).setStrokeStyle(1, color, .14);
+            addFloatingMotif(scene, bubble, { x: w * xr, y: h * yr, dx: index % 2 ? -14 : 14, dy: -16, duration: 5900 + index * 520, rotation: 0 });
         });
     }
 }
 
-function applyPartyjniakThemeMeta(modeName) {
-    const meta = document.querySelector('meta[name="theme-color"]');
-    const colors = {
-        party: '#950f26',
-        impostor: '#063b38',
-        mystery: '#062e2c',
-        discussion: '#063b38',
-        vote: '#063b38',
-        celebrate: '#063b38',
-        'ticking-bomb': '#7c2d12',
-        'bomb-alert': '#7f1d1d',
-        'heads-up': '#4c1d95',
-        taboo: '#881337'
-    };
-    document.body.dataset.bgMode = modeName;
-    if (meta) meta.setAttribute('content', colors[modeName] || '#020617');
+function assignCatalogCardIds() {
+    const catalog = typeof getGameCatalog === 'function' ? getGameCatalog() : [];
+    const available = catalog.filter(game => game.status === 'available');
+    const prototypes = catalog.filter(game => game.status !== 'available');
+
+    document.querySelectorAll('.game-card-primary').forEach((card, index) => {
+        if (!card.dataset.gameId && available[index]) card.dataset.gameId = available[index].id;
+    });
+    document.querySelectorAll('.upcoming-card').forEach((card, index) => {
+        if (!card.dataset.gameId && prototypes[index]) card.dataset.gameId = prototypes[index].id;
+    });
 }
 
-const baseSetBackgroundMode = setBackgroundMode;
-setBackgroundMode = function themedSetBackgroundMode(modeName) {
-    baseSetBackgroundMode(modeName);
-    applyPartyjniakThemeMeta(backgroundMode);
-    renderPartyjniakThemeMotifs(backgroundMode);
-};
-
 function decorateGameCards() {
-    const cards = [...document.querySelectorAll('.game-card-primary, .upcoming-card')];
-    cards.forEach(card => {
-        const name = card.querySelector('strong')?.textContent?.trim();
-        const gameId = name === 'Impostor'
-            ? 'impostor'
-            : name === 'Tykająca Bomba'
-                ? 'ticking-bomb'
-                : name === 'Czółko'
-                    ? 'heads-up'
-                    : name === 'Tabu'
-                        ? 'taboo'
-                        : null;
-        const theme = gameId ? PARTYJNIAK_GAME_THEMES[gameId] : null;
-        if (!theme || card.dataset.themeReady === 'true') return;
+    assignCatalogCardIds();
+    document.querySelectorAll('[data-game-id]').forEach(card => {
+        const gameId = card.dataset.gameId;
+        const theme = getPartyjniakGameTheme(gameId);
+        const palette = theme?.palette;
+        if (!palette) return;
 
-        card.dataset.gameId = gameId;
+        card.style.setProperty('--game-accent', palette.accent);
+        card.style.setProperty('--game-rgb', palette.rgb);
+        card.style.setProperty('--game-text', palette.text);
+        if (card.dataset.themeReady === 'true') return;
         card.dataset.themeReady = 'true';
-        card.style.setProperty('--game-accent', theme.accent);
-        card.style.setProperty('--game-rgb', theme.rgb);
 
         const preview = () => {
-            if (typeof getCurrentScreenName === 'function' && getCurrentScreenName() === 'home') setBackgroundMode(theme.backgroundMode);
+            if (getCurrentScreenName?.() !== 'home') return;
+            setBackgroundMode(theme.previewBackground || 'party');
         };
         const restore = () => {
-            if (typeof getCurrentScreenName === 'function' && getCurrentScreenName() === 'home') setBackgroundMode('party');
+            if (getCurrentScreenName?.() !== 'home') return;
+            setBackgroundMode('party');
         };
         card.addEventListener('pointerenter', preview);
         card.addEventListener('focus', preview);
@@ -200,13 +174,35 @@ function decorateGameCards() {
     });
 }
 
-const themeObserver = new MutationObserver(decorateGameCards);
-themeObserver.observe(document.documentElement, { childList: true, subtree: true });
+const baseSetBackgroundMode = setBackgroundMode;
+setBackgroundMode = function themedSetBackgroundMode(modeName) {
+    baseSetBackgroundMode(modeName);
+    applyPartyjniakBackgroundMeta(backgroundMode);
+    renderPartyjniakThemeMotifs(backgroundMode);
+};
 
-document.addEventListener('DOMContentLoaded', () => {
-    applyPartyjniakThemeMeta('party');
+function initializePartyjniakThemes() {
+    if (themesInitialized) return;
+    themesInitialized = true;
+    registerPartyjniakBackgroundModes();
+    applyPartyjniakGameTheme('home');
+    setBackgroundMode('party');
     queueMicrotask(decorateGameCards);
-}, { once: true });
+}
+
+const themeObserver = new MutationObserver(mutations => {
+    if (!themesInitialized) return;
+    if (mutations.some(mutation => mutation.type === 'attributes' && mutation.attributeName === 'data-game')) {
+        applyPartyjniakGameTheme(document.body?.dataset?.game || 'home');
+    }
+    decorateGameCards();
+});
+themeObserver.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-game']
+});
 
 window.addEventListener('load', () => {
     renderPartyjniakThemeMotifs(backgroundMode);

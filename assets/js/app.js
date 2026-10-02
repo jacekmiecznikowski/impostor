@@ -16,6 +16,7 @@ async function initializeContentLayer() {
 
 async function initializeApp() {
     registerGameModules();
+    initializePartyjniakThemes?.();
 
     try {
         await loadAppViews();
