@@ -112,6 +112,15 @@ function loadSession() {
     }
 }
 
+function resetImpostorSession() {
+    state = {
+        ...DEFAULT_STATE,
+        activeCategories: getDefaultActiveCategories()
+    };
+    try { localStorage.removeItem(STORAGE_KEY); } catch (_) {}
+    return state;
+}
+
 function hasSavedSession() {
     return state.players.length >= 3;
 }
@@ -119,13 +128,14 @@ function hasSavedSession() {
 function updateResumeButton() {
     const button = document.getElementById('resume-session-btn');
     if (!button) return;
-    const visible = hasSavedSession();
+    const visible = typeof hasGameResume === 'function' ? hasGameResume('impostor') : hasSavedSession();
     button.classList.toggle('hidden', !visible);
     button.classList.toggle('flex', visible);
 }
 
 function resumeSavedSession() {
-    if (!hasSavedSession()) {
+    const canResume = typeof hasGameResume === 'function' ? hasGameResume('impostor') : hasSavedSession();
+    if (!canResume) {
         showToast('Poprzednia ekipa', 'Nie znaleziono zapisanej poprzedniej ekipy. Rozpocznij nową grę.');
         return;
     }
