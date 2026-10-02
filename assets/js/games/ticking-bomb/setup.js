@@ -30,43 +30,35 @@ function updateBombResumeButton() {
 }
 
 function setBombPlayerCount(value) {
-    const count = Math.min(12, Math.max(2, Number(value) || 2));
+    const count = clampPlayerSetupCount(value, 2, 12, bombState.playerCount);
     createBombPlayers(count, bombState.players);
-    const label = document.getElementById('bomb-player-count-value');
-    const slider = document.getElementById('bomb-player-count');
-    if (label) label.textContent = String(count);
-    if (slider) slider.value = String(count);
+    syncPlayerSetupCount({
+        sliderId: 'bomb-player-count',
+        labelId: 'bomb-player-count-value',
+        count
+    });
     renderBombNameInputs();
+    playPlayerSetupCountFeedback();
 }
 
 function renderBombPlayerSetup() {
-    const slider = document.getElementById('bomb-player-count');
-    const label = document.getElementById('bomb-player-count-value');
-    if (slider) slider.value = String(bombState.playerCount);
-    if (label) label.textContent = String(bombState.playerCount);
+    syncPlayerSetupCount({
+        sliderId: 'bomb-player-count',
+        labelId: 'bomb-player-count-value',
+        count: bombState.playerCount
+    });
     renderBombNameInputs();
 }
 
 function renderBombNameInputs() {
-    const container = document.getElementById('bomb-player-names');
-    if (!container) return;
-    container.replaceChildren();
-
-    bombState.players.forEach((player, index) => {
-        const label = document.createElement('label');
-        label.className = 'bomb-name-row';
-        const number = document.createElement('span');
-        number.className = 'bomb-player-number';
-        number.textContent = String(index + 1).padStart(2, '0');
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.maxLength = 28;
-        input.autocomplete = 'off';
-        input.value = player.name;
-        input.setAttribute('aria-label', `Imię gracza ${index + 1}`);
-        input.addEventListener('input', () => { bombState.players[index].name = input.value; });
-        label.append(number, input);
-        container.appendChild(label);
+    renderPlayerSetupNames({
+        containerId: 'bomb-player-names',
+        players: bombState.players,
+        maxLength: 28,
+        inputIdPrefix: 'bomb-player-name-',
+        onInput(index, value) {
+            if (bombState.players[index]) bombState.players[index].name = value;
+        }
     });
 }
 

@@ -9,31 +9,23 @@
 </div>
 </section>
 
-<section class="screen hidden flex-col flex-1 justify-between py-4 gap-6" id="screen-setup-count">
-<div class="space-y-6">
-<div class="flex items-center gap-3"><button class="icon-btn" onclick="goToScreen('menu')" type="button"><i class="fa-solid fa-arrow-left"></i></button><div><p class="step-label">Krok 1 z 3</p><h2 class="text-xl font-black">Liczba graczy</h2></div></div>
-<div class="panel text-center space-y-7">
-<div><span class="text-6xl font-black text-teal-400" id="player-count-big">4</span><p class="text-xs text-slate-400 uppercase tracking-widest mt-2">Uczestników</p></div>
-<input class="w-full accent-teal-500" id="player-slider" max="12" min="3" oninput="onPlayerSliderChange(this.value)" type="range" value="4"/>
-<div class="flex justify-center gap-3"><button class="counter-btn" onclick="adjustPlayerCount(-1)" type="button">−</button><button class="counter-btn" onclick="adjustPlayerCount(1)" type="button">+</button></div>
-<p class="text-xs text-slate-400">Najlepiej działa przy 4–8 osobach.</p>
+<section class="screen hidden flex-col flex-1 player-setup-screen" id="screen-setup-count">
+<div class="player-setup-heading">
+<span class="player-setup-step">KROK 1 Z 2</span>
+<h2>Kto gra?</h2>
+<p>Ustaw liczbę osób i od razu wpisz imiona graczy.</p>
 </div>
+<div class="player-setup-card">
+<div class="player-setup-count-row"><div class="player-setup-count-copy"><span>Liczba graczy</span><strong id="player-count-big">4</strong></div><span class="player-setup-range-label">3–12</span></div>
+<input class="player-setup-range" id="player-slider" max="12" min="3" oninput="onPlayerSliderChange(this.value)" type="range" value="4"/>
 </div>
-<button class="primary-btn" onclick="goToSetupNames()" type="button"><span>Dalej: imiona</span><i class="fa-solid fa-arrow-right"></i></button>
-</section>
-
-<section class="screen hidden flex-col flex-1 justify-between py-4 gap-6" id="screen-setup-names">
-<div class="space-y-4 flex-1 flex flex-col">
-<div class="flex items-center gap-3"><button class="icon-btn" onclick="goToScreen('setup-count')" type="button"><i class="fa-solid fa-arrow-left"></i></button><div><p class="step-label">Krok 2 z 3</p><h2 class="text-xl font-black">Imiona graczy</h2></div></div>
-<p class="text-xs text-slate-400">Każdy gracz musi mieć unikalne imię.</p>
-<div class="space-y-2.5 flex-1 overflow-y-auto pr-1" id="name-inputs-container"></div>
-</div>
-<button class="primary-btn" onclick="goToSetupOptions()" type="button"><span>Dalej: ustawienia</span><i class="fa-solid fa-arrow-right"></i></button>
+<div class="player-setup-name-list" id="name-inputs-container"></div>
+<button class="primary-btn player-setup-action" onclick="goToSetupOptions()" type="button"><span>Dalej: ustawienia</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
 <section class="screen hidden flex-col flex-1 justify-between py-4 gap-5" id="screen-setup-options">
 <div class="space-y-4 overflow-y-auto pr-1">
-<div class="flex items-center gap-3"><button class="icon-btn" onclick="goToSetupNames()" type="button"><i class="fa-solid fa-arrow-left"></i></button><div><p class="step-label">Krok 3 z 3</p><h2 class="text-xl font-black">Ustawienia rundy</h2></div></div>
+<div class="flex items-center gap-3"><button class="icon-btn" onclick="goToScreen('setup-count')" type="button"><i class="fa-solid fa-arrow-left"></i></button><div><p class="step-label">Krok 2 z 2</p><h2 class="text-xl font-black">Ustawienia rundy</h2></div></div>
 <div class="panel space-y-3">
 <div class="flex justify-between items-center"><strong class="text-sm">Liczba impostorów</strong><span class="pill" id="impostor-count-label">1 Impostor</span></div>
 <div class="grid grid-cols-3 gap-2">
