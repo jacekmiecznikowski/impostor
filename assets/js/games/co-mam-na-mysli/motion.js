@@ -22,6 +22,19 @@
         return beta;
     }
 
+    function getGravityTiltValue(event, orientationAngle = 0) {
+        const acceleration = event?.accelerationIncludingGravity;
+        if (!acceleration) return null;
+        const angle = normalizeOrientationAngle(orientationAngle);
+        const x = Number(acceleration.x);
+        const y = Number(acceleration.y);
+        const z = Number(acceleration.z);
+        if (![x, y, z].every(Number.isFinite)) return null;
+        const verticalGravity = angle === 90 || angle === 270 ? Math.abs(x) : Math.abs(y);
+        const safeVertical = Math.max(0.25, verticalGravity);
+        return Math.atan2(z, safeVertical) * (180 / Math.PI);
+    }
+
     function classifyTilt(current, baseline, threshold = 28) {
         const delta = normalizeAngleDelta(current, baseline);
         if (delta >= threshold) return 'correct';
@@ -33,14 +46,7 @@
         return Math.abs(normalizeAngleDelta(current, baseline)) <= releaseThreshold;
     }
 
-    const api = {
-        normalizeOrientationAngle,
-        normalizeAngleDelta,
-        getTiltValue,
-        classifyTilt,
-        isNeutral
-    };
-
+    const api = { normalizeOrientationAngle, normalizeAngleDelta, getTiltValue, getGravityTiltValue, classifyTilt, isNeutral };
     root.CoMamNaMysliMotion = api;
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : window);
