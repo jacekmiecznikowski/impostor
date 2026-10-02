@@ -13,6 +13,55 @@ export function registerImpostorGame() {
             status: 'available',
             order: 10
         },
+        theme: {
+            palette: {
+                accent: '#14b8a6',
+                strong: '#0d9488',
+                alt: '#0891b2',
+                text: '#5eead4',
+                contrast: '#ffffff',
+                rgb: '20, 184, 166',
+                surfaceRgb: '6, 59, 56'
+            },
+            previewBackground: 'impostor',
+            backgrounds: {
+                impostor: {
+                    colors: [0x14b8a6, 0x06b6d4, 0x5eead4, 0x334155],
+                    alpha: [0.05, 0.15], speed: 0.62, confetti: false, motif: 'impostor',
+                    metaColor: '#063b38', pageBase: '#020617',
+                    pageGlowRgb: '20, 184, 166', pageGlowAltRgb: '8, 145, 178',
+                    pageGlowAlpha: '.12', pageGlowAltAlpha: '.045'
+                },
+                mystery: {
+                    colors: [0x0f766e, 0x0891b2, 0x38bdf8, 0x475569],
+                    alpha: [0.04, 0.12], speed: 0.48, confetti: false, motif: 'impostor',
+                    metaColor: '#062e2c', pageBase: '#020617',
+                    pageGlowRgb: '15, 118, 110', pageGlowAltRgb: '8, 145, 178',
+                    pageGlowAlpha: '.11', pageGlowAltAlpha: '.04'
+                },
+                discussion: {
+                    colors: [0x14b8a6, 0x06b6d4, 0x22d3ee, 0x334155],
+                    alpha: [0.04, 0.13], speed: 0.58, confetti: false, motif: 'discussion',
+                    metaColor: '#063b38', pageBase: '#020617',
+                    pageGlowRgb: '20, 184, 166', pageGlowAltRgb: '34, 211, 238',
+                    pageGlowAlpha: '.11', pageGlowAltAlpha: '.04'
+                },
+                vote: {
+                    colors: [0x0f766e, 0x14b8a6, 0x0891b2, 0x1e293b],
+                    alpha: [0.04, 0.12], speed: 0.54, confetti: false, motif: 'vote',
+                    metaColor: '#063b38', pageBase: '#020617',
+                    pageGlowRgb: '15, 118, 110', pageGlowAltRgb: '20, 184, 166',
+                    pageGlowAlpha: '.10', pageGlowAltAlpha: '.04'
+                },
+                celebrate: {
+                    colors: [0x14b8a6, 0x22d3ee, 0x5eead4, 0xf8fafc],
+                    alpha: [0.07, 0.20], speed: 0.92, confetti: true, motif: 'celebrate',
+                    metaColor: '#063b38', pageBase: '#020617',
+                    pageGlowRgb: '20, 184, 166', pageGlowAltRgb: '94, 234, 212',
+                    pageGlowAlpha: '.14', pageGlowAltAlpha: '.055'
+                }
+            }
+        },
         views: [
             { target: '#app-main', url: './views/impostor-setup.html' },
             { target: '#app-main', url: './views/impostor-round.html' }
