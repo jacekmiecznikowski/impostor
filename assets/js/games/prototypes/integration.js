@@ -9,6 +9,22 @@ const PROTOTYPE_GAMES = [
             icon: 'fa-comments',
             status: 'prototype',
             order: 30
+        },
+        theme: {
+            palette: {
+                accent: '#6366f1', strong: '#4f46e5', alt: '#a78bfa', text: '#c4b5fd', contrast: '#ffffff',
+                rgb: '99, 102, 241', surfaceRgb: '49, 46, 129'
+            },
+            previewBackground: 'naokolo',
+            backgrounds: {
+                naokolo: {
+                    colors: [0x6366f1, 0xa78bfa, 0x38bdf8, 0xf8fafc],
+                    alpha: [0.06, 0.18], speed: 0.72, confetti: false, motif: 'party', overlayMotif: 'orbit',
+                    metaColor: '#312e81', pageBase: '#070716',
+                    pageGlowRgb: '99, 102, 241', pageGlowAltRgb: '167, 139, 250',
+                    pageGlowAlpha: '.16', pageGlowAltAlpha: '.06'
+                }
+            }
         }
     },
     {
@@ -19,6 +35,22 @@ const PROTOTYPE_GAMES = [
             icon: 'fa-clone',
             status: 'prototype',
             order: 40
+        },
+        theme: {
+            palette: {
+                accent: '#d946ef', strong: '#a21caf', alt: '#f472b6', text: '#f5d0fe', contrast: '#ffffff',
+                rgb: '217, 70, 239', surfaceRgb: '74, 4, 78'
+            },
+            previewBackground: 'dzika-karta',
+            backgrounds: {
+                'dzika-karta': {
+                    colors: [0xd946ef, 0xf472b6, 0xc084fc, 0xf8fafc],
+                    alpha: [0.06, 0.19], speed: 0.78, confetti: false, motif: 'party', overlayMotif: 'wild-cards',
+                    metaColor: '#701a75', pageBase: '#0b0610',
+                    pageGlowRgb: '217, 70, 239', pageGlowAltRgb: '244, 114, 182',
+                    pageGlowAlpha: '.16', pageGlowAltAlpha: '.055'
+                }
+            }
         }
     },
     {
@@ -29,6 +61,22 @@ const PROTOTYPE_GAMES = [
             icon: 'fa-face-grin-stars',
             status: 'prototype',
             order: 50
+        },
+        theme: {
+            palette: {
+                accent: '#f59e0b', strong: '#d97706', alt: '#facc15', text: '#fde68a', contrast: '#1c0a00',
+                rgb: '245, 158, 11', surfaceRgb: '69, 26, 3'
+            },
+            previewBackground: 'co-mam-na-mysli',
+            backgrounds: {
+                'co-mam-na-mysli': {
+                    colors: [0xf59e0b, 0xfacc15, 0xfde68a, 0x38bdf8],
+                    alpha: [0.06, 0.18], speed: 0.68, confetti: false, motif: 'party', overlayMotif: 'thought',
+                    metaColor: '#78350f', pageBase: '#0b0803',
+                    pageGlowRgb: '245, 158, 11', pageGlowAltRgb: '250, 204, 21',
+                    pageGlowAlpha: '.15', pageGlowAltAlpha: '.05'
+                }
+            }
         }
     }
 ];
