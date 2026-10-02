@@ -1,0 +1,116 @@
+<section id="screen-cmm-menu" class="screen hidden flex-col cmm-screen">
+  <div class="cmm-menu-hero">
+    <span class="cmm-kicker">GRA NA CZOŁO</span>
+    <div class="cmm-menu-icon"><i class="fa-solid fa-face-grin-stars"></i></div>
+    <h1>Co mam na myśli?</h1>
+    <p>Przyłóż telefon do czoła. Reszta ekipy podpowiada, a Ty sterujesz rundą przechyleniem telefonu.</p>
+  </div>
+  <div class="cmm-menu-actions">
+    <button class="cmm-primary-btn" type="button" onclick="startNewCoMamNaMysliGame()"><i class="fa-solid fa-play"></i><span>Nowa gra</span></button>
+    <button id="cmm-resume-btn" class="cmm-secondary-btn hidden" type="button" onclick="resumeCoMamNaMysliGame()"><i class="fa-solid fa-rotate-right"></i><span>Graj z poprzednią ekipą</span></button>
+    <button class="cmm-ghost-btn" type="button" onclick="openModal('cmm-rules-modal')"><i class="fa-solid fa-circle-info"></i><span>Jak grać?</span></button>
+  </div>
+</section>
+
+<section id="screen-cmm-players" class="screen hidden flex-col player-setup-screen cmm-screen">
+  <div class="player-setup-heading">
+    <span class="player-setup-step">KROK 1 Z 2</span>
+    <h2>Kto gra?</h2>
+    <p>Ustaw liczbę graczy i od razu wpisz ich imiona.</p>
+  </div>
+  <div class="player-setup-card">
+    <div class="player-setup-count-row">
+      <div class="player-setup-count-copy"><span>Gracze</span><strong id="cmm-player-count">4</strong></div>
+      <span class="player-setup-range-label">2–12</span>
+    </div>
+    <input id="cmm-player-slider" class="player-setup-range" type="range" min="2" max="12" value="4" oninput="onCoMamNaMysliPlayerCountChange(this.value)">
+  </div>
+  <div id="cmm-name-list" class="player-setup-name-list"></div>
+  <button class="cmm-primary-btn player-setup-action" type="button" onclick="goToCoMamNaMysliOptions()"><span>Dalej</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-cmm-options" class="screen hidden flex-col cmm-screen">
+  <div class="cmm-section-heading">
+    <span class="cmm-kicker">KROK 2 Z 2</span>
+    <h2>Ustawienia rundy</h2>
+    <p>Wybierz czas i zestawy haseł.</p>
+  </div>
+
+  <div class="cmm-setup-group">
+    <div class="cmm-group-label"><span>Czas tury</span><small>na jednego gracza</small></div>
+    <div class="cmm-time-grid">
+      <button type="button" data-cmm-time="30" onclick="selectCoMamNaMysliRoundTime(30)"><strong>30 s</strong><small>szybko</small></button>
+      <button type="button" data-cmm-time="45" onclick="selectCoMamNaMysliRoundTime(45)"><strong>45 s</strong><small>krótko</small></button>
+      <button type="button" data-cmm-time="60" onclick="selectCoMamNaMysliRoundTime(60)"><strong>60 s</strong><small>klasycznie</small></button>
+      <button type="button" data-cmm-time="90" onclick="selectCoMamNaMysliRoundTime(90)"><strong>90 s</strong><small>długo</small></button>
+    </div>
+  </div>
+
+  <div class="cmm-setup-group">
+    <div class="cmm-group-label"><span>Kategorie</span><small>min. 1</small></div>
+    <div id="cmm-category-grid" class="cmm-category-grid"></div>
+  </div>
+
+  <button class="cmm-primary-btn cmm-sticky-action" type="button" onclick="beginCoMamNaMysliSession()"><i class="fa-solid fa-check"></i><span>Gotowe</span></button>
+</section>
+
+<section id="screen-cmm-ready" class="screen hidden flex-col cmm-screen cmm-ready-screen">
+  <div class="cmm-ready-card">
+    <span class="cmm-kicker">TERAZ ZGADUJE</span>
+    <strong id="cmm-ready-player" class="cmm-ready-player">Gracz</strong>
+    <div class="cmm-phone-demo" aria-hidden="true">
+      <div class="cmm-phone-demo-device"><i class="fa-solid fa-face-smile"></i></div>
+      <i class="fa-solid fa-rotate cmm-phone-demo-arrow"></i>
+    </div>
+    <h2>Obróć telefon poziomo</h2>
+    <p>Przyłóż ekran do czoła tak, aby pozostali widzieli hasło. Trzymaj telefon nieruchomo podczas odliczania — wtedy skalibrujemy pozycję neutralną.</p>
+    <div class="cmm-ready-meta"><span id="cmm-ready-round">Tura 1</span><span id="cmm-ready-time">60 s</span></div>
+  </div>
+  <div class="cmm-tilt-legend">
+    <div><i class="fa-solid fa-angles-down"></i><strong>W dół</strong><span>odgadnięte</span></div>
+    <div><i class="fa-solid fa-angles-up"></i><strong>W górę</strong><span>pomiń</span></div>
+  </div>
+  <button class="cmm-primary-btn" type="button" onclick="startCoMamNaMysliRound()"><i class="fa-solid fa-mobile-screen-button"></i><span>Start — telefon na czoło</span></button>
+</section>
+
+<section id="screen-cmm-play" class="screen hidden cmm-play-screen">
+  <div class="cmm-landscape-rotate-warning"><i class="fa-solid fa-mobile-screen-button"></i><span>Obróć telefon poziomo</span></div>
+
+  <div class="cmm-play-topbar">
+    <div class="cmm-play-player"><span>Zgadujesz</span><strong id="cmm-play-player">Gracz</strong></div>
+    <div id="cmm-timer-bar" class="cmm-timer-bar"><strong id="cmm-timer-value">60</strong><span>s</span></div>
+    <div class="cmm-live-stats"><span><b id="cmm-live-correct">0</b> dobrze</span><span><b id="cmm-live-passed">0</b> pominięte</span></div>
+  </div>
+
+  <div class="cmm-card-stage">
+    <span id="cmm-card-category" class="cmm-card-category">Kategoria</span>
+    <h2 id="cmm-card-word">HASŁO</h2>
+    <p id="cmm-sensor-status" class="cmm-sensor-status">Przechyl w dół: dobrze • w górę: pomiń</p>
+  </div>
+
+  <div id="cmm-fallback-controls" class="cmm-fallback-controls hidden">
+    <button type="button" onclick="markCoMamNaMysliCard('passed')"><i class="fa-solid fa-forward"></i><span>Pomiń</span></button>
+    <button type="button" onclick="markCoMamNaMysliCard('correct')"><i class="fa-solid fa-check"></i><span>Dobrze</span></button>
+  </div>
+
+  <div id="cmm-countdown" class="cmm-countdown hidden"><strong id="cmm-countdown-value">3</strong><span>Telefon nieruchomo na czole</span></div>
+  <div id="cmm-gesture-feedback" class="cmm-gesture-feedback hidden"><strong id="cmm-gesture-feedback-label">DOBRZE!</strong></div>
+</section>
+
+<section id="screen-cmm-result" class="screen hidden flex-col cmm-screen cmm-result-screen">
+  <div class="cmm-result-hero">
+    <span class="cmm-kicker">KONIEC TURY</span>
+    <div class="cmm-result-icon"><i class="fa-solid fa-trophy"></i></div>
+    <h2 id="cmm-result-player">Gracz</h2>
+    <strong id="cmm-result-score" class="cmm-result-score">+0 pkt</strong>
+  </div>
+  <div class="cmm-result-stats">
+    <div><span>Odgadnięte</span><strong id="cmm-result-correct">0</strong></div>
+    <div><span>Pominięte</span><strong id="cmm-result-passed">0</strong></div>
+  </div>
+  <div class="cmm-result-actions">
+    <button class="cmm-primary-btn" type="button" onclick="startNextCoMamNaMysliRound()"><i class="fa-solid fa-user-group"></i><span>Następny gracz</span></button>
+    <button class="cmm-secondary-btn" type="button" onclick="openModal('score-modal')"><i class="fa-solid fa-ranking-star"></i><span>Tabela wyników</span></button>
+    <button class="cmm-ghost-btn" type="button" onclick="goToScreen('cmm-menu', { direction: 'back' })"><span>Menu gry</span></button>
+  </div>
+</section>
