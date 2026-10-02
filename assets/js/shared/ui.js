@@ -61,6 +61,11 @@ function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) 
     }
 
     const previousScreen = getCurrentScreenName();
+    const previousGameId = getGameIdForScreen(previousScreen);
+    if (previousScreen !== screenName && previousGameId !== 'home') {
+        callGameHook(previousGameId, 'onScreenLeave', previousScreen, screenName);
+    }
+
     if (!silent && previousScreen !== screenName) playSound('click');
 
     if (timerInterval) {
@@ -108,6 +113,8 @@ function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) 
 
 function updateShellContext(screenName) {
     const context = SHELL_CONTEXT_BY_SCREEN[screenName] || SHELL_CONTEXT_BY_SCREEN.home;
+    const gameId = getGameIdForScreen(screenName);
+    const gameModule = gameId === 'home' ? null : getGameModule(gameId);
     const isHome = screenName === 'home';
     const immersive = IMMERSIVE_SCREENS.has(screenName);
     const shell = document.getElementById('app-shell');
@@ -121,6 +128,7 @@ function updateShellContext(screenName) {
     const exitAction = document.getElementById('shell-exit-action');
 
     document.body.dataset.screen = screenName;
+    document.body.dataset.game = gameId;
     shell?.setAttribute('data-mode', context.mode);
     shell?.classList.toggle('is-home', isHome);
     shell?.classList.toggle('is-game', !isHome);
@@ -131,12 +139,12 @@ function updateShellContext(screenName) {
     if (backButton) {
         const canGoBack = Boolean(SCREEN_BACK_TARGET[screenName]) && !immersive;
         backButton.classList.toggle('hidden', !canGoBack);
-        backButton.setAttribute('aria-label', screenName === 'menu' ? 'Wróć do wyboru gier' : 'Wróć');
+        backButton.setAttribute('aria-label', screenName === gameModule?.menuScreen ? 'Wróć do wyboru gier' : 'Wróć');
     }
 
-    scoreAction?.classList.toggle('hidden', isHome);
-    rulesAction?.classList.toggle('hidden', isHome);
-    gameMenuAction?.classList.toggle('hidden', isHome || screenName === 'menu');
+    scoreAction?.classList.toggle('hidden', isHome || typeof gameModule?.renderScoreboard !== 'function');
+    rulesAction?.classList.toggle('hidden', isHome || !gameModule?.rulesModalId);
+    gameMenuAction?.classList.toggle('hidden', isHome || screenName === gameModule?.menuScreen);
     exitAction?.classList.toggle('hidden', isHome);
 
     if (shellTitle) shellTitle.textContent = context.title;
@@ -153,11 +161,22 @@ function updateShellContext(screenName) {
             shellLogo.appendChild(image);
         } else {
             const icon = document.createElement('i');
-            icon.className = 'fa-solid fa-user-secret';
+            icon.className = `fa-solid ${gameModule?.shellIcon || 'fa-gamepad'}`;
             icon.setAttribute('aria-hidden', 'true');
             shellLogo.appendChild(icon);
         }
     }
+
+    const rulesLabel = document.querySelector('#shell-rules-action span');
+    const menuLabel = document.querySelector('#shell-game-menu-action span');
+    if (rulesLabel) rulesLabel.textContent = gameModule?.shellLabels?.rules || 'Zasady gry';
+    if (menuLabel) menuLabel.textContent = gameModule?.shellLabels?.menu || 'Menu gry';
+
+    const sheetMenuButton = document.querySelector('#navigation-sheet .secondary-btn');
+    const sheetMenuIcon = sheetMenuButton?.querySelector('i');
+    const sheetMenuLabel = sheetMenuButton?.querySelector('span');
+    if (sheetMenuIcon) sheetMenuIcon.className = `fa-solid ${gameModule?.shellIcon || 'fa-gamepad'}`;
+    if (sheetMenuLabel) sheetMenuLabel.textContent = gameModule?.shellLabels?.menu || 'Menu gry';
 
     closeShellMenu?.();
     setBackgroundMode?.(BACKGROUND_MODE_BY_SCREEN[screenName] || 'party');
@@ -200,11 +219,16 @@ function navigateBack({ fromSystem = false } = {}) {
 
 function requestLeaveGame(destination = 'home') {
     closeShellMenu?.();
+    const gameModule = getActiveGameModule();
+    callGameHook(gameModule, 'beforeLeave', destination);
+
     if (isRoundInProgress()) {
         openNavigationSheet(destination);
         return;
     }
-    goToScreen(destination === 'menu' ? 'menu' : 'home', { direction: 'back' });
+
+    const target = destination === 'menu' ? gameModule?.menuScreen : 'home';
+    goToScreen(target || 'home', { direction: 'back' });
 }
 
 function clearTransientRoundState() {
@@ -220,10 +244,16 @@ function clearTransientRoundState() {
 }
 
 function leaveActiveRound(destination) {
+    const gameModule = getActiveGameModule();
+    if (typeof gameModule?.leaveRound === 'function') {
+        gameModule.leaveRound(destination);
+        return;
+    }
+
     clearTransientRoundState();
     closeNavigationSheet();
     setGameAwakeMode?.(false);
-    goToScreen(destination === 'home' ? 'home' : 'menu', { direction: 'back' });
+    goToScreen(destination === 'home' ? 'home' : (gameModule?.menuScreen || 'home'), { direction: 'back' });
 }
 
 function openNavigationSheet(preferredDestination = 'menu') {
@@ -293,7 +323,11 @@ function openModal(modalId) {
     if (!modal) return;
     modal.classList.remove('hidden');
     modal.classList.add('flex');
-    if (modalId === 'score-modal') renderScoreboardModal();
+    if (modalId === 'score-modal') {
+        const gameModule = getActiveGameModule();
+        if (typeof gameModule?.renderScoreboard === 'function') gameModule.renderScoreboard();
+        else renderScoreboardModal?.();
+    }
     requestAnimationFrame(() => modal.querySelector('button')?.focus());
 }
 
