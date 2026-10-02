@@ -25,9 +25,7 @@ function normalizeCatalog(gameId, catalog) {
 
 function normalizeScreens(screens) {
     if (!screens) return new Map();
-    if (Array.isArray(screens)) {
-        return new Map(screens.map(screenName => [screenName, {}]));
-    }
+    if (Array.isArray(screens)) return new Map(screens.map(screenName => [screenName, {}]));
     if (typeof screens !== 'object') throw new Error('Konfiguracja ekranów gry musi być obiektem.');
     return new Map(Object.entries(screens).map(([screenName, config]) => [screenName, { ...(config || {}) }]));
 }
@@ -39,24 +37,13 @@ function normalizeViews(views) {
 }
 
 export function registerGameModule(config) {
-    if (!config || typeof config.id !== 'string' || !config.id.trim()) {
-        throw new Error('Moduł gry musi mieć poprawne id.');
-    }
-
+    if (!config || typeof config.id !== 'string' || !config.id.trim()) throw new Error('Moduł gry musi mieć poprawne id.');
     const id = config.id.trim();
     const screenConfig = normalizeScreens(config.screens);
     const session = normalizeGameSession(id, config.session);
     const catalog = normalizeCatalog(id, config.catalog);
     const views = normalizeViews(config.views);
-    const module = {
-        ...config,
-        id,
-        catalog,
-        views,
-        screens: new Set(screenConfig.keys()),
-        screenConfig,
-        session
-    };
+    const module = { ...config, id, catalog, views, screens: new Set(screenConfig.keys()), screenConfig, session };
     GAME_MODULES.set(id, module);
     return module;
 }
@@ -87,6 +74,20 @@ export function getGameScreenConfig(screenName) {
         if (config) return { ...config, gameId: gameModule.id };
     }
     return null;
+}
+
+export async function initializeGameModules() {
+    const results = new Map();
+    for (const gameModule of GAME_MODULES.values()) {
+        if (typeof gameModule.initialize !== 'function') continue;
+        try {
+            results.set(gameModule.id, await gameModule.initialize());
+        } catch (error) {
+            console.warn(`Nie udało się zainicjalizować modułu ${gameModule.id}.`, error);
+            results.set(gameModule.id, null);
+        }
+    }
+    return results;
 }
 
 export function getGameSession(gameOrId) {
@@ -168,6 +169,7 @@ const legacyBridge = {
     getGameCatalog,
     getGameViewFragments,
     getGameScreenConfig,
+    initializeGameModules,
     getGameSession,
     getGameIdForScreen,
     getActiveGameId,
