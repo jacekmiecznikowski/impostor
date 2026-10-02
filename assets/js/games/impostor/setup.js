@@ -26,8 +26,10 @@ function renderImpostorNameInputs() {
     });
 }
 
-function renderImpostorPlayerSetup() {
-    if (state.players.length !== state.playerCount) createImpostorPlayers(state.playerCount, state.players);
+function renderImpostorPlayerSetup({ ensureRoster = true } = {}) {
+    if (ensureRoster && state.players.length !== state.playerCount) {
+        createImpostorPlayers(state.playerCount, state.players);
+    }
     syncPlayerSetupCount({
         sliderId: 'player-slider',
         labelId: 'player-count-big',
