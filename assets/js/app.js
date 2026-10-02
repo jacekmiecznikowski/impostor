@@ -1,3 +1,12 @@
+import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=1';
+import { registerImpostorGame } from './games/impostor/integration.js?v=1';
+import { registerTickingBombGame } from './games/ticking-bomb/integration.js?v=1';
+
+function registerGameModules() {
+    registerImpostorGame();
+    registerTickingBombGame();
+}
+
 async function initializeContentLayer() {
     try {
         if (typeof initializeImpostorRemoteContent === 'function') {
@@ -12,6 +21,8 @@ async function initializeContentLayer() {
 }
 
 async function initializeApp() {
+    registerGameModules();
+
     try {
         await loadAppViews();
     } catch (error) {
@@ -58,7 +69,7 @@ async function initializeApp() {
         } catch (_) {}
     }
 
-    if (requestedGame && GAME_CATALOG.some(game => game.id === requestedGame && game.status === 'available')) {
+    if (requestedGame && getGameModule(requestedGame)) {
         openGame(requestedGame, { silent: true });
     } else {
         goToScreen('home', { silent: true });
@@ -74,4 +85,8 @@ async function initializeApp() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp, { once: true });
+} else {
+    initializeApp();
+}

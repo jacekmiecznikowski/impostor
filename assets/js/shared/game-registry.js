@@ -11,7 +11,7 @@ function normalizeGameSession(gameId, session) {
     return session;
 }
 
-function registerGameModule(config) {
+export function registerGameModule(config) {
     if (!config || typeof config.id !== 'string' || !config.id.trim()) {
         throw new Error('Moduł gry musi mieć poprawne id.');
     }
@@ -23,16 +23,16 @@ function registerGameModule(config) {
     return GAME_MODULES.get(id);
 }
 
-function getGameModule(gameId) {
+export function getGameModule(gameId) {
     return GAME_MODULES.get(gameId) || null;
 }
 
-function getGameSession(gameOrId) {
+export function getGameSession(gameOrId) {
     const gameModule = typeof gameOrId === 'string' ? getGameModule(gameOrId) : gameOrId;
     return gameModule?.session || null;
 }
 
-function getGameIdForScreen(screenName) {
+export function getGameIdForScreen(screenName) {
     if (!screenName || screenName === 'home') return 'home';
     for (const gameModule of GAME_MODULES.values()) {
         if (gameModule.screens.has(screenName)) return gameModule.id;
@@ -40,37 +40,37 @@ function getGameIdForScreen(screenName) {
     return 'home';
 }
 
-function getActiveGameId() {
-    const screenName = typeof getCurrentScreenName === 'function'
-        ? getCurrentScreenName()
+export function getActiveGameId() {
+    const screenName = typeof window.getCurrentScreenName === 'function'
+        ? window.getCurrentScreenName()
         : (document.body?.dataset?.screen || 'home');
     return getGameIdForScreen(screenName);
 }
 
-function getActiveGameModule() {
+export function getActiveGameModule() {
     const gameId = getActiveGameId();
     return gameId === 'home' ? null : getGameModule(gameId);
 }
 
-function getActiveGameSession() {
+export function getActiveGameSession() {
     return getGameSession(getActiveGameModule());
 }
 
-function callGameHook(gameOrId, hookName, ...args) {
+export function callGameHook(gameOrId, hookName, ...args) {
     const gameModule = typeof gameOrId === 'string' ? getGameModule(gameOrId) : gameOrId;
     const hook = gameModule?.[hookName];
     if (typeof hook !== 'function') return undefined;
     return hook(...args);
 }
 
-function forEachGameSession(callback) {
+export function forEachGameSession(callback) {
     for (const gameModule of GAME_MODULES.values()) {
         if (!gameModule.session) continue;
         callback(gameModule.session, gameModule);
     }
 }
 
-function loadGameSessions() {
+export function loadGameSessions() {
     const results = new Map();
     forEachGameSession((session, gameModule) => {
         results.set(gameModule.id, session.load());
@@ -78,23 +78,43 @@ function loadGameSessions() {
     return results;
 }
 
-function syncGameSessionUi() {
+export function syncGameSessionUi() {
     forEachGameSession(session => session.syncUi?.());
 }
 
-function saveGameSession(gameOrId) {
+export function saveGameSession(gameOrId) {
     return getGameSession(gameOrId)?.save();
 }
 
-function resetGameSession(gameOrId) {
+export function resetGameSession(gameOrId) {
     return getGameSession(gameOrId)?.reset();
 }
 
-function hasGameResume(gameOrId) {
+export function hasGameResume(gameOrId) {
     return Boolean(getGameSession(gameOrId)?.hasResume());
 }
 
-function getGamePlayers(gameOrId) {
+export function getGamePlayers(gameOrId) {
     const players = getGameSession(gameOrId)?.getPlayers();
     return Array.isArray(players) ? players : [];
 }
+
+const legacyBridge = {
+    registerGameModule,
+    getGameModule,
+    getGameSession,
+    getGameIdForScreen,
+    getActiveGameId,
+    getActiveGameModule,
+    getActiveGameSession,
+    callGameHook,
+    forEachGameSession,
+    loadGameSessions,
+    syncGameSessionUi,
+    saveGameSession,
+    resetGameSession,
+    hasGameResume,
+    getGamePlayers
+};
+
+Object.assign(window, legacyBridge);
