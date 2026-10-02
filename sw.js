@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v40';
+const CACHE_VERSION = 'v41';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -10,8 +10,11 @@ const LOCAL_ASSETS = [
   './views/impostor-round.html',
   './views/ticking-bomb.html',
   './views/ticking-bomb-modals.html',
+  './views/naokolo.html',
+  './views/naokolo-modals.html',
   './views/modals.html',
   './content/ticking-bomb.pl.json',
+  './content/naokolo.pl.json',
   './assets/css/styles.css',
   './assets/css/impostor.css',
   './assets/css/impostor-reveal.css',
@@ -20,6 +23,7 @@ const LOCAL_ASSETS = [
   './assets/css/ticking-bomb.css',
   './assets/css/ticking-bomb-mobile.css',
   './assets/css/ticking-bomb-visual.css?v=3',
+  './assets/css/naokolo.css',
   './assets/css/game-color-system.css',
   './assets/css/player-setup.css',
   './assets/css/partyjniak.css',
@@ -53,7 +57,7 @@ const LOCAL_ASSETS = [
   './assets/js/shared/navigation-behavior.js',
   './assets/js/shared/game-themes.js',
   './assets/js/shared/native-android.js',
-  './assets/js/games/index.js?v=1',
+  './assets/js/games/index.js?v=2',
   './assets/js/games/impostor/data.js',
   './assets/js/games/impostor/content-provider.js',
   './assets/js/games/impostor/rules.js',
@@ -72,8 +76,15 @@ const LOCAL_ASSETS = [
   './assets/js/games/ticking-bomb/game.js',
   './assets/js/games/ticking-bomb/scoreboard.js',
   './assets/js/games/ticking-bomb/integration.js?v=2',
+  './assets/js/games/naokolo/content-provider.js',
+  './assets/js/games/naokolo/rules.js',
+  './assets/js/games/naokolo/state.js',
+  './assets/js/games/naokolo/setup.js',
+  './assets/js/games/naokolo/game.js',
+  './assets/js/games/naokolo/scoreboard.js',
+  './assets/js/games/naokolo/integration.js?v=1',
   './assets/js/games/prototypes/integration.js?v=1',
-  './assets/js/app.js?v=2'
+  './assets/js/app.js?v=3'
 ];
 
 const EXTERNAL_ASSETS = [
