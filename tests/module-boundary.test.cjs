@@ -1,6 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 
 const root = path.join(__dirname, '..');
 const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
@@ -11,6 +12,19 @@ const registry = read('assets/js/shared/game-registry.js');
 const impostorIntegration = read('assets/js/games/impostor/integration.js');
 const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 const sw = read('sw.js');
+
+for (const [name, source] of [
+  ['app.js', app],
+  ['game-registry.js', registry],
+  ['impostor/integration.js', impostorIntegration],
+  ['ticking-bomb/integration.js', bombIntegration]
+]) {
+  const result = spawnSync(process.execPath, ['--input-type=module', '--check'], {
+    input: source,
+    encoding: 'utf8'
+  });
+  assert.equal(result.status, 0, `${name} nie przechodzi kontroli składni ES module:\n${result.stderr}`);
+}
 
 assert.match(index, /<script type="module" src="\.\/assets\/js\/app\.js\?v=1"><\/script>/);
 assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/shared\/game-registry\.js\?v=1"/);
