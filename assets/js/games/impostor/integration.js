@@ -1,4 +1,4 @@
-import { getGameModule, registerGameModule } from '../../shared/game-registry.js';
+import { getGameModule, registerGameModule } from '../../shared/game-registry.js?v=1';
 
 export function registerImpostorGame() {
     const existing = getGameModule('impostor');
