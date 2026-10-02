@@ -34,6 +34,7 @@ const requiredFiles = [
   'assets/js/games/impostor/scoreboard.js',
   'assets/js/games/impostor/integration.js',
   'assets/js/games/ticking-bomb/content-provider.js',
+  'assets/js/games/ticking-bomb/rules.js',
   'assets/js/games/ticking-bomb/state.js',
   'assets/js/games/ticking-bomb/audio.js',
   'assets/js/games/ticking-bomb/setup.js',

@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const TickingBombRules = require('../assets/js/games/ticking-bomb/rules.js');
 
 const source = fs.readFileSync(path.join(__dirname, '../assets/js/games/ticking-bomb/game.js'), 'utf8');
 let now = 1000;
@@ -21,8 +22,8 @@ const bombState = {
     { id: 'p3', name: 'Celina', score: 0, losses: 0 }
   ],
   mode: 'tracked',
-  fusePreset: 'fixed',
-  activeCategories: [],
+  fusePreset: 'short',
+  activeCategories: ['animals'],
   currentPrompt: null,
   currentCategoryId: null,
   currentPlayerIndex: 0,
@@ -35,11 +36,11 @@ const sandbox = {
   console,
   Math,
   Uint32Array,
+  TickingBombRules,
+  BOMB_CATEGORIES: [
+    { id: 'animals', name: 'Zwierzęta', words: [{ word: 'KOT' }, { word: 'PIES' }] }
+  ],
   bombState,
-  BOMB_FUSE_PRESETS: {
-    fixed: { id: 'fixed', minSeconds: 10, maxSeconds: 10 },
-    unstable: { id: 'unstable', minSeconds: 5, maxSeconds: 120 }
-  },
   crypto: {
     getRandomValues(values) {
       values[0] = 0x80000000;
@@ -64,7 +65,7 @@ const sandbox = {
   },
   clearTimeout(id) { cleared.push(id); },
   normalizeBombActiveCategories() {},
-  getBombCategoryById() { return null; },
+  getBombCategoryById(id) { return sandbox.BOMB_CATEGORIES.find(category => category.id === id) || null; },
   showToast() {},
   goToScreen() {},
   playSound(type) { if (type === 'click') clickCount += 1; },
@@ -79,8 +80,9 @@ vm.createContext(sandbox);
 vm.runInContext(source, sandbox);
 const run = expression => vm.runInContext(expression, sandbox);
 
-assert.equal(run('secureRandomBetween(10, 20)'), 15);
-assert.equal(run('secureRandomBetween(7, 7)'), 7);
+const prompt = run('chooseBombPrompt()');
+assert.equal(prompt.categoryId, 'animals');
+assert.equal(prompt.prompt, 'PIES', 'secure random adapter should feed domain prompt selection');
 
 assert.equal(run("applyBombLoss('p2')"), true);
 assert.equal(bombState.lastLoserId, 'p2');
@@ -143,16 +145,16 @@ assert.equal(persistCount, 1);
 
 scheduled = [];
 bombState.mode = 'tracked';
-bombState.fusePreset = 'fixed';
+bombState.fusePreset = 'short';
 run('bombRuntime.active = false; bombRuntime.exploded = false; bombRuntime.timeoutId = null;');
 (async () => {
   await run('igniteBomb()');
-  assert.equal(run('bombRuntime.durationMs'), 10000);
+  assert.equal(run('bombRuntime.durationMs'), 17500);
   assert.equal(run('bombRuntime.active'), true);
   assert.equal(tickingStarts, 1);
   assert.equal(scheduled.length, 1);
-  assert.equal(scheduled[0].delay, 10000);
-  console.log('Ticking Bomb gameplay behavior tests: OK');
+  assert.equal(scheduled[0].delay, 17500);
+  console.log('Ticking Bomb gameplay orchestration tests: OK');
 })().catch(error => {
   console.error(error);
   process.exitCode = 1;
