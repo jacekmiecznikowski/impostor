@@ -8,6 +8,24 @@ registerGameModule({
         rules: 'Zasady Impostora',
         menu: 'Menu Impostora'
     },
+    session: {
+        load: () => loadSession(),
+        save: () => persistSession(),
+        reset: () => resetImpostorSession(),
+        hasResume: () => hasSavedSession(),
+        getPlayers: () => state.players,
+        syncUi() {
+            normalizeActiveCategories();
+            const slider = document.getElementById('player-slider');
+            const playerCount = document.getElementById('player-count-big');
+            if (slider) slider.value = state.playerCount;
+            if (playerCount) playerCount.innerText = state.playerCount;
+            updateHintModeUI();
+            setDiscussionTimer(state.discussionTime, { silent: true });
+            updateImpostorButtonsUI();
+            updateResumeButton();
+        }
+    },
     open({ silent = false } = {}) {
         goToScreen('menu', { silent });
     },
