@@ -119,7 +119,7 @@ export function registerImpostorGame() {
             getPlayers: () => state.players,
             syncUi() {
                 normalizeActiveCategories();
-                renderImpostorPlayerSetup();
+                renderImpostorPlayerSetup({ ensureRoster: false });
                 updateHintModeUI();
                 setDiscussionTimer(state.discussionTime, { silent: true });
                 updateImpostorButtonsUI();
