@@ -16,30 +16,6 @@ const bombState = {
     hasSavedSession: false
 };
 
-const BOMB_FUSE_PRESETS = Object.freeze({
-    unstable: {
-        id: 'unstable',
-        label: 'Niestabilny ładunek',
-        minSeconds: 5,
-        maxSeconds: 120,
-        description: 'Pełny chaos — wybuch może nadejść niemal od razu albo bardzo późno'
-    },
-    short: {
-        id: 'short',
-        label: 'Krótki lont',
-        minSeconds: 5,
-        maxSeconds: 30,
-        description: 'Krótka, szybka runda z dużą presją'
-    },
-    long: {
-        id: 'long',
-        label: 'Długi lont',
-        minSeconds: 30,
-        maxSeconds: 120,
-        description: 'Więcej czasu na odpowiedzi i podawanie telefonu'
-    }
-});
-
 function createBombPlayers(count, previousPlayers = bombState.players) {
     const previous = Array.isArray(previousPlayers) ? previousPlayers : [];
     bombState.playerCount = count;
@@ -91,7 +67,8 @@ function loadBombSession() {
             : [];
         bombState.mode = parsed.mode === 'manual' ? 'manual' : 'tracked';
         const legacyFuseMap = { quick: 'short', normal: 'unstable', long: 'long' };
-        const restoredFuse = BOMB_FUSE_PRESETS[parsed.fusePreset]
+        const presets = TickingBombRules.FUSE_PRESETS;
+        const restoredFuse = presets[parsed.fusePreset]
             ? parsed.fusePreset
             : legacyFuseMap[parsed.fusePreset];
         bombState.fusePreset = restoredFuse || 'unstable';
