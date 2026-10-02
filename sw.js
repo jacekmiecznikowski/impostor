@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v36';
+const CACHE_VERSION = 'v37';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 
@@ -46,12 +46,13 @@ const LOCAL_ASSETS = [
   './assets/js/shared/background.js',
   './assets/js/shared/platform.js',
   './assets/js/shared/content-repository.js',
-  './assets/js/shared/game-registry.js?v=1',
+  './assets/js/shared/game-registry.js?v=2',
   './assets/js/shared/ui.js',
   './assets/js/shared/hub.js',
   './assets/js/shared/navigation-behavior.js',
   './assets/js/shared/game-themes.js',
   './assets/js/shared/native-android.js',
+  './assets/js/games/index.js?v=1',
   './assets/js/games/impostor/data.js',
   './assets/js/games/impostor/content-provider.js',
   './assets/js/games/impostor/rules.js',
@@ -61,7 +62,7 @@ const LOCAL_ASSETS = [
   './assets/js/games/impostor/presentation.js',
   './assets/js/games/impostor/reveal-fit.js',
   './assets/js/games/impostor/scoreboard.js',
-  './assets/js/games/impostor/integration.js?v=1',
+  './assets/js/games/impostor/integration.js?v=2',
   './assets/js/games/ticking-bomb/content-provider.js',
   './assets/js/games/ticking-bomb/rules.js',
   './assets/js/games/ticking-bomb/state.js',
@@ -69,8 +70,9 @@ const LOCAL_ASSETS = [
   './assets/js/games/ticking-bomb/setup.js',
   './assets/js/games/ticking-bomb/game.js',
   './assets/js/games/ticking-bomb/scoreboard.js',
-  './assets/js/games/ticking-bomb/integration.js?v=1',
-  './assets/js/app.js?v=1'
+  './assets/js/games/ticking-bomb/integration.js?v=2',
+  './assets/js/games/prototypes/integration.js?v=1',
+  './assets/js/app.js?v=2'
 ];
 
 const EXTERNAL_ASSETS = [

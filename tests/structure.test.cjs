@@ -23,6 +23,8 @@ const requiredFiles = [
   'assets/js/shared/navigation-behavior.js',
   'assets/js/shared/game-themes.js',
   'assets/js/shared/native-android.js',
+  'assets/js/games/index.js',
+  'assets/js/games/prototypes/integration.js',
   'assets/js/games/impostor/data.js',
   'assets/js/games/impostor/content-provider.js',
   'assets/js/games/impostor/rules.js',
@@ -98,5 +100,6 @@ assert.equal(pkg.dependencies['@capacitor/core'], '8.5.2');
 assert.equal(pkg.dependencies['@capacitor/android'], '8.5.2');
 assert.equal(pkg.dependencies['@capacitor/app'], '8.1.1');
 assert.match(pkg.scripts['build:web'], /prepare-web/);
+assert.match(pkg.scripts.test, /game-module-config\.test\.cjs/);
 
 console.log('Partyjniak packaging and configuration smoke tests: OK');

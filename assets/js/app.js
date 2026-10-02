@@ -1,11 +1,5 @@
-import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=1';
-import { registerImpostorGame } from './games/impostor/integration.js?v=1';
-import { registerTickingBombGame } from './games/ticking-bomb/integration.js?v=1';
-
-function registerGameModules() {
-    registerImpostorGame();
-    registerTickingBombGame();
-}
+import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
+import { registerGameModules } from './games/index.js?v=1';
 
 async function initializeContentLayer() {
     try {

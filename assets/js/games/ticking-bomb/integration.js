@@ -1,43 +1,48 @@
-import { getGameModule, registerGameModule } from '../../shared/game-registry.js?v=1';
+import { getGameModule, registerGameModule } from '../../shared/game-registry.js?v=2';
 
 export function registerTickingBombGame() {
     const existing = getGameModule('ticking-bomb');
     if (existing) return existing;
 
-    APP_VIEW_FRAGMENTS.splice(2, 0,
-        { target: '#app-main', url: './views/ticking-bomb.html' },
-        { target: '#modal-root', url: './views/ticking-bomb-modals.html' }
-    );
-
-    Object.assign(SCREEN_BACK_TARGET, {
-        'bomb-menu': 'home',
-        'bomb-players': 'bomb-menu',
-        'bomb-options': 'bomb-players',
-        'bomb-result': 'bomb-menu'
-    });
-    ROUND_GUARDED_SCREENS.add('bomb-play');
-    WAKE_LOCK_SCREENS.add('bomb-play');
-    IMMERSIVE_SCREENS.add('bomb-play');
-
-    Object.assign(SHELL_CONTEXT_BY_SCREEN, {
-        'bomb-menu': { title: 'Tykająca Bomba', subtitle: 'Menu gry', mode: 'menu' },
-        'bomb-players': { title: 'Gracze', subtitle: 'Tykająca Bomba • krok 1 z 2', mode: 'contextual' },
-        'bomb-options': { title: 'Ustawienia rundy', subtitle: 'Tykająca Bomba • krok 2 z 2', mode: 'contextual' },
-        'bomb-play': { title: 'Tykająca Bomba', subtitle: 'Runda trwa', mode: 'immersive' },
-        'bomb-result': { title: 'Tykająca Bomba', subtitle: 'Wynik rundy', mode: 'contextual' }
-    });
-
-    Object.assign(BACKGROUND_MODE_BY_SCREEN, {
-        'bomb-menu': 'ticking-bomb',
-        'bomb-players': 'ticking-bomb',
-        'bomb-options': 'ticking-bomb',
-        'bomb-play': 'ticking-bomb',
-        'bomb-result': 'bomb-alert'
-    });
-
     return registerGameModule({
         id: 'ticking-bomb',
-        screens: ['bomb-menu', 'bomb-players', 'bomb-options', 'bomb-play', 'bomb-result'],
+        catalog: {
+            name: 'Tykająca Bomba',
+            description: 'Szybkie odpowiedzi, ukryty lont i telefon, którego nikt nie chce trzymać przy BOOM.',
+            icon: 'fa-bomb',
+            status: 'available',
+            order: 20
+        },
+        views: [
+            { target: '#app-main', url: './views/ticking-bomb.html' },
+            { target: '#modal-root', url: './views/ticking-bomb-modals.html' }
+        ],
+        screens: {
+            'bomb-menu': {
+                backTarget: 'home',
+                shell: { title: 'Tykająca Bomba', subtitle: 'Menu gry', mode: 'menu' },
+                background: 'ticking-bomb'
+            },
+            'bomb-players': {
+                backTarget: 'bomb-menu',
+                shell: { title: 'Gracze', subtitle: 'Tykająca Bomba • krok 1 z 2', mode: 'contextual' },
+                background: 'ticking-bomb'
+            },
+            'bomb-options': {
+                backTarget: 'bomb-players',
+                shell: { title: 'Ustawienia rundy', subtitle: 'Tykająca Bomba • krok 2 z 2', mode: 'contextual' },
+                background: 'ticking-bomb'
+            },
+            'bomb-play': {
+                shell: { title: 'Tykająca Bomba', subtitle: 'Runda trwa', mode: 'immersive' },
+                background: 'ticking-bomb', immersive: true, roundGuard: true, wakeLock: true
+            },
+            'bomb-result': {
+                backTarget: 'bomb-menu',
+                shell: { title: 'Tykająca Bomba', subtitle: 'Wynik rundy', mode: 'contextual' },
+                background: 'bomb-alert'
+            }
+        },
         menuScreen: 'bomb-menu',
         shellIcon: 'fa-bomb',
         rulesModalId: 'bomb-rules-modal',
