@@ -124,6 +124,7 @@ setBackgroundMode = function themedSetBackgroundMode(modeName) {
 function initializePartyjniakThemes() {
     if (themesInitialized) return;
     themesInitialized = true;
+    document.getElementById('phaser-bg')?.style.setProperty('opacity', '.94', 'important');
     registerPartyjniakBackgroundModes();
     applyPartyjniakGameTheme('home');
     setBackgroundMode('party');
