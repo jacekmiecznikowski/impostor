@@ -54,32 +54,6 @@ const PROTOTYPE_GAMES = [
         }
     },
     {
-        id: 'trzy-na-piec',
-        catalog: {
-            name: 'Trzy na Pięć',
-            description: 'Wymień trzy rzeczy z zadanej kategorii, zanim minie pięć sekund.',
-            icon: 'fa-stopwatch',
-            status: 'prototype',
-            order: 60
-        },
-        theme: {
-            palette: {
-                accent: '#eab308', strong: '#a16207', alt: '#fde047', text: '#fef08a', contrast: '#111827',
-                rgb: '234, 179, 8', surfaceRgb: '66, 32, 6'
-            },
-            previewBackground: 'trzy-na-piec',
-            backgrounds: {
-                'trzy-na-piec': {
-                    colors: [0xeab308, 0xfacc15, 0xfde047, 0xf8fafc],
-                    alpha: [0.05, 0.16], speed: 0.72, confetti: false, motif: 'party', overlayMotif: 'three-in-five',
-                    metaColor: '#713f12', pageBase: '#120d02',
-                    pageGlowRgb: '234, 179, 8', pageGlowAltRgb: '253, 224, 71',
-                    pageGlowAlpha: '.13', pageGlowAltAlpha: '.045'
-                }
-            }
-        }
-    },
-    {
         id: 'synchronizacja',
         catalog: {
             name: 'Synchronizacja',
