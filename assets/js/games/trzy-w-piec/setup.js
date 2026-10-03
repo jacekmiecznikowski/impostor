@@ -23,10 +23,14 @@ function resumeThreeFiveGame() {
         startNewThreeFiveGame();
         return;
     }
-    const winner = threeFiveState.players.find(player => ThreeFiveRules.hasWinner(player.score, threeFiveState.targetScore));
-    if (winner) {
-        renderThreeFiveWinner(winner);
+    if (threeFiveState.gameFinished) {
+        renderThreeFiveFinalResults();
         goToScreen('three-five-winner');
+        return;
+    }
+    if (threeFiveState.awaitingRoundDecision) {
+        renderThreeFiveRoundSummary();
+        goToScreen('three-five-round-summary');
         return;
     }
     renderThreeFiveOptions();
@@ -212,6 +216,8 @@ function prepareThreeFiveGame() {
         showToast('Kategorie', 'Wybierz co najmniej jedną kategorię.');
         return;
     }
+    threeFiveState.gameFinished = false;
+    threeFiveState.awaitingRoundDecision = false;
     persistThreeFiveSession();
     prepareThreeFiveTurn();
 }
