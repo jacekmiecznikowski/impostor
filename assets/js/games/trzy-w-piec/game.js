@@ -69,6 +69,18 @@ function showThreeFivePrompt() {
     goToScreen('three-five-play');
 }
 
+function getThreeFiveSecondUnit(seconds) {
+    const value = Number(seconds);
+    if (value === 1) return 'sekunda';
+    if ([2, 3, 4].includes(value)) return 'sekundy';
+    return 'sekund';
+}
+
+function updateThreeFiveTimerUnit(seconds) {
+    const unit = document.getElementById('three-five-timer-unit');
+    if (unit) unit.textContent = getThreeFiveSecondUnit(seconds);
+}
+
 function renderThreeFivePlayScreen() {
     const player = getThreeFiveCurrentPlayer();
     const prompt = threeFiveRuntime.currentPrompt;
@@ -81,9 +93,11 @@ function renderThreeFivePlayScreen() {
 
     const timer = document.getElementById('three-five-timer');
     timer?.style.setProperty('--three-five-progress', '1');
+    timer?.style.setProperty('--three-five-elapsed-angle', '0turn');
     timer?.classList.remove('is-running', 'is-critical', 'is-expired', 'is-pulsing');
     const value = document.getElementById('three-five-timer-value');
     if (value) value.textContent = String(ThreeFiveRules.TURN_SECONDS);
+    updateThreeFiveTimerUnit(ThreeFiveRules.TURN_SECONDS);
     document.querySelectorAll('[data-three-five-tick]').forEach(tick => tick.classList.remove('is-spent'));
 
     const start = document.getElementById('three-five-start-btn');
@@ -104,12 +118,15 @@ function pulseThreeFiveTimer() {
 function updateThreeFiveTimerVisual(remainingMs) {
     const totalMs = ThreeFiveRules.TURN_SECONDS * 1000;
     const progress = Math.max(0, Math.min(1, remainingMs / totalMs));
+    const elapsed = 1 - progress;
     const seconds = Math.max(0, Math.ceil(remainingMs / 1000));
     const timer = document.getElementById('three-five-timer');
     const value = document.getElementById('three-five-timer-value');
     timer?.style.setProperty('--three-five-progress', String(progress));
+    timer?.style.setProperty('--three-five-elapsed-angle', `${elapsed}turn`);
     timer?.classList.toggle('is-critical', seconds <= 2 && remainingMs > 0);
     if (value) value.textContent = String(seconds);
+    updateThreeFiveTimerUnit(seconds);
 
     document.querySelectorAll('[data-three-five-tick]').forEach(tick => {
         const tickValue = Number(tick.dataset.threeFiveTick);
@@ -158,10 +175,12 @@ function expireThreeFiveCountdown() {
 
     const timer = document.getElementById('three-five-timer');
     timer?.style.setProperty('--three-five-progress', '0');
+    timer?.style.setProperty('--three-five-elapsed-angle', '1turn');
     timer?.classList.add('is-expired');
     timer?.classList.remove('is-running', 'is-critical');
     const value = document.getElementById('three-five-timer-value');
     if (value) value.textContent = '0';
+    updateThreeFiveTimerUnit(0);
     document.querySelectorAll('[data-three-five-tick]').forEach(tick => tick.classList.add('is-spent'));
 
     const judge = document.getElementById('three-five-judge');
