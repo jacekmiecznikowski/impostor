@@ -34,21 +34,10 @@ assert.match(runtime, /applyPartyjniakGameTheme/);
 assert.match(runtime, /--ui-accent/);
 assert.match(runtime, /previewBackground/);
 assert.match(runtime, /overlayMotif:\s*'party-aurora'/);
-assert.match(runtime, /function buildPartyAurora/);
-assert.match(runtime, /function buildSuspectRadar/);
-assert.match(runtime, /function buildDialogueNetwork/);
-assert.match(runtime, /function buildVerdictField/);
-assert.match(runtime, /function buildFuseSparks/);
-assert.match(runtime, /function buildOrbitField/);
-assert.match(runtime, /function buildThoughtField/);
-assert.match(runtime, /function buildGyroField/);
-assert.match(runtime, /function buildWildCards/);
-assert.match(runtime, /scene\.reducedMotion/);
-assert.match(runtime, /scene\.scale\.on\('resize'/);
-assert.match(runtime, /schedulePartyjniakThemeMotifs/);
-assert.match(runtime, /setBlendMode\?\.\('ADD'\)/);
-assert.doesNotMatch(runtime, /heads-up|taboo|Czółko|Tabu/);
 assert.match(app, /registerGameModules\(\);\s*initializePartyjniakThemes\?\.\(\);/);
+
+// game-themes owns metadata/palette wiring only. Phaser rendering must live in one place.
+assert.doesNotMatch(runtime, /buildParticleField|partyjniakThemeMotifs|schedulePartyjniakThemeMotifs|scene\.add|setBlendMode/);
 
 assert.match(impostor, /overlayMotif:\s*'suspect-radar'/);
 assert.match(impostor, /overlayMotif:\s*'dialogue-network'/);
@@ -64,18 +53,31 @@ assert.match(cmm, /overlayMotif:\s*'gyro'/);
 assert.match(cmm, /overlayMotif:\s*'thought-celebrate'/);
 assert.match(prototypes, /overlayMotif:\s*'wild-cards'/);
 
-// The base Phaser scene must visibly respond to those motifs too. This is intentionally
-// separate from the overlay renderer so a very subtle overlay cannot make every game
-// look like the same generic drifting-dot background.
-assert.match(background, /resolveParticleProfile\(modeName, mode\)/);
-assert.match(background, /'suspect-radar':\s*\{\s*behavior:\s*'scan'/);
-assert.match(background, /'fuse-sparks':\s*\{\s*behavior:\s*'radial'/);
-assert.match(background, /'orbit-fast':\s*\{\s*behavior:\s*'flow'/);
-assert.match(background, /gyro:\s*\{\s*behavior:\s*'gyro'/);
-assert.match(background, /shockwave:\s*\{\s*behavior:\s*'radial'/);
+// One responsive Phaser renderer: soft glow layer + medium accents + fine dust.
+assert.match(background, /this\.glows\s*=\s*\[\]/);
+assert.match(background, /this\.accents\s*=\s*\[\]/);
+assert.match(background, /this\.dust\s*=\s*\[\]/);
+assert.match(background, /ensureGlowTexture\(\)/);
+assert.match(background, /createRadialGradient/);
+assert.match(background, /resolveVisualProfile\(modeName, mode\)/);
+assert.match(background, /createParticleLayer\('accent'\)/);
+assert.match(background, /createParticleLayer\('dust'\)/);
+assert.match(background, /updateGlows\(time\)/);
+assert.match(background, /short\s*\/\s*390/);
+assert.match(background, /densityScale/);
 assert.match(background, /setBlendMode\?\.\('ADD'\)/);
-assert.doesNotMatch(background, /clearPartyjniakThemeMotifs/);
-assert.doesNotMatch(background, /buildImpostorBackdrop|buildBombBackdrop|buildPartyBackdrop/);
+assert.match(background, /prefers-reduced-motion/);
+assert.match(background, /window\.addEventListener\('resize'/);
+
+// Distinct motion language per game.
+assert.match(background, /'suspect-radar':[\s\S]*?behavior:\s*modeName === 'mystery' \? 'stealth' : 'scan'/);
+assert.match(background, /'fuse-sparks':[\s\S]*?behavior:\s*'embers'/);
+assert.match(background, /shockwave:[\s\S]*?behavior:\s*'blast'/);
+assert.match(background, /'orbit-fast':[\s\S]*?behavior:\s*'rush'/);
+assert.match(background, /gyro:[\s\S]*?behavior:\s*'tilt'/);
+assert.match(background, /'thought-field':[\s\S]*?behavior:\s*'bokeh'/);
+assert.match(background, /'wild-cards':[\s\S]*?behavior:\s*'cards'/);
+assert.doesNotMatch(background, /clearPartyjniakThemeMotifs|buildImpostorBackdrop|buildBombBackdrop|buildPartyBackdrop/);
 
 assert.doesNotMatch(colors, /body\[data-game=/);
 assert.doesNotMatch(brand, /body\[data-bg-mode=/);
@@ -91,4 +93,4 @@ assert.equal(fs.existsSync(path.join(root, 'assets/css/ticking-bomb-theme.css'))
 
 new Function(runtime);
 new Function(background);
-console.log('Module-owned responsive Phaser theme system tests: OK');
+console.log('Module-owned single-renderer Phaser theme system tests: OK');
