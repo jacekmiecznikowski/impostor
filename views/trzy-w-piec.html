@@ -81,12 +81,12 @@
     <div class="three-five-prompt-rule"><i class="fa-solid fa-list-ol"></i><span>Podaj dokładnie 3 odpowiedzi</span></div>
   </article>
 
-  <div id="three-five-timer" class="three-five-timer" style="--three-five-progress:1" aria-live="polite">
+  <div id="three-five-timer" class="three-five-timer" style="--three-five-progress:1;--three-five-elapsed:0" aria-live="polite">
     <div class="three-five-timer-aura" aria-hidden="true"></div>
     <div class="three-five-timer-progress" aria-hidden="true"></div>
     <div class="three-five-timer-core">
       <strong id="three-five-timer-value">5</strong>
-      <span>sekund</span>
+      <span id="three-five-timer-unit">sekund</span>
     </div>
     <span class="three-five-timer-tick" data-three-five-tick="5" style="--tick-index:0" aria-hidden="true"></span>
     <span class="three-five-timer-tick" data-three-five-tick="4" style="--tick-index:1" aria-hidden="true"></span>
@@ -95,16 +95,18 @@
     <span class="three-five-timer-tick" data-three-five-tick="1" style="--tick-index:4" aria-hidden="true"></span>
   </div>
 
-  <button id="three-five-start-btn" type="button" class="three-five-start-button" onclick="startThreeFiveCountdown()">
-    <span class="three-five-start-icon"><i class="fa-solid fa-bolt"></i></span>
-    <span><strong>START</strong><small>Od tej chwili masz 5 sekund</small></span>
-  </button>
+  <div class="three-five-action-slot">
+    <button id="three-five-start-btn" type="button" class="three-five-start-button" onclick="startThreeFiveCountdown()">
+      <span class="three-five-start-icon"><i class="fa-solid fa-bolt"></i></span>
+      <span><strong>START</strong><small>Od tej chwili masz 5 sekund</small></span>
+    </button>
 
-  <div id="three-five-judge" class="three-five-judge hidden">
-    <div class="three-five-stop-label"><i class="fa-solid fa-stop"></i><span>CZAS! Czy padły trzy poprawne odpowiedzi?</span></div>
-    <div class="three-five-judge-actions">
-      <button type="button" class="three-five-verdict is-fail" onclick="judgeThreeFiveTurn(false)"><i class="fa-solid fa-xmark"></i><span>Nie tym razem</span><small>0 pkt</small></button>
-      <button type="button" class="three-five-verdict is-success" onclick="judgeThreeFiveTurn(true)"><i class="fa-solid fa-check"></i><span>Udało się!</span><small>+1 pkt</small></button>
+    <div id="three-five-judge" class="three-five-judge hidden">
+      <div class="three-five-stop-label"><i class="fa-solid fa-stop"></i><span>CZAS! Czy padły trzy poprawne odpowiedzi?</span></div>
+      <div class="three-five-judge-actions">
+        <button type="button" class="three-five-verdict is-fail" onclick="judgeThreeFiveTurn(false)"><i class="fa-solid fa-xmark"></i><span>Nie tym razem</span><small>0 pkt</small></button>
+        <button type="button" class="three-five-verdict is-success" onclick="judgeThreeFiveTurn(true)"><i class="fa-solid fa-check"></i><span>Udało się!</span><small>+1 pkt</small></button>
+      </div>
     </div>
   </div>
 </section>
