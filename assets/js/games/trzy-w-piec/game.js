@@ -11,6 +11,16 @@ function getThreeFiveCurrentPlayer() {
     return threeFiveState.players[threeFiveState.currentPlayerIndex] || null;
 }
 
+function getThreeFiveRoundUnit(rounds) {
+    const value = Math.abs(Number(rounds) || 0);
+    if (value === 1) return 'runda';
+    const lastTwo = value % 100;
+    const last = value % 10;
+    if (lastTwo >= 12 && lastTwo <= 14) return 'rund';
+    if (last >= 2 && last <= 4) return 'rundy';
+    return 'rund';
+}
+
 function clearThreeFiveTimer() {
     if (threeFiveRuntime.timerId) clearInterval(threeFiveRuntime.timerId);
     threeFiveRuntime.timerId = null;
@@ -56,10 +66,11 @@ function renderThreeFiveReadyScreen() {
     const score = document.getElementById('three-five-ready-score');
     const turn = document.getElementById('three-five-ready-turn');
     const target = document.getElementById('three-five-ready-target');
+    const roundNumber = threeFiveState.completedRounds + 1;
     if (name) name.textContent = player?.name || 'Gracz';
     if (score) score.textContent = `${player?.score || 0} pkt`;
-    if (turn) turn.textContent = `Tura ${threeFiveState.turnNumber + 1}`;
-    if (target) target.textContent = `${threeFiveState.answerCount} w ${threeFiveState.turnSeconds} • do ${threeFiveState.targetScore} pkt`;
+    if (turn) turn.textContent = `Runda ${roundNumber} • gracz ${threeFiveState.currentPlayerIndex + 1}/${threeFiveState.players.length}`;
+    if (target) target.textContent = `${threeFiveState.answerCount} w ${threeFiveState.turnSeconds}`;
 }
 
 function showThreeFivePrompt() {
@@ -195,6 +206,100 @@ function expireThreeFiveCountdown() {
     navigator.vibrate?.([50, 35, 90]);
 }
 
+function createThreeFiveStandingRow(player, index, { showRoundResult = false } = {}) {
+    const row = document.createElement('div');
+    row.className = 'three-five-round-row';
+
+    const position = document.createElement('span');
+    position.className = 'three-five-round-position';
+    position.textContent = String(index + 1);
+
+    const copy = document.createElement('span');
+    copy.className = 'three-five-round-copy';
+    const name = document.createElement('strong');
+    name.textContent = player?.name || 'Gracz';
+    const meta = document.createElement('small');
+    meta.textContent = `${player?.score || 0} pkt łącznie`;
+    copy.append(name, meta);
+
+    const result = document.createElement('span');
+    result.className = 'three-five-round-points';
+    if (showRoundResult) {
+        const gained = Math.max(0, Number(threeFiveState.roundResults?.[player?.id]) || 0);
+        result.textContent = gained ? '+1' : '0';
+        result.classList.toggle('is-success', gained > 0);
+    } else {
+        result.textContent = `${player?.score || 0} pkt`;
+    }
+
+    row.append(position, copy, result);
+    return row;
+}
+
+function getThreeFiveLeaderCopy() {
+    const leaders = ThreeFiveRules.getLeaders(threeFiveState.players);
+    if (!leaders.length) return 'Brak wyników.';
+    if (leaders.length === 1) return `Prowadzi ${leaders[0].name} z wynikiem ${leaders[0].score || 0} pkt.`;
+    return `Na prowadzeniu remis: ${leaders.map(player => player.name).join(', ')} • ${leaders[0].score || 0} pkt.`;
+}
+
+function renderThreeFiveRoundSummary() {
+    const round = document.getElementById('three-five-round-number');
+    const leader = document.getElementById('three-five-round-leader');
+    const list = document.getElementById('three-five-round-ranking');
+    if (round) round.textContent = `RUNDA ${threeFiveState.completedRounds}`;
+    if (leader) leader.textContent = getThreeFiveLeaderCopy();
+    if (!list) return;
+    list.replaceChildren();
+    ThreeFiveRules.sortStandings(threeFiveState.players).forEach((player, index) => {
+        list.appendChild(createThreeFiveStandingRow(player, index, { showRoundResult: true }));
+    });
+}
+
+function continueThreeFiveRound() {
+    if (!threeFiveState.awaitingRoundDecision || threeFiveState.gameFinished) return;
+    threeFiveState.awaitingRoundDecision = false;
+    threeFiveState.roundResults = {};
+    persistThreeFiveSession();
+    playSound?.('click');
+    prepareThreeFiveTurn();
+}
+
+function renderThreeFiveFinalResults() {
+    const title = document.getElementById('three-five-final-title');
+    const score = document.getElementById('three-five-final-score');
+    const rounds = document.getElementById('three-five-final-rounds');
+    const list = document.getElementById('three-five-final-ranking');
+    const leaders = ThreeFiveRules.getLeaders(threeFiveState.players);
+    const topScore = leaders.length ? Math.max(0, Number(leaders[0].score) || 0) : 0;
+
+    if (title) {
+        title.textContent = leaders.length === 1
+            ? `${leaders[0].name} wygrywa!`
+            : leaders.length > 1
+                ? 'Remis!'
+                : 'Koniec gry';
+    }
+    if (score) score.textContent = leaders.length > 1 ? `${leaders.length} liderów • ${topScore} pkt` : `${topScore} pkt`;
+    if (rounds) rounds.textContent = `${threeFiveState.completedRounds} ${getThreeFiveRoundUnit(threeFiveState.completedRounds)}`;
+    if (!list) return;
+    list.replaceChildren();
+    ThreeFiveRules.sortStandings(threeFiveState.players).forEach((player, index) => {
+        list.appendChild(createThreeFiveStandingRow(player, index));
+    });
+}
+
+function finishThreeFiveGame() {
+    if (!threeFiveState.awaitingRoundDecision) return;
+    threeFiveState.awaitingRoundDecision = false;
+    threeFiveState.gameFinished = true;
+    persistThreeFiveSession();
+    renderThreeFiveFinalResults();
+    playSound?.('success');
+    navigator.vibrate?.(32);
+    goToScreen('three-five-winner');
+}
+
 function judgeThreeFiveTurn(success) {
     if (!threeFiveRuntime.judging || !threeFiveRuntime.currentPrompt) return;
     const player = getThreeFiveCurrentPlayer();
@@ -203,6 +308,7 @@ function judgeThreeFiveTurn(success) {
     const gained = ThreeFiveRules.scoreVerdict(Boolean(success));
     player.score = Math.max(0, Number(player.score) || 0) + gained;
     player.turns = Math.max(0, Number(player.turns) || 0) + 1;
+    threeFiveState.roundResults[player.id] = gained;
     threeFiveState.turnNumber += 1;
     threeFiveState.recentPromptIds = ThreeFiveRules.rememberPrompt(
         threeFiveState.recentPromptIds,
@@ -216,30 +322,24 @@ function judgeThreeFiveTurn(success) {
         playSound?.('failure');
     }
 
-    const won = ThreeFiveRules.hasWinner(player.score, threeFiveState.targetScore);
     threeFiveRuntime.judging = false;
     threeFiveRuntime.currentPrompt = null;
 
-    if (won) {
+    const next = ThreeFiveRules.nextPlayerIndex(threeFiveState.currentPlayerIndex, threeFiveState.players.length);
+    if (next >= 0) threeFiveState.currentPlayerIndex = next;
+
+    if (ThreeFiveRules.isRoundComplete(threeFiveState.turnNumber, threeFiveState.players.length)) {
+        threeFiveState.completedRounds += 1;
+        threeFiveState.awaitingRoundDecision = true;
+        threeFiveState.gameFinished = false;
         persistThreeFiveSession();
-        renderThreeFiveWinner(player);
-        goToScreen('three-five-winner');
+        renderThreeFiveRoundSummary();
+        goToScreen('three-five-round-summary');
         return;
     }
 
-    const next = ThreeFiveRules.nextPlayerIndex(threeFiveState.currentPlayerIndex, threeFiveState.players.length);
-    if (next >= 0) threeFiveState.currentPlayerIndex = next;
     persistThreeFiveSession();
     prepareThreeFiveTurn();
-}
-
-function renderThreeFiveWinner(player) {
-    const name = document.getElementById('three-five-winner-name');
-    const score = document.getElementById('three-five-winner-score');
-    const turns = document.getElementById('three-five-winner-turns');
-    if (name) name.textContent = player?.name || 'Gracz';
-    if (score) score.textContent = `${player?.score || 0} pkt`;
-    if (turns) turns.textContent = `${player?.turns || 0} tur`;
 }
 
 function restartThreeFiveMatch() {

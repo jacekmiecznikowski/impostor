@@ -15,7 +15,7 @@
   </div>
   <div class="three-five-howto">
     <article><span class="three-five-howto-number">3</span><div><strong>Wybierz liczbę odpowiedzi</strong><span>Domyślnie trzy, ale możesz ustawić od 1 do 60.</span></div></article>
-    <article><span class="three-five-howto-number">5</span><div><strong>Ustaw czas</strong><span>Domyślnie pięć sekund. Maksymalnie 60 sekund na rundę.</span></div></article>
+    <article><span class="three-five-howto-number">5</span><div><strong>Ustaw czas</strong><span>Domyślnie pięć sekund. Maksymalnie 60 sekund na turę.</span></div></article>
   </div>
 </section>
 
@@ -40,7 +40,7 @@
   <div class="three-five-section-heading">
     <span class="three-five-kicker">KROK 2 Z 2</span>
     <h2>Ustaw grę</h2>
-    <p>Ustal tempo wyzwania i wybierz kategorie. Pierwsza osoba do 10 punktów wygrywa.</p>
+    <p>Ustal tempo wyzwania i wybierz kategorie. Po każdym pełnym obiegu graczy zdecydujecie, czy gracie kolejną rundę.</p>
   </div>
 
   <div class="three-five-setup-card three-five-challenge-card">
@@ -65,7 +65,7 @@
         <div class="three-five-parameter-heading"><span>Sekundy</span><strong id="three-five-turn-seconds-value">5</strong></div>
         <div class="three-five-parameter-stepper">
           <button type="button" onclick="adjustThreeFiveTurnSeconds(-1)" aria-label="Mniej sekund"><i class="fa-solid fa-minus"></i></button>
-          <input id="three-five-turn-seconds" type="range" min="1" max="60" value="5" oninput="setThreeFiveTurnSeconds(this.value)" aria-label="Czas rundy w sekundach">
+          <input id="three-five-turn-seconds" type="range" min="1" max="60" value="5" oninput="setThreeFiveTurnSeconds(this.value)" aria-label="Czas tury w sekundach">
           <button type="button" onclick="adjustThreeFiveTurnSeconds(1)" aria-label="Więcej sekund"><i class="fa-solid fa-plus"></i></button>
         </div>
         <small>1–60 sekund</small>
@@ -83,7 +83,7 @@
 
 <section id="screen-three-five-ready" class="screen three-five-screen hidden flex-col flex-1 three-five-ready-screen">
   <div class="three-five-ready-card">
-    <div class="three-five-ready-meta"><span id="three-five-ready-turn">Tura 1</span><span id="three-five-ready-target">3 w 5 • do 10 pkt</span></div>
+    <div class="three-five-ready-meta"><span id="three-five-ready-turn">Runda 1 • gracz 1/4</span><span id="three-five-ready-target">3 w 5</span></div>
     <div class="three-five-ready-icon" aria-hidden="true"><i class="fa-solid fa-hand-point-right"></i></div>
     <span class="three-five-ready-label">TERAZ GRA</span>
     <strong id="three-five-ready-player">Gracz 1</strong>
@@ -128,13 +128,28 @@
   </div>
 </section>
 
+<section id="screen-three-five-round-summary" class="screen three-five-screen hidden flex-col flex-1 three-five-round-screen">
+  <div class="three-five-round-card">
+    <span class="three-five-round-icon" aria-hidden="true"><i class="fa-solid fa-flag-checkered"></i></span>
+    <span id="three-five-round-number" class="three-five-kicker">RUNDA 1</span>
+    <h2>Pełny obieg za nami</h2>
+    <p id="three-five-round-leader">Sprawdźmy, kto prowadzi.</p>
+    <div id="three-five-round-ranking" class="three-five-round-ranking"></div>
+  </div>
+  <div class="three-five-round-actions">
+    <button type="button" class="primary-btn" onclick="continueThreeFiveRound()"><i class="fa-solid fa-forward"></i><span>Jeszcze jedna runda</span></button>
+    <button type="button" class="secondary-btn" onclick="finishThreeFiveGame()"><i class="fa-solid fa-flag-checkered"></i><span>Zakończ grę</span></button>
+  </div>
+</section>
+
 <section id="screen-three-five-winner" class="screen three-five-screen hidden flex-col flex-1 three-five-winner-screen">
   <div class="three-five-winner-card">
     <span class="three-five-winner-crown"><i class="fa-solid fa-trophy"></i></span>
-    <span class="three-five-kicker">MAMY ZWYCIĘZCĘ</span>
-    <h2 id="three-five-winner-name">Gracz</h2>
-    <strong id="three-five-winner-score">10 pkt</strong>
-    <p><span id="three-five-winner-turns">0 tur</span> wystarczyło, żeby wygrać tę partię.</p>
+    <span class="three-five-kicker">KONIEC GRY</span>
+    <h2 id="three-five-final-title">Wyniki końcowe</h2>
+    <strong id="three-five-final-score">0 pkt</strong>
+    <p>Rozegrano <span id="three-five-final-rounds">0 rund</span>.</p>
+    <div id="three-five-final-ranking" class="three-five-round-ranking three-five-final-ranking"></div>
   </div>
   <div class="three-five-winner-actions">
     <button type="button" class="primary-btn" onclick="restartThreeFiveMatch()"><i class="fa-solid fa-rotate-right"></i><span>Rewanż tą samą ekipą</span></button>

@@ -4,7 +4,6 @@ const ThreeFiveRules = require('../assets/js/games/trzy-w-piec/rules.js');
 assert.equal(ThreeFiveRules.DEFAULT_ANSWER_COUNT, 3);
 assert.equal(ThreeFiveRules.DEFAULT_TURN_SECONDS, 5);
 assert.equal(ThreeFiveRules.MAX_CHALLENGE_VALUE, 60);
-assert.equal(ThreeFiveRules.MATCH_TARGET_SCORE, 10);
 assert.equal(ThreeFiveRules.normalizeChallengeValue(5, 3), 5);
 assert.equal(ThreeFiveRules.normalizeChallengeValue(0, 3), 1);
 assert.equal(ThreeFiveRules.normalizeChallengeValue(999, 5), 60);
@@ -14,10 +13,20 @@ assert.equal(ThreeFiveRules.formatPrompt('Wymień 3 rzeczy.', 60), 'Wymień 60 r
 assert.equal(ThreeFiveRules.nextPlayerIndex(0, 4), 1);
 assert.equal(ThreeFiveRules.nextPlayerIndex(3, 4), 0);
 assert.equal(ThreeFiveRules.nextPlayerIndex(0, 0), -1);
+assert.equal(ThreeFiveRules.isRoundComplete(0, 4), false);
+assert.equal(ThreeFiveRules.isRoundComplete(3, 4), false);
+assert.equal(ThreeFiveRules.isRoundComplete(4, 4), true);
+assert.equal(ThreeFiveRules.isRoundComplete(8, 4), true);
 assert.equal(ThreeFiveRules.scoreVerdict(true), 1);
 assert.equal(ThreeFiveRules.scoreVerdict(false), 0);
-assert.equal(ThreeFiveRules.hasWinner(10), true);
-assert.equal(ThreeFiveRules.hasWinner(9), false);
+
+const standings = ThreeFiveRules.sortStandings([
+  { name: 'Bartek', score: 2, turns: 3 },
+  { name: 'Ala', score: 3, turns: 3 },
+  { name: 'Celina', score: 3, turns: 3 }
+]);
+assert.deepEqual(standings.map(player => player.name), ['Ala', 'Celina', 'Bartek']);
+assert.deepEqual(ThreeFiveRules.getLeaders(standings).map(player => player.name), ['Ala', 'Celina']);
 
 const categories = [
   { id: 'a', name: 'A', prompts: [{ id: 'a-1', text: 'A1' }, { id: 'a-2', text: 'A2' }] },

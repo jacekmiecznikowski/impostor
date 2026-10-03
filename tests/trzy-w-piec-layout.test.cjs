@@ -18,6 +18,11 @@ assert.match(view, /data-three-five-preset[^>]*data-answers="3"[^>]*data-seconds
 assert.match(view, /data-three-five-preset[^>]*data-answers="5"[^>]*data-seconds="10"/);
 assert.match(view, /id="three-five-answer-count"[^>]*min="1"[^>]*max="60"/);
 assert.match(view, /id="three-five-turn-seconds"[^>]*min="1"[^>]*max="60"/);
+assert.match(view, /id="screen-three-five-round-summary"/);
+assert.match(view, /onclick="continueThreeFiveRound\(\)"/);
+assert.match(view, /onclick="finishThreeFiveGame\(\)"/);
+assert.match(view, /id="three-five-round-ranking"/);
+assert.match(view, /id="three-five-final-ranking"/);
 
 assert.match(game, /threeFiveState\.turnSeconds/);
 assert.match(game, /threeFiveState\.answerCount/);
@@ -27,6 +32,11 @@ assert.match(game, /--three-five-elapsed-angle/);
 assert.match(game, /const totalMs = turnSeconds \* 1000/);
 assert.match(game, /threeFiveRuntime\.endsAt = performance\.now\(\) \+ turnSeconds \* 1000/);
 assert.doesNotMatch(game, /renderThreeFiveTimerTicks|data-three-five-tick|--tick-angle|ThreeFiveRules\.TURN_SECONDS/);
+assert.match(game, /ThreeFiveRules\.isRoundComplete/);
+assert.match(game, /threeFiveState\.awaitingRoundDecision = true/);
+assert.match(game, /renderThreeFiveRoundSummary\(\)/);
+assert.match(game, /renderThreeFiveFinalResults\(\)/);
+assert.doesNotMatch(game, /hasWinner|targetScore/);
 
 assert.match(layout, /from 0deg/);
 assert.match(layout, /var\(--three-five-elapsed-angle\)/);
@@ -37,6 +47,8 @@ assert.match(layout, /\.three-five-timer\.is-expired \.three-five-timer-sweep[\s
 assert.doesNotMatch(layout, /three-five-timer-tick|tick-angle|has-many-ticks|has-dense-ticks/);
 assert.match(layout, /\.three-five-action-slot[\s\S]*min-height:\s*6\.8rem/);
 assert.match(layout, /\.three-five-player-strip,[\s\S]*\.three-five-prompt-card,[\s\S]*\.three-five-action-slot[\s\S]*width:\s*min\(100%, 30rem\)/);
-assert.match(index, /trzy-w-piec-layout\.css\?v=3/);
+assert.match(layout, /\.three-five-round-ranking/);
+assert.match(layout, /\.three-five-round-row/);
+assert.match(index, /trzy-w-piec-layout\.css\?v=4/);
 
-console.log('Trzy w Pięć timer sweep and layout tests: OK');
+console.log('Trzy w Pięć timer, round decision and layout tests: OK');

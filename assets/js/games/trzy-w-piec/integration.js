@@ -60,12 +60,17 @@ export function registerThreeFiveGame() {
                 background: 'trzy-w-piec'
             },
             'three-five-play': {
-                shell: { title: 'Trzy w Pięć', subtitle: 'Szybka runda', mode: 'immersive' },
+                shell: { title: 'Trzy w Pięć', subtitle: 'Szybka tura', mode: 'immersive' },
                 background: 'trzy-w-piec', immersive: true, roundGuard: true, wakeLock: true
+            },
+            'three-five-round-summary': {
+                backTarget: 'three-five-menu',
+                shell: { title: 'Trzy w Pięć', subtitle: 'Podsumowanie rundy', mode: 'contextual' },
+                background: 'trzy-w-piec'
             },
             'three-five-winner': {
                 backTarget: 'three-five-menu',
-                shell: { title: 'Trzy w Pięć', subtitle: 'Koniec gry', mode: 'contextual' },
+                shell: { title: 'Trzy w Pięć', subtitle: 'Wyniki końcowe', mode: 'contextual' },
                 background: 'trzy-w-piec'
             }
         },
@@ -94,9 +99,11 @@ export function registerThreeFiveGame() {
             if (screenName === 'three-five-options') renderThreeFiveOptions();
             if (screenName === 'three-five-ready') renderThreeFiveReadyScreen();
             if (screenName === 'three-five-play') renderThreeFivePlayScreen();
+            if (screenName === 'three-five-round-summary') renderThreeFiveRoundSummary();
+            if (screenName === 'three-five-winner') renderThreeFiveFinalResults();
         },
         onScreenLeave(previousScreen, nextScreen) {
-            if (previousScreen === 'three-five-play' && nextScreen !== 'three-five-winner' && threeFiveRuntime?.timerRunning) {
+            if (previousScreen === 'three-five-play' && threeFiveRuntime?.timerRunning) {
                 cancelThreeFiveTurn({ silent: true });
             }
         },

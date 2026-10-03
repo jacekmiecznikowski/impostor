@@ -13,8 +13,7 @@ function renderThreeFiveScoreboardModal() {
         return;
     }
 
-    const sorted = [...threeFiveState.players].sort((a, b) => b.score - a.score || a.turns - b.turns || a.name.localeCompare(b.name, 'pl'));
-    sorted.forEach((player, index) => {
+    ThreeFiveRules.sortStandings(threeFiveState.players).forEach((player, index) => {
         const row = document.createElement('div');
         row.className = 'three-five-score-row';
 
@@ -27,7 +26,7 @@ function renderThreeFiveScoreboardModal() {
         const name = document.createElement('strong');
         name.textContent = player.name;
         const turns = document.createElement('small');
-        turns.textContent = `${player.turns || 0} ${(player.turns || 0) === 1 ? 'tura' : 'tur'}`;
+        turns.textContent = `${player.turns || 0} ${(player.turns || 0) === 1 ? 'tura' : 'tur'} • ${threeFiveState.completedRounds || 0} ${getThreeFiveRoundUnit(threeFiveState.completedRounds || 0)}`;
         copy.append(name, turns);
 
         const score = document.createElement('span');
@@ -39,13 +38,8 @@ function renderThreeFiveScoreboardModal() {
 }
 
 function resetThreeFiveScores() {
-    threeFiveState.players.forEach(player => {
-        player.score = 0;
-        player.turns = 0;
-    });
-    threeFiveState.currentPlayerIndex = 0;
-    threeFiveState.turnNumber = 0;
+    resetThreeFiveMatchScores();
     persistThreeFiveSession();
     renderThreeFiveScoreboardModal();
-    showToast('Zresetowano', 'Punkty Trzy w Pięć zostały wyzerowane.');
+    showToast('Zresetowano', 'Punkty i rundy Trzy w Pięć zostały wyzerowane.');
 }
