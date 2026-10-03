@@ -8,7 +8,7 @@ export function registerThreeFiveGame() {
         id: 'trzy-w-piec',
         catalog: {
             name: 'Trzy w Pięć',
-            description: 'Wymień trzy rzeczy z zadanej kategorii, zanim minie pięć sekund.',
+            description: 'Wymień kilka rzeczy z zadanej kategorii, zanim skończy się czas.',
             icon: 'fa-stopwatch',
             status: 'available',
             order: 60
@@ -60,7 +60,7 @@ export function registerThreeFiveGame() {
                 background: 'trzy-w-piec'
             },
             'three-five-play': {
-                shell: { title: 'Trzy w Pięć', subtitle: 'Masz tylko 5 sekund', mode: 'immersive' },
+                shell: { title: 'Trzy w Pięć', subtitle: 'Szybka runda', mode: 'immersive' },
                 background: 'trzy-w-piec', immersive: true, roundGuard: true, wakeLock: true
             },
             'three-five-winner': {
