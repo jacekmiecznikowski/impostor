@@ -1,9 +1,9 @@
 <section id="screen-three-five-menu" class="screen three-five-screen hidden flex-col flex-1">
   <div class="three-five-menu-hero">
-    <span class="three-five-kicker">3 odpowiedzi • 5 sekund • zero namysłu</span>
+    <span class="three-five-kicker">Domyślnie 3 odpowiedzi • 5 sekund</span>
     <div class="three-five-menu-icon" aria-hidden="true"><i class="fa-solid fa-stopwatch"></i></div>
     <h1>Trzy w Pięć</h1>
-    <p>Dostajesz szybkie wyzwanie. Wymień trzy pasujące rzeczy, zanim licznik dobije do zera.</p>
+    <p>Dostajesz szybkie wyzwanie. Ustal ile odpowiedzi trzeba podać i ile czasu ma gracz.</p>
   </div>
   <div class="three-five-menu-actions">
     <button type="button" class="primary-btn" onclick="startNewThreeFiveGame()"><i class="fa-solid fa-play"></i><span>NOWA GRA</span></button>
@@ -14,8 +14,8 @@
     </div>
   </div>
   <div class="three-five-howto">
-    <article><span class="three-five-howto-number">3</span><div><strong>Trzy odpowiedzi</strong><span>Nie muszą być idealne — liczy się szybkie skojarzenie i zgoda grupy.</span></div></article>
-    <article><span class="three-five-howto-number">5</span><div><strong>Pięć sekund</strong><span>Po starcie nie ma pauzy. Ostatnie sekundy dostają mocniejszy sygnał.</span></div></article>
+    <article><span class="three-five-howto-number">3</span><div><strong>Wybierz liczbę odpowiedzi</strong><span>Domyślnie trzy, ale możesz ustawić od 1 do 60.</span></div></article>
+    <article><span class="three-five-howto-number">5</span><div><strong>Ustaw czas</strong><span>Domyślnie pięć sekund. Maksymalnie 60 sekund na rundę.</span></div></article>
   </div>
 </section>
 
@@ -40,15 +40,36 @@
   <div class="three-five-section-heading">
     <span class="three-five-kicker">KROK 2 Z 2</span>
     <h2>Ustaw grę</h2>
-    <p>Wybierz cel punktowy i rodzaje wyzwań. Sam timer zawsze ma dokładnie 5 sekund.</p>
+    <p>Ustal tempo wyzwania i wybierz kategorie. Pierwsza osoba do 10 punktów wygrywa.</p>
   </div>
 
-  <div class="three-five-setup-card">
-    <div class="three-five-group-label"><span>GRAMY DO</span><small>Pierwsza osoba z tym wynikiem wygrywa</small></div>
-    <div class="three-five-target-grid">
-      <button type="button" data-three-five-target="5" onclick="setThreeFiveTargetScore(5)"><strong>5</strong><small>szybka</small></button>
-      <button type="button" data-three-five-target="10" onclick="setThreeFiveTargetScore(10)"><strong>10</strong><small>klasyczna</small></button>
-      <button type="button" data-three-five-target="15" onclick="setThreeFiveTargetScore(15)"><strong>15</strong><small>dłuższa</small></button>
+  <div class="three-five-setup-card three-five-challenge-card">
+    <div class="three-five-group-label"><span>TEMPO RUNDY</span><strong id="three-five-challenge-summary">3 w 5</strong></div>
+    <div class="three-five-preset-grid" aria-label="Szybkie ustawienia">
+      <button type="button" data-three-five-preset data-answers="3" data-seconds="5" onclick="setThreeFiveChallengePreset(3, 5)"><strong>3 w 5</strong><small>klasyczne</small></button>
+      <button type="button" data-three-five-preset data-answers="5" data-seconds="10" onclick="setThreeFiveChallengePreset(5, 10)"><strong>5 w 10</strong><small>spokojniejsze</small></button>
+    </div>
+
+    <div class="three-five-parameter-grid">
+      <div class="three-five-parameter">
+        <div class="three-five-parameter-heading"><span>Odpowiedzi</span><strong id="three-five-answer-count-value">3</strong></div>
+        <div class="three-five-parameter-stepper">
+          <button type="button" onclick="adjustThreeFiveAnswerCount(-1)" aria-label="Mniej odpowiedzi"><i class="fa-solid fa-minus"></i></button>
+          <input id="three-five-answer-count" type="range" min="1" max="60" value="3" oninput="setThreeFiveAnswerCount(this.value)" aria-label="Liczba odpowiedzi">
+          <button type="button" onclick="adjustThreeFiveAnswerCount(1)" aria-label="Więcej odpowiedzi"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <small>1–60 odpowiedzi</small>
+      </div>
+
+      <div class="three-five-parameter">
+        <div class="three-five-parameter-heading"><span>Sekundy</span><strong id="three-five-turn-seconds-value">5</strong></div>
+        <div class="three-five-parameter-stepper">
+          <button type="button" onclick="adjustThreeFiveTurnSeconds(-1)" aria-label="Mniej sekund"><i class="fa-solid fa-minus"></i></button>
+          <input id="three-five-turn-seconds" type="range" min="1" max="60" value="5" oninput="setThreeFiveTurnSeconds(this.value)" aria-label="Czas rundy w sekundach">
+          <button type="button" onclick="adjustThreeFiveTurnSeconds(1)" aria-label="Więcej sekund"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <small>1–60 sekund</small>
+      </div>
     </div>
   </div>
 
@@ -62,7 +83,7 @@
 
 <section id="screen-three-five-ready" class="screen three-five-screen hidden flex-col flex-1 three-five-ready-screen">
   <div class="three-five-ready-card">
-    <div class="three-five-ready-meta"><span id="three-five-ready-turn">Tura 1</span><span id="three-five-ready-target">Cel: 10 pkt</span></div>
+    <div class="three-five-ready-meta"><span id="three-five-ready-turn">Tura 1</span><span id="three-five-ready-target">3 w 5 • do 10 pkt</span></div>
     <div class="three-five-ready-icon" aria-hidden="true"><i class="fa-solid fa-hand-point-right"></i></div>
     <span class="three-five-ready-label">TERAZ GRA</span>
     <strong id="three-five-ready-player">Gracz 1</strong>
@@ -78,31 +99,27 @@
   <article class="three-five-prompt-card">
     <span id="three-five-prompt-category" class="three-five-prompt-category">Kategoria</span>
     <h2 id="three-five-prompt-text">Wymień 3 rzeczy…</h2>
-    <div class="three-five-prompt-rule"><i class="fa-solid fa-list-ol"></i><span>Podaj dokładnie 3 odpowiedzi</span></div>
+    <div class="three-five-prompt-rule"><i class="fa-solid fa-list-ol"></i><span id="three-five-prompt-rule-text">Podaj dokładnie 3 odpowiedzi</span></div>
   </article>
 
-  <div id="three-five-timer" class="three-five-timer" style="--three-five-progress:1;--three-five-elapsed:0" aria-live="polite">
+  <div id="three-five-timer" class="three-five-timer" style="--three-five-progress:1;--three-five-elapsed-angle:0turn" aria-live="polite">
     <div class="three-five-timer-aura" aria-hidden="true"></div>
     <div class="three-five-timer-progress" aria-hidden="true"></div>
+    <div id="three-five-timer-ticks" class="three-five-timer-ticks" aria-hidden="true"></div>
     <div class="three-five-timer-core">
       <strong id="three-five-timer-value">5</strong>
       <span id="three-five-timer-unit">sekund</span>
     </div>
-    <span class="three-five-timer-tick" data-three-five-tick="5" style="--tick-index:0" aria-hidden="true"></span>
-    <span class="three-five-timer-tick" data-three-five-tick="4" style="--tick-index:1" aria-hidden="true"></span>
-    <span class="three-five-timer-tick" data-three-five-tick="3" style="--tick-index:2" aria-hidden="true"></span>
-    <span class="three-five-timer-tick" data-three-five-tick="2" style="--tick-index:3" aria-hidden="true"></span>
-    <span class="three-five-timer-tick" data-three-five-tick="1" style="--tick-index:4" aria-hidden="true"></span>
   </div>
 
   <div class="three-five-action-slot">
     <button id="three-five-start-btn" type="button" class="three-five-start-button" onclick="startThreeFiveCountdown()">
       <span class="three-five-start-icon"><i class="fa-solid fa-bolt"></i></span>
-      <span><strong>START</strong><small>Od tej chwili masz 5 sekund</small></span>
+      <span><strong>START</strong><small id="three-five-start-copy">Od tej chwili masz 5 sekund</small></span>
     </button>
 
     <div id="three-five-judge" class="three-five-judge hidden">
-      <div class="three-five-stop-label"><i class="fa-solid fa-stop"></i><span>CZAS! Czy padły trzy poprawne odpowiedzi?</span></div>
+      <div class="three-five-stop-label"><i class="fa-solid fa-stop"></i><span id="three-five-stop-copy">CZAS! Czy udało się podać 3 odpowiedzi?</span></div>
       <div class="three-five-judge-actions">
         <button type="button" class="three-five-verdict is-fail" onclick="judgeThreeFiveTurn(false)"><i class="fa-solid fa-xmark"></i><span>Nie tym razem</span><small>0 pkt</small></button>
         <button type="button" class="three-five-verdict is-success" onclick="judgeThreeFiveTurn(true)"><i class="fa-solid fa-check"></i><span>Udało się!</span><small>+1 pkt</small></button>
