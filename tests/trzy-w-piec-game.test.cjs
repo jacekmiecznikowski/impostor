@@ -6,37 +6,66 @@ const ThreeFiveRules = require('../assets/js/games/trzy-w-piec/rules.js');
 
 const source = fs.readFileSync(path.join(__dirname, '../assets/js/games/trzy-w-piec/game.js'), 'utf8');
 const elements = new Map();
+function fakeClassList() {
+  const values = new Set();
+  return {
+    add(...items) { items.forEach(item => values.add(item)); },
+    remove(...items) { items.forEach(item => values.delete(item)); },
+    toggle(item, force) {
+      if (force === true) { values.add(item); return true; }
+      if (force === false) { values.delete(item); return false; }
+      if (values.has(item)) { values.delete(item); return false; }
+      values.add(item); return true;
+    },
+    contains(item) { return values.has(item); }
+  };
+}
+function makeElement(id = '') {
+  return {
+    id,
+    textContent: '',
+    dataset: {},
+    style: { setProperty() {} },
+    classList: fakeClassList(),
+    children: [],
+    offsetWidth: 100,
+    append(...children) { this.children.push(...children); },
+    appendChild(child) { this.children.push(child); return child; },
+    replaceChildren(...children) { this.children = [...children]; },
+    setAttribute() {}
+  };
+}
 function element(id) {
-  if (!elements.has(id)) {
-    elements.set(id, {
-      id,
-      textContent: '',
-      dataset: {},
-      style: { setProperty() {} },
-      classList: { add() {}, remove() {}, toggle() {} },
-      offsetWidth: 100
-    });
-  }
+  if (!elements.has(id)) elements.set(id, makeElement(id));
   return elements.get(id);
 }
 
+let lastScreen = null;
+let persistCount = 0;
 const sandbox = {
   console,
   ThreeFiveRules,
   threeFiveState: {
-    players: [{ name: 'Ala', score: 0, turns: 0 }],
+    players: [
+      { id: 'p1', name: 'Ala', score: 0, turns: 0 },
+      { id: 'p2', name: 'Bartek', score: 0, turns: 0 }
+    ],
     currentPlayerIndex: 0,
     answerCount: 5,
     turnSeconds: 10,
-    targetScore: 10,
     turnNumber: 0,
-    activeCategories: [],
+    completedRounds: 0,
+    roundResults: {},
+    awaitingRoundDecision: false,
+    gameFinished: false,
+    activeCategories: ['a'],
     recentPromptIds: []
   },
-  THREE_FIVE_CATEGORIES: [],
+  THREE_FIVE_CATEGORIES: [{ id: 'a', name: 'Świat', prompts: [{ id: 'a-1', text: 'Wymień 3 rzeczy na plaży.' }, { id: 'a-2', text: 'Wymień 3 rzeczy w mieście.' }] }],
   performance: { now: () => 100 },
   document: {
-    getElementById: id => element(id)
+    getElementById: id => element(id),
+    createElement: () => makeElement()
   },
   navigator: { vibrate() {} },
   setInterval: () => 123,
@@ -44,13 +73,12 @@ const sandbox = {
   setGameAwakeMode() {},
   playSound() {},
   showToast() {},
-  goToScreen() {},
-  persistThreeFiveSession() {},
-  renderThreeFiveWinner() {}
+  goToScreen(screen) { lastScreen = screen; },
+  persistThreeFiveSession() { persistCount += 1; }
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-vm.runInContext(`${source}\n;globalThis.__threeFiveGameTest = { threeFiveRuntime, startThreeFiveCountdown, renderThreeFivePlayScreen, getThreeFiveSecondUnit };`, sandbox);
+vm.runInContext(`${source}\n;globalThis.__threeFiveGameTest = { threeFiveRuntime, startThreeFiveCountdown, renderThreeFivePlayScreen, getThreeFiveSecondUnit, clearThreeFiveTimer, judgeThreeFiveTurn, continueThreeFiveRound, finishThreeFiveGame };`, sandbox);
 
 const api = sandbox.__threeFiveGameTest;
 api.threeFiveRuntime.currentPrompt = { id: 'x', text: 'Wymień 3 rzeczy na plaży.', categoryName: 'Świat' };
@@ -63,6 +91,7 @@ assert.equal(element('three-five-start-copy').textContent, 'Od tej chwili masz 1
 api.startThreeFiveCountdown();
 assert.equal(api.threeFiveRuntime.lastWholeSecond, 10);
 assert.equal(api.threeFiveRuntime.endsAt, 10100, '10-second preset must actually schedule a ten-second countdown');
+api.clearThreeFiveTimer();
 
 assert.equal(api.getThreeFiveSecondUnit(1), 'sekunda');
 assert.equal(api.getThreeFiveSecondUnit(2), 'sekundy');
@@ -71,4 +100,34 @@ assert.equal(api.getThreeFiveSecondUnit(22), 'sekundy');
 assert.equal(api.getThreeFiveSecondUnit(24), 'sekundy');
 assert.equal(api.getThreeFiveSecondUnit(25), 'sekund');
 
-console.log('Trzy w Pięć gameplay parameter tests: OK');
+// One round means every player gets exactly one judged turn.
+api.threeFiveRuntime.currentPrompt = { id: 'a-1', text: 'Wymień 3 rzeczy na plaży.', categoryName: 'Świat' };
+api.threeFiveRuntime.judging = true;
+api.judgeThreeFiveTurn(true);
+assert.equal(sandbox.threeFiveState.players[0].score, 1);
+assert.equal(sandbox.threeFiveState.currentPlayerIndex, 1);
+assert.equal(sandbox.threeFiveState.awaitingRoundDecision, false);
+assert.equal(lastScreen, 'three-five-ready');
+
+api.threeFiveRuntime.judging = true;
+api.judgeThreeFiveTurn(false);
+assert.equal(sandbox.threeFiveState.completedRounds, 1);
+assert.equal(sandbox.threeFiveState.awaitingRoundDecision, true);
+assert.equal(sandbox.threeFiveState.currentPlayerIndex, 0);
+assert.equal(sandbox.threeFiveState.roundResults.p1, 1);
+assert.equal(sandbox.threeFiveState.roundResults.p2, 0);
+assert.equal(lastScreen, 'three-five-round-summary');
+
+api.continueThreeFiveRound();
+assert.equal(sandbox.threeFiveState.awaitingRoundDecision, false);
+assert.deepEqual(sandbox.threeFiveState.roundResults, {});
+assert.equal(lastScreen, 'three-five-ready');
+
+sandbox.threeFiveState.awaitingRoundDecision = true;
+api.finishThreeFiveGame();
+assert.equal(sandbox.threeFiveState.gameFinished, true);
+assert.equal(sandbox.threeFiveState.awaitingRoundDecision, false);
+assert.equal(lastScreen, 'three-five-winner');
+assert.ok(persistCount >= 3);
+
+console.log('Trzy w Pięć gameplay parameter and round-flow tests: OK');
