@@ -11,6 +11,7 @@ const PARTYJNIAK_HOME_THEME = Object.freeze({
     previewBackground: 'party',
     backgrounds: {
         party: {
+            family: 'home',
             colors: [0x950f26, 0xd9465f, 0x8b5cf6, 0xf8fafc],
             alpha: [0.04, 0.16],
             speed: 0.82,
@@ -28,6 +29,7 @@ const PARTYJNIAK_HOME_THEME = Object.freeze({
 });
 
 let themesInitialized = false;
+let activeBackgroundFamily = null;
 
 function getPartyjniakGameTheme(gameId) {
     if (!gameId || gameId === 'home') return PARTYJNIAK_HOME_THEME;
@@ -35,11 +37,17 @@ function getPartyjniakGameTheme(gameId) {
 }
 
 function registerPartyjniakBackgroundModes() {
-    Object.assign(BACKGROUND_MODES, PARTYJNIAK_HOME_THEME.backgrounds);
+    Object.entries(PARTYJNIAK_HOME_THEME.backgrounds).forEach(([modeName, config]) => {
+        BACKGROUND_MODES[modeName] = { ...config, family: 'home' };
+    });
+
     const catalog = typeof getGameCatalog === 'function' ? getGameCatalog() : [];
     catalog.forEach(entry => {
         const backgrounds = getGameModule?.(entry.id)?.theme?.backgrounds;
-        if (backgrounds && typeof backgrounds === 'object') Object.assign(BACKGROUND_MODES, backgrounds);
+        if (!backgrounds || typeof backgrounds !== 'object') return;
+        Object.entries(backgrounds).forEach(([modeName, config]) => {
+            BACKGROUND_MODES[modeName] = { ...config, family: entry.id };
+        });
     });
 }
 
@@ -63,8 +71,16 @@ function applyPartyjniakGameTheme(gameId) {
 
 function applyPartyjniakBackgroundMeta(modeName) {
     const mode = BACKGROUND_MODES[modeName] || BACKGROUND_MODES.party;
+    const family = mode.family || modeName;
     const meta = document.querySelector('meta[name="theme-color"]');
     document.body.dataset.bgMode = modeName;
+    document.body.dataset.bgFamily = family;
+
+    // Page glows and base color are part of the same persistent game background.
+    // Do not recolor them on every screen transition inside one game.
+    if (activeBackgroundFamily === family) return;
+    activeBackgroundFamily = family;
+
     setThemeVariable('--page-bg', mode.pageBase || '#020617');
     setThemeVariable('--page-glow-rgb', mode.pageGlowRgb || '15, 23, 42');
     setThemeVariable('--page-glow-alt-rgb', mode.pageGlowAltRgb || mode.pageGlowRgb || '15, 23, 42');
