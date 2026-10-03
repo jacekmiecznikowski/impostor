@@ -16,18 +16,18 @@ vm.createContext(sandbox);
 vm.runInContext(`${source}\n;globalThis.__pwaTest = { CACHE_VERSION, STATIC_CACHE, RUNTIME_CACHE, LOCAL_ASSETS: [...LOCAL_ASSETS], EXTERNAL_ASSETS: [...EXTERNAL_ASSETS] };`, sandbox);
 
 const config = sandbox.__pwaTest;
-assert.equal(config.CACHE_VERSION, 'v50');
-assert.equal(config.STATIC_CACHE, 'partyjniak-static-v50');
-assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v50');
+assert.equal(config.CACHE_VERSION, 'v51');
+assert.equal(config.STATIC_CACHE, 'partyjniak-static-v51');
+assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v51');
 assert.equal(new Set(config.LOCAL_ASSETS).size, config.LOCAL_ASSETS.length, 'precache should not contain duplicates');
 
 [
   './index.html','./manifest.webmanifest','./content/ticking-bomb.pl.json','./content/naokolo.pl.json','./content/co-mam-na-mysli.pl.json',
-  './assets/css/game-color-system.css','./assets/css/player-setup.css','./assets/css/naokolo.css','./assets/css/co-mam-na-mysli.css','./assets/css/brand-theme.css',
-  './assets/js/shared/player-setup.js','./assets/js/shared/background.js','./assets/js/shared/game-themes.js','./assets/js/shared/game-registry.js?v=2','./assets/js/shared/native-android.js',
+  './assets/css/game-color-system.css','./assets/css/player-setup.css','./assets/css/settings.css','./assets/css/naokolo.css','./assets/css/co-mam-na-mysli.css','./assets/css/brand-theme.css',
+  './assets/brand/swawole-studio.svg','./assets/js/shared/app-settings.js','./assets/js/shared/player-setup.js','./assets/js/shared/background.js','./assets/js/shared/game-themes.js','./assets/js/shared/game-registry.js?v=2','./assets/js/shared/native-android.js',
   './assets/js/games/index.js?v=3','./assets/js/games/impostor/integration.js?v=2','./assets/js/games/ticking-bomb/integration.js?v=2','./assets/js/games/naokolo/integration.js?v=1',
   './assets/js/games/co-mam-na-mysli/rules.js','./assets/js/games/co-mam-na-mysli/motion.js','./assets/js/games/co-mam-na-mysli/integration.js?v=1',
-  './assets/js/games/prototypes/integration.js?v=2','./assets/js/app.js?v=4','./views/co-mam-na-mysli.html','./views/co-mam-na-mysli-modals.html'
+  './assets/js/games/prototypes/integration.js?v=2','./assets/js/app.js?v=5','./views/co-mam-na-mysli.html','./views/co-mam-na-mysli-modals.html'
 ].forEach(asset => assert.equal(config.LOCAL_ASSETS.includes(asset), true, `Brakuje w precache: ${asset}`));
 
 assert.equal(config.EXTERNAL_ASSETS.some(url => url.includes('tailwindcss')), true);

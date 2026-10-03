@@ -14,6 +14,12 @@ function syncMobileShellAction(screenName) {
         button.setAttribute('aria-expanded', 'false');
         button.onclick = () => openNavigationSheet('menu');
         closeShellMenu?.();
+    } else if (screenName === 'home') {
+        icon.className = 'fa-solid fa-gear';
+        button.setAttribute('aria-label', 'Ustawienia Partyjniaka');
+        button.setAttribute('aria-expanded', 'false');
+        button.onclick = () => openPartyjniakSettings?.();
+        closeShellMenu?.();
     } else {
         icon.className = 'fa-solid fa-ellipsis-vertical';
         button.setAttribute('aria-label', 'Więcej opcji');
