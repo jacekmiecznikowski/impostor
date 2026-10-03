@@ -27,7 +27,7 @@ for (const [name, source] of [
   assert.equal(result.status, 0, `${name} nie przechodzi kontroli składni ES module:\n${result.stderr}`);
 }
 
-assert.match(index, /<script type="module" src="\.\/assets\/js\/app\.js\?v=4"><\/script>/);
+assert.match(index, /<script type="module" src="\.\/assets\/js\/app\.js\?v=5"><\/script>/);
 assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/shared\/game-registry\.js\?v=2"/);
 assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/games\/index\.js\?v=3"/);
 assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/shared\/game-registry\.js[^\"]*"[^>]*defer/);
@@ -65,6 +65,6 @@ assert.match(sw, /assets\/js\/shared\/game-registry\.js\?v=2/);
 assert.match(sw, /assets\/js\/games\/index\.js\?v=3/);
 assert.match(sw, /assets\/js\/games\/co-mam-na-mysli\/integration\.js\?v=1/);
 assert.match(sw, /assets\/js\/games\/prototypes\/integration\.js\?v=2/);
-assert.match(sw, /assets\/js\/app\.js\?v=4/);
+assert.match(sw, /assets\/js\/app\.js\?v=5/);
 
 console.log('ES module boundary and PWA module revision tests: OK');
