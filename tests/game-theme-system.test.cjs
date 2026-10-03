@@ -15,9 +15,10 @@ const impostor = read('assets/js/games/impostor/integration.js');
 const bomb = read('assets/js/games/ticking-bomb/integration.js');
 const naokolo = read('assets/js/games/naokolo/integration.js');
 const cmm = read('assets/js/games/co-mam-na-mysli/integration.js');
+const threeFive = read('assets/js/games/trzy-w-piec/integration.js');
 const prototypes = read('assets/js/games/prototypes/integration.js');
 
-for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['naokolo', naokolo], ['co-mam-na-mysli', cmm], ['prototypes', prototypes]]) {
+for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['naokolo', naokolo], ['co-mam-na-mysli', cmm], ['trzy-w-piec', threeFive], ['prototypes', prototypes]]) {
   assert.match(source, /theme:\s*\{/ , `${name} must own a theme`);
   assert.match(source, /palette:\s*\{/ , `${name} must own a palette`);
   assert.match(source, /backgrounds:\s*\{/ , `${name} must own background definitions`);
@@ -25,8 +26,10 @@ for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['
 
 assert.match(naokolo, /id:\s*'naokolo'[\s\S]*?theme:/);
 assert.match(cmm, /id:\s*'co-mam-na-mysli'[\s\S]*?theme:/);
+assert.match(threeFive, /id:\s*'trzy-w-piec'[\s\S]*?theme:/);
+assert.match(threeFive, /overlayMotif:\s*'countdown-pulse'/);
 assert.match(prototypes, /id:\s*'dzika-karta'[\s\S]*?theme:/);
-assert.doesNotMatch(prototypes, /id:\s*'co-mam-na-mysli'/);
+assert.doesNotMatch(prototypes, /id:\s*'co-mam-na-mysli'|id:\s*'trzy-w-piec'/);
 
 assert.match(runtime, /getGameModule\?\.\(gameId\)\?\.theme/);
 assert.match(runtime, /registerPartyjniakBackgroundModes/);
@@ -53,6 +56,7 @@ assert.match(impostor, /overlayMotif:\s*'suspect-radar'/);
 assert.match(bomb, /overlayMotif:\s*'fuse-sparks'/);
 assert.match(naokolo, /overlayMotif:\s*'orbit-words'/);
 assert.match(cmm, /overlayMotif:\s*'thought-field'/);
+assert.match(threeFive, /overlayMotif:\s*'countdown-pulse'/);
 assert.match(prototypes, /overlayMotif:\s*'wild-cards'/);
 
 // One renderer owns the whole animated background. Halos are vector layers,
@@ -85,7 +89,7 @@ assert.match(background, /family:\s*'ticking-bomb'/);
 assert.match(background, /profiles\[family\] \|\| profiles\.home/);
 assert.match(background, /backgroundScene\?\.rebuildVisuals\(\)/);
 
-// Distinct motion language still exists per game family.
+// Distinct motion language still exists per established game family.
 assert.match(background, /impostor:[\s\S]*?behavior:\s*'scan'/);
 assert.match(background, /'ticking-bomb':[\s\S]*?behavior:\s*'embers'/);
 assert.match(background, /naokolo:[\s\S]*?behavior:\s*'ribbon'/);
