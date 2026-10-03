@@ -19,13 +19,14 @@ assert.match(view, /data-three-five-tick="2"[^>]*--tick-index:3/);
 assert.match(view, /data-three-five-tick="1"[^>]*--tick-index:4/);
 
 assert.match(game, /const elapsed = 1 - progress/);
-assert.match(game, /--three-five-elapsed/);
+assert.match(game, /--three-five-elapsed-angle/);
+assert.match(game, /`\$\{elapsed\}turn`/);
 assert.match(game, /tickValue > seconds/);
 assert.match(game, /getThreeFiveSecondUnit/);
 assert.match(game, /value === 1\) return 'sekunda'/);
 assert.match(game, /\[2, 3, 4\]\.includes\(value\).*'sekundy'/s);
 
-assert.match(layout, /calc\(var\(--three-five-elapsed\) \* 1turn\)/);
+assert.match(layout, /var\(--three-five-elapsed-angle\)/);
 assert.match(layout, /translate:\s*-50% -50%/);
 assert.match(layout, /--three-five-tick-radius/);
 assert.match(layout, /\.three-five-action-slot[\s\S]*min-height:\s*6\.8rem/);
