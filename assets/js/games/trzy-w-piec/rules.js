@@ -2,7 +2,6 @@
     const DEFAULT_ANSWER_COUNT = 3;
     const DEFAULT_TURN_SECONDS = 5;
     const MAX_CHALLENGE_VALUE = 60;
-    const MATCH_TARGET_SCORE = 10;
     const RECENT_PROMPT_LIMIT = 36;
 
     function normalizeRandomValue(random = Math.random) {
@@ -25,6 +24,12 @@
         if (!Number.isInteger(count) || count <= 0) return -1;
         const current = Number.isInteger(currentIndex) ? currentIndex : 0;
         return ((current % count) + count + 1) % count;
+    }
+
+    function isRoundComplete(turnNumber, playerCount) {
+        const turns = Math.max(0, Number.parseInt(turnNumber, 10) || 0);
+        const count = Math.max(0, Number.parseInt(playerCount, 10) || 0);
+        return count > 0 && turns > 0 && turns % count === 0;
     }
 
     function normalizeChallengeValue(value, fallback) {
@@ -82,25 +87,39 @@
         return success ? 1 : 0;
     }
 
-    function hasWinner(score, targetScore = MATCH_TARGET_SCORE) {
-        return Math.max(0, Number(score) || 0) >= Math.max(1, Number(targetScore) || MATCH_TARGET_SCORE);
+    function sortStandings(players) {
+        return (Array.isArray(players) ? [...players] : []).sort((a, b) => {
+            const scoreDiff = (Number(b?.score) || 0) - (Number(a?.score) || 0);
+            if (scoreDiff) return scoreDiff;
+            const turnsDiff = (Number(a?.turns) || 0) - (Number(b?.turns) || 0);
+            if (turnsDiff) return turnsDiff;
+            return String(a?.name || '').localeCompare(String(b?.name || ''), 'pl');
+        });
+    }
+
+    function getLeaders(players) {
+        const standings = sortStandings(players);
+        if (!standings.length) return [];
+        const topScore = Math.max(0, Number(standings[0]?.score) || 0);
+        return standings.filter(player => Math.max(0, Number(player?.score) || 0) === topScore);
     }
 
     const api = {
         DEFAULT_ANSWER_COUNT,
         DEFAULT_TURN_SECONDS,
         MAX_CHALLENGE_VALUE,
-        MATCH_TARGET_SCORE,
         RECENT_PROMPT_LIMIT,
         shuffle,
         nextPlayerIndex,
+        isRoundComplete,
         normalizeChallengeValue,
         formatPrompt,
         getAnswerUnit,
         buildPromptDeck,
         rememberPrompt,
         scoreVerdict,
-        hasWinner
+        sortStandings,
+        getLeaders
     };
 
     root.ThreeFiveRules = api;
