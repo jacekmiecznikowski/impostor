@@ -28,14 +28,12 @@ async function initializeApp() {
     loadGameSessions();
 
     setupGameHub();
+    initializePartyjniakSettingsUi?.();
     setupImpostorPresentation();
     if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
     setupSystemBackHandling();
     setupNativeAndroidIntegration?.();
     syncGameSessionUi();
-
-    const audioIcon = document.getElementById('audio-icon');
-    if (audioIcon) audioIcon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
 
     document.addEventListener('keydown', event => {
         if (event.key !== 'Escape') return;
