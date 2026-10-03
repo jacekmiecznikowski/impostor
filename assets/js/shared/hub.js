@@ -125,7 +125,7 @@ function setupGameHub() {
         if (prototypes.length) {
             const upcomingLabel = document.createElement('p');
             upcomingLabel.className = 'upcoming-label';
-            upcomingLabel.textContent = 'Prototypy kolejnych gier';
+            upcomingLabel.textContent = 'Nadchodzące gry';
             library.appendChild(upcomingLabel);
 
             const upcomingGrid = document.createElement('div');
@@ -139,7 +139,7 @@ function setupGameHub() {
                 const name = document.createElement('strong');
                 name.textContent = game.name;
                 const description = document.createElement('small');
-                description.textContent = `Prototyp • ${game.description}`;
+                description.textContent = `W przygotowaniu • ${game.description}`;
                 card.append(icon, name, description);
                 upcomingGrid.appendChild(card);
             });
@@ -190,7 +190,7 @@ function openGame(gameId, { silent = false } = {}) {
     const game = gameModule?.catalog;
     if (!game) return;
     if (game.status !== 'available') {
-        showToast('Prototyp', `${game.name} ma już zarezerwowane miejsce w Partyjniaku. Mechanikę dodamy w kolejnych etapach.`, 'fa-solid fa-flask');
+        showToast('W przygotowaniu', `${game.name} ma już zarezerwowane miejsce w Partyjniaku. Mechanikę dodamy w kolejnych etapach.`, 'fa-solid fa-flask');
         return;
     }
 
