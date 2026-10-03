@@ -15,30 +15,30 @@ export function registerCoMamNaMysliGame() {
         },
         theme: {
             palette: {
-                accent: '#f59e0b', strong: '#d97706', alt: '#facc15', text: '#fde68a', contrast: '#1c0a00',
-                rgb: '245, 158, 11', surfaceRgb: '69, 26, 3'
+                accent: '#0ea5e9', strong: '#0284c7', alt: '#22d3ee', text: '#bae6fd', contrast: '#ffffff',
+                rgb: '14, 165, 233', surfaceRgb: '7, 89, 133'
             },
             previewBackground: 'co-mam-na-mysli',
             backgrounds: {
                 'co-mam-na-mysli': {
-                    colors: [0xf59e0b, 0xfacc15, 0xfde68a, 0x38bdf8],
+                    colors: [0x0ea5e9, 0x22d3ee, 0x38bdf8, 0xa78bfa],
                     alpha: [0.06, 0.18], speed: 0.68, confetti: false, motif: 'party', overlayMotif: 'thought',
-                    metaColor: '#78350f', pageBase: '#0b0803',
-                    pageGlowRgb: '245, 158, 11', pageGlowAltRgb: '250, 204, 21',
+                    metaColor: '#075985', pageBase: '#030712',
+                    pageGlowRgb: '14, 165, 233', pageGlowAltRgb: '34, 211, 238',
                     pageGlowAlpha: '.15', pageGlowAltAlpha: '.05'
                 },
                 'cmm-play': {
-                    colors: [0xf59e0b, 0x38bdf8, 0xfacc15, 0xfde68a],
+                    colors: [0x0ea5e9, 0x38bdf8, 0x22d3ee, 0x818cf8],
                     alpha: [0.07, 0.2], speed: 0.8, confetti: false, motif: 'party', overlayMotif: 'thought',
-                    metaColor: '#78350f', pageBase: '#070716',
-                    pageGlowRgb: '245, 158, 11', pageGlowAltRgb: '56, 189, 248',
+                    metaColor: '#075985', pageBase: '#020617',
+                    pageGlowRgb: '14, 165, 233', pageGlowAltRgb: '56, 189, 248',
                     pageGlowAlpha: '.16', pageGlowAltAlpha: '.055'
                 },
                 'cmm-result': {
-                    colors: [0xfacc15, 0xf59e0b, 0x38bdf8, 0xf8fafc],
+                    colors: [0x22d3ee, 0x0ea5e9, 0x818cf8, 0xf8fafc],
                     alpha: [0.08, 0.22], speed: 0.9, confetti: true, motif: 'celebrate', overlayMotif: 'thought',
-                    metaColor: '#78350f', pageBase: '#0b0803',
-                    pageGlowRgb: '250, 204, 21', pageGlowAltRgb: '245, 158, 11',
+                    metaColor: '#075985', pageBase: '#030712',
+                    pageGlowRgb: '34, 211, 238', pageGlowAltRgb: '14, 165, 233',
                     pageGlowAlpha: '.18', pageGlowAltAlpha: '.06'
                 }
             }
