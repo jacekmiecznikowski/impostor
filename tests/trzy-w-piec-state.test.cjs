@@ -34,7 +34,8 @@ api.createThreeFivePlayers(3, []);
 api.threeFiveState.players[0].name = 'Ala';
 api.threeFiveState.players[0].score = 4;
 api.threeFiveState.players[0].turns = 6;
-api.threeFiveState.targetScore = 15;
+api.threeFiveState.answerCount = 5;
+api.threeFiveState.turnSeconds = 10;
 api.threeFiveState.activeCategories = ['b'];
 api.threeFiveState.currentPlayerIndex = 2;
 api.threeFiveState.turnNumber = 11;
@@ -44,17 +45,41 @@ assert.equal(api.threeFiveState.hasSavedSession, true);
 assert.equal(store.has('partyjniak.trzy-w-piec.session.v1'), true);
 
 api.threeFiveState.players = [];
-api.threeFiveState.targetScore = 5;
+api.threeFiveState.answerCount = 3;
+api.threeFiveState.turnSeconds = 5;
 api.loadThreeFiveSession();
 assert.equal(api.threeFiveState.players.length, 3);
 assert.equal(api.threeFiveState.players[0].name, 'Ala');
 assert.equal(api.threeFiveState.players[0].score, 4);
 assert.equal(api.threeFiveState.players[0].turns, 6);
-assert.equal(api.threeFiveState.targetScore, 15);
+assert.equal(api.threeFiveState.targetScore, 10);
+assert.equal(api.threeFiveState.answerCount, 5);
+assert.equal(api.threeFiveState.turnSeconds, 10);
 assert.deepEqual(Array.from(api.threeFiveState.activeCategories), ['b']);
 assert.equal(api.threeFiveState.currentPlayerIndex, 2);
 assert.equal(api.threeFiveState.turnNumber, 11);
 assert.deepEqual(Array.from(api.threeFiveState.recentPromptIds), ['b-1']);
+
+// Old v1 sessions without the new parameters migrate to the 3-in-5 defaults.
+store.set('partyjniak.trzy-w-piec.session.v1', JSON.stringify({
+  playerCount: 2,
+  players: [{ name: 'A' }, { name: 'B' }],
+  targetScore: 15,
+  activeCategories: ['a'],
+  currentPlayerIndex: 0,
+  turnNumber: 0,
+  recentPromptIds: []
+}));
+api.loadThreeFiveSession();
+assert.equal(api.threeFiveState.answerCount, 3);
+assert.equal(api.threeFiveState.turnSeconds, 5);
+assert.equal(api.threeFiveState.targetScore, 10, 'legacy match targets should migrate to the fixed 10-point match');
+
+api.threeFiveState.answerCount = 999;
+api.threeFiveState.turnSeconds = 999;
+api.persistThreeFiveSession();
+assert.equal(api.threeFiveState.answerCount, 60);
+assert.equal(api.threeFiveState.turnSeconds, 60);
 
 api.resetThreeFiveMatchScores();
 assert.equal(api.threeFiveState.players[0].score, 0);
@@ -64,6 +89,8 @@ assert.equal(api.threeFiveState.turnNumber, 0);
 
 api.resetThreeFiveSession();
 assert.equal(api.threeFiveState.players.length, 0);
+assert.equal(api.threeFiveState.answerCount, 3);
+assert.equal(api.threeFiveState.turnSeconds, 5);
 assert.equal(api.threeFiveState.hasSavedSession, false);
 assert.equal(store.has('partyjniak.trzy-w-piec.session.v1'), false);
 
