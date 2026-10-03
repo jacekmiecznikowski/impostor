@@ -27,21 +27,21 @@ export function registerNaokoloGame() {
             backgrounds: {
                 naokolo: {
                     colors: [0x6366f1, 0xa78bfa, 0x38bdf8, 0xf8fafc],
-                    alpha: [0.06, 0.18], speed: 0.72, confetti: false, motif: 'party', overlayMotif: 'orbit',
+                    alpha: [0.06, 0.18], speed: 0.72, confetti: false, motif: 'party', overlayMotif: 'orbit-words',
                     metaColor: '#312e81', pageBase: '#070716',
                     pageGlowRgb: '99, 102, 241', pageGlowAltRgb: '167, 139, 250',
                     pageGlowAlpha: '.16', pageGlowAltAlpha: '.06'
                 },
                 'naokolo-play': {
                     colors: [0x6366f1, 0x38bdf8, 0xa78bfa, 0x22d3ee],
-                    alpha: [0.07, 0.19], speed: 0.84, confetti: false, motif: 'party', overlayMotif: 'orbit',
+                    alpha: [0.07, 0.19], speed: 0.84, confetti: false, motif: 'party', overlayMotif: 'orbit-fast',
                     metaColor: '#312e81', pageBase: '#060615',
                     pageGlowRgb: '99, 102, 241', pageGlowAltRgb: '56, 189, 248',
                     pageGlowAlpha: '.17', pageGlowAltAlpha: '.055'
                 },
                 'naokolo-result': {
                     colors: [0xa78bfa, 0x6366f1, 0x38bdf8, 0xf8fafc],
-                    alpha: [0.08, 0.22], speed: 0.9, confetti: true, motif: 'celebrate', overlayMotif: 'orbit',
+                    alpha: [0.08, 0.22], speed: 0.9, confetti: true, motif: 'celebrate', overlayMotif: 'orbit-celebrate',
                     metaColor: '#312e81', pageBase: '#070716',
                     pageGlowRgb: '167, 139, 250', pageGlowAltRgb: '99, 102, 241',
                     pageGlowAlpha: '.18', pageGlowAltAlpha: '.065'

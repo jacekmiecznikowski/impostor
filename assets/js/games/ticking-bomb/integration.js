@@ -27,14 +27,14 @@ export function registerTickingBombGame() {
             backgrounds: {
                 'ticking-bomb': {
                     colors: [0xf97316, 0xfbbf24, 0xfb923c, 0xef4444],
-                    alpha: [0.06, 0.18], speed: 0.74, confetti: false, motif: 'ticking-bomb',
+                    alpha: [0.06, 0.18], speed: 0.74, confetti: false, motif: 'ticking-bomb', overlayMotif: 'fuse-sparks',
                     metaColor: '#7c2d12', pageBase: '#0a0604',
                     pageGlowRgb: '249, 115, 22', pageGlowAltRgb: '251, 191, 36',
                     pageGlowAlpha: '.16', pageGlowAltAlpha: '.045'
                 },
                 'bomb-alert': {
                     colors: [0xef4444, 0xf97316, 0xfbbf24, 0xfb923c],
-                    alpha: [0.09, 0.23], speed: 1.02, confetti: false, motif: 'bomb-alert',
+                    alpha: [0.09, 0.23], speed: 1.02, confetti: false, motif: 'bomb-alert', overlayMotif: 'shockwave',
                     metaColor: '#7f1d1d', pageBase: '#0d0503',
                     pageGlowRgb: '239, 68, 68', pageGlowAltRgb: '249, 115, 22',
                     pageGlowAlpha: '.17', pageGlowAltAlpha: '.07'
