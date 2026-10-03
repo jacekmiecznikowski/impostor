@@ -38,13 +38,13 @@ const BACKGROUND_MODES = {
     'ticking-bomb': {
         family: 'ticking-bomb',
         colors: [0xf97316, 0xfbbf24, 0xef4444, 0xfb923c],
-        alpha: [0.06, 0.18], speed: 0.74, confetti: false,
+        alpha: [0.06, 0.18], speed: 0.55, confetti: false,
         motif: 'ticking-bomb', overlayMotif: 'fuse-sparks'
     },
     'bomb-alert': {
         family: 'ticking-bomb',
         colors: [0xf97316, 0xfb923c, 0xfbbf24, 0xef4444],
-        alpha: [0.09, 0.23], speed: 1.02, confetti: false,
+        alpha: [0.09, 0.23], speed: 0.55, confetti: false,
         motif: 'bomb-alert', overlayMotif: 'shockwave'
     }
 };
@@ -140,8 +140,8 @@ function initializePhaserBackground() {
                         [.50, .76, .88, .13, 0, 0, -20],
                         [.78, .28, .62, .09, 1, -12, 14]
                     ],
-                    accent: { count: 30, shapes: ['spark', 'orb', 'spark', 'star'], size: [4.2, 9.2], alpha: [.18, .41], speed: [.25, .61], drift: 21 },
-                    dust: { count: 60, size: [1.2, 3.0], alpha: [.09, .23], speed: [.12, .30] }
+                    accent: { count: 24, shapes: ['spark', 'orb', 'spark', 'star'], size: [3.8, 8.4], alpha: [.14, .32], speed: [.14, .34], drift: 12 },
+                    dust: { count: 52, size: [1.15, 2.7], alpha: [.07, .19], speed: [.06, .17] }
                 },
                 naokolo: {
                     behavior: 'ribbon',
@@ -334,8 +334,8 @@ function initializePhaserBackground() {
             const baseSpeed = speedMultiplier * layerFactor * uiScale;
 
             if (behavior === 'embers') {
-                node.y -= Math.max(.16, Math.abs(node.vy)) * baseSpeed * dt * 1.8;
-                node.x += Math.sin(time * .0012 + node.phase) * .20 * node.wave;
+                node.y -= Math.max(.08, Math.abs(node.vy)) * baseSpeed * dt * .92;
+                node.x += Math.sin(time * .00075 + node.phase) * .065 * node.wave;
                 if (node.y < -80) this.resetParticle(node, behavior);
             } else if (behavior === 'scan') {
                 const directionSpeed = Math.max(.22, Math.abs(node.vx)) * node.direction;
