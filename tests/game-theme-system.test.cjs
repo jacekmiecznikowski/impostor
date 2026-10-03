@@ -84,6 +84,14 @@ assert.match(background, /naokolo:[\s\S]*?behavior:\s*'ribbon'/);
 assert.match(background, /'co-mam-na-mysli':[\s\S]*?behavior:\s*'tilt'/);
 assert.match(background, /'dzika-karta':[\s\S]*?behavior:\s*'cards'/);
 
+// Bomb is intentionally calmer than the first particle pass: fewer accent sparks,
+// lower base velocity and gentler lateral ember sway.
+assert.match(bomb, /'ticking-bomb':[\s\S]*?speed:\s*0\.55/);
+assert.match(background, /'ticking-bomb':[\s\S]*?accent:\s*\{\s*count:\s*24[\s\S]*?speed:\s*\[\.14, \.34\]/);
+assert.match(background, /dust:\s*\{\s*count:\s*52[\s\S]*?speed:\s*\[\.06, \.17\]/);
+assert.match(background, /behavior === 'embers'[\s\S]*?\* \.92/);
+assert.match(background, /Math\.sin\(time \* \.00075 \+ node\.phase\) \* \.065/);
+
 assert.doesNotMatch(colors, /body\[data-game=/);
 assert.doesNotMatch(brand, /body\[data-bg-mode=/);
 assert.doesNotMatch(brand, /data-game-id="/);
