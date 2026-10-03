@@ -17,7 +17,8 @@ const playerSetupSources = [
   read('assets/js/games/impostor/setup.js'),
   read('assets/js/games/ticking-bomb/setup.js'),
   read('assets/js/games/naokolo/setup.js'),
-  read('assets/js/games/co-mam-na-mysli/setup.js')
+  read('assets/js/games/co-mam-na-mysli/setup.js'),
+  read('assets/js/games/trzy-w-piec/setup.js')
 ];
 for (const source of playerSetupSources) {
   assert.match(source, /renderPlayerSetupNames\(/);
@@ -69,6 +70,22 @@ assert.match(cmmCss, /height:100dvh/);
 assert.match(cmmCss, /@media \(orientation:portrait\)/);
 assert.match(cmmCss, /\.cmm-gesture-feedback\.is-correct/);
 assert.match(cmmCss, /\.cmm-gesture-feedback\.is-passed/);
+
+const threeFiveView = read('views/trzy-w-piec.html');
+const threeFiveGame = read('assets/js/games/trzy-w-piec/game.js');
+const threeFiveCss = read('assets/css/trzy-w-piec.css');
+assert.match(threeFiveView, /id="screen-three-five-players"[^>]*player-setup-screen/);
+assert.match(threeFiveView, /id="three-five-timer"/);
+assert.equal((threeFiveView.match(/data-three-five-tick=/g) || []).length, 5);
+assert.match(threeFiveView, /onclick="startThreeFiveCountdown\(\)"/);
+assert.match(threeFiveView, /judgeThreeFiveTurn\(false\)/);
+assert.match(threeFiveView, /judgeThreeFiveTurn\(true\)/);
+assert.match(threeFiveGame, /setInterval\(updateThreeFiveCountdown, 40\)/);
+assert.match(threeFiveGame, /ThreeFiveRules\.TURN_SECONDS \* 1000/);
+assert.match(threeFiveCss, /conic-gradient/);
+assert.match(threeFiveCss, /--three-five-progress/);
+assert.match(threeFiveCss, /\.three-five-timer\.is-critical/);
+assert.match(threeFiveCss, /\.three-five-timer\.is-expired/);
 
 const nativeAndroid = read('assets/js/shared/native-android.js');
 assert.match(nativeAndroid, /PartyjniakOrientation/);
