@@ -30,54 +30,59 @@ assert.doesNotMatch(prototypes, /id:\s*'co-mam-na-mysli'/);
 
 assert.match(runtime, /getGameModule\?\.\(gameId\)\?\.theme/);
 assert.match(runtime, /registerPartyjniakBackgroundModes/);
+assert.match(runtime, /family:\s*entry\.id/);
+assert.match(runtime, /activeBackgroundFamily/);
+assert.match(runtime, /if \(activeBackgroundFamily === family\) return;/);
 assert.match(runtime, /applyPartyjniakGameTheme/);
 assert.match(runtime, /--ui-accent/);
 assert.match(runtime, /previewBackground/);
-assert.match(runtime, /overlayMotif:\s*'party-aurora'/);
 assert.match(app, /registerGameModules\(\);\s*initializePartyjniakThemes\?\.\(\);/);
 
 // game-themes owns metadata/palette wiring only. Phaser rendering must live in one place.
 assert.doesNotMatch(runtime, /buildParticleField|partyjniakThemeMotifs|schedulePartyjniakThemeMotifs|scene\.add|setBlendMode/);
 
 assert.match(impostor, /overlayMotif:\s*'suspect-radar'/);
-assert.match(impostor, /overlayMotif:\s*'dialogue-network'/);
-assert.match(impostor, /overlayMotif:\s*'verdict'/);
-assert.match(impostor, /overlayMotif:\s*'victory-rings'/);
 assert.match(bomb, /overlayMotif:\s*'fuse-sparks'/);
-assert.match(bomb, /overlayMotif:\s*'shockwave'/);
 assert.match(naokolo, /overlayMotif:\s*'orbit-words'/);
-assert.match(naokolo, /overlayMotif:\s*'orbit-fast'/);
-assert.match(naokolo, /overlayMotif:\s*'orbit-celebrate'/);
 assert.match(cmm, /overlayMotif:\s*'thought-field'/);
-assert.match(cmm, /overlayMotif:\s*'gyro'/);
-assert.match(cmm, /overlayMotif:\s*'thought-celebrate'/);
 assert.match(prototypes, /overlayMotif:\s*'wild-cards'/);
 
-// One responsive Phaser renderer: soft glow layer + medium accents + fine dust.
-assert.match(background, /this\.glows\s*=\s*\[\]/);
+// One renderer owns the whole animated background. Halos are vector layers,
+// not giant stretched CanvasTextures that can expose rectangular WebGL artifacts.
+assert.match(background, /this\.halos\s*=\s*\[\]/);
 assert.match(background, /this\.accents\s*=\s*\[\]/);
 assert.match(background, /this\.dust\s*=\s*\[\]/);
-assert.match(background, /ensureGlowTexture\(\)/);
-assert.match(background, /createRadialGradient/);
-assert.match(background, /resolveVisualProfile\(modeName, mode\)/);
+assert.match(background, /createHalo\(definition, index\)/);
+assert.match(background, /this\.add\.container/);
+assert.match(background, /this\.add\.circle/);
+assert.doesNotMatch(background, /createCanvas|textures\.createCanvas|createRadialGradient|glowTextureKey/);
+
+// Visual scale follows the short viewport edge so desktop/landscape stays readable.
+assert.match(background, /short\s*\/\s*390/);
+assert.match(background, /uiScale/);
+assert.match(background, /densityScale/);
 assert.match(background, /createParticleLayer\('accent'\)/);
 assert.match(background, /createParticleLayer\('dust'\)/);
-assert.match(background, /updateGlows\(time\)/);
-assert.match(background, /short\s*\/\s*390/);
-assert.match(background, /densityScale/);
 assert.match(background, /setBlendMode\?\.\('ADD'\)/);
 assert.match(background, /prefers-reduced-motion/);
 assert.match(background, /window\.addEventListener\('resize'/);
 
-// Distinct motion language per game.
-assert.match(background, /'suspect-radar':[\s\S]*?behavior:\s*modeName === 'mystery' \? 'stealth' : 'scan'/);
-assert.match(background, /'fuse-sparks':[\s\S]*?behavior:\s*'embers'/);
-assert.match(background, /shockwave:[\s\S]*?behavior:\s*'blast'/);
-assert.match(background, /'orbit-fast':[\s\S]*?behavior:\s*'rush'/);
-assert.match(background, /gyro:[\s\S]*?behavior:\s*'tilt'/);
-assert.match(background, /'thought-field':[\s\S]*?behavior:\s*'bokeh'/);
-assert.match(background, /'wild-cards':[\s\S]*?behavior:\s*'cards'/);
-assert.doesNotMatch(background, /clearPartyjniakThemeMotifs|buildImpostorBackdrop|buildBombBackdrop|buildPartyBackdrop/);
+// A whole game owns one continuous composition. Screen changes inside that family
+// must not destroy/reseed particles or recolor the page-level background.
+assert.match(background, /resolveFamily\(modeName, mode\)/);
+assert.match(background, /this\.visualFamily/);
+assert.match(background, /if \(!force && this\.visualFamily === nextFamily && this\.profile && this\.mode\) return;/);
+assert.match(background, /family:\s*'impostor'/);
+assert.match(background, /family:\s*'ticking-bomb'/);
+assert.match(background, /profiles\[family\] \|\| profiles\.home/);
+assert.match(background, /backgroundScene\?\.rebuildVisuals\(\)/);
+
+// Distinct motion language still exists per game family.
+assert.match(background, /impostor:[\s\S]*?behavior:\s*'scan'/);
+assert.match(background, /'ticking-bomb':[\s\S]*?behavior:\s*'embers'/);
+assert.match(background, /naokolo:[\s\S]*?behavior:\s*'ribbon'/);
+assert.match(background, /'co-mam-na-mysli':[\s\S]*?behavior:\s*'tilt'/);
+assert.match(background, /'dzika-karta':[\s\S]*?behavior:\s*'cards'/);
 
 assert.doesNotMatch(colors, /body\[data-game=/);
 assert.doesNotMatch(brand, /body\[data-bg-mode=/);
@@ -93,4 +98,4 @@ assert.equal(fs.existsSync(path.join(root, 'assets/css/ticking-bomb-theme.css'))
 
 new Function(runtime);
 new Function(background);
-console.log('Module-owned single-renderer Phaser theme system tests: OK');
+console.log('Stable module-owned Phaser background system tests: OK');
