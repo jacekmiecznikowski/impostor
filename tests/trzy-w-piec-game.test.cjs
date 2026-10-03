@@ -14,9 +14,6 @@ function element(id) {
       dataset: {},
       style: { setProperty() {} },
       classList: { add() {}, remove() {}, toggle() {} },
-      replaceChildren() {},
-      appendChild() {},
-      setAttribute() {},
       offsetWidth: 100
     });
   }
@@ -39,10 +36,7 @@ const sandbox = {
   THREE_FIVE_CATEGORIES: [],
   performance: { now: () => 100 },
   document: {
-    getElementById: id => element(id),
-    querySelectorAll: () => [],
-    createDocumentFragment: () => ({ appendChild() {} }),
-    createElement: () => ({ className: '', dataset: {}, style: { setProperty() {} }, setAttribute() {} })
+    getElementById: id => element(id)
   },
   navigator: { vibrate() {} },
   setInterval: () => 123,
@@ -56,7 +50,7 @@ const sandbox = {
 };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);
-vm.runInContext(`${source}\n;globalThis.__threeFiveGameTest = { threeFiveRuntime, startThreeFiveCountdown, renderThreeFivePlayScreen };`, sandbox);
+vm.runInContext(`${source}\n;globalThis.__threeFiveGameTest = { threeFiveRuntime, startThreeFiveCountdown, renderThreeFivePlayScreen, getThreeFiveSecondUnit };`, sandbox);
 
 const api = sandbox.__threeFiveGameTest;
 api.threeFiveRuntime.currentPrompt = { id: 'x', text: 'Wymień 3 rzeczy na plaży.', categoryName: 'Świat' };
@@ -69,5 +63,12 @@ assert.equal(element('three-five-start-copy').textContent, 'Od tej chwili masz 1
 api.startThreeFiveCountdown();
 assert.equal(api.threeFiveRuntime.lastWholeSecond, 10);
 assert.equal(api.threeFiveRuntime.endsAt, 10100, '10-second preset must actually schedule a ten-second countdown');
+
+assert.equal(api.getThreeFiveSecondUnit(1), 'sekunda');
+assert.equal(api.getThreeFiveSecondUnit(2), 'sekundy');
+assert.equal(api.getThreeFiveSecondUnit(12), 'sekund');
+assert.equal(api.getThreeFiveSecondUnit(22), 'sekundy');
+assert.equal(api.getThreeFiveSecondUnit(24), 'sekundy');
+assert.equal(api.getThreeFiveSecondUnit(25), 'sekund');
 
 console.log('Trzy w Pięć gameplay parameter tests: OK');

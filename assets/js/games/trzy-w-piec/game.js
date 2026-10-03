@@ -70,36 +70,18 @@ function showThreeFivePrompt() {
 }
 
 function getThreeFiveSecondUnit(seconds) {
-    const value = Number(seconds);
+    const value = Math.abs(Number(seconds) || 0);
     if (value === 1) return 'sekunda';
-    if ([2, 3, 4].includes(value)) return 'sekundy';
+    const lastTwo = value % 100;
+    const last = value % 10;
+    if (lastTwo >= 12 && lastTwo <= 14) return 'sekund';
+    if (last >= 2 && last <= 4) return 'sekundy';
     return 'sekund';
 }
 
 function updateThreeFiveTimerUnit(seconds) {
     const unit = document.getElementById('three-five-timer-unit');
     if (unit) unit.textContent = getThreeFiveSecondUnit(seconds);
-}
-
-function renderThreeFiveTimerTicks() {
-    const timer = document.getElementById('three-five-timer');
-    const container = document.getElementById('three-five-timer-ticks');
-    if (!container || !timer) return;
-    const total = ThreeFiveRules.normalizeChallengeValue(threeFiveState.turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
-    container.replaceChildren();
-    timer.classList.toggle('has-many-ticks', total > 10);
-    timer.classList.toggle('has-dense-ticks', total > 20);
-
-    const fragment = document.createDocumentFragment();
-    for (let index = 0; index < total; index += 1) {
-        const tick = document.createElement('span');
-        tick.className = 'three-five-timer-tick';
-        tick.dataset.threeFiveTick = String(total - index);
-        tick.style.setProperty('--tick-angle', `${(index * 360) / total}deg`);
-        tick.setAttribute('aria-hidden', 'true');
-        fragment.appendChild(tick);
-    }
-    container.appendChild(fragment);
 }
 
 function renderThreeFivePlayScreen() {
@@ -127,7 +109,6 @@ function renderThreeFivePlayScreen() {
     const value = document.getElementById('three-five-timer-value');
     if (value) value.textContent = String(turnSeconds);
     updateThreeFiveTimerUnit(turnSeconds);
-    renderThreeFiveTimerTicks();
 
     const start = document.getElementById('three-five-start-btn');
     const judge = document.getElementById('three-five-judge');
@@ -157,11 +138,6 @@ function updateThreeFiveTimerVisual(remainingMs) {
     timer?.classList.toggle('is-critical', seconds <= 2 && remainingMs > 0);
     if (value) value.textContent = String(seconds);
     updateThreeFiveTimerUnit(seconds);
-
-    document.querySelectorAll('[data-three-five-tick]').forEach(tick => {
-        const tickValue = Number(tick.dataset.threeFiveTick);
-        tick.classList.toggle('is-spent', tickValue > seconds);
-    });
 
     if (seconds !== threeFiveRuntime.lastWholeSecond) {
         if (threeFiveRuntime.lastWholeSecond !== null && seconds > 0) {
@@ -212,7 +188,6 @@ function expireThreeFiveCountdown() {
     const value = document.getElementById('three-five-timer-value');
     if (value) value.textContent = '0';
     updateThreeFiveTimerUnit(0);
-    document.querySelectorAll('[data-three-five-tick]').forEach(tick => tick.classList.add('is-spent'));
 
     const judge = document.getElementById('three-five-judge');
     judge?.classList.remove('hidden');
