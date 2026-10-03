@@ -1,0 +1,160 @@
+.three-five-play-screen {
+  align-items: center;
+  justify-content: center;
+  gap: clamp(.72rem, 2.2vh, 1rem);
+  width: 100%;
+}
+
+.three-five-player-strip,
+.three-five-prompt-card,
+.three-five-action-slot {
+  width: min(100%, 30rem);
+  margin-inline: auto;
+}
+
+.three-five-player-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.45rem;
+  gap: .45rem;
+  line-height: 1;
+}
+
+.three-five-player-strip span,
+.three-five-player-strip strong {
+  line-height: 1;
+}
+
+.three-five-prompt-card {
+  justify-items: center;
+  padding: 1.15rem 1.2rem;
+}
+
+.three-five-prompt-card h2 {
+  width: 100%;
+  max-width: 27rem;
+  text-wrap: balance;
+}
+
+.three-five-prompt-rule {
+  width: 100%;
+  min-height: 1rem;
+}
+
+.three-five-timer {
+  --three-five-elapsed: 0;
+  --three-five-tick-radius: min(25vw, 6.7rem);
+  flex: 0 0 auto;
+}
+
+/* Time is consumed clockwise from 12 o'clock, matching the five markers. */
+.three-five-timer-progress {
+  background: conic-gradient(
+    from -90deg,
+    rgba(148, 163, 184, .10) calc(var(--three-five-elapsed) * 1turn),
+    var(--three-five-accent) 0
+  );
+}
+
+.three-five-timer.is-critical .three-five-timer-progress {
+  background: conic-gradient(
+    from -90deg,
+    rgba(148, 163, 184, .08) calc(var(--three-five-elapsed) * 1turn),
+    #fb923c 0
+  );
+}
+
+.three-five-timer-core {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+}
+
+.three-five-timer-core strong,
+.three-five-timer-core span {
+  align-self: auto;
+  margin: 0;
+}
+
+.three-five-timer-core strong {
+  line-height: .88;
+}
+
+.three-five-timer-core span {
+  line-height: 1;
+}
+
+.three-five-timer-tick {
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  transform: rotate(calc(var(--tick-index) * 72deg))
+             translateY(calc(-1 * var(--three-five-tick-radius)))
+             rotate(calc(var(--tick-index) * -72deg));
+}
+
+.three-five-timer-tick.is-spent {
+  transform: rotate(calc(var(--tick-index) * 72deg))
+             translateY(calc(-1 * var(--three-five-tick-radius)))
+             rotate(calc(var(--tick-index) * -72deg))
+             scale(.55);
+}
+
+.three-five-action-slot {
+  display: grid;
+  min-height: 6.8rem;
+  align-items: start;
+}
+
+.three-five-action-slot > * {
+  grid-area: 1 / 1;
+  width: 100%;
+}
+
+.three-five-start-button {
+  min-height: 4.2rem;
+}
+
+.three-five-start-button > span:last-child {
+  align-content: center;
+}
+
+.three-five-judge {
+  align-content: start;
+}
+
+.three-five-stop-label {
+  min-height: 1.25rem;
+  line-height: 1.3;
+}
+
+.three-five-verdict {
+  grid-template-rows: 1.2rem auto .9rem;
+  align-content: center;
+}
+
+.three-five-verdict i,
+.three-five-verdict span,
+.three-five-verdict small {
+  line-height: 1;
+}
+
+@media (max-height: 720px) {
+  .three-five-play-screen {
+    justify-content: flex-start;
+    gap: .62rem;
+  }
+
+  .three-five-timer {
+    --three-five-tick-radius: min(20vw, 5.2rem);
+  }
+
+  .three-five-action-slot {
+    min-height: 6.35rem;
+  }
+}
