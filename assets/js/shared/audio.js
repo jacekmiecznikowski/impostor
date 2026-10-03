@@ -71,12 +71,13 @@ function playSound(type) {
 }
 
 function toggleAudio() {
-    soundEnabled = !soundEnabled;
-    const icon = document.getElementById('audio-icon');
-    if (icon) icon.className = soundEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
-    if (soundEnabled) playSound('click');
-    persistSession();
+    if (typeof togglePartyjniakSetting === 'function') {
+        togglePartyjniakSetting('sound');
+        return;
+    }
 
+    soundEnabled = !soundEnabled;
+    if (soundEnabled) playSound('click');
     if (typeof getActiveGameModule === 'function') {
         callGameHook(getActiveGameModule(), 'onAudioChanged', soundEnabled);
     }
