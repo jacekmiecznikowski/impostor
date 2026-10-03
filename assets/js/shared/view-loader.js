@@ -15,6 +15,16 @@ async function loadAppViews() {
 
         const template = document.createElement('template');
         template.innerHTML = await response.text();
-        target.appendChild(template.content.cloneNode(true));
+        const content = template.content.cloneNode(true);
+
+        // Every game view starts hidden. The bootstrap decides which screen becomes
+        // visible through goToScreen(), preventing a first-loaded game fragment from
+        // flashing briefly before the Partyjniak home screen is initialized.
+        content.querySelectorAll?.('.screen').forEach(screen => {
+            screen.classList.add('hidden');
+            screen.classList.remove('flex');
+        });
+
+        target.appendChild(content);
     }
 }
