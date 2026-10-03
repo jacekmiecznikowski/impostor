@@ -113,21 +113,6 @@ function decorateGameCards() {
         card.style.setProperty('--game-accent', palette.accent);
         card.style.setProperty('--game-rgb', palette.rgb);
         card.style.setProperty('--game-text', palette.text);
-        if (card.dataset.themeReady === 'true') return;
-        card.dataset.themeReady = 'true';
-
-        const preview = () => {
-            if (getCurrentScreenName?.() !== 'home') return;
-            setBackgroundMode(theme.previewBackground || 'party');
-        };
-        const restore = () => {
-            if (getCurrentScreenName?.() !== 'home') return;
-            setBackgroundMode('party');
-        };
-        card.addEventListener('pointerenter', preview);
-        card.addEventListener('focus', preview);
-        card.addEventListener('pointerleave', restore);
-        card.addEventListener('blur', restore);
     });
 }
 
