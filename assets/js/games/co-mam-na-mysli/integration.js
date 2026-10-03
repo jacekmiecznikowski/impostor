@@ -22,21 +22,21 @@ export function registerCoMamNaMysliGame() {
             backgrounds: {
                 'co-mam-na-mysli': {
                     colors: [0x0ea5e9, 0x22d3ee, 0x38bdf8, 0xa78bfa],
-                    alpha: [0.06, 0.18], speed: 0.68, confetti: false, motif: 'party', overlayMotif: 'thought',
+                    alpha: [0.06, 0.18], speed: 0.68, confetti: false, motif: 'party', overlayMotif: 'thought-field',
                     metaColor: '#075985', pageBase: '#030712',
                     pageGlowRgb: '14, 165, 233', pageGlowAltRgb: '34, 211, 238',
                     pageGlowAlpha: '.15', pageGlowAltAlpha: '.05'
                 },
                 'cmm-play': {
                     colors: [0x0ea5e9, 0x38bdf8, 0x22d3ee, 0x818cf8],
-                    alpha: [0.07, 0.2], speed: 0.8, confetti: false, motif: 'party', overlayMotif: 'thought',
+                    alpha: [0.07, 0.2], speed: 0.8, confetti: false, motif: 'party', overlayMotif: 'gyro',
                     metaColor: '#075985', pageBase: '#020617',
                     pageGlowRgb: '14, 165, 233', pageGlowAltRgb: '56, 189, 248',
                     pageGlowAlpha: '.16', pageGlowAltAlpha: '.055'
                 },
                 'cmm-result': {
                     colors: [0x22d3ee, 0x0ea5e9, 0x818cf8, 0xf8fafc],
-                    alpha: [0.08, 0.22], speed: 0.9, confetti: true, motif: 'celebrate', overlayMotif: 'thought',
+                    alpha: [0.08, 0.22], speed: 0.9, confetti: true, motif: 'celebrate', overlayMotif: 'thought-celebrate',
                     metaColor: '#075985', pageBase: '#030712',
                     pageGlowRgb: '34, 211, 238', pageGlowAltRgb: '14, 165, 233',
                     pageGlowAlpha: '.18', pageGlowAltAlpha: '.06'
