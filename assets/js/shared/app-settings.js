@@ -178,6 +178,12 @@ function ensurePartyjniakSettingsModal() {
 function ensurePartyjniakSettingsMenuAction() {
     const popover = document.getElementById('shell-menu-popover');
     if (!popover || document.getElementById('shell-settings-action')) return;
+
+    popover.querySelector('#audio-icon')?.closest('button')?.remove();
+    [...popover.querySelectorAll('button')]
+        .find(button => button.getAttribute('onclick')?.includes("about-modal"))
+        ?.remove();
+
     const action = document.createElement('button');
     action.id = 'shell-settings-action';
     action.type = 'button';
@@ -204,4 +210,4 @@ function initializePartyjniakSettingsUi() {
     applyPartyjniakBackgroundSetting();
 }
 
-window.addEventListener('load', applyPartyjniakBackgroundSetting, { once: true });
+window.addEventListener('load', () => setTimeout(applyPartyjniakBackgroundSetting, 0), { once: true });
