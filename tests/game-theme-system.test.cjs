@@ -35,8 +35,16 @@ assert.match(runtime, /activeBackgroundFamily/);
 assert.match(runtime, /if \(activeBackgroundFamily === family\) return;/);
 assert.match(runtime, /applyPartyjniakGameTheme/);
 assert.match(runtime, /--ui-accent/);
-assert.match(runtime, /previewBackground/);
 assert.match(app, /registerGameModules\(\);\s*initializePartyjniakThemes\?\.\(\);/);
+
+// Catalog interactions are local to cards. Hover/focus must never swap the global
+// Phaser background away from Partyjniak before the user actually opens a game.
+assert.doesNotMatch(runtime, /setBackgroundMode\(theme\.previewBackground/);
+assert.doesNotMatch(runtime, /addEventListener\(['"]pointerenter['"]/);
+assert.doesNotMatch(runtime, /addEventListener\(['"]pointerleave['"]/);
+assert.match(brand, /\.game-card-primary::after/);
+assert.match(brand, /\.game-card-primary:hover \.game-card-icon/);
+assert.match(brand, /\.game-card-primary:active::after/);
 
 // game-themes owns metadata/palette wiring only. Phaser rendering must live in one place.
 assert.doesNotMatch(runtime, /buildParticleField|partyjniakThemeMotifs|schedulePartyjniakThemeMotifs|scene\.add|setBlendMode/);
