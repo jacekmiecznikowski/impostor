@@ -23,6 +23,12 @@ function resumeThreeFiveGame() {
         startNewThreeFiveGame();
         return;
     }
+    const winner = threeFiveState.players.find(player => ThreeFiveRules.hasWinner(player.score, threeFiveState.targetScore));
+    if (winner) {
+        renderThreeFiveWinner(winner);
+        goToScreen('three-five-winner');
+        return;
+    }
     renderThreeFiveOptions();
     goToScreen('three-five-options');
 }
