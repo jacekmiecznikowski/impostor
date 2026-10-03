@@ -1,67 +1,51 @@
 const BACKGROUND_MODES = {
     party: {
+        family: 'home',
         colors: [0x950f26, 0xd9465f, 0x8b5cf6, 0xf8fafc],
-        alpha: [0.04, 0.16],
-        speed: 0.82,
-        confetti: false,
-        motif: 'party',
-        overlayMotif: 'party-aurora'
+        alpha: [0.04, 0.16], speed: 0.82, confetti: false,
+        motif: 'party', overlayMotif: 'party-aurora'
     },
     impostor: {
+        family: 'impostor',
         colors: [0x14b8a6, 0x06b6d4, 0x8b5cf6, 0x334155],
-        alpha: [0.05, 0.15],
-        speed: 0.62,
-        confetti: false,
-        motif: 'impostor',
-        overlayMotif: 'suspect-radar'
+        alpha: [0.05, 0.15], speed: 0.62, confetti: false,
+        motif: 'impostor', overlayMotif: 'suspect-radar'
     },
     mystery: {
+        family: 'impostor',
         colors: [0x14b8a6, 0x6366f1, 0x64748b, 0x0f172a],
-        alpha: [0.04, 0.12],
-        speed: 0.48,
-        confetti: false,
-        motif: 'impostor',
-        overlayMotif: 'suspect-radar'
+        alpha: [0.04, 0.12], speed: 0.48, confetti: false,
+        motif: 'impostor', overlayMotif: 'suspect-radar'
     },
     discussion: {
+        family: 'impostor',
         colors: [0x06b6d4, 0x14b8a6, 0x22c55e, 0x334155],
-        alpha: [0.04, 0.13],
-        speed: 0.58,
-        confetti: false,
-        motif: 'discussion',
-        overlayMotif: 'dialogue-network'
+        alpha: [0.04, 0.13], speed: 0.58, confetti: false,
+        motif: 'discussion', overlayMotif: 'dialogue-network'
     },
     vote: {
+        family: 'impostor',
         colors: [0x64748b, 0x14b8a6, 0x06b6d4, 0x1e293b],
-        alpha: [0.04, 0.12],
-        speed: 0.54,
-        confetti: false,
-        motif: 'vote',
-        overlayMotif: 'verdict'
+        alpha: [0.04, 0.12], speed: 0.54, confetti: false,
+        motif: 'vote', overlayMotif: 'verdict'
     },
     celebrate: {
+        family: 'impostor',
         colors: [0x14b8a6, 0x8b5cf6, 0xec4899, 0xf8fafc],
-        alpha: [0.07, 0.20],
-        speed: 0.92,
-        confetti: true,
-        motif: 'celebrate',
-        overlayMotif: 'victory-rings'
+        alpha: [0.07, 0.20], speed: 0.92, confetti: true,
+        motif: 'celebrate', overlayMotif: 'victory-rings'
     },
     'ticking-bomb': {
+        family: 'ticking-bomb',
         colors: [0xf97316, 0xfbbf24, 0xef4444, 0xfb923c],
-        alpha: [0.06, 0.18],
-        speed: 0.74,
-        confetti: false,
-        motif: 'ticking-bomb',
-        overlayMotif: 'fuse-sparks'
+        alpha: [0.06, 0.18], speed: 0.74, confetti: false,
+        motif: 'ticking-bomb', overlayMotif: 'fuse-sparks'
     },
     'bomb-alert': {
+        family: 'ticking-bomb',
         colors: [0xf97316, 0xfb923c, 0xfbbf24, 0xef4444],
-        alpha: [0.09, 0.23],
-        speed: 1.02,
-        confetti: false,
-        motif: 'bomb-alert',
-        overlayMotif: 'shockwave'
+        alpha: [0.09, 0.23], speed: 1.02, confetti: false,
+        motif: 'bomb-alert', overlayMotif: 'shockwave'
     }
 };
 
@@ -87,10 +71,11 @@ function initializePhaserBackground() {
     class BackgroundScene extends PhaserLib.Scene {
         constructor() {
             super({ key: 'BackgroundScene' });
-            this.glows = [];
+            this.halos = [];
             this.accents = [];
             this.dust = [];
             this.pointerTarget = { x: 0, y: 0 };
+            this.visualFamily = null;
             this.profile = null;
             this.mode = null;
             this.modeName = 'party';
@@ -99,8 +84,7 @@ function initializePhaserBackground() {
         create() {
             backgroundScene = this;
             this.reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
-            this.ensureGlowTexture();
-            this.setMode(backgroundMode, { immediate: true });
+            this.setMode(backgroundMode, { force: true });
 
             this.input.on('pointermove', pointer => {
                 this.pointerTarget.x = (pointer.x / Math.max(1, this.scale.width) - 0.5) * 18;
@@ -112,27 +96,6 @@ function initializePhaserBackground() {
             });
         }
 
-        ensureGlowTexture() {
-            const key = 'partyjniak-soft-glow-v2';
-            if (this.textures.exists(key)) {
-                this.glowTextureKey = key;
-                return;
-            }
-
-            const texture = this.textures.createCanvas(key, 256, 256);
-            const context = texture.getContext();
-            const gradient = context.createRadialGradient(128, 128, 0, 128, 128, 128);
-            gradient.addColorStop(0, 'rgba(255,255,255,1)');
-            gradient.addColorStop(.22, 'rgba(255,255,255,.68)');
-            gradient.addColorStop(.56, 'rgba(255,255,255,.20)');
-            gradient.addColorStop(1, 'rgba(255,255,255,0)');
-            context.clearRect(0, 0, 256, 256);
-            context.fillStyle = gradient;
-            context.fillRect(0, 0, 256, 256);
-            texture.refresh();
-            this.glowTextureKey = key;
-        }
-
         sceneMetrics() {
             const width = Math.max(1, this.scale.width);
             const height = Math.max(1, this.scale.height);
@@ -142,170 +105,107 @@ function initializePhaserBackground() {
             return { width, height, short, uiScale, densityScale };
         }
 
-        resolveVisualProfile(modeName, mode) {
-            const key = mode.overlayMotif || mode.motif || modeName;
+        resolveFamily(modeName, mode) {
+            if (mode?.family) return mode.family;
+            if (modeName === 'party') return 'home';
+            if (['impostor', 'mystery', 'discussion', 'vote', 'celebrate'].includes(modeName)) return 'impostor';
+            if (['ticking-bomb', 'bomb-alert'].includes(modeName)) return 'ticking-bomb';
+            return modeName;
+        }
+
+        resolveVisualProfile(family) {
             const profiles = {
-                'party-aurora': {
+                home: {
                     behavior: 'party',
-                    glows: [
-                        [.18, .14, .78, .12, 0, 22, 18],
-                        [.82, .28, .90, .10, 1, -18, 16],
-                        [.48, .86, 1.04, .08, 2, 24, -14]
+                    halos: [
+                        [.18, .15, .78, .13, 0, 22, 18],
+                        [.82, .30, .88, .11, 1, -18, 16],
+                        [.50, .86, .98, .09, 2, 22, -14]
                     ],
-                    accent: { count: 18, shapes: ['orb','star','spark'], size: [4.2, 9.2], alpha: [.14,.34], speed: [.16,.36], drift: 28 },
-                    dust: { count: 54, size: [1.25, 2.9], alpha: [.08,.22], speed: [.08,.22] }
+                    accent: { count: 22, shapes: ['orb', 'star', 'spark'], size: [4.0, 9.0], alpha: [.14, .34], speed: [.16, .36], drift: 28 },
+                    dust: { count: 58, size: [1.2, 2.9], alpha: [.08, .22], speed: [.08, .22] }
                 },
-                'suspect-radar': {
-                    behavior: modeName === 'mystery' ? 'stealth' : 'scan',
-                    glows: [
-                        [.24, .20, .72, .10, 0, 18, 12],
-                        [.82, .72, .82, .08, 1, -16, -12]
+                impostor: {
+                    behavior: 'scan',
+                    halos: [
+                        [.20, .22, .72, .11, 0, 18, 12],
+                        [.82, .72, .78, .09, 1, -16, -12]
                     ],
-                    accent: { count: modeName === 'mystery' ? 14 : 20, shapes: ['spark','shard','orb'], size: [3.8, 8.4], alpha: [.12,.31], speed: [.22,.50], drift: 18 },
-                    dust: { count: 46, size: [1.15, 2.6], alpha: [.07,.19], speed: [.10,.25] }
+                    accent: { count: 24, shapes: ['spark', 'shard', 'orb', 'spark'], size: [3.8, 8.6], alpha: [.13, .32], speed: [.22, .50], drift: 18 },
+                    dust: { count: 50, size: [1.15, 2.7], alpha: [.07, .20], speed: [.10, .25] }
                 },
-                'dialogue-network': {
-                    behavior: 'crossflow',
-                    glows: [
-                        [.16, .34, .70, .09, 0, 20, 16],
-                        [.86, .58, .74, .08, 2, -22, -18]
-                    ],
-                    accent: { count: 22, shapes: ['capsule','orb','capsule'], size: [4.0, 8.6], alpha: [.12,.30], speed: [.16,.40], drift: 24 },
-                    dust: { count: 50, size: [1.2, 2.7], alpha: [.07,.20], speed: [.09,.24] }
-                },
-                verdict: {
-                    behavior: 'lift',
-                    glows: [
-                        [.50, .78, .80, .09, 0, 0, -18],
-                        [.52, .18, .64, .07, 1, 0, 16]
-                    ],
-                    accent: { count: 20, shapes: ['diamond','spark','orb'], size: [3.8, 8.0], alpha: [.12,.30], speed: [.18,.44], drift: 12 },
-                    dust: { count: 44, size: [1.15, 2.5], alpha: [.07,.18], speed: [.10,.23] }
-                },
-                'victory-rings': {
-                    behavior: 'celebrate',
-                    glows: [
-                        [.24, .22, .78, .12, 0, 20, 18],
-                        [.76, .32, .86, .11, 1, -18, 16],
-                        [.52, .82, .94, .09, 2, 14, -14]
-                    ],
-                    accent: { count: 30, shapes: ['star','chip','spark','orb'], size: [4.0, 9.5], alpha: [.18,.42], speed: [.20,.50], drift: 34 },
-                    dust: { count: 62, size: [1.3, 3.1], alpha: [.09,.24], speed: [.12,.28] }
-                },
-                'fuse-sparks': {
+                'ticking-bomb': {
                     behavior: 'embers',
-                    glows: [
-                        [.50, .74, .92, .12, 0, 0, -20],
-                        [.76, .28, .64, .08, 1, -12, 14]
+                    halos: [
+                        [.50, .76, .88, .13, 0, 0, -20],
+                        [.78, .28, .62, .09, 1, -12, 14]
                     ],
-                    accent: { count: 25, shapes: ['spark','orb','spark','star'], size: [4.2, 9.0], alpha: [.18,.40], speed: [.24,.60], drift: 20 },
-                    dust: { count: 56, size: [1.2, 3.0], alpha: [.09,.23], speed: [.12,.30] }
+                    accent: { count: 30, shapes: ['spark', 'orb', 'spark', 'star'], size: [4.2, 9.2], alpha: [.18, .41], speed: [.25, .61], drift: 21 },
+                    dust: { count: 60, size: [1.2, 3.0], alpha: [.09, .23], speed: [.12, .30] }
                 },
-                shockwave: {
-                    behavior: 'blast',
-                    glows: [
-                        [.50, .52, 1.02, .17, 0, 0, 0],
-                        [.50, .52, .66, .12, 1, 0, 0]
-                    ],
-                    accent: { count: 34, shapes: ['spark','star','orb'], size: [4.5, 10.2], alpha: [.22,.48], speed: [.42,.92], drift: 0 },
-                    dust: { count: 68, size: [1.35, 3.4], alpha: [.11,.28], speed: [.22,.50] }
-                },
-                'orbit-words': {
+                naokolo: {
                     behavior: 'ribbon',
-                    glows: [
-                        [.18, .22, .72, .10, 0, 22, 12],
-                        [.82, .72, .78, .09, 1, -22, -14]
+                    halos: [
+                        [.16, .24, .72, .11, 0, 24, 12],
+                        [.84, .70, .78, .10, 1, -24, -14]
                     ],
-                    accent: { count: 22, shapes: ['capsule','orb','spark'], size: [4.0, 9.0], alpha: [.14,.32], speed: [.20,.46], drift: 30 },
-                    dust: { count: 52, size: [1.2, 2.8], alpha: [.08,.21], speed: [.12,.26] }
+                    accent: { count: 27, shapes: ['capsule', 'orb', 'spark', 'capsule'], size: [4.0, 9.2], alpha: [.15, .34], speed: [.24, .54], drift: 32 },
+                    dust: { count: 56, size: [1.2, 2.9], alpha: [.08, .22], speed: [.13, .28] }
                 },
-                'orbit-fast': {
-                    behavior: 'rush',
-                    glows: [
-                        [.14, .28, .74, .10, 0, 28, 10],
-                        [.88, .66, .82, .10, 2, -28, -10]
-                    ],
-                    accent: { count: 28, shapes: ['spark','capsule','orb'], size: [4.0, 9.4], alpha: [.16,.37], speed: [.34,.76], drift: 36 },
-                    dust: { count: 60, size: [1.2, 3.0], alpha: [.09,.24], speed: [.18,.36] }
-                },
-                'orbit-celebrate': {
-                    behavior: 'celebrate',
-                    glows: [
-                        [.20, .20, .78, .12, 0, 22, 18],
-                        [.80, .32, .82, .11, 1, -20, 18],
-                        [.52, .82, .92, .09, 2, 16, -16]
-                    ],
-                    accent: { count: 30, shapes: ['star','capsule','spark','orb'], size: [4.0, 9.4], alpha: [.18,.42], speed: [.22,.52], drift: 34 },
-                    dust: { count: 62, size: [1.3, 3.1], alpha: [.09,.25], speed: [.14,.30] }
-                },
-                'thought-field': {
-                    behavior: 'bokeh',
-                    glows: [
-                        [.24, .20, .78, .10, 0, 20, 18],
-                        [.82, .68, .82, .09, 1, -18, -16]
-                    ],
-                    accent: { count: 18, shapes: ['orb','orb','capsule'], size: [5.0, 11.5], alpha: [.10,.26], speed: [.12,.30], drift: 26 },
-                    dust: { count: 46, size: [1.25, 2.8], alpha: [.07,.19], speed: [.09,.22] }
-                },
-                gyro: {
+                'co-mam-na-mysli': {
                     behavior: 'tilt',
-                    glows: [
-                        [.08, .50, .78, .11, 0, 28, 0],
-                        [.92, .50, .82, .10, 1, -28, 0]
+                    halos: [
+                        [.08, .48, .74, .11, 0, 28, 0],
+                        [.92, .52, .78, .10, 1, -28, 0]
                     ],
-                    accent: { count: 26, shapes: ['spark','spark','orb'], size: [4.0, 9.2], alpha: [.16,.39], speed: [.34,.82], drift: 18 },
-                    dust: { count: 54, size: [1.2, 2.9], alpha: [.08,.22], speed: [.16,.34] }
+                    accent: { count: 27, shapes: ['spark', 'orb', 'spark', 'capsule'], size: [4.0, 9.4], alpha: [.16, .38], speed: [.30, .72], drift: 19 },
+                    dust: { count: 55, size: [1.2, 2.9], alpha: [.08, .22], speed: [.15, .32] }
                 },
-                'thought-celebrate': {
-                    behavior: 'celebrate',
-                    glows: [
-                        [.20, .22, .76, .12, 0, 20, 18],
-                        [.82, .30, .84, .11, 1, -18, 18],
-                        [.54, .82, .90, .09, 2, 16, -16]
-                    ],
-                    accent: { count: 30, shapes: ['star','orb','spark'], size: [4.2, 9.6], alpha: [.18,.42], speed: [.22,.50], drift: 34 },
-                    dust: { count: 60, size: [1.3, 3.1], alpha: [.09,.24], speed: [.13,.29] }
-                },
-                'wild-cards': {
+                'dzika-karta': {
                     behavior: 'cards',
-                    glows: [
-                        [.22, .20, .72, .10, 0, 20, 14],
-                        [.82, .74, .80, .08, 1, -18, -14]
+                    halos: [
+                        [.20, .22, .70, .10, 0, 20, 14],
+                        [.82, .74, .78, .09, 1, -18, -14]
                     ],
-                    accent: { count: 18, shapes: ['chip','chip','star','orb'], size: [4.4, 9.0], alpha: [.13,.32], speed: [.14,.34], drift: 30 },
-                    dust: { count: 44, size: [1.2, 2.7], alpha: [.07,.19], speed: [.09,.22] }
+                    accent: { count: 20, shapes: ['chip', 'chip', 'star', 'orb'], size: [4.3, 9.0], alpha: [.14, .33], speed: [.14, .34], drift: 30 },
+                    dust: { count: 46, size: [1.2, 2.7], alpha: [.07, .19], speed: [.09, .22] }
                 }
             };
-
-            return profiles[key] || profiles['party-aurora'];
+            return profiles[family] || profiles.home;
         }
 
         clearVisuals() {
-            [...this.glows, ...this.accents, ...this.dust].forEach(node => node?.destroy());
-            this.glows = [];
+            this.halos.forEach(node => node?.destroy(true));
+            [...this.accents, ...this.dust].forEach(node => node?.destroy());
+            this.halos = [];
             this.accents = [];
             this.dust = [];
         }
 
-        createGlow(definition, index) {
+        createHalo(definition, index) {
             const { width, height, short } = this.sceneMetrics();
             const [xr, yr, sizeRatio, alpha, colorIndex, driftX, driftY] = definition;
-            const size = short * sizeRatio;
-            const node = this.add.image(width * xr, height * yr, this.glowTextureKey)
-                .setDisplaySize(size, size)
-                .setTint(this.mode.colors[colorIndex % this.mode.colors.length])
-                .setAlpha(alpha);
+            const diameter = short * sizeRatio;
+            const radius = diameter * .5;
+            const color = this.mode.colors[colorIndex % this.mode.colors.length];
+            const container = this.add.container(width * xr, height * yr);
+            const rings = [
+                [1.00, .10], [.84, .12], [.68, .14], [.52, .18], [.38, .22], [.25, .28]
+            ];
 
-            try { node.setBlendMode?.('ADD'); } catch (_) {}
-            node.baseX = node.x;
-            node.baseY = node.y;
-            node.baseScaleX = node.scaleX;
-            node.baseScaleY = node.scaleY;
-            node.phase = index * 1.7 + PhaserLib.Math.FloatBetween(0, 1);
-            node.driftX = driftX;
-            node.driftY = driftY;
-            node.parallax = .08 + index * .025;
-            this.glows.push(node);
+            rings.forEach(([ratio, weight]) => {
+                const circle = this.add.circle(0, 0, radius * ratio, color, alpha * weight);
+                try { circle.setBlendMode?.('ADD'); } catch (_) {}
+                container.add(circle);
+            });
+
+            container.baseX = container.x;
+            container.baseY = container.y;
+            container.phase = index * 1.7 + PhaserLib.Math.FloatBetween(0, 1);
+            container.driftX = driftX;
+            container.driftY = driftY;
+            container.parallax = .08 + index * .025;
+            this.halos.push(container);
         }
 
         createShape(shape, x, y, size, color, alpha) {
@@ -324,11 +224,6 @@ function initializePhaserBackground() {
                     .setAlpha(alpha)
                     .setAngle(PhaserLib.Math.Between(0, 359));
             }
-            if (shape === 'diamond') {
-                return this.add.rectangle(x, y, size * 1.25, size * 1.25, color, 1)
-                    .setAlpha(alpha)
-                    .setAngle(45);
-            }
             if (shape === 'chip') {
                 return this.add.rectangle(x, y, size * 1.35, size * 1.9, color, 1)
                     .setAlpha(alpha)
@@ -342,9 +237,9 @@ function initializePhaserBackground() {
             return this.add.circle(x, y, size, color, 1).setAlpha(alpha);
         }
 
-        seedParticle(node, layer, profile, index) {
+        seedParticle(node, layer, index) {
             const { width, height } = this.sceneMetrics();
-            const config = profile[layer];
+            const config = this.profile[layer];
             const speed = PhaserLib.Math.FloatBetween(config.speed[0], config.speed[1]);
             const angle = PhaserLib.Math.FloatBetween(0, Math.PI * 2);
 
@@ -357,22 +252,18 @@ function initializePhaserBackground() {
             node.wave = PhaserLib.Math.FloatBetween(5, config.drift || 18);
             node.spin = PhaserLib.Math.FloatBetween(-.004, .004);
             node.parallax = layer === 'accent' ? PhaserLib.Math.FloatBetween(.10, .24) : PhaserLib.Math.FloatBetween(.03, .10);
-            node.centerX = width * .5;
-            node.centerY = height * .52;
-            node.radialAngle = PhaserLib.Math.FloatBetween(0, Math.PI * 2);
-            node.radialRadius = PhaserLib.Math.FloatBetween(14, Math.min(width, height) * .46);
-            node.radialSpeed = speed;
             node.direction = index % 2 ? 1 : -1;
             node.baseY = node.y;
+            node.centerX = width * .5;
+            node.centerY = height * .52;
         }
 
         createParticleLayer(layer) {
             const { width, height, uiScale, densityScale } = this.sceneMetrics();
             const config = this.profile[layer];
-            const baseCount = config.count;
             const count = this.reducedMotion
-                ? Math.max(6, Math.round(baseCount * .32))
-                : Math.round(baseCount * densityScale);
+                ? Math.max(6, Math.round(config.count * .32))
+                : Math.round(config.count * densityScale);
             const target = layer === 'accent' ? this.accents : this.dust;
             const shapes = layer === 'accent' ? config.shapes : ['orb'];
 
@@ -384,48 +275,44 @@ function initializePhaserBackground() {
                 const y = PhaserLib.Math.FloatBetween(-height * .04, height * 1.04);
                 const color = this.mode.colors[i % this.mode.colors.length];
                 const node = this.createShape(shape, x, y, size, color, alpha);
-
                 try { node.setBlendMode?.('ADD'); } catch (_) {}
-                this.seedParticle(node, layer, this.profile, i);
+                this.seedParticle(node, layer, i);
                 target.push(node);
             }
         }
 
         rebuildVisuals() {
+            if (!this.mode || !this.profile) return;
             this.clearVisuals();
-            this.profile.glows.forEach((definition, index) => this.createGlow(definition, index));
+            this.profile.halos.forEach((definition, index) => this.createHalo(definition, index));
             this.createParticleLayer('accent');
             this.createParticleLayer('dust');
         }
 
-        setMode(modeName, { immediate = false } = {}) {
-            const mode = BACKGROUND_MODES[modeName] || BACKGROUND_MODES.party;
+        setMode(modeName, { force = false } = {}) {
+            const nextMode = BACKGROUND_MODES[modeName] || BACKGROUND_MODES.party;
+            const nextFamily = this.resolveFamily(modeName, nextMode);
             this.modeName = modeName;
-            this.mode = mode;
-            this.profile = this.resolveVisualProfile(modeName, mode);
-            this.rebuildVisuals();
 
-            if (!immediate && ['shockwave', 'victory-rings', 'orbit-celebrate', 'thought-celebrate'].includes(mode.overlayMotif) && !this.reducedMotion) {
-                this.spawnBurst(this.scale.width * .5, this.scale.height * .46, 18);
-            }
+            // A game's background is intentionally continuous. Screen changes inside the
+            // same game must not destroy/reseed particles or change the visual composition.
+            if (!force && this.visualFamily === nextFamily && this.profile && this.mode) return;
+
+            this.visualFamily = nextFamily;
+            this.mode = nextMode;
+            this.profile = this.resolveVisualProfile(nextFamily);
+            this.rebuildVisuals();
         }
 
         resetParticle(node, behavior) {
             const { width, height } = this.sceneMetrics();
-            if (behavior === 'blast') {
-                node.radialAngle = PhaserLib.Math.FloatBetween(0, Math.PI * 2);
-                node.radialRadius = PhaserLib.Math.FloatBetween(8, 36);
-                node.centerX = width * .5;
-                node.centerY = height * .52;
-                return;
-            }
-            if (behavior === 'embers' || behavior === 'lift' || behavior === 'celebrate') {
+            if (behavior === 'embers') {
                 node.x = PhaserLib.Math.FloatBetween(-20, width + 20);
                 node.y = height + PhaserLib.Math.Between(12, 80);
                 return;
             }
-            if (['scan', 'stealth', 'ribbon', 'rush', 'tilt'].includes(behavior)) {
-                node.x = node.direction > 0 ? -40 : width + 40;
+            if (['scan', 'ribbon', 'tilt'].includes(behavior)) {
+                node.x = node.direction > 0 ? -60 : width + 60;
                 node.y = PhaserLib.Math.FloatBetween(-10, height + 10);
                 return;
             }
@@ -433,7 +320,7 @@ function initializePhaserBackground() {
             node.y = PhaserLib.Math.FloatBetween(-20, height + 20);
         }
 
-        wrapParticle(node, margin = 70) {
+        wrapParticle(node, margin = 80) {
             const { width, height } = this.sceneMetrics();
             if (node.x < -margin) node.x = width + margin;
             if (node.x > width + margin) node.x = -margin;
@@ -442,52 +329,34 @@ function initializePhaserBackground() {
         }
 
         updateParticle(node, behavior, time, dt, speedMultiplier) {
-            const { width, short, uiScale } = this.sceneMetrics();
+            const { width, uiScale } = this.sceneMetrics();
             const layerFactor = node.layer === 'accent' ? 1 : .58;
             const baseSpeed = speedMultiplier * layerFactor * uiScale;
 
-            if (behavior === 'blast') {
-                node.radialRadius += node.radialSpeed * baseSpeed * dt * 2.9;
-                if (node.radialRadius > short * .72) this.resetParticle(node, behavior);
-                node.x = node.centerX + Math.cos(node.radialAngle) * node.radialRadius;
-                node.y = node.centerY + Math.sin(node.radialAngle) * node.radialRadius;
-                node.rotation = node.radialAngle;
-            } else if (behavior === 'embers') {
-                node.y -= Math.abs(node.vy || node.radialSpeed) * baseSpeed * dt * 1.9;
+            if (behavior === 'embers') {
+                node.y -= Math.max(.16, Math.abs(node.vy)) * baseSpeed * dt * 1.8;
                 node.x += Math.sin(time * .0012 + node.phase) * .20 * node.wave;
-                if (node.y < -70) this.resetParticle(node, behavior);
-            } else if (behavior === 'lift' || behavior === 'celebrate') {
-                node.y -= Math.max(.18, Math.abs(node.vy)) * baseSpeed * dt * (behavior === 'celebrate' ? 1.7 : 1.25);
-                node.x += Math.sin(time * .0011 + node.phase) * .12 * node.wave;
-                if (node.y < -70) this.resetParticle(node, behavior);
-            } else if (behavior === 'scan' || behavior === 'stealth') {
+                if (node.y < -80) this.resetParticle(node, behavior);
+            } else if (behavior === 'scan') {
                 const directionSpeed = Math.max(.22, Math.abs(node.vx)) * node.direction;
-                node.x += directionSpeed * baseSpeed * dt * (behavior === 'stealth' ? .62 : 1.0);
+                node.x += directionSpeed * baseSpeed * dt;
                 node.y += Math.sin(time * .0013 + node.phase) * .045 * node.wave;
-                if (node.x < -80 || node.x > width + 80) this.resetParticle(node, behavior);
-            } else if (behavior === 'ribbon' || behavior === 'rush' || behavior === 'tilt') {
-                const multiplier = behavior === 'rush' ? 1.55 : behavior === 'tilt' ? 1.8 : 1.0;
+                if (node.x < -100 || node.x > width + 100) this.resetParticle(node, behavior);
+            } else if (behavior === 'ribbon' || behavior === 'tilt') {
+                const multiplier = behavior === 'tilt' ? 1.45 : 1.0;
                 const directionSpeed = Math.max(.20, Math.abs(node.vx)) * node.direction;
                 node.x += directionSpeed * baseSpeed * dt * multiplier;
-                node.y += Math.sin(time * (behavior === 'tilt' ? .0020 : .00145) + node.phase) * .07 * node.wave;
-                if (node.x < -90 || node.x > width + 90) this.resetParticle(node, behavior);
-            } else if (behavior === 'crossflow') {
-                node.x += node.vx * baseSpeed * dt;
-                node.y += node.vy * baseSpeed * dt;
-                node.x += Math.cos(time * .0010 + node.phase) * .045 * node.wave;
-                this.wrapParticle(node);
+                node.y += Math.sin(time * (behavior === 'tilt' ? .0019 : .00145) + node.phase) * .07 * node.wave;
+                if (node.x < -110 || node.x > width + 110) this.resetParticle(node, behavior);
             } else if (behavior === 'cards') {
-                node.x += node.vx * baseSpeed * dt * .7;
-                node.y += node.vy * baseSpeed * dt * .7;
+                node.x += node.vx * baseSpeed * dt * .72;
+                node.y += node.vy * baseSpeed * dt * .72;
                 node.rotation += node.spin * dt;
                 this.wrapParticle(node);
-            } else if (behavior === 'bokeh') {
-                node.y -= Math.max(.06, Math.abs(node.vy)) * baseSpeed * dt * .65;
-                node.x += Math.sin(time * .0009 + node.phase) * .055 * node.wave;
-                if (node.y < -80) this.resetParticle(node, 'celebrate');
             } else {
                 node.x += node.vx * baseSpeed * dt;
                 node.y += node.vy * baseSpeed * dt;
+                node.x += Math.sin(time * .0009 + node.phase) * .035 * node.wave;
                 this.wrapParticle(node);
             }
 
@@ -501,18 +370,19 @@ function initializePhaserBackground() {
             if (node.layer === 'accent' && 'rotation' in node) node.rotation += node.spin * dt * .35;
         }
 
-        updateGlows(time) {
-            this.glows.forEach(glow => {
-                if (!glow?.active) return;
-                const wave = time * .00025 + glow.phase;
-                glow.x = glow.baseX + Math.sin(wave) * glow.driftX + this.pointerTarget.x * glow.parallax;
-                glow.y = glow.baseY + Math.cos(wave * 1.17) * glow.driftY + this.pointerTarget.y * glow.parallax;
+        updateHalos(time) {
+            this.halos.forEach(halo => {
+                if (!halo?.active) return;
+                const wave = time * .00025 + halo.phase;
+                halo.x = halo.baseX + Math.sin(wave) * halo.driftX + this.pointerTarget.x * halo.parallax;
+                halo.y = halo.baseY + Math.cos(wave * 1.17) * halo.driftY + this.pointerTarget.y * halo.parallax;
                 const pulse = 1 + Math.sin(wave * 1.35) * .045;
-                glow.setScale(glow.baseScaleX * pulse, glow.baseScaleY * pulse);
+                halo.setScale(pulse);
             });
         }
 
         spawnBurst(x, y, count = 10) {
+            if (!this.mode) return;
             const { uiScale } = this.sceneMetrics();
             for (let i = 0; i < count; i++) {
                 const angle = (Math.PI * 2 * i) / count + PhaserLib.Math.FloatBetween(-.12, .12);
@@ -540,7 +410,7 @@ function initializePhaserBackground() {
             const speedMultiplier = this.reducedMotion ? .12 : Math.max(.55, this.mode.speed || 1);
             const behavior = this.profile?.behavior || 'party';
 
-            this.updateGlows(time);
+            this.updateHalos(time);
             this.accents.forEach(node => this.updateParticle(node, behavior, time, dt, speedMultiplier));
             this.dust.forEach(node => this.updateParticle(node, behavior, time, dt, speedMultiplier * .72));
         }
@@ -559,7 +429,7 @@ function initializePhaserBackground() {
 
     window.addEventListener('resize', () => {
         phaserGame?.scale?.resize(window.innerWidth, window.innerHeight);
-        if (backgroundScene?.mode) backgroundScene.setMode(backgroundScene.modeName, { immediate: true });
+        backgroundScene?.rebuildVisuals();
     });
 }
 
