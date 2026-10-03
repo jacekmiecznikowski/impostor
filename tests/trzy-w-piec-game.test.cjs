@@ -120,7 +120,7 @@ assert.equal(lastScreen, 'three-five-round-summary');
 
 api.continueThreeFiveRound();
 assert.equal(sandbox.threeFiveState.awaitingRoundDecision, false);
-assert.deepEqual(sandbox.threeFiveState.roundResults, {});
+assert.equal(Object.keys(sandbox.threeFiveState.roundResults).length, 0);
 assert.equal(lastScreen, 'three-five-ready');
 
 sandbox.threeFiveState.awaitingRoundDecision = true;
