@@ -74,18 +74,54 @@ function threeFiveProceedToOptions() {
     goToScreen('three-five-options');
 }
 
-function setThreeFiveTargetScore(value) {
-    const normalized = ThreeFiveRules.normalizeTargetScore(value, threeFiveState.targetScore);
-    if (normalized === threeFiveState.targetScore && Number(value) !== normalized) return;
-    threeFiveState.targetScore = normalized;
-    playSound?.('click');
-    renderThreeFiveTargetOptions();
+function setThreeFiveAnswerCount(value) {
+    threeFiveState.answerCount = ThreeFiveRules.normalizeChallengeValue(value, threeFiveState.answerCount);
+    renderThreeFiveChallengeOptions();
     if (threeFiveState.hasSavedSession) persistThreeFiveSession();
 }
 
-function renderThreeFiveTargetOptions() {
-    document.querySelectorAll('[data-three-five-target]').forEach(button => {
-        const active = Number(button.dataset.threeFiveTarget) === threeFiveState.targetScore;
+function setThreeFiveTurnSeconds(value) {
+    threeFiveState.turnSeconds = ThreeFiveRules.normalizeChallengeValue(value, threeFiveState.turnSeconds);
+    renderThreeFiveChallengeOptions();
+    if (threeFiveState.hasSavedSession) persistThreeFiveSession();
+}
+
+function adjustThreeFiveAnswerCount(delta) {
+    setThreeFiveAnswerCount(threeFiveState.answerCount + Number(delta || 0));
+    playSound?.('click');
+}
+
+function adjustThreeFiveTurnSeconds(delta) {
+    setThreeFiveTurnSeconds(threeFiveState.turnSeconds + Number(delta || 0));
+    playSound?.('click');
+}
+
+function setThreeFiveChallengePreset(answerCount, turnSeconds) {
+    threeFiveState.answerCount = ThreeFiveRules.normalizeChallengeValue(answerCount, ThreeFiveRules.DEFAULT_ANSWER_COUNT);
+    threeFiveState.turnSeconds = ThreeFiveRules.normalizeChallengeValue(turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
+    playSound?.('click');
+    renderThreeFiveChallengeOptions();
+    if (threeFiveState.hasSavedSession) persistThreeFiveSession();
+}
+
+function renderThreeFiveChallengeOptions() {
+    normalizeThreeFiveChallenge();
+    const answerInput = document.getElementById('three-five-answer-count');
+    const secondsInput = document.getElementById('three-five-turn-seconds');
+    const answerValue = document.getElementById('three-five-answer-count-value');
+    const secondsValue = document.getElementById('three-five-turn-seconds-value');
+    const summary = document.getElementById('three-five-challenge-summary');
+
+    if (answerInput) answerInput.value = String(threeFiveState.answerCount);
+    if (secondsInput) secondsInput.value = String(threeFiveState.turnSeconds);
+    if (answerValue) answerValue.textContent = String(threeFiveState.answerCount);
+    if (secondsValue) secondsValue.textContent = String(threeFiveState.turnSeconds);
+    if (summary) summary.textContent = `${threeFiveState.answerCount} w ${threeFiveState.turnSeconds}`;
+
+    document.querySelectorAll('[data-three-five-preset]').forEach(button => {
+        const answers = Number(button.dataset.answers);
+        const seconds = Number(button.dataset.seconds);
+        const active = answers === threeFiveState.answerCount && seconds === threeFiveState.turnSeconds;
         button.classList.toggle('is-selected', active);
         button.setAttribute('aria-pressed', String(active));
     });
@@ -161,7 +197,7 @@ function renderThreeFiveCategories() {
 }
 
 function renderThreeFiveOptions() {
-    renderThreeFiveTargetOptions();
+    renderThreeFiveChallengeOptions();
     renderThreeFiveCategories();
 }
 
@@ -171,6 +207,7 @@ function prepareThreeFiveGame() {
         return;
     }
     normalizeThreeFiveCategories();
+    normalizeThreeFiveChallenge();
     if (!threeFiveState.activeCategories.length) {
         showToast('Kategorie', 'Wybierz co najmniej jedną kategorię.');
         return;
