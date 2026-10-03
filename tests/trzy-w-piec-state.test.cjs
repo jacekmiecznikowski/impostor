@@ -97,7 +97,7 @@ assert.equal(api.threeFiveState.players[0].turns, 0);
 assert.equal(api.threeFiveState.currentPlayerIndex, 0);
 assert.equal(api.threeFiveState.turnNumber, 0);
 assert.equal(api.threeFiveState.completedRounds, 0);
-assert.deepEqual(api.threeFiveState.roundResults, {});
+assert.equal(Object.keys(api.threeFiveState.roundResults).length, 0);
 assert.equal(api.threeFiveState.awaitingRoundDecision, false);
 assert.equal(api.threeFiveState.gameFinished, false);
 
