@@ -1,6 +1,8 @@
 (function exposeThreeFiveRules(root) {
-    const TARGET_SCORES = Object.freeze([5, 10, 15]);
-    const TURN_SECONDS = 5;
+    const DEFAULT_ANSWER_COUNT = 3;
+    const DEFAULT_TURN_SECONDS = 5;
+    const MAX_CHALLENGE_VALUE = 60;
+    const MATCH_TARGET_SCORE = 10;
     const RECENT_PROMPT_LIMIT = 36;
 
     function normalizeRandomValue(random = Math.random) {
@@ -25,9 +27,26 @@
         return ((current % count) + count + 1) % count;
     }
 
-    function normalizeTargetScore(value, fallback = 10) {
-        const score = Number(value);
-        return TARGET_SCORES.includes(score) ? score : fallback;
+    function normalizeChallengeValue(value, fallback) {
+        const parsed = Number.parseInt(value, 10);
+        const safeFallback = Math.min(MAX_CHALLENGE_VALUE, Math.max(1, Number.parseInt(fallback, 10) || 1));
+        if (!Number.isFinite(parsed)) return safeFallback;
+        return Math.min(MAX_CHALLENGE_VALUE, Math.max(1, parsed));
+    }
+
+    function formatPrompt(text, answerCount = DEFAULT_ANSWER_COUNT) {
+        const count = normalizeChallengeValue(answerCount, DEFAULT_ANSWER_COUNT);
+        const source = String(text || 'Wymień 3 rzeczy.');
+        return source.replace(/^Wymień\s+\d+\b/i, `Wymień ${count}`);
+    }
+
+    function getAnswerUnit(answerCount) {
+        const count = normalizeChallengeValue(answerCount, DEFAULT_ANSWER_COUNT);
+        const mod10 = count % 10;
+        const mod100 = count % 100;
+        if (count === 1) return 'odpowiedź';
+        if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return 'odpowiedzi';
+        return 'odpowiedzi';
     }
 
     function buildPromptDeck(categories, activeCategoryIds, recentPromptIds = [], random = Math.random) {
@@ -65,17 +84,21 @@
         return success ? 1 : 0;
     }
 
-    function hasWinner(score, targetScore) {
-        return Math.max(0, Number(score) || 0) >= normalizeTargetScore(targetScore, 10);
+    function hasWinner(score, targetScore = MATCH_TARGET_SCORE) {
+        return Math.max(0, Number(score) || 0) >= Math.max(1, Number(targetScore) || MATCH_TARGET_SCORE);
     }
 
     const api = {
-        TARGET_SCORES,
-        TURN_SECONDS,
+        DEFAULT_ANSWER_COUNT,
+        DEFAULT_TURN_SECONDS,
+        MAX_CHALLENGE_VALUE,
+        MATCH_TARGET_SCORE,
         RECENT_PROMPT_LIMIT,
         shuffle,
         nextPlayerIndex,
-        normalizeTargetScore,
+        normalizeChallengeValue,
+        formatPrompt,
+        getAnswerUnit,
         buildPromptDeck,
         rememberPrompt,
         scoreVerdict,
