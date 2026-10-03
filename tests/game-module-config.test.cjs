@@ -62,7 +62,9 @@ assert.match(threeFive, /id:\s*'trzy-w-piec'/);
 assert.match(threeFive, /name:\s*'Trzy w Pięć'/);
 assert.match(threeFive, /rulesModalId:\s*'three-five-rules-modal'/);
 assert.match(threeFive, /roundGuard: true/);
-assert.match(threeFiveGame, /ThreeFiveRules\.TURN_SECONDS/);
+assert.match(threeFiveGame, /threeFiveState\.turnSeconds/);
+assert.match(threeFiveGame, /turnSeconds \* 1000/);
+assert.doesNotMatch(threeFiveGame, /ThreeFiveRules\.TURN_SECONDS/);
 assert.match(threeFiveGame, /judgeThreeFiveTurn\(success\)/);
 assert.match(threeFiveGame, /navigator\.vibrate/);
 
