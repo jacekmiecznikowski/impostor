@@ -37,15 +37,13 @@
     function formatPrompt(text, answerCount = DEFAULT_ANSWER_COUNT) {
         const count = normalizeChallengeValue(answerCount, DEFAULT_ANSWER_COUNT);
         const source = String(text || 'Wymień 3 rzeczy.');
-        return source.replace(/^Wymień\s+\d+\b/i, `Wymień ${count}`);
+        const noun = count === 1 ? 'rzecz' : 'rzeczy';
+        return source.replace(/^Wymień\s+\d+\s+rzeczy\b/i, `Wymień ${count} ${noun}`);
     }
 
     function getAnswerUnit(answerCount) {
         const count = normalizeChallengeValue(answerCount, DEFAULT_ANSWER_COUNT);
-        const mod10 = count % 10;
-        const mod100 = count % 100;
         if (count === 1) return 'odpowiedź';
-        if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return 'odpowiedzi';
         return 'odpowiedzi';
     }
 
