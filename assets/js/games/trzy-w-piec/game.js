@@ -93,7 +93,7 @@ function renderThreeFivePlayScreen() {
 
     const timer = document.getElementById('three-five-timer');
     timer?.style.setProperty('--three-five-progress', '1');
-    timer?.style.setProperty('--three-five-elapsed', '0');
+    timer?.style.setProperty('--three-five-elapsed-angle', '0turn');
     timer?.classList.remove('is-running', 'is-critical', 'is-expired', 'is-pulsing');
     const value = document.getElementById('three-five-timer-value');
     if (value) value.textContent = String(ThreeFiveRules.TURN_SECONDS);
@@ -123,7 +123,7 @@ function updateThreeFiveTimerVisual(remainingMs) {
     const timer = document.getElementById('three-five-timer');
     const value = document.getElementById('three-five-timer-value');
     timer?.style.setProperty('--three-five-progress', String(progress));
-    timer?.style.setProperty('--three-five-elapsed', String(elapsed));
+    timer?.style.setProperty('--three-five-elapsed-angle', `${elapsed}turn`);
     timer?.classList.toggle('is-critical', seconds <= 2 && remainingMs > 0);
     if (value) value.textContent = String(seconds);
     updateThreeFiveTimerUnit(seconds);
@@ -175,7 +175,7 @@ function expireThreeFiveCountdown() {
 
     const timer = document.getElementById('three-five-timer');
     timer?.style.setProperty('--three-five-progress', '0');
-    timer?.style.setProperty('--three-five-elapsed', '1');
+    timer?.style.setProperty('--three-five-elapsed-angle', '1turn');
     timer?.classList.add('is-expired');
     timer?.classList.remove('is-running', 'is-critical');
     const value = document.getElementById('three-five-timer-value');
