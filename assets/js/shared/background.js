@@ -16,15 +16,6 @@ let backgroundScene = null;
 function setBackgroundMode(modeName) {
     backgroundMode = BACKGROUND_MODES[modeName] ? modeName : 'party';
     backgroundScene?.setMode(backgroundMode);
-
-    // Tykająca Bomba ma teraz własny pełny motyw w BackgroundScene.
-    // Stare dodatkowe motywy z warstwy integracyjnej czyścimy po zakończeniu
-    // bieżącego stosu wywołań, aby dwa systemy nie nakładały się na siebie.
-    if (['ticking-bomb', 'bomb-alert'].includes(backgroundMode)) {
-        queueMicrotask(() => {
-            if (typeof clearPartyjniakThemeMotifs === 'function') clearPartyjniakThemeMotifs();
-        });
-    }
 }
 
 function initializePhaserBackground() {
@@ -42,62 +33,123 @@ function initializePhaserBackground() {
             super({ key: 'BackgroundScene' });
             this.motes = [];
             this.confetti = [];
-            this.decor = [];
-            this.floaters = [];
             this.pointerTarget = { x: 0, y: 0 };
+            this.profile = null;
         }
 
         create() {
             backgroundScene = this;
             this.reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
-            this.createMotes();
             this.createConfetti();
             this.setMode(backgroundMode, { immediate: true });
 
             this.input.on('pointermove', pointer => {
-                this.pointerTarget.x = (pointer.x / Math.max(1, this.scale.width) - 0.5) * 12;
-                this.pointerTarget.y = (pointer.y / Math.max(1, this.scale.height) - 0.5) * 12;
+                this.pointerTarget.x = (pointer.x / Math.max(1, this.scale.width) - 0.5) * 8;
+                this.pointerTarget.y = (pointer.y / Math.max(1, this.scale.height) - 0.5) * 8;
             });
 
             this.input.on('pointerdown', pointer => {
-                if (!this.reducedMotion) this.spawnBurst(pointer.x, pointer.y, 7);
+                if (!this.reducedMotion) this.spawnBurst(pointer.x, pointer.y, 9);
             });
         }
 
-        createMotes() {
-            const count = this.reducedMotion ? 12 : 24;
+        resolveParticleProfile(modeName, mode) {
+            const key = mode.overlayMotif || mode.motif || modeName;
+            const profiles = {
+                'party-aurora': { behavior: 'rise', count: 68, shapes: ['dot','dot','star','dash'], size: [1.2,3.7], alpha: [.13,.34], vx: [-.11,.11], vy: [-.34,-.10], twinkle: .08 },
+                'suspect-radar': { behavior: 'scan', count: 64, shapes: ['dot','dash','dot','dash'], size: [1.0,3.1], alpha: [.12,.32], vx: [.18,.46], vy: [-.035,.035], twinkle: .09 },
+                'dialogue-network': { behavior: 'drift', count: 72, shapes: ['dot','dot','dash'], size: [1.0,3.0], alpha: [.12,.31], vx: [-.24,.24], vy: [-.16,.16], twinkle: .07 },
+                verdict: { behavior: 'vote', count: 64, shapes: ['dash','dot','dash'], size: [1.1,3.0], alpha: [.12,.31], vx: [-.06,.06], vy: [-.38,-.14], twinkle: .08 },
+                'victory-rings': { behavior: 'celebrate', count: 82, shapes: ['dot','star','dash','star'], size: [1.2,4.0], alpha: [.16,.42], vx: [-.28,.28], vy: [-.42,.10], twinkle: .12 },
+                'fuse-sparks': { behavior: 'radial', count: 76, shapes: ['dot','dash','dot'], size: [1.0,3.3], alpha: [.16,.39], radial: [.10,.32], twinkle: .10 },
+                shockwave: { behavior: 'radial', count: 92, shapes: ['dash','dot','star'], size: [1.2,4.1], alpha: [.20,.48], radial: [.28,.68], twinkle: .13 },
+                'orbit-words': { behavior: 'flow', count: 66, shapes: ['dot','dash','dot'], size: [1.0,3.1], alpha: [.12,.33], vx: [.16,.40], vy: [-.08,.08], wave: [8,22], twinkle: .08 },
+                'orbit-fast': { behavior: 'flow', count: 78, shapes: ['dash','dot','dash','dot'], size: [1.0,3.3], alpha: [.15,.38], vx: [.32,.72], vy: [-.10,.10], wave: [10,28], twinkle: .10 },
+                'orbit-celebrate': { behavior: 'celebrate', count: 84, shapes: ['dot','star','dash'], size: [1.1,4.0], alpha: [.17,.43], vx: [-.32,.32], vy: [-.44,.12], twinkle: .12 },
+                'thought-field': { behavior: 'float', count: 66, shapes: ['dot','dot','dash'], size: [1.0,3.4], alpha: [.12,.33], vx: [-.12,.12], vy: [-.28,-.08], twinkle: .09 },
+                gyro: { behavior: 'gyro', count: 82, shapes: ['dash','dot','dash','dot'], size: [1.0,3.2], alpha: [.16,.40], vx: [.34,.82], vy: [-.025,.025], wave: [5,16], twinkle: .10 },
+                'thought-celebrate': { behavior: 'celebrate', count: 84, shapes: ['dot','star','dot','dash'], size: [1.2,4.0], alpha: [.17,.43], vx: [-.30,.30], vy: [-.42,.12], twinkle: .12 },
+                'wild-cards': { behavior: 'drift', count: 58, shapes: ['chip','dot','chip','star'], size: [1.2,3.4], alpha: [.13,.34], vx: [-.20,.20], vy: [-.22,.12], twinkle: .08 },
+                party: { behavior: 'rise', count: 64, shapes: ['dot','dot','star'], size: [1.2,3.5], alpha: [.12,.32], vx: [-.10,.10], vy: [-.30,-.08], twinkle: .08 },
+                impostor: { behavior: 'scan', count: 64, shapes: ['dot','dash'], size: [1.0,3.0], alpha: [.12,.31], vx: [.16,.42], vy: [-.04,.04], twinkle: .08 },
+                discussion: { behavior: 'drift', count: 70, shapes: ['dot','dash','dot'], size: [1.0,3.0], alpha: [.12,.31], vx: [-.22,.22], vy: [-.15,.15], twinkle: .08 },
+                vote: { behavior: 'vote', count: 64, shapes: ['dash','dot'], size: [1.0,3.0], alpha: [.12,.31], vx: [-.05,.05], vy: [-.34,-.12], twinkle: .08 },
+                celebrate: { behavior: 'celebrate', count: 82, shapes: ['dot','star','dash'], size: [1.2,4.0], alpha: [.16,.42], vx: [-.28,.28], vy: [-.42,.10], twinkle: .12 },
+                'ticking-bomb': { behavior: 'radial', count: 76, shapes: ['dot','dash'], size: [1.0,3.3], alpha: [.16,.39], radial: [.10,.32], twinkle: .10 },
+                'bomb-alert': { behavior: 'radial', count: 92, shapes: ['dash','dot','star'], size: [1.2,4.1], alpha: [.20,.48], radial: [.28,.68], twinkle: .13 }
+            };
+            return profiles[key] || profiles.party;
+        }
+
+        createParticle(shape, x, y, size, color, alpha) {
+            if (shape === 'dash') {
+                return this.add.rectangle(x, y, size * 4.2, Math.max(1, size * .6), color, alpha)
+                    .setAngle(PhaserLib.Math.Between(-24, 24));
+            }
+            if (shape === 'chip') {
+                return this.add.rectangle(x, y, Math.max(3, size * 1.8), Math.max(4, size * 2.6), color, alpha)
+                    .setAngle(PhaserLib.Math.Between(-28, 28));
+            }
+            if (shape === 'star') {
+                return this.add.star(x, y, 4, Math.max(.8, size * .45), Math.max(1.8, size), color, alpha);
+            }
+            return this.add.circle(x, y, Math.max(.8, size), color, alpha);
+        }
+
+        rebuildMotes() {
+            this.motes.forEach(mote => mote?.destroy());
+            this.motes = [];
+
+            const profile = this.profile;
+            const w = Math.max(1, this.scale.width);
+            const h = Math.max(1, this.scale.height);
+            const areaScale = PhaserLib.Math.Clamp(Math.sqrt((w * h) / (390 * 844)), .82, 1.45);
+            const count = this.reducedMotion ? Math.max(14, Math.round(profile.count * .34)) : Math.round(profile.count * areaScale);
+            const colors = this.mode.colors;
+            const cx = w * .5;
+            const cy = h * .5;
+
             for (let i = 0; i < count; i++) {
-                const mote = this.add.circle(
-                    PhaserLib.Math.Between(0, this.scale.width),
-                    PhaserLib.Math.Between(0, this.scale.height),
-                    PhaserLib.Math.FloatBetween(1.1, 3.2),
-                    0xffffff,
-                    PhaserLib.Math.FloatBetween(.035, .10)
-                );
-                mote.depthFactor = PhaserLib.Math.FloatBetween(.35, 1);
-                mote.speedX = PhaserLib.Math.FloatBetween(-.07, .07) * mote.depthFactor;
-                mote.speedY = PhaserLib.Math.FloatBetween(-.18, -.05) * mote.depthFactor;
+                const x = PhaserLib.Math.FloatBetween(-12, w + 12);
+                const y = PhaserLib.Math.FloatBetween(-12, h + 12);
+                const size = PhaserLib.Math.FloatBetween(profile.size[0], profile.size[1]);
+                const alpha = PhaserLib.Math.FloatBetween(profile.alpha[0], profile.alpha[1]);
+                const shape = profile.shapes[i % profile.shapes.length];
+                const mote = this.createParticle(shape, x, y, size, colors[i % colors.length], alpha);
+                try { mote.setBlendMode?.('ADD'); } catch (_) {}
+
+                mote.baseAlpha = alpha;
                 mote.phase = PhaserLib.Math.FloatBetween(0, Math.PI * 2);
-                mote.twinkleSpeed = PhaserLib.Math.FloatBetween(.0004, .0012);
-                mote.baseAlpha = mote.fillAlpha || .07;
+                mote.twinkleSpeed = PhaserLib.Math.FloatBetween(.0010, .0028);
+                mote.vx = PhaserLib.Math.FloatBetween(profile.vx?.[0] ?? -.08, profile.vx?.[1] ?? .08);
+                mote.vy = PhaserLib.Math.FloatBetween(profile.vy?.[0] ?? -.12, profile.vy?.[1] ?? .12);
+                mote.wave = PhaserLib.Math.FloatBetween(profile.wave?.[0] ?? 0, profile.wave?.[1] ?? 0);
+                mote.baseY = y;
+                mote.radialAngle = PhaserLib.Math.FloatBetween(0, Math.PI * 2);
+                mote.radialRadius = PhaserLib.Math.FloatBetween(8, Math.min(w, h) * .48);
+                mote.radialSpeed = PhaserLib.Math.FloatBetween(profile.radial?.[0] ?? .08, profile.radial?.[1] ?? .18);
+                mote.cx = cx;
+                mote.cy = cy;
+                mote.parallax = PhaserLib.Math.FloatBetween(.05, .24);
                 this.motes.push(mote);
             }
         }
 
         createConfetti() {
-            const count = this.reducedMotion ? 0 : 12;
+            const count = this.reducedMotion ? 0 : 14;
             for (let i = 0; i < count; i++) {
                 const rect = this.add.rectangle(
                     PhaserLib.Math.Between(0, this.scale.width),
                     PhaserLib.Math.Between(0, this.scale.height),
                     PhaserLib.Math.Between(2, 4),
-                    PhaserLib.Math.Between(7, 13),
+                    PhaserLib.Math.Between(6, 11),
                     0x8b5cf6,
-                    PhaserLib.Math.FloatBetween(.08, .18)
+                    PhaserLib.Math.FloatBetween(.10, .22)
                 );
-                rect.speedY = PhaserLib.Math.FloatBetween(.09, .22);
-                rect.speedX = PhaserLib.Math.FloatBetween(-.05, .05);
-                rect.rotationSpeed = PhaserLib.Math.FloatBetween(-.006, .006);
+                rect.speedY = PhaserLib.Math.FloatBetween(.10, .24);
+                rect.speedX = PhaserLib.Math.FloatBetween(-.06, .06);
+                rect.rotationSpeed = PhaserLib.Math.FloatBetween(-.008, .008);
+                rect.setVisible(false);
                 this.confetti.push(rect);
             }
         }
@@ -106,223 +158,46 @@ function initializePhaserBackground() {
             const mode = BACKGROUND_MODES[modeName] || BACKGROUND_MODES.party;
             this.modeName = modeName;
             this.mode = mode;
-            this.motif = mode.motif || modeName;
-
-            this.motes.forEach((mote, index) => {
-                const alpha = PhaserLib.Math.FloatBetween(mode.alpha[0], mode.alpha[1]);
-                mote.baseAlpha = alpha;
-                mote.setFillStyle(mode.colors[index % mode.colors.length], alpha);
-            });
+            this.profile = this.resolveParticleProfile(modeName, mode);
+            this.rebuildMotes();
 
             this.confetti.forEach((rect, index) => {
                 rect.setVisible(Boolean(mode.confetti));
-                if (mode.confetti) rect.setFillStyle(mode.colors[index % mode.colors.length], PhaserLib.Math.FloatBetween(.08, .18));
+                if (mode.confetti) rect.setFillStyle(mode.colors[index % mode.colors.length], PhaserLib.Math.FloatBetween(.10, .24));
             });
 
-            this.rebuildDecor();
-
-            if (!immediate && modeName === 'celebrate' && !this.reducedMotion) {
-                this.spawnBurst(this.scale.width * .5, this.scale.height * .34, 18);
+            if (!immediate && mode.confetti && !this.reducedMotion) {
+                this.spawnBurst(this.scale.width * .5, this.scale.height * .34, 16);
             }
         }
 
-        clearDecor() {
-            this.decor.forEach(node => node?.destroy());
-            this.decor = [];
-            this.floaters = [];
+        wrapParticle(mote, margin = 24) {
+            if (mote.x < -margin) mote.x = this.scale.width + margin;
+            if (mote.x > this.scale.width + margin) mote.x = -margin;
+            if (mote.y < -margin) mote.y = this.scale.height + margin;
+            if (mote.y > this.scale.height + margin) mote.y = -margin;
         }
 
-        addFloater(node, options = {}) {
-            const item = {
-                node,
-                baseX: options.x ?? node.x,
-                baseY: options.y ?? node.y,
-                dx: options.dx ?? 14,
-                dy: options.dy ?? 12,
-                duration: options.duration ?? 7000,
-                rotate: options.rotate ?? 0,
-                alphaSwing: options.alphaSwing ?? .03,
-                baseAlpha: options.baseAlpha ?? node.alpha ?? 1,
-                depthFactor: options.depthFactor ?? .2,
-                phase: PhaserLib.Math.FloatBetween(0, Math.PI * 2)
-            };
-            this.decor.push(node);
-            this.floaters.push(item);
-            return node;
-        }
-
-        rebuildDecor() {
-            this.clearDecor();
-            const builder = {
-                party: () => this.buildPartyBackdrop(),
-                impostor: () => this.buildImpostorBackdrop(),
-                discussion: () => this.buildDiscussionBackdrop(),
-                vote: () => this.buildVoteBackdrop(),
-                celebrate: () => this.buildCelebrateBackdrop(),
-                'ticking-bomb': () => this.buildBombBackdrop(false),
-                'bomb-alert': () => this.buildBombBackdrop(true)
-            }[this.motif] || (() => this.buildPartyBackdrop());
-            builder();
-        }
-
-        buildPartyBackdrop() {
-            const w = this.scale.width;
-            const h = this.scale.height;
-            const colors = this.mode.colors;
-            [
-                [.13, .19, 300, 165, -18],
-                [.88, .30, 345, 185, 17],
-                [.48, .87, 410, 210, -7]
-            ].forEach(([xr, yr, width, height, angle], index) => {
-                const blob = this.add.ellipse(w * xr, h * yr, width, height, colors[index % colors.length], .045).setAngle(angle);
-                this.addFloater(blob, { dx: 18, dy: 13, duration: 9000 + index * 700, rotate: .0015 * (index % 2 ? 1 : -1), alphaSwing: .018, depthFactor: .14 });
-            });
-
-            for (let i = 0; i < 11; i++) {
-                const card = this.add.rectangle(
-                    PhaserLib.Math.Between(10, w - 10),
-                    PhaserLib.Math.Between(10, h - 10),
-                    PhaserLib.Math.Between(22, 46),
-                    PhaserLib.Math.Between(7, 13),
-                    colors[i % colors.length],
-                    .09
-                ).setAngle(PhaserLib.Math.Between(-42, 42));
-                card.setStrokeStyle(1, 0xffffff, .06);
-                this.addFloater(card, { dx: PhaserLib.Math.Between(-16, 16), dy: PhaserLib.Math.Between(-16, 16), duration: PhaserLib.Math.Between(6200, 9800), rotate: PhaserLib.Math.FloatBetween(-.003, .003), alphaSwing: .025, depthFactor: .24 });
-            }
-
-            for (let i = 0; i < 7; i++) {
-                const star = this.add.star(PhaserLib.Math.Between(18, w - 18), PhaserLib.Math.Between(18, h - 18), 4, 2.5, 7, colors[(i + 1) % colors.length], .12).setAngle(45);
-                this.addFloater(star, { dx: 10, dy: 12, duration: 5000 + i * 280, rotate: .009, alphaSwing: .05, depthFactor: .31 });
-            }
-        }
-
-        buildImpostorBackdrop() {
-            const w = this.scale.width;
-            const h = this.scale.height;
-            const colors = this.mode.colors;
-            [
-                [.16, .22, 205],
-                [.84, .33, 280],
-                [.52, .84, 325]
-            ].forEach(([xr, yr, size], index) => {
-                const diamond = this.add.rectangle(w * xr, h * yr, size, size, colors[index % 3], .028).setAngle(45);
-                diamond.setStrokeStyle(1, colors[(index + 1) % 3], .10);
-                this.addFloater(diamond, { dx: 12, dy: 10, duration: 9400 + index * 600, rotate: .0014 * (index % 2 ? 1 : -1), alphaSwing: .014, depthFactor: .12 });
-            });
-
-            for (let i = 0; i < 13; i++) {
-                const slash = this.add.rectangle(
-                    PhaserLib.Math.Between(-20, w + 20),
-                    PhaserLib.Math.Between(0, h),
-                    PhaserLib.Math.Between(42, 118),
-                    2,
-                    colors[i % 3],
-                    .13
-                ).setAngle(-32);
-                this.addFloater(slash, { dx: PhaserLib.Math.Between(-18, 18), dy: PhaserLib.Math.Between(-10, 10), duration: PhaserLib.Math.Between(5000, 8200), rotate: .002, alphaSwing: .04, depthFactor: .34 });
-            }
-
-            for (let i = 0; i < 8; i++) {
-                const shard = this.add.triangle(
-                    PhaserLib.Math.Between(18, w - 18),
-                    PhaserLib.Math.Between(18, h - 18),
-                    0, 22, 22, 0, 44, 22,
-                    colors[(i + 2) % 3],
-                    .075
-                ).setAngle(PhaserLib.Math.Between(0, 360));
-                this.addFloater(shard, { dx: PhaserLib.Math.Between(-14, 14), dy: PhaserLib.Math.Between(-14, 14), duration: PhaserLib.Math.Between(7000, 10400), rotate: PhaserLib.Math.FloatBetween(-.003, .003), alphaSwing: .025, depthFactor: .26 });
-            }
-        }
-
-        buildDiscussionBackdrop() {
-            const w = this.scale.width;
-            const h = this.scale.height;
-            const colors = this.mode.colors;
-            for (let i = 0; i < 9; i++) {
-                const x = w * (.12 + (i % 3) * .38);
-                const y = h * (.16 + Math.floor(i / 3) * .32);
-                const capsule = this.add.ellipse(x, y, PhaserLib.Math.Between(105, 145), PhaserLib.Math.Between(38, 58), colors[i % colors.length], .048).setAngle(PhaserLib.Math.Between(-22, 22));
-                capsule.setStrokeStyle(1, colors[(i + 1) % colors.length], .08);
-                this.addFloater(capsule, { dx: 10, dy: 8, duration: 7200 + i * 220, rotate: .0015, alphaSwing: .02, depthFactor: .20 });
-            }
-        }
-
-        buildVoteBackdrop() {
-            const w = this.scale.width;
-            const h = this.scale.height;
-            const colors = this.mode.colors;
-            for (let i = 0; i < 15; i++) {
-                const bar = this.add.rectangle(
-                    PhaserLib.Math.Between(10, w - 10),
-                    PhaserLib.Math.Between(10, h - 10),
-                    PhaserLib.Math.Between(54, 118),
-                    PhaserLib.Math.Between(7, 11),
-                    colors[i % colors.length],
-                    .07
-                ).setAngle(-18);
-                this.addFloater(bar, { dx: PhaserLib.Math.Between(-11, 11), dy: PhaserLib.Math.Between(-9, 9), duration: PhaserLib.Math.Between(6500, 9300), rotate: PhaserLib.Math.FloatBetween(-.002, .002), alphaSwing: .018, depthFactor: .25 });
-            }
-        }
-
-        buildCelebrateBackdrop() {
-            this.buildPartyBackdrop();
-            if (this.reducedMotion) return;
-            const w = this.scale.width;
-            const h = this.scale.height;
-            const colors = this.mode.colors;
-            for (let i = 0; i < 9; i++) {
-                const star = this.add.star(PhaserLib.Math.Between(16, w - 16), PhaserLib.Math.Between(16, h - 16), 5, 3.5, 10, colors[i % colors.length], .14);
-                this.addFloater(star, { dx: PhaserLib.Math.Between(-16, 16), dy: PhaserLib.Math.Between(-16, 16), duration: PhaserLib.Math.Between(4300, 7400), rotate: PhaserLib.Math.FloatBetween(-.009, .009), alphaSwing: .07, depthFactor: .38 });
-            }
-        }
-
-        buildBombBackdrop(alertMode = false) {
-            const w = this.scale.width;
-            const h = this.scale.height;
-            const colors = this.mode.colors;
-            const centers = alertMode
-                ? [[.10, .20, 72], [.86, .28, 90], [.24, .78, 82], [.78, .83, 64]]
-                : [[.10, .20, 56], [.86, .29, 72], [.22, .78, 68], [.77, .84, 52]];
-
-            centers.forEach(([xr, yr, radius], index) => {
-                const x = w * xr;
-                const y = h * yr;
-                const burst = this.add.star(x, y, 10, radius * .34, radius, colors[index % colors.length], alertMode ? .028 : .018);
-                burst.setStrokeStyle(1.2, colors[(index + 1) % colors.length], alertMode ? .21 : .13);
-                this.addFloater(burst, { x, y, dx: 14, dy: 13, duration: 6000 + index * 430, rotate: .006 * (index % 2 ? 1 : -1), alphaSwing: .018, depthFactor: .17 });
-
-                const ring = this.add.circle(x, y, radius * .72, colors[(index + 2) % colors.length], .004);
-                ring.setStrokeStyle(alertMode ? 2 : 1.4, colors[(index + 2) % colors.length], alertMode ? .19 : .11);
-                this.addFloater(ring, { x, y, dx: 10, dy: 11, duration: 6900 + index * 500, alphaSwing: .016, depthFactor: .13 });
-            });
-
-            for (let i = 0; i < 17; i++) {
-                const spark = this.add.rectangle(
-                    PhaserLib.Math.Between(8, w - 8),
-                    PhaserLib.Math.Between(8, h - 8),
-                    PhaserLib.Math.Between(11, 25),
-                    2.2,
-                    colors[i % colors.length],
-                    alertMode ? .19 : .12
-                ).setAngle(PhaserLib.Math.Between(0, 180));
-                this.addFloater(spark, { dx: PhaserLib.Math.Between(-17, 17), dy: PhaserLib.Math.Between(-17, 17), duration: PhaserLib.Math.Between(4500, 7800), rotate: PhaserLib.Math.FloatBetween(-.006, .006), alphaSwing: .035, depthFactor: .34 });
-            }
+        resetRadialParticle(mote) {
+            mote.radialAngle = PhaserLib.Math.FloatBetween(0, Math.PI * 2);
+            mote.radialRadius = PhaserLib.Math.FloatBetween(6, 34);
+            mote.baseAlpha = PhaserLib.Math.FloatBetween(this.profile.alpha[0], this.profile.alpha[1]);
         }
 
         spawnBurst(x, y, count = 8) {
             const mode = this.mode || BACKGROUND_MODES.party;
             for (let i = 0; i < count; i++) {
                 const angle = (Math.PI * 2 * i) / count + PhaserLib.Math.FloatBetween(-.15, .15);
-                const distance = PhaserLib.Math.Between(28, 82);
-                const dot = this.add.circle(x, y, PhaserLib.Math.FloatBetween(1.8, 3.5), mode.colors[i % mode.colors.length], .40);
+                const distance = PhaserLib.Math.Between(32, 96);
+                const dot = this.add.circle(x, y, PhaserLib.Math.FloatBetween(1.8, 3.8), mode.colors[i % mode.colors.length], .52);
+                try { dot.setBlendMode?.('ADD'); } catch (_) {}
                 this.tweens.add({
                     targets: dot,
                     x: x + Math.cos(angle) * distance,
                     y: y + Math.sin(angle) * distance,
-                    scale: .25,
+                    scale: .2,
                     alpha: 0,
-                    duration: PhaserLib.Math.Between(420, 720),
+                    duration: PhaserLib.Math.Between(420, 760),
                     ease: 'Cubic.Out',
                     onComplete: () => dot.destroy()
                 });
@@ -331,27 +206,44 @@ function initializePhaserBackground() {
 
         update(time, delta) {
             if (!this.mode || document.visibilityState !== 'visible') return;
-            const speed = this.reducedMotion ? .18 : this.mode.speed;
             const dt = Math.min(32, delta) / 16.67;
+            const speed = this.reducedMotion ? .16 : Math.max(.45, this.mode.speed || 1);
+            const behavior = this.profile?.behavior || 'rise';
+            const short = Math.min(this.scale.width, this.scale.height);
 
             this.motes.forEach(mote => {
-                mote.x += mote.speedX * speed * dt;
-                mote.y += mote.speedY * speed * dt;
-                mote.alpha = PhaserLib.Math.Clamp(mote.baseAlpha + Math.sin(time * mote.twinkleSpeed + mote.phase) * .025, .015, .26);
+                if (!mote?.active) return;
 
-                if (mote.y < -16) mote.y = this.scale.height + 16;
-                if (mote.x < -16) mote.x = this.scale.width + 16;
-                if (mote.x > this.scale.width + 16) mote.x = -16;
-            });
+                if (behavior === 'radial') {
+                    mote.radialRadius += mote.radialSpeed * speed * dt * 3.2;
+                    if (mote.radialRadius > short * .58) this.resetRadialParticle(mote);
+                    mote.x = mote.cx + Math.cos(mote.radialAngle) * mote.radialRadius + this.pointerTarget.x * mote.parallax;
+                    mote.y = mote.cy + Math.sin(mote.radialAngle) * mote.radialRadius + this.pointerTarget.y * mote.parallax;
+                    if ('rotation' in mote) mote.rotation = mote.radialAngle;
+                } else if (behavior === 'gyro') {
+                    mote.x += mote.vx * speed * dt * 2.2;
+                    mote.y += mote.vy * speed * dt;
+                    mote.y += Math.sin(time * .0022 + mote.phase) * .16 * mote.wave;
+                    this.wrapParticle(mote);
+                } else if (behavior === 'flow') {
+                    mote.x += mote.vx * speed * dt * 1.8;
+                    mote.y += mote.vy * speed * dt;
+                    mote.y += Math.sin(time * .0015 + mote.phase) * .06 * mote.wave;
+                    this.wrapParticle(mote);
+                } else {
+                    const multiplier = behavior === 'scan' ? 1.7 : behavior === 'celebrate' ? 1.45 : 1;
+                    mote.x += mote.vx * speed * dt * multiplier;
+                    mote.y += mote.vy * speed * dt * multiplier;
+                    if (behavior === 'scan') mote.y += Math.sin(time * .0014 + mote.phase) * .08;
+                    if (behavior === 'drift') mote.x += Math.cos(time * .0011 + mote.phase) * .07;
+                    this.wrapParticle(mote);
+                }
 
-            this.floaters.forEach(item => {
-                const node = item.node;
-                if (!node?.active) return;
-                const t = time / item.duration + item.phase;
-                node.x = item.baseX + Math.sin(t) * item.dx + this.pointerTarget.x * item.depthFactor;
-                node.y = item.baseY + Math.cos(t * 1.13) * item.dy + this.pointerTarget.y * item.depthFactor;
-                node.alpha = PhaserLib.Math.Clamp(item.baseAlpha + Math.sin(t * 1.37) * item.alphaSwing, .012, .32);
-                if (item.rotate) node.rotation += item.rotate * speed * dt;
+                mote.alpha = PhaserLib.Math.Clamp(
+                    mote.baseAlpha + Math.sin(time * mote.twinkleSpeed + mote.phase) * (this.profile.twinkle || .08),
+                    .06,
+                    .56
+                );
             });
 
             this.confetti.forEach(rect => {
@@ -380,7 +272,7 @@ function initializePhaserBackground() {
 
     window.addEventListener('resize', () => {
         phaserGame?.scale?.resize(window.innerWidth, window.innerHeight);
-        backgroundScene?.rebuildDecor?.();
+        if (backgroundScene?.mode) backgroundScene.setMode(backgroundScene.modeName, { immediate: true });
     });
 }
 
