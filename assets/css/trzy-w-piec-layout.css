@@ -44,13 +44,124 @@
   min-height: 1rem;
 }
 
+.three-five-challenge-card {
+  gap: .72rem;
+}
+
+.three-five-challenge-card .three-five-group-label > strong {
+  color: var(--three-five-accent);
+  font-size: .82rem;
+  font-weight: 950;
+  letter-spacing: .05em;
+}
+
+.three-five-preset-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .55rem;
+}
+
+.three-five-preset-grid button {
+  display: grid;
+  place-items: center;
+  gap: .12rem;
+  min-height: 3.6rem;
+  border: 1px solid rgba(148, 163, 184, .12);
+  border-radius: .9rem;
+  background: rgba(15, 23, 42, .54);
+  transition: border-color .16s ease, background .16s ease, transform .16s ease;
+}
+
+.three-five-preset-grid button strong {
+  font-size: 1rem;
+  font-weight: 950;
+}
+
+.three-five-preset-grid button small {
+  color: rgb(100 116 139);
+  font-size: .6rem;
+}
+
+.three-five-preset-grid button.is-selected {
+  color: #101703;
+  border-color: rgba(var(--three-five-rgb), .72);
+  background: linear-gradient(135deg, var(--three-five-accent), var(--three-five-alt));
+  transform: translateY(-1px);
+}
+
+.three-five-preset-grid button.is-selected small {
+  color: rgba(16, 23, 3, .64);
+}
+
+.three-five-parameter-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .55rem;
+}
+
+.three-five-parameter {
+  display: grid;
+  gap: .52rem;
+  padding: .72rem;
+  border: 1px solid rgba(148, 163, 184, .1);
+  border-radius: .9rem;
+  background: rgba(2, 6, 23, .42);
+}
+
+.three-five-parameter-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.three-five-parameter-heading span {
+  color: rgb(148 163 184);
+  font-size: .65rem;
+  font-weight: 800;
+}
+
+.three-five-parameter-heading strong {
+  color: var(--three-five-accent);
+  font-size: 1.25rem;
+  font-weight: 950;
+}
+
+.three-five-parameter-stepper {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) 2rem;
+  align-items: center;
+  gap: .42rem;
+}
+
+.three-five-parameter-stepper button {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  aspect-ratio: 1;
+  border-radius: .66rem;
+  color: var(--three-five-accent);
+  border: 1px solid rgba(var(--three-five-rgb), .16);
+  background: rgba(var(--three-five-rgb), .08);
+}
+
+.three-five-parameter-stepper input[type="range"] {
+  width: 100%;
+  accent-color: var(--three-five-accent);
+}
+
+.three-five-parameter > small {
+  color: rgb(71 85 105);
+  font-size: .58rem;
+  text-align: center;
+}
+
 .three-five-timer {
   --three-five-elapsed-angle: 0turn;
-  --three-five-tick-radius: min(25vw, 6.7rem);
   flex: 0 0 auto;
 }
 
-/* Time is consumed clockwise from 12 o'clock, matching the five markers. */
+/* Time is consumed clockwise from 12 o'clock. */
 .three-five-timer-progress {
   background: conic-gradient(
     from -90deg,
@@ -89,20 +200,64 @@
   line-height: 1;
 }
 
-.three-five-timer-tick {
-  left: 50%;
-  top: 50%;
-  translate: -50% -50%;
-  transform: rotate(calc(var(--tick-index) * 72deg))
-             translateY(calc(-1 * var(--three-five-tick-radius)))
-             rotate(calc(var(--tick-index) * -72deg));
+.three-five-timer-ticks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
 }
 
+/* Each tick uses the exact same 7% circle as the progress ring.
+   The mark itself is centered 4px inside its outer edge: the ring's centerline. */
+.three-five-timer-tick,
 .three-five-timer-tick.is-spent {
-  transform: rotate(calc(var(--tick-index) * 72deg))
-             translateY(calc(-1 * var(--three-five-tick-radius)))
-             rotate(calc(var(--tick-index) * -72deg))
-             scale(.55);
+  position: absolute;
+  inset: 7%;
+  left: 7%;
+  top: 7%;
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  background: none;
+  box-shadow: none;
+  translate: none;
+  transform: rotate(var(--tick-angle));
+  opacity: 1;
+  filter: none;
+  transition: none;
+}
+
+.three-five-timer-tick::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: .56rem;
+  height: 1.45rem;
+  border-radius: 999px;
+  background: linear-gradient(to bottom, var(--three-five-alt), var(--three-five-accent));
+  box-shadow: 0 0 16px rgba(var(--three-five-rgb), .3);
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  transition: opacity .18s ease, transform .18s ease, filter .18s ease;
+}
+
+.three-five-timer-tick.is-spent::before {
+  opacity: .12;
+  filter: saturate(.2);
+  transform: translate(-50%, -50%) scale(.55);
+}
+
+.three-five-timer.has-many-ticks .three-five-timer-tick::before {
+  width: .32rem;
+  height: 1.05rem;
+  box-shadow: 0 0 10px rgba(var(--three-five-rgb), .24);
+}
+
+.three-five-timer.has-dense-ticks .three-five-timer-tick::before {
+  width: .14rem;
+  height: .72rem;
+  box-shadow: 0 0 7px rgba(var(--three-five-rgb), .2);
 }
 
 .three-five-action-slot {
@@ -144,14 +299,16 @@
   line-height: 1;
 }
 
+@media (max-width: 390px) {
+  .three-five-parameter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-height: 720px) {
   .three-five-play-screen {
     justify-content: flex-start;
     gap: .62rem;
-  }
-
-  .three-five-timer {
-    --three-five-tick-radius: min(20vw, 5.2rem);
   }
 
   .three-five-action-slot {

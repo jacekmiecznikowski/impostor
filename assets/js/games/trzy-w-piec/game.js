@@ -59,7 +59,7 @@ function renderThreeFiveReadyScreen() {
     if (name) name.textContent = player?.name || 'Gracz';
     if (score) score.textContent = `${player?.score || 0} pkt`;
     if (turn) turn.textContent = `Tura ${threeFiveState.turnNumber + 1}`;
-    if (target) target.textContent = `Cel: ${threeFiveState.targetScore} pkt`;
+    if (target) target.textContent = `${threeFiveState.answerCount} w ${threeFiveState.turnSeconds} • do ${threeFiveState.targetScore} pkt`;
 }
 
 function showThreeFivePrompt() {
@@ -81,24 +81,53 @@ function updateThreeFiveTimerUnit(seconds) {
     if (unit) unit.textContent = getThreeFiveSecondUnit(seconds);
 }
 
+function renderThreeFiveTimerTicks() {
+    const timer = document.getElementById('three-five-timer');
+    const container = document.getElementById('three-five-timer-ticks');
+    if (!container || !timer) return;
+    const total = ThreeFiveRules.normalizeChallengeValue(threeFiveState.turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
+    container.replaceChildren();
+    timer.classList.toggle('has-many-ticks', total > 10);
+    timer.classList.toggle('has-dense-ticks', total > 20);
+
+    const fragment = document.createDocumentFragment();
+    for (let index = 0; index < total; index += 1) {
+        const tick = document.createElement('span');
+        tick.className = 'three-five-timer-tick';
+        tick.dataset.threeFiveTick = String(total - index);
+        tick.style.setProperty('--tick-angle', `${(index * 360) / total}deg`);
+        tick.setAttribute('aria-hidden', 'true');
+        fragment.appendChild(tick);
+    }
+    container.appendChild(fragment);
+}
+
 function renderThreeFivePlayScreen() {
     const player = getThreeFiveCurrentPlayer();
     const prompt = threeFiveRuntime.currentPrompt;
+    const answerCount = ThreeFiveRules.normalizeChallengeValue(threeFiveState.answerCount, ThreeFiveRules.DEFAULT_ANSWER_COUNT);
+    const turnSeconds = ThreeFiveRules.normalizeChallengeValue(threeFiveState.turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
     const name = document.getElementById('three-five-current-player');
     const category = document.getElementById('three-five-prompt-category');
     const text = document.getElementById('three-five-prompt-text');
+    const rule = document.getElementById('three-five-prompt-rule-text');
+    const startCopy = document.getElementById('three-five-start-copy');
+    const stopCopy = document.getElementById('three-five-stop-copy');
     if (name) name.textContent = player?.name || 'Gracz';
     if (category) category.textContent = prompt?.categoryName || 'Wyzwanie';
-    if (text) text.textContent = prompt?.text || 'Wymień 3 rzeczy.';
+    if (text) text.textContent = ThreeFiveRules.formatPrompt(prompt?.text, answerCount);
+    if (rule) rule.textContent = `Podaj dokładnie ${answerCount} ${ThreeFiveRules.getAnswerUnit(answerCount)}`;
+    if (startCopy) startCopy.textContent = `Od tej chwili masz ${turnSeconds} ${getThreeFiveSecondUnit(turnSeconds)}`;
+    if (stopCopy) stopCopy.textContent = `CZAS! Czy udało się podać ${answerCount} ${ThreeFiveRules.getAnswerUnit(answerCount)}?`;
 
     const timer = document.getElementById('three-five-timer');
     timer?.style.setProperty('--three-five-progress', '1');
     timer?.style.setProperty('--three-five-elapsed-angle', '0turn');
     timer?.classList.remove('is-running', 'is-critical', 'is-expired', 'is-pulsing');
     const value = document.getElementById('three-five-timer-value');
-    if (value) value.textContent = String(ThreeFiveRules.TURN_SECONDS);
-    updateThreeFiveTimerUnit(ThreeFiveRules.TURN_SECONDS);
-    document.querySelectorAll('[data-three-five-tick]').forEach(tick => tick.classList.remove('is-spent'));
+    if (value) value.textContent = String(turnSeconds);
+    updateThreeFiveTimerUnit(turnSeconds);
+    renderThreeFiveTimerTicks();
 
     const start = document.getElementById('three-five-start-btn');
     const judge = document.getElementById('three-five-judge');
@@ -116,7 +145,8 @@ function pulseThreeFiveTimer() {
 }
 
 function updateThreeFiveTimerVisual(remainingMs) {
-    const totalMs = ThreeFiveRules.TURN_SECONDS * 1000;
+    const turnSeconds = ThreeFiveRules.normalizeChallengeValue(threeFiveState.turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
+    const totalMs = turnSeconds * 1000;
     const progress = Math.max(0, Math.min(1, remainingMs / totalMs));
     const elapsed = 1 - progress;
     const seconds = Math.max(0, Math.ceil(remainingMs / 1000));
@@ -150,9 +180,10 @@ function startThreeFiveCountdown() {
     const timer = document.getElementById('three-five-timer');
     timer?.classList.add('is-running');
 
+    const turnSeconds = ThreeFiveRules.normalizeChallengeValue(threeFiveState.turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
     threeFiveRuntime.timerRunning = true;
-    threeFiveRuntime.lastWholeSecond = ThreeFiveRules.TURN_SECONDS;
-    threeFiveRuntime.endsAt = performance.now() + ThreeFiveRules.TURN_SECONDS * 1000;
+    threeFiveRuntime.lastWholeSecond = turnSeconds;
+    threeFiveRuntime.endsAt = performance.now() + turnSeconds * 1000;
     setGameAwakeMode?.(true);
     playSound?.('reveal');
     navigator.vibrate?.(18);

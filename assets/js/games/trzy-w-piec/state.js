@@ -4,7 +4,9 @@ const THREE_FIVE_DEFAULT_PLAYER_COUNT = 4;
 const threeFiveState = {
     playerCount: THREE_FIVE_DEFAULT_PLAYER_COUNT,
     players: [],
-    targetScore: 10,
+    targetScore: ThreeFiveRules.MATCH_TARGET_SCORE,
+    answerCount: ThreeFiveRules.DEFAULT_ANSWER_COUNT,
+    turnSeconds: ThreeFiveRules.DEFAULT_TURN_SECONDS,
     activeCategories: [],
     currentPlayerIndex: 0,
     turnNumber: 0,
@@ -42,14 +44,29 @@ function normalizeThreeFiveCategories() {
     threeFiveState.activeCategories = selected.length ? selected : [...available];
 }
 
+function normalizeThreeFiveChallenge() {
+    threeFiveState.answerCount = ThreeFiveRules.normalizeChallengeValue(
+        threeFiveState.answerCount,
+        ThreeFiveRules.DEFAULT_ANSWER_COUNT
+    );
+    threeFiveState.turnSeconds = ThreeFiveRules.normalizeChallengeValue(
+        threeFiveState.turnSeconds,
+        ThreeFiveRules.DEFAULT_TURN_SECONDS
+    );
+    threeFiveState.targetScore = ThreeFiveRules.MATCH_TARGET_SCORE;
+}
+
 function persistThreeFiveSession() {
     normalizeThreeFiveCategories();
+    normalizeThreeFiveChallenge();
     threeFiveState.hasSavedSession = threeFiveState.players.length >= 2;
     try {
         localStorage.setItem(THREE_FIVE_SESSION_STORAGE_KEY, JSON.stringify({
             playerCount: threeFiveState.playerCount,
             players: threeFiveState.players,
             targetScore: threeFiveState.targetScore,
+            answerCount: threeFiveState.answerCount,
+            turnSeconds: threeFiveState.turnSeconds,
             activeCategories: threeFiveState.activeCategories,
             currentPlayerIndex: threeFiveState.currentPlayerIndex,
             turnNumber: threeFiveState.turnNumber,
@@ -67,7 +84,9 @@ function loadThreeFiveSession() {
         const count = clampPlayerSetupCount(parsed.playerCount, 2, 12, THREE_FIVE_DEFAULT_PLAYER_COUNT);
         const players = Array.isArray(parsed.players) ? parsed.players.slice(0, count) : [];
         createThreeFivePlayers(count, players);
-        threeFiveState.targetScore = ThreeFiveRules.normalizeTargetScore(parsed.targetScore, 10);
+        threeFiveState.targetScore = ThreeFiveRules.MATCH_TARGET_SCORE;
+        threeFiveState.answerCount = ThreeFiveRules.normalizeChallengeValue(parsed.answerCount, ThreeFiveRules.DEFAULT_ANSWER_COUNT);
+        threeFiveState.turnSeconds = ThreeFiveRules.normalizeChallengeValue(parsed.turnSeconds, ThreeFiveRules.DEFAULT_TURN_SECONDS);
         threeFiveState.activeCategories = Array.isArray(parsed.activeCategories) ? parsed.activeCategories.map(String) : [];
         threeFiveState.currentPlayerIndex = Math.min(
             Math.max(0, Number.parseInt(parsed.currentPlayerIndex, 10) || 0),
@@ -81,19 +100,24 @@ function loadThreeFiveSession() {
     } catch (_) {
         threeFiveState.playerCount = THREE_FIVE_DEFAULT_PLAYER_COUNT;
         threeFiveState.players = [];
-        threeFiveState.targetScore = 10;
+        threeFiveState.targetScore = ThreeFiveRules.MATCH_TARGET_SCORE;
+        threeFiveState.answerCount = ThreeFiveRules.DEFAULT_ANSWER_COUNT;
+        threeFiveState.turnSeconds = ThreeFiveRules.DEFAULT_TURN_SECONDS;
         threeFiveState.activeCategories = getThreeFiveCategoryIds();
         threeFiveState.currentPlayerIndex = 0;
         threeFiveState.turnNumber = 0;
         threeFiveState.recentPromptIds = [];
     }
     normalizeThreeFiveCategories();
+    normalizeThreeFiveChallenge();
 }
 
 function resetThreeFiveSession() {
     threeFiveState.playerCount = THREE_FIVE_DEFAULT_PLAYER_COUNT;
     threeFiveState.players = [];
-    threeFiveState.targetScore = 10;
+    threeFiveState.targetScore = ThreeFiveRules.MATCH_TARGET_SCORE;
+    threeFiveState.answerCount = ThreeFiveRules.DEFAULT_ANSWER_COUNT;
+    threeFiveState.turnSeconds = ThreeFiveRules.DEFAULT_TURN_SECONDS;
     threeFiveState.activeCategories = getThreeFiveCategoryIds();
     threeFiveState.currentPlayerIndex = 0;
     threeFiveState.turnNumber = 0;
