@@ -45,7 +45,7 @@
 }
 
 .three-five-timer {
-  --three-five-elapsed: 0;
+  --three-five-elapsed-angle: 0turn;
   --three-five-tick-radius: min(25vw, 6.7rem);
   flex: 0 0 auto;
 }
@@ -54,7 +54,7 @@
 .three-five-timer-progress {
   background: conic-gradient(
     from -90deg,
-    rgba(148, 163, 184, .10) calc(var(--three-five-elapsed) * 1turn),
+    rgba(148, 163, 184, .10) var(--three-five-elapsed-angle),
     var(--three-five-accent) 0
   );
 }
@@ -62,7 +62,7 @@
 .three-five-timer.is-critical .three-five-timer-progress {
   background: conic-gradient(
     from -90deg,
-    rgba(148, 163, 184, .08) calc(var(--three-five-elapsed) * 1turn),
+    rgba(148, 163, 184, .08) var(--three-five-elapsed-angle),
     #fb923c 0
   );
 }
