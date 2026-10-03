@@ -8,6 +8,7 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const app = read('assets/js/app.js');
 const index = read('index.html');
 const runtime = read('assets/js/shared/game-themes.js');
+const background = read('assets/js/shared/background.js');
 const colors = read('assets/css/game-color-system.css');
 const brand = read('assets/css/brand-theme.css');
 const impostor = read('assets/js/games/impostor/integration.js');
@@ -63,6 +64,19 @@ assert.match(cmm, /overlayMotif:\s*'gyro'/);
 assert.match(cmm, /overlayMotif:\s*'thought-celebrate'/);
 assert.match(prototypes, /overlayMotif:\s*'wild-cards'/);
 
+// The base Phaser scene must visibly respond to those motifs too. This is intentionally
+// separate from the overlay renderer so a very subtle overlay cannot make every game
+// look like the same generic drifting-dot background.
+assert.match(background, /resolveParticleProfile\(modeName, mode\)/);
+assert.match(background, /'suspect-radar':\s*\{\s*behavior:\s*'scan'/);
+assert.match(background, /'fuse-sparks':\s*\{\s*behavior:\s*'radial'/);
+assert.match(background, /'orbit-fast':\s*\{\s*behavior:\s*'flow'/);
+assert.match(background, /gyro:\s*\{\s*behavior:\s*'gyro'/);
+assert.match(background, /shockwave:\s*\{\s*behavior:\s*'radial'/);
+assert.match(background, /setBlendMode\?\.\('ADD'\)/);
+assert.doesNotMatch(background, /clearPartyjniakThemeMotifs/);
+assert.doesNotMatch(background, /buildImpostorBackdrop|buildBombBackdrop|buildPartyBackdrop/);
+
 assert.doesNotMatch(colors, /body\[data-game=/);
 assert.doesNotMatch(brand, /body\[data-bg-mode=/);
 assert.doesNotMatch(brand, /data-game-id="/);
@@ -76,4 +90,5 @@ assert.doesNotMatch(index, /bomb:\s*\{/);
 assert.equal(fs.existsSync(path.join(root, 'assets/css/ticking-bomb-theme.css')), false);
 
 new Function(runtime);
+new Function(background);
 console.log('Module-owned responsive Phaser theme system tests: OK');
