@@ -17,6 +17,9 @@ const prototypes = read('assets/js/games/prototypes/integration.js');
 const gamesIndex = read('assets/js/games/index.js');
 
 assert.match(viewLoader, /getGameViewFragments/);
+assert.match(viewLoader, /querySelectorAll\?\.\('\.screen'\)/);
+assert.match(viewLoader, /classList\.add\('hidden'\)/);
+assert.match(viewLoader, /classList\.remove\('flex'\)/);
 assert.doesNotMatch(viewLoader, /impostor|ticking-bomb|naokolo|co-mam-na-mysli/i);
 
 assert.match(ui, /getGameScreenConfig/);
@@ -54,10 +57,17 @@ assert.match(cmm, /rulesModalId:\s*'cmm-rules-modal'/);
 assert.match(cmm, /orientation:\s*'landscape'/);
 assert.match(cmm, /initialize:\s*\(\) => initializeCoMamNaMysliContent\(\)/);
 
-assert.match(prototypes, /id:\s*'dzika-karta'/);
-assert.match(prototypes, /name:\s*'Dzika Karta'/);
+for (const [id, name] of [
+  ['dzika-karta', 'Dzika Karta'],
+  ['trzy-rundy', 'Trzy Rundy'],
+  ['trzy-na-piec', 'Trzy na Pięć'],
+  ['synchronizacja', 'Synchronizacja']
+]) {
+  assert.match(prototypes, new RegExp(`id:\\s*'${id}'`));
+  assert.match(prototypes, new RegExp(`name:\\s*'${name}'`));
+}
 assert.doesNotMatch(prototypes, /id:\s*'naokolo'|id:\s*'co-mam-na-mysli'/);
-assert.equal((prototypes.match(/status: 'prototype'/g) || []).length, 1);
+assert.equal((prototypes.match(/status: 'prototype'/g) || []).length, 4);
 assert.doesNotMatch(prototypes, /screens:\s*\{|session:\s*\{|\bopen\s*\(/);
 
 assert.match(gamesIndex, /registerImpostorGame\(\)/);
