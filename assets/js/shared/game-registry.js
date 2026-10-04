@@ -110,13 +110,14 @@ export async function initializeGameModule(gameOrId) {
             return { status: 'fulfilled', value };
         } catch (error) {
             console.warn(`Nie udało się zainicjalizować modułu ${gameModule.id}.`, error);
-            GAME_INITIALIZATION.delete(gameModule.id);
             return { status: 'rejected', reason: error };
         }
     })();
 
     GAME_INITIALIZATION.set(gameModule.id, initialization);
-    return initialization;
+    const result = await initialization;
+    if (result.status === 'rejected') GAME_INITIALIZATION.delete(gameModule.id);
+    return result;
 }
 
 export async function initializeGameModules() {
