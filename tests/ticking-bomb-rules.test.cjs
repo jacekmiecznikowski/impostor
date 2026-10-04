@@ -83,6 +83,7 @@ assert.equal(scoreLoss(null, 'p1'), null);
 const root = path.join(__dirname, '..');
 const gameSource = fs.readFileSync(path.join(root, 'assets/js/games/ticking-bomb/game.js'), 'utf8');
 const stateSource = fs.readFileSync(path.join(root, 'assets/js/games/ticking-bomb/state.js'), 'utf8');
+const bootstrapSource = fs.readFileSync(path.join(root, 'assets/js/games/ticking-bomb/bootstrap.js'), 'utf8');
 const indexSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 
 ['choosePrompt', 'chooseStartingPlayerIndex', 'getFuseDurationMs', 'nextPlayerIndex', 'scoreLoss'].forEach(method => {
@@ -91,9 +92,10 @@ const indexSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 assert.doesNotMatch(gameSource, /function secureRandomBetween/);
 assert.doesNotMatch(stateSource, /const BOMB_FUSE_PRESETS/);
 
-const rulesScript = indexSource.indexOf('./assets/js/games/ticking-bomb/rules.js');
-const stateScript = indexSource.indexOf('./assets/js/games/ticking-bomb/state.js');
-const gameScript = indexSource.indexOf('./assets/js/games/ticking-bomb/game.js');
+const rulesScript = bootstrapSource.indexOf('./assets/js/games/ticking-bomb/rules.js');
+const stateScript = bootstrapSource.indexOf('./assets/js/games/ticking-bomb/state.js');
+const gameScript = bootstrapSource.indexOf('./assets/js/games/ticking-bomb/game.js');
 assert.ok(rulesScript >= 0 && rulesScript < stateScript && stateScript < gameScript, 'rules.js musi ładować się przed state.js i game.js');
+assert.doesNotMatch(indexSource, /assets\/js\/games\/ticking-bomb\/(?:rules|state|game)\.js/);
 
-console.log('Ticking Bomb domain rules tests: OK');
+console.log('Ticking Bomb domain rules and lazy load order tests: OK');

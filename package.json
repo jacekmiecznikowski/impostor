@@ -1,5 +1,28 @@
 {
-  "name":"partyjniak","version":"4.2.0","private":true,"description":"Partyjniak – mobilne gry imprezowe na jeden telefon.",
-  "scripts":{"test":"node tests/core.test.cjs && node tests/content.test.cjs && node tests/game-registry-behavior.test.mjs && node tests/game-module-config.test.cjs && node tests/game-theme-system.test.cjs && node tests/app-settings.test.cjs && node tests/player-setup.test.cjs && node tests/naokolo-content.test.cjs && node tests/naokolo-rules.test.cjs && node tests/naokolo-state.test.cjs && node tests/co-mam-na-mysli-content.test.cjs && node tests/co-mam-na-mysli-rules.test.cjs && node tests/co-mam-na-mysli-motion.test.cjs && node tests/co-mam-na-mysli-state.test.cjs && node tests/trzy-w-piec-content.test.cjs && node tests/trzy-w-piec-rules.test.cjs && node tests/trzy-w-piec-state.test.cjs && node tests/trzy-w-piec-game.test.cjs && node tests/trzy-w-piec-layout.test.cjs && node tests/synchronizacja-content.test.cjs && node tests/synchronizacja-rules.test.cjs && node tests/synchronizacja-state.test.cjs && node tests/synchronizacja-game.test.cjs && node tests/trzy-rundy-content.test.cjs && node tests/trzy-rundy-rules.test.cjs && node tests/trzy-rundy-state.test.cjs && node tests/trzy-rundy-game.test.cjs && node tests/dzika-karta-content.test.cjs && node tests/dzika-karta-rules.test.cjs && node tests/dzika-karta-state.test.cjs && node tests/ticking-bomb-content.test.cjs && node tests/ticking-bomb-rules.test.cjs && node tests/ticking-bomb-state.test.cjs && node tests/ticking-bomb-game.test.cjs && node tests/session-interface.test.cjs && node tests/module-boundary.test.cjs && node tests/ui-contract.test.cjs && node tests/pwa-config.test.cjs && node tests/structure.test.cjs","serve":"python3 -m http.server 8080","build:web":"node scripts/prepare-web.mjs","android:prepare":"npm run build:web && npx cap sync android","android:debug":"npm run android:prepare && node scripts/patch-android.mjs && cd android && ./gradlew assembleDebug"},
-  "dependencies":{"@capacitor/android":"8.5.2","@capacitor/app":"8.1.1","@capacitor/core":"8.5.2"},"devDependencies":{"@capacitor/cli":"8.5.2"}
+  "name": "partyjniak",
+  "version": "4.2.0",
+  "private": true,
+  "description": "Partyjniak – mobilne gry imprezowe na jeden telefon.",
+  "scripts": {
+    "test": "node tests/core.test.cjs && node tests/content.test.cjs && node tests/game-registry-behavior.test.mjs && node tests/game-module-config.test.cjs && node tests/game-theme-system.test.cjs && node tests/app-settings.test.cjs && node tests/player-setup.test.cjs && node tests/naokolo-content.test.cjs && node tests/naokolo-rules.test.cjs && node tests/naokolo-state.test.cjs && node tests/co-mam-na-mysli-content.test.cjs && node tests/co-mam-na-mysli-rules.test.cjs && node tests/co-mam-na-mysli-motion.test.cjs && node tests/co-mam-na-mysli-state.test.cjs && node tests/trzy-w-piec-content.test.cjs && node tests/trzy-w-piec-rules.test.cjs && node tests/trzy-w-piec-state.test.cjs && node tests/trzy-w-piec-game.test.cjs && node tests/trzy-w-piec-layout.test.cjs && node tests/synchronizacja-content.test.cjs && node tests/synchronizacja-rules.test.cjs && node tests/synchronizacja-state.test.cjs && node tests/synchronizacja-game.test.cjs && node tests/trzy-rundy-content.test.cjs && node tests/trzy-rundy-rules.test.cjs && node tests/trzy-rundy-state.test.cjs && node tests/trzy-rundy-game.test.cjs && node tests/dzika-karta-content.test.cjs && node tests/dzika-karta-rules.test.cjs && node tests/dzika-karta-state.test.cjs && node tests/ticking-bomb-content.test.cjs && node tests/ticking-bomb-rules.test.cjs && node tests/ticking-bomb-state.test.cjs && node tests/ticking-bomb-game.test.cjs && node tests/session-interface.test.cjs && node tests/module-boundary.test.cjs && node tests/ui-contract.test.cjs && node tests/pwa-config.test.cjs && node tests/structure.test.cjs",
+    "test:e2e": "playwright test",
+    "build:assets": "node scripts/build-assets.mjs",
+    "serve": "npm run build:assets && python3 -m http.server 8080",
+    "build:web": "npm run build:assets && node scripts/prepare-web.mjs",
+    "android:prepare": "npm run build:web && npx cap sync android",
+    "android:debug": "npm run android:prepare && node scripts/patch-android.mjs && cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/core": "8.5.2",
+    "@fortawesome/fontawesome-free": "6.4.0",
+    "@fontsource/inter": "5.0.18",
+    "phaser": "3.60.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2",
+    "@playwright/test": "1.55.0",
+    "tailwindcss": "3.4.17"
+  }
 }

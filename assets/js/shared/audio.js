@@ -1,5 +1,9 @@
 let audioCtx = null;
 
+function isPartyjniakSoundEnabled() {
+    return typeof getPartyjniakSetting === 'function' ? getPartyjniakSetting('sound') !== false : true;
+}
+
 function getAudioContext() {
     if (!audioCtx) {
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -10,7 +14,7 @@ function getAudioContext() {
 }
 
 function playSound(type) {
-    if (!soundEnabled) return;
+    if (!isPartyjniakSoundEnabled()) return;
     try {
         const context = getAudioContext();
         if (!context) return;
@@ -74,11 +78,5 @@ function toggleAudio() {
     if (typeof togglePartyjniakSetting === 'function') {
         togglePartyjniakSetting('sound');
         return;
-    }
-
-    soundEnabled = !soundEnabled;
-    if (soundEnabled) playSound('click');
-    if (typeof getActiveGameModule === 'function') {
-        callGameHook(getActiveGameModule(), 'onAudioChanged', soundEnabled);
     }
 }

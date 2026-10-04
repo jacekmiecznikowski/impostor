@@ -30,7 +30,7 @@ async function loadBombAudioBuffer(name) {
 }
 
 function primeBombAudio() {
-    if (!soundEnabled) return;
+    if (!isPartyjniakSoundEnabled()) return;
     const context = getAudioContext();
     context?.resume?.().catch?.(() => {});
     Promise.allSettled(['tick', 'explosion'].map(loadBombAudioBuffer));
@@ -50,7 +50,7 @@ function stopBombTicking() {
 
 async function startBombTicking() {
     stopBombTicking();
-    if (!soundEnabled) return false;
+    if (!isPartyjniakSoundEnabled()) return false;
     try {
         const context = getAudioContext();
         if (!context) return false;
@@ -92,7 +92,7 @@ function setBombTickRate(rate) {
 
 async function playBombExplosion() {
     stopBombTicking();
-    if (!soundEnabled) return false;
+    if (!isPartyjniakSoundEnabled()) return false;
     try {
         const context = getAudioContext();
         if (!context) return false;
@@ -133,7 +133,7 @@ function stopAllBombAudio() {
 }
 
 function syncBombAudioWithSoundSetting() {
-    if (!soundEnabled) stopAllBombAudio();
+    if (!isPartyjniakSoundEnabled()) stopAllBombAudio();
 }
 
 document.addEventListener('pointerdown', primeBombAudio, { once: true, passive: true, capture: true });

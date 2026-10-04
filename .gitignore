@@ -1,6 +1,7 @@
 node_modules/
 dist/
 android/
+assets/vendor/
 .DS_Store
 Thumbs.db
 .vscode/

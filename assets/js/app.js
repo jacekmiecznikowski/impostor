@@ -1,5 +1,49 @@
-import { getGameModule, initializeGameModules, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
-import { registerGameModules } from './games/index.js?v=7';
+import { getGameModule, initializeGameModule, syncGameSessionUi } from './shared/game-registry.js?v=2';
+import { registerGameModules } from './games/index.js?v=9';
+
+const preparedGames = new Map();
+
+async function prepareGame(gameModule) {
+    if (preparedGames.has(gameModule.id)) return preparedGames.get(gameModule.id);
+
+    const preparation = (async () => {
+        await window.loadGameAssets?.(gameModule);
+        await window.loadGameViews?.(gameModule);
+
+        const initialization = await initializeGameModule(gameModule);
+        if (initialization.status === 'rejected') throw initialization.reason;
+
+        gameModule.session?.load?.();
+        syncGameSessionUi(gameModule);
+        return gameModule;
+    })();
+
+    preparedGames.set(gameModule.id, preparation);
+    try {
+        return await preparation;
+    } catch (error) {
+        preparedGames.delete(gameModule.id);
+        throw error;
+    }
+}
+
+function installLazyGameLoader() {
+    const openRegisteredGame = window.openGame;
+    window.openGame = async (gameId, options = {}) => {
+        const gameModule = getGameModule(gameId);
+        if (!gameModule) return;
+
+        try {
+            await prepareGame(gameModule);
+        } catch (error) {
+            console.error(`Nie udało się przygotować gry ${gameId}:`, error);
+            showToast?.('Błąd gry', 'Nie udało się załadować tej gry. Spróbuj ponownie.');
+            return;
+        }
+
+        return openRegisteredGame?.(gameId, options);
+    };
+}
 
 async function initializeApp() {
     registerGameModules();
@@ -13,26 +57,20 @@ async function initializeApp() {
         return;
     }
 
-    await initializeGameModules();
-    loadGameSessions();
-
     setupGameHub();
+    installLazyGameLoader();
     initializePartyjniakSettingsUi?.();
-    setupImpostorPresentation();
-    if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
     setupSystemBackHandling();
     setupNativeAndroidIntegration?.();
-    syncGameSessionUi();
 
     document.addEventListener('keydown', event => {
         if (event.key !== 'Escape') return;
         if (!navigateBack()) closeShellMenu?.();
     });
 
-    document.querySelectorAll('[id$="-modal"]').forEach(modal => {
-        modal.addEventListener('click', event => {
-            if (event.target === modal) closeModal(modal.id);
-        });
+    document.addEventListener('click', event => {
+        const modal = event.target instanceof Element ? event.target.closest('[id$="-modal"]') : null;
+        if (modal && event.target === modal) closeModal(modal.id);
     });
 
     document.addEventListener('pointerdown', event => {
@@ -49,8 +87,8 @@ async function initializeApp() {
         } catch (_) {}
     }
 
-    if (requestedGame && getGameModule(requestedGame)) openGame(requestedGame, { silent: true });
-    else goToScreen('home', { silent: true });
+    goToScreen('home', { silent: true });
+    if (requestedGame && getGameModule(requestedGame)) await window.openGame(requestedGame, { silent: true });
 
     const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
     if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {

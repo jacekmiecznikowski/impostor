@@ -1,45 +1,47 @@
 # Partyjniak – gry imprezowe
 
-**Partyjniak** to mobilna aplikacja webowa/PWA z grami imprezowymi na jeden telefon. Obecnie dostępny jest **Impostor**; architektura jest przygotowana pod kolejne gry, m.in. Czółko i Tabu.
+**Partyjniak** to mobilna aplikacja webowa/PWA z grami imprezowymi na jeden telefon. Aktualna wersja zawiera osiem pełnych trybów: **Impostor**, **Tykająca Bomba**, **Naokoło**, **Co mam na myśli?**, **Trzy w Pięć**, **Synchronizacja**, **Trzy Rundy** i **Dzika Karta**.
 
 ## Uruchomienie lokalne
 
-W katalogu repozytorium:
+Wymagany jest Node 22+.
 
 ```bash
-python3 -m http.server 8080
-```
-
-albo:
-
-```bash
+npm ci
 npm run serve
 ```
 
-Następnie otwórz `http://localhost:8080`.
+`npm run serve` buduje lokalne assety runtime (Tailwind, Phaser, Font Awesome i Inter), a następnie uruchamia serwer na `http://localhost:8080`.
 
 Nie uruchamiaj aplikacji przez `file://`, ponieważ Service Worker i część API przeglądarki wymagają HTTP/HTTPS.
 
 ## Testy
 
+Szybki zestaw testów domenowych i kontraktowych:
+
 ```bash
 npm test
 ```
 
-Testy obejmują produkcyjne reguły Impostora, walidację zdalnych danych/kategorii oraz krytyczne zależności struktury aplikacji, PWA i nawigacji.
+Mobilne smoke testy w prawdziwym Chromium:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+Pull requesty do `main` uruchamiają oba poziomy walidacji oraz test produkcyjnego bundla webowego w `.github/workflows/ci.yml`.
 
 ## Android APK
 
-Repozytorium zawiera konfigurację **Capacitor 8** oraz workflow GitHub Actions `.github/workflows/android-apk.yml`.
-
-Każdy push na `main` uruchamia build debug APK. Po zakończeniu workflow plik można pobrać z zakładki **Actions** jako artefakt:
+Repozytorium zawiera konfigurację **Capacitor 8** oraz workflow `.github/workflows/android-apk.yml`. Każdy push na `main` uruchamia testy, przygotowanie web bundle i build debug APK. Artefakt ma nazwę:
 
 ```text
 partyjniak-debug-apk
 └── app-debug.apk
 ```
 
-APK ma identyfikator pakietu:
+Identyfikator pakietu:
 
 ```text
 pl.partyjniak.app
@@ -48,15 +50,15 @@ pl.partyjniak.app
 W wersji Android:
 
 - ekran jest utrzymywany aktywny natywnie przez `FLAG_KEEP_SCREEN_ON`,
-- sprzętowy/gestowy przycisk **Wstecz** jest podpięty do nawigacji Partyjniaka przez `@capacitor/app`,
-- aplikacja działa w orientacji pionowej,
-- używana jest ikona Partyjniaka,
-- Service Worker jest wyłączony wewnątrz natywnego wrappera, żeby nie powodował konfliktów cache.
+- sprzętowy/gestowy przycisk **Wstecz** korzysta z `@capacitor/app`,
+- domyślna orientacja jest pionowa, a gry wymagające landscape mogą przełączać ją przez natywny plugin,
+- Service Worker jest wyłączony wewnątrz natywnego wrappera,
+- wszystkie biblioteki runtime są lokalne — APK nie wymaga CDN do pierwszego uruchomienia.
 
-Do lokalnego builda potrzebne są Node 22+, JDK 21 oraz Android SDK. Potem:
+Do lokalnego builda potrzebne są Node 22+, JDK 21 oraz Android SDK:
 
 ```bash
-npm install
+npm ci
 npm run build:web
 npx cap add android
 npx cap sync android
@@ -67,22 +69,18 @@ cd android
 
 Gotowy plik znajdziesz w `android/app/build/outputs/apk/debug/app-debug.apk`.
 
-## Nawigacja na Androidzie
-
-Partyjniak używa lekkiego, kontekstowego shella zamiast stałej ciężkiej belki:
-
-- na ekranie głównym branding jest częścią treści,
-- w menu gry i konfiguracji działa kontekstowy top bar z dużym celem dotykowym **Wstecz**,
-- podczas aktywnej rundy shell nie zajmuje pionowej przestrzeni,
-- systemowy przycisk/gest Android **Wstecz** jest obsługiwany wewnątrz aplikacji,
-- podczas aktywnej rundy cofnięcie otwiera dolny arkusz potwierdzenia zamiast wracać do poprzedniej roli.
-
 ## Architektura
+
+Każda gra jest samodzielnym modułem. `integration.js` opisuje kontrakt z shellem, a `bootstrap.js` deklaruje assety ładowane dopiero przy wejściu do gry.
 
 ```text
 assets/js/
 ├── app.js
 ├── shared/
+│   ├── asset-loader.js
+│   ├── view-loader.js
+│   ├── game-registry.js
+│   ├── app-settings.js
 │   ├── audio.js
 │   ├── background.js
 │   ├── content-repository.js
@@ -91,43 +89,42 @@ assets/js/
 │   ├── platform.js
 │   └── ui.js
 └── games/
-    └── impostor/
+    ├── index.js
+    └── <game-id>/
+        ├── bootstrap.js
+        ├── integration.js
         ├── content-provider.js
-        ├── data.js
-        ├── game.js
-        ├── presentation.js
-        ├── reveal-fit.js
         ├── rules.js
-        ├── scoreboard.js
+        ├── state.js
         ├── setup.js
-        └── state.js
+        ├── game.js
+        └── scoreboard.js
 ```
 
-`rules.js` zawiera czystą logikę domenową i jest bezpośrednio używany zarówno przez grę, jak i testy. `presentation.js` odpowiada za specyficzny UI Impostora, natomiast shell, tło i funkcje urządzenia są współdzielone.
+Start aplikacji ładuje tylko shell/shared. Po wybraniu gry Partyjniak kolejno ładuje jej CSS/JS, widoki, inicjalizuje content i odtwarza sesję. Service Worker nadal precache'uje komplet lokalnych zasobów, więc lazy loading nie ogranicza działania offline.
 
-## Treści: kategorie i hasła
+Rejestr gier pilnuje unikalności ID modułów i nazw ekranów. Czyste `rules.js` pozostają niezależne od DOM i są testowane bez przeglądarki.
 
-Obecne hasła w `assets/js/games/impostor/data.js` są fallbackiem offline. Aplikacja ma też warstwę `ContentRepository`, dzięki której można podpiąć zewnętrzne źródło bez zmiany logiki gry.
+Szczegółowy kontrakt dodawania nowej gry opisuje `docs/adding-a-game.md`.
 
-Endpoint powinien być dostępny jako:
+## Treści
+
+Gry z większymi bazami korzystają z plików w `content/` i lokalnych fallbacków. Impostor dodatkowo obsługuje opcjonalne zdalne źródło przez `ContentRepository` pod adresem:
 
 ```text
 <BASE_URL>/impostor.pl.json
 ```
 
-i zwracać JSON z polami `schemaVersion`, `game`, `locale`, `categories` i opcjonalnym `discussionTips`. Jeśli API jest niedostępne albo zwróci błędne dane, Partyjniak użyje cache lub lokalnego fallbacku.
+Jeśli zdalne API jest niedostępne albo zwróci błędne dane, używany jest cache lub lokalny fallback.
 
-## Android / PWA
+## PWA i offline
 
 - manifest z ikonami 192/512 i maskable,
 - tryb `standalone`,
 - `safe-area` i `100dvh`,
-- Service Worker i cache lokalnych zasobów dla wersji webowej,
-- Screen Wake Lock w PWA podczas właściwej rundy,
-- natywny `KEEP_SCREEN_ON` w APK.
+- Service Worker z cache lokalnych zasobów,
+- Screen Wake Lock podczas aktywnych rund,
+- lokalne Tailwind CSS, Phaser, Font Awesome i Inter generowane przez `scripts/build-assets.mjs`,
+- vendor precache generowany automatycznie do `assets/vendor/precache.json`.
 
-## Zależności
-
-Aplikacja nadal korzysta z CDN dla Tailwind CSS, Phasera, Font Awesome i Google Fonts. Brak Phasera nie blokuje uruchomienia aplikacji – wyłączane jest wyłącznie animowane tło.
-
-Przed publikacją produkcyjną w Google Play warto przenieść zależności CDN do lokalnego bundla, aby pierwsze uruchomienie APK także działało całkowicie offline.
+`assets/vendor/`, `dist/` i `android/` są artefaktami builda i nie są commitowane.
