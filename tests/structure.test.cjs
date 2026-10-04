@@ -71,6 +71,10 @@ const manifest = JSON.parse(read('manifest.webmanifest'));
 assert.equal(manifest.name, 'Partyjniak – gry imprezowe');
 assert.equal(manifest.short_name, 'Partyjniak');
 assert.equal(manifest.icons.some(icon => icon.purpose === 'maskable'), true);
+assert.equal(manifest.shortcuts.length, gameIds.length);
+for (const gameId of gameIds) {
+  assert.equal(manifest.shortcuts.some(shortcut => shortcut.url === `./?game=${gameId}`), true, `Brakuje skrótu PWA dla ${gameId}`);
+}
 
 const pkg = JSON.parse(read('package.json'));
 assert.equal(pkg.private, true);
