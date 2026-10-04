@@ -1,5 +1,5 @@
 import { getGameModule, initializeGameModule, syncGameSessionUi } from './shared/game-registry.js?v=2';
-import { registerGameModules } from './games/index.js?v=8';
+import { registerGameModules } from './games/index.js?v=9';
 
 const preparedGames = new Map();
 
