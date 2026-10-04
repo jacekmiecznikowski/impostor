@@ -4,7 +4,8 @@ import { registerNaokoloGame } from './naokolo/integration.js?v=1';
 import { registerCoMamNaMysliGame } from './co-mam-na-mysli/integration.js?v=1';
 import { registerThreeFiveGame } from './trzy-w-piec/integration.js?v=1';
 import { registerSynchronizacjaGame } from './synchronizacja/integration.js?v=1';
-import { registerPrototypeGames } from './prototypes/integration.js?v=4';
+import { registerTrzyRundyGame } from './trzy-rundy/integration.js?v=1';
+import { registerPrototypeGames } from './prototypes/integration.js?v=5';
 
 export function registerGameModules() {
     registerImpostorGame();
@@ -13,5 +14,6 @@ export function registerGameModules() {
     registerCoMamNaMysliGame();
     registerThreeFiveGame();
     registerSynchronizacjaGame();
+    registerTrzyRundyGame();
     registerPrototypeGames();
 }
