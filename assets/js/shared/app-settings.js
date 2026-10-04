@@ -193,6 +193,19 @@ function ensurePartyjniakSettingsMenuAction() {
     popover.prepend(action);
 }
 
+function ensurePartyjniakHomeSettingsButton() {
+    const home = document.getElementById('screen-home');
+    if (!home || document.getElementById('home-settings-btn')) return;
+    const button = document.createElement('button');
+    button.id = 'home-settings-btn';
+    button.type = 'button';
+    button.className = 'home-settings-button';
+    button.setAttribute('aria-label', 'Ustawienia Partyjniaka');
+    button.onclick = openPartyjniakSettings;
+    button.innerHTML = '<i class="fa-solid fa-gear" aria-hidden="true"></i>';
+    home.prepend(button);
+}
+
 function openPartyjniakSettings() {
     closeShellMenu?.();
     ensurePartyjniakSettingsModal();
@@ -206,6 +219,7 @@ function initializePartyjniakSettingsUi() {
     hapticsEnabled = partyjniakSettings.haptics !== false;
     ensurePartyjniakSettingsModal();
     ensurePartyjniakSettingsMenuAction();
+    ensurePartyjniakHomeSettingsButton();
     syncPartyjniakSettingsUi();
     applyPartyjniakBackgroundSetting();
 }
