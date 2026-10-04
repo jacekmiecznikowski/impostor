@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "game": "synchronizacja",
+  "locale": "pl",
+  "categories": [
+    {
+      "id": "codziennosc",
+      "name": "Codzienność",
+      "desc": "Rzeczy, sytuacje i wybory z normalnego życia.",
+      "icon": "fa-house",
+      "scales": [
+        { "id": "cod-01", "left": "Tani", "right": "Luksusowy" },
+        { "id": "cod-02", "left": "Praktyczny", "right": "Efektowny" },
+        { "id": "cod-03", "left": "Spokojny", "right": "Chaotyczny" },
+        { "id": "cod-04", "left": "Szybki", "right": "Dokładny" },
+        { "id": "cod-05", "left": "Zbędny", "right": "Niezbędny" },
+        { "id": "cod-06", "left": "Staroświecki", "right": "Futurystyczny" },
+        { "id": "cod-07", "left": "Łatwy do zgubienia", "right": "Niemożliwy do zgubienia" },
+        { "id": "cod-08", "left": "Dobry pomysł rano", "right": "Dobry pomysł w nocy" }
+      ]
+    },
+    {
+      "id": "ludzie",
+      "name": "Ludzie i zachowania",
+      "desc": "Charakter, relacje i społeczne sytuacje.",
+      "icon": "fa-people-group",
+      "scales": [
+        { "id": "lud-01", "left": "Nieśmiały", "right": "Bezczelnie pewny siebie" },
+        { "id": "lud-02", "left": "Godny zaufania", "right": "Podejrzany" },
+        { "id": "lud-03", "left": "Dyplomatyczny", "right": "Brutalnie szczery" },
+        { "id": "lud-04", "left": "Romantyczny", "right": "Praktyczny" },
+        { "id": "lud-05", "left": "Dusza towarzystwa", "right": "Chce już wracać do domu" },
+        { "id": "lud-06", "left": "Dobry sekret", "right": "Sekret, który zaraz wypłynie" },
+        { "id": "lud-07", "left": "Niezręczny", "right": "Charyzmatyczny" },
+        { "id": "lud-08", "left": "Podejmuje ryzyko", "right": "Gra bardzo bezpiecznie" }
+      ]
+    },
+    {
+      "id": "rozrywka",
+      "name": "Rozrywka",
+      "desc": "Filmy, muzyka, internet i rzeczy do oglądania.",
+      "icon": "fa-film",
+      "scales": [
+        { "id": "roz-01", "left": "Niszowy", "right": "Totalny mainstream" },
+        { "id": "roz-02", "left": "Kultowy", "right": "Przereklamowany" },
+        { "id": "roz-03", "left": "Relaksujący", "right": "Trzymający w napięciu" },
+        { "id": "roz-04", "left": "Do oglądania samemu", "right": "Do oglądania w grupie" },
+        { "id": "roz-05", "left": "Krindżowy", "right": "Autentycznie cool" },
+        { "id": "roz-06", "left": "Zapomniany po godzinie", "right": "Zostaje w głowie na lata" },
+        { "id": "roz-07", "left": "Wymaga skupienia", "right": "Może lecieć w tle" },
+        { "id": "roz-08", "left": "Dla dzieci", "right": "Zdecydowanie nie dla dzieci" }
+      ]
+    },
+    {
+      "id": "miejsca",
+      "name": "Miejsca i podróże",
+      "desc": "Klimat miejsc, wyjazdów i przestrzeni.",
+      "icon": "fa-location-dot",
+      "scales": [
+        { "id": "mie-01", "left": "Blisko domu", "right": "Koniec świata" },
+        { "id": "mie-02", "left": "Ciche", "right": "Głośne" },
+        { "id": "mie-03", "left": "Dobre na weekend", "right": "Dobre na całe życie" },
+        { "id": "mie-04", "left": "Turystyczna pułapka", "right": "Ukryta perełka" },
+        { "id": "mie-05", "left": "Przytulne", "right": "Monumentalne" },
+        { "id": "mie-06", "left": "Bezpieczne", "right": "Przygodowe" },
+        { "id": "mie-07", "left": "Warto fotografować", "right": "Lepiej przeżyć bez telefonu" },
+        { "id": "mie-08", "left": "Na spontaniczny wypad", "right": "Wymaga planowania miesiącami" }
+      ]
+    },
+    {
+      "id": "jedzenie",
+      "name": "Jedzenie",
+      "desc": "Smaki, dania i kulinarne opinie.",
+      "icon": "fa-utensils",
+      "scales": [
+        { "id": "jed-01", "left": "Lekki", "right": "Ciężki" },
+        { "id": "jed-02", "left": "Zdrowy", "right": "Grzeszna przyjemność" },
+        { "id": "jed-03", "left": "Łagodny", "right": "Piekielnie ostry" },
+        { "id": "jed-04", "left": "Domowy", "right": "Restauracyjny" },
+        { "id": "jed-05", "left": "Bezpieczny wybór", "right": "Kulinarne ryzyko" },
+        { "id": "jed-06", "left": "Dobre na śniadanie", "right": "Dobre o drugiej w nocy" },
+        { "id": "jed-07", "left": "Wygląda lepiej niż smakuje", "right": "Smakuje lepiej niż wygląda" },
+        { "id": "jed-08", "left": "Do jedzenia rękami", "right": "Wymaga pełnej zastawy" }
+      ]
+    },
+    {
+      "id": "absurd",
+      "name": "Absurd",
+      "desc": "Luźniejsze skale, gdzie najlepsza jest dyskusja.",
+      "icon": "fa-wand-magic-sparkles",
+      "scales": [
+        { "id": "abs-01", "left": "Genialny pomysł", "right": "Katastrofalny pomysł" },
+        { "id": "abs-02", "left": "Dobry superbohater", "right": "Fatalny superbohater" },
+        { "id": "abs-03", "left": "Normalne imię dla psa", "right": "Dziwne imię nawet dla smoka" },
+        { "id": "abs-04", "left": "Brzmi legalnie", "right": "Brzmi jak natychmiastowy mandat" },
+        { "id": "abs-05", "left": "Dobry prezent", "right": "Powód do zakończenia znajomości" },
+        { "id": "abs-06", "left": "Mała niedogodność", "right": "Koniec cywilizacji" },
+        { "id": "abs-07", "left": "Wymówka wiarygodna", "right": "Wymówka kompletnie absurdalna" },
+        { "id": "abs-08", "left": "Niewinna wiadomość", "right": "Wiadomość, po której wyłączasz telefon" }
+      ]
+    }
+  ]
+}
