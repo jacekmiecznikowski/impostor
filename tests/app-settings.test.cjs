@@ -23,6 +23,9 @@ assert.match(settings, /settings-modal/);
 assert.match(settings, /https:\/\/swawole\.studio/);
 assert.match(settings, /assets\/brand\/swawole-studio\.svg/);
 assert.match(settings, /shell-settings-action/);
+assert.match(settings, /ensurePartyjniakHomeSettingsButton/);
+assert.match(settings, /id = 'home-settings-btn'/);
+assert.match(settings, /home\.prepend\(button\)/);
 
 assert.match(audio, /togglePartyjniakSetting\('sound'\)/);
 assert.doesNotMatch(audio, /persistSession\(\)/);
@@ -31,6 +34,9 @@ assert.match(navigation, /fa-gear/);
 assert.match(navigation, /openPartyjniakSettings/);
 assert.match(css, /background-effects-disabled/);
 assert.match(css, /settings-switch/);
+assert.match(css, /\.app-shell\.is-home\s*\{[\s\S]*display:\s*none/);
+assert.match(css, /\.home-settings-button/);
+assert.match(css, /position:\s*absolute/);
 
 const settingsIndex = index.indexOf('./assets/js/shared/app-settings.js');
 const audioIndex = index.indexOf('./assets/js/shared/audio.js');
