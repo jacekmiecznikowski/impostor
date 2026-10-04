@@ -1,5 +1,5 @@
 import { getGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
-import { registerGameModules } from './games/index.js?v=4';
+import { registerGameModules } from './games/index.js?v=5';
 
 async function initializeContentLayer() {
     try {
@@ -8,6 +8,7 @@ async function initializeContentLayer() {
         if (typeof initializeNaokoloContent === 'function') await initializeNaokoloContent();
         if (typeof initializeCoMamNaMysliContent === 'function') await initializeCoMamNaMysliContent();
         if (typeof initializeThreeFiveContent === 'function') await initializeThreeFiveContent();
+        if (typeof initializeSynchronizacjaContent === 'function') await initializeSynchronizacjaContent();
     } catch (error) {
         console.warn('Warstwa treści nie została w pełni uruchomiona. Używam danych lokalnych lub awaryjnych.', error);
     }
