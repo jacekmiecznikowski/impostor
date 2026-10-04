@@ -1,0 +1,149 @@
+<section id="screen-sync-menu" class="screen sync-screen hidden flex-col flex-1">
+  <div class="sync-menu-hero">
+    <span class="sync-kicker">JEDNA WSKAZÓWKA • JEDNA FALA</span>
+    <div class="sync-menu-icon" aria-hidden="true"><i class="fa-solid fa-wave-square"></i></div>
+    <h1>Synchronizacja</h1>
+    <p>Jedna osoba widzi ukryty punkt na skali. Reszta musi trafić w niego na podstawie jej wskazówki.</p>
+  </div>
+  <div class="sync-menu-actions">
+    <button type="button" class="primary-btn" onclick="startNewSynchronizacjaGame()"><i class="fa-solid fa-play"></i><span>NOWA GRA</span></button>
+    <button id="sync-resume-btn" type="button" class="secondary-btn hidden" onclick="resumeSynchronizacjaGame()"><i class="fa-solid fa-people-group"></i><span>GRAJ Z POPRZEDNIĄ EKIPĄ</span></button>
+    <div class="sync-menu-grid">
+      <button type="button" class="secondary-btn" onclick="openCurrentRules()"><i class="fa-solid fa-book-open"></i><span>Zasady</span></button>
+      <button type="button" class="secondary-btn" onclick="openCurrentScoreboard()"><i class="fa-solid fa-ranking-star"></i><span>Wyniki</span></button>
+    </div>
+  </div>
+  <div class="sync-howto">
+    <article><i class="fa-solid fa-eye"></i><div><strong>Zobacz cel</strong><span>Nadający jako jedyny widzi ukryty punkt.</span></div></article>
+    <article><i class="fa-solid fa-comment-dots"></i><div><strong>Daj wskazówkę</strong><span>Jedno hasło lub krótka fraza — bez cyfr.</span></div></article>
+    <article><i class="fa-solid fa-crosshairs"></i><div><strong>Trafcie markerem</strong><span>Im bliżej celu, tym więcej punktów.</span></div></article>
+  </div>
+</section>
+
+<section id="screen-sync-players" class="screen sync-screen player-setup-screen hidden flex-col flex-1">
+  <div class="player-setup-heading">
+    <span class="player-setup-step">KROK 1 Z 2</span>
+    <h2>Kto gra?</h2>
+    <p>Każdy po kolei będzie nadającym. Reszta ekipy wspólnie ustawia marker.</p>
+  </div>
+  <div class="player-setup-card">
+    <div class="player-setup-count-row">
+      <div class="player-setup-count-copy"><span>Liczba graczy</span><strong id="sync-player-count-value">4</strong></div>
+      <span class="player-setup-range-label">2–12</span>
+    </div>
+    <input id="sync-player-count" class="player-setup-range" type="range" min="2" max="12" value="4" oninput="setSynchronizacjaPlayerCount(this.value)">
+  </div>
+  <div id="sync-player-names" class="player-setup-name-list"></div>
+  <button type="button" class="primary-btn player-setup-action" onclick="synchronizacjaProceedToOptions()"><span>Dalej: kategorie</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-sync-options" class="screen sync-screen hidden flex-col flex-1">
+  <div class="sync-section-heading">
+    <span class="sync-kicker">KROK 2 Z 2</span>
+    <h2>Wybierz skale</h2>
+    <p>Możesz mieszać wszystkie kategorie albo zostawić tylko te, które pasują do ekipy.</p>
+  </div>
+  <div class="sync-setup-card">
+    <div class="sync-group-label"><span>KATEGORIE</span><button id="sync-toggle-all-categories" type="button" onclick="toggleAllSynchronizacjaCategories()">Wybierz wszystkie</button></div>
+    <div id="sync-category-grid" class="sync-category-grid"></div>
+  </div>
+  <button type="button" class="primary-btn sync-sticky-action" onclick="prepareSynchronizacjaGame()"><i class="fa-solid fa-wave-square"></i><span>Zaczynamy</span></button>
+</section>
+
+<section id="screen-sync-ready" class="screen sync-screen hidden flex-col flex-1 sync-ready-screen">
+  <div class="sync-ready-card">
+    <div class="sync-ready-meta"><span id="sync-ready-round">Runda 1</span><span id="sync-ready-score">0 pkt</span></div>
+    <div class="sync-ready-icon" aria-hidden="true"><i class="fa-solid fa-satellite-dish"></i></div>
+    <span class="sync-kicker">TERAZ NADAJE</span>
+    <strong id="sync-ready-player">Gracz 1</strong>
+    <p>Przekaż telefon tej osobie. Tylko ona może zobaczyć położenie ukrytego celu.</p>
+  </div>
+  <button type="button" class="primary-btn" onclick="showSynchronizacjaClueScreen()"><i class="fa-solid fa-eye"></i><span>Pokaż ukryty cel</span></button>
+</section>
+
+<section id="screen-sync-clue" class="screen sync-screen hidden flex-col flex-1 sync-play-screen">
+  <div class="sync-stage-heading">
+    <span class="sync-kicker">TYLKO DLA NADAJĄCEGO</span>
+    <h2 id="sync-clue-player">Gracz</h2>
+    <p>Daj na głos wskazówkę, która pasuje do miejsca zaznaczonego na skali. Nie używaj cyfr ani procentów.</p>
+  </div>
+  <article class="sync-spectrum-card is-target-visible">
+    <span id="sync-clue-category" class="sync-category-pill">Kategoria</span>
+    <div id="sync-clue-spectrum" class="sync-spectrum" style="--sync-target:50%;--sync-guess:50%">
+      <div class="sync-spectrum-glow" aria-hidden="true"></div>
+      <div class="sync-spectrum-track" aria-hidden="true"></div>
+      <div class="sync-target-zone" aria-hidden="true"><span></span></div>
+      <div class="sync-spectrum-labels"><strong id="sync-clue-left">Lewo</strong><strong id="sync-clue-right">Prawo</strong></div>
+    </div>
+    <div class="sync-secret-note"><i class="fa-solid fa-lock"></i><span>Zapamiętaj miejsce celu. Za chwilę zniknie.</span></div>
+  </article>
+  <button type="button" class="primary-btn" onclick="startSynchronizacjaGuess()"><i class="fa-solid fa-eye-slash"></i><span>Ukryj cel i przekaż telefon</span></button>
+</section>
+
+<section id="screen-sync-guess" class="screen sync-screen hidden flex-col flex-1 sync-play-screen">
+  <div class="sync-stage-heading">
+    <span class="sync-kicker">TERAZ CAŁA EKIPA</span>
+    <h2>Gdzie był cel?</h2>
+    <p>Ustawcie marker na podstawie wskazówki nadającego. Cel jest całkowicie ukryty.</p>
+  </div>
+  <article class="sync-spectrum-card is-guessing">
+    <span id="sync-guess-category" class="sync-category-pill">Kategoria</span>
+    <div id="sync-guess-spectrum" class="sync-spectrum" style="--sync-target:50%;--sync-guess:50%">
+      <div class="sync-spectrum-glow" aria-hidden="true"></div>
+      <div class="sync-spectrum-track" aria-hidden="true"></div>
+      <div class="sync-guess-marker" aria-hidden="true"><span></span></div>
+      <div class="sync-spectrum-labels"><strong id="sync-guess-left">Lewo</strong><strong id="sync-guess-right">Prawo</strong></div>
+      <input id="sync-guess-input" class="sync-spectrum-input" type="range" min="0" max="100" value="50" oninput="setSynchronizacjaGuess(this.value)" aria-label="Pozycja markera na skali">
+    </div>
+    <div class="sync-guess-hint"><i class="fa-solid fa-hand-pointer"></i><span>Przesuwaj marker po całej skali.</span></div>
+  </article>
+  <button type="button" class="primary-btn" onclick="submitSynchronizacjaGuess()"><i class="fa-solid fa-crosshairs"></i><span>Zatwierdź marker</span></button>
+</section>
+
+<section id="screen-sync-reveal" class="screen sync-screen hidden flex-col flex-1 sync-play-screen">
+  <div class="sync-stage-heading">
+    <span class="sync-kicker">ODKRYCIE</span>
+    <h2 id="sync-reveal-message">Sprawdźmy synchronizację</h2>
+    <p><strong id="sync-reveal-points">+0 pkt</strong> <span id="sync-reveal-distance">Odległość: 0</span></p>
+  </div>
+  <article class="sync-spectrum-card is-reveal">
+    <div id="sync-reveal-spectrum" class="sync-spectrum" style="--sync-target:50%;--sync-guess:50%;--sync-distance-start:50%;--sync-distance-width:0%">
+      <div class="sync-spectrum-glow" aria-hidden="true"></div>
+      <div class="sync-spectrum-track" aria-hidden="true"></div>
+      <div class="sync-distance-line" aria-hidden="true"></div>
+      <div class="sync-target-zone" aria-hidden="true"><span></span></div>
+      <div class="sync-guess-marker" aria-hidden="true"><span></span></div>
+      <div class="sync-spectrum-labels"><strong id="sync-reveal-left">Lewo</strong><strong id="sync-reveal-right">Prawo</strong></div>
+    </div>
+    <div class="sync-reveal-legend"><span><i class="fa-solid fa-bullseye"></i> Cel <strong id="sync-reveal-target-value">50</strong></span><span><i class="fa-solid fa-location-dot"></i> Marker <strong id="sync-reveal-guess-value">50</strong></span></div>
+  </article>
+  <button type="button" class="primary-btn" onclick="advanceSynchronizacjaTurn()"><span>Dalej</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-sync-round-summary" class="screen sync-screen hidden flex-col flex-1 sync-summary-screen">
+  <div class="sync-summary-card">
+    <span class="sync-summary-icon"><i class="fa-solid fa-chart-line"></i></span>
+    <span id="sync-summary-round" class="sync-kicker">Runda 1</span>
+    <h2>Jak dobrze się zgraliście?</h2>
+    <p id="sync-summary-leader">Podsumowanie rundy.</p>
+  </div>
+  <div id="sync-round-ranking" class="sync-ranking"></div>
+  <div class="sync-summary-actions">
+    <button type="button" class="primary-btn" onclick="continueSynchronizacjaRound()"><i class="fa-solid fa-rotate-right"></i><span>Jeszcze jedna runda</span></button>
+    <button type="button" class="secondary-btn" onclick="finishSynchronizacjaGame()"><i class="fa-solid fa-flag-checkered"></i><span>Zakończ grę</span></button>
+  </div>
+</section>
+
+<section id="screen-sync-final" class="screen sync-screen hidden flex-col flex-1 sync-summary-screen">
+  <div class="sync-summary-card is-final">
+    <span class="sync-summary-icon"><i class="fa-solid fa-trophy"></i></span>
+    <span class="sync-kicker">KONIEC GRY</span>
+    <h2 id="sync-final-title">Mamy zwycięzcę!</h2>
+    <p id="sync-final-copy">Wynik końcowy.</p>
+  </div>
+  <div id="sync-final-ranking" class="sync-ranking"></div>
+  <div class="sync-summary-actions">
+    <button type="button" class="primary-btn" onclick="restartSynchronizacjaMatch()"><i class="fa-solid fa-rotate-right"></i><span>Rewanż tą samą ekipą</span></button>
+    <button type="button" class="secondary-btn" onclick="openSynchronizacjaMenu()"><i class="fa-solid fa-house"></i><span>Menu gry</span></button>
+  </div>
+</section>
