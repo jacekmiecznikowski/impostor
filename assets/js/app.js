@@ -1,5 +1,31 @@
-import { getGameModule, initializeGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
+import { getGameModule, initializeGameModule, syncGameSessionUi } from './shared/game-registry.js?v=2';
 import { registerGameModules } from './games/index.js?v=8';
+
+const preparedGames = new Map();
+
+async function prepareGame(gameModule) {
+    if (preparedGames.has(gameModule.id)) return preparedGames.get(gameModule.id);
+
+    const preparation = (async () => {
+        await window.loadGameAssets?.(gameModule);
+        await window.loadGameViews?.(gameModule);
+
+        const initialization = await initializeGameModule(gameModule);
+        if (initialization.status === 'rejected') throw initialization.reason;
+
+        gameModule.session?.load?.();
+        syncGameSessionUi(gameModule);
+        return gameModule;
+    })();
+
+    preparedGames.set(gameModule.id, preparation);
+    try {
+        return await preparation;
+    } catch (error) {
+        preparedGames.delete(gameModule.id);
+        throw error;
+    }
+}
 
 function installLazyGameLoader() {
     const openRegisteredGame = window.openGame;
@@ -8,10 +34,7 @@ function installLazyGameLoader() {
         if (!gameModule) return;
 
         try {
-            await window.loadGameViews?.(gameModule);
-            const initialization = await initializeGameModule(gameModule);
-            if (initialization.status === 'rejected') throw initialization.reason;
-            syncGameSessionUi(gameModule);
+            await prepareGame(gameModule);
         } catch (error) {
             console.error(`Nie udało się przygotować gry ${gameId}:`, error);
             showToast?.('Błąd gry', 'Nie udało się załadować tej gry. Spróbuj ponownie.');
@@ -34,7 +57,6 @@ async function initializeApp() {
         return;
     }
 
-    loadGameSessions();
     setupGameHub();
     installLazyGameLoader();
     initializePartyjniakSettingsUi?.();
