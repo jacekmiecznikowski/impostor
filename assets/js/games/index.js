@@ -5,7 +5,7 @@ import { registerCoMamNaMysliGame } from './co-mam-na-mysli/integration.js?v=1';
 import { registerThreeFiveGame } from './trzy-w-piec/integration.js?v=1';
 import { registerSynchronizacjaGame } from './synchronizacja/integration.js?v=1';
 import { registerTrzyRundyGame } from './trzy-rundy/integration.js?v=1';
-import { registerPrototypeGames } from './prototypes/integration.js?v=5';
+import { registerDzikaKartaGame } from './dzika-karta/integration.js?v=1';
 
 export function registerGameModules() {
     registerImpostorGame();
@@ -15,5 +15,5 @@ export function registerGameModules() {
     registerThreeFiveGame();
     registerSynchronizacjaGame();
     registerTrzyRundyGame();
-    registerPrototypeGames();
+    registerDzikaKartaGame();
 }
