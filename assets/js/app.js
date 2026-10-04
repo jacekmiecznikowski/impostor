@@ -1,5 +1,26 @@
-import { getGameModule, loadGameSessions } from './shared/game-registry.js?v=2';
+import { getGameModule, initializeGameModule, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
 import { registerGameModules } from './games/index.js?v=8';
+
+function installLazyGameLoader() {
+    const openRegisteredGame = window.openGame;
+    window.openGame = async (gameId, options = {}) => {
+        const gameModule = getGameModule(gameId);
+        if (!gameModule) return;
+
+        try {
+            await window.loadGameViews?.(gameModule);
+            const initialization = await initializeGameModule(gameModule);
+            if (initialization.status === 'rejected') throw initialization.reason;
+            syncGameSessionUi(gameModule);
+        } catch (error) {
+            console.error(`Nie udało się przygotować gry ${gameId}:`, error);
+            showToast?.('Błąd gry', 'Nie udało się załadować tej gry. Spróbuj ponownie.');
+            return;
+        }
+
+        return openRegisteredGame?.(gameId, options);
+    };
+}
 
 async function initializeApp() {
     registerGameModules();
@@ -15,6 +36,7 @@ async function initializeApp() {
 
     loadGameSessions();
     setupGameHub();
+    installLazyGameLoader();
     initializePartyjniakSettingsUi?.();
     setupSystemBackHandling();
     setupNativeAndroidIntegration?.();
@@ -24,10 +46,9 @@ async function initializeApp() {
         if (!navigateBack()) closeShellMenu?.();
     });
 
-    document.querySelectorAll('[id$="-modal"]').forEach(modal => {
-        modal.addEventListener('click', event => {
-            if (event.target === modal) closeModal(modal.id);
-        });
+    document.addEventListener('click', event => {
+        const modal = event.target instanceof Element ? event.target.closest('[id$="-modal"]') : null;
+        if (modal && event.target === modal) closeModal(modal.id);
     });
 
     document.addEventListener('pointerdown', event => {
@@ -45,7 +66,7 @@ async function initializeApp() {
     }
 
     goToScreen('home', { silent: true });
-    if (requestedGame && getGameModule(requestedGame)) await openGame(requestedGame, { silent: true });
+    if (requestedGame && getGameModule(requestedGame)) await window.openGame(requestedGame, { silent: true });
 
     const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
     if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {
