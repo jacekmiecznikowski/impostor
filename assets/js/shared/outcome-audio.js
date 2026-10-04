@@ -28,9 +28,7 @@ function decodeBase64Bytes(base64) {
     const normalized = base64.replace(/\s+/g, '');
     const binary = atob(normalized);
     const bytes = new Uint8Array(binary.length);
-    for (let index = 0; index < binary.length; index += 1) {
-        bytes[index] = binary.charCodeAt(index);
-    }
+    for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
     return bytes.buffer;
 }
 
@@ -53,7 +51,6 @@ async function decodeOutcomeAudio(context, source) {
 async function loadOutcomeAudioBuffer(outcome) {
     if (outcomeAudioBuffers.has(outcome)) return outcomeAudioBuffers.get(outcome);
     if (outcomeAudioLoads.has(outcome)) return outcomeAudioLoads.get(outcome);
-
     const config = PARTYJNIAK_OUTCOME_AUDIO[outcome];
     if (!config) return null;
 
@@ -68,7 +65,6 @@ async function loadOutcomeAudioBuffer(outcome) {
             outcomeAudioLoads.delete(outcome);
         }
     })();
-
     outcomeAudioLoads.set(outcome, load);
     return load;
 }
@@ -78,28 +74,22 @@ function stopOutcomeSound() {
     const gain = activeOutcomeGain;
     activeOutcomeSource = null;
     activeOutcomeGain = null;
-
     if (source) {
         source.onended = null;
-        try { source.stop(0); } catch (_) { /* already stopped */ }
-        try { source.disconnect(); } catch (_) { /* no-op */ }
+        try { source.stop(0); } catch (_) {}
+        try { source.disconnect(); } catch (_) {}
     }
-    if (gain) {
-        try { gain.disconnect(); } catch (_) { /* no-op */ }
-    }
+    if (gain) try { gain.disconnect(); } catch (_) {}
 }
 
 function primeOutcomeAudio() {
-    if (outcomeAudioPrimed || !soundEnabled) return;
+    if (outcomeAudioPrimed || !isPartyjniakSoundEnabled()) return;
     outcomeAudioPrimed = true;
-
     try {
         const context = getAudioContext();
         context?.resume?.().catch?.(() => {});
         Object.keys(PARTYJNIAK_OUTCOME_AUDIO).forEach(outcome => {
-            loadOutcomeAudioBuffer(outcome).catch(error => {
-                console.warn(`Nie udało się przygotować dźwięku wyniku (${outcome}).`, error);
-            });
+            loadOutcomeAudioBuffer(outcome).catch(error => console.warn(`Nie udało się przygotować dźwięku wyniku (${outcome}).`, error));
         });
     } catch (error) {
         console.warn('Nie udało się przygotować dźwięków wyników.', error);
@@ -109,8 +99,7 @@ function primeOutcomeAudio() {
 async function playOutcomeSound(outcome) {
     const requestId = ++outcomePlaybackRequest;
     stopOutcomeSound();
-
-    if (!soundEnabled) return false;
+    if (!isPartyjniakSoundEnabled()) return false;
     const config = PARTYJNIAK_OUTCOME_AUDIO[outcome];
     if (!config) return false;
 
@@ -118,7 +107,6 @@ async function playOutcomeSound(outcome) {
         const context = getAudioContext();
         if (!context) return false;
         if (context.state === 'suspended') await context.resume();
-
         const buffer = await loadOutcomeAudioBuffer(outcome);
         if (!buffer || requestId !== outcomePlaybackRequest) return false;
 
@@ -128,17 +116,15 @@ async function playOutcomeSound(outcome) {
         source.buffer = buffer;
         source.connect(gain);
         gain.connect(context.destination);
-
         activeOutcomeSource = source;
         activeOutcomeGain = gain;
         source.onended = () => {
             if (activeOutcomeSource !== source) return;
             activeOutcomeSource = null;
             activeOutcomeGain = null;
-            try { source.disconnect(); } catch (_) { /* no-op */ }
-            try { gain.disconnect(); } catch (_) { /* no-op */ }
+            try { source.disconnect(); } catch (_) {}
+            try { gain.disconnect(); } catch (_) {}
         };
-
         source.start(0);
         return true;
     } catch (error) {
