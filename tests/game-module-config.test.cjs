@@ -1,8 +1,44 @@
-const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const root=path.join(__dirname,'..');const read=r=>fs.readFileSync(path.join(root,r),'utf8');
-const ui=read('assets/js/shared/ui.js'),hub=read('assets/js/shared/hub.js'),viewLoader=read('assets/js/shared/view-loader.js'),navigation=read('assets/js/shared/navigation-behavior.js'),gamesIndex=read('assets/js/games/index.js');
-const ids=['impostor','ticking-bomb','naokolo','co-mam-na-mysli','trzy-w-piec','synchronizacja','trzy-rundy','dzika-karta'];const integrations=Object.fromEntries(ids.map(id=>[id,read(`assets/js/games/${id}/integration.js`)]));
-assert.match(viewLoader,/getGameViewFragments/);assert.match(viewLoader,/classList\.add\('hidden'\)/);assert.doesNotMatch(viewLoader,/impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta/i);assert.match(ui,/getGameScreenConfig/);assert.match(navigation,/roundGuard/);assert.match(hub,/getGameCatalog/);assert.doesNotMatch(hub,/const GAME_CATALOG|heads-up|taboo|Czółko|Tabu/);
-for(const [id,source] of Object.entries(integrations)){for(const pattern of [/catalog:\s*\{/,/status:\s*'available'/,/views:\s*\[/,/screens:\s*\{/,/shell:\s*\{/,/background:/,/session:\s*\{/])assert.match(source,pattern,`${id} missing module contract`);}
-assert.match(integrations['co-mam-na-mysli'],/orientation:\s*'landscape'/);assert.match(integrations['trzy-w-piec'],/name:\s*'Trzy w Pięć'/);assert.match(integrations.synchronizacja,/id:\s*'synchronizacja'/);assert.match(integrations['trzy-rundy'],/name:\s*'Trzy Rundy'/);assert.match(integrations['dzika-karta'],/name:\s*'Dzika Karta'/);assert.match(integrations['dzika-karta'],/rulesModalId:\s*'dk-rules-modal'/);assert.match(integrations['dzika-karta'],/initialize:\s*\(\) => initializeDzikaKartaContent\(\)/);
-for(const fn of ['registerImpostorGame','registerTickingBombGame','registerNaokoloGame','registerCoMamNaMysliGame','registerThreeFiveGame','registerSynchronizacjaGame','registerTrzyRundyGame','registerDzikaKartaGame'])assert.match(gamesIndex,new RegExp(`${fn}\\(\\)`));assert.doesNotMatch(gamesIndex,/registerPrototypeGames|prototypes\/integration/);
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.join(__dirname, '..');
+const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
+
+const ui = read('assets/js/shared/ui.js');
+const hub = read('assets/js/shared/hub.js');
+const viewLoader = read('assets/js/shared/view-loader.js');
+const navigation = read('assets/js/shared/navigation-behavior.js');
+const gamesIndex = read('assets/js/games/index.js');
+const ids = ['impostor', 'ticking-bomb', 'naokolo', 'co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta'];
+const integrations = Object.fromEntries(ids.map(id => [id, read(`assets/js/games/${id}/integration.js`)]));
+
+assert.match(viewLoader, /getGameViewFragments/);
+assert.match(viewLoader, /classList\.add\('hidden'\)/);
+assert.doesNotMatch(viewLoader, /impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta/i);
+assert.match(ui, /getGameScreenConfig/);
+assert.match(navigation, /roundGuard/);
+assert.match(hub, /getGameCatalog/);
+assert.doesNotMatch(hub, /const GAME_CATALOG|heads-up|taboo|Czółko|Tabu/);
+
+for (const [id, source] of Object.entries(integrations)) {
+  for (const pattern of [/catalog:\s*\{/, /status:\s*'available'/, /views:\s*\[/, /screens:\s*\{/, /shell:\s*\{/, /background:/, /session:\s*\{/]) {
+    assert.match(source, pattern, `${id} missing module contract`);
+  }
+}
+
+assert.match(integrations['co-mam-na-mysli'], /orientation:\s*'landscape'/);
+assert.match(integrations['trzy-w-piec'], /name:\s*'Trzy w Pięć'/);
+assert.match(integrations.synchronizacja, /id:\s*'synchronizacja'/);
+assert.match(integrations['trzy-rundy'], /name:\s*'Trzy Rundy'/);
+assert.match(integrations['dzika-karta'], /name:\s*'Dzika Karta'/);
+assert.match(integrations['dzika-karta'], /rulesModalId:\s*'dk-rules-modal'/);
+assert.match(integrations['dzika-karta'], /initialize:\s*\(\)\s*=>\s*initializeDzikaKartaContent\(\)/);
+
+for (const fn of ['registerImpostorGame', 'registerTickingBombGame', 'registerNaokoloGame', 'registerCoMamNaMysliGame', 'registerThreeFiveGame', 'registerSynchronizacjaGame', 'registerTrzyRundyGame', 'registerDzikaKartaGame']) {
+  assert.match(gamesIndex, new RegExp(`${fn}\\(\\)`));
+}
+assert.match(gamesIndex, /LEGACY_INITIALIZERS/);
+assert.match(gamesIndex, /attachLegacyInitializer/);
+assert.doesNotMatch(gamesIndex, /registerPrototypeGames|prototypes\/integration/);
+
 console.log('Module-owned game configuration tests: OK');
