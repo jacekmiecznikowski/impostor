@@ -27,35 +27,24 @@ const session = {
 
 const gameModule = registry.registerGameModule({
   id: 'demo',
-  catalog: {
-    name: 'Demo',
-    description: 'Gra testowa',
-    icon: 'fa-flask',
-    status: 'available',
-    order: 7
-  },
+  catalog: { name: 'Demo', description: 'Gra testowa', icon: 'fa-flask', status: 'available', order: 7 },
   views: [{ target: '#app-main', url: './views/demo.html' }],
   screens: {
-    'demo-menu': {
-      backTarget: 'home',
-      shell: { title: 'Demo', subtitle: 'Menu gry', mode: 'menu' },
-      background: 'demo'
-    },
-    'demo-play': {
-      shell: { title: 'Demo', subtitle: 'Runda', mode: 'immersive' },
-      background: 'demo-play',
-      immersive: true,
-      roundGuard: true,
-      wakeLock: true
-    }
+    'demo-menu': { backTarget: 'home', shell: { title: 'Demo', subtitle: 'Menu gry', mode: 'menu' }, background: 'demo' },
+    'demo-play': { shell: { title: 'Demo', subtitle: 'Runda', mode: 'immersive' }, background: 'demo-play', immersive: true, roundGuard: true, wakeLock: true }
   },
   session,
+  async initialize() { events.push('initialize:demo'); return 'demo-ready'; },
   ping(value) { events.push(`ping:${value}`); return value * 2; }
 });
 
 registry.registerGameModule({
   id: 'future-game',
   catalog: { name: 'Przyszła gra', status: 'prototype', order: 99 }
+});
+registry.registerGameModule({
+  id: 'failing-init',
+  async initialize() { events.push('initialize:failing'); throw new Error('boom'); }
 });
 
 assert.equal(registry.getGameModule('demo'), gameModule);
@@ -73,14 +62,21 @@ assert.equal(playConfig.roundGuard, true);
 assert.equal(playConfig.wakeLock, true);
 assert.equal(registry.getGameScreenConfig('unknown'), null);
 
-assert.deepEqual(registry.getGameViewFragments(), [
-  { target: '#app-main', url: './views/demo.html' }
-]);
+assert.deepEqual(registry.getGameViewFragments(), [{ target: '#app-main', url: './views/demo.html' }]);
 const catalog = registry.getGameCatalog();
 assert.deepEqual(catalog.map(item => item.id), ['demo', 'future-game']);
 assert.equal(catalog[0].name, 'Demo');
 assert.equal(catalog[1].status, 'prototype');
 assert.equal(Object.isFrozen(catalog[0]), true);
+
+const originalWarn = console.warn;
+console.warn = () => {};
+const initResults = await registry.initializeGameModules();
+console.warn = originalWarn;
+assert.equal(initResults.get('demo').status, 'fulfilled');
+assert.equal(initResults.get('demo').value, 'demo-ready');
+assert.equal(initResults.get('failing-init').status, 'rejected');
+assert.match(initResults.get('failing-init').reason.message, /boom/);
 
 const loadResults = registry.loadGameSessions();
 assert.equal(loadResults.get('demo'), 'loaded');
@@ -97,6 +93,8 @@ assert.equal(registry.getActiveGameSession(), session);
 
 assert.deepEqual(events, [
   'ping:7',
+  'initialize:demo',
+  'initialize:failing',
   'load',
   'syncUi',
   'save',
@@ -106,6 +104,7 @@ assert.deepEqual(events, [
 ]);
 
 assert.equal(window.registerGameModule, registry.registerGameModule);
+assert.equal(window.initializeGameModules, registry.initializeGameModules);
 assert.equal(window.getGameCatalog, registry.getGameCatalog);
 assert.equal(window.getGameScreenConfig, registry.getGameScreenConfig);
 assert.equal(window.getGamePlayers, registry.getGamePlayers);
