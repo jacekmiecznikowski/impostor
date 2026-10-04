@@ -1,5 +1,5 @@
-import { getGameModule, initializeGameModules, loadGameSessions, syncGameSessionUi } from './shared/game-registry.js?v=2';
-import { registerGameModules } from './games/index.js?v=7';
+import { getGameModule, loadGameSessions } from './shared/game-registry.js?v=2';
+import { registerGameModules } from './games/index.js?v=8';
 
 async function initializeApp() {
     registerGameModules();
@@ -13,16 +13,11 @@ async function initializeApp() {
         return;
     }
 
-    await initializeGameModules();
     loadGameSessions();
-
     setupGameHub();
     initializePartyjniakSettingsUi?.();
-    setupImpostorPresentation();
-    if (typeof setupRevealWordFitting === 'function') setupRevealWordFitting();
     setupSystemBackHandling();
     setupNativeAndroidIntegration?.();
-    syncGameSessionUi();
 
     document.addEventListener('keydown', event => {
         if (event.key !== 'Escape') return;
@@ -49,8 +44,8 @@ async function initializeApp() {
         } catch (_) {}
     }
 
-    if (requestedGame && getGameModule(requestedGame)) openGame(requestedGame, { silent: true });
-    else goToScreen('home', { silent: true });
+    goToScreen('home', { silent: true });
+    if (requestedGame && getGameModule(requestedGame)) await openGame(requestedGame, { silent: true });
 
     const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
     if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {
