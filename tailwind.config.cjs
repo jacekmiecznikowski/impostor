@@ -1,0 +1,23 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './index.html',
+    './views/**/*.html',
+    './assets/js/**/*.js'
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: [
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'sans-serif'
+        ]
+      }
+    }
+  },
+  plugins: []
+};
