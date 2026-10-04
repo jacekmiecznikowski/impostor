@@ -52,32 +52,6 @@ const PROTOTYPE_GAMES = [
                 }
             }
         }
-    },
-    {
-        id: 'synchronizacja',
-        catalog: {
-            name: 'Synchronizacja',
-            description: 'Daj wskazówkę tak, żeby reszta ekipy trafiła w ukryty punkt na skali.',
-            icon: 'fa-wave-square',
-            status: 'prototype',
-            order: 70
-        },
-        theme: {
-            palette: {
-                accent: '#8b5cf6', strong: '#6d28d9', alt: '#c4b5fd', text: '#ddd6fe', contrast: '#ffffff',
-                rgb: '139, 92, 246', surfaceRgb: '46, 16, 101'
-            },
-            previewBackground: 'synchronizacja',
-            backgrounds: {
-                synchronizacja: {
-                    colors: [0x8b5cf6, 0xa78bfa, 0xc4b5fd, 0xf8fafc],
-                    alpha: [0.05, 0.16], speed: 0.58, confetti: false, motif: 'party', overlayMotif: 'sync-spectrum',
-                    metaColor: '#4c1d95', pageBase: '#0b0614',
-                    pageGlowRgb: '139, 92, 246', pageGlowAltRgb: '196, 181, 253',
-                    pageGlowAlpha: '.13', pageGlowAltAlpha: '.045'
-                }
-            }
-        }
     }
 ];
 
