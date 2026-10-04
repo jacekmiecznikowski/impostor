@@ -205,13 +205,15 @@
 
 .home-screen {
   position: relative;
-  padding-top: max(3.35rem, calc(env(safe-area-inset-top) + .8rem)) !important;
+  justify-content: flex-start !important;
+  gap: 1.15rem !important;
+  padding-top: .7rem !important;
 }
 
 .home-settings-button {
   position: absolute;
   z-index: 4;
-  top: max(.8rem, env(safe-area-inset-top));
+  top: .7rem;
   right: 0;
   width: 2.75rem;
   height: 2.75rem;
@@ -244,14 +246,21 @@
   transform: scale(.94);
 }
 
-/* Reclaim some height after moving the utility action into a proper safe-area. */
 .home-screen .home-hero {
-  padding-top: .15rem;
+  padding: .1rem .35rem .25rem;
 }
 
 .home-screen .home-logo-lockup {
   width: 5.45rem;
   height: 5.45rem;
+}
+
+.partyjniak-native-android .home-screen {
+  padding-top: calc(var(--partyjniak-status-safe) + .55rem) !important;
+}
+
+.partyjniak-native-android .home-settings-button {
+  top: calc(var(--partyjniak-status-safe) + .55rem);
 }
 
 @media (max-width: 520px) {
@@ -264,7 +273,7 @@
   .settings-row-icon { width: 2.35rem; height: 2.35rem; }
   .settings-row-copy small { font-size: .62rem; }
   .settings-control > [data-setting-state] { display: none; }
-  .home-screen { padding-top: max(3.15rem, calc(env(safe-area-inset-top) + .65rem)) !important; }
+  .home-screen { gap: 1rem !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
