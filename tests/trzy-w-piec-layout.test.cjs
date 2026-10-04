@@ -8,6 +8,7 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const view = read('views/trzy-w-piec.html');
 const game = read('assets/js/games/trzy-w-piec/game.js');
 const layout = read('assets/css/trzy-w-piec-layout.css');
+const bootstrap = read('assets/js/games/trzy-w-piec/bootstrap.js');
 const index = read('index.html');
 
 assert.match(view, /id="three-five-timer-unit"/);
@@ -49,6 +50,8 @@ assert.match(layout, /\.three-five-action-slot[\s\S]*min-height:\s*6\.8rem/);
 assert.match(layout, /\.three-five-player-strip,[\s\S]*\.three-five-prompt-card,[\s\S]*\.three-five-action-slot[\s\S]*width:\s*min\(100%, 30rem\)/);
 assert.match(layout, /\.three-five-round-ranking/);
 assert.match(layout, /\.three-five-round-row/);
-assert.match(index, /trzy-w-piec-layout\.css\?v=4/);
 
-console.log('Trzy w Pięć timer, round decision and layout tests: OK');
+assert.match(bootstrap, /trzy-w-piec-layout\.css\?v=4/);
+assert.doesNotMatch(index, /trzy-w-piec-layout\.css\?v=4/);
+
+console.log('Trzy w Pięć timer, round decision and lazy layout tests: OK');
