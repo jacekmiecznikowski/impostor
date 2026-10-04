@@ -186,9 +186,52 @@
   display: none !important;
 }
 
+/* Home owns its own branding, so keep the settings control anchored to the same
+   content column instead of floating at the far edge of wide viewports. */
+.app-shell.is-home {
+  display: none;
+}
+
+.home-screen {
+  position: relative;
+}
+
+.home-settings-button {
+  position: absolute;
+  z-index: 4;
+  top: .25rem;
+  right: .15rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .9rem;
+  color: rgb(203 213 225);
+  border: 1px solid rgba(71, 85, 105, .52);
+  background: rgba(8, 15, 29, .66);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, .18);
+  transition: transform .14s ease, border-color .16s ease, background .16s ease;
+}
+
+.home-settings-button:hover,
+.home-settings-button:focus-visible {
+  outline: none;
+  color: white;
+  border-color: rgba(var(--ui-accent-rgb), .48);
+  background: rgba(var(--ui-accent-surface-rgb), .34);
+}
+
+.home-settings-button:active {
+  transform: scale(.94);
+}
+
 @media (max-width: 520px) {
   .settings-about { grid-template-columns: 1fr; }
   .settings-author-link { width: min(100%, 13rem); }
+  .home-settings-button { top: .1rem; right: 0; }
 }
 
 @media (max-width: 390px) {
@@ -202,5 +245,6 @@
   .settings-row,
   .settings-switch,
   .settings-switch > span,
-  .settings-author-link { transition: none !important; }
+  .settings-author-link,
+  .home-settings-button { transition: none !important; }
 }
