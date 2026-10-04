@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "game": "trzy-rundy",
+  "locale": "pl",
+  "categories": [
+    {"id":"codziennosc","name":"Codzienność","icon":"fa-house","words":["Parasol","Budzik","Lodówka","Szczoteczka","Walizka","Odkurzacz","Pilot","Kalendarz","Winda","Koszyk"]},
+    {"id":"miejsca","name":"Miejsca","icon":"fa-location-dot","words":["Lotnisko","Latarnia morska","Biblioteka","Wesołe miasteczko","Stadion","Kemping","Piekarnia","Metro","Plaża","Muzeum"]},
+    {"id":"rozrywka","name":"Rozrywka","icon":"fa-film","words":["Karaoke","Podcast","Komiks","Koncert","Planszówka","Selfie","Maraton filmowy","Magik","DJ","Teleturniej"]},
+    {"id":"jedzenie","name":"Jedzenie","icon":"fa-utensils","words":["Pierogi","Awokado","Popcorn","Sushi","Naleśnik","Arbuz","Kebab","Cynamon","Tost","Lody"]},
+    {"id":"postacie","name":"Postacie i zawody","icon":"fa-user-astronaut","words":["Astronauta","Detektyw","Pirata","Weterynarz","Kucharz","Strażak","Fotograf","Dyrygent","Nurek","Listonosz"]},
+    {"id":"absurd","name":"Absurd","icon":"fa-wand-magic-sparkles","words":["Tańczący robot","Niewidzialny kot","Kosmiczny ziemniak","Śpiący smok","Zepsuty teleport","Król pingwinów","Latająca kanapa","Nerwowy duch","Śpiewający kaktus","Detektyw z przyszłości"]}
+  ]
+}
