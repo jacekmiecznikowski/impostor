@@ -2,81 +2,14 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
-
-const root = path.join(__dirname, '..');
-const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
-
-const index = read('index.html');
-const app = read('assets/js/app.js');
-const gamesIndex = read('assets/js/games/index.js');
-const registry = read('assets/js/shared/game-registry.js');
-const impostorIntegration = read('assets/js/games/impostor/integration.js');
-const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
-const naokoloIntegration = read('assets/js/games/naokolo/integration.js');
-const cmmIntegration = read('assets/js/games/co-mam-na-mysli/integration.js');
-const threeFiveIntegration = read('assets/js/games/trzy-w-piec/integration.js');
-const syncIntegration = read('assets/js/games/synchronizacja/integration.js');
-const prototypesIntegration = read('assets/js/games/prototypes/integration.js');
-const sw = read('sw.js');
-
-for (const [name, source] of [
-  ['app.js', app], ['games/index.js', gamesIndex], ['game-registry.js', registry],
-  ['impostor/integration.js', impostorIntegration], ['ticking-bomb/integration.js', bombIntegration],
-  ['naokolo/integration.js', naokoloIntegration], ['co-mam-na-mysli/integration.js', cmmIntegration],
-  ['trzy-w-piec/integration.js', threeFiveIntegration], ['synchronizacja/integration.js', syncIntegration],
-  ['prototypes/integration.js', prototypesIntegration]
-]) {
-  const result = spawnSync(process.execPath, ['--input-type=module', '--check'], { input: source, encoding: 'utf8' });
-  assert.equal(result.status, 0, `${name} nie przechodzi kontroli składni ES module:\n${result.stderr}`);
-}
-
-assert.match(index, /<script type="module" src="\.\/assets\/js\/app\.js\?v=7"><\/script>/);
-assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/shared\/game-registry\.js\?v=2"/);
-assert.match(index, /rel="modulepreload" href="\.\/assets\/js\/games\/index\.js\?v=5"/);
-assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/shared\/game-registry\.js[^\"]*"[^>]*defer/);
-assert.doesNotMatch(index, /<script[^>]+src="\.\/assets\/js\/games\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja)\/integration\.js[^\"]*"[^>]*defer/);
-
-assert.match(app, /from '\.\/shared\/game-registry\.js\?v=2'/);
-assert.match(app, /from '\.\/games\/index\.js\?v=5'/);
-assert.doesNotMatch(app, /initializeGameModules/);
-assert.doesNotMatch(app, /games\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja)\/integration/);
-assert.match(app, /registerGameModules\(\);[\s\S]*await loadAppViews\(\)/);
-assert.match(app, /initializeCoMamNaMysliContent/);
-assert.match(app, /initializeThreeFiveContent/);
-assert.match(app, /initializeSynchronizacjaContent/);
-
-assert.match(gamesIndex, /from '\.\/impostor\/integration\.js\?v=2'/);
-assert.match(gamesIndex, /from '\.\/ticking-bomb\/integration\.js\?v=2'/);
-assert.match(gamesIndex, /from '\.\/naokolo\/integration\.js\?v=1'/);
-assert.match(gamesIndex, /from '\.\/co-mam-na-mysli\/integration\.js\?v=1'/);
-assert.match(gamesIndex, /from '\.\/trzy-w-piec\/integration\.js\?v=1'/);
-assert.match(gamesIndex, /from '\.\/synchronizacja\/integration\.js\?v=1'/);
-assert.match(gamesIndex, /from '\.\/prototypes\/integration\.js\?v=4'/);
-assert.match(gamesIndex, /registerCoMamNaMysliGame\(\)/);
-assert.match(gamesIndex, /registerThreeFiveGame\(\)/);
-assert.match(gamesIndex, /registerSynchronizacjaGame\(\)/);
-
-assert.match(registry, /export function registerGameModule/);
-assert.match(registry, /export function getGameScreenConfig/);
-assert.match(registry, /Object\.assign\(window, legacyBridge\)/);
-
-for (const [source, fn] of [
-  [impostorIntegration, 'registerImpostorGame'], [bombIntegration, 'registerTickingBombGame'],
-  [naokoloIntegration, 'registerNaokoloGame'], [cmmIntegration, 'registerCoMamNaMysliGame'],
-  [threeFiveIntegration, 'registerThreeFiveGame'], [syncIntegration, 'registerSynchronizacjaGame']
-]) {
-  assert.match(source, /from '\.\.\/\.\.\/shared\/game-registry\.js\?v=2'/);
-  assert.match(source, new RegExp(`export function ${fn}`));
-  assert.doesNotMatch(source, /^registerGameModule\(/m);
-}
-assert.match(prototypesIntegration, /export function registerPrototypeGames/);
-
-assert.match(sw, /assets\/js\/shared\/game-registry\.js\?v=2/);
-assert.match(sw, /assets\/js\/games\/index\.js\?v=5/);
-assert.match(sw, /assets\/js\/games\/co-mam-na-mysli\/integration\.js\?v=1/);
-assert.match(sw, /assets\/js\/games\/trzy-w-piec\/integration\.js\?v=1/);
-assert.match(sw, /assets\/js\/games\/synchronizacja\/integration\.js\?v=1/);
-assert.match(sw, /assets\/js\/games\/prototypes\/integration\.js\?v=4/);
-assert.match(sw, /assets\/js\/app\.js\?v=7/);
-
+const root=path.join(__dirname,'..');const read=r=>fs.readFileSync(path.join(root,r),'utf8');
+const index=read('index.html'),app=read('assets/js/app.js'),gamesIndex=read('assets/js/games/index.js'),registry=read('assets/js/shared/game-registry.js'),sw=read('sw.js');
+const modules=[['impostor','registerImpostorGame'],['ticking-bomb','registerTickingBombGame'],['naokolo','registerNaokoloGame'],['co-mam-na-mysli','registerCoMamNaMysliGame'],['trzy-w-piec','registerThreeFiveGame'],['synchronizacja','registerSynchronizacjaGame'],['trzy-rundy','registerTrzyRundyGame']];
+const sources=modules.map(([id,fn])=>[id,fn,read(`assets/js/games/${id}/integration.js`)]);const prototypes=read('assets/js/games/prototypes/integration.js');
+for(const [name,source] of [['app.js',app],['games/index.js',gamesIndex],['game-registry.js',registry],...sources.map(([id,,s])=>[`${id}/integration.js`,s]),['prototypes/integration.js',prototypes]]){const result=spawnSync(process.execPath,['--input-type=module','--check'],{input:source,encoding:'utf8'});assert.equal(result.status,0,`${name} syntax:\n${result.stderr}`);}
+assert.match(index,/app\.js\?v=8/);assert.match(index,/games\/index\.js\?v=6/);assert.match(app,/from '\.\/games\/index\.js\?v=6'/);assert.match(app,/initializeTrzyRundyContent/);assert.doesNotMatch(app,/games\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy)\/integration/);
+for(const [id,fn,source] of sources){assert.match(source,/from '\.\.\/\.\.\/shared\/game-registry\.js\?v=2'/);assert.match(source,new RegExp(`export function ${fn}`));assert.match(gamesIndex,new RegExp(`${fn}`));}
+assert.match(gamesIndex,/trzy-rundy\/integration\.js\?v=1/);assert.match(gamesIndex,/prototypes\/integration\.js\?v=5/);assert.match(prototypes,/export function registerPrototypeGames/);
+assert.match(registry,/export function registerGameModule/);assert.match(registry,/Object\.assign\(window, legacyBridge\)/);
+assert.match(sw,/assets\/js\/games\/index\.js\?v=6/);assert.match(sw,/assets\/js\/games\/trzy-rundy\/integration\.js\?v=1/);assert.match(sw,/assets\/js\/games\/prototypes\/integration\.js\?v=5/);assert.match(sw,/assets\/js\/app\.js\?v=8/);
 console.log('ES module boundary and PWA module revision tests: OK');

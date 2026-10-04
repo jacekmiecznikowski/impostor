@@ -1,0 +1,76 @@
+<section id="screen-tr-menu" class="screen hidden flex-col flex-1 justify-center gap-4 tr-screen">
+  <div class="tr-hero panel">
+    <span class="tr-kicker">Gra drużynowa</span>
+    <h1>Trzy Rundy</h1>
+    <p>Jedna pula haseł. Najpierw opisujesz, potem pokazujesz, na końcu wolno Ci użyć tylko jednego słowa.</p>
+    <div class="tr-rounds-preview" aria-label="Trzy etapy gry">
+      <span><b>1</b> Opisz</span><span><b>2</b> Pokaż</span><span><b>3</b> Jedno słowo</span>
+    </div>
+  </div>
+  <button class="primary-btn" type="button" onclick="startNewTrzyRundyGame()"><i class="fa-solid fa-play"></i><span>NOWA GRA</span></button>
+  <button id="tr-resume-btn" class="secondary-btn hidden" type="button" onclick="resumeTrzyRundyGame()"><i class="fa-solid fa-rotate-right"></i><span>WZNÓW GRĘ</span></button>
+</section>
+
+<section id="screen-tr-players" class="screen hidden flex-col flex-1 gap-4 player-setup-screen tr-screen">
+  <div class="tr-section-heading"><span class="tr-kicker">Krok 1 z 2</span><h2>Kto gra?</h2><p>Gracze zostaną automatycznie rozdzieleni naprzemiennie na dwie drużyny.</p></div>
+  <div class="panel player-setup-count-card">
+    <div class="player-setup-count-head"><span>Liczba graczy</span><strong id="tr-player-count-value">6</strong></div>
+    <input id="tr-player-count" class="player-setup-slider" type="range" min="4" max="12" value="6" oninput="setTrzyRundyPlayerCount(this.value)">
+  </div>
+  <div id="tr-player-names" class="player-setup-names"></div>
+  <div class="tr-team-preview-grid">
+    <div class="panel tr-team-preview tr-team-a"><span>Drużyna A</span><p id="tr-team-a-preview"></p></div>
+    <div class="panel tr-team-preview tr-team-b"><span>Drużyna B</span><p id="tr-team-b-preview"></p></div>
+  </div>
+  <button class="primary-btn" type="button" onclick="trzyRundyProceedToOptions()"><span>DALEJ</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-tr-options" class="screen hidden flex-col flex-1 gap-4 tr-screen">
+  <div class="tr-section-heading"><span class="tr-kicker">Krok 2 z 2</span><h2>Ustawienia</h2><p>W każdej z trzech rund wraca dokładnie ta sama pula haseł.</p></div>
+  <div class="tr-options-grid">
+    <label class="panel tr-option-card"><span>Liczba haseł</span><strong id="tr-pool-size-value">24</strong><input id="tr-pool-size" type="range" min="12" max="36" step="2" value="24" oninput="setTrzyRundyPoolSize(this.value)"><small>Im więcej haseł, tym dłuższa gra.</small></label>
+    <label class="panel tr-option-card"><span>Czas tury</span><strong id="tr-turn-seconds-value">45s</strong><input id="tr-turn-seconds" type="range" min="20" max="90" step="5" value="45" oninput="setTrzyRundyTurnSeconds(this.value)"><small>Po czasie telefon przechodzi do drugiej drużyny.</small></label>
+  </div>
+  <div><div class="tr-options-label"><span>Kategorie</span><small>Wybierz co najmniej jedną</small></div><div id="tr-category-grid" class="tr-category-grid"></div></div>
+  <button class="primary-btn" type="button" onclick="prepareTrzyRundyGame()"><i class="fa-solid fa-flag-checkered"></i><span>ZACZYNAMY</span></button>
+</section>
+
+<section id="screen-tr-ready" class="screen hidden flex-col flex-1 justify-center gap-4 tr-screen tr-ready-screen">
+  <div class="tr-ready-card panel">
+    <span id="tr-ready-round" class="tr-kicker">Runda 1 z 3</span>
+    <div id="tr-ready-mode" class="tr-mode-orb">Opisz</div>
+    <p class="tr-ready-label">Telefon bierze</p>
+    <h2 id="tr-ready-player">Gracz</h2>
+    <strong id="tr-ready-team" class="tr-team-pill">Drużyna A</strong>
+    <p id="tr-ready-instruction" class="tr-ready-instruction"></p>
+    <small id="tr-ready-remaining"></small>
+  </div>
+  <button class="primary-btn" type="button" onclick="startTrzyRundyTurn()"><i class="fa-solid fa-stopwatch"></i><span>START TURY</span></button>
+</section>
+
+<section id="screen-tr-play" class="screen hidden flex-col flex-1 justify-center tr-play-screen">
+  <div class="tr-play-topline"><span id="tr-play-mode">Opisz • Runda 1</span><strong id="tr-play-team">Drużyna A</strong></div>
+  <div id="tr-timer-ring" class="tr-timer-ring"><span id="tr-timer">45</span><small>sek</small></div>
+  <div class="tr-word-card"><span class="tr-kicker">Hasło</span><h2 id="tr-word">Parasol</h2><p id="tr-play-instruction"></p></div>
+  <div class="tr-play-score"><span id="tr-turn-points">0 pkt w tej turze</span></div>
+  <div class="tr-play-actions">
+    <button class="tr-skip-btn" type="button" onclick="skipTrzyRundyWord()"><i class="fa-solid fa-forward"></i><span>Pomiń</span></button>
+    <button class="tr-guessed-btn" type="button" onclick="markTrzyRundyWordGuessed()"><i class="fa-solid fa-check"></i><span>Odgadnięte!</span></button>
+  </div>
+</section>
+
+<section id="screen-tr-turn-summary" class="screen hidden flex-col flex-1 justify-center gap-4 tr-screen">
+  <div class="tr-summary-card panel"><span class="tr-kicker">Koniec tury</span><div id="tr-summary-points" class="tr-summary-points">+0</div><p>Punkty zdobyte w tej turze</p><strong id="tr-summary-scores">A 0 : 0 B</strong><small id="tr-summary-remaining"></small></div>
+  <button class="primary-btn" type="button" onclick="continueTrzyRundyAfterTurn()"><span>PRZEKAŻ TELEFON</span><i class="fa-solid fa-arrow-right"></i></button>
+</section>
+
+<section id="screen-tr-round-break" class="screen hidden flex-col flex-1 justify-center gap-4 tr-screen">
+  <div class="tr-summary-card panel"><span class="tr-kicker">Zmiana zasad</span><h2 id="tr-round-break-title">Runda 1 zakończona</h2><div id="tr-round-break-scores" class="tr-scoreline">Drużyna A 0 : 0 Drużyna B</div><div class="tr-next-round"><span>Dalej</span><strong id="tr-round-break-next">Runda 2: Pokaż</strong><p id="tr-round-break-instruction"></p></div></div>
+  <button class="primary-btn" type="button" onclick="startNextTrzyRundyRound()"><i class="fa-solid fa-rotate"></i><span>START KOLEJNEJ RUNDY</span></button>
+</section>
+
+<section id="screen-tr-final" class="screen hidden flex-col flex-1 justify-center gap-4 tr-screen">
+  <div class="tr-final-card panel"><span class="tr-kicker">Koniec gry</span><div class="tr-final-icon"><i class="fa-solid fa-trophy"></i></div><h2 id="tr-final-title">Drużyna A wygrywa!</h2><div id="tr-final-score" class="tr-final-score">0 : 0</div><p id="tr-final-copy"></p><div id="tr-final-teams" class="tr-final-teams"></div></div>
+  <button class="primary-btn" type="button" onclick="restartTrzyRundyMatch()"><i class="fa-solid fa-rotate-right"></i><span>REWANŻ TĄ SAMĄ EKIPĄ</span></button>
+  <button class="secondary-btn" type="button" onclick="openTrzyRundyMenu()"><span>MENU GRY</span></button>
+</section>

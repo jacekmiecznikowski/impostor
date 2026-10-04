@@ -26,32 +26,6 @@ const PROTOTYPE_GAMES = [
                 }
             }
         }
-    },
-    {
-        id: 'trzy-rundy',
-        catalog: {
-            name: 'Trzy Rundy',
-            description: 'Te same hasła: najpierw opisuj, potem pokazuj, na końcu użyj jednego słowa.',
-            icon: 'fa-arrows-rotate',
-            status: 'prototype',
-            order: 50
-        },
-        theme: {
-            palette: {
-                accent: '#22c55e', strong: '#15803d', alt: '#86efac', text: '#bbf7d0', contrast: '#ffffff',
-                rgb: '34, 197, 94', surfaceRgb: '5, 46, 22'
-            },
-            previewBackground: 'trzy-rundy',
-            backgrounds: {
-                'trzy-rundy': {
-                    colors: [0x22c55e, 0x4ade80, 0x86efac, 0xf8fafc],
-                    alpha: [0.05, 0.16], speed: 0.62, confetti: false, motif: 'party', overlayMotif: 'three-rounds',
-                    metaColor: '#14532d', pageBase: '#03120a',
-                    pageGlowRgb: '34, 197, 94', pageGlowAltRgb: '134, 239, 172',
-                    pageGlowAlpha: '.13', pageGlowAltAlpha: '.045'
-                }
-            }
-        }
     }
 ];
 
