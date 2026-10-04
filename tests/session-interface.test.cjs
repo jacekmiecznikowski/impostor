@@ -12,6 +12,7 @@ const bombIntegration = read('assets/js/games/ticking-bomb/integration.js');
 const naokoloIntegration = read('assets/js/games/naokolo/integration.js');
 const cmmIntegration = read('assets/js/games/co-mam-na-mysli/integration.js');
 const threeFiveIntegration = read('assets/js/games/trzy-w-piec/integration.js');
+const syncIntegration = read('assets/js/games/synchronizacja/integration.js');
 const impostorState = read('assets/js/games/impostor/state.js');
 
 assert.match(registry, /GAME_SESSION_METHODS/);
@@ -31,7 +32,8 @@ for (const [source, methods] of [
   [bombIntegration, ['loadBombSession', 'persistBombSession', 'resetBombSession']],
   [naokoloIntegration, ['loadNaokoloSession', 'persistNaokoloSession', 'resetNaokoloSession']],
   [cmmIntegration, ['loadCoMamNaMysliSession', 'persistCoMamNaMysliSession', 'resetCoMamNaMysliSession']],
-  [threeFiveIntegration, ['loadThreeFiveSession', 'persistThreeFiveSession', 'resetThreeFiveSession']]
+  [threeFiveIntegration, ['loadThreeFiveSession', 'persistThreeFiveSession', 'resetThreeFiveSession']],
+  [syncIntegration, ['loadSynchronizacjaSession', 'persistSynchronizacjaSession', 'resetSynchronizacjaSession']]
 ]) {
   assert.match(source, /session:\s*\{/);
   methods.forEach(method => assert.match(source, new RegExp(method)));
@@ -42,7 +44,7 @@ for (const [source, methods] of [
 assert.match(impostorState, /function resetImpostorSession/);
 assert.match(app, /loadGameSessions\(\)/);
 assert.match(app, /syncGameSessionUi\(\)/);
-assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadCoMamNaMysliSession\(\)|loadThreeFiveSession\(\)|loadSession\(\)/);
-assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\.|\bcoMamNaMysliState\.|\bthreeFiveState\./);
+assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadCoMamNaMysliSession\(\)|loadThreeFiveSession\(\)|loadSynchronizacjaSession\(\)|loadSession\(\)/);
+assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\.|\bcoMamNaMysliState\.|\bthreeFiveState\.|\bsynchronizacjaState\./);
 
 console.log('Shared game session interface tests: OK');

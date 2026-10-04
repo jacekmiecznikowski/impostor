@@ -16,9 +16,10 @@ const bomb = read('assets/js/games/ticking-bomb/integration.js');
 const naokolo = read('assets/js/games/naokolo/integration.js');
 const cmm = read('assets/js/games/co-mam-na-mysli/integration.js');
 const threeFive = read('assets/js/games/trzy-w-piec/integration.js');
+const sync = read('assets/js/games/synchronizacja/integration.js');
 const prototypes = read('assets/js/games/prototypes/integration.js');
 
-for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['naokolo', naokolo], ['co-mam-na-mysli', cmm], ['trzy-w-piec', threeFive], ['prototypes', prototypes]]) {
+for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['naokolo', naokolo], ['co-mam-na-mysli', cmm], ['trzy-w-piec', threeFive], ['synchronizacja', sync], ['prototypes', prototypes]]) {
   assert.match(source, /theme:\s*\{/ , `${name} must own a theme`);
   assert.match(source, /palette:\s*\{/ , `${name} must own a palette`);
   assert.match(source, /backgrounds:\s*\{/ , `${name} must own background definitions`);
@@ -27,9 +28,11 @@ for (const [name, source] of [['impostor', impostor], ['ticking-bomb', bomb], ['
 assert.match(naokolo, /id:\s*'naokolo'[\s\S]*?theme:/);
 assert.match(cmm, /id:\s*'co-mam-na-mysli'[\s\S]*?theme:/);
 assert.match(threeFive, /id:\s*'trzy-w-piec'[\s\S]*?theme:/);
+assert.match(sync, /id:\s*'synchronizacja'[\s\S]*?theme:/);
 assert.match(threeFive, /overlayMotif:\s*'countdown-pulse'/);
+assert.match(sync, /overlayMotif:\s*'sync-spectrum'/);
 assert.match(prototypes, /id:\s*'dzika-karta'[\s\S]*?theme:/);
-assert.doesNotMatch(prototypes, /id:\s*'co-mam-na-mysli'|id:\s*'trzy-w-piec'/);
+assert.doesNotMatch(prototypes, /id:\s*'co-mam-na-mysli'|id:\s*'trzy-w-piec'|id:\s*'synchronizacja'/);
 
 assert.match(runtime, /getGameModule\?\.\(gameId\)\?\.theme/);
 assert.match(runtime, /registerPartyjniakBackgroundModes/);
@@ -57,6 +60,7 @@ assert.match(bomb, /overlayMotif:\s*'fuse-sparks'/);
 assert.match(naokolo, /overlayMotif:\s*'orbit-words'/);
 assert.match(cmm, /overlayMotif:\s*'thought-field'/);
 assert.match(threeFive, /overlayMotif:\s*'countdown-pulse'/);
+assert.match(sync, /overlayMotif:\s*'sync-spectrum'/);
 assert.match(prototypes, /overlayMotif:\s*'wild-cards'/);
 
 // One renderer owns the whole animated background. Halos are vector layers,

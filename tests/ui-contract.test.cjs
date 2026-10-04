@@ -18,7 +18,8 @@ const playerSetupSources = [
   read('assets/js/games/ticking-bomb/setup.js'),
   read('assets/js/games/naokolo/setup.js'),
   read('assets/js/games/co-mam-na-mysli/setup.js'),
-  read('assets/js/games/trzy-w-piec/setup.js')
+  read('assets/js/games/trzy-w-piec/setup.js'),
+  read('assets/js/games/synchronizacja/setup.js')
 ];
 for (const source of playerSetupSources) {
   assert.match(source, /renderPlayerSetupNames\(/);
@@ -101,6 +102,27 @@ assert.match(threeFiveCss, /\.three-five-timer\.is-expired/);
 assert.match(threeFiveLayout, /from 0deg/);
 assert.match(threeFiveLayout, /\.three-five-timer-sweep/);
 assert.match(threeFiveLayout, /\.three-five-round-ranking/);
+
+const syncView = read('views/synchronizacja.html');
+const syncGame = read('assets/js/games/synchronizacja/game.js');
+const syncCss = read('assets/css/synchronizacja.css');
+assert.match(syncView, /id="screen-sync-players"[^>]*player-setup-screen/);
+assert.match(syncView, /id="screen-sync-clue"/);
+assert.match(syncView, /id="screen-sync-guess"/);
+assert.match(syncView, /id="screen-sync-reveal"/);
+assert.match(syncView, /id="sync-guess-input"[^>]*min="0"[^>]*max="100"/);
+assert.match(syncView, /Ukryj cel i przekaż telefon/);
+assert.match(syncView, /Jeszcze jedna runda/);
+assert.match(syncView, /Zakończ grę/);
+assert.match(syncGame, /SynchronizacjaRules\.scoreGuess/);
+assert.match(syncGame, /SynchronizacjaRules\.isRoundComplete/);
+assert.match(syncGame, /continueSynchronizacjaRound/);
+assert.match(syncGame, /finishSynchronizacjaGame/);
+assert.match(syncCss, /--sync-target/);
+assert.match(syncCss, /--sync-guess/);
+assert.match(syncCss, /\.sync-target-zone/);
+assert.match(syncCss, /\.sync-guess-marker/);
+assert.match(syncCss, /\.sync-distance-line/);
 
 const nativeAndroid = read('assets/js/shared/native-android.js');
 assert.match(nativeAndroid, /PartyjniakOrientation/);
