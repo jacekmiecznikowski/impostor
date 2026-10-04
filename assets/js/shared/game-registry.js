@@ -1,5 +1,6 @@
 const GAME_MODULES = new Map();
 const GAME_SESSION_METHODS = Object.freeze(['load', 'save', 'reset', 'hasResume', 'getPlayers']);
+const GAME_INITIALIZATION = new Map();
 
 function normalizeGameSession(gameId, session) {
     if (!session) return null;
@@ -11,7 +12,14 @@ function normalizeGameSession(gameId, session) {
 
 function normalizeCatalog(gameId, catalog) {
     if (!catalog) return null;
-    return Object.freeze({ id: gameId, name: String(catalog.name || gameId), description: String(catalog.description || ''), icon: String(catalog.icon || 'fa-gamepad'), status: String(catalog.status || 'prototype'), order: Number.isFinite(Number(catalog.order)) ? Number(catalog.order) : 100 });
+    return Object.freeze({
+        id: gameId,
+        name: String(catalog.name || gameId),
+        description: String(catalog.description || ''),
+        icon: String(catalog.icon || 'fa-gamepad'),
+        status: String(catalog.status || 'prototype'),
+        order: Number.isFinite(Number(catalog.order)) ? Number(catalog.order) : 100
+    });
 }
 
 function normalizeScreens(screens) {
@@ -26,10 +34,24 @@ function normalizeViews(views) {
     return views.map(view => ({ target: String(view.target || ''), url: String(view.url || '') })).filter(view => view.target && view.url);
 }
 
+function assertUniqueScreens(gameId, screenConfig) {
+    for (const screenName of screenConfig.keys()) {
+        if (!screenName || screenName === 'home') throw new Error(`Gra ${gameId} używa zarezerwowanej lub pustej nazwy ekranu.`);
+        for (const existing of GAME_MODULES.values()) {
+            if (existing.screens.has(screenName)) {
+                throw new Error(`Ekran „${screenName}” jest już zarejestrowany przez grę ${existing.id}.`);
+            }
+        }
+    }
+}
+
 export function registerGameModule(config) {
     if (!config || typeof config.id !== 'string' || !config.id.trim()) throw new Error('Moduł gry musi mieć poprawne id.');
     const id = config.id.trim();
+    if (GAME_MODULES.has(id)) throw new Error(`Moduł gry „${id}” jest już zarejestrowany.`);
+
     const screenConfig = normalizeScreens(config.screens);
+    assertUniqueScreens(id, screenConfig);
     const session = normalizeGameSession(id, config.session);
     const catalog = normalizeCatalog(id, config.catalog);
     const views = normalizeViews(config.views);
@@ -77,31 +99,59 @@ export function callGameHook(gameOrId, hookName, ...args) {
     return typeof hook === 'function' ? hook(...args) : undefined;
 }
 
-export async function initializeGameModules() {
-    const results = new Map();
-    for (const gameModule of GAME_MODULES.values()) {
-        if (typeof gameModule.initialize !== 'function') continue;
+export async function initializeGameModule(gameOrId) {
+    const gameModule = typeof gameOrId === 'string' ? getGameModule(gameOrId) : gameOrId;
+    if (!gameModule) throw new Error('Nie znaleziono modułu gry do inicjalizacji.');
+    if (GAME_INITIALIZATION.has(gameModule.id)) return GAME_INITIALIZATION.get(gameModule.id);
+
+    const initialization = (async () => {
         try {
-            results.set(gameModule.id, { status: 'fulfilled', value: await gameModule.initialize() });
+            const value = typeof gameModule.initialize === 'function' ? await gameModule.initialize() : undefined;
+            return { status: 'fulfilled', value };
         } catch (error) {
             console.warn(`Nie udało się zainicjalizować modułu ${gameModule.id}.`, error);
-            results.set(gameModule.id, { status: 'rejected', reason: error });
+            GAME_INITIALIZATION.delete(gameModule.id);
+            return { status: 'rejected', reason: error };
         }
-    }
-    return results;
+    })();
+
+    GAME_INITIALIZATION.set(gameModule.id, initialization);
+    return initialization;
+}
+
+export async function initializeGameModules() {
+    const entries = await Promise.all(listGameModules().map(async gameModule => [gameModule.id, await initializeGameModule(gameModule)]));
+    return new Map(entries);
 }
 
 export function forEachGameSession(callback) {
-    for (const gameModule of GAME_MODULES.values()) {
-        if (gameModule.session) callback(gameModule.session, gameModule);
-    }
+    for (const gameModule of GAME_MODULES.values()) if (gameModule.session) callback(gameModule.session, gameModule);
 }
-export function loadGameSessions() { const results = new Map(); forEachGameSession((session, gameModule) => results.set(gameModule.id, session.load())); return results; }
-export function syncGameSessionUi() { forEachGameSession(session => session.syncUi?.()); }
+
+export function loadGameSessions() {
+    const results = new Map();
+    forEachGameSession((session, gameModule) => results.set(gameModule.id, session.load()));
+    return results;
+}
+
+export function syncGameSessionUi(gameOrId = null) {
+    if (gameOrId) {
+        const session = getGameSession(gameOrId);
+        session?.syncUi?.();
+        return;
+    }
+    forEachGameSession(session => session.syncUi?.());
+}
+
 export function saveGameSession(gameOrId) { return getGameSession(gameOrId)?.save(); }
 export function resetGameSession(gameOrId) { return getGameSession(gameOrId)?.reset(); }
 export function hasGameResume(gameOrId) { return Boolean(getGameSession(gameOrId)?.hasResume()); }
 export function getGamePlayers(gameOrId) { const players = getGameSession(gameOrId)?.getPlayers(); return Array.isArray(players) ? players : []; }
 
-const legacyBridge = { registerGameModule, getGameModule, listGameModules, getGameCatalog, getGameViewFragments, getGameScreenConfig, getGameSession, getGameIdForScreen, getActiveGameId, getActiveGameModule, getActiveGameSession, callGameHook, initializeGameModules, forEachGameSession, loadGameSessions, syncGameSessionUi, saveGameSession, resetGameSession, hasGameResume, getGamePlayers };
+const legacyBridge = {
+    registerGameModule, getGameModule, listGameModules, getGameCatalog, getGameViewFragments,
+    getGameScreenConfig, getGameSession, getGameIdForScreen, getActiveGameId, getActiveGameModule,
+    getActiveGameSession, callGameHook, initializeGameModule, initializeGameModules, forEachGameSession,
+    loadGameSessions, syncGameSessionUi, saveGameSession, resetGameSession, hasGameResume, getGamePlayers
+};
 Object.assign(window, legacyBridge);
