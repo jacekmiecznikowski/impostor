@@ -1,21 +1,24 @@
 .game-menu-screen {
   width: 100%;
   justify-content: center;
+  align-items: stretch;
   gap: 1.25rem !important;
   padding-top: clamp(.8rem, 3vh, 1.4rem) !important;
   padding-bottom: max(1.25rem, env(safe-area-inset-bottom)) !important;
 }
 
 .game-menu-hero {
+  flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: .62rem;
+  gap: .62rem !important;
   padding: .35rem .45rem .2rem;
 }
 
 .game-menu-kicker {
+  flex: 0 0 auto;
   color: var(--ui-accent-text);
   font-size: .66rem;
   line-height: .9rem;
@@ -25,8 +28,11 @@
 }
 
 .game-menu-icon {
+  flex: 0 0 5.5rem;
   width: 5.5rem;
   height: 5.5rem;
+  min-width: 5.5rem;
+  min-height: 5.5rem;
   margin: .3rem 0 .18rem;
   display: grid;
   place-items: center;
@@ -39,6 +45,7 @@
 }
 
 .game-menu-title {
+  flex: 0 0 auto;
   margin: .18rem 0 0;
   max-width: 24rem;
   color: rgb(248 250 252);
@@ -50,6 +57,7 @@
 }
 
 .game-menu-description {
+  flex: 0 0 auto;
   margin: .08rem 0 0;
   max-width: 22rem;
   color: rgb(148 163 184);
@@ -59,10 +67,11 @@
 }
 
 .game-menu-actions {
+  flex: 0 0 auto;
   width: min(100%, 22rem);
   margin: 0 auto;
   display: grid;
-  gap: .72rem;
+  gap: .72rem !important;
 }
 
 .game-menu-primary,
@@ -183,7 +192,14 @@
 
 @media (max-width: 380px) {
   .game-menu-screen { gap: 1rem !important; }
-  .game-menu-icon { width: 5rem; height: 5rem; font-size: 2rem; }
+  .game-menu-icon {
+    flex-basis: 5rem;
+    width: 5rem;
+    height: 5rem;
+    min-width: 5rem;
+    min-height: 5rem;
+    font-size: 2rem;
+  }
   .game-menu-title { font-size: 2.35rem; }
   .interrupted-game-card { grid-template-columns: 3rem minmax(0, 1fr); }
   .interrupted-game-icon { width: 3rem; height: 3rem; }
@@ -192,8 +208,15 @@
 
 @media (max-height: 700px) {
   .game-menu-screen { gap: 1rem !important; padding-top: .45rem !important; }
-  .game-menu-hero { gap: .5rem; }
-  .game-menu-icon { width: 4.8rem; height: 4.8rem; font-size: 1.95rem; }
+  .game-menu-hero { gap: .5rem !important; }
+  .game-menu-icon {
+    flex-basis: 4.8rem;
+    width: 4.8rem;
+    height: 4.8rem;
+    min-width: 4.8rem;
+    min-height: 4.8rem;
+    font-size: 1.95rem;
+  }
   .game-menu-title { font-size: clamp(2.05rem, 9vw, 3rem); }
   .game-menu-description { font-size: .82rem; }
 }
