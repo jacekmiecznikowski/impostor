@@ -139,6 +139,9 @@
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
+.navigation-sheet.hidden { display: none !important; }
+.navigation-sheet.flex { display: flex; }
+
 .navigation-sheet {
   position: fixed;
   inset: 0;
