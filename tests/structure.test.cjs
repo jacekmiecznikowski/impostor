@@ -14,7 +14,7 @@ const gameIds = [
 const requiredFiles = [
   'index.html', 'manifest.webmanifest', 'sw.js', 'capacitor.config.json', 'package.json', 'package-lock.json',
   'tailwind.config.cjs', 'playwright.config.mjs', 'docs/adding-a-game.md',
-  'scripts/build-assets.mjs', 'scripts/prepare-web.mjs', 'scripts/patch-android.mjs',
+  'scripts/build-assets.mjs', 'scripts/prepare-web.mjs', 'scripts/verify-web-bundle.mjs', 'scripts/patch-android.mjs',
   'assets/css/tailwind-input.css', 'assets/css/game-menu.css',
   'assets/js/app.js', 'assets/js/shared/view-loader.js', 'assets/js/shared/asset-loader.js',
   'assets/js/shared/app-settings.js', 'assets/js/shared/audio.js', 'assets/js/shared/player-setup.js',
@@ -37,10 +37,9 @@ assert.equal(exists('assets/js/games/prototypes/integration.js'), false, 'Martwy
 const index = read('index.html');
 assert.match(index, /<html lang="pl"/);
 assert.match(index, /<title>Partyjniak – gry imprezowe<\/title>/);
-assert.match(index, /assets\/vendor\/tailwind\.css/);
-assert.match(index, /assets\/vendor\/phaser\/phaser\.min\.js/);
-assert.match(index, /assets\/vendor\/fontawesome\/css\/all\.min\.css/);
-assert.match(index, /assets\/vendor\/inter\/latin\.css/);
+assert.match(index, /assets\/css\/runtime\.css/);
+assert.match(index, /assets\/js\/phaser\.min\.js/);
+assert.doesNotMatch(index, /assets\/vendor\//);
 assert.match(index, /assets\/js\/shared\/asset-loader\.js/);
 assert.match(index, /assets\/js\/shared\/game-menu\.js/);
 assert.match(index, /assets\/css\/game-menu\.css/);
@@ -61,11 +60,22 @@ assert.doesNotMatch(gameMenu, /Wyniki|Graj z poprzednią ekipą|Wznów grę/i);
 const buildAssets = read('scripts/build-assets.mjs');
 assert.match(buildAssets, /node_modules/);
 assert.match(buildAssets, /tailwindcss\/lib\/cli\.js/);
+assert.match(buildAssets, /runtime\.css/);
+assert.match(buildAssets, /data:.*base64/s);
 assert.match(buildAssets, /assets.*vendor/s);
 assert.match(buildAssets, /precache\.json/);
 
 const prepareWeb = read('scripts/prepare-web.mjs');
+assert.match(prepareWeb, /data-partyjniak-runtime/);
+assert.match(prepareWeb, /runtime\.css/);
 assert.match(prepareWeb, /\['assets', 'views', 'content'\]/, 'Android web bundle must include game content JSON files');
+
+const verifyWebBundle = read('scripts/verify-web-bundle.mjs');
+assert.match(verifyWebBundle, /data-partyjniak-runtime/);
+assert.match(verifyWebBundle, /Font Awesome 6 Free/);
+assert.match(verifyWebBundle, /data:font\/woff2;base64/);
+assert.match(verifyWebBundle, /max-w-lg/);
+assert.match(verifyWebBundle, /assets\/vendor/);
 
 const androidPatch = read('scripts/patch-android.mjs');
 assert.match(androidPatch, /PartyjniakOrientationPlugin/);
@@ -96,6 +106,8 @@ assert.equal(pkg.devDependencies.tailwindcss, '3.4.17');
 assert.equal(pkg.devDependencies['@playwright/test'], '1.55.0');
 assert.match(pkg.scripts['build:web'], /build:assets/);
 assert.match(pkg.scripts['build:web'], /prepare-web/);
+assert.match(pkg.scripts['build:web'], /verify:web/);
+assert.match(pkg.scripts['android:prepare'], /verify-web-bundle/);
 assert.match(pkg.scripts['test:e2e'], /playwright test/);
 
 for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta']) {
