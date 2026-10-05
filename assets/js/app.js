@@ -15,6 +15,7 @@ async function prepareGame(gameModule) {
 
         gameModule.session?.load?.();
         syncGameSessionUi(gameModule);
+        window.standardizeGameMenu?.(gameModule);
         return gameModule;
     })();
 
@@ -58,6 +59,7 @@ async function initializeApp() {
     }
 
     setupGameHub();
+    window.setupGameMenuRecovery?.();
     installLazyGameLoader();
     initializePartyjniakSettingsUi?.();
     setupSystemBackHandling();
