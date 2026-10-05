@@ -31,6 +31,21 @@ const sharedPlayerSetup = read('assets/css/player-setup.css');
 assert.match(sharedPlayerSetup, /--ui-accent/);
 assert.match(sharedPlayerSetup, /\.player-setup-name-row/);
 
+const sharedPlayerSelectorViews = [
+  read('views/dzika-karta.html'),
+  read('views/trzy-rundy.html')
+];
+for (const view of sharedPlayerSelectorViews) {
+  assert.match(view, /player-setup-heading/);
+  assert.match(view, /player-setup-count-row/);
+  assert.match(view, /player-setup-count-copy/);
+  assert.match(view, /player-setup-range-label/);
+  assert.match(view, /class="player-setup-range"/);
+  assert.match(view, /player-setup-name-list/);
+  assert.match(view, /player-setup-action/);
+  assert.doesNotMatch(view, /player-setup-count-card|player-setup-count-head|player-setup-slider|player-setup-names/);
+}
+
 const bombView = read('views/ticking-bomb.html');
 assert.match(bombView, /id="bomb-visual"[^>]*bomb-ignite-control/);
 assert.match(bombView, /onclick="igniteBomb\(\)"/);
