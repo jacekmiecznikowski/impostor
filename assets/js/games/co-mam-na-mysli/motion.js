@@ -1,4 +1,7 @@
 (function exposeCoMamNaMysliMotion(root) {
+    const GESTURE_COOLDOWN_MS = 1200;
+    let gestureCooldownUntil = 0;
+
     function normalizeOrientationAngle(value) {
         const numeric = Number(value);
         if (!Number.isFinite(numeric)) return 0;
@@ -35,18 +38,48 @@
         return Math.atan2(z, safeVertical) * (180 / Math.PI);
     }
 
-    function classifyTilt(current, baseline, threshold = 28) {
+    function armGestureCooldown(now = Date.now()) {
+        gestureCooldownUntil = Number(now) + GESTURE_COOLDOWN_MS;
+        return gestureCooldownUntil;
+    }
+
+    function classifyTilt(current, baseline, threshold = 28, now = Date.now()) {
         const delta = normalizeAngleDelta(current, baseline);
-        if (delta >= threshold) return 'correct';
-        if (delta <= -threshold) return 'passed';
+        if (delta >= threshold) {
+            armGestureCooldown(now);
+            return 'correct';
+        }
+        if (delta <= -threshold) {
+            armGestureCooldown(now);
+            return 'passed';
+        }
         return null;
     }
 
-    function isNeutral(current, baseline, releaseThreshold = 12) {
+    function isNeutral(current, baseline, releaseThreshold = 12, now = Date.now()) {
+        if (Number(now) < gestureCooldownUntil) return false;
         return Math.abs(normalizeAngleDelta(current, baseline)) <= releaseThreshold;
     }
 
-    const api = { normalizeOrientationAngle, normalizeAngleDelta, getTiltValue, getGravityTiltValue, classifyTilt, isNeutral };
+    function resetGestureCooldown() {
+        gestureCooldownUntil = 0;
+    }
+
+    function getGestureCooldownUntil() {
+        return gestureCooldownUntil;
+    }
+
+    const api = {
+        GESTURE_COOLDOWN_MS,
+        normalizeOrientationAngle,
+        normalizeAngleDelta,
+        getTiltValue,
+        getGravityTiltValue,
+        classifyTilt,
+        isNeutral,
+        resetGestureCooldown,
+        getGestureCooldownUntil
+    };
     root.CoMamNaMysliMotion = api;
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : window);
