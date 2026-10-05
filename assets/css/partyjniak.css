@@ -189,18 +189,14 @@ body {
 .upcoming-card strong { display:block; margin-top:.65rem; color:rgb(203 213 225); font-size:.82rem; }
 .upcoming-card small { display:block; margin-top:.22rem; color:rgb(71 85 105); font-size:.62rem; line-height:1.25; }
 
-#screen-menu > div:first-child,
 #screen-pass > div:first-child,
 #screen-discussion > div:first-child,
 #screen-results > div:first-child { box-shadow:0 18px 42px rgba(13,148,136,.15) !important; }
 
-#screen-menu,
 #screen-pass,
 #screen-discussion,
 #screen-results { gap:1.35rem !important; }
 
-#screen-menu .primary-btn,
-#screen-menu .secondary-btn,
 #screen-pass .primary-btn,
 #screen-discussion .primary-btn,
 #screen-results .primary-btn,
