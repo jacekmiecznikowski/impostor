@@ -26,6 +26,36 @@ test('home starts without external runtime requests', async ({ page }) => {
   expect(externalRequests).toEqual([]);
 });
 
+test('critical runtime styles, fonts and icons are active', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#screen-home')).toBeVisible();
+
+  const metrics = await page.evaluate(async () => {
+    await document.fonts?.ready;
+    const main = document.getElementById('app-main');
+    const settings = document.getElementById('home-settings-btn');
+    const settingsIcon = settings?.querySelector('i');
+    const popover = document.getElementById('shell-menu-popover');
+    return {
+      runtimeMarker: getComputedStyle(document.documentElement).getPropertyValue('--partyjniak-runtime-bundle').trim(),
+      bodyFont: getComputedStyle(document.body).fontFamily,
+      mainMaxWidth: getComputedStyle(main).maxWidth,
+      settingsDisplay: getComputedStyle(settings).display,
+      iconFont: getComputedStyle(settingsIcon).fontFamily,
+      iconContent: getComputedStyle(settingsIcon, '::before').content,
+      popoverDisplay: getComputedStyle(popover).display
+    };
+  });
+
+  expect(metrics.runtimeMarker).toBe('ready');
+  expect(metrics.bodyFont).toContain('Inter');
+  expect(metrics.mainMaxWidth).not.toBe('none');
+  expect(metrics.settingsDisplay).not.toBe('none');
+  expect(metrics.iconFont).toContain('Font Awesome 6 Free');
+  expect(metrics.iconContent).not.toBe('none');
+  expect(metrics.popoverDisplay).toBe('none');
+});
+
 test('home never exposes the active-round pause sheet', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#screen-home')).toBeVisible();

@@ -2,6 +2,9 @@ node_modules/
 dist/
 android/
 assets/vendor/
+assets/css/runtime.css
+assets/js/phaser.min.js
+.partyjniak-build/
 .DS_Store
 Thumbs.db
 .vscode/
