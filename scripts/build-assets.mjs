@@ -78,6 +78,12 @@ const runtimeCss = [
 ].join('\n');
 
 await writeFile(runtimeCssPath, runtimeCss, 'utf8');
+await mkdir(legacyVendor, { recursive: true });
+await writeFile(
+  path.join(legacyVendor, 'precache.json'),
+  `${JSON.stringify(['./assets/css/runtime.css', './assets/js/phaser.min.js'], null, 2)}\n`,
+  'utf8'
+);
 await rm(tempDir, { recursive: true, force: true });
 
-console.log(`Built self-contained runtime CSS (${runtimeCss.length} bytes) and local Phaser script outside assets/vendor.`);
+console.log(`Built self-contained runtime CSS (${runtimeCss.length} bytes), local Phaser, and a PWA-only precache manifest.`);
