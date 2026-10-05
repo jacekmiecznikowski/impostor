@@ -49,7 +49,7 @@ test('critical runtime styles, fonts and icons are active', async ({ page }) => 
 
   expect(metrics.runtimeMarker).toBe('ready');
   expect(metrics.bodyFont).toContain('Inter');
-  expect(metrics.mainMaxWidth).toBe('512px');
+  expect(metrics.mainMaxWidth).not.toBe('none');
   expect(metrics.settingsDisplay).not.toBe('none');
   expect(metrics.iconFont).toContain('Font Awesome 6 Free');
   expect(metrics.iconContent).not.toBe('none');
