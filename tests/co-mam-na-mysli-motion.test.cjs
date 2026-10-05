@@ -14,10 +14,22 @@ const tiltedGravity = Motion.getGravityTiltValue({ accelerationIncludingGravity:
 assert.ok(Math.abs(tiltedGravity - 30) < 0.2);
 assert.equal(Motion.getGravityTiltValue({}, 90), null);
 
-assert.equal(Motion.classifyTilt(30, 0, 28), 'correct');
-assert.equal(Motion.classifyTilt(-30, 0, 28), 'passed');
-assert.equal(Motion.classifyTilt(20, 0, 28), null);
-assert.equal(Motion.isNeutral(10, 0, 12), true);
-assert.equal(Motion.isNeutral(18, 0, 12), false);
+Motion.resetGestureCooldown();
+assert.equal(Motion.isNeutral(10, 0, 12, 1000), true);
+assert.equal(Motion.isNeutral(18, 0, 12, 1000), false);
+assert.equal(Motion.classifyTilt(30, 0, 28, 1000), 'correct');
+assert.equal(Motion.getGestureCooldownUntil(), 1000 + Motion.GESTURE_COOLDOWN_MS);
+assert.equal(Motion.isNeutral(0, 0, 12, 1000 + Motion.GESTURE_COOLDOWN_MS - 1), false);
+assert.equal(Motion.isNeutral(0, 0, 12, 1000 + Motion.GESTURE_COOLDOWN_MS), true);
+
+Motion.resetGestureCooldown();
+assert.equal(Motion.classifyTilt(-30, 0, 28, 5000), 'passed');
+assert.equal(Motion.isNeutral(0, 0, 12, 5000 + 600), false);
+assert.equal(Motion.isNeutral(30, 0, 12, 5000 + Motion.GESTURE_COOLDOWN_MS), false);
+assert.equal(Motion.isNeutral(0, 0, 12, 5000 + Motion.GESTURE_COOLDOWN_MS), true);
+
+Motion.resetGestureCooldown();
+assert.equal(Motion.classifyTilt(20, 0, 28, 9000), null);
+assert.equal(Motion.getGestureCooldownUntil(), 0);
 
 console.log('Co mam na myśli motion tests: OK');
