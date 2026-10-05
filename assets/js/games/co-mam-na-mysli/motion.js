@@ -69,36 +69,6 @@
         return gestureCooldownUntil;
     }
 
-    function installGestureFeedbackStyle() {
-        const doc = root?.document;
-        if (!doc || doc.getElementById('cmm-gesture-feedback-style')) return;
-        const style = doc.createElement('style');
-        style.id = 'cmm-gesture-feedback-style';
-        style.textContent = `
-            .cmm-gesture-feedback:not(.hidden) {
-                inset: auto auto auto 50% !important;
-                top: 4.15rem !important;
-                width: max-content !important;
-                max-width: calc(100vw - 2rem) !important;
-                height: auto !important;
-                min-height: 0 !important;
-                padding: .5rem .9rem !important;
-                transform: translateX(-50%);
-                border-radius: 999px !important;
-                flex-direction: row !important;
-                box-shadow: 0 .55rem 1.7rem rgba(0,0,0,.28);
-            }
-            .cmm-gesture-feedback strong {
-                font-size: clamp(1rem, 3vw, 1.35rem) !important;
-                line-height: 1 !important;
-                letter-spacing: .02em !important;
-            }
-        `;
-        doc.head.appendChild(style);
-    }
-
-    installGestureFeedbackStyle();
-
     const api = {
         GESTURE_COOLDOWN_MS,
         normalizeOrientationAngle,
