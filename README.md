@@ -91,12 +91,13 @@ assets/js/
 ├── app.js
 ├── shared/
 │   ├── asset-loader.js
+│   ├── view-loader.js
+│   ├── game-registry.js
 │   ├── app-settings.js
 │   ├── audio.js
 │   ├── background.js
 │   ├── content-repository.js
 │   ├── game-menu.js
-│   ├── game-registry.js
 │   ├── game-themes.js
 │   ├── hub.js
 │   ├── native-android.js
@@ -104,20 +105,44 @@ assets/js/
 │   ├── outcome-audio.js
 │   ├── platform.js
 │   ├── player-setup.js
-│   ├── ui.js
-│   └── view-loader.js
+│   └── ui.js
 └── games/
     ├── index.js
-    ├── impostor/
-    ├── ticking-bomb/
-    ├── naokolo/
-    ├── co-mam-na-mysli/
-    ├── trzy-w-piec/
-    ├── synchronizacja/
-    ├── trzy-rundy/
-    └── dzika-karta/
+    └── <game-id>/
+        ├── bootstrap.js
+        ├── integration.js
+        ├── content-provider.js
+        ├── rules.js
+        ├── state.js
+        ├── setup.js
+        ├── game.js
+        └── scoreboard.js
 ```
 
-Przy starcie aplikacja ładuje tylko wspólny shell, hub i współdzielone moduły. CSS, JS i widoki konkretnej gry są ładowane dopiero przy wejściu do niej. Service Worker nadal precachuje lokalne zasoby wymagane do działania PWA offline.
+Start aplikacji ładuje tylko shell/shared. Po wybraniu gry Partyjniak kolejno ładuje jej CSS/JS, widoki, inicjalizuje content i odtwarza sesję. Service Worker nadal precache'uje komplet lokalnych zasobów, więc lazy loading nie ogranicza działania offline.
 
-Instrukcja dodawania kolejnych gier znajduje się w [`docs/adding-a-game.md`](docs/adding-a-game.md).
+Rejestr gier pilnuje unikalności ID modułów i nazw ekranów. Czyste `rules.js` pozostają niezależne od DOM i są testowane bez przeglądarki.
+
+Szczegółowy kontrakt dodawania nowej gry opisuje `docs/adding-a-game.md`.
+
+## Treści
+
+Gry z większymi bazami korzystają z plików w `content/` i lokalnych fallbacków. Impostor dodatkowo obsługuje opcjonalne zdalne źródło przez `ContentRepository` pod adresem:
+
+```text
+<BASE_URL>/impostor.pl.json
+```
+
+Jeśli zdalne API jest niedostępne albo zwróci błędne dane, używany jest cache lub lokalny fallback.
+
+## PWA i offline
+
+- manifest z ikonami 192/512 i maskable,
+- tryb `standalone`,
+- `safe-area` i `100dvh`,
+- Service Worker z cache lokalnych zasobów,
+- Screen Wake Lock podczas aktywnych rund,
+- lokalne Tailwind CSS, Phaser, Font Awesome i Inter generowane przez `scripts/build-assets.mjs`,
+- runtime CSS jest generowany do `assets/css/runtime.css`, a Phaser do `assets/js/phaser.min.js`.
+
+`assets/css/runtime.css`, `assets/js/phaser.min.js`, `dist/` i `android/` są artefaktami builda i nie są commitowane.
