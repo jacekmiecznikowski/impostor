@@ -41,18 +41,74 @@ test('game views and runtime are loaded only when the game opens', async ({ page
   expect(await page.locator('script[src*="/games/ticking-bomb/game.js"]').count()).toBe(0);
 });
 
-test('every catalog game can lazy-load and open its menu', async ({ page }) => {
+test('every game uses the same minimal menu contract and geometry', async ({ page }) => {
+  let baseline = null;
+
   for (const [name, gameId] of games) {
     await page.goto('/');
     await expect(page.locator('#screen-home')).toBeVisible();
     await page.locator('.game-card-primary').filter({ hasText: name }).click();
+
     await expect(page.locator('body')).toHaveAttribute('data-game', gameId);
-    await expect(page.locator('.screen.flex')).toBeVisible();
+    const menu = page.locator('.game-menu-screen');
+    await expect(menu).toBeVisible();
+    await expect(menu.getByRole('heading', { name })).toBeVisible();
+    await expect(menu.getByRole('button', { name: 'Nowa gra' })).toBeVisible();
+    await expect(menu.getByRole('button', { name: 'Zasady' })).toBeVisible();
+    await expect(menu.locator('button')).toHaveCount(2);
+    await expect(menu.getByText(/Wyniki|Wznów grę|Graj z poprzednią ekipą/i)).toHaveCount(0);
+
+    const metrics = await menu.evaluate(element => {
+      const icon = element.querySelector('.game-menu-icon');
+      const primary = element.querySelector('.game-menu-primary');
+      const rules = element.querySelector('.game-menu-rules');
+      const actions = element.querySelector('.game-menu-actions');
+      const hero = element.querySelector('.game-menu-hero');
+      const style = target => getComputedStyle(target);
+      return {
+        menuGap: style(element).gap,
+        heroGap: style(hero).gap,
+        actionGap: style(actions).gap,
+        iconWidth: style(icon).width,
+        iconHeight: style(icon).height,
+        primaryHeight: style(primary).height,
+        rulesHeight: style(rules).height,
+        primaryRadius: style(primary).borderRadius,
+        rulesRadius: style(rules).borderRadius
+      };
+    });
+
+    if (!baseline) baseline = metrics;
+    else expect(metrics).toEqual(baseline);
   }
+});
+
+test('leaving an active round exposes a short-lived recovery card on the hub', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.game-card-primary').filter({ hasText: 'Impostor' }).click();
+  await page.getByRole('button', { name: 'Nowa gra' }).click();
+  await expect(page.locator('#screen-setup-count')).toBeVisible();
+  await page.getByRole('button', { name: /Dalej: ustawienia/i }).click();
+  await expect(page.locator('#screen-setup-options')).toBeVisible();
+  await page.getByRole('button', { name: /Rozpocznij rundę/i }).click();
+  await expect(page.locator('#screen-pass')).toBeVisible();
+
+  await page.evaluate(() => window.leaveActiveRound('home'));
+  await expect(page.locator('#screen-home')).toBeVisible();
+  const recovery = page.locator('#interrupted-game-card');
+  await expect(recovery).toBeVisible();
+  await expect(recovery).toContainText('Impostor');
+  await expect(recovery.getByRole('button', { name: 'Wróć do gry' })).toBeVisible();
+
+  await recovery.getByRole('button', { name: 'Wróć do gry' }).click();
+  await expect(page.locator('body')).toHaveAttribute('data-game', 'impostor');
+  await expect(page.locator('#screen-setup-options')).toBeVisible();
+  await expect(page.locator('#interrupted-game-card')).toBeHidden();
 });
 
 test('PWA shortcut deep link opens Impostor after lazy preparation', async ({ page }) => {
   await page.goto('/?game=impostor');
   await expect(page.locator('#screen-menu')).toBeVisible();
+  await expect(page.locator('#screen-menu')).toHaveClass(/game-menu-screen/);
   await expect(page).not.toHaveURL(/game=impostor/);
 });

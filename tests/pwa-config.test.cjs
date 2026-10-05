@@ -27,9 +27,9 @@ vm.createContext(sandbox);
 vm.runInContext(`${source}\n;globalThis.__pwaTest={CACHE_VERSION,STATIC_CACHE,RUNTIME_CACHE,VENDOR_MANIFEST,LOCAL_ASSETS:[...LOCAL_ASSETS]};`, sandbox);
 
 const config = sandbox.__pwaTest;
-assert.equal(config.CACHE_VERSION, 'v64');
-assert.equal(config.STATIC_CACHE, 'partyjniak-static-v64');
-assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v64');
+assert.equal(config.CACHE_VERSION, 'v65');
+assert.equal(config.STATIC_CACHE, 'partyjniak-static-v65');
+assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v65');
 assert.equal(config.VENDOR_MANIFEST, './assets/vendor/precache.json');
 assert.equal(new Set(config.LOCAL_ASSETS).size, config.LOCAL_ASSETS.length, 'precache should not contain duplicates');
 [
@@ -39,13 +39,15 @@ assert.equal(new Set(config.LOCAL_ASSETS).size, config.LOCAL_ASSETS.length, 'pre
   './content/dzika-karta.pl.json',
   './views/dzika-karta.html',
   './assets/css/dzika-karta.css',
+  './assets/css/game-menu.css',
   './assets/js/shared/asset-loader.js',
+  './assets/js/shared/game-menu.js',
   './assets/js/games/dzika-karta/rules.js',
   './assets/js/games/dzika-karta/game.js',
   './assets/js/games/dzika-karta/bootstrap.js?v=1',
   './assets/js/games/dzika-karta/integration.js?v=1',
   './assets/js/games/index.js?v=9',
-  './assets/js/app.js?v=11',
+  './assets/js/app.js?v=12',
   './assets/js/shared/game-registry.js?v=2',
   './assets/css/settings.css',
   './assets/brand/swawole-studio.svg'
