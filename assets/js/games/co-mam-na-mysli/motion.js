@@ -1,4 +1,7 @@
 (function exposeCoMamNaMysliMotion(root) {
+    const GESTURE_COOLDOWN_MS = 1200;
+    let gestureCooldownUntil = 0;
+
     function normalizeOrientationAngle(value) {
         const numeric = Number(value);
         if (!Number.isFinite(numeric)) return 0;
@@ -35,18 +38,78 @@
         return Math.atan2(z, safeVertical) * (180 / Math.PI);
     }
 
-    function classifyTilt(current, baseline, threshold = 28) {
+    function armGestureCooldown(now = Date.now()) {
+        gestureCooldownUntil = Number(now) + GESTURE_COOLDOWN_MS;
+        return gestureCooldownUntil;
+    }
+
+    function classifyTilt(current, baseline, threshold = 28, now = Date.now()) {
         const delta = normalizeAngleDelta(current, baseline);
-        if (delta >= threshold) return 'correct';
-        if (delta <= -threshold) return 'passed';
+        if (delta >= threshold) {
+            armGestureCooldown(now);
+            return 'correct';
+        }
+        if (delta <= -threshold) {
+            armGestureCooldown(now);
+            return 'passed';
+        }
         return null;
     }
 
-    function isNeutral(current, baseline, releaseThreshold = 12) {
+    function isNeutral(current, baseline, releaseThreshold = 12, now = Date.now()) {
+        if (Number(now) < gestureCooldownUntil) return false;
         return Math.abs(normalizeAngleDelta(current, baseline)) <= releaseThreshold;
     }
 
-    const api = { normalizeOrientationAngle, normalizeAngleDelta, getTiltValue, getGravityTiltValue, classifyTilt, isNeutral };
+    function resetGestureCooldown() {
+        gestureCooldownUntil = 0;
+    }
+
+    function getGestureCooldownUntil() {
+        return gestureCooldownUntil;
+    }
+
+    function installGestureFeedbackStyle() {
+        const doc = root?.document;
+        if (!doc || doc.getElementById('cmm-gesture-feedback-style')) return;
+        const style = doc.createElement('style');
+        style.id = 'cmm-gesture-feedback-style';
+        style.textContent = `
+            .cmm-gesture-feedback:not(.hidden) {
+                inset: auto auto auto 50% !important;
+                top: 4.15rem !important;
+                width: max-content !important;
+                max-width: calc(100vw - 2rem) !important;
+                height: auto !important;
+                min-height: 0 !important;
+                padding: .5rem .9rem !important;
+                transform: translateX(-50%);
+                border-radius: 999px !important;
+                flex-direction: row !important;
+                box-shadow: 0 .55rem 1.7rem rgba(0,0,0,.28);
+            }
+            .cmm-gesture-feedback strong {
+                font-size: clamp(1rem, 3vw, 1.35rem) !important;
+                line-height: 1 !important;
+                letter-spacing: .02em !important;
+            }
+        `;
+        doc.head.appendChild(style);
+    }
+
+    installGestureFeedbackStyle();
+
+    const api = {
+        GESTURE_COOLDOWN_MS,
+        normalizeOrientationAngle,
+        normalizeAngleDelta,
+        getTiltValue,
+        getGravityTiltValue,
+        classifyTilt,
+        isNeutral,
+        resetGestureCooldown,
+        getGestureCooldownUntil
+    };
     root.CoMamNaMysliMotion = api;
     if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : window);
