@@ -46,6 +46,29 @@ function installLazyGameLoader() {
     };
 }
 
+function isLocalDevelopmentHost() {
+    return ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+}
+
+async function disableLocalDevelopmentServiceWorker() {
+    if (!isLocalDevelopmentHost()) return;
+
+    try {
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(registrations.map(registration => registration.unregister()));
+        }
+        if ('caches' in window) {
+            const cacheKeys = await caches.keys();
+            await Promise.all(cacheKeys
+                .filter(key => key.startsWith('partyjniak-'))
+                .map(key => caches.delete(key)));
+        }
+    } catch (error) {
+        console.warn('Nie udało się wyczyścić lokalnego Service Workera Partyjniaka:', error);
+    }
+}
+
 async function initializeApp() {
     registerGameModules();
     initializePartyjniakThemes?.();
@@ -94,9 +117,13 @@ async function initializeApp() {
 
     const nativeApp = typeof isPartyjniakNative === 'function' && isPartyjniakNative();
     if (!nativeApp && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch(error => console.warn('Service Worker nie został zarejestrowany:', error));
-        }, { once: true });
+        if (isLocalDevelopmentHost()) {
+            window.addEventListener('load', disableLocalDevelopmentServiceWorker, { once: true });
+        } else {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(error => console.warn('Service Worker nie został zarejestrowany:', error));
+            }, { once: true });
+        }
     }
 }
 
