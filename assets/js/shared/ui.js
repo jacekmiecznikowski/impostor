@@ -40,6 +40,9 @@ function goToScreen(screenName, { silent = false, direction = 'forward' } = {}) 
         return false;
     }
 
+    // A screen transition is authoritative: no stale pause sheet may survive it.
+    closeNavigationSheet();
+
     const previousScreen = getCurrentScreenName();
     const previousGameId = getGameIdForScreen(previousScreen);
     if (previousScreen !== screenName && previousGameId !== 'home') {
@@ -205,12 +208,21 @@ function leaveActiveRound(destination) {
 
 function openNavigationSheet(preferredDestination = 'menu') {
     const sheet = document.getElementById('navigation-sheet');
-    if (!sheet) return;
+    if (!sheet) return false;
+
+    // The pause sheet belongs exclusively to guarded round screens.
+    // This prevents a restored WebView/history event from exposing it on Home or menus.
+    if (!isRoundInProgress()) {
+        closeNavigationSheet();
+        return false;
+    }
+
     sheet.dataset.preferredDestination = preferredDestination;
     sheet.classList.remove('hidden');
     sheet.classList.add('flex');
     closeShellMenu?.();
     requestAnimationFrame(() => sheet.querySelector('[data-sheet-primary]')?.focus());
+    return true;
 }
 
 function closeNavigationSheet() {

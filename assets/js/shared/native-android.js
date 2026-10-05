@@ -51,6 +51,16 @@ function setupNativeAndroidIntegration() {
     const nativeApp = window.Capacitor?.Plugins?.App;
     if (!nativeApp?.addListener) return;
 
+    nativeApp.addListener('appStateChange', ({ isActive }) => {
+        if (!isActive) return;
+        const screenName = typeof getCurrentScreenName === 'function' ? getCurrentScreenName() : 'home';
+        const screenConfig = typeof getScreenUiConfig === 'function' ? getScreenUiConfig(screenName) : null;
+        if (!screenConfig?.roundGuard) closeNavigationSheet?.();
+        syncPartyjniakScreenOrientation?.(screenName);
+    }).catch?.(error => {
+        console.warn('Nie udało się podpiąć obsługi wznowienia aplikacji.', error);
+    });
+
     nativeApp.addListener('backButton', () => {
         const handled = typeof navigateBack === 'function'
             ? navigateBack({ fromSystem: true })
