@@ -10,6 +10,7 @@ const app = read('assets/js/app.js');
 const gamesIndex = read('assets/js/games/index.js');
 const registry = read('assets/js/shared/game-registry.js');
 const assetLoader = read('assets/js/shared/asset-loader.js');
+const gameMenu = read('assets/js/shared/game-menu.js');
 const sw = read('sw.js');
 const modules = [
   ['impostor', 'registerImpostorGame'], ['ticking-bomb', 'registerTickingBombGame'],
@@ -35,9 +36,14 @@ for (const [name, source] of [
   assert.equal(result.status, 0, `${name} syntax:\n${result.stderr}`);
 }
 
-assert.match(index, /app\.js\?v=11/);
+const gameMenuSyntax = spawnSync(process.execPath, ['--check'], { input: gameMenu, encoding: 'utf8' });
+assert.equal(gameMenuSyntax.status, 0, `game-menu.js syntax:\n${gameMenuSyntax.stderr}`);
+
+assert.match(index, /app\.js\?v=12/);
 assert.match(index, /games\/index\.js\?v=9/);
 assert.match(index, /shared\/asset-loader\.js/);
+assert.match(index, /shared\/game-menu\.js/);
+assert.match(index, /css\/game-menu\.css/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
 assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
 
@@ -45,6 +51,8 @@ assert.match(app, /from '\.\/games\/index\.js\?v=9'/);
 assert.match(app, /loadGameAssets/);
 assert.match(app, /loadGameViews/);
 assert.match(app, /initializeGameModule/);
+assert.match(app, /standardizeGameMenu/);
+assert.match(app, /setupGameMenuRecovery/);
 assert.doesNotMatch(app, /loadGameSessions\(/);
 assert.doesNotMatch(app, /initializeImpostorRemoteContent|initializeTickingBombContent|initializeNaokoloContent|initializeCoMamNaMysliContent|initializeThreeFiveContent|initializeSynchronizacjaContent|initializeTrzyRundyContent|initializeDzikaKartaContent/);
 
@@ -65,10 +73,13 @@ assert.match(registry, /Ekran „\$\{screenName\}” jest już zarejestrowany/);
 assert.match(registry, /export async function initializeGameModule/);
 assert.match(registry, /Object\.assign\(window, legacyBridge\)/);
 assert.match(assetLoader, /async function loadGameAssets/);
+assert.match(gameMenu, /function standardizeGameMenu/);
+assert.match(gameMenu, /function resumeInterruptedGame/);
 assert.equal(fs.existsSync(path.join(root, 'assets/js/games/prototypes/integration.js')), false);
 assert.match(sw, /assets\/js\/games\/index\.js\?v=9/);
 assert.match(sw, /assets\/js\/shared\/asset-loader\.js/);
-assert.match(sw, /assets\/js\/app\.js\?v=11/);
+assert.match(sw, /assets\/js\/shared\/game-menu\.js/);
+assert.match(sw, /assets\/js\/app\.js\?v=12/);
 assert.doesNotMatch(sw, /prototypes\/integration/);
 
 console.log('ES module boundary and lazy game bootstrap tests: OK');
