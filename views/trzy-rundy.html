@@ -12,17 +12,24 @@
 </section>
 
 <section id="screen-tr-players" class="screen hidden flex-col flex-1 gap-4 player-setup-screen tr-screen">
-  <div class="tr-section-heading"><span class="tr-kicker">Krok 1 z 2</span><h2>Kto gra?</h2><p>Gracze zostaną automatycznie rozdzieleni naprzemiennie na dwie drużyny.</p></div>
-  <div class="panel player-setup-count-card">
-    <div class="player-setup-count-head"><span>Liczba graczy</span><strong id="tr-player-count-value">6</strong></div>
-    <input id="tr-player-count" class="player-setup-slider" type="range" min="4" max="12" value="6" oninput="setTrzyRundyPlayerCount(this.value)">
+  <div class="player-setup-heading">
+    <span class="player-setup-step">KROK 1 Z 2</span>
+    <h2>Kto gra?</h2>
+    <p>Gracze zostaną automatycznie rozdzieleni naprzemiennie na dwie drużyny.</p>
   </div>
-  <div id="tr-player-names" class="player-setup-names"></div>
+  <div class="player-setup-card">
+    <div class="player-setup-count-row">
+      <div class="player-setup-count-copy"><span>Liczba graczy</span><strong id="tr-player-count-value">6</strong></div>
+      <span class="player-setup-range-label">4–12</span>
+    </div>
+    <input id="tr-player-count" class="player-setup-range" type="range" min="4" max="12" value="6" oninput="setTrzyRundyPlayerCount(this.value)">
+  </div>
+  <div id="tr-player-names" class="player-setup-name-list"></div>
   <div class="tr-team-preview-grid">
     <div class="panel tr-team-preview tr-team-a"><span>Drużyna A</span><p id="tr-team-a-preview"></p></div>
     <div class="panel tr-team-preview tr-team-b"><span>Drużyna B</span><p id="tr-team-b-preview"></p></div>
   </div>
-  <button class="primary-btn" type="button" onclick="trzyRundyProceedToOptions()"><span>DALEJ</span><i class="fa-solid fa-arrow-right"></i></button>
+  <button class="primary-btn player-setup-action" type="button" onclick="trzyRundyProceedToOptions()"><span>DALEJ</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
 <section id="screen-tr-options" class="screen hidden flex-col flex-1 gap-4 tr-screen">
