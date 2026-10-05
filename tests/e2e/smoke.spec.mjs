@@ -26,6 +26,29 @@ test('home starts without external runtime requests', async ({ page }) => {
   expect(externalRequests).toEqual([]);
 });
 
+test('home never exposes the active-round pause sheet', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#screen-home')).toBeVisible();
+
+  const sheet = page.locator('#navigation-sheet');
+  await expect(sheet).toBeHidden();
+  await expect(sheet).toHaveClass(/hidden/);
+
+  const openedOnHome = await page.evaluate(() => window.openNavigationSheet('home'));
+  expect(openedOnHome).toBe(false);
+  await expect(sheet).toBeHidden();
+
+  await page.evaluate(() => {
+    const staleSheet = document.getElementById('navigation-sheet');
+    staleSheet?.classList.remove('hidden');
+    staleSheet?.classList.add('flex');
+    window.goToScreen('home', { silent: true });
+  });
+
+  await expect(sheet).toBeHidden();
+  await expect(sheet).not.toHaveClass(/\bflex\b/);
+});
+
 test('game views and runtime are loaded only when the game opens', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#screen-home')).toBeVisible();
@@ -92,6 +115,11 @@ test('leaving an active round exposes a short-lived recovery card on the hub', a
   await expect(page.locator('#screen-setup-options')).toBeVisible();
   await page.getByRole('button', { name: /Rozpocznij rundę/i }).click();
   await expect(page.locator('#screen-pass')).toBeVisible();
+
+  expect(await page.evaluate(() => window.openNavigationSheet('home'))).toBe(true);
+  await expect(page.locator('#navigation-sheet')).toBeVisible();
+  await page.evaluate(() => window.closeNavigationSheet());
+  await expect(page.locator('#navigation-sheet')).toBeHidden();
 
   await page.evaluate(() => window.leaveActiveRound('home'));
   await expect(page.locator('#screen-home')).toBeVisible();
