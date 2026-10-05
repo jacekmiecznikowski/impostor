@@ -15,12 +15,12 @@ const requiredFiles = [
   'index.html', 'manifest.webmanifest', 'sw.js', 'capacitor.config.json', 'package.json', 'package-lock.json',
   'tailwind.config.cjs', 'playwright.config.mjs', 'docs/adding-a-game.md',
   'scripts/build-assets.mjs', 'scripts/prepare-web.mjs', 'scripts/patch-android.mjs',
-  'assets/css/tailwind-input.css',
+  'assets/css/tailwind-input.css', 'assets/css/game-menu.css',
   'assets/js/app.js', 'assets/js/shared/view-loader.js', 'assets/js/shared/asset-loader.js',
   'assets/js/shared/app-settings.js', 'assets/js/shared/audio.js', 'assets/js/shared/player-setup.js',
   'assets/js/shared/outcome-audio.js', 'assets/js/shared/background.js', 'assets/js/shared/platform.js',
   'assets/js/shared/content-repository.js', 'assets/js/shared/game-registry.js', 'assets/js/shared/ui.js',
-  'assets/js/shared/hub.js', 'assets/js/shared/navigation-behavior.js', 'assets/js/shared/game-themes.js',
+  'assets/js/shared/hub.js', 'assets/js/shared/game-menu.js', 'assets/js/shared/navigation-behavior.js', 'assets/js/shared/game-themes.js',
   'assets/js/shared/native-android.js', 'assets/js/games/index.js',
   'views/modals.html', 'assets/icons/icon.svg', 'assets/icons/icon-192.png', 'assets/icons/icon-512.png',
   'assets/icons/icon-maskable-512.png', 'assets/brand/swawole-studio.svg', 'tests/e2e/smoke.spec.mjs'
@@ -42,10 +42,21 @@ assert.match(index, /assets\/vendor\/phaser\/phaser\.min\.js/);
 assert.match(index, /assets\/vendor\/fontawesome\/css\/all\.min\.css/);
 assert.match(index, /assets\/vendor\/inter\/latin\.css/);
 assert.match(index, /assets\/js\/shared\/asset-loader\.js/);
+assert.match(index, /assets\/js\/shared\/game-menu\.js/);
+assert.match(index, /assets\/css\/game-menu\.css/);
 assert.doesNotMatch(index, /https:\/\/(?:cdn\.tailwindcss|cdnjs\.cloudflare|fonts\.googleapis)/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
 assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
+
+const gameMenu = read('assets/js/shared/game-menu.js');
+assert.match(gameMenu, /standardizeGameMenu/);
+assert.match(gameMenu, /resumeInterruptedGame/);
+assert.match(gameMenu, /partyjniak\.interrupted-game\.v1/);
+assert.match(gameMenu, /6 \* 60 \* 60 \* 1000/);
+assert.match(gameMenu, /<span>Nowa gra<\/span>/);
+assert.match(gameMenu, /<span>Zasady<\/span>/);
+assert.doesNotMatch(gameMenu, /Wyniki|Graj z poprzednią ekipą|Wznów grę/i);
 
 const buildAssets = read('scripts/build-assets.mjs');
 assert.match(buildAssets, /node_modules/);
