@@ -8,7 +8,7 @@
     "test:e2e": "playwright test",
     "build:assets": "node scripts/build-assets.mjs",
     "verify:web": "node scripts/verify-web-bundle.mjs dist",
-    "serve": "npm run build:assets && python3 -m http.server 8080",
+    "serve": "npm run build:assets && node scripts/serve.mjs",
     "build:web": "npm run build:assets && node scripts/prepare-web.mjs && npm run verify:web",
     "android:prepare": "npm run build:web && npx cap sync android && node scripts/verify-web-bundle.mjs android/app/src/main/assets/public",
     "android:debug": "npm run android:prepare && node scripts/patch-android.mjs && cd android && ./gradlew assembleDebug"
