@@ -11,19 +11,24 @@ npm ci
 npm run serve
 ```
 
-`npm run serve` buduje lokalne assety runtime (Tailwind, Phaser, Font Awesome i Inter), a następnie uruchamia serwer na `http://localhost:8080`.
+`npm run serve`:
 
-**Nie uruchamiaj świeżego checkoutu samym `python -m http.server 8080`.** Pliki `assets/css/runtime.css` i `assets/js/phaser.min.js` są generowane i nie są przechowywane w repozytorium. Jeśli chcesz użyć własnego serwera HTTP, najpierw zbuduj assety:
+1. buduje lokalne assety runtime (Tailwind, Phaser, Font Awesome i Inter),
+2. uruchamia wbudowany serwer Node na `http://localhost:8080`,
+3. wyłącza cache dla plików developerskich i usuwa lokalny produkcyjny Service Worker Partyjniaka.
+
+Skrypt działa tak samo na Windowsie, macOS i Linuksie — nie wymaga Pythona.
+
+**Nie uruchamiaj świeżego checkoutu samym `python -m http.server 8080` ani `python3 -m http.server 8080`.** Pliki `assets/css/runtime.css` i `assets/js/phaser.min.js` są generowane i nie są przechowywane w repozytorium. Jeśli używasz własnego serwera HTTP, najpierw wykonaj:
 
 ```bash
 npm ci
 npm run build:assets
-python -m http.server 8080
 ```
 
 Jeśli runtime nie został zbudowany, aplikacja pokaże komunikat diagnostyczny zamiast renderować niekompletny interfejs.
 
-Nie uruchamiaj aplikacji przez `file://`, ponieważ Service Worker i część API przeglądarki wymagają HTTP/HTTPS.
+Nie uruchamiaj aplikacji przez `file://`, ponieważ część API przeglądarki wymaga HTTP/HTTPS.
 
 ## Testy
 
@@ -119,7 +124,7 @@ assets/js/
         └── scoreboard.js
 ```
 
-Start aplikacji ładuje tylko shell/shared. Po wybraniu gry Partyjniak kolejno ładuje jej CSS/JS, widoki, inicjalizuje content i odtwarza sesję. Service Worker nadal precache'uje komplet lokalnych zasobów, więc lazy loading nie ogranicza działania offline.
+Start aplikacji ładuje tylko shell/shared. Po wybraniu gry Partyjniak kolejno ładuje jej CSS/JS, widoki, inicjalizuje content i odtwarza sesję. Service Worker nadal precache'uje komplet lokalnych zasobów, więc lazy loading nie ogranicza działania offline w normalnym buildzie/PWA.
 
 Rejestr gier pilnuje unikalności ID modułów i nazw ekranów. Czyste `rules.js` pozostają niezależne od DOM i są testowane bez przeglądarki.
 
@@ -140,7 +145,7 @@ Jeśli zdalne API jest niedostępne albo zwróci błędne dane, używany jest ca
 - manifest z ikonami 192/512 i maskable,
 - tryb `standalone`,
 - `safe-area` i `100dvh`,
-- Service Worker z cache lokalnych zasobów,
+- Service Worker z cache lokalnych zasobów w buildzie produkcyjnym/PWA,
 - Screen Wake Lock podczas aktywnych rund,
 - lokalne Tailwind CSS, Phaser, Font Awesome i Inter generowane przez `scripts/build-assets.mjs`,
 - runtime CSS jest generowany do `assets/css/runtime.css`, a Phaser do `assets/js/phaser.min.js`.
