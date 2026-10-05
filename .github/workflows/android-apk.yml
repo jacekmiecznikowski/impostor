@@ -59,16 +59,17 @@ jobs:
       - name: Verify runtime inside APK
         run: |
           APK="android/app/build/outputs/apk/debug/app-debug.apk"
-          INDEX="$(unzip -p "$APK" assets/public/index.html)"
-          printf '%s' "$INDEX" | grep -q 'data-partyjniak-runtime="inline"'
-          printf '%s' "$INDEX" | grep -q -- '--partyjniak-runtime-bundle:ready'
-          printf '%s' "$INDEX" | grep -q 'Font Awesome 6 Free'
-          printf '%s' "$INDEX" | grep -q 'data:font/woff2;base64,'
-          if printf '%s' "$INDEX" | grep -q 'assets/vendor/'; then
+          unzip -p "$APK" assets/public/index.html > /tmp/partyjniak-apk-index.html
+          grep -q 'data-partyjniak-runtime="inline"' /tmp/partyjniak-apk-index.html
+          grep -q -- '--partyjniak-runtime-bundle:ready' /tmp/partyjniak-apk-index.html
+          grep -q 'Font Awesome 6 Free' /tmp/partyjniak-apk-index.html
+          grep -q 'data:font/woff2;base64,' /tmp/partyjniak-apk-index.html
+          if grep -q 'assets/vendor/' /tmp/partyjniak-apk-index.html; then
             echo 'APK still depends on assets/vendor' >&2
             exit 1
           fi
-          unzip -l "$APK" assets/public/assets/js/phaser.min.js | grep -q 'assets/public/assets/js/phaser.min.js'
+          unzip -l "$APK" assets/public/assets/js/phaser.min.js > /tmp/partyjniak-phaser-entry.txt
+          grep -q 'assets/public/assets/js/phaser.min.js' /tmp/partyjniak-phaser-entry.txt
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
