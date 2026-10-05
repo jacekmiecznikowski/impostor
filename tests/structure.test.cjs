@@ -14,7 +14,7 @@ const gameIds = [
 const requiredFiles = [
   'index.html', 'manifest.webmanifest', 'sw.js', 'capacitor.config.json', 'package.json', 'package-lock.json',
   'tailwind.config.cjs', 'playwright.config.mjs', 'docs/adding-a-game.md',
-  'scripts/build-assets.mjs', 'scripts/prepare-web.mjs', 'scripts/verify-web-bundle.mjs', 'scripts/patch-android.mjs',
+  'scripts/build-assets.mjs', 'scripts/prepare-web.mjs', 'scripts/verify-web-bundle.mjs', 'scripts/patch-android.mjs', 'scripts/serve.mjs',
   'assets/css/tailwind-input.css', 'assets/css/game-menu.css',
   'assets/js/app.js', 'assets/js/shared/view-loader.js', 'assets/js/shared/asset-loader.js',
   'assets/js/shared/app-settings.js', 'assets/js/shared/audio.js', 'assets/js/shared/player-setup.js',
@@ -43,6 +43,10 @@ assert.doesNotMatch(index, /assets\/vendor\//);
 assert.match(index, /assets\/js\/shared\/asset-loader\.js/);
 assert.match(index, /assets\/js\/shared\/game-menu\.js/);
 assert.match(index, /assets\/css\/game-menu\.css/);
+assert.match(index, /partyjniak-runtime-missing/);
+assert.match(index, /--partyjniak-runtime-bundle/);
+assert.match(index, /Brakuje wygenerowanych assetów Partyjniaka/);
+assert.match(index, /npm run serve/);
 assert.doesNotMatch(index, /https:\/\/(?:cdn\.tailwindcss|cdnjs\.cloudflare|fonts\.googleapis)/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
 assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
@@ -77,6 +81,18 @@ assert.match(verifyWebBundle, /data:font\/woff2;base64/);
 assert.match(verifyWebBundle, /max-w-lg/);
 assert.match(verifyWebBundle, /assets\/vendor/);
 
+const devServer = read('scripts/serve.mjs');
+assert.match(devServer, /node:http/);
+assert.match(devServer, /Cache-Control.*no-store/s);
+assert.match(devServer, /cleanupServiceWorker/);
+assert.match(devServer, /partyjniak-/);
+
+const appSource = read('assets/js/app.js');
+assert.match(appSource, /isLocalDevelopmentHost/);
+assert.match(appSource, /disableLocalDevelopmentServiceWorker/);
+assert.match(appSource, /getRegistrations/);
+assert.match(appSource, /caches\.keys/);
+
 const androidPatch = read('scripts/patch-android.mjs');
 assert.match(androidPatch, /PartyjniakOrientationPlugin/);
 assert.match(androidPatch, /registerPlugin\(PartyjniakOrientationPlugin\.class\)/);
@@ -109,6 +125,14 @@ assert.match(pkg.scripts['build:web'], /prepare-web/);
 assert.match(pkg.scripts['build:web'], /verify:web/);
 assert.match(pkg.scripts['android:prepare'], /verify-web-bundle/);
 assert.match(pkg.scripts['test:e2e'], /playwright test/);
+assert.match(pkg.scripts.serve, /node scripts\/serve\.mjs/);
+assert.doesNotMatch(pkg.scripts.serve, /python3?|http\.server/);
+
+const readme = read('README.md');
+assert.match(readme, /npm run serve/);
+assert.match(readme, /Nie uruchamiaj świeżego checkoutu samym `python -m http\.server 8080`/);
+assert.match(readme, /npm run build:assets/);
+assert.match(readme, /Windowsie, macOS i Linuksie/);
 
 for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta']) {
   assert.match(pkg.scripts.test, new RegExp(`${game}-content\\.test\\.cjs`));

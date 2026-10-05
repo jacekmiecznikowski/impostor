@@ -11,9 +11,24 @@ npm ci
 npm run serve
 ```
 
-`npm run serve` buduje lokalne assety runtime (Tailwind, Phaser, Font Awesome i Inter), a następnie uruchamia serwer na `http://localhost:8080`.
+`npm run serve`:
 
-Nie uruchamiaj aplikacji przez `file://`, ponieważ Service Worker i część API przeglądarki wymagają HTTP/HTTPS.
+1. buduje lokalne assety runtime (Tailwind, Phaser, Font Awesome i Inter),
+2. uruchamia wbudowany serwer Node na `http://localhost:8080`,
+3. wyłącza cache dla plików developerskich i usuwa lokalny produkcyjny Service Worker Partyjniaka.
+
+Skrypt działa tak samo na Windowsie, macOS i Linuksie — nie wymaga Pythona.
+
+**Nie uruchamiaj świeżego checkoutu samym `python -m http.server 8080` ani `python3 -m http.server 8080`.** Pliki `assets/css/runtime.css` i `assets/js/phaser.min.js` są generowane i nie są przechowywane w repozytorium. Jeśli używasz własnego serwera HTTP, najpierw wykonaj:
+
+```bash
+npm ci
+npm run build:assets
+```
+
+Jeśli runtime nie został zbudowany, aplikacja pokaże komunikat diagnostyczny zamiast renderować niekompletny interfejs.
+
+Nie uruchamiaj aplikacji przez `file://`, ponieważ część API przeglądarki wymaga HTTP/HTTPS.
 
 ## Testy
 
@@ -30,11 +45,13 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-Pull requesty do `main` uruchamiają oba poziomy walidacji oraz test produkcyjnego bundla webowego w `.github/workflows/ci.yml`.
+Pull requesty do `main` uruchamiają testy domenowe, produkcyjny build webowy, mobilne smoke testy Chromium oraz pełny build Android APK z inspekcją faktycznie spakowanego runtime'u.
 
 ## Android APK
 
-Repozytorium zawiera konfigurację **Capacitor 8** oraz workflow `.github/workflows/android-apk.yml`. Każdy push na `main` uruchamia testy, przygotowanie web bundle i build debug APK. Artefakt ma nazwę:
+Repozytorium zawiera konfigurację **Capacitor 8** oraz workflow `.github/workflows/android-apk.yml`. Każdy push na `main` uruchamia testy, przygotowanie web bundle, weryfikację paczki Capacitor i build debug APK. Gotowy APK jest dodatkowo sprawdzany pod kątem obecności kompletnego runtime'u przed uploadem artefaktu.
+
+Artefakt ma nazwę:
 
 ```text
 partyjniak-debug-apk
@@ -53,7 +70,8 @@ W wersji Android:
 - sprzętowy/gestowy przycisk **Wstecz** korzysta z `@capacitor/app`,
 - domyślna orientacja jest pionowa, a gry wymagające landscape mogą przełączać ją przez natywny plugin,
 - Service Worker jest wyłączony wewnątrz natywnego wrappera,
-- wszystkie biblioteki runtime są lokalne — APK nie wymaga CDN do pierwszego uruchomienia.
+- wszystkie biblioteki runtime są lokalne — APK nie wymaga CDN do pierwszego uruchomienia,
+- Tailwind, Inter i Font Awesome są pakowane do samowystarczalnego runtime CSS, a krytyczny CSS jest osadzany w Androidowym `index.html`.
 
 Do lokalnego builda potrzebne są Node 22+, JDK 21 oraz Android SDK:
 
@@ -84,9 +102,14 @@ assets/js/
 │   ├── audio.js
 │   ├── background.js
 │   ├── content-repository.js
+│   ├── game-menu.js
+│   ├── game-themes.js
 │   ├── hub.js
 │   ├── native-android.js
+│   ├── navigation-behavior.js
+│   ├── outcome-audio.js
 │   ├── platform.js
+│   ├── player-setup.js
 │   └── ui.js
 └── games/
     ├── index.js
@@ -101,7 +124,7 @@ assets/js/
         └── scoreboard.js
 ```
 
-Start aplikacji ładuje tylko shell/shared. Po wybraniu gry Partyjniak kolejno ładuje jej CSS/JS, widoki, inicjalizuje content i odtwarza sesję. Service Worker nadal precache'uje komplet lokalnych zasobów, więc lazy loading nie ogranicza działania offline.
+Start aplikacji ładuje tylko shell/shared. Po wybraniu gry Partyjniak kolejno ładuje jej CSS/JS, widoki, inicjalizuje content i odtwarza sesję. Service Worker nadal precache'uje komplet lokalnych zasobów, więc lazy loading nie ogranicza działania offline w normalnym buildzie/PWA.
 
 Rejestr gier pilnuje unikalności ID modułów i nazw ekranów. Czyste `rules.js` pozostają niezależne od DOM i są testowane bez przeglądarki.
 
@@ -122,9 +145,9 @@ Jeśli zdalne API jest niedostępne albo zwróci błędne dane, używany jest ca
 - manifest z ikonami 192/512 i maskable,
 - tryb `standalone`,
 - `safe-area` i `100dvh`,
-- Service Worker z cache lokalnych zasobów,
+- Service Worker z cache lokalnych zasobów w buildzie produkcyjnym/PWA,
 - Screen Wake Lock podczas aktywnych rund,
 - lokalne Tailwind CSS, Phaser, Font Awesome i Inter generowane przez `scripts/build-assets.mjs`,
-- vendor precache generowany automatycznie do `assets/vendor/precache.json`.
+- runtime CSS jest generowany do `assets/css/runtime.css`, a Phaser do `assets/js/phaser.min.js`.
 
-`assets/vendor/`, `dist/` i `android/` są artefaktami builda i nie są commitowane.
+`assets/css/runtime.css`, `assets/js/phaser.min.js`, `dist/` i `android/` są artefaktami builda i nie są commitowane.

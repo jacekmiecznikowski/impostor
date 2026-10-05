@@ -7,7 +7,37 @@
   <link rel="modulepreload" href="./assets/js/shared/game-registry.js?v=2"><link rel="modulepreload" href="./assets/js/games/index.js?v=9">
   <link rel="stylesheet" href="./assets/css/runtime.css"><script src="./assets/js/phaser.min.js"></script>
   <link rel="stylesheet" href="./assets/css/styles.css"><link rel="stylesheet" href="./assets/css/partyjniak.css"><link rel="stylesheet" href="./assets/css/navigation.css"><link rel="stylesheet" href="./assets/css/navigation-android.css"><link rel="stylesheet" href="./assets/css/brand-theme.css"><link rel="stylesheet" href="./assets/css/game-color-system.css"><link rel="stylesheet" href="./assets/css/game-menu.css"><link rel="stylesheet" href="./assets/css/player-setup.css"><link rel="stylesheet" href="./assets/css/settings.css"><link rel="stylesheet" href="./assets/css/screen-layout-system.css?v=1">
+  <style>
+    #runtime-build-error{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:24px;background:#020617;color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center}
+    #runtime-build-error>div{max-width:640px;padding:24px;border:1px solid #334155;border-radius:18px;background:#0f172a;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+    #runtime-build-error h1{margin:0 0 12px;font-size:22px}
+    #runtime-build-error p{margin:8px 0;color:#cbd5e1;line-height:1.5}
+    #runtime-build-error code{display:block;margin-top:16px;padding:12px;border-radius:10px;background:#020617;color:#5eead4;font-size:14px;white-space:pre-wrap}
+    html.partyjniak-runtime-missing #runtime-build-error{display:flex}
+  </style>
+  <script>
+    (() => {
+      const checkPartyjniakRuntime = () => {
+        const ready = getComputedStyle(document.documentElement)
+          .getPropertyValue('--partyjniak-runtime-bundle')
+          .trim() === 'ready';
+        document.documentElement.classList.toggle('partyjniak-runtime-missing', !ready);
+      };
+      window.addEventListener('DOMContentLoaded', () => setTimeout(checkPartyjniakRuntime, 0), { once: true });
+      window.addEventListener('load', checkPartyjniakRuntime, { once: true });
+    })();
+  </script>
 </head>
-<body class="h-full bg-slate-950 text-slate-100 overflow-x-hidden relative flex flex-col antialiased"><div id="phaser-bg" class="fixed inset-0 pointer-events-auto z-0 opacity-70"></div><header id="app-shell" class="app-shell"></header><main id="app-main" class="relative z-10 flex-1 flex flex-col max-w-lg w-full mx-auto p-4 md:p-6 overflow-y-auto"></main><div id="modal-root"></div>
+<body class="h-full bg-slate-950 text-slate-100 overflow-x-hidden relative flex flex-col antialiased">
+<div id="runtime-build-error" role="alert">
+  <div>
+    <h1>Brakuje wygenerowanych assetów Partyjniaka</h1>
+    <p>Ta kopia repozytorium została uruchomiona bez zbudowania Tailwinda, Font Awesome, Intera i Phasera.</p>
+    <p>Uruchom aplikację przez skrypt projektu zamiast bezpośrednio przez <code>python -m http.server</code>.</p>
+    <code>npm ci
+npm run serve</code>
+  </div>
+</div>
+<div id="phaser-bg" class="fixed inset-0 pointer-events-auto z-0 opacity-70"></div><header id="app-shell" class="app-shell"></header><main id="app-main" class="relative z-10 flex-1 flex flex-col max-w-lg w-full mx-auto p-4 md:p-6 overflow-y-auto"></main><div id="modal-root"></div>
 <script src="./assets/js/shared/view-loader.js" defer></script><script src="./assets/js/shared/asset-loader.js" defer></script><script src="./assets/js/shared/app-settings.js" defer></script><script src="./assets/js/shared/audio.js" defer></script><script src="./assets/js/shared/player-setup.js" defer></script><script src="./assets/js/shared/outcome-audio.js?v=7" defer></script><script src="./assets/js/shared/background.js" defer></script><script src="./assets/js/shared/platform.js" defer></script><script src="./assets/js/shared/content-repository.js" defer></script><script src="./assets/js/shared/ui.js" defer></script><script src="./assets/js/shared/hub.js" defer></script><script src="./assets/js/shared/game-menu.js" defer></script><script src="./assets/js/shared/navigation-behavior.js" defer></script><script src="./assets/js/shared/game-themes.js" defer></script><script src="./assets/js/shared/native-android.js" defer></script><script type="module" src="./assets/js/app.js?v=12"></script>
 </body></html>
