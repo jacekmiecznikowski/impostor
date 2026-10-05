@@ -43,6 +43,10 @@ assert.doesNotMatch(index, /assets\/vendor\//);
 assert.match(index, /assets\/js\/shared\/asset-loader\.js/);
 assert.match(index, /assets\/js\/shared\/game-menu\.js/);
 assert.match(index, /assets\/css\/game-menu\.css/);
+assert.match(index, /partyjniak-runtime-missing/);
+assert.match(index, /--partyjniak-runtime-bundle/);
+assert.match(index, /Brakuje wygenerowanych assetów Partyjniaka/);
+assert.match(index, /npm run serve/);
 assert.doesNotMatch(index, /https:\/\/(?:cdn\.tailwindcss|cdnjs\.cloudflare|fonts\.googleapis)/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
 assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
@@ -109,6 +113,11 @@ assert.match(pkg.scripts['build:web'], /prepare-web/);
 assert.match(pkg.scripts['build:web'], /verify:web/);
 assert.match(pkg.scripts['android:prepare'], /verify-web-bundle/);
 assert.match(pkg.scripts['test:e2e'], /playwright test/);
+
+const readme = read('README.md');
+assert.match(readme, /npm run serve/);
+assert.match(readme, /Nie uruchamiaj świeżego checkoutu samym `python -m http\.server 8080`/);
+assert.match(readme, /npm run build:assets/);
 
 for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta']) {
   assert.match(pkg.scripts.test, new RegExp(`${game}-content\\.test\\.cjs`));
