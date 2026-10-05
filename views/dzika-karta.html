@@ -3,7 +3,22 @@
   <button class="primary-btn" type="button" onclick="startNewDzikaKartaGame()"><i class="fa-solid fa-play"></i><span>NOWA GRA</span></button>
   <button id="dk-resume-btn" class="secondary-btn hidden" type="button" onclick="resumeDzikaKartaGame()"><i class="fa-solid fa-rotate-right"></i><span>WZNÓW GRĘ</span></button>
 </section>
-<section id="screen-dk-players" class="screen hidden flex-col flex-1 gap-4 player-setup-screen dk-screen"><div class="dk-heading"><span class="dk-kicker">Przygotowanie</span><h2>Kto gra?</h2><p>Minimum 3 osoby. Sędzia zmienia się po każdej turze.</p></div><div class="panel player-setup-count-card"><div class="player-setup-count-head"><span>Liczba graczy</span><strong id="dk-player-count-value">4</strong></div><input id="dk-player-count" class="player-setup-slider" type="range" min="3" max="10" value="4" oninput="setDzikaKartaPlayerCount(this.value)"></div><div id="dk-player-names" class="player-setup-names"></div><button class="primary-btn" type="button" onclick="startDzikaKartaMatch()"><i class="fa-solid fa-shuffle"></i><span>ROZDAJ KARTY</span></button></section>
+<section id="screen-dk-players" class="screen hidden flex-col flex-1 gap-4 player-setup-screen dk-screen">
+  <div class="player-setup-heading">
+    <span class="player-setup-step">PRZYGOTOWANIE</span>
+    <h2>Kto gra?</h2>
+    <p>Minimum 3 osoby. Sędzia zmienia się po każdej turze.</p>
+  </div>
+  <div class="player-setup-card">
+    <div class="player-setup-count-row">
+      <div class="player-setup-count-copy"><span>Liczba graczy</span><strong id="dk-player-count-value">4</strong></div>
+      <span class="player-setup-range-label">3–10</span>
+    </div>
+    <input id="dk-player-count" class="player-setup-range" type="range" min="3" max="10" value="4" oninput="setDzikaKartaPlayerCount(this.value)">
+  </div>
+  <div id="dk-player-names" class="player-setup-name-list"></div>
+  <button class="primary-btn player-setup-action" type="button" onclick="startDzikaKartaMatch()"><i class="fa-solid fa-shuffle"></i><span>ROZDAJ KARTY</span></button>
+</section>
 <section id="screen-dk-judge" class="screen hidden flex-col flex-1 justify-center gap-4 dk-screen"><div class="dk-status"><span id="dk-judge-progress">Runda 1</span><strong>Sędzia: <b id="dk-judge-name">Gracz</b></strong></div><div class="dk-prompt-card"><span class="dk-card-label">Pytanie</span><h2 id="dk-judge-prompt">Pytanie</h2></div><div class="panel dk-info"><i class="fa-solid fa-eye-slash"></i><p>Przeczytaj pytanie wszystkim. Potem ukryj ekran i przekaż telefon pierwszej osobie.</p></div><button class="primary-btn" type="button" onclick="beginDzikaKartaSubmissions()"><i class="fa-solid fa-lock"></i><span>UKRYJ I PRZEKAŻ TELEFON</span></button></section>
 <section id="screen-dk-pass" class="screen hidden flex-col flex-1 justify-center gap-4 dk-screen"><div class="dk-pass-card panel"><span id="dk-pass-progress" class="dk-kicker">Odpowiedź 1 z 3</span><div class="dk-pass-icon"><i class="fa-solid fa-hand"></i></div><p>Telefon bierze</p><h2 id="dk-pass-player">Gracz</h2><small>Nie pokazuj swoich kart innym.</small></div><button class="primary-btn" type="button" onclick="revealDzikaKartaHand()"><i class="fa-solid fa-eye"></i><span>POKAŻ MOJE KARTY</span></button></section>
 <section id="screen-dk-choose" class="screen hidden flex-col flex-1 dk-screen dk-choice-screen"><div class="dk-choice-head"><span id="dk-choice-player" class="dk-kicker">Gracz</span><p id="dk-choice-prompt">Pytanie</p></div><div id="dk-hand" class="dk-hand"></div><small class="dk-private-note"><i class="fa-solid fa-lock"></i> Stuknij jedną kartę. Wybór od razu zostanie ukryty.</small></section>
