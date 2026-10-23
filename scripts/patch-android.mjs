@@ -100,7 +100,7 @@ manifest = manifest
     return match.replace('>', '\n            android:screenOrientation="portrait">');
   });
 if (!manifest.includes('android.permission.VIBRATE')) {
-  manifest = manifest.replace(/<application\\b/, '<uses-permission android:name="android.permission.VIBRATE" />\\n    <application');
+  manifest = manifest.replace(/<application\b/, '<uses-permission android:name="android.permission.VIBRATE" />\n    <application');
 }
 await writeFile(manifestPath, manifest, 'utf8');
 
