@@ -11,7 +11,8 @@ assert.doesNotMatch(impostorSetup, /Wznów ostatnią sesję/);
 assert.match(impostorSetup, /player-setup-screen/);
 assert.match(impostorSetup, /id="name-inputs-container"/);
 assert.doesNotMatch(impostorSetup, /id="screen-setup-names"/);
-assert.match(impostorSetup, /Krok 2 z 2/);
+assert.doesNotMatch(impostorSetup, /class="party-options-header"/, 'Global shell is the only settings header');
+assert.match(read('assets/js/games/impostor/integration.js'), /krok 2 z 2/i);
 
 const playerSetupSources = [
   read('assets/js/games/impostor/setup.js'),
