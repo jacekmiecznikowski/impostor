@@ -192,6 +192,10 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     await expect(options).toHaveClass(/party-options-screen/);
     await expect(options.locator('.party-options-header')).toHaveCount(0);
     await expect(options.locator('.party-options-panel').last()).toBeVisible();
+    const contentBounds = await options.locator('.party-options-content').boundingBox();
+    const ctaBounds = await options.locator('.party-options-cta').boundingBox();
+    expect(contentBounds.width).toBeGreaterThan(255);
+    expect(contentBounds.y + contentBounds.height).toBeLessThanOrEqual(ctaBounds.y + 3);
     await expect(options.locator('.party-options-cta')).toBeVisible();
 
     const grid = options.locator(`#${gridId}`);

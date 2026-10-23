@@ -149,3 +149,14 @@ assert.match(hapticPatch, /android\.permission\.VIBRATE/);
 assert.match(hapticPatch, /VibrationEffect\.createWaveform/);
 assert.match(hapticPatch, /motor\.cancel\(\)/);
 assert.match(hapticPatch, /handleOnPause\(\)/);
+
+// The old applause MP3 has a truncated/invalid base64 payload; the new
+// synthesizer generates a valid WAV that Android plays through MediaPlayer.
+const audioPatch = read('scripts/patch-android.mjs');
+assert.match(audioPatch, /PartyjniakApplausePlugin\.java/);
+assert.match(audioPatch, /registerPlugin\(PartyjniakApplausePlugin\.class\)/);
+assert.match(audioPatch, /partyjniak_applause\.wav/);
+assert.match(audioPatch, /pcm\.write\('RIFF'/);
+assert.match(audioPatch, /int\[\] amplitudes = \{ 0, 255, 0 \}/);
+assert.match(audioPatch, /220L, 35L/);
+assert.match(read('index.html'), /assets\/js\/shared\/applause-synth\.js/);

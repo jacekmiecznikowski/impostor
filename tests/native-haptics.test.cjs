@@ -35,3 +35,7 @@ native = true;
 sandbox.window.Capacitor.Plugins.PartyjniakHaptics = undefined;
 assert.equal(start(), false, 'Missing plugin must gracefully fall back');
 console.log('Native Android reveal haptics routing tests: OK');
+
+const patch = fs.readFileSync(path.join(__dirname, '../scripts/patch-android.mjs'), 'utf8');
+assert.match(patch, /int\[\] amplitudes = \{ 0, 255, 0 \}/);
+assert.match(patch, /220L, 35L/);

@@ -17,7 +17,7 @@ const screens = [
 for (const [file, screen, grid] of screens) {
   const html = read(`views/${file}.html`);
   assert.match(html, new RegExp(`id="screen-${screen}"[^>]*party-options-screen|party-options-screen[^>]*id="screen-${screen}"`));
-  assert.match(html, /class="party-options-header"/);
+  assert.doesNotMatch(html, /class="party-options-header"/, 'The global shell is already the settings header');
   assert.match(html, /class="party-options-content"/);
   assert.match(html, /party-options-panel/);
   assert.match(html, /party-options-cta/);
@@ -44,7 +44,7 @@ for (const [game, metric] of setups) {
   assert.doesNotMatch(source, /\${category\.desc}/);
 }
 const css = read('assets/css/category-setup.css');
-for (const selector of ['party-options-screen', 'party-options-header', 'party-options-panel', 'party-options-cta', 'party-category-search', 'party-category-actions']) {
+for (const selector of ['party-options-screen', 'party-options-content', 'party-options-panel', 'party-options-cta', 'party-category-search', 'party-category-actions']) {
   assert.ok(css.includes(selector), `No CSS for ${selector}`);
 }
 assert.match(read('index.html'), /assets\/js\/shared\/category-setup\.js/);
