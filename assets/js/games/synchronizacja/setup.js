@@ -96,10 +96,11 @@ function toggleSynchronizacjaCategory(categoryId) {
     if (synchronizacjaState.hasSavedSession) persistSynchronizacjaSession();
 }
 
-function toggleAllSynchronizacjaCategories() {
+function toggleAllSynchronizacjaCategories(select = null) {
     const allIds = getSynchronizacjaCategoryIds();
     const allSelected = allIds.length > 0 && allIds.every(id => synchronizacjaState.activeCategories.includes(id));
-    synchronizacjaState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    synchronizacjaState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     playSound?.('click');
     renderSynchronizacjaCategories();
     if (synchronizacjaState.hasSavedSession) persistSynchronizacjaSession();
@@ -143,6 +144,7 @@ function renderSynchronizacjaCategories() {
         const allSelected = allIds.length > 0 && allIds.every(id => synchronizacjaState.activeCategories.includes(id));
         toggle.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('sync-category-grid');
 }
 
 function renderSynchronizacjaOptions() {

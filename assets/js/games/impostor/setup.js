@@ -258,4 +258,5 @@ function renderCategoriesGrid(filter = '') {
         if (!Array.isArray(words) || words.length === 0) return;
         grid.appendChild(createCategoryButton(key, category, state.activeCategories.includes(key), words.length));
     });
+    syncPartyCategoryGrid('categories-grid');
 }

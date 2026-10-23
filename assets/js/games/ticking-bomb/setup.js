@@ -109,10 +109,11 @@ function toggleBombCategory(categoryId) {
     if (bombState.hasSavedSession) persistBombSession();
 }
 
-function toggleAllBombCategories() {
+function toggleAllBombCategories(select = null) {
     const allIds = BOMB_CATEGORIES.map(category => category.id);
     const allSelected = allIds.length > 0 && allIds.every(id => bombState.activeCategories.includes(id));
-    bombState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    bombState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     renderBombCategories();
     if (bombState.hasSavedSession) persistBombSession();
 }
@@ -179,6 +180,7 @@ function renderBombCategories() {
         const allSelected = BOMB_CATEGORIES.length > 0 && BOMB_CATEGORIES.every(category => bombState.activeCategories.includes(category.id));
         allButton.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('bomb-category-grid');
 }
 
 function startBombFromSetup() {

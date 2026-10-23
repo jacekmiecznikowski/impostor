@@ -100,6 +100,15 @@ function toggleCoMamNaMysliCategory(categoryId) {
     playSound?.('click');
 }
 
+function setAllCoMamNaMysliCategories(select) {
+    const ids = CO_MAM_NA_MYSLI_CATEGORIES.map(category => category.id);
+    if (!ids.length) return;
+    coMamNaMysliState.activeCategories = select ? ids : ids.slice(0, 1);
+    renderCoMamNaMysliOptions();
+    if (coMamNaMysliState.hasSavedSession) persistCoMamNaMysliSession();
+    playSound?.('click');
+}
+
 function renderCoMamNaMysliOptions() {
     normalizeCoMamNaMysliActiveCategories();
     document.querySelectorAll('[data-cmm-time]').forEach(button => {
@@ -115,6 +124,7 @@ function renderCoMamNaMysliOptions() {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = `party-category-card cmm-category-card${active.has(category.id) ? ' is-selected' : ''}`;
+        button.setAttribute('aria-pressed', String(active.has(category.id)));
         button.addEventListener('click', () => toggleCoMamNaMysliCategory(category.id));
 
         const icon = document.createElement('span');
@@ -133,6 +143,7 @@ function renderCoMamNaMysliOptions() {
         button.append(icon, copy, check);
         grid.appendChild(button);
     });
+    syncPartyCategoryGrid('cmm-category-grid');
 }
 
 function beginCoMamNaMysliSession() {

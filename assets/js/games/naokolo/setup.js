@@ -104,10 +104,11 @@ function toggleNaokoloCategory(categoryId) {
     if (naokoloState.hasSavedSession) persistNaokoloSession();
 }
 
-function toggleAllNaokoloCategories() {
+function toggleAllNaokoloCategories(select = null) {
     const allIds = getNaokoloCategoryIds();
     const allSelected = allIds.length > 0 && allIds.every(id => naokoloState.activeCategories.includes(id));
-    naokoloState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    naokoloState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     playSound?.('click');
     renderNaokoloCategories();
     if (naokoloState.hasSavedSession) persistNaokoloSession();
@@ -155,6 +156,7 @@ function renderNaokoloCategories() {
         const allSelected = allIds.length > 0 && allIds.every(id => naokoloState.activeCategories.includes(id));
         toggle.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('naokolo-category-grid');
 }
 
 function renderNaokoloOptions() {

@@ -150,10 +150,11 @@ function toggleThreeFiveCategory(categoryId) {
     if (threeFiveState.hasSavedSession) persistThreeFiveSession();
 }
 
-function toggleAllThreeFiveCategories() {
+function toggleAllThreeFiveCategories(select = null) {
     const allIds = getThreeFiveCategoryIds();
     const allSelected = allIds.length > 0 && allIds.every(id => threeFiveState.activeCategories.includes(id));
-    threeFiveState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    threeFiveState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     playSound?.('click');
     renderThreeFiveCategories();
     if (threeFiveState.hasSavedSession) persistThreeFiveSession();
@@ -199,6 +200,7 @@ function renderThreeFiveCategories() {
         const allSelected = allIds.length > 0 && allIds.every(id => threeFiveState.activeCategories.includes(id));
         toggle.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('three-five-category-grid');
 }
 
 function renderThreeFiveOptions() {
