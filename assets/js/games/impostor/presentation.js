@@ -127,22 +127,24 @@ function setupRevealPresentation() {
     const OUT_MS = reducedMotion ? 20 : 170;
     const IN_MS = reducedMotion ? 20 : 220;
 
-    // Gentle tactile feedback only while the secret card is pressed.
-    // Browsers without vibration support simply use the visual effect.
+    // Use Android's vibration motor while holding; browser vibration is only
+    // a fallback outside Capacitor. Reduced motion disables visual shaking,
+    // not the requested physical haptic feedback.
     const stopHoldFeedback = () => {
         if (vibrationTimer !== null) {
             clearInterval(vibrationTimer);
             vibrationTimer = null;
         }
+        stopPartyjniakRevealHaptics?.();
         navigator.vibrate?.(0);
     };
     const startHoldFeedback = () => {
-        if (reducedMotion || typeof navigator.vibrate !== 'function') return;
-        stopHoldFeedback();
-        navigator.vibrate(12);
+        if (startPartyjniakRevealHaptics?.()) return;
+        if (typeof navigator.vibrate !== 'function') return;
+        navigator.vibrate(16);
         vibrationTimer = window.setInterval(() => {
-            if (isHolding) navigator.vibrate(8);
-        }, 420);
+            if (isHolding) navigator.vibrate(12);
+        }, 350);
     };
 
     const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));

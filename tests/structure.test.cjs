@@ -141,3 +141,11 @@ for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'dzika-k
 }
 
 console.log('Partyjniak packaging and configuration smoke tests: OK');
+
+const hapticPatch = read('scripts/patch-android.mjs');
+assert.match(hapticPatch, /PartyjniakHapticsPlugin\.java/);
+assert.match(hapticPatch, /registerPlugin\(PartyjniakHapticsPlugin\.class\)/);
+assert.match(hapticPatch, /android\.permission\.VIBRATE/);
+assert.match(hapticPatch, /VibrationEffect\.createWaveform/);
+assert.match(hapticPatch, /motor\.cancel\(\)/);
+assert.match(hapticPatch, /handleOnPause\(\)/);

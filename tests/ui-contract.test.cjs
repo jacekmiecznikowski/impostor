@@ -181,3 +181,10 @@ assert.match(syncCss, /left: 5%;\s*right: 5%/);
 const impostorGameAudio = read('assets/js/games/impostor/game.js');
 assert.match(impostorGameAudio, /playOutcomeSound\(caughtImpostor \? 'detectives' : 'impostor'\)/);
 assert.ok(impostorGameAudio.indexOf('playOutcomeSound(caughtImpostor') < impostorGameAudio.indexOf("goToScreen('results')"));
+
+const nativeHaptics = read('assets/js/shared/native-android.js');
+assert.match(nativeHaptics, /Capacitor\?\.Plugins\?\.PartyjniakHaptics/);
+assert.match(nativeHaptics, /function startPartyjniakRevealHaptics\(/);
+assert.match(nativeHaptics, /function stopPartyjniakRevealHaptics\(/);
+assert.match(impostorPresentation, /startPartyjniakRevealHaptics\?\.\(\)/);
+assert.match(impostorPresentation, /stopPartyjniakRevealHaptics\?\.\(\)/);
