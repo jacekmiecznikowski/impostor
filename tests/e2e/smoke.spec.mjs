@@ -169,3 +169,50 @@ test('PWA shortcut deep link opens Impostor after lazy preparation', async ({ pa
   await expect(page.locator('#screen-menu')).toHaveClass(/game-menu-screen/);
   await expect(page).not.toHaveURL(/game=impostor/);
 });
+
+test('all category screens share Impostor layout, filtering and bulk selection', async ({ page }) => {
+  const menus = [
+    ['Impostor', 'setup-options', 'categories-grid'],
+    ['Tykająca Bomba', 'bomb-options', 'bomb-category-grid'],
+    ['Naokoło', 'naokolo-options', 'naokolo-category-grid'],
+    ['Co mam na myśli?', 'cmm-options', 'cmm-category-grid'],
+    ['Trzy w Pięć', 'three-five-options', 'three-five-category-grid'],
+    ['Synchronizacja', 'sync-options', 'sync-category-grid']
+  ];
+
+  for (const [name, screenId, gridId] of menus) {
+    await page.goto('/');
+    await expect(page.locator('#screen-home')).toBeVisible();
+    await page.locator('.game-card-primary').filter({ hasText: name }).click();
+    await page.getByRole('button', { name: 'Nowa gra' }).click();
+    const playerScreen = page.locator('.player-setup-screen').filter({ visible: true });
+    await playerScreen.locator('button.player-setup-action, button.bomb-sticky-action').click();
+
+    const options = page.locator(`#screen-${screenId}`);
+    await expect(options).toBeVisible();
+    await expect(options).toHaveClass(/party-options-screen/);
+    await expect(options.locator('.party-options-header')).toBeVisible();
+    await expect(options.locator('.party-options-panel').last()).toBeVisible();
+    await expect(options.locator('.party-options-cta')).toBeVisible();
+
+    const grid = options.locator(`#${gridId}`);
+    const allCards = grid.locator('.party-category-card');
+    const total = await allCards.count();
+    expect(total).toBeGreaterThan(1);
+
+    await options.getByRole('button', { name: 'Wyczyść' }).click();
+    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(1);
+    await options.getByRole('button', { name: 'Wszystkie' }).click();
+    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total);
+
+    const search = options.getByRole('searchbox', { name: 'Szukaj kategorii' });
+    const firstTitle = await allCards.first().locator('.party-category-copy').textContent();
+    await search.fill(firstTitle.trim().split(' ')[0]);
+    const shown = await allCards.evaluateAll(cards => cards.filter(card => !card.hidden).length);
+    expect(shown).toBeGreaterThan(0);
+    await search.fill('nieistniejacazakategoria999');
+    await expect(options.locator(`#${gridId}-summary`)).toContainText('Brak pasujących kategorii');
+    await search.fill('');
+    expect(await allCards.evaluateAll(cards => cards.filter(card => !card.hidden).length)).toBe(total);
+  }
+});
