@@ -185,8 +185,7 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     await expect(page.locator('#screen-home')).toBeVisible();
     await page.locator('.game-card-primary').filter({ hasText: name }).click();
     await page.getByRole('button', { name: 'Nowa gra' }).click();
-    const playerScreen = page.locator('.player-setup-screen').filter({ visible: true });
-    await playerScreen.locator('button.player-setup-action, button.bomb-sticky-action').click();
+    await page.locator('button.player-setup-action:visible, #screen-bomb-players button.bomb-sticky-action:visible').click();
 
     const options = page.locator(`#screen-${screenId}`);
     await expect(options).toBeVisible();
