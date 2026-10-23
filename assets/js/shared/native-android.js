@@ -14,6 +14,7 @@ if (isPartyjniakNative()) {
 // Repeated pulses are generated on the Android side, not with JavaScript timers.
 function startPartyjniakRevealHaptics() {
     if (!isPartyjniakNative()) return false;
+    if (typeof getPartyjniakSetting === 'function' && getPartyjniakSetting('haptics') === false) return true;
     const motor = window.Capacitor?.Plugins?.PartyjniakHaptics;
     if (typeof motor?.startHold !== 'function') return false;
     try {
@@ -33,6 +34,22 @@ function stopPartyjniakRevealHaptics() {
         motor.stopHold().catch?.(error => console.warn('Nie udało się zatrzymać natywnej wibracji karty.', error));
     } catch (error) {
         console.warn('Nie udało się zatrzymać natywnej wibracji karty.', error);
+    }
+}
+
+function playPartyjniakNativeApplause() {
+    if (!isPartyjniakNative()) return false;
+    const applause = window.Capacitor?.Plugins?.PartyjniakApplause;
+    if (typeof applause?.play !== 'function') return false;
+    try {
+        applause.play().catch?.(error => {
+            console.warn('Natywne odtwarzanie oklasków nie powiodło się.', error);
+            playSynthesizedApplause?.();
+        });
+        return true;
+    } catch (error) {
+        console.warn('Nie udało się uruchomić natywnych oklasków.', error);
+        return false;
     }
 }
 

@@ -1,11 +1,16 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const createPartyjniakApplauseSamples = require('../assets/js/shared/applause-synth.js');
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const packagePath = path.join(root, 'android', 'app', 'src', 'main', 'java', 'pl', 'partyjniak', 'app');
 const mainActivityPath = path.join(packagePath, 'MainActivity.java');
 const orientationPluginPath = path.join(packagePath, 'PartyjniakOrientationPlugin.java');
+const applausePluginPath = path.join(packagePath, 'PartyjniakApplausePlugin.java');
+const rawResourcesDir = path.join(root, 'android', 'app', 'src', 'main', 'res', 'raw');
 const hapticsPluginPath = path.join(packagePath, 'PartyjniakHapticsPlugin.java');
 const manifestPath = path.join(root, 'android', 'app', 'src', 'main', 'AndroidManifest.xml');
 const drawableDir = path.join(root, 'android', 'app', 'src', 'main', 'res', 'drawable');
@@ -13,6 +18,7 @@ const iconTarget = path.join(drawableDir, 'partyjniak_icon.xml');
 
 await mkdir(packagePath, { recursive: true });
 await mkdir(drawableDir, { recursive: true });
+await mkdir(rawResourcesDir, { recursive: true });
 
 await writeFile(orientationPluginPath, `package pl.partyjniak.app;\n\nimport android.content.pm.ActivityInfo;\nimport com.getcapacitor.Plugin;\nimport com.getcapacitor.PluginCall;\nimport com.getcapacitor.PluginMethod;\nimport com.getcapacitor.annotation.CapacitorPlugin;\n\n@CapacitorPlugin(name = \"PartyjniakOrientation\")\npublic class PartyjniakOrientationPlugin extends Plugin {\n    @PluginMethod\n    public void lockLandscape(PluginCall call) {\n        getActivity().runOnUiThread(() -> {\n            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);\n            call.resolve();\n        });\n    }\n\n    @PluginMethod\n    public void lockPortrait(PluginCall call) {\n        getActivity().runOnUiThread(() -> {\n            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);\n            call.resolve();\n        });\n    }\n\n    @PluginMethod\n    public void unlock(PluginCall call) {\n        getActivity().runOnUiThread(() -> {\n            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);\n            call.resolve();\n        });\n    }\n}\n`, 'utf8');
 
@@ -52,13 +58,13 @@ public class PartyjniakHapticsPlugin extends Plugin {
                 return;
             }
             motor.cancel();
-            // 16 ms soft tick, then 330 ms silence, repeated until release.
-            long[] pattern = { 0L, 16L, 330L };
+            // Strong motor pulses for the entire duration of the reveal hold.
+            long[] pattern = { 0L, 220L, 35L };
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                int[] amplitudes = { 0, 65, 0 };
-                motor.vibrate(VibrationEffect.createWaveform(pattern, amplitudes, 0));
+                int[] amplitudes = { 0, 255, 0 };
+                motor.vibrate(VibrationEffect.createWaveform(pattern, amplitudes, 1));
             } else {
-                motor.vibrate(pattern, 0);
+                motor.vibrate(pattern, 1);
             }
             call.resolve();
         } catch (Exception error) {
@@ -86,7 +92,85 @@ public class PartyjniakHapticsPlugin extends Plugin {
 }
 `, 'utf8');
 
-await writeFile(mainActivityPath, `package pl.partyjniak.app;\n\nimport android.graphics.Color;\nimport android.os.Bundle;\nimport android.view.WindowManager;\nimport androidx.core.view.WindowCompat;\nimport com.getcapacitor.BridgeActivity;\n\npublic class MainActivity extends BridgeActivity {\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        registerPlugin(PartyjniakOrientationPlugin.class);\n        registerPlugin(PartyjniakHapticsPlugin.class);\n        super.onCreate(savedInstanceState);\n\n        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);\n        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);\n        getWindow().setStatusBarColor(Color.parseColor(\"#06111D\"));\n        getWindow().setNavigationBarColor(Color.parseColor(\"#020617\"));\n\n        if (getBridge() != null && getBridge().getWebView() != null) {\n            getBridge().getWebView().setHapticFeedbackEnabled(false);\n            getBridge().getWebView().setOnLongClickListener(view -> true);\n        }\n    }\n}\n`, 'utf8');
+await writeFile(applausePluginPath, `package pl.partyjniak.app;
+
+import android.media.MediaPlayer;
+import com.getcapacitor.Plugin;
+import com.getcapacitor.PluginCall;
+import com.getcapacitor.PluginMethod;
+import com.getcapacitor.annotation.CapacitorPlugin;
+
+@CapacitorPlugin(name = "PartyjniakApplause")
+public class PartyjniakApplausePlugin extends Plugin {
+    private MediaPlayer player;
+
+    private void releasePlayer() {
+        if (player == null) return;
+        try { player.stop(); } catch (IllegalStateException ignored) {}
+        player.release();
+        player = null;
+    }
+
+    @PluginMethod
+    public void play(PluginCall call) {
+        getActivity().runOnUiThread(() -> {
+            try {
+                releasePlayer();
+                player = MediaPlayer.create(getContext(), R.raw.partyjniak_applause);
+                if (player == null) {
+                    call.reject("Nie udało się przygotować nagrania oklasków.");
+                    return;
+                }
+                player.setVolume(1.0f, 1.0f);
+                player.setOnCompletionListener(done -> releasePlayer());
+                player.start();
+                call.resolve();
+            } catch (Exception error) {
+                releasePlayer();
+                call.reject("Nie udało się odtworzyć oklasków.", error);
+            }
+        });
+    }
+
+    @PluginMethod
+    public void stop(PluginCall call) {
+        getActivity().runOnUiThread(() -> {
+            releasePlayer();
+            call.resolve();
+        });
+    }
+
+    @Override
+    protected void handleOnDestroy() {
+        releasePlayer();
+        super.handleOnDestroy();
+    }
+}
+`, 'utf8');
+
+// Create a real, fully decodable WAV asset, instead of the damaged Base64 MP3.
+const applause = createPartyjniakApplauseSamples(22050);
+const frameCount = applause.left.length;
+const pcm = Buffer.alloc(44 + frameCount * 4);
+pcm.write('RIFF', 0);
+pcm.writeUInt32LE(pcm.length - 8, 4);
+pcm.write('WAVEfmt ', 8);
+pcm.writeUInt32LE(16, 16);
+pcm.writeUInt16LE(1, 20);
+pcm.writeUInt16LE(2, 22);
+pcm.writeUInt32LE(applause.sampleRate, 24);
+pcm.writeUInt32LE(applause.sampleRate * 4, 28);
+pcm.writeUInt16LE(4, 32);
+pcm.writeUInt16LE(16, 34);
+pcm.write('data', 36);
+pcm.writeUInt32LE(frameCount * 4, 40);
+for (let i = 0; i < frameCount; i++) {
+    pcm.writeInt16LE(Math.round(Math.max(-1, Math.min(1, applause.left[i])) * 32767), 44 + i * 4);
+    pcm.writeInt16LE(Math.round(Math.max(-1, Math.min(1, applause.right[i])) * 32767), 46 + i * 4);
+}
+await writeFile(path.join(rawResourcesDir, 'partyjniak_applause.wav'), pcm);
+
+await writeFile(mainActivityPath, `package pl.partyjniak.app;\n\nimport android.graphics.Color;\nimport android.os.Bundle;\nimport android.view.WindowManager;\nimport androidx.core.view.WindowCompat;\nimport com.getcapacitor.BridgeActivity;\n\npublic class MainActivity extends BridgeActivity {\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        registerPlugin(PartyjniakOrientationPlugin.class);\n        registerPlugin(PartyjniakHapticsPlugin.class);\n        registerPlugin(PartyjniakApplausePlugin.class);\n        super.onCreate(savedInstanceState);\n\n        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);\n        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);\n        getWindow().setStatusBarColor(Color.parseColor(\"#06111D\"));\n        getWindow().setNavigationBarColor(Color.parseColor(\"#020617\"));\n\n        if (getBridge() != null && getBridge().getWebView() != null) {\n            getBridge().getWebView().setHapticFeedbackEnabled(false);\n            getBridge().getWebView().setOnLongClickListener(view -> true);\n        }\n    }\n}\n`, 'utf8');
 
 const iconVector = `<?xml version="1.0" encoding="utf-8"?>\n<vector xmlns:android="http://schemas.android.com/apk/res/android"\n    android:width="108dp"\n    android:height="108dp"\n    android:viewportWidth="1548"\n    android:viewportHeight="1548">\n    <path\n        android:fillColor="#950F26"\n        android:pathData="M0,0H1548V1548H0Z" />\n    <group android:translateX="-466" android:translateY="-980">\n        <path\n            android:fillColor="#FFFFFF"\n            android:pathData="M880.899,1393.14l0,-12.892l0.54,0c0.208,-8.196 0.41,-14.365 0.467,-16.079c2.135,-65.219 45.697,-104.919 88.324,-118.85c24.065,-7.865 24.55,-7.46 316.421,-5.557c394.028,2.569 550.497,462.608 290.181,710.917c-122.357,116.713 -278.404,113.005 -279.057,113.217c-14.172,4.599 15.478,105.603 -32.649,159.055c-47.881,53.179 -68.077,45.967 -242.549,46.016c-4.9,-0.08 -9.801,0.004 -14.701,-0.076c-71.285,-1.163 -125.502,-52.965 -126.074,-130.188c-0.11,-14.923 -0.984,-132.958 -0.746,-210.489l-0.157,0l0,-181.946l224.123,0l67.838,135.331c37.743,75.291 129.528,105.787 204.818,68.042c75.376,-37.779 96.576,-126.147 68.931,-202.759l-114.311,-316.752c-16.127,-44.683 -62.085,-69.863 -110.304,-80.895c-24.109,-5.518 -49.297,-7.713 -73.35,-6.091c-24.051,1.624 -46.968,7.072 -66.517,16.875c-16.853,8.448 -30.926,20.066 -43.044,33.121l-158.184,0Zm327.741,85.137c0,17.278 -14.007,31.284 -31.284,31.284c-17.278,0 -31.286,-14.006 -31.286,-31.284c0,-17.278 14.008,-31.286 31.286,-31.286c17.276,0 31.284,14.008 31.284,31.286Zm0,139.611c0,17.278 -14.007,31.284 -31.284,31.284c-17.278,0 -31.286,-14.006 -31.286,-31.284c0,-17.278 14.008,-31.286 31.286,-31.286c17.276,0 31.284,14.007 31.284,31.286Zm38.521,-38.528c-17.278,0 -31.284,-14.008 -31.284,-31.286c0,-17.276 14.006,-31.284 31.284,-31.284c17.278,0 31.286,14.007 31.286,31.284c0,17.278 -14.008,31.286 -31.286,31.286Zm-139.604,0c-17.278,0 -31.286,-14.008 -31.286,-31.286c0,-17.276 14.008,-31.284 31.286,-31.284c17.278,0 31.284,14.007 31.284,31.284c0,17.278 -14.006,31.286 -31.284,31.286Z" />\n    </group>\n</vector>\n`;
 await writeFile(iconTarget, iconVector, 'utf8');
