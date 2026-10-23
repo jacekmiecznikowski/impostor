@@ -46,7 +46,7 @@ assert.match(integrations['dzika-karta'], /name:\s*'Dzika Karta'/);
 assert.match(integrations['dzika-karta'], /rulesModalId:\s*'dk-rules-modal'/);
 assert.match(integrations['dzika-karta'], /initialize:\s*\(\)\s*=>\s*initializeDzikaKartaContent\(\)/);
 
-for (const fn of ['registerImpostorGame', 'registerTickingBombGame', 'registerNaokoloGame', 'registerCoMamNaMysliGame', 'registerThreeFiveGame', 'registerSynchronizacjaGame', ''registerDzikaKartaGame']) {
+for (const fn of ['registerImpostorGame', 'registerTickingBombGame', 'registerNaokoloGame', 'registerCoMamNaMysliGame', 'registerThreeFiveGame', 'registerSynchronizacjaGame', 'registerDzikaKartaGame']) {
   assert.match(gamesIndex, new RegExp(`${fn}\\(\\)`));
 }
 assert.doesNotMatch(gamesIndex, /LEGACY_INITIALIZERS|attachLegacyInitializer/);

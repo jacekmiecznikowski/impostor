@@ -19,7 +19,6 @@ const entries = [
   ['co-mam-na-mysli', ['loadCoMamNaMysliSession', 'persistCoMamNaMysliSession', 'resetCoMamNaMysliSession']],
   ['trzy-w-piec', ['loadThreeFiveSession', 'persistThreeFiveSession', 'resetThreeFiveSession']],
   ['synchronizacja', ['loadSynchronizacjaSession', 'persistSynchronizacjaSession', 'resetSynchronizacjaSession']],
-  [['loadTrzyRundySession', 'persistTrzyRundySession', 'resetTrzyRundySession']],
   ['dzika-karta', ['loadDzikaKartaSession', 'persistDzikaKartaSession', 'resetDzikaKartaSession']]
 ];
 

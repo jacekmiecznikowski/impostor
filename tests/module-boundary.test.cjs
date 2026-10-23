@@ -16,7 +16,7 @@ const modules = [
   ['impostor', 'registerImpostorGame'], ['ticking-bomb', 'registerTickingBombGame'],
   ['naokolo', 'registerNaokoloGame'], ['co-mam-na-mysli', 'registerCoMamNaMysliGame'],
   ['trzy-w-piec', 'registerThreeFiveGame'], ['synchronizacja', 'registerSynchronizacjaGame'],
-  ['], ['dzika-karta', 'registerDzikaKartaGame']
+  ['dzika-karta', 'registerDzikaKartaGame']
 ];
 const sources = modules.map(([id, fn]) => [
   id,

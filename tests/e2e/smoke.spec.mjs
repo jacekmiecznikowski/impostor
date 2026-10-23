@@ -7,7 +7,6 @@ const games = [
   ['Co mam na myśli?', 'co-mam-na-mysli'],
   ['Trzy w Pięć', 'trzy-w-piec'],
   ['Synchronizacja', 'synchronizacja'],
-  ['Trzy Rundy'],
   ['Dzika Karta', 'dzika-karta']
 ];
 

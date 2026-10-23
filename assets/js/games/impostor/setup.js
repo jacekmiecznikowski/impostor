@@ -205,6 +205,8 @@ function createCategoryButton(key, category, active, wordCount) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = `w-full text-left flex items-center justify-between p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${active ? 'bg-teal-950/40 border-teal-500 text-teal-300 shadow-md shadow-teal-500/10' : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700'}`;
+    button.classList.add('party-category-card');
+    button.classList.toggle('is-selected', active);
     button.setAttribute('aria-pressed', String(active));
     button.addEventListener('click', () => toggleCategory(key));
 
@@ -238,7 +240,7 @@ function createCategoryButton(key, category, active, wordCount) {
         marker.appendChild(check);
     }
 
-    button.append(left, marker);
+    button.append(iconBox, copy, marker);
     return button;
 }
 
