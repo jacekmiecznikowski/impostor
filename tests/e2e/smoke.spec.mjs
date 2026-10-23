@@ -190,7 +190,7 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     const options = page.locator(`#screen-${screenId}`);
     await expect(options).toBeVisible();
     await expect(options).toHaveClass(/party-options-screen/);
-    await expect(options.locator('.party-options-header')).toBeVisible();
+    await expect(options.locator('.party-options-header')).toHaveCount(0);
     await expect(options.locator('.party-options-panel').last()).toBeVisible();
     await expect(options.locator('.party-options-cta')).toBeVisible();
 

@@ -309,3 +309,15 @@
 .party-category-card.party-category-card .party-category-check {
   opacity: 1;
 }
+
+/* One visible header already lives in the common shell. The secondary
+   options header is removed; keep the CTA out of scrollable form content. */
+.party-options-screen.party-options-screen { overflow: hidden; min-height: 0; }
+.party-options-content.party-options-content {
+  width: 100%; align-self: stretch; min-height: 0;
+  overflow-y: auto; padding: .15rem .2rem .6rem;
+}
+.party-options-cta.party-options-cta {
+  position: relative; bottom: auto; flex-shrink: 0;
+  margin-top: 0 !important;
+}
