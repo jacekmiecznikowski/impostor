@@ -11,7 +11,7 @@ const PARTYJNIAK_OUTCOME_AUDIO = Object.freeze({
         label: 'impostor win'
     },
     detectives: {
-        src: './assets/audio/crewmates-win.mp3.b64',
+        src: null, // WAV/PCM applause is now produced locally, not decoded from the invalid legacy MP3.
         volume: 1.0,
         label: 'crewmates win'
     }
@@ -23,8 +23,7 @@ let outcomeAudioPrimed = false;
 let activeOutcomeSource = null;
 let activeOutcomeGain = null;
 let outcomePlaybackRequest = 0;
-let crewmateApplauseMedia = null;
-let crewmateApplauseLoad = null;
+
 
 function decodeBase64Bytes(base64) {
     const normalized = base64.replace(/\s+/g, '');
@@ -71,36 +70,49 @@ async function loadOutcomeAudioBuffer(outcome) {
     return load;
 }
 
-// The crewmate clip is actual recorded applause. On Android WebView, playing
-// a prepared HTMLAudioElement directly in the vote click handler is more
-// reliable than waiting for a Web Audio fetch/decode before starting playback.
-function preloadCrewmateApplause() {
-    if (crewmateApplauseMedia) return Promise.resolve(crewmateApplauseMedia);
-    if (crewmateApplauseLoad) return crewmateApplauseLoad;
-    if (typeof Audio !== 'function') return Promise.resolve(null);
+// The old .mp3.b64 file has invalid padding and damaged audio frames.
+// Prepare a self-contained, audible PCM applause sound instead.
+function prepareApplauseBuffer(context) {
+    if (outcomeAudioBuffers.has('detectives')) return outcomeAudioBuffers.get('detectives');
+    const samples = createPartyjniakApplauseSamples(context.sampleRate || 22050);
+    const buffer = context.createBuffer(2, samples.left.length, samples.sampleRate);
+    buffer.getChannelData(0).set(samples.left);
+    buffer.getChannelData(1).set(samples.right);
+    outcomeAudioBuffers.set('detectives', buffer);
+    return buffer;
+}
 
-    crewmateApplauseLoad = (async () => {
-        const encoded = await fetchBase64Source(PARTYJNIAK_OUTCOME_AUDIO.detectives.src);
-        const media = new Audio(`data:audio/mpeg;base64,${encoded.replace(/\s+/g, '')}`);
-        media.preload = 'auto';
-        media.volume = PARTYJNIAK_OUTCOME_AUDIO.detectives.volume;
-        media.load?.();
-        crewmateApplauseMedia = media;
-        return media;
-    })().catch(error => {
-        console.warn('Nie udało się przygotować oklasków crewmate’ów.', error);
-        return null;
-    }).finally(() => {
-        crewmateApplauseLoad = null;
-    });
-    return crewmateApplauseLoad;
+function playSynthesizedApplause() {
+    if (!isPartyjniakSoundEnabled()) return false;
+    try {
+        const context = getAudioContext();
+        if (!context) return false;
+        if (context.state === 'suspended') context.resume()?.catch?.(() => {});
+        const buffer = prepareApplauseBuffer(context);
+        const source = context.createBufferSource();
+        const gain = context.createGain();
+        source.buffer = buffer;
+        gain.gain.value = 1.0;
+        source.connect(gain);
+        gain.connect(context.destination);
+        activeOutcomeSource = source;
+        activeOutcomeGain = gain;
+        source.onended = () => {
+            if (activeOutcomeSource !== source) return;
+            activeOutcomeSource = null;
+            activeOutcomeGain = null;
+            try { source.disconnect(); } catch (_) {}
+            try { gain.disconnect(); } catch (_) {}
+        };
+        source.start(0);
+        return true;
+    } catch (error) {
+        console.warn('Nie udało się odtworzyć wygenerowanych oklasków.', error);
+        return false;
+    }
 }
 
 function stopOutcomeSound() {
-    if (crewmateApplauseMedia) {
-        crewmateApplauseMedia.pause();
-        try { crewmateApplauseMedia.currentTime = 0; } catch (_) {}
-    }
     const source = activeOutcomeSource;
     const gain = activeOutcomeGain;
     activeOutcomeSource = null;
@@ -119,8 +131,8 @@ function primeOutcomeAudio() {
     try {
         const context = getAudioContext();
         context?.resume?.().catch?.(() => {});
-        preloadCrewmateApplause().catch(error => console.warn('Nie udało się przygotować oklasków.', error));
-        Object.keys(PARTYJNIAK_OUTCOME_AUDIO).forEach(outcome => {
+        prepareApplauseBuffer(context);
+        ['impostor'].forEach(outcome => {
             loadOutcomeAudioBuffer(outcome).catch(error => console.warn(`Nie udało się przygotować dźwięku wyniku (${outcome}).`, error));
         });
     } catch (error) {
@@ -135,26 +147,11 @@ async function playOutcomeSound(outcome) {
     const config = PARTYJNIAK_OUTCOME_AUDIO[outcome];
     if (!config) return false;
 
-    // Start the prepared applause synchronously with the user's tap.
-    // Keep the existing Web Audio decoder as a fallback.
     if (outcome === 'detectives') {
-        const media = crewmateApplauseMedia;
-        if (media) {
-            try {
-                media.currentTime = 0;
-                await media.play();
-                if (requestId !== outcomePlaybackRequest) {
-                    media.pause();
-                    return false;
-                }
-                return true;
-            } catch (error) {
-                console.warn('Odtwarzanie oklasków przez HTML audio nie powiodło się; używam Web Audio.', error);
-            }
-        } else {
-            // A missing preload must not silently skip the crewmate victory.
-            preloadCrewmateApplause().catch(() => {});
-        }
+        // Native MediaPlayer takes priority on Android; it bypasses WebView's
+        // HTMLAudio/data URI limitations and plays a proper WAV resource.
+        if (typeof playPartyjniakNativeApplause === 'function' && playPartyjniakNativeApplause()) return true;
+        return playSynthesizedApplause();
     }
 
     try {
