@@ -165,7 +165,7 @@ function renderBombCategories() {
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = category.desc;
+        desc.textContent = `${category.words.length} pytań`;
         copy.append(name, desc);
 
         const check = document.createElement('span');

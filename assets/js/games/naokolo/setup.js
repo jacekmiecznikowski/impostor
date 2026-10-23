@@ -140,7 +140,7 @@ function renderNaokoloCategories() {
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.cards.length} kart • ${category.desc}`;
+        desc.textContent = `${category.cards.length} kart`;
         copy.append(name, desc);
 
         const check = document.createElement('span');

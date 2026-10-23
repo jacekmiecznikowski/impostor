@@ -135,7 +135,7 @@ function renderCoMamNaMysliOptions() {
         const title = document.createElement('strong');
         title.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = category.desc;
+        desc.textContent = `${category.words.length} haseł`;
         copy.append(title, desc);
         const check = document.createElement('span');
         check.className = 'party-category-check cmm-category-check';

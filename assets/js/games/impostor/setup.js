@@ -204,36 +204,26 @@ function filterCategories(query) {
 function createCategoryButton(key, category, active, wordCount) {
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = `w-full text-left flex items-center justify-between p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${active ? 'bg-teal-950/40 border-teal-500 text-teal-300 shadow-md shadow-teal-500/10' : 'bg-slate-950 border-slate-800 text-slate-500 hover:border-slate-700'}`;
-    button.classList.add('party-category-card');
-    button.classList.toggle('is-selected', active);
+    button.className = `party-category-card${active ? ' is-selected' : ''}`;
     button.setAttribute('aria-pressed', String(active));
     button.addEventListener('click', () => toggleCategory(key));
 
-    const left = document.createElement('span');
-    left.className = 'flex items-center space-x-2';
-
     const iconBox = document.createElement('span');
-    iconBox.className = `w-7 h-7 rounded-lg ${active ? 'bg-teal-600 text-white' : 'bg-slate-900 text-slate-400'} flex items-center justify-center text-xs`;
+    iconBox.className = 'party-category-icon';
     const icon = document.createElement('i');
     icon.className = `fa-solid ${category.icon}`;
-    iconBox.classList.add('party-category-icon');
     iconBox.appendChild(icon);
 
     const copy = document.createElement('span');
-    const name = document.createElement('span');
-    name.className = 'block font-bold text-white text-xs';
+    copy.className = 'party-category-copy';
+    const name = document.createElement('strong');
     name.textContent = category.name;
-    const count = document.createElement('span');
-    count.className = 'block text-[10px] text-slate-400 font-normal';
+    const count = document.createElement('small');
     count.textContent = `${wordCount} haseł`;
-    copy.classList.add('party-category-copy');
     copy.append(name, count);
-    left.append(iconBox, copy);
 
     const marker = document.createElement('span');
-    marker.className = `w-4 h-4 rounded-full border ${active ? 'border-teal-500 bg-teal-500 text-slate-950' : 'border-slate-700'} flex items-center justify-center text-[10px]`;
-    marker.classList.add('party-category-check');
+    marker.className = 'party-category-check';
     if (active) {
         const check = document.createElement('i');
         check.className = 'fa-solid fa-check';

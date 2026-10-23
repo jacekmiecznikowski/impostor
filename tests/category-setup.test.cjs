@@ -29,6 +29,20 @@ for (const [file, screen, grid] of screens) {
 }
 // Trzy w Pięć must load its category pack before its options screen is shown.
 assert.match(read('assets/js/games/trzy-w-piec/bootstrap.js'), /await initializeThreeFiveContent\(\)/);
+const setups = [
+  ['impostor', 'wordCount} haseł'],
+  ['ticking-bomb', 'category.words.length} pytań'],
+  ['naokolo', 'category.cards.length} kart'],
+  ['co-mam-na-mysli', 'category.words.length} haseł'],
+  ['trzy-w-piec', 'category.prompts.length} pytań'],
+  ['synchronizacja', 'category.scales.length} skal']
+];
+for (const [game, metric] of setups) {
+  const source = read(`assets/js/games/${game}/setup.js`);
+  assert.ok(source.includes(metric), `Count missing for ${game}`);
+  assert.doesNotMatch(source, /desc\.textContent\s*=\s*category\.desc/);
+  assert.doesNotMatch(source, /\${category\.desc}/);
+}
 const css = read('assets/css/category-setup.css');
 for (const selector of ['party-options-screen', 'party-options-header', 'party-options-panel', 'party-options-cta', 'party-category-search', 'party-category-actions']) {
   assert.ok(css.includes(selector), `No CSS for ${selector}`);

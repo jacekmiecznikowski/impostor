@@ -184,7 +184,7 @@ function renderThreeFiveCategories() {
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.prompts.length} wyzwań • ${category.desc}`;
+        desc.textContent = `${category.prompts.length} pytań`;
         copy.append(name, desc);
 
         const check = document.createElement('span');

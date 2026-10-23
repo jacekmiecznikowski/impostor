@@ -129,7 +129,7 @@ function renderSynchronizacjaCategories() {
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.scales.length} skal • ${category.desc}`;
+        desc.textContent = `${category.scales.length} skal`;
         copy.append(name, desc);
         const check = document.createElement('span');
         check.className = 'party-category-check sync-category-check';
