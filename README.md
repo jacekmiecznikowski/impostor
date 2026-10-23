@@ -1,6 +1,6 @@
 # Partyjniak – gry imprezowe
 
-**Partyjniak** to mobilna aplikacja webowa/PWA z grami imprezowymi na jeden telefon. Aktualna wersja zawiera osiem pełnych trybów: **Impostor**, **Tykająca Bomba**, **Naokoło**, **Co mam na myśli?**, **Trzy w Pięć**, **Synchronizacja**, **Trzy Rundy** i **Dzika Karta**.
+**Partyjniak** to mobilna aplikacja webowa/PWA z grami imprezowymi na jeden telefon. Aktualna wersja zawiera siedem pełnych trybów: **Impostor**, **Tykająca Bomba**, **Naokoło**, **Co mam na myśli?**, **Trzy w Pięć**, **Synchronizacja** i **Dzika Karta**.
 
 ## Uruchomienie lokalne
 

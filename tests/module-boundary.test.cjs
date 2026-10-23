@@ -16,7 +16,7 @@ const modules = [
   ['impostor', 'registerImpostorGame'], ['ticking-bomb', 'registerTickingBombGame'],
   ['naokolo', 'registerNaokoloGame'], ['co-mam-na-mysli', 'registerCoMamNaMysliGame'],
   ['trzy-w-piec', 'registerThreeFiveGame'], ['synchronizacja', 'registerSynchronizacjaGame'],
-  ['trzy-rundy', 'registerTrzyRundyGame'], ['dzika-karta', 'registerDzikaKartaGame']
+  ['], ['dzika-karta', 'registerDzikaKartaGame']
 ];
 const sources = modules.map(([id, fn]) => [
   id,
@@ -45,7 +45,7 @@ assert.match(index, /shared\/asset-loader\.js/);
 assert.match(index, /shared\/game-menu\.js/);
 assert.match(index, /css\/game-menu\.css/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
-assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
+assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|dzika-karta)[^"']*\.css/);
 
 assert.match(app, /from '\.\/games\/index\.js\?v=9'/);
 assert.match(app, /loadGameAssets/);
@@ -54,7 +54,7 @@ assert.match(app, /initializeGameModule/);
 assert.match(app, /standardizeGameMenu/);
 assert.match(app, /setupGameMenuRecovery/);
 assert.doesNotMatch(app, /loadGameSessions\(/);
-assert.doesNotMatch(app, /initializeImpostorRemoteContent|initializeTickingBombContent|initializeNaokoloContent|initializeCoMamNaMysliContent|initializeThreeFiveContent|initializeSynchronizacjaContent|initializeTrzyRundyContent|initializeDzikaKartaContent/);
+assert.doesNotMatch(app, /initializeImpostorRemoteContent|initializeTickingBombContent|initializeNaokoloContent|initializeCoMamNaMysliContent|initializeThreeFiveContent|initializeSynchronizacjaContent|initializeDzikaKartaContent/);
 
 for (const [id, fn, integration, bootstrap] of sources) {
   assert.match(integration, /from '\.\.\/\.\.\/shared\/game-registry\.js\?v=2'/);

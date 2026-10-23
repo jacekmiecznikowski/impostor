@@ -8,7 +8,7 @@ const exists = relative => fs.existsSync(path.join(root, relative));
 
 const gameIds = [
   'impostor', 'ticking-bomb', 'naokolo', 'co-mam-na-mysli',
-  'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta'
+  'trzy-w-piec', 'synchronizacja', 'dzika-karta'
 ];
 
 const requiredFiles = [
@@ -49,7 +49,7 @@ assert.match(index, /Brakuje wygenerowanych assetów Partyjniaka/);
 assert.match(index, /npm run serve/);
 assert.doesNotMatch(index, /https:\/\/(?:cdn\.tailwindcss|cdnjs\.cloudflare|fonts\.googleapis)/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
-assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
+assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|dzika-karta)[^"']*\.css/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 
 const gameMenu = read('assets/js/shared/game-menu.js');
@@ -134,7 +134,7 @@ assert.match(readme, /Nie uruchamiaj świeżego checkoutu samym `python -m http\
 assert.match(readme, /npm run build:assets/);
 assert.match(readme, /Windowsie, macOS i Linuksie/);
 
-for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta']) {
+for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'dzika-karta']) {
   assert.match(pkg.scripts.test, new RegExp(`${game}-content\\.test\\.cjs`));
   assert.match(pkg.scripts.test, new RegExp(`${game}-rules\\.test\\.cjs`));
   assert.match(pkg.scripts.test, new RegExp(`${game}-state\\.test\\.cjs`));

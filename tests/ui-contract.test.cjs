@@ -32,8 +32,7 @@ assert.match(sharedPlayerSetup, /--ui-accent/);
 assert.match(sharedPlayerSetup, /\.player-setup-name-row/);
 
 const sharedPlayerSelectorViews = [
-  read('views/dzika-karta.html'),
-  read('views/trzy-rundy.html')
+  read('views/dzika-karta.html')
 ];
 for (const view of sharedPlayerSelectorViews) {
   assert.match(view, /player-setup-heading/);
