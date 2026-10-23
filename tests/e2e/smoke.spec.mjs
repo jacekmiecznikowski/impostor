@@ -200,7 +200,7 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     expect(total).toBeGreaterThan(1);
     const secondLines = await grid.locator('.party-category-card .party-category-copy small').allTextContents();
     expect(secondLines).toHaveLength(total);
-    expect(secondLines.every(text => /^\\d+ (haseł|pytań|kart|skal)$/.test(text.trim()))).toBe(true);
+    expect(secondLines.every(text => /^\d+ (haseł|pytań|kart|skal)$/.test(text.trim()))).toBe(true);
 
     await options.getByRole('button', { name: 'Wyczyść' }).click();
     await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(1);

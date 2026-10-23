@@ -188,5 +188,6 @@ async function playOutcomeSound(outcome) {
     }
 }
 
-document.addEventListener('pointerdown', primeOutcomeAudio, { once: true, passive: true, capture: true });
-document.addEventListener('keydown', primeOutcomeAudio, { once: true, capture: true });
+// Keep the listener when sounds are initially disabled, so turning them on later can prime audio.
+document.addEventListener('pointerdown', primeOutcomeAudio, { passive: true, capture: true });
+document.addEventListener('keydown', primeOutcomeAudio, { capture: true });
