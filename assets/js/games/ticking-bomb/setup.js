@@ -143,23 +143,24 @@ function renderBombFuseOptions() {
 function renderBombCategories() {
     const grid = document.getElementById('bomb-category-grid');
     if (!grid) return;
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
     BOMB_CATEGORIES.forEach(category => {
         const selected = bombState.activeCategories.includes(category.id);
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `bomb-category-card${selected ? ' is-selected' : ''}`;
+        button.className = `party-category-card bomb-category-card${selected ? ' is-selected' : ''}`;
         button.setAttribute('aria-pressed', String(selected));
         button.onclick = () => toggleBombCategory(category.id);
 
         const icon = document.createElement('span');
-        icon.className = 'bomb-category-icon';
+        icon.className = 'party-category-icon bomb-category-icon';
         const iconEl = document.createElement('i');
         iconEl.className = `fa-solid ${category.icon}`;
         icon.appendChild(iconEl);
 
         const copy = document.createElement('span');
-        copy.className = 'bomb-category-copy';
+        copy.className = 'party-category-copy bomb-category-copy';
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
@@ -167,7 +168,7 @@ function renderBombCategories() {
         copy.append(name, desc);
 
         const check = document.createElement('span');
-        check.className = 'bomb-category-check';
+        check.className = 'party-category-check bomb-category-check';
         check.innerHTML = selected ? '<i class="fa-solid fa-check"></i>' : '';
         button.append(icon, copy, check);
         grid.appendChild(button);

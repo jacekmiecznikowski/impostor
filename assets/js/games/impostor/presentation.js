@@ -122,9 +122,28 @@ function setupRevealPresentation() {
     let animating = false;
     let animationGeneration = 0;
     let resetAnchorTimer = null;
+    let vibrationTimer = null;
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const OUT_MS = reducedMotion ? 20 : 170;
     const IN_MS = reducedMotion ? 20 : 220;
+
+    // Gentle tactile feedback only while the secret card is pressed.
+    // Browsers without vibration support simply use the visual effect.
+    const stopHoldFeedback = () => {
+        if (vibrationTimer !== null) {
+            clearInterval(vibrationTimer);
+            vibrationTimer = null;
+        }
+        navigator.vibrate?.(0);
+    };
+    const startHoldFeedback = () => {
+        if (reducedMotion || typeof navigator.vibrate !== 'function') return;
+        stopHoldFeedback();
+        navigator.vibrate(12);
+        vibrationTimer = window.setInterval(() => {
+            if (isHolding) navigator.vibrate(8);
+        }, 420);
+    };
 
     const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
 
@@ -198,6 +217,7 @@ function setupRevealPresentation() {
         animationGeneration++;
         animating = false;
         isHolding = false;
+        stopHoldFeedback();
         desiredBack = false;
         clearTimeout(resetAnchorTimer);
         clearFlipClasses();
@@ -208,6 +228,7 @@ function setupRevealPresentation() {
     const hideRole = () => {
         if (!isHolding) return;
         isHolding = false;
+        stopHoldFeedback();
         revealSecret(false);
         card.classList.remove('is-holding');
         requestFace(false);
@@ -224,6 +245,7 @@ function setupRevealPresentation() {
         clearTimeout(resetAnchorTimer);
         updateTouchAnchor(event);
         card.classList.add('is-holding');
+        startHoldFeedback();
 
         if (event.pointerId !== undefined && card.setPointerCapture) {
             try { card.setPointerCapture(event.pointerId); } catch (_) { /* no-op */ }
@@ -243,6 +265,7 @@ function setupRevealPresentation() {
             event.preventDefault();
             isHolding = true;
             card.classList.add('hold-lower', 'is-holding');
+            startHoldFeedback();
             revealSecret(true);
             requestFace(true);
         }

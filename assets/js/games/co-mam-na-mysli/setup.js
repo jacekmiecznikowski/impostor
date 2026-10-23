@@ -108,26 +108,27 @@ function renderCoMamNaMysliOptions() {
 
     const grid = document.getElementById('cmm-category-grid');
     if (!grid) return;
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
     const active = new Set(coMamNaMysliState.activeCategories);
     CO_MAM_NA_MYSLI_CATEGORIES.forEach(category => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `cmm-category-card${active.has(category.id) ? ' is-selected' : ''}`;
+        button.className = `party-category-card cmm-category-card${active.has(category.id) ? ' is-selected' : ''}`;
         button.addEventListener('click', () => toggleCoMamNaMysliCategory(category.id));
 
         const icon = document.createElement('span');
-        icon.className = 'cmm-category-icon';
+        icon.className = 'party-category-icon cmm-category-icon';
         icon.innerHTML = `<i class="fa-solid ${category.icon}"></i>`;
         const copy = document.createElement('span');
-        copy.className = 'cmm-category-copy';
+        copy.className = 'party-category-copy cmm-category-copy';
         const title = document.createElement('strong');
         title.textContent = category.name;
         const desc = document.createElement('small');
         desc.textContent = category.desc;
         copy.append(title, desc);
         const check = document.createElement('span');
-        check.className = 'cmm-category-check';
+        check.className = 'party-category-check cmm-category-check';
         check.innerHTML = '<i class="fa-solid fa-check"></i>';
         button.append(icon, copy, check);
         grid.appendChild(button);

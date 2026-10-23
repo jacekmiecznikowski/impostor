@@ -151,3 +151,29 @@ assert.match(colorSystem, /var\(--ui-accent\)/);
 assert.doesNotMatch(colorSystem, /body\[data-game=/);
 
 console.log('Critical Partyjniak UI contracts: OK');
+
+// Shared category picker: all six category-based modes use one geometry system.
+const categoryCSS = read('assets/css/category-setup.css');
+assert.match(categoryCSS, /\.party-category-grid\.party-category-grid/);
+assert.match(categoryCSS, /\.party-category-card\.party-category-card/);
+for (const source of playerSetupSources) {
+  assert.match(source, /party-category-grid/);
+  assert.match(source, /party-category-card/);
+}
+
+// The manual bomb mode must not display the tracked player's name.
+const bombGame = read('assets/js/games/ticking-bomb/game.js');
+const bombCSS = read('assets/css/ticking-bomb.css');
+assert.match(bombGame, /trackedControls\.hidden = !trackedMode/);
+assert.match(bombCSS, /#bomb-tracked-controls\[hidden\]/);
+
+// Vibrations and visual tremor stop immediately when the secret card is released.
+const impostorPresentation = read('assets/js/games/impostor/presentation.js');
+const impostorRevealCSS = read('assets/css/impostor-reveal.css');
+assert.match(impostorPresentation, /startHoldFeedback\(\)/);
+assert.match(impostorPresentation, /stopHoldFeedback\(\)/);
+assert.match(impostorRevealCSS, /impostor-card-hold-shiver/);
+
+// The same 5%-95% geometry is used by the spectrum track and markers.
+assert.match(syncGame, /5 \+ position \* 0\.9/);
+assert.match(syncCss, /left: 5%;\s*right: 5%/);

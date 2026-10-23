@@ -7,16 +7,16 @@ assert.equal(Rules.normalizePosition(-4), 0);
 assert.equal(Rules.normalizePosition(105), 100);
 assert.equal(Rules.normalizePosition(51.7), 52);
 
-assert.equal(Rules.scoreDistance(0), 4);
-assert.equal(Rules.scoreDistance(4), 4);
-assert.equal(Rules.scoreDistance(5), 3);
-assert.equal(Rules.scoreDistance(9), 3);
-assert.equal(Rules.scoreDistance(10), 2);
-assert.equal(Rules.scoreDistance(16), 2);
-assert.equal(Rules.scoreDistance(17), 1);
-assert.equal(Rules.scoreDistance(25), 1);
+assert.equal(Rules.scoreDistance(0), 25);
+assert.equal(Rules.scoreDistance(1), 19);
+assert.equal(Rules.scoreDistance(2), 18);
+assert.equal(Rules.scoreDistance(4), 16);
+assert.equal(Rules.scoreDistance(6), 14);
+assert.equal(Rules.scoreDistance(10), 10);
+assert.equal(Rules.scoreDistance(19), 1);
+assert.equal(Rules.scoreDistance(20), 0);
 assert.equal(Rules.scoreDistance(26), 0);
-assert.deepEqual(Rules.scoreGuess(70, 64), { target: 70, guess: 64, distance: 6, points: 3 });
+assert.deepEqual(Rules.scoreGuess(70, 64), { target: 70, guess: 64, distance: 6, points: 14 });
 
 assert.equal(Rules.nextPlayerIndex(0, 4), 1);
 assert.equal(Rules.nextPlayerIndex(3, 4), 0);

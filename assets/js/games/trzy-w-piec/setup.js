@@ -163,22 +163,23 @@ function renderThreeFiveCategories() {
     const grid = document.getElementById('three-five-category-grid');
     if (!grid) return;
     normalizeThreeFiveCategories();
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
 
     THREE_FIVE_CATEGORIES.forEach(category => {
         const selected = threeFiveState.activeCategories.includes(category.id);
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `three-five-category-card${selected ? ' is-selected' : ''}`;
+        button.className = `party-category-card three-five-category-card${selected ? ' is-selected' : ''}`;
         button.setAttribute('aria-pressed', String(selected));
         button.addEventListener('click', () => toggleThreeFiveCategory(category.id));
 
         const icon = document.createElement('span');
-        icon.className = 'three-five-category-icon';
+        icon.className = 'party-category-icon three-five-category-icon';
         icon.innerHTML = `<i class="fa-solid ${category.icon}" aria-hidden="true"></i>`;
 
         const copy = document.createElement('span');
-        copy.className = 'three-five-category-copy';
+        copy.className = 'party-category-copy three-five-category-copy';
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
@@ -186,7 +187,7 @@ function renderThreeFiveCategories() {
         copy.append(name, desc);
 
         const check = document.createElement('span');
-        check.className = 'three-five-category-check';
+        check.className = 'party-category-check three-five-category-check';
         if (selected) check.innerHTML = '<i class="fa-solid fa-check"></i>';
         button.append(icon, copy, check);
         grid.appendChild(button);

@@ -67,10 +67,10 @@ api.synchronizacjaRuntime.currentScale = { id: 'a1', left: 'Tani', right: 'Drogi
 api.synchronizacjaRuntime.target = 70;
 api.setSynchronizacjaGuess(64);
 api.submitSynchronizacjaGuess();
-assert.equal(sandbox.synchronizacjaState.players[0].score, 3);
+assert.equal(sandbox.synchronizacjaState.players[0].score, 14);
 assert.equal(sandbox.synchronizacjaState.players[0].turns, 1);
 assert.equal(sandbox.synchronizacjaState.turnNumber, 1);
-assert.equal(sandbox.synchronizacjaState.roundResults.p1, 3);
+assert.equal(sandbox.synchronizacjaState.roundResults.p1, 14);
 assert.equal(lastScreen, 'sync-reveal');
 
 api.advanceSynchronizacjaTurn();

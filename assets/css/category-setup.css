@@ -1,0 +1,94 @@
+/* A shared category picker for every game that offers category selection.
+   Uses game theme tokens; geometry and selected-state affordances stay identical. */
+.party-category-grid.party-category-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .55rem;
+  width: 100%;
+  max-height: clamp(13rem, 35dvh, 22rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: .15rem .15rem .4rem;
+  scrollbar-width: thin;
+}
+.party-category-card.party-category-card {
+  display: grid;
+  grid-template-columns: 2.3rem minmax(0, 1fr) 1.4rem;
+  align-items: center;
+  gap: .65rem;
+  width: 100%;
+  min-height: 3.85rem;
+  padding: .64rem .7rem;
+  border: 1px solid rgba(100, 116, 139, .4);
+  border-radius: .9rem;
+  background: rgba(15, 23, 42, .58);
+  box-shadow: none;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.party-category-card.party-category-card.is-selected {
+  border-color: rgba(var(--ui-accent-rgb), .65);
+  background: rgba(var(--ui-accent-rgb), .12);
+}
+.party-category-card.party-category-card:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 2px;
+}
+.party-category-icon.party-category-icon {
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  margin: 0;
+  padding: 0;
+  border-radius: .75rem;
+  color: var(--ui-accent-text);
+  background: rgba(var(--ui-accent-rgb), .13);
+  font-size: .86rem;
+}
+.party-category-copy.party-category-copy {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: #e2e8f0;
+}
+.party-category-copy.party-category-copy strong {
+  display: block;
+  color: #f8fafc;
+  font-size: .78rem;
+  line-height: 1.25;
+  font-weight: 850;
+}
+.party-category-copy.party-category-copy small,
+.party-category-copy.party-category-copy > span {
+  display: block;
+  margin-top: .13rem;
+  color: #94a3b8;
+  font-size: .63rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.party-category-check.party-category-check {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(100,116,139,.55);
+  border-radius: 50%;
+  color: transparent;
+  background: rgba(15,23,42,.65);
+  font-size: .65rem;
+  box-shadow: none;
+}
+.party-category-card.is-selected .party-category-check.party-category-check {
+  color: #fff;
+  border-color: var(--ui-accent);
+  background: var(--ui-accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .party-category-card.party-category-card { transition: none; }
+}
