@@ -81,7 +81,7 @@ function preloadCrewmateApplause() {
 
     crewmateApplauseLoad = (async () => {
         const encoded = await fetchBase64Source(PARTYJNIAK_OUTCOME_AUDIO.detectives.src);
-        const media = new Audio(`data:audio/mpeg;base64,${encoded.replace(/\\s+/g, '')}`);
+        const media = new Audio(`data:audio/mpeg;base64,${encoded.replace(/\s+/g, '')}`);
         media.preload = 'auto';
         media.volume = PARTYJNIAK_OUTCOME_AUDIO.detectives.volume;
         media.load?.();

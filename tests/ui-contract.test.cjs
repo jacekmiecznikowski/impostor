@@ -176,3 +176,8 @@ assert.match(impostorRevealCSS, /impostor-card-hold-shiver/);
 // The same 5%-95% geometry is used by the spectrum track and markers.
 assert.match(syncGame, /5 \+ position \* 0\.9/);
 assert.match(syncCss, /left: 5%;\s*right: 5%/);
+
+// Crew applause must start in the actual vote tap, before screen navigation.
+const impostorGameAudio = read('assets/js/games/impostor/game.js');
+assert.match(impostorGameAudio, /playOutcomeSound\(caughtImpostor \? 'detectives' : 'impostor'\)/);
+assert.ok(impostorGameAudio.indexOf('playOutcomeSound(caughtImpostor') < impostorGameAudio.indexOf("goToScreen('results')"));

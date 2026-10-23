@@ -27,7 +27,7 @@ vm.createContext(sandbox);
 vm.runInContext(`${source}\n;globalThis.__pwaTest={CACHE_VERSION,STATIC_CACHE,RUNTIME_CACHE,VENDOR_MANIFEST,LOCAL_ASSETS:[...LOCAL_ASSETS]};`, sandbox);
 
 const config = sandbox.__pwaTest;
-assert.equal(config.CACHE_VERSION, 'v69');
+assert.equal(config.CACHE_VERSION, 'v70');
 assert.equal(config.STATIC_CACHE, 'partyjniak-static-v69');
 assert.equal(config.RUNTIME_CACHE, 'partyjniak-runtime-v69');
 assert.equal(config.VENDOR_MANIFEST, './assets/vendor/precache.json');
