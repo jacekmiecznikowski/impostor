@@ -100,6 +100,15 @@ function toggleCoMamNaMysliCategory(categoryId) {
     playSound?.('click');
 }
 
+function setAllCoMamNaMysliCategories(select) {
+    const ids = CO_MAM_NA_MYSLI_CATEGORIES.map(category => category.id);
+    if (!ids.length) return;
+    coMamNaMysliState.activeCategories = select ? ids : ids.slice(0, 1);
+    renderCoMamNaMysliOptions();
+    if (coMamNaMysliState.hasSavedSession) persistCoMamNaMysliSession();
+    playSound?.('click');
+}
+
 function renderCoMamNaMysliOptions() {
     normalizeCoMamNaMysliActiveCategories();
     document.querySelectorAll('[data-cmm-time]').forEach(button => {
@@ -108,30 +117,33 @@ function renderCoMamNaMysliOptions() {
 
     const grid = document.getElementById('cmm-category-grid');
     if (!grid) return;
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
     const active = new Set(coMamNaMysliState.activeCategories);
     CO_MAM_NA_MYSLI_CATEGORIES.forEach(category => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `cmm-category-card${active.has(category.id) ? ' is-selected' : ''}`;
+        button.className = `party-category-card cmm-category-card${active.has(category.id) ? ' is-selected' : ''}`;
+        button.setAttribute('aria-pressed', String(active.has(category.id)));
         button.addEventListener('click', () => toggleCoMamNaMysliCategory(category.id));
 
         const icon = document.createElement('span');
-        icon.className = 'cmm-category-icon';
+        icon.className = 'party-category-icon cmm-category-icon';
         icon.innerHTML = `<i class="fa-solid ${category.icon}"></i>`;
         const copy = document.createElement('span');
-        copy.className = 'cmm-category-copy';
+        copy.className = 'party-category-copy cmm-category-copy';
         const title = document.createElement('strong');
         title.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = category.desc;
+        desc.textContent = `${category.words.length} haseł`;
         copy.append(title, desc);
         const check = document.createElement('span');
-        check.className = 'cmm-category-check';
+        check.className = 'party-category-check cmm-category-check';
         check.innerHTML = '<i class="fa-solid fa-check"></i>';
         button.append(icon, copy, check);
         grid.appendChild(button);
     });
+    syncPartyCategoryGrid('cmm-category-grid');
 }
 
 function beginCoMamNaMysliSession() {

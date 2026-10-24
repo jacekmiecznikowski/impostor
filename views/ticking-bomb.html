@@ -29,10 +29,11 @@
   <button type="button" class="bomb-primary-btn bomb-sticky-action" onclick="bombProceedToOptions()"><span>Dalej</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
-<section id="screen-bomb-options" class="screen bomb-screen hidden flex-col flex-1">
-  <div class="bomb-section-heading"><span class="bomb-step">KROK 2 Z 2</span><h2>Ustaw rundę</h2><p>Wybierz sposób podawania, zapłon i paczki pytań.</p></div>
+<section id="screen-bomb-options" class="screen bomb-screen hidden flex-col flex-1 party-options-screen">
+  <div class="party-options-content">
 
-  <div class="bomb-setup-group">
+
+  <div class="bomb-setup-group party-options-panel">
     <div class="bomb-group-label"><span>TRYB GRY</span></div>
     <div class="bomb-mode-grid">
       <button type="button" data-bomb-mode="manual" class="bomb-mode-card" onclick="selectBombMode('manual')">
@@ -44,7 +45,7 @@
     </div>
   </div>
 
-  <div class="bomb-setup-group">
+  <div class="bomb-setup-group party-options-panel">
     <div class="bomb-group-label"><span>ZAPŁON</span><small>Czas jest losowy i ukryty</small></div>
     <div class="bomb-fuse-grid">
       <button type="button" data-bomb-fuse="unstable" onclick="selectBombFusePreset('unstable')"><strong>Niestabilny ładunek</strong><small>5–120 s</small></button>
@@ -53,12 +54,15 @@
     </div>
   </div>
 
-  <div class="bomb-setup-group">
-    <div class="bomb-group-label"><span>KATEGORIE</span><button id="bomb-toggle-all-categories" type="button" onclick="toggleAllBombCategories()">Wybierz wszystkie</button></div>
-    <div id="bomb-category-grid" class="bomb-category-grid"></div>
+  <div class="bomb-setup-group party-options-panel">
+    <div class="party-options-group-heading"><strong>Kategorie</strong><span class="party-category-actions"><button type="button" onclick="toggleAllBombCategories(true)">Wszystkie</button><span aria-hidden="true">|</span><button type="button" onclick="toggleAllBombCategories(false)" title="Zostawia jedną kategorię">Wyczyść</button></span></div>
+    <label class="party-category-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="bomb-category-grid-search" type="search" placeholder="Szukaj kategorii..." aria-label="Szukaj kategorii" oninput="syncPartyCategoryGrid('bomb-category-grid')" autocomplete="off"></label>
+    <p id="bomb-category-grid-summary" class="party-category-summary" aria-live="polite"></p>
+    <div id="bomb-category-grid" class="party-category-grid bomb-category-grid"></div>
   </div>
 
-  <button type="button" class="bomb-primary-btn bomb-sticky-action" onclick="startBombFromSetup()"><i class="fa-solid fa-fire-flame-curved"></i><span>Przygotuj bombę</span></button>
+  </div>
+<button type="button" class="bomb-primary-btn bomb-sticky-action party-options-cta" onclick="startBombFromSetup()"><i class="fa-solid fa-fire-flame-curved"></i><span>Przygotuj bombę</span></button>
 </section>
 
 <section id="screen-bomb-play" class="screen bomb-screen bomb-play-screen hidden flex-col flex-1">

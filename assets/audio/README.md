@@ -1,22 +1,30 @@
 # Dźwięki Partyjniaka
 
-Sample wyników Impostora pochodzą z OpenGameArt i mają licencję CC0:
+Pliki dźwiękowe są częścią repozytorium i APK. Odtwarzanie działa offline.
 
-- wygrana impostora: `Evil Laugh` — AntumDeluge,
-- wygrana zwykłych graczy: `Well Done` — qubodup.
+## Impostor — nagrania zwycięstwa
 
-Źródła referencyjne:
+- `crewmates-win.mp3` — oryginalne nagranie zwycięstwa crewmate’ów;
+- `impostor-win.mp3` — oryginalne nagranie zwycięstwa impostora.
 
-- https://opengameart.org/content/evil-laugh
-- https://opengameart.org/content/well-done
+Aplikacja odtwarza **bezpośrednio te MP3**, bez konwersji, generowania efektów ani przechowywania ich kopii w Base64. Android używa `PartyjniakApplausePlugin` z natywnym `MediaPlayer`; przeglądarka używa HTML Audio lub Web Audio.
 
-Aplikacja nie pobiera tych dźwięków z internetu w runtime. Pliki są przechowywane lokalnie jako tekst base64:
+Źródła i licencje podawane we wcześniejszej dokumentacji:
 
-- `impostor-win.0.b64` … `impostor-win.4.b64`,
-- `crewmates-win.mp3.b64`,
-- `bomb-tick.b64`,
-- `bomb-explosion.b64`.
+- `Evil Laugh` — AntumDeluge (CC0): https://opengameart.org/content/evil-laugh
+- `Well Done` — qubodup (CC0): https://opengameart.org/content/well-done
 
-`assets/js/shared/outcome-audio.js` i `assets/js/games/ticking-bomb/audio.js` pobierają lokalne pliki, dekodują base64 do `ArrayBuffer` i przekazują dane do Web Audio API. Service Worker precache'uje te pliki dla PWA, a build Capacitor kopiuje je do APK razem z resztą `assets/`.
+Przy zmianie nagrań należy zweryfikować, czy te informacje nadal odnoszą się do użytych plików.
 
-Wszystkie moduły audio respektują wspólne ustawienie `partyjniak.settings.v1`; nie zależą od stanu żadnej konkretnej gry.
+## Tykająca Bomba
+
+- `bomb-tick.b64` — tykanie, odtwarzane w pętli;
+- `bomb-explosion.b64` — pojedynczy efekt wybuchu.
+
+To celowo pozostawione lokalne pliki tekstowe Base64: `assets/js/games/ticking-bomb/audio.js` dekoduje je do Web Audio API. Nie ma potrzeby konwertowania ich na MP3, dopóki mechanizm odtwarzania Bomby się nie zmieni.
+
+## Zasady
+
+- Przechowujemy **jedną aktywną wersję każdego nagrania** — żadnych podzielonych kopii Base64 ani plików przejściowych.
+- Nowy dźwięk dodajemy do `assets/audio/` i aktualizujemy odwołania w kodzie oraz `sw.js`.
+- Wszystkie gry respektują globalne ustawienie dźwięku `partyjniak.settings.v1`.

@@ -29,14 +29,11 @@
   <button class="cmm-primary-btn player-setup-action" type="button" onclick="goToCoMamNaMysliOptions()"><span>Dalej</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
-<section id="screen-cmm-options" class="screen hidden flex-col cmm-screen">
-  <div class="cmm-section-heading">
-    <span class="cmm-kicker">KROK 2 Z 2</span>
-    <h2>Ustawienia rundy</h2>
-    <p>Wybierz czas i zestawy haseł.</p>
-  </div>
+<section id="screen-cmm-options" class="screen hidden flex-col cmm-screen party-options-screen">
+  <div class="party-options-content">
 
-  <div class="cmm-setup-group">
+
+  <div class="cmm-setup-group party-options-panel">
     <div class="cmm-group-label"><span>Czas tury</span><small>na jednego gracza</small></div>
     <div class="cmm-time-grid">
       <button type="button" data-cmm-time="30" onclick="selectCoMamNaMysliRoundTime(30)"><strong>30 s</strong><small>szybko</small></button>
@@ -46,12 +43,15 @@
     </div>
   </div>
 
-  <div class="cmm-setup-group">
-    <div class="cmm-group-label"><span>Kategorie</span><small>min. 1</small></div>
-    <div id="cmm-category-grid" class="cmm-category-grid"></div>
+  <div class="cmm-setup-group party-options-panel">
+    <div class="party-options-group-heading"><strong>Kategorie</strong><span class="party-category-actions"><button type="button" onclick="setAllCoMamNaMysliCategories(true)">Wszystkie</button><span aria-hidden="true">|</span><button type="button" onclick="setAllCoMamNaMysliCategories(false)" title="Zostawia jedną kategorię">Wyczyść</button></span></div>
+    <label class="party-category-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="cmm-category-grid-search" type="search" placeholder="Szukaj kategorii..." aria-label="Szukaj kategorii" oninput="syncPartyCategoryGrid('cmm-category-grid')" autocomplete="off"></label>
+    <p id="cmm-category-grid-summary" class="party-category-summary" aria-live="polite"></p>
+    <div id="cmm-category-grid" class="party-category-grid cmm-category-grid"></div>
   </div>
 
-  <button class="cmm-primary-btn cmm-sticky-action" type="button" onclick="beginCoMamNaMysliSession()"><i class="fa-solid fa-check"></i><span>Gotowe</span></button>
+  </div>
+<button class="cmm-primary-btn cmm-sticky-action party-options-cta" type="button" onclick="beginCoMamNaMysliSession()"><i class="fa-solid fa-check"></i><span>Gotowe</span></button>
 </section>
 
 <section id="screen-cmm-ready" class="screen hidden flex-col cmm-screen cmm-ready-screen">

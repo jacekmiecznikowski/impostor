@@ -65,8 +65,11 @@ function renderBombPlayScreen(picked = null) {
     if (statusEl) statusEl.textContent = 'Dotknij bomby, kiedy wszyscy są gotowi';
     if (changeBtn) changeBtn.classList.remove('hidden');
     if (answerBtn) answerBtn.disabled = true;
-    trackedControls?.classList.toggle('hidden', bombState.mode !== 'tracked');
-    manualHint?.classList.toggle('hidden', bombState.mode !== 'manual');
+    const trackedMode = bombState.mode === 'tracked';
+    trackedControls?.classList.toggle('hidden', !trackedMode);
+    if (trackedControls) trackedControls.hidden = !trackedMode;
+    manualHint?.classList.toggle('hidden', trackedMode);
+    if (manualHint) manualHint.hidden = trackedMode;
     bombVisual?.classList.remove('is-live', 'is-hot', 'is-exploded');
     bombVisual?.style.removeProperty('--bomb-progress');
     if (bombVisual) {

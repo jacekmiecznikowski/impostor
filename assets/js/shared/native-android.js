@@ -10,6 +10,51 @@ if (isPartyjniakNative()) {
     document.documentElement.classList.add('partyjniak-native', 'partyjniak-native-android');
 }
 
+// Returns true only if the dedicated native vibration motor bridge accepted the call.
+// Repeated pulses are generated on the Android side, not with JavaScript timers.
+function startPartyjniakRevealHaptics() {
+    if (!isPartyjniakNative()) return false;
+    if (typeof getPartyjniakSetting === 'function' && getPartyjniakSetting('haptics') === false) return true;
+    const motor = window.Capacitor?.Plugins?.PartyjniakHaptics;
+    if (typeof motor?.startHold !== 'function') return false;
+    try {
+        motor.startHold().catch?.(error => console.warn('Nie udało się uruchomić natywnej wibracji karty.', error));
+        return true;
+    } catch (error) {
+        console.warn('Nie udało się uruchomić natywnej wibracji karty.', error);
+        return false;
+    }
+}
+
+function stopPartyjniakRevealHaptics() {
+    if (!isPartyjniakNative()) return;
+    const motor = window.Capacitor?.Plugins?.PartyjniakHaptics;
+    if (typeof motor?.stopHold !== 'function') return;
+    try {
+        motor.stopHold().catch?.(error => console.warn('Nie udało się zatrzymać natywnej wibracji karty.', error));
+    } catch (error) {
+        console.warn('Nie udało się zatrzymać natywnej wibracji karty.', error);
+    }
+}
+
+// Android MediaPlayer plays the unmodified MP3 uploaded to the repository.
+function playPartyjniakNativeOutcome(outcome) {
+    if (!isPartyjniakNative()) return false;
+    const audio = window.Capacitor?.Plugins?.PartyjniakApplause;
+    if (typeof audio?.play !== 'function') return false;
+    try {
+        audio.play({ outcome }).catch?.(error => {
+            console.warn('Natywne odtwarzanie dźwięku zwycięstwa nie powiodło się.', error);
+            // Fallback always uses that same original MP3, never synthesized audio.
+            playRecordedOutcome?.(outcome);
+        });
+        return true;
+    } catch (error) {
+        console.warn('Natywne odtwarzanie dźwięku zwycięstwa nie powiodło się.', error);
+        return false;
+    }
+}
+
 async function setPartyjniakOrientation(mode = 'portrait') {
     const target = mode === 'landscape' ? 'landscape' : 'portrait';
     document.documentElement.dataset.partyjniakOrientation = target;

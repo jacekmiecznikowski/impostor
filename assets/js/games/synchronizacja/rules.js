@@ -44,11 +44,10 @@
 
     function scoreDistance(distance) {
         const value = Math.max(0, Number(distance) || 0);
-        if (value <= 4) return 4;
-        if (value <= 9) return 3;
-        if (value <= 16) return 2;
-        if (value <= 25) return 1;
-        return 0;
+        // Direct bullseye earns a significant jackpot.
+        // Every position further away loses exactly one point.
+        if (value === 0) return 25;
+        return Math.max(0, 20 - Math.ceil(value));
     }
 
     function scoreGuess(target, guess) {

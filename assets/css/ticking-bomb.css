@@ -141,3 +141,9 @@ body[data-game="ticking-bomb"] {
 @media (prefers-reduced-motion:reduce) {
   .bomb-visual.is-live .bomb-body,.bomb-visual.is-live .bomb-spark,.bomb-visual.is-exploded .bomb-body,.bomb-visual.is-exploded .bomb-shockwave { animation-duration:1ms!important; animation-iteration-count:1!important; }
 }
+
+/* Explicit hidden attribute beats layout rules for the two exclusive bomb modes. */
+#bomb-tracked-controls[hidden],
+#bomb-manual-hint[hidden] {
+  display: none !important;
+}

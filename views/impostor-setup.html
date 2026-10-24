@@ -23,10 +23,10 @@
 <button class="primary-btn player-setup-action" onclick="goToSetupOptions()" type="button"><span>Dalej: ustawienia</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
-<section class="screen hidden flex-col flex-1 justify-between py-4 gap-5" id="screen-setup-options">
-<div class="space-y-4 overflow-y-auto pr-1">
-<div class="flex items-center gap-3"><button class="icon-btn" onclick="goToScreen('setup-count')" type="button"><i class="fa-solid fa-arrow-left"></i></button><div><p class="step-label">Krok 2 z 2</p><h2 class="text-xl font-black">Ustawienia rundy</h2></div></div>
-<div class="panel space-y-3">
+<section class="screen hidden flex-col flex-1 justify-between py-4 gap-5 party-options-screen" id="screen-setup-options">
+<div class="party-options-content">
+
+<div class="panel space-y-3 party-options-panel">
 <div class="flex justify-between items-center"><strong class="text-sm">Liczba impostorów</strong><span class="pill" id="impostor-count-label">1 Impostor</span></div>
 <div class="grid grid-cols-3 gap-2">
 <button class="impostor-btn option-active" data-count="1" onclick="setImpostorCount(1)" type="button">1 Impostor</button>
@@ -35,7 +35,7 @@
 </div>
 <p class="hidden text-[11px] text-amber-400" id="impostor-notice">Przy 3 lub 4 graczach dozwolony jest tylko 1 impostor.</p>
 </div>
-<div class="panel space-y-3">
+<div class="panel space-y-3 party-options-panel">
 <strong class="text-sm">Podpowiedzi dla impostora</strong>
 <div class="grid grid-cols-3 gap-2">
 <button class="hint-mode-btn option-btn" data-mode="none" onclick="setHintMode('none')" type="button">Bez</button>
@@ -43,7 +43,7 @@
 <button class="hint-mode-btn option-active" data-mode="random" onclick="setHintMode('random')" type="button">50% szans</button>
 </div>
 </div>
-<div class="panel space-y-3">
+<div class="panel space-y-3 party-options-panel">
 <div class="flex justify-between items-center"><strong class="text-sm">Czas dyskusji</strong><span class="pill" id="timer-label">Wyłączony</span></div>
 <div class="grid grid-cols-4 gap-2">
 <button class="timer-btn option-active" data-time="0" onclick="setDiscussionTimer(0)" type="button">Off</button>
@@ -52,11 +52,12 @@
 <button class="timer-btn option-btn" data-time="180" onclick="setDiscussionTimer(180)" type="button">3 min</button>
 </div>
 </div>
-<div class="panel space-y-3">
-<div class="flex justify-between gap-2"><strong class="text-sm">Kategorie słów</strong><div class="text-xs"><button class="text-teal-400" onclick="toggleAllCategories(true)" type="button">Wszystkie</button><span class="text-slate-600 mx-1">|</span><button class="text-slate-400" onclick="toggleAllCategories(false)" type="button">Wyczyść</button></div></div>
-<input class="field" oninput="filterCategories(this.value)" placeholder="Szukaj kategorii..." type="search"/>
-<div class="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto" id="categories-grid"></div>
+<div class="panel space-y-3 party-options-panel">
+<div class="party-options-group-heading"><strong>Kategorie</strong><span class="party-category-actions"><button type="button" onclick="toggleAllCategories(true)">Wszystkie</button><span aria-hidden="true">|</span><button type="button" onclick="toggleAllCategories(false)" title="Zostawia jedną kategorię">Wyczyść</button></span></div>
+    <label class="party-category-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="categories-grid-search" type="search" placeholder="Szukaj kategorii..." aria-label="Szukaj kategorii" oninput="syncPartyCategoryGrid('categories-grid')" autocomplete="off"></label>
+    <p id="categories-grid-summary" class="party-category-summary" aria-live="polite"></p>
+<div id="categories-grid" class="party-category-grid"></div>
 </div>
 </div>
-<button class="primary-btn" onclick="startGameRound()" type="button"><i class="fa-solid fa-play"></i><span>ROZPOCZNIJ RUNDĘ</span></button>
+<button class="primary-btn party-options-cta" onclick="startGameRound()" type="button"><i class="fa-solid fa-play"></i><span>ROZPOCZNIJ RUNDĘ</span></button>
 </section>

@@ -192,14 +192,14 @@ function submitGroupVote() {
 
     const caughtImpostor = ImpostorRules.scoreVote(state.players, state.impostorIds, state.selectedVotedPlayerId);
     persistSession();
-    goToScreen('results');
-    renderResultsScreen(caughtImpostor, votedPlayer);
-
+    // Start the celebration in the confirmed vote's user gesture on Android.
     if (typeof playOutcomeSound === 'function') {
         playOutcomeSound(caughtImpostor ? 'detectives' : 'impostor');
     } else {
         console.warn('Moduł dźwięku wyniku nie został załadowany.');
     }
+    goToScreen('results');
+    renderResultsScreen(caughtImpostor, votedPlayer);
 }
 
 function renderResultsScreen(caughtImpostor, votedPlayer) {

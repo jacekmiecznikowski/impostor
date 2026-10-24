@@ -109,10 +109,11 @@ function toggleBombCategory(categoryId) {
     if (bombState.hasSavedSession) persistBombSession();
 }
 
-function toggleAllBombCategories() {
+function toggleAllBombCategories(select = null) {
     const allIds = BOMB_CATEGORIES.map(category => category.id);
     const allSelected = allIds.length > 0 && allIds.every(id => bombState.activeCategories.includes(id));
-    bombState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    bombState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     renderBombCategories();
     if (bombState.hasSavedSession) persistBombSession();
 }
@@ -143,31 +144,32 @@ function renderBombFuseOptions() {
 function renderBombCategories() {
     const grid = document.getElementById('bomb-category-grid');
     if (!grid) return;
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
     BOMB_CATEGORIES.forEach(category => {
         const selected = bombState.activeCategories.includes(category.id);
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `bomb-category-card${selected ? ' is-selected' : ''}`;
+        button.className = `party-category-card bomb-category-card${selected ? ' is-selected' : ''}`;
         button.setAttribute('aria-pressed', String(selected));
         button.onclick = () => toggleBombCategory(category.id);
 
         const icon = document.createElement('span');
-        icon.className = 'bomb-category-icon';
+        icon.className = 'party-category-icon bomb-category-icon';
         const iconEl = document.createElement('i');
         iconEl.className = `fa-solid ${category.icon}`;
         icon.appendChild(iconEl);
 
         const copy = document.createElement('span');
-        copy.className = 'bomb-category-copy';
+        copy.className = 'party-category-copy bomb-category-copy';
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = category.desc;
+        desc.textContent = `${category.words.length} pytań`;
         copy.append(name, desc);
 
         const check = document.createElement('span');
-        check.className = 'bomb-category-check';
+        check.className = 'party-category-check bomb-category-check';
         check.innerHTML = selected ? '<i class="fa-solid fa-check"></i>' : '';
         button.append(icon, copy, check);
         grid.appendChild(button);
@@ -178,6 +180,7 @@ function renderBombCategories() {
         const allSelected = BOMB_CATEGORIES.length > 0 && BOMB_CATEGORIES.every(category => bombState.activeCategories.includes(category.id));
         allButton.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('bomb-category-grid');
 }
 
 function startBombFromSetup() {

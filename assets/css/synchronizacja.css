@@ -522,3 +522,8 @@
 @media (prefers-reduced-motion: reduce) {
   .sync-spectrum-glow { filter: blur(12px); }
 }
+
+/* The thumb center and its 2rem marker stay fully within the gradient bar. */
+.sync-guess-marker {
+  left: clamp(calc(5% + 1rem), var(--sync-guess), calc(95% - 1rem));
+}

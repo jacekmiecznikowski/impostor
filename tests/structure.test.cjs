@@ -8,7 +8,7 @@ const exists = relative => fs.existsSync(path.join(root, relative));
 
 const gameIds = [
   'impostor', 'ticking-bomb', 'naokolo', 'co-mam-na-mysli',
-  'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta'
+  'trzy-w-piec', 'synchronizacja', 'dzika-karta'
 ];
 
 const requiredFiles = [
@@ -49,7 +49,7 @@ assert.match(index, /Brakuje wygenerowanych assetów Partyjniaka/);
 assert.match(index, /npm run serve/);
 assert.doesNotMatch(index, /https:\/\/(?:cdn\.tailwindcss|cdnjs\.cloudflare|fonts\.googleapis)/);
 assert.doesNotMatch(index, /assets\/js\/games\/[^"']+\/(?:game|state|rules|setup|scoreboard)\.js/);
-assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|trzy-rundy|dzika-karta)[^"']*\.css/);
+assert.doesNotMatch(index, /assets\/css\/(?:impostor|ticking-bomb|naokolo|co-mam-na-mysli|trzy-w-piec|synchronizacja|dzika-karta)[^"']*\.css/);
 assert.doesNotMatch(index, /DÅ|WrÃ|â€“/);
 
 const gameMenu = read('assets/js/shared/game-menu.js');
@@ -134,10 +134,47 @@ assert.match(readme, /Nie uruchamiaj świeżego checkoutu samym `python -m http\
 assert.match(readme, /npm run build:assets/);
 assert.match(readme, /Windowsie, macOS i Linuksie/);
 
-for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'trzy-rundy', 'dzika-karta']) {
+for (const game of ['co-mam-na-mysli', 'trzy-w-piec', 'synchronizacja', 'dzika-karta']) {
   assert.match(pkg.scripts.test, new RegExp(`${game}-content\\.test\\.cjs`));
   assert.match(pkg.scripts.test, new RegExp(`${game}-rules\\.test\\.cjs`));
   assert.match(pkg.scripts.test, new RegExp(`${game}-state\\.test\\.cjs`));
 }
 
 console.log('Partyjniak packaging and configuration smoke tests: OK');
+
+const hapticPatch = read('scripts/patch-android.mjs');
+assert.match(hapticPatch, /PartyjniakHapticsPlugin\.java/);
+assert.match(hapticPatch, /registerPlugin\(PartyjniakHapticsPlugin\.class\)/);
+assert.match(hapticPatch, /android\.permission\.VIBRATE/);
+assert.match(hapticPatch, /VibrationEffect\.createWaveform/);
+assert.match(hapticPatch, /motor\.cancel\(\)/);
+assert.match(hapticPatch, /handleOnPause\(\)/);
+
+// The Android APK must contain the unmodified MP3 files uploaded by the user.
+const audioPatch = read('scripts/patch-android.mjs');
+assert.match(audioPatch, /PartyjniakApplausePlugin\.java/);
+assert.match(audioPatch, /registerPlugin\(PartyjniakApplausePlugin\.class\)/);
+assert.match(audioPatch, /partyjniak_applause\.mp3/);
+assert.match(audioPatch, /partyjniak_impostor\.mp3/);
+assert.match(audioPatch, /assets\/audio\/crewmates-win\.mp3/);
+assert.match(audioPatch, /assets\/audio\/impostor-win\.mp3/);
+assert.match(audioPatch, /int\[\] amplitudes = \{ 0, 255, 0 \}/);
+assert.match(audioPatch, /220L, 35L/);
+assert.doesNotMatch(audioPatch, /createPartyjniakApplauseSamples|pcm\.write/);
+assert.doesNotMatch(read('index.html'), /assets\/js\/shared\/applause-synth\.js/);
+
+// Retired duplicate/fragmented audio files must not return to APK builds.
+for (const obsolete of [
+  'assets/audio/crewmates-win.mp3.b64',
+  'assets/audio/impostor-win.mp3.b64',
+  'assets/audio/bomb-tick.0.b64',
+  'assets/audio/bomb-tick.1.b64',
+  ...Array.from({length: 5}, (_, index) => `assets/audio/impostor-win.${index}.b64`),
+  'assets/audio/README-ticking-bomb.md'
+]) assert.equal(exists(obsolete), false, `Przestarzały plik audio: ${obsolete}`);
+for (const active of [
+  'assets/audio/crewmates-win.mp3',
+  'assets/audio/impostor-win.mp3',
+  'assets/audio/bomb-tick.b64',
+  'assets/audio/bomb-explosion.b64'
+]) assert.equal(exists(active), true, `Brakuje aktywnego dźwięku: ${active}`);

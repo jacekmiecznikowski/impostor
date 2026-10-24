@@ -122,9 +122,30 @@ function setupRevealPresentation() {
     let animating = false;
     let animationGeneration = 0;
     let resetAnchorTimer = null;
+    let vibrationTimer = null;
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const OUT_MS = reducedMotion ? 20 : 170;
     const IN_MS = reducedMotion ? 20 : 220;
+
+    // Use Android's vibration motor while holding; browser vibration is only
+    // a fallback outside Capacitor. Reduced motion disables visual shaking,
+    // not the requested physical haptic feedback.
+    const stopHoldFeedback = () => {
+        if (vibrationTimer !== null) {
+            clearInterval(vibrationTimer);
+            vibrationTimer = null;
+        }
+        stopPartyjniakRevealHaptics?.();
+        navigator.vibrate?.(0);
+    };
+    const startHoldFeedback = () => {
+        if (startPartyjniakRevealHaptics?.()) return;
+        if (typeof navigator.vibrate !== 'function') return;
+        navigator.vibrate(16);
+        vibrationTimer = window.setInterval(() => {
+            if (isHolding) navigator.vibrate(12);
+        }, 350);
+    };
 
     const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
 
@@ -198,6 +219,7 @@ function setupRevealPresentation() {
         animationGeneration++;
         animating = false;
         isHolding = false;
+        stopHoldFeedback();
         desiredBack = false;
         clearTimeout(resetAnchorTimer);
         clearFlipClasses();
@@ -208,6 +230,7 @@ function setupRevealPresentation() {
     const hideRole = () => {
         if (!isHolding) return;
         isHolding = false;
+        stopHoldFeedback();
         revealSecret(false);
         card.classList.remove('is-holding');
         requestFace(false);
@@ -224,6 +247,7 @@ function setupRevealPresentation() {
         clearTimeout(resetAnchorTimer);
         updateTouchAnchor(event);
         card.classList.add('is-holding');
+        startHoldFeedback();
 
         if (event.pointerId !== undefined && card.setPointerCapture) {
             try { card.setPointerCapture(event.pointerId); } catch (_) { /* no-op */ }
@@ -243,6 +267,7 @@ function setupRevealPresentation() {
             event.preventDefault();
             isHolding = true;
             card.classList.add('hold-lower', 'is-holding');
+            startHoldFeedback();
             revealSecret(true);
             requestFace(true);
         }

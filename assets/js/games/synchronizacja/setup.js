@@ -96,10 +96,11 @@ function toggleSynchronizacjaCategory(categoryId) {
     if (synchronizacjaState.hasSavedSession) persistSynchronizacjaSession();
 }
 
-function toggleAllSynchronizacjaCategories() {
+function toggleAllSynchronizacjaCategories(select = null) {
     const allIds = getSynchronizacjaCategoryIds();
     const allSelected = allIds.length > 0 && allIds.every(id => synchronizacjaState.activeCategories.includes(id));
-    synchronizacjaState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    synchronizacjaState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     playSound?.('click');
     renderSynchronizacjaCategories();
     if (synchronizacjaState.hasSavedSession) persistSynchronizacjaSession();
@@ -109,28 +110,29 @@ function renderSynchronizacjaCategories() {
     const grid = document.getElementById('sync-category-grid');
     if (!grid) return;
     normalizeSynchronizacjaCategories();
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
 
     SYNCHRONIZACJA_CATEGORIES.forEach(category => {
         const selected = synchronizacjaState.activeCategories.includes(category.id);
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `sync-category-card${selected ? ' is-selected' : ''}`;
+        button.className = `party-category-card sync-category-card${selected ? ' is-selected' : ''}`;
         button.setAttribute('aria-pressed', String(selected));
         button.addEventListener('click', () => toggleSynchronizacjaCategory(category.id));
 
         const icon = document.createElement('span');
-        icon.className = 'sync-category-icon';
+        icon.className = 'party-category-icon sync-category-icon';
         icon.innerHTML = `<i class="fa-solid ${category.icon}" aria-hidden="true"></i>`;
         const copy = document.createElement('span');
-        copy.className = 'sync-category-copy';
+        copy.className = 'party-category-copy sync-category-copy';
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.scales.length} skal • ${category.desc}`;
+        desc.textContent = `${category.scales.length} skal`;
         copy.append(name, desc);
         const check = document.createElement('span');
-        check.className = 'sync-category-check';
+        check.className = 'party-category-check sync-category-check';
         if (selected) check.innerHTML = '<i class="fa-solid fa-check"></i>';
         button.append(icon, copy, check);
         grid.appendChild(button);
@@ -142,6 +144,7 @@ function renderSynchronizacjaCategories() {
         const allSelected = allIds.length > 0 && allIds.every(id => synchronizacjaState.activeCategories.includes(id));
         toggle.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('sync-category-grid');
 }
 
 function renderSynchronizacjaOptions() {

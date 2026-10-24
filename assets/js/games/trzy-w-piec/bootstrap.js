@@ -16,5 +16,8 @@ export function registerThreeFiveGame() {
             './assets/js/games/trzy-w-piec/scoreboard.js'
         ]
     };
+    gameModule.initialize = async () => {
+        await initializeThreeFiveContent();
+    };
     return gameModule;
 }

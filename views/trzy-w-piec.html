@@ -36,14 +36,11 @@
   <button type="button" class="primary-btn player-setup-action" onclick="threeFiveProceedToOptions()"><span>Dalej: ustawienia</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
-<section id="screen-three-five-options" class="screen three-five-screen hidden flex-col flex-1">
-  <div class="three-five-section-heading">
-    <span class="three-five-kicker">KROK 2 Z 2</span>
-    <h2>Ustaw grę</h2>
-    <p>Ustal tempo wyzwania i wybierz kategorie. Po każdym pełnym obiegu graczy zdecydujecie, czy gracie kolejną rundę.</p>
-  </div>
+<section id="screen-three-five-options" class="screen three-five-screen hidden flex-col flex-1 party-options-screen">
+  <div class="party-options-content">
 
-  <div class="three-five-setup-card three-five-challenge-card">
+
+  <div class="three-five-setup-card three-five-challenge-card party-options-panel">
     <div class="three-five-group-label"><span>TEMPO RUNDY</span><strong id="three-five-challenge-summary">3 w 5</strong></div>
     <div class="three-five-preset-grid" aria-label="Szybkie ustawienia">
       <button type="button" data-three-five-preset data-answers="3" data-seconds="5" onclick="setThreeFiveChallengePreset(3, 5)"><strong>3 w 5</strong><small>klasyczne</small></button>
@@ -73,12 +70,15 @@
     </div>
   </div>
 
-  <div class="three-five-setup-card">
-    <div class="three-five-group-label"><span>KATEGORIE</span><button id="three-five-toggle-all-categories" type="button" onclick="toggleAllThreeFiveCategories()">Wybierz wszystkie</button></div>
-    <div id="three-five-category-grid" class="three-five-category-grid"></div>
+  <div class="three-five-setup-card party-options-panel">
+    <div class="party-options-group-heading"><strong>Kategorie</strong><span class="party-category-actions"><button type="button" onclick="toggleAllThreeFiveCategories(true)">Wszystkie</button><span aria-hidden="true">|</span><button type="button" onclick="toggleAllThreeFiveCategories(false)" title="Zostawia jedną kategorię">Wyczyść</button></span></div>
+    <label class="party-category-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="three-five-category-grid-search" type="search" placeholder="Szukaj kategorii..." aria-label="Szukaj kategorii" oninput="syncPartyCategoryGrid('three-five-category-grid')" autocomplete="off"></label>
+    <p id="three-five-category-grid-summary" class="party-category-summary" aria-live="polite"></p>
+    <div id="three-five-category-grid" class="party-category-grid three-five-category-grid"></div>
   </div>
 
-  <button type="button" class="primary-btn three-five-sticky-action" onclick="prepareThreeFiveGame()"><i class="fa-solid fa-bolt"></i><span>Zaczynamy</span></button>
+  </div>
+<button type="button" class="primary-btn three-five-sticky-action party-options-cta" onclick="prepareThreeFiveGame()"><i class="fa-solid fa-bolt"></i><span>Zaczynamy</span></button>
 </section>
 
 <section id="screen-three-five-ready" class="screen three-five-screen hidden flex-col flex-1 three-five-ready-screen">

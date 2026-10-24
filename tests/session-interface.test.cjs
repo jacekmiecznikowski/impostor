@@ -19,7 +19,6 @@ const entries = [
   ['co-mam-na-mysli', ['loadCoMamNaMysliSession', 'persistCoMamNaMysliSession', 'resetCoMamNaMysliSession']],
   ['trzy-w-piec', ['loadThreeFiveSession', 'persistThreeFiveSession', 'resetThreeFiveSession']],
   ['synchronizacja', ['loadSynchronizacjaSession', 'persistSynchronizacjaSession', 'resetSynchronizacjaSession']],
-  ['trzy-rundy', ['loadTrzyRundySession', 'persistTrzyRundySession', 'resetTrzyRundySession']],
   ['dzika-karta', ['loadDzikaKartaSession', 'persistDzikaKartaSession', 'resetDzikaKartaSession']]
 ];
 
@@ -34,7 +33,7 @@ for (const [id, methods] of entries) {
 assert.match(app, /gameModule\.session\?\.load\?\.\(\)/);
 assert.match(app, /syncGameSessionUi\(gameModule\)/);
 assert.doesNotMatch(app, /loadGameSessions\(\)/);
-assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadCoMamNaMysliSession\(\)|loadThreeFiveSession\(\)|loadSynchronizacjaSession\(\)|loadTrzyRundySession\(\)|loadDzikaKartaSession\(\)|loadSession\(\)/);
-assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\.|\bcoMamNaMysliState\.|\bthreeFiveState\.|\bsynchronizacjaState\.|\btrzyRundyState\.|\bdzikaKartaState\./);
+assert.doesNotMatch(app, /loadBombSession\(\)|loadNaokoloSession\(\)|loadCoMamNaMysliSession\(\)|loadThreeFiveSession\(\)|loadSynchronizacjaSession\(\)|loadDzikaKartaSession\(\)|loadSession\(\)/);
+assert.doesNotMatch(app, /\bstate\.|\bbombState\.|\bnaokoloState\.|\bcoMamNaMysliState\.|\bthreeFiveState\.|\bsynchronizacjaState\.|\bdzikaKartaState\./);
 
 console.log('Shared lazy game session interface tests: OK');

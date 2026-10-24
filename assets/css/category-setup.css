@@ -1,0 +1,323 @@
+/* A shared category picker for every game that offers category selection.
+   Uses game theme tokens; geometry and selected-state affordances stay identical. */
+.party-category-grid.party-category-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .55rem;
+  width: 100%;
+  max-height: clamp(13rem, 35dvh, 22rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: .15rem .15rem .4rem;
+  scrollbar-width: thin;
+}
+.party-category-card.party-category-card {
+  display: grid;
+  grid-template-columns: 2.3rem minmax(0, 1fr) 1.4rem;
+  align-items: center;
+  gap: .65rem;
+  width: 100%;
+  min-height: 3.85rem;
+  padding: .64rem .7rem;
+  border: 1px solid rgba(100, 116, 139, .4);
+  border-radius: .9rem;
+  background: rgba(15, 23, 42, .58);
+  box-shadow: none;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.party-category-card.party-category-card.is-selected {
+  border-color: rgba(var(--ui-accent-rgb), .65);
+  background: rgba(var(--ui-accent-rgb), .12);
+}
+.party-category-card.party-category-card:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 2px;
+}
+.party-category-icon.party-category-icon {
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  margin: 0;
+  padding: 0;
+  border-radius: .75rem;
+  color: var(--ui-accent-text);
+  background: rgba(var(--ui-accent-rgb), .13);
+  font-size: .86rem;
+}
+.party-category-copy.party-category-copy {
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: #e2e8f0;
+}
+.party-category-copy.party-category-copy strong {
+  display: block;
+  color: #f8fafc;
+  font-size: .78rem;
+  line-height: 1.25;
+  font-weight: 850;
+}
+.party-category-copy.party-category-copy small,
+.party-category-copy.party-category-copy > span {
+  display: block;
+  margin-top: .13rem;
+  color: #94a3b8;
+  font-size: .63rem;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.party-category-check.party-category-check {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(100,116,139,.55);
+  border-radius: 50%;
+  color: transparent;
+  background: rgba(15,23,42,.65);
+  font-size: .65rem;
+  box-shadow: none;
+}
+.party-category-card.is-selected .party-category-check.party-category-check {
+  color: #fff;
+  border-color: var(--ui-accent);
+  background: var(--ui-accent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .party-category-card.party-category-card { transition: none; }
+}
+
+/* Whole setup screen uses the same geometry as Impostor, without overriding
+   the individual game's accent colors or its gameplay-specific controls. */
+.party-options-screen.party-options-screen {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  justify-content: flex-start !important;
+  gap: .85rem !important;
+  padding: .75rem 0 max(1rem, env(safe-area-inset-bottom)) !important;
+}
+.party-options-content.party-options-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  gap: .8rem;
+  padding: 0 .2rem .3rem;
+  scrollbar-width: thin;
+}
+.party-options-header.party-options-header {
+  display: grid;
+  grid-template-columns: 2.65rem minmax(0, 1fr);
+  align-items: start;
+  gap: .65rem;
+  padding: .25rem 0 .15rem;
+  text-align: left;
+}
+.party-options-back.party-options-back {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  min-width: 2.6rem;
+  border: 1px solid rgba(148,163,184,.24);
+  border-radius: .9rem;
+  background: rgba(15,23,42,.65);
+  color: var(--ui-accent-text);
+}
+.party-options-header .party-options-step {
+  margin: .1rem 0 .35rem;
+  color: var(--ui-accent-text);
+  font-size: .65rem;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.party-options-header h2 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(1.45rem, 6.8vw, 1.75rem);
+  line-height: 1.13;
+  font-weight: 950;
+  letter-spacing: -.045em;
+}
+.party-options-header .party-options-description {
+  margin: .35rem 0 0;
+  color: #94a3b8;
+  font-size: .76rem;
+  line-height: 1.45;
+}
+.party-options-panel.party-options-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  gap: .75rem;
+  min-width: 0;
+  margin: 0 !important;
+  padding: .95rem;
+  border: 1px solid rgba(148,163,184,.2);
+  border-radius: 1.1rem;
+  background: rgba(2,6,23,.6);
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+.party-options-panel.party-options-panel > * + * {
+  margin-top: 0 !important;
+}
+.party-options-group-heading.party-options-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+.party-options-group-heading > strong {
+  color: #f8fafc;
+  font-size: .85rem;
+  font-weight: 850;
+}
+.party-category-actions.party-category-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: #475569;
+  font-size: .72rem;
+}
+.party-category-actions button {
+  padding: .2rem .05rem;
+  color: var(--ui-accent-text);
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.party-category-actions button:last-child { color: #94a3b8; }
+.party-category-actions button:focus-visible {
+  outline: 2px solid var(--ui-accent);
+  outline-offset: 3px;
+  border-radius: .3rem;
+}
+.party-category-search.party-category-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0 .8rem;
+  gap: .65rem;
+  border: 1px solid rgba(148,163,184,.22);
+  border-radius: .8rem;
+  background: rgba(15,23,42,.7);
+  color: #64748b;
+}
+.party-category-search:focus-within {
+  border-color: rgba(var(--ui-accent-rgb),.65);
+  box-shadow: 0 0 0 3px rgba(var(--ui-accent-rgb),.08);
+}
+.party-category-search input {
+  appearance: none;
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 2.6rem;
+  border: 0;
+  padding: .5rem 0;
+  outline: 0;
+  color: #f8fafc;
+  background: transparent;
+  font-size: .79rem;
+}
+.party-category-search input::placeholder { color: #94a3b8; }
+.party-category-summary.party-category-summary {
+  margin: -.22rem 0 0;
+  color: #94a3b8;
+  font-size: .65rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.party-options-cta.party-options-cta {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  position: sticky;
+  bottom: max(.15rem,env(safe-area-inset-bottom));
+  z-index: 4;
+  width: 100%;
+  min-height: 3.45rem;
+  margin: auto 0 0 !important;
+  padding: .75rem 1rem;
+  border: 1px solid rgba(var(--ui-accent-rgb),.42);
+  border-radius: 1.05rem;
+  background: linear-gradient(125deg,var(--ui-accent-strong),var(--ui-accent),var(--ui-accent-alt));
+  box-shadow: 0 12px 28px rgba(var(--ui-accent-rgb),.22);
+  color: var(--ui-accent-contrast, #fff);
+  font-size: .84rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.party-category-card.party-category-card[hidden] { display: none !important; }
+.party-category-check.party-category-check { opacity: 1; }
+.party-category-grid.party-category-grid {
+  max-height: min(18rem, 39dvh);
+  margin: 0;
+}
+@media (max-height: 670px) {
+  .party-options-screen.party-options-screen { gap: .55rem !important; padding-top: .3rem !important; }
+  .party-options-content.party-options-content { gap: .55rem; }
+  .party-options-panel.party-options-panel { padding: .75rem; }
+  .party-category-grid.party-category-grid { max-height: 11rem; }
+}
+
+/* A single two-line category tile across all six modes: icon, name,
+   item count, selected marker. No category marketing descriptions. */
+.party-category-card.party-category-card {
+  grid-template-columns: 2.3rem minmax(0, 1fr) 1.4rem;
+  min-height: 3.45rem;
+  padding: .58rem .7rem;
+}
+.party-category-copy.party-category-copy {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+.party-category-copy.party-category-copy strong {
+  font-size: .8rem;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.party-category-copy.party-category-copy small {
+  display: block;
+  margin: 0;
+  color: #94a3b8;
+  font-size: .68rem;
+  font-weight: 600;
+  white-space: normal;
+  line-height: 1.2;
+}
+.party-category-card.party-category-card .party-category-check {
+  opacity: 1;
+}
+
+/* One visible header already lives in the common shell. The secondary
+   options header is removed; keep the CTA out of scrollable form content. */
+.party-options-screen.party-options-screen { overflow: hidden; min-height: 0; }
+.party-options-content.party-options-content {
+  width: 100%; align-self: stretch; min-height: 0;
+  overflow-y: auto; padding: .15rem .2rem .6rem;
+}
+.party-options-cta.party-options-cta {
+  position: relative; bottom: auto; flex-shrink: 0;
+  margin-top: 0 !important;
+}

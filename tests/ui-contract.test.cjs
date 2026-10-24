@@ -11,7 +11,8 @@ assert.doesNotMatch(impostorSetup, /Wznów ostatnią sesję/);
 assert.match(impostorSetup, /player-setup-screen/);
 assert.match(impostorSetup, /id="name-inputs-container"/);
 assert.doesNotMatch(impostorSetup, /id="screen-setup-names"/);
-assert.match(impostorSetup, /Krok 2 z 2/);
+assert.doesNotMatch(impostorSetup, /class="party-options-header"/, 'Global shell is the only settings header');
+assert.match(read('assets/js/games/impostor/integration.js'), /krok 2 z 2/i);
 
 const playerSetupSources = [
   read('assets/js/games/impostor/setup.js'),
@@ -32,8 +33,7 @@ assert.match(sharedPlayerSetup, /--ui-accent/);
 assert.match(sharedPlayerSetup, /\.player-setup-name-row/);
 
 const sharedPlayerSelectorViews = [
-  read('views/dzika-karta.html'),
-  read('views/trzy-rundy.html')
+  read('views/dzika-karta.html')
 ];
 for (const view of sharedPlayerSelectorViews) {
   assert.match(view, /player-setup-heading/);
@@ -151,3 +151,44 @@ assert.match(colorSystem, /var\(--ui-accent\)/);
 assert.doesNotMatch(colorSystem, /body\[data-game=/);
 
 console.log('Critical Partyjniak UI contracts: OK');
+
+// Shared category picker: all six category-based modes use one geometry system.
+const categoryCSS = read('assets/css/category-setup.css');
+assert.match(categoryCSS, /\.party-category-grid\.party-category-grid/);
+assert.match(categoryCSS, /\.party-category-card\.party-category-card/);
+for (const source of playerSetupSources) {
+  assert.match(source, /party-category-grid/);
+  assert.match(source, /party-category-card/);
+}
+
+// The manual bomb mode must not display the tracked player's name.
+const bombGame = read('assets/js/games/ticking-bomb/game.js');
+const bombCSS = read('assets/css/ticking-bomb.css');
+assert.match(bombGame, /trackedControls\.hidden = !trackedMode/);
+assert.match(bombCSS, /#bomb-tracked-controls\[hidden\]/);
+
+// Vibrations and visual tremor stop immediately when the secret card is released.
+const impostorPresentation = read('assets/js/games/impostor/presentation.js');
+const impostorRevealCSS = read('assets/css/impostor-reveal.css');
+assert.match(impostorPresentation, /startHoldFeedback\(\)/);
+assert.match(impostorPresentation, /stopHoldFeedback\(\)/);
+assert.match(impostorRevealCSS, /impostor-card-hold-shiver/);
+
+// The same 5%-95% geometry is used by the spectrum track and markers.
+assert.match(syncGame, /5 \+ position \* 0\.9/);
+assert.match(syncCss, /left: 5%;\s*right: 5%/);
+
+// Crew applause must start in the actual vote tap, before screen navigation.
+const impostorGameAudio = read('assets/js/games/impostor/game.js');
+assert.match(impostorGameAudio, /playOutcomeSound\(caughtImpostor \? 'detectives' : 'impostor'\)/);
+assert.ok(impostorGameAudio.indexOf('playOutcomeSound(caughtImpostor') < impostorGameAudio.indexOf("goToScreen('results')"));
+
+const nativeHaptics = read('assets/js/shared/native-android.js');
+assert.match(nativeHaptics, /Capacitor\?\.Plugins\?\.PartyjniakHaptics/);
+assert.match(nativeHaptics, /function startPartyjniakRevealHaptics\(/);
+assert.match(nativeHaptics, /function stopPartyjniakRevealHaptics\(/);
+assert.match(impostorPresentation, /startPartyjniakRevealHaptics\?\.\(\)/);
+assert.match(impostorPresentation, /stopPartyjniakRevealHaptics\?\.\(\)/);
+
+assert.match(nativeHaptics, /function playPartyjniakNativeOutcome\(/);
+assert.match(read('assets/js/shared/outcome-audio.js'), /playPartyjniakNativeOutcome\(outcome\)/);

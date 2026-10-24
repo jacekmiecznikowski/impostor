@@ -37,17 +37,17 @@
   <button type="button" class="primary-btn player-setup-action" onclick="synchronizacjaProceedToOptions()"><span>Dalej: kategorie</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
-<section id="screen-sync-options" class="screen sync-screen hidden flex-col flex-1">
-  <div class="sync-section-heading">
-    <span class="sync-kicker">KROK 2 Z 2</span>
-    <h2>Wybierz skale</h2>
-    <p>Możesz mieszać wszystkie kategorie albo zostawić tylko te, które pasują do ekipy.</p>
+<section id="screen-sync-options" class="screen sync-screen hidden flex-col flex-1 party-options-screen">
+  <div class="party-options-content">
+
+  <div class="sync-setup-card party-options-panel">
+    <div class="party-options-group-heading"><strong>Kategorie</strong><span class="party-category-actions"><button type="button" onclick="toggleAllSynchronizacjaCategories(true)">Wszystkie</button><span aria-hidden="true">|</span><button type="button" onclick="toggleAllSynchronizacjaCategories(false)" title="Zostawia jedną kategorię">Wyczyść</button></span></div>
+    <label class="party-category-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="sync-category-grid-search" type="search" placeholder="Szukaj kategorii..." aria-label="Szukaj kategorii" oninput="syncPartyCategoryGrid('sync-category-grid')" autocomplete="off"></label>
+    <p id="sync-category-grid-summary" class="party-category-summary" aria-live="polite"></p>
+    <div id="sync-category-grid" class="party-category-grid sync-category-grid"></div>
   </div>
-  <div class="sync-setup-card">
-    <div class="sync-group-label"><span>KATEGORIE</span><button id="sync-toggle-all-categories" type="button" onclick="toggleAllSynchronizacjaCategories()">Wybierz wszystkie</button></div>
-    <div id="sync-category-grid" class="sync-category-grid"></div>
   </div>
-  <button type="button" class="primary-btn sync-sticky-action" onclick="prepareSynchronizacjaGame()"><i class="fa-solid fa-wave-square"></i><span>Zaczynamy</span></button>
+<button type="button" class="primary-btn sync-sticky-action party-options-cta" onclick="prepareSynchronizacjaGame()"><i class="fa-solid fa-wave-square"></i><span>Zaczynamy</span></button>
 </section>
 
 <section id="screen-sync-ready" class="screen sync-screen hidden flex-col flex-1 sync-ready-screen">

@@ -36,14 +36,11 @@
   <button type="button" class="primary-btn player-setup-action" onclick="naokoloProceedToOptions()"><span>Dalej: ustawienia</span><i class="fa-solid fa-arrow-right"></i></button>
 </section>
 
-<section id="screen-naokolo-options" class="screen naokolo-screen hidden flex-col flex-1">
-  <div class="naokolo-section-heading">
-    <span class="naokolo-kicker">KROK 2 Z 2</span>
-    <h2>Ustaw rundę</h2>
-    <p>Wybierz długość tury i paczki kart.</p>
-  </div>
+<section id="screen-naokolo-options" class="screen naokolo-screen hidden flex-col flex-1 party-options-screen">
+  <div class="party-options-content">
 
-  <div class="naokolo-setup-card">
+
+  <div class="naokolo-setup-card party-options-panel">
     <div class="naokolo-group-label"><span>CZAS TURY</span><small>Widoczny podczas gry</small></div>
     <div class="naokolo-time-grid">
       <button type="button" data-naokolo-time="30" onclick="setNaokoloRoundTime(30)"><strong>30 s</strong><small>Sprint</small></button>
@@ -53,12 +50,15 @@
     </div>
   </div>
 
-  <div class="naokolo-setup-card">
-    <div class="naokolo-group-label"><span>KATEGORIE</span><button id="naokolo-toggle-all-categories" type="button" onclick="toggleAllNaokoloCategories()">Wybierz wszystkie</button></div>
-    <div id="naokolo-category-grid" class="naokolo-category-grid"></div>
+  <div class="naokolo-setup-card party-options-panel">
+    <div class="party-options-group-heading"><strong>Kategorie</strong><span class="party-category-actions"><button type="button" onclick="toggleAllNaokoloCategories(true)">Wszystkie</button><span aria-hidden="true">|</span><button type="button" onclick="toggleAllNaokoloCategories(false)" title="Zostawia jedną kategorię">Wyczyść</button></span></div>
+    <label class="party-category-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="naokolo-category-grid-search" type="search" placeholder="Szukaj kategorii..." aria-label="Szukaj kategorii" oninput="syncPartyCategoryGrid('naokolo-category-grid')" autocomplete="off"></label>
+    <p id="naokolo-category-grid-summary" class="party-category-summary" aria-live="polite"></p>
+    <div id="naokolo-category-grid" class="party-category-grid naokolo-category-grid"></div>
   </div>
 
-  <button type="button" class="primary-btn naokolo-sticky-action" onclick="prepareNaokoloGame()"><i class="fa-solid fa-circle-play"></i><span>Przejdź do pierwszej tury</span></button>
+  </div>
+<button type="button" class="primary-btn naokolo-sticky-action party-options-cta" onclick="prepareNaokoloGame()"><i class="fa-solid fa-circle-play"></i><span>Przejdź do pierwszej tury</span></button>
 </section>
 
 <section id="screen-naokolo-ready" class="screen naokolo-screen hidden flex-col flex-1 naokolo-ready-screen">

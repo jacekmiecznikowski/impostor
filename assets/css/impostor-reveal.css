@@ -376,3 +376,17 @@
     transition-duration: 20ms !important;
   }
 }
+
+/* Subtle hold-to-reveal tremor: never affects the 3D flip itself. */
+.reveal-card.is-holding {
+  animation: impostor-card-hold-shiver 140ms linear infinite;
+}
+@keyframes impostor-card-hold-shiver {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  25% { transform: translate(.65px, -.4px) rotate(.12deg); }
+  50% { transform: translate(-.55px, .35px) rotate(-.12deg); }
+  75% { transform: translate(.35px, .45px) rotate(.08deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-card.is-holding { animation: none; }
+}

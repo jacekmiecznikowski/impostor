@@ -104,10 +104,11 @@ function toggleNaokoloCategory(categoryId) {
     if (naokoloState.hasSavedSession) persistNaokoloSession();
 }
 
-function toggleAllNaokoloCategories() {
+function toggleAllNaokoloCategories(select = null) {
     const allIds = getNaokoloCategoryIds();
     const allSelected = allIds.length > 0 && allIds.every(id => naokoloState.activeCategories.includes(id));
-    naokoloState.activeCategories = allSelected ? [allIds[0]] : allIds;
+    const selectAll = select === null ? !allSelected : Boolean(select);
+    naokoloState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
     playSound?.('click');
     renderNaokoloCategories();
     if (naokoloState.hasSavedSession) persistNaokoloSession();
@@ -117,32 +118,33 @@ function renderNaokoloCategories() {
     const grid = document.getElementById('naokolo-category-grid');
     if (!grid) return;
     normalizeNaokoloCategories();
+    grid.classList.add('party-category-grid');
     grid.replaceChildren();
 
     NAOKOLO_CATEGORIES.forEach(category => {
         const selected = naokoloState.activeCategories.includes(category.id);
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `naokolo-category-card${selected ? ' is-selected' : ''}`;
+        button.className = `party-category-card naokolo-category-card${selected ? ' is-selected' : ''}`;
         button.setAttribute('aria-pressed', String(selected));
         button.addEventListener('click', () => toggleNaokoloCategory(category.id));
 
         const icon = document.createElement('span');
-        icon.className = 'naokolo-category-icon';
+        icon.className = 'party-category-icon naokolo-category-icon';
         const iconEl = document.createElement('i');
         iconEl.className = `fa-solid ${category.icon}`;
         icon.appendChild(iconEl);
 
         const copy = document.createElement('span');
-        copy.className = 'naokolo-category-copy';
+        copy.className = 'party-category-copy naokolo-category-copy';
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.cards.length} kart • ${category.desc}`;
+        desc.textContent = `${category.cards.length} kart`;
         copy.append(name, desc);
 
         const check = document.createElement('span');
-        check.className = 'naokolo-category-check';
+        check.className = 'party-category-check naokolo-category-check';
         if (selected) check.innerHTML = '<i class="fa-solid fa-check"></i>';
         button.append(icon, copy, check);
         grid.appendChild(button);
@@ -154,6 +156,7 @@ function renderNaokoloCategories() {
         const allSelected = allIds.length > 0 && allIds.every(id => naokoloState.activeCategories.includes(id));
         toggle.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
+    syncPartyCategoryGrid('naokolo-category-grid');
 }
 
 function renderNaokoloOptions() {

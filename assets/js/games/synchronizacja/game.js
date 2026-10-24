@@ -22,10 +22,13 @@ function setSynchronizacjaSpectrum(element, { target = synchronizacjaRuntime.tar
     if (!element) return;
     const safeTarget = SynchronizacjaRules.normalizePosition(target);
     const safeGuess = SynchronizacjaRules.normalizePosition(guess);
-    element.style.setProperty('--sync-target', `${safeTarget}%`);
-    element.style.setProperty('--sync-guess', `${safeGuess}%`);
-    element.style.setProperty('--sync-distance-start', `${Math.min(safeTarget, safeGuess)}%`);
-    element.style.setProperty('--sync-distance-width', `${Math.abs(safeTarget - safeGuess)}%`);
+    // The visible gradient track occupies 5%–95% of the spectrum's width.
+    // Keep the target, guess and distance line in those same coordinates.
+    const project = position => 5 + position * 0.9;
+    element.style.setProperty('--sync-target', `${project(safeTarget)}%`);
+    element.style.setProperty('--sync-guess', `${project(safeGuess)}%`);
+    element.style.setProperty('--sync-distance-start', `${project(Math.min(safeTarget, safeGuess))}%`);
+    element.style.setProperty('--sync-distance-width', `${Math.abs(safeTarget - safeGuess) * 0.9}%`);
 }
 
 function fillSynchronizacjaScaleLabels(prefix, scale = synchronizacjaRuntime.currentScale) {
@@ -121,7 +124,7 @@ function submitSynchronizacjaGuess() {
     );
     persistSynchronizacjaSession();
 
-    if (result.points >= 3) {
+    if (result.points >= 14) {
         playSound?.('success');
         navigator.vibrate?.([25, 30, 45]);
     } else if (result.points > 0) {
@@ -147,7 +150,7 @@ function renderSynchronizacjaRevealScreen() {
     if (target) target.textContent = String(result.target);
     if (guess) guess.textContent = String(result.guess);
     if (message) {
-        message.textContent = result.points === 4 ? 'Idealna synchronizacja!' : result.points === 3 ? 'Bardzo blisko!' : result.points === 2 ? 'Dobry kierunek.' : result.points === 1 ? 'Prawie złapaliście falę.' : 'Tym razem częstotliwości się minęły.';
+        message.textContent = result.distance === 0 ? 'Idealna synchronizacja! Jackpot!' : result.distance <= 4 ? 'Bardzo blisko!' : result.distance <= 10 ? 'Dobry kierunek.' : result.points > 0 ? 'Prawie złapaliście falę.' : 'Tym razem częstotliwości się minęły.';
     }
     fillSynchronizacjaScaleLabels('sync-reveal');
     setSynchronizacjaSpectrum(document.getElementById('sync-reveal-spectrum'), result);

@@ -7,7 +7,6 @@ const games = [
   ['Co mam na myśli?', 'co-mam-na-mysli'],
   ['Trzy w Pięć', 'trzy-w-piec'],
   ['Synchronizacja', 'synchronizacja'],
-  ['Trzy Rundy', 'trzy-rundy'],
   ['Dzika Karta', 'dzika-karta']
 ];
 
@@ -169,4 +168,58 @@ test('PWA shortcut deep link opens Impostor after lazy preparation', async ({ pa
   await expect(page.locator('#screen-menu')).toBeVisible();
   await expect(page.locator('#screen-menu')).toHaveClass(/game-menu-screen/);
   await expect(page).not.toHaveURL(/game=impostor/);
+});
+
+test('all category screens share Impostor layout, filtering and bulk selection', async ({ page }) => {
+  test.setTimeout(120_000); // Six complete game setup flows on a mobile browser.
+  const menus = [
+    ['Impostor', 'setup-options', 'categories-grid'],
+    ['Tykająca Bomba', 'bomb-options', 'bomb-category-grid'],
+    ['Naokoło', 'naokolo-options', 'naokolo-category-grid'],
+    ['Co mam na myśli?', 'cmm-options', 'cmm-category-grid'],
+    ['Trzy w Pięć', 'three-five-options', 'three-five-category-grid'],
+    ['Synchronizacja', 'sync-options', 'sync-category-grid']
+  ];
+
+  for (const [name, screenId, gridId] of menus) {
+    await page.goto('/');
+    await expect(page.locator('#screen-home')).toBeVisible();
+    await page.locator('.game-card-primary').filter({ hasText: name }).click();
+    await page.getByRole('button', { name: 'Nowa gra' }).click();
+    await page.locator('button.player-setup-action:visible, #screen-bomb-players button.bomb-sticky-action:visible').click();
+
+    const options = page.locator(`#screen-${screenId}`);
+    await expect(options).toBeVisible();
+    await expect(options).toHaveClass(/party-options-screen/);
+    await expect(options.locator('.party-options-header')).toHaveCount(0);
+    await expect(options.locator('.party-options-panel').last()).toBeVisible();
+    const contentBounds = await options.locator('.party-options-content').boundingBox();
+    const ctaBounds = await options.locator('.party-options-cta').boundingBox();
+    expect(contentBounds.width).toBeGreaterThan(255);
+    expect(contentBounds.y + contentBounds.height).toBeLessThanOrEqual(ctaBounds.y + 3);
+    await expect(options.locator('.party-options-cta')).toBeVisible();
+
+    const grid = options.locator(`#${gridId}`);
+    const allCards = grid.locator('.party-category-card');
+    const total = await allCards.count();
+    expect(total).toBeGreaterThan(1);
+    const secondLines = await grid.locator('.party-category-card .party-category-copy small').allTextContents();
+    expect(secondLines).toHaveLength(total);
+    expect(secondLines.every(text => /^\d+ (haseł|pytań|kart|skal)$/.test(text.trim()))).toBe(true);
+
+    await options.getByRole('button', { name: 'Wyczyść' }).click();
+    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(1);
+    await options.getByRole('button', { name: 'Wszystkie' }).click();
+    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total);
+
+    const search = options.getByRole('searchbox', { name: 'Szukaj kategorii' });
+    const firstTitle = await allCards.first().locator('.party-category-copy').textContent();
+    await search.fill(firstTitle.trim().split(' ')[0]);
+    const shown = await allCards.evaluateAll(cards => cards.filter(card => !card.hidden).length);
+    expect(shown).toBeGreaterThan(0);
+    await search.fill('nieistniejacazakategoria999');
+    await expect(options.locator(`#${gridId}-summary`)).toContainText('Brak pasujących kategorii');
+    await search.fill('');
+    expect(await allCards.evaluateAll(cards => cards.filter(card => !card.hidden).length)).toBe(total);
+  }
 });
