@@ -1,118 +1,44 @@
+// The recordings in assets/audio are the original MP3 files supplied for Partyjniak.
+// No generated applause or Base64 decoding is used for win screens.
 const PARTYJNIAK_OUTCOME_AUDIO = Object.freeze({
     impostor: {
-        src: [
-            './assets/audio/impostor-win.0.b64',
-            './assets/audio/impostor-win.1.b64',
-            './assets/audio/impostor-win.2.b64',
-            './assets/audio/impostor-win.3.b64',
-            './assets/audio/impostor-win.4.b64'
-        ],
+        src: './assets/audio/impostor-win.mp3',
         volume: 0.35,
         label: 'impostor win'
     },
     detectives: {
-        src: null, // WAV/PCM applause is now produced locally, not decoded from the invalid legacy MP3.
+        src: './assets/audio/crewmates-win.mp3',
         volume: 1.0,
         label: 'crewmates win'
     }
 });
 
+const outcomeAudioElements = new Map();
 const outcomeAudioBuffers = new Map();
-const outcomeAudioLoads = new Map();
 let outcomeAudioPrimed = false;
 let activeOutcomeSource = null;
 let activeOutcomeGain = null;
+let activeOutcomeMedia = null;
 let outcomePlaybackRequest = 0;
 
-
-function decodeBase64Bytes(base64) {
-    const normalized = base64.replace(/\s+/g, '');
-    const binary = atob(normalized);
-    const bytes = new Uint8Array(binary.length);
-    for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
-    return bytes.buffer;
-}
-
-async function fetchBase64Source(source) {
-    const sources = Array.isArray(source) ? source : [source];
-    const parts = await Promise.all(sources.map(async url => {
-        const response = await fetch(url, { cache: 'force-cache' });
-        if (!response.ok) throw new Error(`HTTP ${response.status} dla ${url}`);
-        return response.text();
-    }));
-    return parts.join('');
-}
-
-async function decodeOutcomeAudio(context, source) {
-    const base64 = await fetchBase64Source(source);
-    const bytes = decodeBase64Bytes(base64);
-    return context.decodeAudioData(bytes.slice(0));
-}
-
-async function loadOutcomeAudioBuffer(outcome) {
-    if (outcomeAudioBuffers.has(outcome)) return outcomeAudioBuffers.get(outcome);
-    if (outcomeAudioLoads.has(outcome)) return outcomeAudioLoads.get(outcome);
+function getRecordedOutcomeMedia(outcome) {
+    if (!PARTYJNIAK_OUTCOME_AUDIO[outcome] || typeof Audio !== 'function') return null;
+    if (outcomeAudioElements.has(outcome)) return outcomeAudioElements.get(outcome);
     const config = PARTYJNIAK_OUTCOME_AUDIO[outcome];
-    if (!config) return null;
-
-    const load = (async () => {
-        try {
-            const context = getAudioContext();
-            if (!context) return null;
-            const buffer = await decodeOutcomeAudio(context, config.src);
-            outcomeAudioBuffers.set(outcome, buffer);
-            return buffer;
-        } finally {
-            outcomeAudioLoads.delete(outcome);
-        }
-    })();
-    outcomeAudioLoads.set(outcome, load);
-    return load;
-}
-
-// The old .mp3.b64 file has invalid padding and damaged audio frames.
-// Prepare a self-contained, audible PCM applause sound instead.
-function prepareApplauseBuffer(context) {
-    if (outcomeAudioBuffers.has('detectives')) return outcomeAudioBuffers.get('detectives');
-    const samples = createPartyjniakApplauseSamples(context.sampleRate || 22050);
-    const buffer = context.createBuffer(2, samples.left.length, samples.sampleRate);
-    buffer.getChannelData(0).set(samples.left);
-    buffer.getChannelData(1).set(samples.right);
-    outcomeAudioBuffers.set('detectives', buffer);
-    return buffer;
-}
-
-function playSynthesizedApplause() {
-    if (!isPartyjniakSoundEnabled()) return false;
-    try {
-        const context = getAudioContext();
-        if (!context) return false;
-        if (context.state === 'suspended') context.resume()?.catch?.(() => {});
-        const buffer = prepareApplauseBuffer(context);
-        const source = context.createBufferSource();
-        const gain = context.createGain();
-        source.buffer = buffer;
-        gain.gain.value = 1.0;
-        source.connect(gain);
-        gain.connect(context.destination);
-        activeOutcomeSource = source;
-        activeOutcomeGain = gain;
-        source.onended = () => {
-            if (activeOutcomeSource !== source) return;
-            activeOutcomeSource = null;
-            activeOutcomeGain = null;
-            try { source.disconnect(); } catch (_) {}
-            try { gain.disconnect(); } catch (_) {}
-        };
-        source.start(0);
-        return true;
-    } catch (error) {
-        console.warn('Nie udało się odtworzyć wygenerowanych oklasków.', error);
-        return false;
-    }
+    const media = new Audio(config.src);
+    media.preload = 'auto';
+    media.volume = config.volume;
+    outcomeAudioElements.set(outcome, media);
+    media.load?.();
+    return media;
 }
 
 function stopOutcomeSound() {
+    if (activeOutcomeMedia) {
+        activeOutcomeMedia.pause();
+        try { activeOutcomeMedia.currentTime = 0; } catch (_) {}
+        activeOutcomeMedia = null;
+    }
     const source = activeOutcomeSource;
     const gain = activeOutcomeGain;
     activeOutcomeSource = null;
@@ -128,43 +54,31 @@ function stopOutcomeSound() {
 function primeOutcomeAudio() {
     if (outcomeAudioPrimed || !isPartyjniakSoundEnabled()) return;
     outcomeAudioPrimed = true;
-    try {
-        const context = getAudioContext();
-        context?.resume?.().catch?.(() => {});
-        prepareApplauseBuffer(context);
-        ['impostor'].forEach(outcome => {
-            loadOutcomeAudioBuffer(outcome).catch(error => console.warn(`Nie udało się przygotować dźwięku wyniku (${outcome}).`, error));
-        });
-    } catch (error) {
-        console.warn('Nie udało się przygotować dźwięków wyników.', error);
+    for (const outcome of Object.keys(PARTYJNIAK_OUTCOME_AUDIO)) {
+        try { getRecordedOutcomeMedia(outcome); }
+        catch (error) { console.warn('Nie można przygotować nagrania wyniku.', error); }
     }
 }
 
-async function playOutcomeSound(outcome) {
-    const requestId = ++outcomePlaybackRequest;
-    stopOutcomeSound();
-    if (!isPartyjniakSoundEnabled()) return false;
-    const config = PARTYJNIAK_OUTCOME_AUDIO[outcome];
-    if (!config) return false;
-
-    if (outcome === 'detectives') {
-        // Native MediaPlayer takes priority on Android; it bypasses WebView's
-        // HTMLAudio/data URI limitations and plays a proper WAV resource.
-        if (typeof playPartyjniakNativeApplause === 'function' && playPartyjniakNativeApplause()) return true;
-        return playSynthesizedApplause();
-    }
-
+// If an embedded browser rejects HTML media playback, use Web Audio to decode
+// the same original MP3. Never substitute a synthetic sound.
+async function playRecordedOutcomeFallback(outcome, requestId) {
     try {
         const context = getAudioContext();
         if (!context) return false;
         if (context.state === 'suspended') await context.resume();
-        const buffer = await loadOutcomeAudioBuffer(outcome);
-        if (!buffer || requestId !== outcomePlaybackRequest) return false;
-
+        let buffer = outcomeAudioBuffers.get(outcome);
+        if (!buffer) {
+            const response = await fetch(PARTYJNIAK_OUTCOME_AUDIO[outcome].src, { cache: 'force-cache' });
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            buffer = await context.decodeAudioData(await response.arrayBuffer());
+            outcomeAudioBuffers.set(outcome, buffer);
+        }
+        if (requestId !== outcomePlaybackRequest || !isPartyjniakSoundEnabled()) return false;
         const source = context.createBufferSource();
         const gain = context.createGain();
-        gain.gain.value = config.volume;
         source.buffer = buffer;
+        gain.gain.value = PARTYJNIAK_OUTCOME_AUDIO[outcome].volume;
         source.connect(gain);
         gain.connect(context.destination);
         activeOutcomeSource = source;
@@ -179,12 +93,43 @@ async function playOutcomeSound(outcome) {
         source.start(0);
         return true;
     } catch (error) {
-        if (requestId === outcomePlaybackRequest) stopOutcomeSound();
-        console.warn(`Nie udało się odtworzyć sampla „${config.label}”.`, error);
+        console.warn('Nie udało się odtworzyć oryginalnego MP3 przez Web Audio.', error);
         return false;
     }
 }
 
-// Keep the listener when sounds are initially disabled, so turning them on later can prime audio.
+async function playRecordedOutcome(outcome) {
+    if (!isPartyjniakSoundEnabled() || !PARTYJNIAK_OUTCOME_AUDIO[outcome]) return false;
+    const requestId = outcomePlaybackRequest;
+    const media = getRecordedOutcomeMedia(outcome);
+    if (media) {
+        try {
+            if (!media.paused) media.pause();
+            media.currentTime = 0;
+            activeOutcomeMedia = media;
+            // Crucial: play() is invoked inside the vote click's user gesture.
+            await media.play();
+            if (requestId !== outcomePlaybackRequest) {
+                media.pause();
+                return false;
+            }
+            return true;
+        } catch (error) {
+            console.warn('HTML audio nie odtworzyło nagrania, próbuję Web Audio.', error);
+        }
+    }
+    return playRecordedOutcomeFallback(outcome, requestId);
+}
+
+async function playOutcomeSound(outcome) {
+    ++outcomePlaybackRequest;
+    stopOutcomeSound();
+    if (!isPartyjniakSoundEnabled() || !PARTYJNIAK_OUTCOME_AUDIO[outcome]) return false;
+    // Native MediaPlayer plays the exact uploaded MP3 packaged in the APK.
+    if (typeof playPartyjniakNativeOutcome === 'function' && playPartyjniakNativeOutcome(outcome)) return true;
+    return playRecordedOutcome(outcome);
+}
+
+// Preload on the first interaction; the listener remains if sound was disabled.
 document.addEventListener('pointerdown', primeOutcomeAudio, { passive: true, capture: true });
 document.addEventListener('keydown', primeOutcomeAudio, { capture: true });

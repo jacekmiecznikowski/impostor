@@ -150,13 +150,15 @@ assert.match(hapticPatch, /VibrationEffect\.createWaveform/);
 assert.match(hapticPatch, /motor\.cancel\(\)/);
 assert.match(hapticPatch, /handleOnPause\(\)/);
 
-// The old applause MP3 has a truncated/invalid base64 payload; the new
-// synthesizer generates a valid WAV that Android plays through MediaPlayer.
+// The Android APK must contain the unmodified MP3 files uploaded by the user.
 const audioPatch = read('scripts/patch-android.mjs');
 assert.match(audioPatch, /PartyjniakApplausePlugin\.java/);
 assert.match(audioPatch, /registerPlugin\(PartyjniakApplausePlugin\.class\)/);
-assert.match(audioPatch, /partyjniak_applause\.wav/);
-assert.match(audioPatch, /pcm\.write\('RIFF'/);
+assert.match(audioPatch, /partyjniak_applause\.mp3/);
+assert.match(audioPatch, /partyjniak_impostor\.mp3/);
+assert.match(audioPatch, /assets\/audio\/crewmates-win\.mp3/);
+assert.match(audioPatch, /assets\/audio\/impostor-win\.mp3/);
 assert.match(audioPatch, /int\[\] amplitudes = \{ 0, 255, 0 \}/);
 assert.match(audioPatch, /220L, 35L/);
-assert.match(read('index.html'), /assets\/js\/shared\/applause-synth\.js/);
+assert.doesNotMatch(audioPatch, /createPartyjniakApplauseSamples|pcm\.write/);
+assert.doesNotMatch(read('index.html'), /assets\/js\/shared\/applause-synth\.js/);

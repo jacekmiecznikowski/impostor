@@ -190,5 +190,5 @@ assert.match(nativeHaptics, /function stopPartyjniakRevealHaptics\(/);
 assert.match(impostorPresentation, /startPartyjniakRevealHaptics\?\.\(\)/);
 assert.match(impostorPresentation, /stopPartyjniakRevealHaptics\?\.\(\)/);
 
-assert.match(nativeHaptics, /function playPartyjniakNativeApplause\(/);
-assert.match(read('assets/js/shared/outcome-audio.js'), /playPartyjniakNativeApplause\(\)/);
+assert.match(nativeHaptics, /function playPartyjniakNativeOutcome\(/);
+assert.match(read('assets/js/shared/outcome-audio.js'), /playPartyjniakNativeOutcome\(outcome\)/);
