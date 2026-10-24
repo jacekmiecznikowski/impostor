@@ -171,6 +171,7 @@ test('PWA shortcut deep link opens Impostor after lazy preparation', async ({ pa
 });
 
 test('all category screens share Impostor layout, filtering and bulk selection', async ({ page }) => {
+  test.setTimeout(120_000); // Six complete game setup flows on a mobile browser.
   const menus = [
     ['Impostor', 'setup-options', 'categories-grid'],
     ['Tykająca Bomba', 'bomb-options', 'bomb-category-grid'],
