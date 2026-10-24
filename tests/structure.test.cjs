@@ -162,3 +162,19 @@ assert.match(audioPatch, /int\[\] amplitudes = \{ 0, 255, 0 \}/);
 assert.match(audioPatch, /220L, 35L/);
 assert.doesNotMatch(audioPatch, /createPartyjniakApplauseSamples|pcm\.write/);
 assert.doesNotMatch(read('index.html'), /assets\/js\/shared\/applause-synth\.js/);
+
+// Retired duplicate/fragmented audio files must not return to APK builds.
+for (const obsolete of [
+  'assets/audio/crewmates-win.mp3.b64',
+  'assets/audio/impostor-win.mp3.b64',
+  'assets/audio/bomb-tick.0.b64',
+  'assets/audio/bomb-tick.1.b64',
+  ...Array.from({length: 5}, (_, index) => `assets/audio/impostor-win.${index}.b64`),
+  'assets/audio/README-ticking-bomb.md'
+]) assert.equal(exists(obsolete), false, `Przestarzały plik audio: ${obsolete}`);
+for (const active of [
+  'assets/audio/crewmates-win.mp3',
+  'assets/audio/impostor-win.mp3',
+  'assets/audio/bomb-tick.b64',
+  'assets/audio/bomb-explosion.b64'
+]) assert.equal(exists(active), true, `Brakuje aktywnego dźwięku: ${active}`);

@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v73';
+const CACHE_VERSION = 'v74';
 const STATIC_CACHE = `partyjniak-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `partyjniak-runtime-${CACHE_VERSION}`;
 const VENDOR_MANIFEST = './assets/vendor/precache.json';
