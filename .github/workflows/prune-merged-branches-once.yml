@@ -1,0 +1,79 @@
+# One-shot housekeeping. Runs only when this file is first merged into main.
+# Remove the workflow file after the run; no cleanup runs on normal pushes.
+name: Prune historical merged branches
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/prune-merged-branches-once.yml
+permissions:
+  contents: write
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete verified obsolete branches
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo;
+            if (context.ref !== 'refs/heads/main') {
+              throw new Error('Cleanup is only authorized on main');
+            }
+            const prs = await github.paginate(github.rest.pulls.list, {
+              owner, repo, state: 'closed', per_page: 100
+            });
+            const mergedBranches = new Map(
+              prs.filter(pr => pr.merged_at &&
+                  pr.head.repo?.full_name === `${owner}/${repo}`)
+                .map(pr => [pr.head.ref, pr.head.sha])
+            );
+            const obsoleteBehindBranches = new Set([
+              'android-pwa', 'android-pwa-test', 'build/apk-pr48-20261023'
+            ]);
+            const protectedNames = new Set([
+              'main', 'build/full-offline-assets'
+            ]);
+            const branches = await github.paginate(github.rest.repos.listBranches, {
+              owner, repo, per_page: 100
+            });
+            const removed = [];
+            const retained = [];
+
+            for (const branch of branches) {
+              const name = branch.name;
+              if (branch.protected || protectedNames.has(name)) {
+                retained.push(name);
+                continue;
+              }
+
+              // A merged PR counts only if the branch was not reused for
+              // new commits after that PR merged.
+              const verifiedMergedPR = mergedBranches.get(name) === branch.commit.sha;
+              let verifiedObsolete = false;
+              if (!verifiedMergedPR && obsoleteBehindBranches.has(name)) {
+                const comparison = await github.rest.repos.compareCommitsWithBasehead({
+                  owner, repo, basehead: `main...${name}`
+                });
+                verifiedObsolete = comparison.data.ahead_by === 0;
+              }
+
+              if (!verifiedMergedPR && !verifiedObsolete) {
+                retained.push(name);
+                continue;
+              }
+
+              try {
+                await github.rest.git.deleteRef({owner, repo, ref: `heads/${name}`});
+                removed.push(name);
+                core.info(`Deleted previously merged branch: ${name}`);
+              } catch (error) {
+                core.warning(`Could not delete ${name}: ${error.message}`);
+                retained.push(name);
+              }
+            }
+            core.summary.addHeading('Partyjniak — branch cleanup')
+              .addRaw(`Removed ${removed.length} old branches, kept ${retained.length} branches.`)
+              .addBreak()
+              .addRaw(`Preserved: ${retained.join(', ')}`)
+              .write();
