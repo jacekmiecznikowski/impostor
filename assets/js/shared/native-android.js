@@ -37,18 +37,20 @@ function stopPartyjniakRevealHaptics() {
     }
 }
 
-function playPartyjniakNativeApplause() {
+// Android MediaPlayer plays the unmodified MP3 uploaded to the repository.
+function playPartyjniakNativeOutcome(outcome) {
     if (!isPartyjniakNative()) return false;
-    const applause = window.Capacitor?.Plugins?.PartyjniakApplause;
-    if (typeof applause?.play !== 'function') return false;
+    const audio = window.Capacitor?.Plugins?.PartyjniakApplause;
+    if (typeof audio?.play !== 'function') return false;
     try {
-        applause.play().catch?.(error => {
-            console.warn('Natywne odtwarzanie oklasków nie powiodło się.', error);
-            playSynthesizedApplause?.();
+        audio.play({ outcome }).catch?.(error => {
+            console.warn('Natywne odtwarzanie dźwięku zwycięstwa nie powiodło się.', error);
+            // Fallback always uses that same original MP3, never synthesized audio.
+            playRecordedOutcome?.(outcome);
         });
         return true;
     } catch (error) {
-        console.warn('Nie udało się uruchomić natywnych oklasków.', error);
+        console.warn('Natywne odtwarzanie dźwięku zwycięstwa nie powiodło się.', error);
         return false;
     }
 }

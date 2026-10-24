@@ -1,9 +1,6 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const createPartyjniakApplauseSamples = require('../assets/js/shared/applause-synth.js');
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const packagePath = path.join(root, 'android', 'app', 'src', 'main', 'java', 'pl', 'partyjniak', 'app');
@@ -116,7 +113,10 @@ public class PartyjniakApplausePlugin extends Plugin {
         getActivity().runOnUiThread(() -> {
             try {
                 releasePlayer();
-                player = MediaPlayer.create(getContext(), R.raw.partyjniak_applause);
+                String outcome = call.getString("outcome", "detectives");
+                int resourceId = "impostor".equals(outcome)
+                    ? R.raw.partyjniak_impostor : R.raw.partyjniak_applause;
+                player = MediaPlayer.create(getContext(), resourceId);
                 if (player == null) {
                     call.reject("Nie udało się przygotować nagrania oklasków.");
                     return;
@@ -148,27 +148,12 @@ public class PartyjniakApplausePlugin extends Plugin {
 }
 `, 'utf8');
 
-// Create a real, fully decodable WAV asset, instead of the damaged Base64 MP3.
-const applause = createPartyjniakApplauseSamples(22050);
-const frameCount = applause.left.length;
-const pcm = Buffer.alloc(44 + frameCount * 4);
-pcm.write('RIFF', 0);
-pcm.writeUInt32LE(pcm.length - 8, 4);
-pcm.write('WAVEfmt ', 8);
-pcm.writeUInt32LE(16, 16);
-pcm.writeUInt16LE(1, 20);
-pcm.writeUInt16LE(2, 22);
-pcm.writeUInt32LE(applause.sampleRate, 24);
-pcm.writeUInt32LE(applause.sampleRate * 4, 28);
-pcm.writeUInt16LE(4, 32);
-pcm.writeUInt16LE(16, 34);
-pcm.write('data', 36);
-pcm.writeUInt32LE(frameCount * 4, 40);
-for (let i = 0; i < frameCount; i++) {
-    pcm.writeInt16LE(Math.round(Math.max(-1, Math.min(1, applause.left[i])) * 32767), 44 + i * 4);
-    pcm.writeInt16LE(Math.round(Math.max(-1, Math.min(1, applause.right[i])) * 32767), 46 + i * 4);
-}
-await writeFile(path.join(rawResourcesDir, 'partyjniak_applause.wav'), pcm);
+// Preserve the user's original recorded victory sounds byte-for-byte.
+// No synthetic claps or Base64 encoding in the Android build.
+await copyFile(path.join(root, 'assets/audio/crewmates-win.mp3'),
+  path.join(rawResourcesDir, 'partyjniak_applause.mp3'));
+await copyFile(path.join(root, 'assets/audio/impostor-win.mp3'),
+  path.join(rawResourcesDir, 'partyjniak_impostor.mp3'));
 
 await writeFile(mainActivityPath, `package pl.partyjniak.app;\n\nimport android.graphics.Color;\nimport android.os.Bundle;\nimport android.view.WindowManager;\nimport androidx.core.view.WindowCompat;\nimport com.getcapacitor.BridgeActivity;\n\npublic class MainActivity extends BridgeActivity {\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        registerPlugin(PartyjniakOrientationPlugin.class);\n        registerPlugin(PartyjniakHapticsPlugin.class);\n        registerPlugin(PartyjniakApplausePlugin.class);\n        super.onCreate(savedInstanceState);\n\n        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);\n        WindowCompat.setDecorFitsSystemWindows(getWindow(), true);\n        getWindow().setStatusBarColor(Color.parseColor(\"#06111D\"));\n        getWindow().setNavigationBarColor(Color.parseColor(\"#020617\"));\n\n        if (getBridge() != null && getBridge().getWebView() != null) {\n            getBridge().getWebView().setHapticFeedbackEnabled(false);\n            getBridge().getWebView().setOnLongClickListener(view -> true);\n        }\n    }\n}\n`, 'utf8');
 
