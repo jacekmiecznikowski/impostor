@@ -1,4 +1,4 @@
-:root{color-scheme:dark;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#080f1b;color:#eef5ff;--a:#22d8c5;--line:#24344d;--muted:#92a1bc;--surface:#101c2c;--field:#0c1726;--radius:19px}
+:root{color-scheme:dark;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#080f1b;color:#eef5ff;--a:#fb7185;--line:#3b2a3d;--muted:#a69ba9;--surface:#161120;--field:#100e19;--radius:19px}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;overflow-x:hidden}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--a);outline-offset:2px}
 [hidden]{display:none!important}h1,h2,h3,p{margin-top:0}p{color:var(--muted);line-height:1.55}h1{letter-spacing:-.05em;font-weight:850}h2{font-size:1.05rem;font-weight:780;letter-spacing:-.02em}h3{font-size:.9rem}small,.meta{color:var(--muted)}
 .background-glow{position:fixed;z-index:-1;inset:0;background:radial-gradient(ellipse 32rem 25rem at 6% 5%,#0b4b4c80,transparent),radial-gradient(ellipse 40rem 30rem at 90% 80%,#173a7060,transparent),#080f1b}
@@ -24,3 +24,79 @@ input,select,textarea{width:100%;border-radius:10px;border:1px solid #34465b;bac
 .advanced-connection summary{cursor:pointer;color:#91b7c1;font-size:.7rem;font-weight:750}
 .advanced-connection[open]{display:grid;gap:12px}
 .advanced-connection[open] summary{margin-bottom:5px}
+
+
+/* Partyjniak HOME brand palette, sourced from assets/js/shared/game-themes.js:
+   accent #950f26, strong #720b1d, alt #d9465f, text #fda4af.
+   Teal is Impostor's game accent, not the Partyjniak brand color. */
+body { background:#06050a; }
+.background-glow {
+  background:
+    radial-gradient(ellipse 38rem 24rem at 10% 0%,rgba(149,15,38,.26),transparent),
+    radial-gradient(ellipse 36rem 32rem at 94% 79%,rgba(139,92,246,.13),transparent),
+    #06050a;
+}
+.topbar {
+  border-bottom-color:rgba(149,15,38,.22);
+  background:rgba(9,7,16,.84);
+}
+.brand-mark {
+  color:white;
+  background:linear-gradient(140deg,#720b1d,#950f26 55%,#d9465f);
+  box-shadow:0 10px 27px rgba(149,15,38,.27);
+}
+.brand small,.eyebrow { color:#fda4af; }
+.hero .accent { color:#fb7185; }
+.glass {
+  background:linear-gradient(145deg,rgba(24,16,32,.98),rgba(12,11,23,.97));
+  border-color:rgba(100,64,87,.49);
+}
+.hero-stats>div,.category-item,.item-row,.device-preview,.search,.item-fields input,.item-fields textarea{
+  border-color:rgba(117,72,103,.43);
+}
+.hero-stats>div { background:rgba(33,18,38,.76); }
+input,select,textarea {
+  background:#100d19;
+  border-color:#493248;
+}
+.primary {
+  color:white;
+  background:linear-gradient(110deg,#720b1d,#950f26 52%,#d9465f);
+  box-shadow:0 8px 24px rgba(149,15,38,.24);
+}
+.secondary { background:#2a1a34;border-color:#59405b; }
+.square {background:#23182d;border-color:#59405b;}
+.category-item {background:#151020;}
+.category-item.selected {
+  background:linear-gradient(110deg,rgba(149,15,38,.38),rgba(91,28,67,.22));
+  border-color:#b33156;
+  box-shadow:inset 3px 0 0 #fb7185;
+}
+.category-item .number {
+  color:#fecdd3;background:rgba(149,15,38,.26);
+}
+.category-item:hover {border-color:rgba(251,113,133,.5);}
+.device-preview {
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(149,15,38,.35),transparent 65%),
+    #0b0813;
+  box-shadow:inset 0 0 0 5px #130d1a;
+}
+.device-preview .preview-category {color:#fda4af;}
+.device-preview .forbidden {color:#f9a8d4;}
+.publish-info {
+  background:rgba(80,33,59,.32);border-color:rgba(217,70,95,.35);
+}
+.publish-info .info-symbol {color:#fda4af;border-color:#d9465f;}
+.publish-info strong {color:#fecdd3;}
+.publish-info p span {color:#c8a9bd;}
+.benefits span {
+  background:rgba(149,15,38,.11);color:#fda4af;border-color:rgba(217,70,95,.32);
+}
+.panel-icon {background:rgba(149,15,38,.19);color:#fb7185;}
+.brand-mark:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible {
+  outline-color:#fda4af;
+}
+.pill:not(.muted) { border-color:rgba(217,70,95,.38);color:#fecdd3;background:rgba(149,15,38,.19); }
+.pill.muted {background:#221728;border-color:#493248;color:#c4adbd;}
+.toast:not(.error) { background:#361929;border-color:#d9465f;color:#ffe4e6; }
