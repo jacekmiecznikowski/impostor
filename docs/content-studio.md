@@ -61,20 +61,13 @@ npm run studio
 node tools/generate-content-seed.mjs --check
 ```
 
-## Dostęp do panelu przez przeglądarkę (Supabase Free)
+## Darmowy hosting panelu: GitHub Pages
 
-Panel jest już wdrożony jako **publiczna strona logowania** w darmowej Supabase Edge Function:
+Supabase Edge Functions nie może hostować HTML na domyślnej domenie — Supabase zmienia Content-Type odpowiedzi na `text/plain`. Z tego powodu formularz jest wdrażany **na GitHub Pages**, a Supabase odpowiada tylko za bazę i logowanie.
 
-https://astcatgvvliatokqalhd.supabase.co/functions/v1/partyjniak-studio/
+Przygotowana jest osobna gałąź `gh-pages` zawierająca wyłącznie cztery statyczne pliki edytora. Na GitHubie otwórz [Settings → Pages](https://github.com/jacekmiecznikowski/impostor/settings/pages) i ustaw **Deploy from a branch → gh-pages → /(root) → Save**.
 
-Funkcja serwuje wyłącznie statyczne pliki HTML, JS i CSS. Publiczny dostęp do samego formularza logowania **nie oznacza prawa do edycji bazy**: wszystkie zapisy i publikacje nadal przechodzą przez Supabase Auth oraz weryfikowaną w PostgreSQL listę adresów redaktorów.
+Docelowy adres panelu: https://jacekmiecznikowski.github.io/impostor/
 
-Po zmianie panelu uruchom:
+Zawartość gałęzi wdrożeniowej musi być aktualizowana przy zmianach w katalogu `admin/`. Po publikacji źródłem prawdy jest nadal `admin/` z PR i `main`. Publiczne HTML, JS i CSS nie zawierają żadnego klucza sekretnego. Uprawnienia do szkiców i publikacji są sprawdzane w PostgreSQL po zalogowaniu.
 
-```bash
-node tools/generate-studio-edge.mjs
-# po zalogowaniu do Supabase CLI i powiązaniu projektu:
-supabase functions deploy partyjniak-studio --no-verify-jwt
-```
-
-Pliki `supabase/functions/partyjniak-studio/*.ts` są generowane z `admin/`. Sprawdź spójność poleceniem `node tools/generate-studio-edge.mjs --check`. `verify_jwt=false` dotyczy **tylko serwowania publicznego HTML/CSS/JS**, nie żadnej operacji na bazie.

@@ -1,1 +1,0 @@
-export default "// Public project URL and publishable key, not administrative credentials.\nexport const STUDIO_DEFAULTS = Object.freeze({\n  url: 'https://astcatgvvliatokqalhd.supabase.co',\n  key: 'sb_publishable_B2QUgtW6nJ4qBbiwT0eyqw_1Oz34ytU',\n  email: 'contact@swawole.studio'\n});\n";
