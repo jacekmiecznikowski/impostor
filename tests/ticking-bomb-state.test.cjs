@@ -107,4 +107,16 @@ assert.deepEqual(reset.activeCategories, ['animals', 'food']);
 assert.equal(reset.roundNumber, 0);
 assert.equal(reset.hasSavedSession, false);
 
+// Every bulk category action must exclude 18+; only a deliberate tap opts in.
+vm.runInContext(fs.readFileSync(path.join(__dirname, '../assets/js/games/ticking-bomb/setup.js'), 'utf8'), sandbox);
+run('renderBombCategories = () => {}');
+run('toggleAllBombCategories(true)');
+assert.deepEqual(snapshot().activeCategories, ['animals', 'food']);
+run("toggleBombCategory('adult')");
+assert.deepEqual(snapshot().activeCategories, ['animals', 'food', 'adult']);
+run('toggleAllBombCategories(true)');
+assert.deepEqual(snapshot().activeCategories, ['animals', 'food'], 'Select all must turn adult off');
+run('toggleAllBombCategories(false)');
+assert.deepEqual(snapshot().activeCategories, ['animals'], 'Clear must leave a safe category');
+
 console.log('Ticking Bomb state behavior tests: OK');
