@@ -80,3 +80,11 @@ Stary adres Supabase Edge Function przekierowuje na GitHub Pages, ponieważ Supa
 Wersja początkowa to 663 karty, pytania, hasła i skale. Plik `content/expansions/20261029-party-pack.pl.json` dodaje 197 nowych, ręcznie dobranych pozycji do wszystkich siedmiu gier, bez usuwania wcześniejszych wpisów (razem **860**). Skrypt `supabase/data/20261029_party_pack.sql` zapisuje wersję startową w historii, waliduje nowe dane w PostgreSQL i publikuje je atomowo jako rewizję 2. Jego ponowne wykonanie zostaje świadomie zablokowane — zapobiega to zdublowaniu zawartości.
 
 Rozbudowany zestaw jest publicznie dostępny po odświeżeniu gry z internetem. Pierwszy start całkowicie offline korzysta z oryginalnego pakietu 663 pozycji zapisanych w APK.
+
+## Baza Impostora — aktualna rewizja (2026-10-29)
+
+W opublikowanym dokumencie Supabase (`impostor/pl`, rewizja **32**) jest **1870 unikalnych haseł w 35 kategoriach**. Każde hasło ma dokładnie **trzy różne podpowiedzi**; najmniejsza kategoria ma 47 haseł. Rozszerzony, wersjonowany eksport zgodny z formatem Content Studio znajduje się w `content/impostor-expanded.pl.json`.
+
+Kategoria `dla_doroslych` zawiera **153 hasła 18+**, w tym 100 odważniejszych skojarzeń dla dorosłych. Nie jest włączana przez zbiorcze „Wszystkie”; w grze wymagane jest osobne potwierdzenie włączenia.
+
+**Istotne rozróżnienie:** powyższe liczby dotyczą *opublikowanej bazy zdalnej*, a tabela na początku dokumentu opisuje nadal pierwotny, niewielki seed i lokalny pakiet w APK. Po uruchomieniu z internetem aplikacja pobiera aktualny katalog i przechowuje go w pamięci podręcznej na użytek gry offline. Na świeżym urządzeniu bez wcześniejszej synchronizacji pozostaje mniejszy lokalny zestaw. W celu przeniesienia całości do nowej bazy użyj wersjonowanego eksportu JSON zamiast ponownie uruchamiać stary skrypt rozszerzający rewizję 2.
