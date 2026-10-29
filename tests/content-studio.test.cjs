@@ -99,3 +99,7 @@ assert.match(read('admin/studio.js'),/STUDIO_DEFAULTS/);
 assert.doesNotMatch(read('admin/studio.js'),/(?<!\$)\$\('(project-url|publishable-key|editor-email|add-item|add-tip)'\)/);
 
 
+
+// Prevent repeating the production '$$$ is not defined' login bug.
+assert.doesNotMatch(editor,/\$\$\$\(/, 'Only the defined $$ DOM lookup helper may be used');
+assert.doesNotMatch(editor,/(?<!\$)\$\('[a-z-]+'\)/, 'Bare $ helper is not defined');

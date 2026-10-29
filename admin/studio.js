@@ -45,9 +45,9 @@ function setBusy(state) {
   }
 }
 function getConfig() {
-  const url = safeString($$$('project-url').value).replace(/\/+$/,'');
-  const key = safeString($$$('publishable-key').value);
-  const email = safeString($$$('editor-email').value).toLowerCase();
+  const url = safeString($$('project-url').value).replace(/\/+$/,'');
+  const key = safeString($$('publishable-key').value);
+  const email = safeString($$('editor-email').value).toLowerCase();
   // Prevent accidental sending of credentials to random endpoints.
   if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url))
     throw new Error('Wpisz adres HTTPS swojego projektu *.supabase.co.');
@@ -257,9 +257,9 @@ function renderEditor(){
   });
 }
 function renderExtra(){
-  const view=$('extra-settings');view.hidden=!Array.isArray(data.discussionTips);
+  const view=$$('extra-settings');view.hidden=!Array.isArray(data.discussionTips);
   if(view.hidden)return;
-  const list=$('extra-list');list.replaceChildren();
+  const list=$$('extra-list');list.replaceChildren();
   data.discussionTips.forEach((tip,index)=>{
     const row=create('div','item-row');
     row.append(create('span','row-index',String(index+1).padStart(2,'0')));
