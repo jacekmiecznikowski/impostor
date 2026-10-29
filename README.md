@@ -8,6 +8,8 @@ Projekt zawiera również **panel webowy do zarządzania treścią wszystkich si
 
 Pełna instrukcja: [docs/content-studio.md](docs/content-studio.md).
 
+**Panel online:** [Partyjniak Content Studio](https://jacekmiecznikowski.github.io/impostor/) — bezpłatny hosting GitHub Pages, baza Supabase Free.
+
 ```bash
 npm run studio # lokalny podgląd panelu: http://127.0.0.1:4174
 node tools/generate-content-seed.mjs --check

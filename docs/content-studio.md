@@ -65,9 +65,11 @@ node tools/generate-content-seed.mjs --check
 
 Supabase Edge Functions nie może hostować HTML na domyślnej domenie — Supabase zmienia Content-Type odpowiedzi na `text/plain`. Z tego powodu formularz jest wdrażany **na GitHub Pages**, a Supabase odpowiada tylko za bazę i logowanie.
 
-Przygotowana jest osobna gałąź `gh-pages` zawierająca wyłącznie cztery statyczne pliki edytora. Na GitHubie otwórz [Settings → Pages](https://github.com/jacekmiecznikowski/impostor/settings/pages) i ustaw **Deploy from a branch → gh-pages → /(root) → Save**.
+GitHub Pages został automatycznie aktywowany dla gałęzi `gh-pages`. Publikacja zakończyła się sukcesem. Panel jest dostępny pod adresem:
 
-Docelowy adres panelu: https://jacekmiecznikowski.github.io/impostor/
+**https://jacekmiecznikowski.github.io/impostor/**
 
-Zawartość gałęzi wdrożeniowej musi być aktualizowana przy zmianach w katalogu `admin/`. Po publikacji źródłem prawdy jest nadal `admin/` z PR i `main`. Publiczne HTML, JS i CSS nie zawierają żadnego klucza sekretnego. Uprawnienia do szkiców i publikacji są sprawdzane w PostgreSQL po zalogowaniu.
+Gałąź `gh-pages` zawiera tylko cztery statyczne pliki edytora i `.nojekyll`. Workflow `.github/workflows/publish-content-studio.yml` aktualizuje stronę automatycznie po zmianach w katalogu `admin/` na gałęzi projektowej lub po scaleniu do `main`. Źródłem prawdy pozostaje `admin/`. W stronie nie ma żadnych kluczy sekretów; edycja szkiców wymaga zalogowania i weryfikacji uprawnień PostgreSQL.
+
+Stary adres Supabase Edge Function przekierowuje na GitHub Pages, ponieważ Supabase na domyślnej domenie celowo zastępuje `text/html` przez `text/plain`.
 
