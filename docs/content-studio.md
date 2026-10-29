@@ -81,18 +81,16 @@ Wersja początkowa to 663 karty, pytania, hasła i skale. Plik `content/expansio
 
 Rozbudowany zestaw jest publicznie dostępny po odświeżeniu gry z internetem. Pierwszy start całkowicie offline korzysta z oryginalnego pakietu 663 pozycji zapisanych w APK.
 
-## Baza Impostora — aktualna rewizja (2026-10-29)
+## Baza Impostora — opublikowany katalog (2026-10-29)
 
-W opublikowanym dokumencie Supabase (`impostor/pl`, rewizja **36**) jest **1868 unikalnych haseł w 35 kategoriach**. Każde hasło ma dokładnie **trzy różne podpowiedzi**; najmniejsza kategoria ma 47 haseł. Rozszerzony, wersjonowany eksport zgodny z formatem Content Studio znajduje się w `content/impostor-expanded.pl.json`.
+Aktualna rewizja `impostor/pl` w Supabase: **56**. Katalog obejmuje **5573 unikalne hasła w 35 kategoriach** (w każdej od **151 do 193**). Każde hasło ma dokładnie **trzy różne podpowiedzi**; podpowiedź nie może być dosłownie tym samym co odpowiedź. W repozytorium przechowujemy kompletny eksport w `content/impostor-expanded.pl.json`, a test `tests/impostor-multi-hints.test.cjs` wymusza minimum 150 haseł na każdą kategorię, brak duplikatów i poprawne wskazówki.
 
-Kategoria `dla_doroslych` zawiera **151 haseł 18+**, w tym 100 odważniejszych skojarzeń dla dorosłych. Nie jest włączana przez zbiorcze „Wszystkie”; w grze wymagane jest osobne potwierdzenie włączenia.
+Kategoria `dla_doroslych` zawiera **151 haseł 18+**. Nigdy nie zostaje zaznaczona przez zbiorcze „Wszystkie”; gracz świadomie włącza ją osobno. Dla podpowiedzi obowiązuje ta sama kontrola.
 
-**Istotne rozróżnienie:** powyższe liczby dotyczą *opublikowanej bazy zdalnej*, a tabela na początku dokumentu opisuje nadal pierwotny, niewielki seed i lokalny pakiet w APK. Po uruchomieniu z internetem aplikacja pobiera aktualny katalog i przechowuje go w pamięci podręcznej na użytek gry offline. Na świeżym urządzeniu bez wcześniejszej synchronizacji pozostaje mniejszy lokalny zestaw. W celu przeniesienia całości do nowej bazy użyj wersjonowanego eksportu JSON zamiast ponownie uruchamiać stary skrypt rozszerzający rewizję 2.
+### Kryteria redakcyjne
 
-## Redakcja pod kątem grywalności
+Priorytetem jest **grywalność przy stole**, nie liczba wyrazów. Hasła mają być jednoznacznymi, znanymi rzeczami, osobami, czynnościami, zjawiskami lub utrwalonymi zwrotami. Frazy takie jak „Ślad po szmince” są odpowiednie, ale opowiadania o dziwnych sytuacjach („Romantyczna kolacja z mikrofalówki”) nie. Rozszerzenie obejmuje sprawdzone i deduplikowane hasła z trzema wskazówkami. Przed kolejną dużą aktualizacją nadal warto przeprowadzić rozgrywki testowe z ludźmi i korygować zbyt specjalistyczne pozycje na podstawie rzeczywistej odgadywalności.
 
-Hasło w Impostorze powinno być **łatwo rozpoznawalnym pojęciem**, a nie opowieścią do odtworzenia słowo w słowo. Nie wprowadzamy sztywnego ograniczenia do dwóch wyrazów: np. „Ślad po szmince” lub znany tytuł są pełnoprawnymi hasłami. Odrzucamy za to sztuczne scenki i niejednoznaczne konstrukcje. Zmieniono 61 sformułowań w zwykłych kategoriach oraz rozpoczęto redakcję 18+, w tym „Niezręczna cisza”, „Feromony”, „Ślad po szmince”; usunięto dwie wyjątkowo nienaturalne pozycje.
+### Aktualizacja APK i offline
 
-**Kontynuacja redakcji 18+:** nadal wymaga pełnego ręcznego przeglądu. Zbiorcza operacja porządkująca pozostałe hasła nie została zastosowana; GitHub i Supabase pozostają zsynchronizowane na opublikowanej wersji.
-
-**Ważne: najnowsza drobna korekta po eksporcie.** Opublikowana baza Supabase ma obecnie rewizję **37**; oprócz zmian opisanych powyżej zmieniono hasło dotyczące wpadki po randce na „Pęknięty kondom” oraz poprawiono podpowiedzi do „Feromony”. Plik JSON na gałęzi projektowej odpowiada rewizji 36. Większa redakcja kategorii 18+ nadal nie jest zakończona; po ograniczeniach podczas zbiorczego zapisu nie należy uważać jej za w pełni przejrzaną.
+Nowe hasła pobierane są przy uruchomieniu gry z internetem, po czym pozostają w pamięci podręcznej na rozgrywki bez sieci. **Sam import haseł nie wymaga nowego APK.** Na całkiem nowym urządzeniu, które nigdy nie pobrało opublikowanych treści, aplikacja nadal ma tylko niewielki lokalny pakiet startowy. Początkowe dane i automatycznie generowany seed opisane we wcześniejszych rozdziałach dotyczą właśnie tego pakietu, nie katalogu zdalnego.
