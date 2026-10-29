@@ -37,10 +37,14 @@ assert.equal(content.locale, 'pl');
 assert.equal(content.categories.length, 8);
 assert.equal(content.categories.reduce((sum, category) => sum + category.words.length, 0), 96);
 assert.equal(content.categories.every(category => category.id && category.name && Array.isArray(category.words) && category.words.length > 0), true);
-assert.equal(expanded.categories.length, 8);
-assert.equal(expanded.categories.reduce((sum, category) => sum + category.words.length, 0), 211);
-assert.ok(expanded.categories.every(category => category.id && category.name && category.words.length >= 25));
-assert.deepEqual(expanded.categories.map(c => c.id), content.categories.map(c => c.id));
+assert.equal(expanded.categories.length, 9);
+assert.equal(expanded.categories.reduce((sum, category) => sum + category.words.length, 0), 1350);
+assert.ok(expanded.categories.every(category => category.id && category.name && category.words.length >= 150));
+assert.deepEqual(expanded.categories.filter(c => !c.adult).map(c => c.id), content.categories.map(c => c.id));
+assert.equal(expanded.categories.filter(c => c.adult === true).length, 1);
+assert.equal(expanded.categories.find(c => c.id === 'adult')?.adult, true);
+assert.match(expanded.categories.find(c => c.id === 'adult').name, /18\+/);
+assert.match(source, /localAdult/);
 const prompts = expanded.categories.flatMap(category => category.words.map(entry => entry.word));
 const normalizedPrompts = prompts.map(prompt => prompt.trim().replace(/[.!?]+$/g, '').toLocaleLowerCase('pl-PL'));
 assert.equal(new Set(normalizedPrompts).size, prompts.length, 'Each prompt should be unique');
@@ -66,3 +70,10 @@ for (const removedDuplicate of [
 }
 
 console.log('Ticking Bomb content behavior tests: OK');
+
+// Adult content is bundled only for clients with explicit opt-in support.
+const stateSource = fs.readFileSync(path.join(__dirname, '../assets/js/games/ticking-bomb/state.js'), 'utf8');
+const setupSource = fs.readFileSync(path.join(__dirname, '../assets/js/games/ticking-bomb/setup.js'), 'utf8');
+assert.match(stateSource, /getBombDefaultCategoryIds\(\)/);
+assert.match(setupSource, /const allIds = getBombDefaultCategoryIds\(\)/);
+assert.match(setupSource, /category\.adult === true/);
