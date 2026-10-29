@@ -3,6 +3,7 @@ import { STUDIO_DEFAULTS } from './config.js';
 // Partyjniak Content Studio — dependency-free, strictly authenticated editor.
 // Only the public Supabase publishable key is stored locally.
 // Bearer access/refresh tokens are kept in sessionStorage, never in the game.
+// Supabase's free default mailer sends Magic Links; no custom SMTP or OTP template needed.
 const NAMES = Object.freeze({
   impostor:'Impostor', 'ticking-bomb':'Tykająca Bomba',
   'co-mam-na-mysli':'Co mam na myśli?',naokolo:'Naokoło',
@@ -15,6 +16,7 @@ const TYPE = Object.freeze({
 const $$ = id => document.getElementById(id);
 const STORE_CONFIG = 'partyjniak.studio.public-config.v1';
 const STORE_SESSION = 'partyjniak.studio.session.v1';
+const STUDIO_REDIRECT_URL = 'https://jacekmiecznikowski.github.io/impostor/';
 let config = { ...STUDIO_DEFAULTS };
 let session = null;
 let documents = [];
@@ -82,27 +84,43 @@ async function refreshSession() {
   const result=await request('/auth/v1/token?grant_type=refresh_token',{body:{refresh_token:current.refresh_token},auth:false});
   storeSession(result);
 }
-async function sendOtp(e) {
+async function sendMagicLink(e) {
   e.preventDefault();
   try {
     config=getConfig();
     localStorage.setItem(STORE_CONFIG,JSON.stringify(config)); // URL and public key only
-    await request('/auth/v1/otp',{body:{email:config.email,create_user:false},auth:false});
-    showToast('Kod został wysłany. Sprawdź skrzynkę e-mail.');
-    $$('otp-code').focus();
+    const redirect = encodeURIComponent(STUDIO_REDIRECT_URL);
+    await request('/auth/v1/otp?redirect_to='+redirect,{
+      body:{email:config.email,create_user:false},auth:false
+    });
+    showToast('Wysłano link logowania. Otwórz wiadomość i kliknij Sign in.');
   } catch(error){ showToast(error.message,true); }
 }
-async function verifyOtp() {
-  try {
-    config=getConfig();
-    const token=safeString($$('otp-code').value);
-    if(!/^\d{6,8}$/.test(token)) throw new Error('Podaj kod z wiadomości e-mail.');
-    const result=await request('/auth/v1/verify',{body:{email:config.email,token,type:'email'},auth:false});
-    if(!result?.access_token) throw new Error('Nie udało się uzyskać sesji.');
-    storeSession(result);
-    await openStudio();
-  } catch(error){showToast(error.message,true);}
+
+// Supabase redirects the verified Magic Link to our allowed Site URL.
+// The access and refresh tokens arrive in the URL fragment (#), not in server
+// logs. Remove them from the address bar synchronously, before any network calls.
+function consumeMagicLinkCallback(){
+  const hash=window.location.hash;
+  if(!hash || (!hash.includes('access_token=') && !hash.includes('error=')))return false;
+  const params=new URLSearchParams(hash.slice(1));
+  window.history.replaceState(null,'',window.location.pathname+window.location.search);
+  if(params.has('error')){
+    showToast('Link logowania wygasł lub jest nieprawidłowy. Wyślij nowy link.',true);
+    return false;
+  }
+  const access=params.get('access_token');
+  const refresh=params.get('refresh_token');
+  const type=params.get('token_type');
+  const expires=Number(params.get('expires_in')||3600);
+  if(!access||!refresh||type!=='bearer'||!Number.isFinite(expires)||expires<=0){
+    showToast('Niepełne dane logowania. Wyślij nowy link.',true);
+    return false;
+  }
+  storeSession({access_token:access,refresh_token:refresh,expires_in:expires});
+  return true;
 }
+
 async function logout() {
   if(dirty && !confirm('Niezapisane zmiany zostaną utracone. Wylogować?')) return;
   try { await request('/auth/v1/logout',{auth:true}); }catch{}
@@ -448,12 +466,13 @@ function bootstrap(){
     $$('publishable-key').value=config.key;
     $$('editor-email').value=config.email;
     session=JSON.parse(sessionStorage.getItem(STORE_SESSION)||'null');
+    consumeMagicLinkCallback();
     if(session&&config.url&&config.key)openStudio().catch(error=>{
-      sessionStorage.removeItem(STORE_SESSION);session=null;showToast(error.message,true);
+      sessionStorage.removeItem(STORE_SESSION);session=null;
+      showToast('Nie udało się zalogować. Sprawdź uprawnienia konta lub spróbuj ponownie. '+error.message,true);
     });
   }catch{}
-  $$('connect-form').addEventListener('submit',sendOtp);
-  $$('verify-code').addEventListener('click',verifyOtp);
+  $('connect-form').addEventListener('submit',sendMagicLink);
   $$('logout').addEventListener('click',logout);
   $$('game-picker').addEventListener('change',e=>chooseGame(e.target.value));
   $$('group-search').addEventListener('input',renderGroups);

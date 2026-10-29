@@ -103,3 +103,11 @@ assert.doesNotMatch(read('admin/studio.js'),/(?<!\$)\$\('(project-url|publishabl
 // Prevent repeating the production '$$$ is not defined' login bug.
 assert.doesNotMatch(editor,/\$\$\$\(/, 'Only the defined $$ DOM lookup helper may be used');
 assert.doesNotMatch(editor,/(?<!\$)\$\('[a-z-]+'\)/, 'Bare $ helper is not defined');
+
+// Free Supabase mailer sends Magic Links. Tokens must be read from the URL
+// fragment and immediately removed, never left in browser history.
+assert.match(editor,/STUDIO_REDIRECT_URL = 'https:\/\/jacekmiecznikowski\.github\.io\/impostor\/'/);
+assert.match(editor,/function consumeMagicLinkCallback\(/);
+assert.match(editor,/history\.replaceState\(null,'',window\.location\.pathname\+window\.location\.search\)/);
+assert.match(editor,/auth\/v1\/otp\?redirect_to=/);
+assert.doesNotMatch(html,/id="otp-code"|id="verify-code"/);

@@ -20,8 +20,9 @@ Panel: `admin/`. Baza: PostgreSQL w Supabase. Obecna aplikacja ma siedem różny
 2. Uruchom w **SQL Editor** `supabase/migrations/20261029_content_studio.sql`, a następnie `supabase/seed.sql`. Import jest bezpieczny przy ponownym wykonaniu — nie nadpisze edytowanych dokumentów. Seed można odtworzyć przez `node tools/generate-content-seed.mjs`.
 3. Zastosuj drugą migrację `supabase/migrations/20261029_editor_email_allowlist.sql`. Na działającej bazie Partyjniak już jest zastosowana: dopuszcza wyłącznie potwierdzone konto z adresem **`contact@swawole.studio`**. Nie trzeba znać UUID użytkownika.
 4. W [Supabase Dashboard → Authentication → Users](https://supabase.com/dashboard/project/astcatgvvliatokqalhd/auth/users) wybierz **Add user → Send invitation** i zaproś `contact@swawole.studio`. Zaproszenie konta Auth to jedyny konieczny ręczny krok — podłączona integracja nie ma uprawnień do zarządzania kontami Authentication. Nie twórz użytkownika bezpośrednio przez SQL.
-5. Wyłącz publiczną rejestrację (Authentication → Providers / Signups). W szablonie **Magic Link** zastąp domyślny link kodem `{{ .Token }}`; skonfiguruj też wysyłkę e-mail, aby docierały wiadomości OTP.
-6. Uruchom `npm run studio` i wejdź na `http://127.0.0.1:4174`. Adres bazy, publiczny klucz i adres e-mail są już wypełnione. Kliknij **Wyślij kod logowania** i wpisz kod z e-maila. Uprawnienia do zapisu i publikacji wymagają potwierdzonego adresu z listy.
+5. W [Authentication → URL Configuration](https://supabase.com/dashboard/project/astcatgvvliatokqalhd/auth/url-configuration) ustaw **Site URL** na `https://jacekmiecznikowski.github.io/impostor/` i dodaj ten sam dokładny adres do **Redirect URLs**. Zastępuje to domyślny `http://localhost:3000`.
+6. Supabase na darmowym planie może blokować edycję szablonów maili bez własnego SMTP — **nie konfiguruj płatnego SMTP**. Panel wykorzystuje domyślny **Magic Link**, a nie kod OTP. Otwórz https://jacekmiecznikowski.github.io/impostor/, kliknij **Wyślij link logowania**, a w e-mailu kliknij **Sign in**. Po przekierowaniu panel sam zapisze sesję i otworzy siedem gier. Przy pierwszym uruchomieniu sprawdź, czy konto jest na liście redaktorów. Nie przesyłaj nikomu linku logowania, tokenu ani hasła.
+
 
 ## Hosting panelu
 
