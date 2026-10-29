@@ -98,7 +98,7 @@ Nowe hasła pobierane są przy uruchomieniu gry z internetem, po czym pozostają
 
 ## Tykająca Bomba — 150 pytań na kategorię (2026-10-30)
 
-- **1200 pytań w ośmiu kategoriach ogólnych** — wszystkie po 150, opublikowane w Supabase jako `ticking-bomb/pl`, **rewizja 11**.
+- **1200 pytań w ośmiu kategoriach ogólnych** — wszystkie po 150, opublikowane w Supabase jako `ticking-bomb/pl`, **rewizja 13**.
 - **150 pytań w dziewiątej kategorii „18+ — Bez cenzury”** — tylko dla dorosłych, wyłącznie po indywidualnym włączeniu.
 - **Łącznie 1350 pytań** w `content/ticking-bomb-expanded.pl.json`. Brak identycznych pytań, wszystkie mieszczą się w limicie 80 znaków. Lokalne źródło jest kompletne i może działać przy pierwszym uruchomieniu nowej aplikacji offline.
 - Starszy plik `content/ticking-bomb.pl.json` (**96 pytań**) pozostaje niezmieniony jako historyczny seed i rezerwa.
