@@ -111,3 +111,5 @@ assert.match(editor,/function consumeMagicLinkCallback\(/);
 assert.match(editor,/history\.replaceState\(null,'',window\.location\.pathname\+window\.location\.search\)/);
 assert.match(editor,/auth\/v1\/otp\?redirect_to=/);
 assert.doesNotMatch(html,/id="otp-code"|id="verify-code"/);
+
+assert.match(editor,/addEventListener\('hashchange'/);

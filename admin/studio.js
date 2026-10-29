@@ -472,7 +472,16 @@ function bootstrap(){
       showToast('Nie udało się zalogować. Sprawdź uprawnienia konta lub spróbuj ponownie. '+error.message,true);
     });
   }catch{}
-  $$('connect-form').addEventListener('submit',sendMagicLink);
+  // Also handle hash-only navigation in a tab that already has the editor open.
+  // Supabase normally performs a full redirect, but browsers can reuse a tab.
+  window.addEventListener('hashchange', () => {
+    if (!consumeMagicLinkCallback()) return;
+    openStudio().catch(error => {
+      sessionStorage.removeItem(STORE_SESSION); session=null;
+      showToast('Nie udało się zalogować. '+error.message,true);
+    });
+  });
+  $('connect-form').addEventListener('submit',sendMagicLink);
   $$('logout').addEventListener('click',logout);
   $$('game-picker').addEventListener('change',e=>chooseGame(e.target.value));
   $$('group-search').addEventListener('input',renderGroups);
