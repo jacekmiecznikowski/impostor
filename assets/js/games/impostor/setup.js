@@ -182,6 +182,7 @@ function toggleCategory(key) {
         }
         state.activeCategories = state.activeCategories.filter(categoryKey => categoryKey !== key);
     } else {
+        if (key === 'dla_doroslych' && !window.confirm('Ta kategoria zawiera humor i aluzje dla dorosłych (18+). Czy wszyscy gracze są pełnoletni i chcą ją włączyć?')) return;
         state.activeCategories.push(key);
     }
     playSound('click');
