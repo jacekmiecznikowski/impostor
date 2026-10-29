@@ -295,6 +295,186 @@
             "Tarte ziemniaki",
             "Blacha"
           ]
+        },
+        {
+          "hint": "Święta",
+          "word": "Babka drożdżowa",
+          "hints": [
+            "Święta",
+            "Ciasto",
+            "Rodzynki"
+          ]
+        },
+        {
+          "hint": "Buraki",
+          "word": "Chłodnik",
+          "hints": [
+            "Buraki",
+            "Lato",
+            "Zupa"
+          ]
+        },
+        {
+          "hint": "Francja",
+          "word": "Zupa cebulowa",
+          "hints": [
+            "Francja",
+            "Ser",
+            "Grzanki"
+          ]
+        },
+        {
+          "hint": "Karmel",
+          "word": "Krem brulee",
+          "hints": [
+            "Karmel",
+            "Deser",
+            "Francja"
+          ]
+        },
+        {
+          "hint": "Bakłażan",
+          "word": "Moussaka",
+          "hints": [
+            "Bakłażan",
+            "Grecja",
+            "Zapiekanka"
+          ]
+        },
+        {
+          "hint": "Bazylia",
+          "word": "Pesto",
+          "hints": [
+            "Bazylia",
+            "Oliwa",
+            "Sos"
+          ]
+        },
+        {
+          "hint": "Indie",
+          "word": "Samosa",
+          "hints": [
+            "Indie",
+            "Trójkąt",
+            "Farsz"
+          ]
+        },
+        {
+          "hint": "Ser",
+          "word": "Fondue",
+          "hints": [
+            "Ser",
+            "Maczanie",
+            "Szwajcaria"
+          ]
+        },
+        {
+          "hint": "Cytrusy",
+          "word": "Ceviche",
+          "hints": [
+            "Cytrusy",
+            "Surowa ryba",
+            "Peru"
+          ]
+        },
+        {
+          "hint": "Cukier",
+          "word": "Churros",
+          "hints": [
+            "Cukier",
+            "Hiszpania",
+            "Smażone"
+          ]
+        },
+        {
+          "hint": "Orzechy",
+          "word": "Baklava",
+          "hints": [
+            "Orzechy",
+            "Miód",
+            "Turcja"
+          ]
+        },
+        {
+          "hint": "Rozmaryn",
+          "word": "Focaccia",
+          "hints": [
+            "Rozmaryn",
+            "Oliwa",
+            "Włochy"
+          ]
+        },
+        {
+          "hint": "Wietnam",
+          "word": "Pho",
+          "hints": [
+            "Wietnam",
+            "Bulion",
+            "Zioła"
+          ]
+        },
+        {
+          "hint": "Korea",
+          "word": "Kimchi",
+          "hints": [
+            "Korea",
+            "Kapusta",
+            "Fermentacja"
+          ]
+        },
+        {
+          "hint": "Włochy",
+          "word": "Gnocchi",
+          "hints": [
+            "Włochy",
+            "Ziemniaki",
+            "Kluski"
+          ]
+        },
+        {
+          "hint": "Kwaśna",
+          "word": "Tarta cytrynowa",
+          "hints": [
+            "Kwaśna",
+            "Krem",
+            "Wypiek"
+          ]
+        },
+        {
+          "hint": "Śmietanka",
+          "word": "Panna cotta",
+          "hints": [
+            "Śmietanka",
+            "Włochy",
+            "Galaretka"
+          ]
+        },
+        {
+          "hint": "Kukurydza",
+          "word": "Nachosy",
+          "hints": [
+            "Kukurydza",
+            "Salsa",
+            "Trójkąty"
+          ]
+        },
+        {
+          "hint": "Papier ryżowy",
+          "word": "Sajgonki",
+          "hints": [
+            "Papier ryżowy",
+            "Warzywa",
+            "Wietnam"
+          ]
+        },
+        {
+          "hint": "Gruby",
+          "word": "Makaron udon",
+          "hints": [
+            "Gruby",
+            "Japonia",
+            "Pszenica"
+          ]
         }
       ]
     },
@@ -590,6 +770,186 @@
             "Dno morza",
             "Płaska",
             "Płetwy"
+          ]
+        },
+        {
+          "hint": "Trąbka",
+          "word": "Tapir",
+          "hints": [
+            "Trąbka",
+            "Tropiki",
+            "Ssак"
+          ]
+        },
+        {
+          "hint": "Długi pysk",
+          "word": "Mrówkojad",
+          "hints": [
+            "Długi pysk",
+            "Owady",
+            "Język"
+          ]
+        },
+        {
+          "hint": "Meksyk",
+          "word": "Axolotl",
+          "hints": [
+            "Meksyk",
+            "Skrzela",
+            "Płaz"
+          ]
+        },
+        {
+          "hint": "Jednorożec morza",
+          "word": "Narwal",
+          "hints": [
+            "Jednorożec morza",
+            "Kieł",
+            "Arktyka"
+          ]
+        },
+        {
+          "hint": "Australia",
+          "word": "Wombat",
+          "hints": [
+            "Australia",
+            "Nora",
+            "Torbacz"
+          ]
+        },
+        {
+          "hint": "Australia",
+          "word": "Dingo",
+          "hints": [
+            "Australia",
+            "Dziki pies",
+            "Pustkowie"
+          ]
+        },
+        {
+          "hint": "Drapieżnik",
+          "word": "Rosomak",
+          "hints": [
+            "Drapieżnik",
+            "Futro",
+            "Północ"
+          ]
+        },
+        {
+          "hint": "Długie nogi",
+          "word": "Żuraw",
+          "hints": [
+            "Długie nogi",
+            "Ptak",
+            "Taniec"
+          ]
+        },
+        {
+          "hint": "Dziób",
+          "word": "Pelikan",
+          "hints": [
+            "Dziób",
+            "Worek",
+            "Ryby"
+          ]
+        },
+        {
+          "hint": "Andy",
+          "word": "Kondor",
+          "hints": [
+            "Andy",
+            "Szybowanie",
+            "Ptak"
+          ]
+        },
+        {
+          "hint": "Płaz",
+          "word": "Salamandra",
+          "hints": [
+            "Płaz",
+            "Wilgoć",
+            "Plamy"
+          ]
+        },
+        {
+          "hint": "Owady",
+          "word": "Modliszka",
+          "hints": [
+            "Owady",
+            "Złożone ręce",
+            "Polowanie"
+          ]
+        },
+        {
+          "hint": "Noc",
+          "word": "Świetlik",
+          "hints": [
+            "Noc",
+            "Światło",
+            "Owad"
+          ]
+        },
+        {
+          "hint": "Ogon",
+          "word": "Konik morski",
+          "hints": [
+            "Ogon",
+            "Morze",
+            "Samiec"
+          ]
+        },
+        {
+          "hint": "Ocean",
+          "word": "Kaszalot",
+          "hints": [
+            "Ocean",
+            "Wieloryb",
+            "Głębina"
+          ]
+        },
+        {
+          "hint": "Prędkość",
+          "word": "Gepard",
+          "hints": [
+            "Prędkość",
+            "Cętki",
+            "Afryka"
+          ]
+        },
+        {
+          "hint": "Pancerz",
+          "word": "Pancernik",
+          "hints": [
+            "Pancerz",
+            "Zwija się",
+            "Ameryka"
+          ]
+        },
+        {
+          "hint": "Tama",
+          "word": "Bóbr",
+          "hints": [
+            "Tama",
+            "Zęby",
+            "Rzeka"
+          ]
+        },
+        {
+          "hint": "Ogon",
+          "word": "Jaszczurka",
+          "hints": [
+            "Ogon",
+            "Słońce",
+            "Gad"
+          ]
+        },
+        {
+          "hint": "Muszla",
+          "word": "Krab pustelnik",
+          "hints": [
+            "Muszla",
+            "Plaża",
+            "Szczypce"
           ]
         }
       ]
@@ -887,6 +1247,186 @@
             "Widownia",
             "Scena"
           ]
+        },
+        {
+          "hint": "Sól",
+          "word": "Jaskinia solna",
+          "hints": [
+            "Sól",
+            "Podziemie",
+            "Relaks"
+          ]
+        },
+        {
+          "hint": "Paczka",
+          "word": "Urząd pocztowy",
+          "hints": [
+            "Paczka",
+            "Okienko",
+            "Znaczki"
+          ]
+        },
+        {
+          "hint": "Antyki",
+          "word": "Targ staroci",
+          "hints": [
+            "Antyki",
+            "Stragany",
+            "Pchli"
+          ]
+        },
+        {
+          "hint": "Espresso",
+          "word": "Kawiarnia",
+          "hints": [
+            "Espresso",
+            "Stolik",
+            "Barista"
+          ]
+        },
+        {
+          "hint": "Miasto",
+          "word": "Ratusz",
+          "hints": [
+            "Miasto",
+            "Urząd",
+            "Wieża"
+          ]
+        },
+        {
+          "hint": "Orkiestra",
+          "word": "Filharmonia",
+          "hints": [
+            "Orkiestra",
+            "Koncert",
+            "Sala"
+          ]
+        },
+        {
+          "hint": "Namiot",
+          "word": "Cyrk",
+          "hints": [
+            "Namiot",
+            "Akrobata",
+            "Arena"
+          ]
+        },
+        {
+          "hint": "Schron",
+          "word": "Bunkier",
+          "hints": [
+            "Schron",
+            "Beton",
+            "Podziemie"
+          ]
+        },
+        {
+          "hint": "Mundur",
+          "word": "Posterunek policji",
+          "hints": [
+            "Mundur",
+            "Zgłoszenie",
+            "Dyżurka"
+          ]
+        },
+        {
+          "hint": "Winorośl",
+          "word": "Winnica",
+          "hints": [
+            "Winorośl",
+            "Zbiór",
+            "Winogrona"
+          ]
+        },
+        {
+          "hint": "Chmiel",
+          "word": "Browar",
+          "hints": [
+            "Chmiel",
+            "Kadzie",
+            "Warzenie"
+          ]
+        },
+        {
+          "hint": "Pielgrzymka",
+          "word": "Sanktuarium",
+          "hints": [
+            "Pielgrzymka",
+            "Świątynia",
+            "Cisza"
+          ]
+        },
+        {
+          "hint": "Dokumenty",
+          "word": "Archiwum",
+          "hints": [
+            "Dokumenty",
+            "Akta",
+            "Regały"
+          ]
+        },
+        {
+          "hint": "Bukiety",
+          "word": "Targ kwiatowy",
+          "hints": [
+            "Bukiety",
+            "Stragany",
+            "Rośliny"
+          ]
+        },
+        {
+          "hint": "Łodzie",
+          "word": "Przystań",
+          "hints": [
+            "Łodzie",
+            "Cumy",
+            "Brzeg"
+          ]
+        },
+        {
+          "hint": "Panorama",
+          "word": "Dach wieżowca",
+          "hints": [
+            "Panorama",
+            "Wysokość",
+            "Miasto"
+          ]
+        },
+        {
+          "hint": "Stoiska",
+          "word": "Hala targowa",
+          "hints": [
+            "Stoiska",
+            "Kupcy",
+            "Zadaszenie"
+          ]
+        },
+        {
+          "hint": "Nagrobki",
+          "word": "Cmentarz",
+          "hints": [
+            "Nagrobki",
+            "Pamięć",
+            "Alejki"
+          ]
+        },
+        {
+          "hint": "Hale",
+          "word": "Opuszczona fabryka",
+          "hints": [
+            "Hale",
+            "Ruiny",
+            "Maszyny"
+          ]
+        },
+        {
+          "hint": "Lawa",
+          "word": "Wulkaniczna wyspa",
+          "hints": [
+            "Lawa",
+            "Morze",
+            "Krater"
+          ]
         }
       ]
     },
@@ -1182,6 +1722,186 @@
             "Piasek",
             "Czas",
             "Odwracanie"
+          ]
+        },
+        {
+          "hint": "Papier",
+          "word": "Dziurkacz",
+          "hints": [
+            "Papier",
+            "Otwory",
+            "Biuro"
+          ]
+        },
+        {
+          "hint": "Powiększenie",
+          "word": "Lupa",
+          "hints": [
+            "Powiększenie",
+            "Szkło",
+            "Detektyw"
+          ]
+        },
+        {
+          "hint": "Ziarna",
+          "word": "Młynek do kawy",
+          "hints": [
+            "Ziarna",
+            "Mielenie",
+            "Aromat"
+          ]
+        },
+        {
+          "hint": "Kropla",
+          "word": "Pipeta",
+          "hints": [
+            "Kropla",
+            "Laboratorium",
+            "Szkło"
+          ]
+        },
+        {
+          "hint": "Zamiatanie",
+          "word": "Miotła",
+          "hints": [
+            "Zamiatanie",
+            "Szczotka",
+            "Podłoga"
+          ]
+        },
+        {
+          "hint": "Para",
+          "word": "Parownica",
+          "hints": [
+            "Para",
+            "Ubrania",
+            "Zagniecenia"
+          ]
+        },
+        {
+          "hint": "Cyfry",
+          "word": "Waga łazienkowa",
+          "hints": [
+            "Cyfry",
+            "Kilogramy",
+            "Pomiar"
+          ]
+        },
+        {
+          "hint": "Puszka",
+          "word": "Otwieracz do konserw",
+          "hints": [
+            "Puszka",
+            "Wieczko",
+            "Kuchnia"
+          ]
+        },
+        {
+          "hint": "Płomień",
+          "word": "Latarnia naftowa",
+          "hints": [
+            "Płomień",
+            "Szkło",
+            "Dawniej"
+          ]
+        },
+        {
+          "hint": "Żegluga",
+          "word": "Sekstant",
+          "hints": [
+            "Żegluga",
+            "Gwiazdy",
+            "Nawigacja"
+          ]
+        },
+        {
+          "hint": "Piana",
+          "word": "Pompka do mydła",
+          "hints": [
+            "Piana",
+            "Łazienka",
+            "Dozownik"
+          ]
+        },
+        {
+          "hint": "Szycie",
+          "word": "Szpulka nici",
+          "hints": [
+            "Szycie",
+            "Nitka",
+            "Krawiec"
+          ]
+        },
+        {
+          "hint": "Kierownica",
+          "word": "Dzwonek rowerowy",
+          "hints": [
+            "Kierownica",
+            "Sygnał",
+            "Rower"
+          ]
+        },
+        {
+          "hint": "Pranie",
+          "word": "Klamerka",
+          "hints": [
+            "Pranie",
+            "Sznurek",
+            "Zacisk"
+          ]
+        },
+        {
+          "hint": "Mróz",
+          "word": "Skrobaczka do szyb",
+          "hints": [
+            "Mróz",
+            "Auto",
+            "Lód"
+          ]
+        },
+        {
+          "hint": "Butelka",
+          "word": "Kapslownica",
+          "hints": [
+            "Butelka",
+            "Zamykanie",
+            "Metal"
+          ]
+        },
+        {
+          "hint": "Rozciąganie",
+          "word": "Gumka recepturka",
+          "hints": [
+            "Rozciąganie",
+            "Zwijanie",
+            "Papier"
+          ]
+        },
+        {
+          "hint": "Budowa",
+          "word": "Poziomica",
+          "hints": [
+            "Budowa",
+            "Bąbelek",
+            "Prosto"
+          ]
+        },
+        {
+          "hint": "Czesanie",
+          "word": "Szczotka do włosów",
+          "hints": [
+            "Czesanie",
+            "Rączka",
+            "Zęby"
+          ]
+        },
+        {
+          "hint": "Żelazko",
+          "word": "Deska do prasowania",
+          "hints": [
+            "Żelazko",
+            "Pokrowiec",
+            "Ubrania"
           ]
         }
       ]
@@ -1479,6 +2199,186 @@
             "Scena",
             "Magia"
           ]
+        },
+        {
+          "hint": "Kowadło",
+          "word": "Kowal",
+          "hints": [
+            "Kowadło",
+            "Młot",
+            "Kuźnia"
+          ]
+        },
+        {
+          "hint": "Sadza",
+          "word": "Kominiarz",
+          "hints": [
+            "Sadza",
+            "Dach",
+            "Czarny"
+          ]
+        },
+        {
+          "hint": "Człowiek",
+          "word": "Antropolog",
+          "hints": [
+            "Człowiek",
+            "Kultura",
+            "Badanie"
+          ]
+        },
+        {
+          "hint": "Morze",
+          "word": "Oceanograf",
+          "hints": [
+            "Morze",
+            "Głębiny",
+            "Nauka"
+          ]
+        },
+        {
+          "hint": "Mapy",
+          "word": "Kartograf morski",
+          "hints": [
+            "Mapy",
+            "Żegluga",
+            "Port"
+          ]
+        },
+        {
+          "hint": "Dźwięk",
+          "word": "Akustyk",
+          "hints": [
+            "Dźwięk",
+            "Sala",
+            "Pomiar"
+          ]
+        },
+        {
+          "hint": "Dekoracje",
+          "word": "Scenograf",
+          "hints": [
+            "Dekoracje",
+            "Teatr",
+            "Plan"
+          ]
+        },
+        {
+          "hint": "Makijaż",
+          "word": "Charakteryzator",
+          "hints": [
+            "Makijaż",
+            "Film",
+            "Metamorfoza"
+          ]
+        },
+        {
+          "hint": "Wycena",
+          "word": "Rzeczoznawca",
+          "hints": [
+            "Wycena",
+            "Ekspertyza",
+            "Wartość"
+          ]
+        },
+        {
+          "hint": "Torty",
+          "word": "Cukiernik",
+          "hints": [
+            "Torty",
+            "Krem",
+            "Deser"
+          ]
+        },
+        {
+          "hint": "Rośliny",
+          "word": "Archeobotanik",
+          "hints": [
+            "Rośliny",
+            "Wykopaliska",
+            "Nasiona"
+          ]
+        },
+        {
+          "hint": "Skamieliny",
+          "word": "Paleontolog",
+          "hints": [
+            "Skamieliny",
+            "Dinozaury",
+            "Nauka"
+          ]
+        },
+        {
+          "hint": "Skrzypce",
+          "word": "Lutnik",
+          "hints": [
+            "Skrzypce",
+            "Drewno",
+            "Instrument"
+          ]
+        },
+        {
+          "hint": "Bukiety",
+          "word": "Florysta",
+          "hints": [
+            "Bukiety",
+            "Kwiaty",
+            "Kompozycje"
+          ]
+        },
+        {
+          "hint": "Audycja",
+          "word": "Radiowiec",
+          "hints": [
+            "Audycja",
+            "Mikrofon",
+            "Studio"
+          ]
+        },
+        {
+          "hint": "Miasto",
+          "word": "Urbanista",
+          "hints": [
+            "Miasto",
+            "Planowanie",
+            "Ulice"
+          ]
+        },
+        {
+          "hint": "Las",
+          "word": "Strażnik leśny",
+          "hints": [
+            "Las",
+            "Ochrona",
+            "Patrol"
+          ]
+        },
+        {
+          "hint": "Załoga",
+          "word": "Kapitan statku",
+          "hints": [
+            "Załoga",
+            "Morze",
+            "Mostek"
+          ]
+        },
+        {
+          "hint": "Film",
+          "word": "Montażysta",
+          "hints": [
+            "Film",
+            "Cięcia",
+            "Ujęcia"
+          ]
+        },
+        {
+          "hint": "Kontrola",
+          "word": "Inspektor budowlany",
+          "hints": [
+            "Kontrola",
+            "Budynek",
+            "Przepisy"
+          ]
         }
       ]
     },
@@ -1775,6 +2675,186 @@
             "Stumilowy Las",
             "Miś"
           ]
+        },
+        {
+          "hint": "Saiyanin",
+          "word": "Dragon Ball",
+          "hints": [
+            "Saiyanin",
+            "Goku",
+            "Anime"
+          ]
+        },
+        {
+          "hint": "Ninja",
+          "word": "Naruto",
+          "hints": [
+            "Ninja",
+            "Konohа",
+            "Anime"
+          ]
+        },
+        {
+          "hint": "Piraci",
+          "word": "One Piece",
+          "hints": [
+            "Piraci",
+            "Luffy",
+            "Anime"
+          ]
+        },
+        {
+          "hint": "Smoki",
+          "word": "Gra o tron",
+          "hints": [
+            "Smoki",
+            "Żelazny Tron",
+            "Westeros"
+          ]
+        },
+        {
+          "hint": "Chemia",
+          "word": "Breaking Bad",
+          "hints": [
+            "Chemia",
+            "Walter",
+            "Serial"
+          ]
+        },
+        {
+          "hint": "Kawiarnia",
+          "word": "Przyjaciele",
+          "hints": [
+            "Kawiarnia",
+            "Nowy Jork",
+            "Sitcom"
+          ]
+        },
+        {
+          "hint": "Biuro",
+          "word": "The Office",
+          "hints": [
+            "Biuro",
+            "Dokumentalny",
+            "Serial"
+          ]
+        },
+        {
+          "hint": "Żółci",
+          "word": "Simpsonowie",
+          "hints": [
+            "Żółci",
+            "Springfield",
+            "Rodzina"
+          ]
+        },
+        {
+          "hint": "Animacja",
+          "word": "South Park",
+          "hints": [
+            "Animacja",
+            "Kolorado",
+            "Satyra"
+          ]
+        },
+        {
+          "hint": "Portal",
+          "word": "Rick i Morty",
+          "hints": [
+            "Portal",
+            "Wymiary",
+            "Animacja"
+          ]
+        },
+        {
+          "hint": "Zabawki",
+          "word": "Toy Story",
+          "hints": [
+            "Zabawki",
+            "Buzz",
+            "Pixar"
+          ]
+        },
+        {
+          "hint": "Osioł",
+          "word": "Shrek 2",
+          "hints": [
+            "Osioł",
+            "Bajka",
+            "Kontynuacja"
+          ]
+        },
+        {
+          "hint": "Bazyliszek",
+          "word": "Harry Potter i Komnata Tajemnic",
+          "hints": [
+            "Bazyliszek",
+            "Hogwart",
+            "Książka"
+          ]
+        },
+        {
+          "hint": "Arrakis",
+          "word": "Dune",
+          "hints": [
+            "Arrakis",
+            "Przyprawa",
+            "Pustynia"
+          ]
+        },
+        {
+          "hint": "Korea",
+          "word": "Squid Game",
+          "hints": [
+            "Korea",
+            "Maski",
+            "Gra"
+          ]
+        },
+        {
+          "hint": "Kapelusze",
+          "word": "Peaky Blinders",
+          "hints": [
+            "Kapelusze",
+            "Birmingham",
+            "Gang"
+          ]
+        },
+        {
+          "hint": "Hełm",
+          "word": "Mandalorianin",
+          "hints": [
+            "Hełm",
+            "Dziecko",
+            "Kosmos"
+          ]
+        },
+        {
+          "hint": "Battle royale",
+          "word": "Fortnite",
+          "hints": [
+            "Battle royale",
+            "Budowanie",
+            "Gra"
+          ]
+        },
+        {
+          "hint": "Sabotaż",
+          "word": "Among Us",
+          "hints": [
+            "Sabotaż",
+            "Załoga",
+            "Kosmos"
+          ]
+        },
+        {
+          "hint": "Wyspa",
+          "word": "Animal Crossing",
+          "hints": [
+            "Wyspa",
+            "Zwierzęta",
+            "Nintendo"
+          ]
         }
       ]
     },
@@ -2043,6 +3123,186 @@
             "Mały",
             "Elektronika",
             "Obudowa"
+          ]
+        },
+        {
+          "hint": "Czerń",
+          "word": "Ekran OLED",
+          "hints": [
+            "Czerń",
+            "Piksele",
+            "Telewizor"
+          ]
+        },
+        {
+          "hint": "Toner",
+          "word": "Drukarka laserowa",
+          "hints": [
+            "Toner",
+            "Biuro",
+            "Papier"
+          ]
+        },
+        {
+          "hint": "Internet",
+          "word": "Światłowód",
+          "hints": [
+            "Internet",
+            "Szkło",
+            "Światło"
+          ]
+        },
+        {
+          "hint": "Obraz",
+          "word": "Karta graficzna",
+          "hints": [
+            "Obraz",
+            "Gry",
+            "Renderowanie"
+          ]
+        },
+        {
+          "hint": "Komputer",
+          "word": "Płyta główna",
+          "hints": [
+            "Komputer",
+            "Podzespoły",
+            "Obwody"
+          ]
+        },
+        {
+          "hint": "Ciepło",
+          "word": "Kamera termowizyjna",
+          "hints": [
+            "Ciepło",
+            "Obraz",
+            "Podczerwień"
+          ]
+        },
+        {
+          "hint": "Alarm",
+          "word": "Czujnik ruchu",
+          "hints": [
+            "Alarm",
+            "Wykrywanie",
+            "Automatyka"
+          ]
+        },
+        {
+          "hint": "Biometria",
+          "word": "Skaner twarzy",
+          "hints": [
+            "Biometria",
+            "Logowanie",
+            "Kamera"
+          ]
+        },
+        {
+          "hint": "Bez kabla",
+          "word": "Ładowanie indukcyjne",
+          "hints": [
+            "Bez kabla",
+            "Cewka",
+            "Telefon"
+          ]
+        },
+        {
+          "hint": "Polecenie",
+          "word": "Wirtualny asystent",
+          "hints": [
+            "Polecenie",
+            "Głos",
+            "Odpowiedź"
+          ]
+        },
+        {
+          "hint": "Szafy",
+          "word": "Serwerownia",
+          "hints": [
+            "Szafy",
+            "Chłodzenie",
+            "Dane"
+          ]
+        },
+        {
+          "hint": "Uczenie",
+          "word": "Sieć neuronowa",
+          "hints": [
+            "Uczenie",
+            "Wagi",
+            "Algorytm"
+          ]
+        },
+        {
+          "hint": "Bezpieczeństwo",
+          "word": "Firewall",
+          "hints": [
+            "Bezpieczeństwo",
+            "Ruch",
+            "Sieć"
+          ]
+        },
+        {
+          "hint": "Obraz",
+          "word": "Kabel HDMI",
+          "hints": [
+            "Obraz",
+            "Port",
+            "Telewizor"
+          ]
+        },
+        {
+          "hint": "Ergonomia",
+          "word": "Myszka pionowa",
+          "hints": [
+            "Ergonomia",
+            "Komputer",
+            "Dłoń"
+          ]
+        },
+        {
+          "hint": "Porty",
+          "word": "Stacja dokująca",
+          "hints": [
+            "Porty",
+            "Laptop",
+            "Podłączanie"
+          ]
+        },
+        {
+          "hint": "Nagrywanie",
+          "word": "Kamera sportowa",
+          "hints": [
+            "Nagrywanie",
+            "Kask",
+            "Wodoodporna"
+          ]
+        },
+        {
+          "hint": "Pliki",
+          "word": "Dysk zewnętrzny",
+          "hints": [
+            "Pliki",
+            "USB",
+            "Backup"
+          ]
+        },
+        {
+          "hint": "Kod",
+          "word": "Zamek elektroniczny",
+          "hints": [
+            "Kod",
+            "Drzwi",
+            "Dostęp"
+          ]
+        },
+        {
+          "hint": "Ekran",
+          "word": "Domofon wideo",
+          "hints": [
+            "Ekran",
+            "Gość",
+            "Drzwi"
           ]
         }
       ]
@@ -2313,6 +3573,186 @@
             "Paletka",
             "Stół"
           ]
+        },
+        {
+          "hint": "Piaskownica",
+          "word": "Skok w dal",
+          "hints": [
+            "Piaskownica",
+            "Rozbieg",
+            "Lekkoatletyka"
+          ]
+        },
+        {
+          "hint": "Włócznia",
+          "word": "Rzut oszczepem",
+          "hints": [
+            "Włócznia",
+            "Stadion",
+            "Dystans"
+          ]
+        },
+        {
+          "hint": "42 kilometry",
+          "word": "Bieg maratoński",
+          "hints": [
+            "42 kilometry",
+            "Wytrzymałość",
+            "Trasa"
+          ]
+        },
+        {
+          "hint": "Narty",
+          "word": "Biathlon",
+          "hints": [
+            "Narty",
+            "Karabin",
+            "Zima"
+          ]
+        },
+        {
+          "hint": "Krążek",
+          "word": "Hokej na lodzie",
+          "hints": [
+            "Krążek",
+            "Łyżwy",
+            "Bramka"
+          ]
+        },
+        {
+          "hint": "Owalna piłka",
+          "word": "Rugby",
+          "hints": [
+            "Owalna piłka",
+            "Szarża",
+            "Boisko"
+          ]
+        },
+        {
+          "hint": "Konie",
+          "word": "Polo",
+          "hints": [
+            "Konie",
+            "Kije",
+            "Zawody"
+          ]
+        },
+        {
+          "hint": "Żagiel",
+          "word": "Windsurfing",
+          "hints": [
+            "Żagiel",
+            "Deska",
+            "Wiatr"
+          ]
+        },
+        {
+          "hint": "Latawiec",
+          "word": "Kitesurfing",
+          "hints": [
+            "Latawiec",
+            "Deska",
+            "Woda"
+          ]
+        },
+        {
+          "hint": "Taśma",
+          "word": "Slackline",
+          "hints": [
+            "Taśma",
+            "Równowaga",
+            "Spacer"
+          ]
+        },
+        {
+          "hint": "Ścianka",
+          "word": "Bouldering",
+          "hints": [
+            "Ścianka",
+            "Chwyty",
+            "Bez liny"
+          ]
+        },
+        {
+          "hint": "Skakanie",
+          "word": "Parkour",
+          "hints": [
+            "Skakanie",
+            "Przeszkody",
+            "Miasto"
+          ]
+        },
+        {
+          "hint": "Pałeczka",
+          "word": "Sztafeta",
+          "hints": [
+            "Pałeczka",
+            "Drużyna",
+            "Bieg"
+          ]
+        },
+        {
+          "hint": "Metalowa kula",
+          "word": "Pchnięcie kulą",
+          "hints": [
+            "Metalowa kula",
+            "Lekkoatletyka",
+            "Rzut"
+          ]
+        },
+        {
+          "hint": "Metalowe kule",
+          "word": "Pétanque",
+          "hints": [
+            "Metalowe kule",
+            "Żwirek",
+            "Francja"
+          ]
+        },
+        {
+          "hint": "Ściana",
+          "word": "Squash",
+          "hints": [
+            "Ściana",
+            "Rakieta",
+            "Hala"
+          ]
+        },
+        {
+          "hint": "Kort",
+          "word": "Padel",
+          "hints": [
+            "Kort",
+            "Szyby",
+            "Debel"
+          ]
+        },
+        {
+          "hint": "Kopnięcie",
+          "word": "Taekwondo",
+          "hints": [
+            "Kopnięcie",
+            "Mata",
+            "Sztuki walki"
+          ]
+        },
+        {
+          "hint": "Brazylia",
+          "word": "Capoeira",
+          "hints": [
+            "Brazylia",
+            "Taniec",
+            "Walka"
+          ]
+        },
+        {
+          "hint": "Płotki",
+          "word": "Bieg z przeszkodami",
+          "hints": [
+            "Płotki",
+            "Tor",
+            "Zwinność"
+          ]
         }
       ]
     },
@@ -2336,8 +3776,8 @@
           "word": "Pianino",
           "hints": [
             "Klawisze",
-            "klawisze",
-            "fortepian"
+            "Fortepian",
+            "Pedały"
           ]
         },
         {
@@ -2372,8 +3812,8 @@
           "word": "Słuchawki",
           "hints": [
             "Uszy",
-            "audio",
-            "uszy"
+            "Audio",
+            "Muzyka"
           ]
         },
         {
@@ -2399,8 +3839,8 @@
           "word": "Wiolonczela",
           "hints": [
             "Smyczek",
-            "orkiestra",
-            "smyczek"
+            "Orkiestra",
+            "Niski dźwięk"
           ]
         },
         {
@@ -2582,6 +4022,186 @@
             "Orkiestra",
             "Zapis"
           ]
+        },
+        {
+          "hint": "Metalowe języczki",
+          "word": "Kalimba",
+          "hints": [
+            "Metalowe języczki",
+            "Kciuki",
+            "Afryka"
+          ]
+        },
+        {
+          "hint": "Okrągłe pudło",
+          "word": "Banjo",
+          "hints": [
+            "Okrągłe pudło",
+            "Struny",
+            "Country"
+          ]
+        },
+        {
+          "hint": "Australia",
+          "word": "Didgeridoo",
+          "hints": [
+            "Australia",
+            "Długi",
+            "Dźwięk"
+          ]
+        },
+        {
+          "hint": "Szkocja",
+          "word": "Dudy",
+          "hints": [
+            "Szkocja",
+            "Worek",
+            "Piszczałki"
+          ]
+        },
+        {
+          "hint": "Struny",
+          "word": "Mandolina",
+          "hints": [
+            "Struny",
+            "Włochy",
+            "Mała"
+          ]
+        },
+        {
+          "hint": "Grzechotka",
+          "word": "Marakasy",
+          "hints": [
+            "Grzechotka",
+            "Rytm",
+            "Taniec"
+          ]
+        },
+        {
+          "hint": "Pałeczki",
+          "word": "Ksylofon",
+          "hints": [
+            "Pałeczki",
+            "Drewniane płytki",
+            "Melodia"
+          ]
+        },
+        {
+          "hint": "Metalowe sztabki",
+          "word": "Wibrafon",
+          "hints": [
+            "Metalowe sztabki",
+            "Jazz",
+            "Pałeczki"
+          ]
+        },
+        {
+          "hint": "Dzwonki",
+          "word": "Tamburyn",
+          "hints": [
+            "Dzwonki",
+            "Rytm",
+            "Okrągły"
+          ]
+        },
+        {
+          "hint": "Niskie tony",
+          "word": "Tuba",
+          "hints": [
+            "Niskie tony",
+            "Blacha",
+            "Orkiestra"
+          ]
+        },
+        {
+          "hint": "Stroik",
+          "word": "Klarnet",
+          "hints": [
+            "Stroik",
+            "Czarny",
+            "Dęty"
+          ]
+        },
+        {
+          "hint": "Suwak",
+          "word": "Puzon",
+          "hints": [
+            "Suwak",
+            "Blacha",
+            "Orkiestra"
+          ]
+        },
+        {
+          "hint": "Dźwięki",
+          "word": "Sampler",
+          "hints": [
+            "Dźwięki",
+            "Elektronika",
+            "Próbki"
+          ]
+        },
+        {
+          "hint": "Zapętlanie",
+          "word": "Looper",
+          "hints": [
+            "Zapętlanie",
+            "Nagrywanie",
+            "Efekt"
+          ]
+        },
+        {
+          "hint": "Czarna płyta",
+          "word": "Winyl",
+          "hints": [
+            "Czarna płyta",
+            "Gramofon",
+            "Igła"
+          ]
+        },
+        {
+          "hint": "Taśma",
+          "word": "Kaseta magnetofonowa",
+          "hints": [
+            "Taśma",
+            "Przewijanie",
+            "Walkman"
+          ]
+        },
+        {
+          "hint": "Dyrygent",
+          "word": "Orkiestra symfoniczna",
+          "hints": [
+            "Dyrygent",
+            "Muzycy",
+            "Filharmonia"
+          ]
+        },
+        {
+          "hint": "Tło",
+          "word": "Muzyka ambient",
+          "hints": [
+            "Tło",
+            "Atmosfera",
+            "Spokój"
+          ]
+        },
+        {
+          "hint": "Śpiew",
+          "word": "Opera rockowa",
+          "hints": [
+            "Śpiew",
+            "Gitara",
+            "Scena"
+          ]
+        },
+        {
+          "hint": "Solo",
+          "word": "Improwizacja jazzowa",
+          "hints": [
+            "Solo",
+            "Saksofon",
+            "Spontaniczność"
+          ]
         }
       ]
     },
@@ -2642,7 +4262,7 @@
           "hints": [
             "Egipt",
             "Nil",
-            "Egipt"
+            "Grobowiec"
           ]
         },
         {
@@ -2650,8 +4270,8 @@
           "word": "Cesarz",
           "hints": [
             "Imperium",
-            "imperium",
-            "dynastia"
+            "Dynastia",
+            "Tron"
           ]
         },
         {
@@ -2660,7 +4280,7 @@
           "hints": [
             "1410",
             "Krzyżacy",
-            "1410"
+            "Jagiełło"
           ]
         },
         {
@@ -2833,6 +4453,186 @@
             "Filozofia",
             "Polis"
           ]
+        },
+        {
+          "hint": "Gladiator",
+          "word": "Spartakus",
+          "hints": [
+            "Gladiator",
+            "Rzym",
+            "Bunt"
+          ]
+        },
+        {
+          "hint": "Macedonia",
+          "word": "Aleksander Wielki",
+          "hints": [
+            "Macedonia",
+            "Podboje",
+            "Antyk"
+          ]
+        },
+        {
+          "hint": "Rzym",
+          "word": "Juliusz Cezar",
+          "hints": [
+            "Rzym",
+            "Senat",
+            "Idy marcowe"
+          ]
+        },
+        {
+          "hint": "Rad",
+          "word": "Maria Skłodowska-Curie",
+          "hints": [
+            "Rad",
+            "Nobel",
+            "Chemia"
+          ]
+        },
+        {
+          "hint": "Wynalazki",
+          "word": "Leonardo da Vinci",
+          "hints": [
+            "Wynalazki",
+            "Mona Lisa",
+            "Renesans"
+          ]
+        },
+        {
+          "hint": "Heliocentryzm",
+          "word": "Mikołaj Kopernik",
+          "hints": [
+            "Heliocentryzm",
+            "Toruń",
+            "Astronomia"
+          ]
+        },
+        {
+          "hint": "Anglia",
+          "word": "Wojna stuletnia",
+          "hints": [
+            "Anglia",
+            "Francja",
+            "Średniowiecze"
+          ]
+        },
+        {
+          "hint": "Dżuma",
+          "word": "Wielka zaraza",
+          "hints": [
+            "Dżuma",
+            "Europa",
+            "Średniowiecze"
+          ]
+        },
+        {
+          "hint": "Hiszpania",
+          "word": "Wielka Armada",
+          "hints": [
+            "Hiszpania",
+            "Flota",
+            "Anglia"
+          ]
+        },
+        {
+          "hint": "Napoleon",
+          "word": "Bitwa pod Waterloo",
+          "hints": [
+            "Napoleon",
+            "1815",
+            "Porażka"
+          ]
+        },
+        {
+          "hint": "Bastylia",
+          "word": "Rewolucja francuska",
+          "hints": [
+            "Bastylia",
+            "1789",
+            "Paryż"
+          ]
+        },
+        {
+          "hint": "Anglia",
+          "word": "Epoka wiktoriańska",
+          "hints": [
+            "Anglia",
+            "Królowa",
+            "XIX wiek"
+          ]
+        },
+        {
+          "hint": "Egipt",
+          "word": "Kamień z Rosetty",
+          "hints": [
+            "Egipt",
+            "Hieroglify",
+            "Odczyt"
+          ]
+        },
+        {
+          "hint": "Kolumb",
+          "word": "Odkrycie Ameryki",
+          "hints": [
+            "Kolumb",
+            "1492",
+            "Wyprawa"
+          ]
+        },
+        {
+          "hint": "Bracia Wright",
+          "word": "Pierwszy lot samolotem",
+          "hints": [
+            "Bracia Wright",
+            "1903",
+            "Maszyna"
+          ]
+        },
+        {
+          "hint": "Gagarin",
+          "word": "Pierwszy człowiek w kosmosie",
+          "hints": [
+            "Gagarin",
+            "1961",
+            "Orbita"
+          ]
+        },
+        {
+          "hint": "Apollo",
+          "word": "Lądowanie na Księżycu",
+          "hints": [
+            "Apollo",
+            "1969",
+            "Astronauta"
+          ]
+        },
+        {
+          "hint": "Granice",
+          "word": "Rozbiór Polski",
+          "hints": [
+            "Granice",
+            "Zabory",
+            "Historia"
+          ]
+        },
+        {
+          "hint": "1830",
+          "word": "Powstanie listopadowe",
+          "hints": [
+            "1830",
+            "Polska",
+            "Zryw"
+          ]
+        },
+        {
+          "hint": "Stocznia",
+          "word": "Solidarność",
+          "hints": [
+            "Stocznia",
+            "Związek",
+            "Gdańsk"
+          ]
         }
       ]
     },
@@ -2901,8 +4701,8 @@
           "word": "Feniks",
           "hints": [
             "Odrodzenie",
-            "popiół",
-            "odrodzenie"
+            "Popiół",
+            "Ognisty ptak"
           ]
         },
         {
@@ -2910,8 +4710,8 @@
           "word": "Troll",
           "hints": [
             "Most",
-            "most",
-            "potwór"
+            "Jaskinia",
+            "Potwór"
           ]
         },
         {
@@ -2919,8 +4719,8 @@
           "word": "Krasnolud",
           "hints": [
             "Kopalnia",
-            "kopalnia",
-            "krótka broda"
+            "Topór",
+            "Krótka broda"
           ]
         },
         {
@@ -3102,6 +4902,186 @@
             "Magia",
             "Mieszkańcy"
           ]
+        },
+        {
+          "hint": "Życzenia",
+          "word": "Dżin z lampy",
+          "hints": [
+            "Życzenia",
+            "Dym",
+            "Magia"
+          ]
+        },
+        {
+          "hint": "Odbicie",
+          "word": "Zaczarowane lustro",
+          "hints": [
+            "Odbicie",
+            "Prawda",
+            "Baśń"
+          ]
+        },
+        {
+          "hint": "Skorupka",
+          "word": "Smocze jajo",
+          "hints": [
+            "Skorupka",
+            "Ogień",
+            "Gniazdo"
+          ]
+        },
+        {
+          "hint": "Drzewa",
+          "word": "Las zaklęty",
+          "hints": [
+            "Drzewa",
+            "Czar",
+            "Tajemnica"
+          ]
+        },
+        {
+          "hint": "Światło",
+          "word": "Czarodziejska różdżka z kryształem",
+          "hints": [
+            "Światło",
+            "Zaklęcia",
+            "Mag"
+          ]
+        },
+        {
+          "hint": "Złoto",
+          "word": "Skrzynia skarbów",
+          "hints": [
+            "Złoto",
+            "Klucz",
+            "Piraci"
+          ]
+        },
+        {
+          "hint": "Symbol",
+          "word": "Runa",
+          "hints": [
+            "Symbol",
+            "Kamień",
+            "Magia"
+          ]
+        },
+        {
+          "hint": "Naszyjnik",
+          "word": "Amulet ochronny",
+          "hints": [
+            "Naszyjnik",
+            "Talizman",
+            "Zaklęcie"
+          ]
+        },
+        {
+          "hint": "Przejście",
+          "word": "Portal między światami",
+          "hints": [
+            "Przejście",
+            "Wymiary",
+            "Brama"
+          ]
+        },
+        {
+          "hint": "Krzyk",
+          "word": "Banshee",
+          "hints": [
+            "Krzyk",
+            "Duch",
+            "Irlandia"
+          ]
+        },
+        {
+          "hint": "Drzewo",
+          "word": "Driada",
+          "hints": [
+            "Drzewo",
+            "Nimfa",
+            "Las"
+          ]
+        },
+        {
+          "hint": "Strumień",
+          "word": "Nimfa wodna",
+          "hints": [
+            "Strumień",
+            "Mit",
+            "Magia"
+          ]
+        },
+        {
+          "hint": "Furia",
+          "word": "Berserker",
+          "hints": [
+            "Furia",
+            "Wojownik",
+            "Północ"
+          ]
+        },
+        {
+          "hint": "Trop",
+          "word": "Łowca potworów",
+          "hints": [
+            "Trop",
+            "Miecz",
+            "Bestia"
+          ]
+        },
+        {
+          "hint": "Brama",
+          "word": "Strażnik portalu",
+          "hints": [
+            "Brama",
+            "Przejście",
+            "Wartownik"
+          ]
+        },
+        {
+          "hint": "Skrzynia",
+          "word": "Mimik",
+          "hints": [
+            "Skrzynia",
+            "Potwór",
+            "Przebranie"
+          ]
+        },
+        {
+          "hint": "Ocean",
+          "word": "Lewiatan",
+          "hints": [
+            "Ocean",
+            "Ogrom",
+            "Bestia"
+          ]
+        },
+        {
+          "hint": "Przepowiednia",
+          "word": "Wróżbita",
+          "hints": [
+            "Przepowiednia",
+            "Przyszłość",
+            "Karty"
+          ]
+        },
+        {
+          "hint": "Mrok",
+          "word": "Cień demona",
+          "hints": [
+            "Mrok",
+            "Rogi",
+            "Strach"
+          ]
+        },
+        {
+          "hint": "Formuły",
+          "word": "Księga zaklęć",
+          "hints": [
+            "Formuły",
+            "Strony",
+            "Czarodziej"
+          ]
         }
       ]
     },
@@ -3171,7 +5151,7 @@
           "hints": [
             "Gwiazdy",
             "Droga Mleczna",
-            "gwiazdy"
+            "Mgławice"
           ]
         },
         {
@@ -3362,6 +5342,186 @@
             "Przyroda",
             "Ekosystem"
           ]
+        },
+        {
+          "hint": "Niesporczak",
+          "word": "Tardigrada",
+          "hints": [
+            "Niesporczak",
+            "Mikroskop",
+            "Przetrwanie"
+          ]
+        },
+        {
+          "hint": "Bozon",
+          "word": "Cząstka Higgsa",
+          "hints": [
+            "Bozon",
+            "Akcelerator",
+            "Fizyka"
+          ]
+        },
+        {
+          "hint": "Prawie niewidoczne",
+          "word": "Neutrino",
+          "hints": [
+            "Prawie niewidoczne",
+            "Cząstka",
+            "Kosmos"
+          ]
+        },
+        {
+          "hint": "Brak powietrza",
+          "word": "Próżnia",
+          "hints": [
+            "Brak powietrza",
+            "Ciśnienie",
+            "Laboratorium"
+          ]
+        },
+        {
+          "hint": "Obraz",
+          "word": "Rezonans magnetyczny",
+          "hints": [
+            "Obraz",
+            "Badanie",
+            "Pole"
+          ]
+        },
+        {
+          "hint": "Widmo",
+          "word": "Spektrometr",
+          "hints": [
+            "Widmo",
+            "Pomiar",
+            "Światło"
+          ]
+        },
+        {
+          "hint": "Kropla",
+          "word": "Pipetowanie",
+          "hints": [
+            "Kropla",
+            "Chemia",
+            "Laboratorium"
+          ]
+        },
+        {
+          "hint": "Kryształ",
+          "word": "Krystalizacja",
+          "hints": [
+            "Kryształ",
+            "Osad",
+            "Roztwór"
+          ]
+        },
+        {
+          "hint": "Drożdże",
+          "word": "Fermentacja",
+          "hints": [
+            "Drożdże",
+            "Proces",
+            "Bakterie"
+          ]
+        },
+        {
+          "hint": "Błona",
+          "word": "Osmoza",
+          "hints": [
+            "Błona",
+            "Woda",
+            "Stężenie"
+          ]
+        },
+        {
+          "hint": "DNA",
+          "word": "Mutacja",
+          "hints": [
+            "DNA",
+            "Zmiana",
+            "Gen"
+          ]
+        },
+        {
+          "hint": "Geny",
+          "word": "Chromosom",
+          "hints": [
+            "Geny",
+            "Podział",
+            "Komórka"
+          ]
+        },
+        {
+          "hint": "Mózg",
+          "word": "Neuron",
+          "hints": [
+            "Mózg",
+            "Impuls",
+            "Synapsa"
+          ]
+        },
+        {
+          "hint": "Połączenie",
+          "word": "Synapsa",
+          "hints": [
+            "Połączenie",
+            "Neuron",
+            "Sygnał"
+          ]
+        },
+        {
+          "hint": "Kosmos",
+          "word": "Czarna materia",
+          "hints": [
+            "Kosmos",
+            "Grawitacja",
+            "Niewidzialna"
+          ]
+        },
+        {
+          "hint": "Czasoprzestrzeń",
+          "word": "Grawitacyjne fale",
+          "hints": [
+            "Czasoprzestrzeń",
+            "Detektor",
+            "Kosmos"
+          ]
+        },
+        {
+          "hint": "Słońce",
+          "word": "Fuzja jądrowa",
+          "hints": [
+            "Słońce",
+            "Energia",
+            "Plazma"
+          ]
+        },
+        {
+          "hint": "Kolejne",
+          "word": "Reakcja łańcuchowa",
+          "hints": [
+            "Kolejne",
+            "Chemia",
+            "Proces"
+          ]
+        },
+        {
+          "hint": "Woda",
+          "word": "Zjawisko kapilarne",
+          "hints": [
+            "Woda",
+            "Cienka rurka",
+            "Podciąganie"
+          ]
+        },
+        {
+          "hint": "Dawny klimat",
+          "word": "Paleoklimatologia",
+          "hints": [
+            "Dawny klimat",
+            "Lód",
+            "Badania"
+          ]
         }
       ]
     },
@@ -3385,8 +5545,8 @@
           "word": "Motocykl",
           "hints": [
             "Dwa koła",
-            "kask",
-            "dwa koła"
+            "Kask",
+            "Manetka"
           ]
         },
         {
@@ -3394,8 +5554,8 @@
           "word": "TIR",
           "hints": [
             "Naczepa",
-            "ciężarówka",
-            "naczepa"
+            "Ciężarówka",
+            "Autostrada"
           ]
         },
         {
@@ -3412,8 +5572,8 @@
           "word": "Pociąg",
           "hints": [
             "Tory",
-            "tory",
-            "wagon"
+            "Wagon",
+            "Lokomotywa"
           ]
         },
         {
@@ -3430,8 +5590,8 @@
           "word": "Tramwaj",
           "hints": [
             "Szyny",
-            "szyny",
-            "miasto"
+            "Miasto",
+            "Pantograf"
           ]
         },
         {
@@ -3439,8 +5599,8 @@
           "word": "Skuter",
           "hints": [
             "Kask",
-            "kask",
-            "miejska jazda"
+            "Miejska jazda",
+            "Manetka"
           ]
         },
         {
@@ -3448,8 +5608,8 @@
           "word": "Autobus",
           "hints": [
             "Przystanek",
-            "przystanek",
-            "kierowca"
+            "Kierowca",
+            "Pasażerowie"
           ]
         },
         {
@@ -3631,6 +5791,186 @@
             "Trasa",
             "Ekran"
           ]
+        },
+        {
+          "hint": "Cztery drzwi",
+          "word": "Sedan",
+          "hints": [
+            "Cztery drzwi",
+            "Bagażnik",
+            "Samochód"
+          ]
+        },
+        {
+          "hint": "Tylna klapa",
+          "word": "Hatchback",
+          "hints": [
+            "Tylna klapa",
+            "Kompakt",
+            "Auto"
+          ]
+        },
+        {
+          "hint": "Duży bagażnik",
+          "word": "Kombi",
+          "hints": [
+            "Duży bagażnik",
+            "Rodzina",
+            "Auto"
+          ]
+        },
+        {
+          "hint": "Paka",
+          "word": "Pickup",
+          "hints": [
+            "Paka",
+            "Przewożenie",
+            "Auto"
+          ]
+        },
+        {
+          "hint": "Dwa miejsca",
+          "word": "Roadster",
+          "hints": [
+            "Dwa miejsca",
+            "Sportowy",
+            "Dach"
+          ]
+        },
+        {
+          "hint": "Cylindry",
+          "word": "Silnik V8",
+          "hints": [
+            "Cylindry",
+            "Moc",
+            "Dźwięk"
+          ]
+        },
+        {
+          "hint": "Biegi",
+          "word": "Skrzynia automatyczna",
+          "hints": [
+            "Biegi",
+            "Bez sprzęgła",
+            "Samochód"
+          ]
+        },
+        {
+          "hint": "Postój",
+          "word": "Hamulec ręczny",
+          "hints": [
+            "Postój",
+            "Dźwignia",
+            "Zatrzymanie"
+          ]
+        },
+        {
+          "hint": "Spaliny",
+          "word": "Katalizator",
+          "hints": [
+            "Spaliny",
+            "Filtr",
+            "Układ wydechowy"
+          ]
+        },
+        {
+          "hint": "Prąd",
+          "word": "Alternator",
+          "hints": [
+            "Prąd",
+            "Akumulator",
+            "Silnik"
+          ]
+        },
+        {
+          "hint": "Płyn",
+          "word": "Chłodnica",
+          "hints": [
+            "Płyn",
+            "Temperatura",
+            "Auto"
+          ]
+        },
+        {
+          "hint": "Sprężyna",
+          "word": "Amortyzator",
+          "hints": [
+            "Sprężyna",
+            "Nierówności",
+            "Zawieszenie"
+          ]
+        },
+        {
+          "hint": "Deszcz",
+          "word": "Wycieraczki",
+          "hints": [
+            "Deszcz",
+            "Szyba",
+            "Guma"
+          ]
+        },
+        {
+          "hint": "Miganie",
+          "word": "Kierunkowskaz",
+          "hints": [
+            "Miganie",
+            "Skręt",
+            "Dźwignia"
+          ]
+        },
+        {
+          "hint": "Przód",
+          "word": "Zderzak",
+          "hints": [
+            "Przód",
+            "Stłuczka",
+            "Karoseria"
+          ]
+        },
+        {
+          "hint": "Sufit",
+          "word": "Szyberdach",
+          "hints": [
+            "Sufit",
+            "Słońce",
+            "Auto"
+          ]
+        },
+        {
+          "hint": "Przyczepa",
+          "word": "Hak holowniczy",
+          "hints": [
+            "Przyczepa",
+            "Tył",
+            "Zaczep"
+          ]
+        },
+        {
+          "hint": "Piana",
+          "word": "Myjnia bezdotykowa",
+          "hints": [
+            "Piana",
+            "Ciśnienie",
+            "Auto"
+          ]
+        },
+        {
+          "hint": "Zakret",
+          "word": "Tor wyścigowy",
+          "hints": [
+            "Zakret",
+            "Bolid",
+            "Rywalizacja"
+          ]
+        },
+        {
+          "hint": "Zabytkowy",
+          "word": "Samochód retro",
+          "hints": [
+            "Zabytkowy",
+            "Chrom",
+            "Klasyk"
+          ]
         }
       ]
     },
@@ -3681,8 +6021,8 @@
           "word": "Samolot",
           "hints": [
             "Skrzydła",
-            "lotnisko",
-            "skrzydła"
+            "Lotnisko",
+            "Kokpit"
           ]
         },
         {
@@ -3699,8 +6039,8 @@
           "word": "Rejs",
           "hints": [
             "Statek",
-            "pokład",
-            "statek"
+            "Pokład",
+            "Morze"
           ]
         },
         {
@@ -3708,8 +6048,8 @@
           "word": "Pensjonat",
           "hints": [
             "Nocleg",
-            "nocleg",
-            "gościnność"
+            "Gościnność",
+            "Pokoje"
           ]
         },
         {
@@ -3717,8 +6057,8 @@
           "word": "Wycieczka",
           "hints": [
             "Zwiedzanie",
-            "zwiedzanie",
-            "przewodnik"
+            "Przewodnik",
+            "Trasa"
           ]
         },
         {
@@ -3900,6 +6240,186 @@
             "Hotel",
             "Przejazd"
           ]
+        },
+        {
+          "hint": "Mała kabina",
+          "word": "Hostel kapsułowy",
+          "hints": [
+            "Mała kabina",
+            "Japonia",
+            "Nocleg"
+          ]
+        },
+        {
+          "hint": "Kanapa",
+          "word": "Couchsurfing",
+          "hints": [
+            "Kanapa",
+            "Gościnność",
+            "Podróż"
+          ]
+        },
+        {
+          "hint": "Wakacje",
+          "word": "Wymiana domów",
+          "hints": [
+            "Wakacje",
+            "Mieszkanie",
+            "Podróż"
+          ]
+        },
+        {
+          "hint": "Kciuk",
+          "word": "Autostop",
+          "hints": [
+            "Kciuk",
+            "Droga",
+            "Kierowca"
+          ]
+        },
+        {
+          "hint": "Kuszetka",
+          "word": "Nocny pociąg",
+          "hints": [
+            "Kuszetka",
+            "Sen",
+            "Tory"
+          ]
+        },
+        {
+          "hint": "Widoki",
+          "word": "Pociąg panoramiczny",
+          "hints": [
+            "Widoki",
+            "Okna",
+            "Góry"
+          ]
+        },
+        {
+          "hint": "Szlak",
+          "word": "Trekking",
+          "hints": [
+            "Szlak",
+            "Plecak",
+            "Wędrówka"
+          ]
+        },
+        {
+          "hint": "Noclegi",
+          "word": "Wędrówka z plecakiem",
+          "hints": [
+            "Noclegi",
+            "Trasa",
+            "Przygoda"
+          ]
+        },
+        {
+          "hint": "Sakwy",
+          "word": "Wyprawa rowerowa",
+          "hints": [
+            "Sakwy",
+            "Pedały",
+            "Trasa"
+          ]
+        },
+        {
+          "hint": "Jedzenie",
+          "word": "Turystyka kulinarna",
+          "hints": [
+            "Jedzenie",
+            "Restauracje",
+            "Smaki"
+          ]
+        },
+        {
+          "hint": "Nauka",
+          "word": "Obóz językowy",
+          "hints": [
+            "Nauka",
+            "Wyjazd",
+            "Uczestnicy"
+          ]
+        },
+        {
+          "hint": "Samochód",
+          "word": "Road trip",
+          "hints": [
+            "Samochód",
+            "Trasa",
+            "Przystanki"
+          ]
+        },
+        {
+          "hint": "Walizka",
+          "word": "Bagaż rejestrowany",
+          "hints": [
+            "Walizka",
+            "Luk",
+            "Lotnisko"
+          ]
+        },
+        {
+          "hint": "Plaże",
+          "word": "Nadmorski kurort",
+          "hints": [
+            "Plaże",
+            "Hotele",
+            "Wypoczynek"
+          ]
+        },
+        {
+          "hint": "Kaucja",
+          "word": "Wypożyczalnia rowerów",
+          "hints": [
+            "Kaucja",
+            "Pedały",
+            "Turysta"
+          ]
+        },
+        {
+          "hint": "Kontrola",
+          "word": "Przejście graniczne",
+          "hints": [
+            "Kontrola",
+            "Państwo",
+            "Paszport"
+          ]
+        },
+        {
+          "hint": "Zakręty",
+          "word": "Górska serpentyna",
+          "hints": [
+            "Zakręty",
+            "Droga",
+            "Wysokość"
+          ]
+        },
+        {
+          "hint": "Wjazd",
+          "word": "Prom samochodowy",
+          "hints": [
+            "Wjazd",
+            "Pokład",
+            "Przeprawa"
+          ]
+        },
+        {
+          "hint": "Kurs",
+          "word": "Autobus nocny",
+          "hints": [
+            "Kurs",
+            "Sen",
+            "Trasa"
+          ]
+        },
+        {
+          "hint": "Chip",
+          "word": "Paszport biometryczny",
+          "hints": [
+            "Chip",
+            "Dane",
+            "Granica"
+          ]
         }
       ]
     },
@@ -3923,8 +6443,8 @@
           "word": "Mars",
           "hints": [
             "Czerwona planeta",
-            "czerwona planeta",
-            "łazik"
+            "Łazik",
+            "Olympus Mons"
           ]
         },
         {
@@ -3932,8 +6452,8 @@
           "word": "Kometa",
           "hints": [
             "Warkocz",
-            "warkocz",
-            "lodowa bryła"
+            "Lodowa bryła",
+            "Orbita"
           ]
         },
         {
@@ -3941,8 +6461,8 @@
           "word": "Satelita",
           "hints": [
             "Orbita",
-            "orbita",
-            "łączność"
+            "Łączność",
+            "Antena"
           ]
         },
         {
@@ -3959,8 +6479,8 @@
           "word": "Rakieta",
           "hints": [
             "Start",
-            "start",
-            "silniki"
+            "Silniki",
+            "Kosmodrom"
           ]
         },
         {
@@ -3968,8 +6488,8 @@
           "word": "Meteoryt",
           "hints": [
             "Krater",
-            "krater",
-            "kosmiczna skała"
+            "Kosmiczna skała",
+            "Atmosfera"
           ]
         },
         {
@@ -4151,6 +6671,186 @@
             "Ziemia",
             "Pozycja"
           ]
+        },
+        {
+          "hint": "Księżyc",
+          "word": "Europa Jowisza",
+          "hints": [
+            "Księżyc",
+            "Lód",
+            "Ocean"
+          ]
+        },
+        {
+          "hint": "Metan",
+          "word": "Tytan Saturna",
+          "hints": [
+            "Metan",
+            "Atmosfera",
+            "Księżyc"
+          ]
+        },
+        {
+          "hint": "Lodowy",
+          "word": "Enceladus",
+          "hints": [
+            "Lodowy",
+            "Gejzery",
+            "Saturn"
+          ]
+        },
+        {
+          "hint": "Jowisz",
+          "word": "Wielka Czerwona Plama",
+          "hints": [
+            "Jowisz",
+            "Burza",
+            "Wir"
+          ]
+        },
+        {
+          "hint": "Lód",
+          "word": "Pierścienie Saturna",
+          "hints": [
+            "Lód",
+            "Planeta",
+            "Orbita"
+          ]
+        },
+        {
+          "hint": "Koła",
+          "word": "Rover księżycowy",
+          "hints": [
+            "Koła",
+            "Astronauta",
+            "Powierzchnia"
+          ]
+        },
+        {
+          "hint": "Mars",
+          "word": "Łazik Perseverance",
+          "hints": [
+            "Mars",
+            "NASA",
+            "Badania"
+          ]
+        },
+        {
+          "hint": "Podczerwień",
+          "word": "Kosmiczny teleskop Webba",
+          "hints": [
+            "Podczerwień",
+            "Lustro",
+            "Gwiazdy"
+          ]
+        },
+        {
+          "hint": "Teleskop",
+          "word": "Hubble",
+          "hints": [
+            "Teleskop",
+            "Orbita",
+            "Kosmos"
+          ]
+        },
+        {
+          "hint": "Antena",
+          "word": "Radioteleskop",
+          "hints": [
+            "Antena",
+            "Sygnały",
+            "Kosmos"
+          ]
+        },
+        {
+          "hint": "Barwa",
+          "word": "Czerwona gwiazda",
+          "hints": [
+            "Barwa",
+            "Olbrzym",
+            "Niebo"
+          ]
+        },
+        {
+          "hint": "Gwiazda",
+          "word": "Biały karzeł",
+          "hints": [
+            "Gwiazda",
+            "Mała",
+            "Gęsta"
+          ]
+        },
+        {
+          "hint": "Impulsy",
+          "word": "Pulsar",
+          "hints": [
+            "Impulsy",
+            "Gwiazda neutronowa",
+            "Rytm"
+          ]
+        },
+        {
+          "hint": "Galaktyka",
+          "word": "Kwazar",
+          "hints": [
+            "Galaktyka",
+            "Odległość",
+            "Jasność"
+          ]
+        },
+        {
+          "hint": "Czarna dziura",
+          "word": "Horyzont zdarzeń",
+          "hints": [
+            "Czarna dziura",
+            "Granica",
+            "Grawitacja"
+          ]
+        },
+        {
+          "hint": "Planeta",
+          "word": "Orbita eliptyczna",
+          "hints": [
+            "Planeta",
+            "Okrąg spłaszczony",
+            "Ruch"
+          ]
+        },
+        {
+          "hint": "Ziemia",
+          "word": "Pasy radiacyjne",
+          "hints": [
+            "Ziemia",
+            "Cząstki",
+            "Magnetosfera"
+          ]
+        },
+        {
+          "hint": "Brak powietrza",
+          "word": "Próżnia kosmiczna",
+          "hints": [
+            "Brak powietrza",
+            "Kosmos",
+            "Ciśnienie"
+          ]
+        },
+        {
+          "hint": "Krótki",
+          "word": "Lot suborbitalny",
+          "hints": [
+            "Krótki",
+            "Grawitacja",
+            "Rakieta"
+          ]
+        },
+        {
+          "hint": "Houston",
+          "word": "Kontrola misji",
+          "hints": [
+            "Houston",
+            "Ekrany",
+            "Astronauci"
+          ]
         }
       ]
     },
@@ -4183,8 +6883,8 @@
           "word": "Tęcza",
           "hints": [
             "Kolory",
-            "kolory",
-            "po deszczu"
+            "Po deszczu",
+            "Łuk"
           ]
         },
         {
@@ -4192,8 +6892,8 @@
           "word": "Błyskawica",
           "hints": [
             "Burza",
-            "burza",
-            "elektryczność"
+            "Elektryczność",
+            "Błysk"
           ]
         },
         {
@@ -4201,8 +6901,8 @@
           "word": "Jaskinia",
           "hints": [
             "Stalaktyt",
-            "podziemie",
-            "stalaktyt"
+            "Podziemie",
+            "Grota"
           ]
         },
         {
@@ -4210,8 +6910,8 @@
           "word": "Las",
           "hints": [
             "Drzewa",
-            "drzewa",
-            "grzyby"
+            "Grzyby",
+            "Ścieżki"
           ]
         },
         {
@@ -4228,8 +6928,8 @@
           "word": "Wydma",
           "hints": [
             "Piasek",
-            "wiatr",
-            "piasek"
+            "Wiatr",
+            "Wzniesienie"
           ]
         },
         {
@@ -4237,8 +6937,8 @@
           "word": "Bagno",
           "hints": [
             "Mokradła",
-            "mokradła",
-            "trzęsawisko"
+            "Trzęsawisko",
+            "Grząsko"
           ]
         },
         {
@@ -4410,6 +7110,186 @@
             "Błoto",
             "Erupcja",
             "Geologia"
+          ]
+        },
+        {
+          "hint": "Wulkan",
+          "word": "Jezioro kraterowe",
+          "hints": [
+            "Wulkan",
+            "Woda",
+            "Okrągłe"
+          ]
+        },
+        {
+          "hint": "Lód",
+          "word": "Jezioro polodowcowe",
+          "hints": [
+            "Lód",
+            "Rynna",
+            "Krajobraz"
+          ]
+        },
+        {
+          "hint": "Sól",
+          "word": "Morze Martwe",
+          "hints": [
+            "Sól",
+            "Pływalność",
+            "Bliski Wschód"
+          ]
+        },
+        {
+          "hint": "Zapadanie",
+          "word": "Ruchome piaski",
+          "hints": [
+            "Zapadanie",
+            "Piasek",
+            "Bagno"
+          ]
+        },
+        {
+          "hint": "Drzewa",
+          "word": "Polana leśna",
+          "hints": [
+            "Drzewa",
+            "Światło",
+            "Trawa"
+          ]
+        },
+        {
+          "hint": "Fiolet",
+          "word": "Wrzosowisko",
+          "hints": [
+            "Fiolet",
+            "Jesień",
+            "Łąka"
+          ]
+        },
+        {
+          "hint": "Mokradła",
+          "word": "Torfowisko",
+          "hints": [
+            "Mokradła",
+            "Rośliny",
+            "Bagno"
+          ]
+        },
+        {
+          "hint": "Korzenie",
+          "word": "Mangrowce",
+          "hints": [
+            "Korzenie",
+            "Wybrzeże",
+            "Tropiki"
+          ]
+        },
+        {
+          "hint": "Trawy",
+          "word": "Step",
+          "hints": [
+            "Trawy",
+            "Przestrzeń",
+            "Sucho"
+          ]
+        },
+        {
+          "hint": "Ameryka",
+          "word": "Preria",
+          "hints": [
+            "Ameryka",
+            "Trawy",
+            "Bizony"
+          ]
+        },
+        {
+          "hint": "Zatoka",
+          "word": "Fjord",
+          "hints": [
+            "Zatoka",
+            "Góry",
+            "Norwegia"
+          ]
+        },
+        {
+          "hint": "Wyspy",
+          "word": "Archipelag",
+          "hints": [
+            "Wyspy",
+            "Morze",
+            "Grupa"
+          ]
+        },
+        {
+          "hint": "Rafa",
+          "word": "Atol",
+          "hints": [
+            "Rafa",
+            "Laguna",
+            "Pierścień"
+          ]
+        },
+        {
+          "hint": "Woda",
+          "word": "Cieśnina",
+          "hints": [
+            "Woda",
+            "Między lądami",
+            "Statek"
+          ]
+        },
+        {
+          "hint": "Brzeg",
+          "word": "Zatoka",
+          "hints": [
+            "Brzeg",
+            "Osłona",
+            "Morze"
+          ]
+        },
+        {
+          "hint": "Rzeka",
+          "word": "Łacha piasku",
+          "hints": [
+            "Rzeka",
+            "Brzeg",
+            "Piasek"
+          ]
+        },
+        {
+          "hint": "Pszczoły",
+          "word": "Łąka kwietna",
+          "hints": [
+            "Pszczoły",
+            "Kwiaty",
+            "Trawa"
+          ]
+        },
+        {
+          "hint": "Pień",
+          "word": "Martwe drzewo",
+          "hints": [
+            "Pień",
+            "Las",
+            "Próchnica"
+          ]
+        },
+        {
+          "hint": "Skała",
+          "word": "Kamienny most naturalny",
+          "hints": [
+            "Skała",
+            "Łuk",
+            "Erozja"
+          ]
+        },
+        {
+          "hint": "Wapno",
+          "word": "Jaskinia krasowa",
+          "hints": [
+            "Wapno",
+            "Stalagmity",
+            "Grota"
           ]
         }
       ]
@@ -4707,6 +7587,186 @@
             "Powietrze",
             "Zabawa"
           ]
+        },
+        {
+          "hint": "Głośnik",
+          "word": "Awaria Bluetooth",
+          "hints": [
+            "Głośnik",
+            "Łączenie",
+            "Muzyka"
+          ]
+        },
+        {
+          "hint": "Drzwi",
+          "word": "Gość bez zaproszenia",
+          "hints": [
+            "Drzwi",
+            "Impreza",
+            "Niespodzianka"
+          ]
+        },
+        {
+          "hint": "Przebranie",
+          "word": "Impreza tematyczna",
+          "hints": [
+            "Przebranie",
+            "Motyw",
+            "Dekoracje"
+          ]
+        },
+        {
+          "hint": "Światło",
+          "word": "Kolorowe lampki LED",
+          "hints": [
+            "Światło",
+            "Salon",
+            "Nastrój"
+          ]
+        },
+        {
+          "hint": "Taniec",
+          "word": "Domowa dyskoteka",
+          "hints": [
+            "Taniec",
+            "Muzyka",
+            "Salon"
+          ]
+        },
+        {
+          "hint": "Przekąski",
+          "word": "Deska serów",
+          "hints": [
+            "Przekąski",
+            "Talerz",
+            "Wino"
+          ]
+        },
+        {
+          "hint": "Nachosy",
+          "word": "Przyniesiony dip",
+          "hints": [
+            "Nachosy",
+            "Miska",
+            "Sos"
+          ]
+        },
+        {
+          "hint": "Różowy",
+          "word": "Napompowany flaming",
+          "hints": [
+            "Różowy",
+            "Basen",
+            "Zabawa"
+          ]
+        },
+        {
+          "hint": "Dekoracje",
+          "word": "Balonowa girlanda",
+          "hints": [
+            "Dekoracje",
+            "Kolory",
+            "Ściana"
+          ]
+        },
+        {
+          "hint": "Ruch",
+          "word": "Konkurs tańca",
+          "hints": [
+            "Ruch",
+            "Muzyka",
+            "Wygrana"
+          ]
+        },
+        {
+          "hint": "Pytania",
+          "word": "Imprezowa ankieta",
+          "hints": [
+            "Pytania",
+            "Głosowanie",
+            "Goście"
+          ]
+        },
+        {
+          "hint": "Pokazywanie",
+          "word": "Gry w kalambury",
+          "hints": [
+            "Pokazywanie",
+            "Zgaduj",
+            "Grupa"
+          ]
+        },
+        {
+          "hint": "Tekst",
+          "word": "Wspólne śpiewanie",
+          "hints": [
+            "Tekst",
+            "Muzyka",
+            "Goście"
+          ]
+        },
+        {
+          "hint": "Melodia",
+          "word": "Karaoke bez słów",
+          "hints": [
+            "Melodia",
+            "Scena",
+            "Wpadka"
+          ]
+        },
+        {
+          "hint": "Głód",
+          "word": "Nocny kebab",
+          "hints": [
+            "Głód",
+            "Impreza",
+            "Sos"
+          ]
+        },
+        {
+          "hint": "Sprzątanie",
+          "word": "Rano po domówce",
+          "hints": [
+            "Sprzątanie",
+            "Kanapa",
+            "Bałagan"
+          ]
+        },
+        {
+          "hint": "Impreza",
+          "word": "Głośna rozmowa w kuchni",
+          "hints": [
+            "Impreza",
+            "Goście",
+            "Noc"
+          ]
+        },
+        {
+          "hint": "Hałas",
+          "word": "Sąsiedzka skarga",
+          "hints": [
+            "Hałas",
+            "Drzwi",
+            "Policja"
+          ]
+        },
+        {
+          "hint": "Butelka",
+          "word": "Zgubiony otwieracz",
+          "hints": [
+            "Butelka",
+            "Poszukiwania",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Salon",
+          "word": "Imprezowy fotel",
+          "hints": [
+            "Salon",
+            "Siedzenie",
+            "Goście"
+          ]
         }
       ]
     },
@@ -5002,6 +8062,186 @@
             "Niepewność",
             "Kierunek",
             "Dezorientacja"
+          ]
+        },
+        {
+          "hint": "Zrozumienie",
+          "word": "Empatia",
+          "hints": [
+            "Zrozumienie",
+            "Cudze uczucia",
+            "Wsparcie"
+          ]
+        },
+        {
+          "hint": "Zawód",
+          "word": "Rozgoryczenie",
+          "hints": [
+            "Zawód",
+            "Gorycz",
+            "Pretensje"
+          ]
+        },
+        {
+          "hint": "Złość",
+          "word": "Rozdrażnienie",
+          "hints": [
+            "Złość",
+            "Drobiazgi",
+            "Nerwy"
+          ]
+        },
+        {
+          "hint": "Strach",
+          "word": "Przerażenie",
+          "hints": [
+            "Strach",
+            "Krzyk",
+            "Ucieczka"
+          ]
+        },
+        {
+          "hint": "Łzy",
+          "word": "Wzruszenie",
+          "hints": [
+            "Łzy",
+            "Uczucia",
+            "Historia"
+          ]
+        },
+        {
+          "hint": "Więcej",
+          "word": "Zachłanność",
+          "hints": [
+            "Więcej",
+            "Pragnienie",
+            "Niedosyt"
+          ]
+        },
+        {
+          "hint": "Przeszłość",
+          "word": "Żal",
+          "hints": [
+            "Przeszłość",
+            "Smutek",
+            "Strata"
+          ]
+        },
+        {
+          "hint": "Osiągnięcie",
+          "word": "Satysfakcja",
+          "hints": [
+            "Osiągnięcie",
+            "Zadowolenie",
+            "Wysiłek"
+          ]
+        },
+        {
+          "hint": "Przyszłość",
+          "word": "Nadzieja",
+          "hints": [
+            "Przyszłość",
+            "Oczekiwanie",
+            "Wiara"
+          ]
+        },
+        {
+          "hint": "Uśmiech",
+          "word": "Radość z drobiazgów",
+          "hints": [
+            "Uśmiech",
+            "Małe rzeczy",
+            "Codzienność"
+          ]
+        },
+        {
+          "hint": "Rumieniec",
+          "word": "Zawstydzenie",
+          "hints": [
+            "Rumieniec",
+            "Spojrzenia",
+            "Wpadka"
+          ]
+        },
+        {
+          "hint": "Napięcie",
+          "word": "Dreszczyk emocji",
+          "hints": [
+            "Napięcie",
+            "Ekscytacja",
+            "Przygoda"
+          ]
+        },
+        {
+          "hint": "Odległość",
+          "word": "Niewysłowiona tęsknota",
+          "hints": [
+            "Odległość",
+            "Wspomnienia",
+            "Brak"
+          ]
+        },
+        {
+          "hint": "Sumienie",
+          "word": "Poczucie winy",
+          "hints": [
+            "Sumienie",
+            "Błąd",
+            "Żal"
+          ]
+        },
+        {
+          "hint": "Trudności",
+          "word": "Odporność psychiczna",
+          "hints": [
+            "Trudności",
+            "Wytrwałość",
+            "Emocje"
+          ]
+        },
+        {
+          "hint": "Spokój",
+          "word": "Poczucie bezpieczeństwa",
+          "hints": [
+            "Spokój",
+            "Zaufanie",
+            "Bliskość"
+          ]
+        },
+        {
+          "hint": "Smutek",
+          "word": "Przygnębienie",
+          "hints": [
+            "Smutek",
+            "Energia",
+            "Nastrój"
+          ]
+        },
+        {
+          "hint": "Harmonia",
+          "word": "Wewnętrzny spokój",
+          "hints": [
+            "Harmonia",
+            "Cisza",
+            "Odpoczynek"
+          ]
+        },
+        {
+          "hint": "Motywacja",
+          "word": "Zapał do pracy",
+          "hints": [
+            "Motywacja",
+            "Energia",
+            "Cel"
+          ]
+        },
+        {
+          "hint": "Zawody",
+          "word": "Zdrowa rywalizacja",
+          "hints": [
+            "Zawody",
+            "Emocje",
+            "Szacunek"
           ]
         }
       ]
@@ -5299,6 +8539,186 @@
             "Prywatność",
             "Karta"
           ]
+        },
+        {
+          "hint": "Negatywne wiadomości",
+          "word": "Doomscrolling",
+          "hints": [
+            "Negatywne wiadomości",
+            "Ekran",
+            "Przewijanie"
+          ]
+        },
+        {
+          "hint": "Offline",
+          "word": "Dzień bez internetu",
+          "hints": [
+            "Offline",
+            "Telefon",
+            "Przerwa"
+          ]
+        },
+        {
+          "hint": "Animacja",
+          "word": "GIF",
+          "hints": [
+            "Animacja",
+            "Krótka",
+            "Pętla"
+          ]
+        },
+        {
+          "hint": "Sztuczny obraz",
+          "word": "Deepfake",
+          "hints": [
+            "Sztuczny obraz",
+            "Twarz",
+            "Wideo"
+          ]
+        },
+        {
+          "hint": "Góra",
+          "word": "Komentarz przypięty",
+          "hints": [
+            "Góra",
+            "Dyskusja",
+            "Moderator"
+          ]
+        },
+        {
+          "hint": "Podpis",
+          "word": "Internetowa petycja",
+          "hints": [
+            "Podpis",
+            "Link",
+            "Poparcie"
+          ]
+        },
+        {
+          "hint": "Odpowiedzi",
+          "word": "Wątek na forum",
+          "hints": [
+            "Odpowiedzi",
+            "Dyskusja",
+            "Temat"
+          ]
+        },
+        {
+          "hint": "Serwer",
+          "word": "Kanał na Discordzie",
+          "hints": [
+            "Serwer",
+            "Czat",
+            "Społeczność"
+          ]
+        },
+        {
+          "hint": "Krok po kroku",
+          "word": "Filmik instruktażowy",
+          "hints": [
+            "Krok po kroku",
+            "Wideo",
+            "Pomoc"
+          ]
+        },
+        {
+          "hint": "Oglądanie",
+          "word": "Wideo reakcja",
+          "hints": [
+            "Oglądanie",
+            "Emocje",
+            "Nagranie"
+          ]
+        },
+        {
+          "hint": "Subskrypcja",
+          "word": "Newsletter płatny",
+          "hints": [
+            "Subskrypcja",
+            "E-mail",
+            "Autor"
+          ]
+        },
+        {
+          "hint": "Odłączenie",
+          "word": "Cyfrowy detoks",
+          "hints": [
+            "Odłączenie",
+            "Telefon",
+            "Przerwa"
+          ]
+        },
+        {
+          "hint": "Profil",
+          "word": "Udostępnienie relacji",
+          "hints": [
+            "Profil",
+            "Znajomi",
+            "24 godziny"
+          ]
+        },
+        {
+          "hint": "Podszywanie",
+          "word": "Konta fejkowe",
+          "hints": [
+            "Podszywanie",
+            "Profil",
+            "Internet"
+          ]
+        },
+        {
+          "hint": "Rozmowa",
+          "word": "Czatbot",
+          "hints": [
+            "Rozmowa",
+            "Automat",
+            "Odpowiedzi"
+          ]
+        },
+        {
+          "hint": "Czat",
+          "word": "Przypięta wiadomość",
+          "hints": [
+            "Czat",
+            "Góra",
+            "Informacja"
+          ]
+        },
+        {
+          "hint": "Kod",
+          "word": "Hasło jednorazowe",
+          "hints": [
+            "Kod",
+            "Logowanie",
+            "Czas"
+          ]
+        },
+        {
+          "hint": "Odznaka",
+          "word": "Weryfikacja konta",
+          "hints": [
+            "Odznaka",
+            "Profil",
+            "Tożsamość"
+          ]
+        },
+        {
+          "hint": "Twarz",
+          "word": "Emotka płacząca ze śmiechu",
+          "hints": [
+            "Twarz",
+            "Reakcja",
+            "Łzy"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Dźwięk powiadomienia",
+          "hints": [
+            "Telefon",
+            "Sygnał",
+            "Wiadomość"
+          ]
         }
       ]
     },
@@ -5595,6 +9015,186 @@
             "Morze",
             "Kurort"
           ]
+        },
+        {
+          "hint": "Zakopane",
+          "word": "Krupówki",
+          "hints": [
+            "Zakopane",
+            "Deptak",
+            "Tatry"
+          ]
+        },
+        {
+          "hint": "Mazury",
+          "word": "Jezioro Śniardwy",
+          "hints": [
+            "Mazury",
+            "Woda",
+            "Żagle"
+          ]
+        },
+        {
+          "hint": "Tatry",
+          "word": "Morskie Oko",
+          "hints": [
+            "Tatry",
+            "Jezioro",
+            "Góry"
+          ]
+        },
+        {
+          "hint": "Kraków",
+          "word": "Sukiennice",
+          "hints": [
+            "Kraków",
+            "Rynek",
+            "Handel"
+          ]
+        },
+        {
+          "hint": "Poznań",
+          "word": "Rogale świętomarcińskie",
+          "hints": [
+            "Poznań",
+            "Migdały",
+            "Listopad"
+          ]
+        },
+        {
+          "hint": "Wałbrzych",
+          "word": "Zamek Książ",
+          "hints": [
+            "Wałbrzych",
+            "Pałac",
+            "Dolny Śląsk"
+          ]
+        },
+        {
+          "hint": "Zabrze",
+          "word": "Kopalnia Guido",
+          "hints": [
+            "Zabrze",
+            "Węgiel",
+            "Podziemia"
+          ]
+        },
+        {
+          "hint": "Warszawa",
+          "word": "Puszcza Kampinoska",
+          "hints": [
+            "Warszawa",
+            "Las",
+            "Park narodowy"
+          ]
+        },
+        {
+          "hint": "Warszawa",
+          "word": "Park Łazienkowski",
+          "hints": [
+            "Warszawa",
+            "Pałac",
+            "Chopin"
+          ]
+        },
+        {
+          "hint": "Statki",
+          "word": "Kanał Elbląski",
+          "hints": [
+            "Statki",
+            "Pochylnie",
+            "Mazury"
+          ]
+        },
+        {
+          "hint": "Woda",
+          "word": "Zalew Wiślany",
+          "hints": [
+            "Woda",
+            "Bałtyk",
+            "Laguna"
+          ]
+        },
+        {
+          "hint": "Skały",
+          "word": "Góry Stołowe",
+          "hints": [
+            "Skały",
+            "Sudety",
+            "Błędne Skały"
+          ]
+        },
+        {
+          "hint": "Wapń",
+          "word": "Jura Krakowsko-Częstochowska",
+          "hints": [
+            "Wapń",
+            "Zamki",
+            "Skały"
+          ]
+        },
+        {
+          "hint": "Morze",
+          "word": "Półwysep Helski",
+          "hints": [
+            "Morze",
+            "Wąski ląd",
+            "Plaże"
+          ]
+        },
+        {
+          "hint": "Tatry",
+          "word": "Czarny Staw",
+          "hints": [
+            "Tatry",
+            "Woda",
+            "Góry"
+          ]
+        },
+        {
+          "hint": "Wzór",
+          "word": "Kaszubski haft",
+          "hints": [
+            "Wzór",
+            "Region",
+            "Kolory"
+          ]
+        },
+        {
+          "hint": "Papier",
+          "word": "Wycinanka łowicka",
+          "hints": [
+            "Papier",
+            "Kolory",
+            "Ludowa"
+          ]
+        },
+        {
+          "hint": "Muzyka",
+          "word": "Taniec mazur",
+          "hints": [
+            "Muzyka",
+            "Kroki",
+            "Tradycja"
+          ]
+        },
+        {
+          "hint": "Studniówka",
+          "word": "Polonez",
+          "hints": [
+            "Studniówka",
+            "Taniec",
+            "Korowód"
+          ]
+        },
+        {
+          "hint": "Port",
+          "word": "Żuraw gdański",
+          "hints": [
+            "Port",
+            "Gdańsk",
+            "Dźwig"
+          ]
         }
       ]
     },
@@ -5881,6 +9481,186 @@
             "Azja",
             "Miasto-państwo",
             "Wieżowce"
+          ]
+        },
+        {
+          "hint": "Finlandia",
+          "word": "Helsinki",
+          "hints": [
+            "Finlandia",
+            "Zatoka",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Estonia",
+          "word": "Tallinn",
+          "hints": [
+            "Estonia",
+            "Starówka",
+            "Bałtyk"
+          ]
+        },
+        {
+          "hint": "Łotwa",
+          "word": "Ryga",
+          "hints": [
+            "Łotwa",
+            "Secesja",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Słowacja",
+          "word": "Bratysława",
+          "hints": [
+            "Słowacja",
+            "Dunaj",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Słowenia",
+          "word": "Lublana",
+          "hints": [
+            "Słowenia",
+            "Smok",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Chorwacja",
+          "word": "Zagrzeb",
+          "hints": [
+            "Chorwacja",
+            "Stolica",
+            "Place"
+          ]
+        },
+        {
+          "hint": "Bośnia",
+          "word": "Sarajewo",
+          "hints": [
+            "Bośnia",
+            "Bałkany",
+            "Historia"
+          ]
+        },
+        {
+          "hint": "Serbia",
+          "word": "Belgrad",
+          "hints": [
+            "Serbia",
+            "Dunaj",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Rumunia",
+          "word": "Bukareszt",
+          "hints": [
+            "Rumunia",
+            "Pałac Parlamentu",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Bułgaria",
+          "word": "Sofia",
+          "hints": [
+            "Bułgaria",
+            "Stolica",
+            "Witosza"
+          ]
+        },
+        {
+          "hint": "Szwajcaria",
+          "word": "Zurych",
+          "hints": [
+            "Szwajcaria",
+            "Jezioro",
+            "Banki"
+          ]
+        },
+        {
+          "hint": "Jezioro",
+          "word": "Genewa",
+          "hints": [
+            "Jezioro",
+            "ONZ",
+            "Szwajcaria"
+          ]
+        },
+        {
+          "hint": "Renesans",
+          "word": "Florencja",
+          "hints": [
+            "Renesans",
+            "Duomo",
+            "Włochy"
+          ]
+        },
+        {
+          "hint": "Wezuwiusz",
+          "word": "Neapol",
+          "hints": [
+            "Wezuwiusz",
+            "Pizza",
+            "Włochy"
+          ]
+        },
+        {
+          "hint": "Portugalia",
+          "word": "Porto",
+          "hints": [
+            "Portugalia",
+            "Rzeka Douro",
+            "Most"
+          ]
+        },
+        {
+          "hint": "Belgia",
+          "word": "Bruksela",
+          "hints": [
+            "Belgia",
+            "Unia Europejska",
+            "Gofry"
+          ]
+        },
+        {
+          "hint": "Irlandia",
+          "word": "Dublin",
+          "hints": [
+            "Irlandia",
+            "Guinness",
+            "Stolica"
+          ]
+        },
+        {
+          "hint": "Góra Stołowa",
+          "word": "Kapsztad",
+          "hints": [
+            "Góra Stołowa",
+            "RPA",
+            "Ocean"
+          ]
+        },
+        {
+          "hint": "Świątynie",
+          "word": "Kioto",
+          "hints": [
+            "Świątynie",
+            "Japonia",
+            "Ogrody"
+          ]
+        },
+        {
+          "hint": "Japonia",
+          "word": "Osaka",
+          "hints": [
+            "Japonia",
+            "Jedzenie",
+            "Metropolia"
           ]
         }
       ]
@@ -6178,6 +9958,186 @@
             "Fabuła",
             "Zaskoczenie"
           ]
+        },
+        {
+          "hint": "Krótki",
+          "word": "Film krótkometrażowy",
+          "hints": [
+            "Krótki",
+            "Fabuła",
+            "Festiwal"
+          ]
+        },
+        {
+          "hint": "Kamera",
+          "word": "Ujęcie z drona",
+          "hints": [
+            "Kamera",
+            "Z góry",
+            "Lot"
+          ]
+        },
+        {
+          "hint": "Twarz",
+          "word": "Zbliżenie kamery",
+          "hints": [
+            "Twarz",
+            "Kadr",
+            "Detal"
+          ]
+        },
+        {
+          "hint": "Na planie",
+          "word": "Efekty praktyczne",
+          "hints": [
+            "Na planie",
+            "Triki",
+            "Bez komputera"
+          ]
+        },
+        {
+          "hint": "Chroma key",
+          "word": "Zielony ekran",
+          "hints": [
+            "Chroma key",
+            "Tło",
+            "Plan"
+          ]
+        },
+        {
+          "hint": "Ryzyko",
+          "word": "Scena kaskaderska",
+          "hints": [
+            "Ryzyko",
+            "Dubler",
+            "Akcja"
+          ]
+        },
+        {
+          "hint": "Głos",
+          "word": "Dubbing aktorski",
+          "hints": [
+            "Głos",
+            "Postać",
+            "Dialog"
+          ]
+        },
+        {
+          "hint": "Dodatkowe sceny",
+          "word": "Wersja reżyserska",
+          "hints": [
+            "Dodatkowe sceny",
+            "Film",
+            "Montaż"
+          ]
+        },
+        {
+          "hint": "Czerń i biel",
+          "word": "Film noir",
+          "hints": [
+            "Czerń i biel",
+            "Detektyw",
+            "Cienie"
+          ]
+        },
+        {
+          "hint": "Zagrożenie",
+          "word": "Film katastroficzny",
+          "hints": [
+            "Zagrożenie",
+            "Zniszczenia",
+            "Widowisko"
+          ]
+        },
+        {
+          "hint": "Pokazy",
+          "word": "Festiwal filmowy",
+          "hints": [
+            "Pokazy",
+            "Nagrody",
+            "Kino"
+          ]
+        },
+        {
+          "hint": "Małe",
+          "word": "Kino studyjne",
+          "hints": [
+            "Małe",
+            "Arthouse",
+            "Seans"
+          ]
+        },
+        {
+          "hint": "Statuetka",
+          "word": "Oscar za scenariusz",
+          "hints": [
+            "Statuetka",
+            "Dialog",
+            "Hollywood"
+          ]
+        },
+        {
+          "hint": "Przeszłość",
+          "word": "Scena retrospekcji",
+          "hints": [
+            "Przeszłość",
+            "Wspomnienie",
+            "Montaż"
+          ]
+        },
+        {
+          "hint": "Głos",
+          "word": "Narrator z offu",
+          "hints": [
+            "Głos",
+            "Opowieść",
+            "Obraz"
+          ]
+        },
+        {
+          "hint": "Scena",
+          "word": "Plan zdjęciowy",
+          "hints": [
+            "Scena",
+            "Kamera",
+            "Ekipa"
+          ]
+        },
+        {
+          "hint": "Epoka",
+          "word": "Kostium historyczny",
+          "hints": [
+            "Epoka",
+            "Ubranie",
+            "Film"
+          ]
+        },
+        {
+          "hint": "Zapowiedź",
+          "word": "Montowanie zwiastuna",
+          "hints": [
+            "Zapowiedź",
+            "Kadry",
+            "Premiera"
+          ]
+        },
+        {
+          "hint": "Odcinki",
+          "word": "Maraton serialowy",
+          "hints": [
+            "Odcinki",
+            "Kanapa",
+            "Noc"
+          ]
+        },
+        {
+          "hint": "Tekst",
+          "word": "Oglądanie z napisami",
+          "hints": [
+            "Tekst",
+            "Film",
+            "Język"
+          ]
         }
       ]
     },
@@ -6474,6 +10434,186 @@
             "Stół",
             "Ochrona"
           ]
+        },
+        {
+          "hint": "Mieszanie",
+          "word": "Robot planetarny",
+          "hints": [
+            "Mieszanie",
+            "Ciasto",
+            "Misa"
+          ]
+        },
+        {
+          "hint": "Pieczenie",
+          "word": "Silikonowa forma",
+          "hints": [
+            "Pieczenie",
+            "Elastyczna",
+            "Ciasto"
+          ]
+        },
+        {
+          "hint": "Mięso",
+          "word": "Termometr kuchenny",
+          "hints": [
+            "Mięso",
+            "Temperatura",
+            "Pomiar"
+          ]
+        },
+        {
+          "hint": "Karmel",
+          "word": "Palnik cukierniczy",
+          "hints": [
+            "Karmel",
+            "Ogień",
+            "Deser"
+          ]
+        },
+        {
+          "hint": "Tort",
+          "word": "Obrotowa patera",
+          "hints": [
+            "Tort",
+            "Dekorowanie",
+            "Kręcenie"
+          ]
+        },
+        {
+          "hint": "Skórka",
+          "word": "Obierak do jabłek",
+          "hints": [
+            "Skórka",
+            "Owoc",
+            "Ostrze"
+          ]
+        },
+        {
+          "hint": "Wysoka temperatura",
+          "word": "Piec do pizzy",
+          "hints": [
+            "Wysoka temperatura",
+            "Ciasto",
+            "Kamień"
+          ]
+        },
+        {
+          "hint": "Chleb",
+          "word": "Kamień do pieczenia",
+          "hints": [
+            "Chleb",
+            "Piekarnik",
+            "Rozgrzewanie"
+          ]
+        },
+        {
+          "hint": "Spaghetti",
+          "word": "Szczypce do makaronu",
+          "hints": [
+            "Spaghetti",
+            "Chwytanie",
+            "Garnek"
+          ]
+        },
+        {
+          "hint": "Warzywa",
+          "word": "Kosz do gotowania na parze",
+          "hints": [
+            "Warzywa",
+            "Para",
+            "Pojemnik"
+          ]
+        },
+        {
+          "hint": "Ząbki",
+          "word": "Prasa do czosnku",
+          "hints": [
+            "Ząbki",
+            "Rozgniatanie",
+            "Aromat"
+          ]
+        },
+        {
+          "hint": "Puree",
+          "word": "Prasa do ziemniaków",
+          "hints": [
+            "Puree",
+            "Ubijanie",
+            "Warzywa"
+          ]
+        },
+        {
+          "hint": "Litry",
+          "word": "Dzbanek z miarką",
+          "hints": [
+            "Litry",
+            "Płyn",
+            "Skala"
+          ]
+        },
+        {
+          "hint": "Blacha",
+          "word": "Taca do pieczenia",
+          "hints": [
+            "Blacha",
+            "Piekarnik",
+            "Ciastka"
+          ]
+        },
+        {
+          "hint": "Zamrażarka",
+          "word": "Woreczek do mrożenia",
+          "hints": [
+            "Zamrażarka",
+            "Jedzenie",
+            "Przechowywanie"
+          ]
+        },
+        {
+          "hint": "Sos",
+          "word": "Sosjerka",
+          "hints": [
+            "Sos",
+            "Naczynie",
+            "Podawanie"
+          ]
+        },
+        {
+          "hint": "Mieszanie",
+          "word": "Drewniana łyżka",
+          "hints": [
+            "Mieszanie",
+            "Garnek",
+            "Kuchnia"
+          ]
+        },
+        {
+          "hint": "Mięso",
+          "word": "Szczypce do grilla",
+          "hints": [
+            "Mięso",
+            "Ruszt",
+            "Chwytanie"
+          ]
+        },
+        {
+          "hint": "Uchwyt",
+          "word": "Garnuszek emaliowany",
+          "hints": [
+            "Uchwyt",
+            "Kuchnia",
+            "Gotowanie"
+          ]
+        },
+        {
+          "hint": "Sos",
+          "word": "Rondelek",
+          "hints": [
+            "Sos",
+            "Mały garnek",
+            "Uchwyt"
+          ]
         }
       ]
     },
@@ -6742,6 +10882,186 @@
             "Stopnie",
             "Pomiar",
             "Pogoda"
+          ]
+        },
+        {
+          "hint": "Warstwy",
+          "word": "Inwersja temperatury",
+          "hints": [
+            "Warstwy",
+            "Powietrze",
+            "Smog"
+          ]
+        },
+        {
+          "hint": "Pustynia",
+          "word": "Miraż",
+          "hints": [
+            "Pustynia",
+            "Złudzenie",
+            "Upał"
+          ]
+        },
+        {
+          "hint": "Pierścień",
+          "word": "Halo słoneczne",
+          "hints": [
+            "Pierścień",
+            "Niebo",
+            "Lód"
+          ]
+        },
+        {
+          "hint": "Noc",
+          "word": "Halo księżycowe",
+          "hints": [
+            "Noc",
+            "Pierścień",
+            "Księżyc"
+          ]
+        },
+        {
+          "hint": "Pustynia",
+          "word": "Zamieć piaskowa",
+          "hints": [
+            "Pustynia",
+            "Wiatr",
+            "Ziarna"
+          ]
+        },
+        {
+          "hint": "Mieszanka",
+          "word": "Śnieg z deszczem",
+          "hints": [
+            "Mieszanka",
+            "Zima",
+            "Mokro"
+          ]
+        },
+        {
+          "hint": "Para",
+          "word": "Wilgotność powietrza",
+          "hints": [
+            "Para",
+            "Procenty",
+            "Pomiar"
+          ]
+        },
+        {
+          "hint": "Temperatura",
+          "word": "Punkt rosy",
+          "hints": [
+            "Temperatura",
+            "Wilgoć",
+            "Kondensacja"
+          ]
+        },
+        {
+          "hint": "Biała",
+          "word": "Kłębiasta chmura",
+          "hints": [
+            "Biała",
+            "Niebo",
+            "Puchata"
+          ]
+        },
+        {
+          "hint": "Góry",
+          "word": "Chmura soczewkowata",
+          "hints": [
+            "Góry",
+            "UFO",
+            "Kształt"
+          ]
+        },
+        {
+          "hint": "Krótko",
+          "word": "Przelotny deszcz",
+          "hints": [
+            "Krótko",
+            "Krople",
+            "Chmury"
+          ]
+        },
+        {
+          "hint": "Grzmoty",
+          "word": "Burza z piorunami",
+          "hints": [
+            "Grzmoty",
+            "Błysk",
+            "Chmury"
+          ]
+        },
+        {
+          "hint": "Plaża",
+          "word": "Łagodna bryza",
+          "hints": [
+            "Plaża",
+            "Wiatr",
+            "Morze"
+          ]
+        },
+        {
+          "hint": "Szaro",
+          "word": "Zachmurzenie całkowite",
+          "hints": [
+            "Szaro",
+            "Niebo",
+            "Chmury"
+          ]
+        },
+        {
+          "hint": "Wyższa temperatura",
+          "word": "Ocieplenie",
+          "hints": [
+            "Wyższa temperatura",
+            "Prognoza",
+            "Wiosna"
+          ]
+        },
+        {
+          "hint": "Zmiana",
+          "word": "Załamanie pogody",
+          "hints": [
+            "Zmiana",
+            "Deszcz",
+            "Front"
+          ]
+        },
+        {
+          "hint": "Wiatr",
+          "word": "Zaspa śnieżna",
+          "hints": [
+            "Wiatr",
+            "Śnieg",
+            "Droga"
+          ]
+        },
+        {
+          "hint": "Ślisko",
+          "word": "Oblodzenie",
+          "hints": [
+            "Ślisko",
+            "Mróz",
+            "Chodnik"
+          ]
+        },
+        {
+          "hint": "Lato",
+          "word": "Fala upałów",
+          "hints": [
+            "Lato",
+            "Gorąco",
+            "Dni"
+          ]
+        },
+        {
+          "hint": "Zima",
+          "word": "Burza śnieżna",
+          "hints": [
+            "Zima",
+            "Wiatr",
+            "Śnieg"
           ]
         }
       ]
@@ -7020,6 +11340,186 @@
             "Wino",
             "Uczta",
             "Bóg"
+          ]
+        },
+        {
+          "hint": "Łuk",
+          "word": "Artemida",
+          "hints": [
+            "Łuk",
+            "Łowy",
+            "Bogini"
+          ]
+        },
+        {
+          "hint": "Słońce",
+          "word": "Apollo",
+          "hints": [
+            "Słońce",
+            "Muzyka",
+            "Olimp"
+          ]
+        },
+        {
+          "hint": "Kuźnia",
+          "word": "Hefajstos",
+          "hints": [
+            "Kuźnia",
+            "Ogień",
+            "Bóg"
+          ]
+        },
+        {
+          "hint": "Skrzydlate sandały",
+          "word": "Hermes",
+          "hints": [
+            "Skrzydlate sandały",
+            "Posłaniec",
+            "Olimp"
+          ]
+        },
+        {
+          "hint": "Małżeństwo",
+          "word": "Hera",
+          "hints": [
+            "Małżeństwo",
+            "Bogini",
+            "Olimp"
+          ]
+        },
+        {
+          "hint": "Zboże",
+          "word": "Demeter",
+          "hints": [
+            "Zboże",
+            "Urodzaj",
+            "Bogini"
+          ]
+        },
+        {
+          "hint": "Wiosna",
+          "word": "Persefona",
+          "hints": [
+            "Wiosna",
+            "Podziemie",
+            "Bogini"
+          ]
+        },
+        {
+          "hint": "Strzała",
+          "word": "Eros",
+          "hints": [
+            "Strzała",
+            "Miłość",
+            "Skrzydła"
+          ]
+        },
+        {
+          "hint": "Niebo",
+          "word": "Atlas",
+          "hints": [
+            "Niebo",
+            "Ramiona",
+            "Tytan"
+          ]
+        },
+        {
+          "hint": "Głód",
+          "word": "Tantal",
+          "hints": [
+            "Głód",
+            "Woda",
+            "Kara"
+          ]
+        },
+        {
+          "hint": "Głaz",
+          "word": "Syzyf",
+          "hints": [
+            "Głaz",
+            "Góra",
+            "Wieczność"
+          ]
+        },
+        {
+          "hint": "Lira",
+          "word": "Orfeusz",
+          "hints": [
+            "Lira",
+            "Eurydyka",
+            "Muzyka"
+          ]
+        },
+        {
+          "hint": "Kreta",
+          "word": "Dedalowy labirynt",
+          "hints": [
+            "Kreta",
+            "Minotaur",
+            "Pułapka"
+          ]
+        },
+        {
+          "hint": "Labirynt",
+          "word": "Nić Ariadny",
+          "hints": [
+            "Labirynt",
+            "Droga",
+            "Kłębek"
+          ]
+        },
+        {
+          "hint": "Troja",
+          "word": "Jabłko niezgody",
+          "hints": [
+            "Troja",
+            "Boginie",
+            "Spór"
+          ]
+        },
+        {
+          "hint": "Podstęp",
+          "word": "Koń trojański",
+          "hints": [
+            "Podstęp",
+            "Drewno",
+            "Miasto"
+          ]
+        },
+        {
+          "hint": "Morze",
+          "word": "Kraken",
+          "hints": [
+            "Morze",
+            "Macki",
+            "Legendarny"
+          ]
+        },
+        {
+          "hint": "Wzrok",
+          "word": "Bazyliszek",
+          "hints": [
+            "Wzrok",
+            "Kamień",
+            "Stwór"
+          ]
+        },
+        {
+          "hint": "Woda",
+          "word": "Rusałka",
+          "hints": [
+            "Woda",
+            "Słowiańska",
+            "Legenda"
+          ]
+        },
+        {
+          "hint": "Statek",
+          "word": "Latający Holender",
+          "hints": [
+            "Statek",
+            "Widmo",
+            "Ocean"
           ]
         }
       ]
@@ -7308,6 +11808,186 @@
             "Kolce",
             "Roślina"
           ]
+        },
+        {
+          "hint": "Doniczka",
+          "word": "Fiołek afrykański",
+          "hints": [
+            "Doniczka",
+            "Fiolet",
+            "Kwiat"
+          ]
+        },
+        {
+          "hint": "Sukulenty",
+          "word": "Kalanchoe",
+          "hints": [
+            "Sukulenty",
+            "Drobne kwiaty",
+            "Doniczka"
+          ]
+        },
+        {
+          "hint": "Sztywne liście",
+          "word": "Sansewieria",
+          "hints": [
+            "Sztywne liście",
+            "Wężownica",
+            "Doniczka"
+          ]
+        },
+        {
+          "hint": "Błyszczące liście",
+          "word": "Zamiokulkas",
+          "hints": [
+            "Błyszczące liście",
+            "Cień",
+            "Biuro"
+          ]
+        },
+        {
+          "hint": "Pnącze",
+          "word": "Filodendron",
+          "hints": [
+            "Pnącze",
+            "Liście",
+            "Tropiki"
+          ]
+        },
+        {
+          "hint": "Wzory",
+          "word": "Kalatea",
+          "hints": [
+            "Wzory",
+            "Liście",
+            "Doniczka"
+          ]
+        },
+        {
+          "hint": "Okrągłe liście",
+          "word": "Pilea",
+          "hints": [
+            "Okrągłe liście",
+            "Monety",
+            "Doniczka"
+          ]
+        },
+        {
+          "hint": "Duże kwiatostany",
+          "word": "Hortensja",
+          "hints": [
+            "Duże kwiatostany",
+            "Ogród",
+            "Kolory"
+          ]
+        },
+        {
+          "hint": "Jesień",
+          "word": "Dalia",
+          "hints": [
+            "Jesień",
+            "Kwiat",
+            "Rabata"
+          ]
+        },
+        {
+          "hint": "Zapach",
+          "word": "Frezja",
+          "hints": [
+            "Zapach",
+            "Bukiet",
+            "Cebulka"
+          ]
+        },
+        {
+          "hint": "Białe dzwonki",
+          "word": "Konwalia",
+          "hints": [
+            "Białe dzwonki",
+            "Las",
+            "Maj"
+          ]
+        },
+        {
+          "hint": "Wiosna",
+          "word": "Krokus",
+          "hints": [
+            "Wiosna",
+            "Fiolet",
+            "Cebulka"
+          ]
+        },
+        {
+          "hint": "Śnieg",
+          "word": "Przebiśnieg",
+          "hints": [
+            "Śnieg",
+            "Biały",
+            "Wiosna"
+          ]
+        },
+        {
+          "hint": "Zapach",
+          "word": "Hiacynt",
+          "hints": [
+            "Zapach",
+            "Wiosna",
+            "Cebulka"
+          ]
+        },
+        {
+          "hint": "Czerwony",
+          "word": "Mak polny",
+          "hints": [
+            "Czerwony",
+            "Pole",
+            "Kwiat"
+          ]
+        },
+        {
+          "hint": "Herbata",
+          "word": "Rumianek",
+          "hints": [
+            "Herbata",
+            "Białe płatki",
+            "Zioło"
+          ]
+        },
+        {
+          "hint": "Zioło",
+          "word": "Szałwia",
+          "hints": [
+            "Zioło",
+            "Liście",
+            "Kuchnia"
+          ]
+        },
+        {
+          "hint": "Przyprawa",
+          "word": "Tymianek",
+          "hints": [
+            "Przyprawa",
+            "Zioło",
+            "Zapach"
+          ]
+        },
+        {
+          "hint": "Pizza",
+          "word": "Oregano",
+          "hints": [
+            "Pizza",
+            "Zioło",
+            "Kuchnia"
+          ]
+        },
+        {
+          "hint": "Uspokojenie",
+          "word": "Melisa",
+          "hints": [
+            "Uspokojenie",
+            "Herbata",
+            "Liście"
+          ]
         }
       ]
     },
@@ -7594,6 +12274,186 @@
             "Pociąg",
             "Łóżko",
             "Podróż"
+          ]
+        },
+        {
+          "hint": "Dym",
+          "word": "Lokomotywa parowa",
+          "hints": [
+            "Dym",
+            "Węgiel",
+            "Tory"
+          ]
+        },
+        {
+          "hint": "Japonia",
+          "word": "Pociąg ekspresowy Shinkansen",
+          "hints": [
+            "Japonia",
+            "Szybkość",
+            "Tory"
+          ]
+        },
+        {
+          "hint": "Długi",
+          "word": "Autobus przegubowy",
+          "hints": [
+            "Długi",
+            "Miasto",
+            "Przystanek"
+          ]
+        },
+        {
+          "hint": "Londyn",
+          "word": "Autobus piętrowy",
+          "hints": [
+            "Londyn",
+            "Dwa poziomy",
+            "Czerwony"
+          ]
+        },
+        {
+          "hint": "Wagonik",
+          "word": "Kolejka górska",
+          "hints": [
+            "Wagonik",
+            "Stok",
+            "Trasa"
+          ]
+        },
+        {
+          "hint": "Narciarze",
+          "word": "Wyciąg krzesełkowy",
+          "hints": [
+            "Narciarze",
+            "Krzesło",
+            "Góry"
+          ]
+        },
+        {
+          "hint": "Podziemie",
+          "word": "Pociąg metra",
+          "hints": [
+            "Podziemie",
+            "Peron",
+            "Stacje"
+          ]
+        },
+        {
+          "hint": "Paczki",
+          "word": "Samochód dostawczy",
+          "hints": [
+            "Paczki",
+            "Firma",
+            "Ładunek"
+          ]
+        },
+        {
+          "hint": "Syrena",
+          "word": "Karetka",
+          "hints": [
+            "Syrena",
+            "Ratownicy",
+            "Pojazd"
+          ]
+        },
+        {
+          "hint": "Drabina",
+          "word": "Wóz strażacki",
+          "hints": [
+            "Drabina",
+            "Syrena",
+            "Pożar"
+          ]
+        },
+        {
+          "hint": "Telewizja",
+          "word": "Wóz transmisyjny",
+          "hints": [
+            "Telewizja",
+            "Antena",
+            "Relacja"
+          ]
+        },
+        {
+          "hint": "Pole",
+          "word": "Traktor",
+          "hints": [
+            "Pole",
+            "Rolnik",
+            "Koła"
+          ]
+        },
+        {
+          "hint": "Żniwa",
+          "word": "Kombajn zbożowy",
+          "hints": [
+            "Żniwa",
+            "Pole",
+            "Ziarno"
+          ]
+        },
+        {
+          "hint": "Tory",
+          "word": "Drezyna",
+          "hints": [
+            "Tory",
+            "Mały pojazd",
+            "Kolej"
+          ]
+        },
+        {
+          "hint": "Śnieg",
+          "word": "Sanie konne",
+          "hints": [
+            "Śnieg",
+            "Koń",
+            "Zima"
+          ]
+        },
+        {
+          "hint": "Silnik",
+          "word": "Motorówka",
+          "hints": [
+            "Silnik",
+            "Woda",
+            "Prędkość"
+          ]
+        },
+        {
+          "hint": "Maszt",
+          "word": "Żaglówka regatowa",
+          "hints": [
+            "Maszt",
+            "Wyścig",
+            "Wiatr"
+          ]
+        },
+        {
+          "hint": "Towar",
+          "word": "Ciężarówka chłodnia",
+          "hints": [
+            "Towar",
+            "Temperatura",
+            "Transport"
+          ]
+        },
+        {
+          "hint": "Ląd",
+          "word": "Pojazd amfibijny",
+          "hints": [
+            "Ląd",
+            "Woda",
+            "Koła"
+          ]
+        },
+        {
+          "hint": "Morze",
+          "word": "Łódź ratunkowa",
+          "hints": [
+            "Morze",
+            "Pomoc",
+            "Załoga"
           ]
         }
       ]
@@ -7891,6 +12751,186 @@
             "Litera",
             "Kategorie"
           ]
+        },
+        {
+          "hint": "Płytki",
+          "word": "Carcassonne",
+          "hints": [
+            "Płytki",
+            "Miasta",
+            "Meeple"
+          ]
+        },
+        {
+          "hint": "Osadnicy",
+          "word": "Catan",
+          "hints": [
+            "Osadnicy",
+            "Surowce",
+            "Wyspa"
+          ]
+        },
+        {
+          "hint": "Mozaika",
+          "word": "Azul",
+          "hints": [
+            "Mozaika",
+            "Płytki",
+            "Wzory"
+          ]
+        },
+        {
+          "hint": "Obrazy",
+          "word": "Dixit",
+          "hints": [
+            "Obrazy",
+            "Skojarzenia",
+            "Karty"
+          ]
+        },
+        {
+          "hint": "Kooperacja",
+          "word": "Pandemic",
+          "hints": [
+            "Kooperacja",
+            "Choroby",
+            "Mapa"
+          ]
+        },
+        {
+          "hint": "Trasy",
+          "word": "Wsiąść do pociągu",
+          "hints": [
+            "Trasy",
+            "Wagony",
+            "Plansza"
+          ]
+        },
+        {
+          "hint": "Totem",
+          "word": "Jungle Speed",
+          "hints": [
+            "Totem",
+            "Refleks",
+            "Karty"
+          ]
+        },
+        {
+          "hint": "Czas",
+          "word": "5 sekund",
+          "hints": [
+            "Czas",
+            "Odpowiedzi",
+            "Presja"
+          ]
+        },
+        {
+          "hint": "Zakazane słowa",
+          "word": "Tabu",
+          "hints": [
+            "Zakazane słowa",
+            "Hasło",
+            "Zgadywanie"
+          ]
+        },
+        {
+          "hint": "Tunele",
+          "word": "Sabotażysta",
+          "hints": [
+            "Tunele",
+            "Złoto",
+            "Karty"
+          ]
+        },
+        {
+          "hint": "Karty",
+          "word": "Uno Flip",
+          "hints": [
+            "Karty",
+            "Dwie strony",
+            "Kolory"
+          ]
+        },
+        {
+          "hint": "Litery",
+          "word": "Bananagrams",
+          "hints": [
+            "Litery",
+            "Słowa",
+            "Wyścig"
+          ]
+        },
+        {
+          "hint": "Zagadki",
+          "word": "Cortex",
+          "hints": [
+            "Zagadki",
+            "Refleks",
+            "Karty"
+          ]
+        },
+        {
+          "hint": "Pary",
+          "word": "Dobieranka",
+          "hints": [
+            "Pary",
+            "Karty",
+            "Kolory"
+          ]
+        },
+        {
+          "hint": "Litery",
+          "word": "Kółko fortuny",
+          "hints": [
+            "Litery",
+            "Hasło",
+            "Koło"
+          ]
+        },
+        {
+          "hint": "Postacie",
+          "word": "Zgadnij kto",
+          "hints": [
+            "Postacie",
+            "Pytania",
+            "Twarze"
+          ]
+        },
+        {
+          "hint": "Zagadki",
+          "word": "Czarne historie",
+          "hints": [
+            "Zagadki",
+            "Dziwne",
+            "Dedukcja"
+          ]
+        },
+        {
+          "hint": "Impreza",
+          "word": "Prawda czy wyzwanie",
+          "hints": [
+            "Impreza",
+            "Pytanie",
+            "Zadanie"
+          ]
+        },
+        {
+          "hint": "Stół",
+          "word": "Turniej ping-ponga",
+          "hints": [
+            "Stół",
+            "Paletki",
+            "Punkty"
+          ]
+        },
+        {
+          "hint": "Skakanie",
+          "word": "Wyścig w workach",
+          "hints": [
+            "Skakanie",
+            "Worek",
+            "Zabawa"
+          ]
         }
       ]
     },
@@ -8177,6 +13217,186 @@
             "Para",
             "Kuchnia",
             "Przepis"
+          ]
+        },
+        {
+          "hint": "Papier",
+          "word": "Długi list miłosny",
+          "hints": [
+            "Papier",
+            "Uczucia",
+            "Słowa"
+          ]
+        },
+        {
+          "hint": "Para",
+          "word": "Pierwszy wspólny pies",
+          "hints": [
+            "Para",
+            "Adopcja",
+            "Zwierzak"
+          ]
+        },
+        {
+          "hint": "Duma",
+          "word": "Niewypowiedziane przeprosiny",
+          "hints": [
+            "Duma",
+            "Żal",
+            "Milczenie"
+          ]
+        },
+        {
+          "hint": "Wspomnienia",
+          "word": "Spotkanie po latach",
+          "hints": [
+            "Wspomnienia",
+            "Przyjaciele",
+            "Powrót"
+          ]
+        },
+        {
+          "hint": "Tajemnica",
+          "word": "Wspólny sekret",
+          "hints": [
+            "Tajemnica",
+            "Zaufanie",
+            "Dwoje"
+          ]
+        },
+        {
+          "hint": "Słowa",
+          "word": "Małe nieporozumienie",
+          "hints": [
+            "Słowa",
+            "Konflikt",
+            "Pomyłka"
+          ]
+        },
+        {
+          "hint": "Prawda",
+          "word": "Ważna rozmowa",
+          "hints": [
+            "Prawda",
+            "Bliskość",
+            "Słuchanie"
+          ]
+        },
+        {
+          "hint": "Szkoła",
+          "word": "Znajomość z dzieciństwa",
+          "hints": [
+            "Szkoła",
+            "Lata",
+            "Przyjaciele"
+          ]
+        },
+        {
+          "hint": "Para",
+          "word": "Wspólne hobby",
+          "hints": [
+            "Para",
+            "Pasja",
+            "Czas"
+          ]
+        },
+        {
+          "hint": "Klucze",
+          "word": "Pierwsze wspólne mieszkanie",
+          "hints": [
+            "Klucze",
+            "Para",
+            "Dom"
+          ]
+        },
+        {
+          "hint": "Spojrzenie",
+          "word": "Zakochanie od pierwszego wejrzenia",
+          "hints": [
+            "Spojrzenie",
+            "Miłość",
+            "Spotkanie"
+          ]
+        },
+        {
+          "hint": "Koperta",
+          "word": "Romantyczny list",
+          "hints": [
+            "Koperta",
+            "Serce",
+            "Słowa"
+          ]
+        },
+        {
+          "hint": "Wsparcie",
+          "word": "Przyjaciel od serca",
+          "hints": [
+            "Wsparcie",
+            "Zaufanie",
+            "Znajomy"
+          ]
+        },
+        {
+          "hint": "Stół",
+          "word": "Niezręczne spotkanie rodzinne",
+          "hints": [
+            "Stół",
+            "Rodzina",
+            "Milczenie"
+          ]
+        },
+        {
+          "hint": "Sekret",
+          "word": "Zaufany powiernik",
+          "hints": [
+            "Sekret",
+            "Rozmowa",
+            "Pomoc"
+          ]
+        },
+        {
+          "hint": "Początek",
+          "word": "Przełamanie lodów",
+          "hints": [
+            "Początek",
+            "Rozmowa",
+            "Obcy"
+          ]
+        },
+        {
+          "hint": "Pociąg",
+          "word": "Pożegnanie na dworcu",
+          "hints": [
+            "Pociąg",
+            "Uścisk",
+            "Podróż"
+          ]
+        },
+        {
+          "hint": "Zdjęcia",
+          "word": "Wspomnienia z wakacji",
+          "hints": [
+            "Zdjęcia",
+            "Podróż",
+            "Razem"
+          ]
+        },
+        {
+          "hint": "Przyszłość",
+          "word": "Wspólne plany",
+          "hints": [
+            "Przyszłość",
+            "Para",
+            "Marzenia"
+          ]
+        },
+        {
+          "hint": "Pomoc",
+          "word": "Drobny gest",
+          "hints": [
+            "Pomoc",
+            "Bliskość",
+            "Uśmiech"
           ]
         }
       ]
@@ -8474,6 +13694,186 @@
             "Liczby",
             "Podatki"
           ]
+        },
+        {
+          "hint": "Pomysły",
+          "word": "Kreatywne zebranie",
+          "hints": [
+            "Pomysły",
+            "Zespół",
+            "Tablica"
+          ]
+        },
+        {
+          "hint": "Pierwszy dzień",
+          "word": "Nowy pracownik",
+          "hints": [
+            "Pierwszy dzień",
+            "Wdrożenie",
+            "Biurko"
+          ]
+        },
+        {
+          "hint": "Kalendarz",
+          "word": "Dzień bez spotkań",
+          "hints": [
+            "Kalendarz",
+            "Spokój",
+            "Praca"
+          ]
+        },
+        {
+          "hint": "Kubek",
+          "word": "Kawa z automatu",
+          "hints": [
+            "Kubek",
+            "Maszyna",
+            "Przerwa"
+          ]
+        },
+        {
+          "hint": "Dom",
+          "word": "Praca hybrydowa",
+          "hints": [
+            "Dom",
+            "Biuro",
+            "Dni"
+          ]
+        },
+        {
+          "hint": "Hałas",
+          "word": "Biuro na open space",
+          "hints": [
+            "Hałas",
+            "Biurka",
+            "Zespół"
+          ]
+        },
+        {
+          "hint": "Wyniki",
+          "word": "Raport kwartalny",
+          "hints": [
+            "Wyniki",
+            "Dane",
+            "Prezentacja"
+          ]
+        },
+        {
+          "hint": "Deadline",
+          "word": "Termin oddania projektu",
+          "hints": [
+            "Deadline",
+            "Zadanie",
+            "Kalendarz"
+          ]
+        },
+        {
+          "hint": "Dokument",
+          "word": "Notatka służbowa",
+          "hints": [
+            "Dokument",
+            "Sprawa",
+            "Firma"
+          ]
+        },
+        {
+          "hint": "Hasło",
+          "word": "Służbowy laptop",
+          "hints": [
+            "Hasło",
+            "Zadania",
+            "Komputer"
+          ]
+        },
+        {
+          "hint": "Sieć",
+          "word": "Hasło do Wi-Fi w biurze",
+          "hints": [
+            "Sieć",
+            "Internet",
+            "Dostęp"
+          ]
+        },
+        {
+          "hint": "Marker",
+          "word": "Tablica suchościeralna",
+          "hints": [
+            "Marker",
+            "Pomysły",
+            "Ściana"
+          ]
+        },
+        {
+          "hint": "Kieszeń",
+          "word": "Służbowy telefon",
+          "hints": [
+            "Kieszeń",
+            "Połączenia",
+            "Firma"
+          ]
+        },
+        {
+          "hint": "Biuro",
+          "word": "Drukarka bez papieru",
+          "hints": [
+            "Biuro",
+            "Awaria",
+            "Wydruk"
+          ]
+        },
+        {
+          "hint": "Zegar",
+          "word": "Przeciągające się spotkanie",
+          "hints": [
+            "Zegar",
+            "Dyskusja",
+            "Sala"
+          ]
+        },
+        {
+          "hint": "Kofeina",
+          "word": "Potrójny espresso",
+          "hints": [
+            "Kofeina",
+            "Poranek",
+            "Filiżanka"
+          ]
+        },
+        {
+          "hint": "Jedzenie",
+          "word": "Lunchbox",
+          "hints": [
+            "Jedzenie",
+            "Pudełko",
+            "Przerwa"
+          ]
+        },
+        {
+          "hint": "Praca",
+          "word": "Biurko stojące",
+          "hints": [
+            "Praca",
+            "Wysokość",
+            "Postawa"
+          ]
+        },
+        {
+          "hint": "Cele",
+          "word": "Miesięczne podsumowanie",
+          "hints": [
+            "Cele",
+            "Wyniki",
+            "Raport"
+          ]
+        },
+        {
+          "hint": "Hotel",
+          "word": "Wyjazd integracyjny",
+          "hints": [
+            "Hotel",
+            "Zespół",
+            "Impreza"
+          ]
         }
       ]
     },
@@ -8761,6 +14161,186 @@
             "Student",
             "Doświadczenie"
           ]
+        },
+        {
+          "hint": "Taniec",
+          "word": "Szkolna dyskoteka",
+          "hints": [
+            "Taniec",
+            "Sala",
+            "Uczniowie"
+          ]
+        },
+        {
+          "hint": "Sala gimnastyczna",
+          "word": "Szkolny apel",
+          "hints": [
+            "Sala gimnastyczna",
+            "Przemówienie",
+            "Dyrektor"
+          ]
+        },
+        {
+          "hint": "Klasa",
+          "word": "Wycieczka do muzeum",
+          "hints": [
+            "Klasa",
+            "Eksponaty",
+            "Zwiedzanie"
+          ]
+        },
+        {
+          "hint": "Październik",
+          "word": "Dzień nauczyciela",
+          "hints": [
+            "Październik",
+            "Kwiaty",
+            "Szkoła"
+          ]
+        },
+        {
+          "hint": "Wrzesień",
+          "word": "Pierwszy dzwonek",
+          "hints": [
+            "Wrzesień",
+            "Początek",
+            "Lekcja"
+          ]
+        },
+        {
+          "hint": "Uczniowie",
+          "word": "Zebranie samorządu",
+          "hints": [
+            "Uczniowie",
+            "Głosowanie",
+            "Pomysły"
+          ]
+        },
+        {
+          "hint": "Test",
+          "word": "Próbna matura",
+          "hints": [
+            "Test",
+            "Liceum",
+            "Arkusze"
+          ]
+        },
+        {
+          "hint": "Figura",
+          "word": "Zadanie z geometrii",
+          "hints": [
+            "Figura",
+            "Kąty",
+            "Matematyka"
+          ]
+        },
+        {
+          "hint": "Ortografia",
+          "word": "Dyktando",
+          "hints": [
+            "Ortografia",
+            "Pisanie",
+            "Błędy"
+          ]
+        },
+        {
+          "hint": "Farby",
+          "word": "Lekcja plastyki",
+          "hints": [
+            "Farby",
+            "Rysowanie",
+            "Szkoła"
+          ]
+        },
+        {
+          "hint": "Doświadczenie",
+          "word": "Fizyka w laboratorium",
+          "hints": [
+            "Doświadczenie",
+            "Wahadło",
+            "Uczniowie"
+          ]
+        },
+        {
+          "hint": "Stołówka",
+          "word": "Przerwa obiadowa",
+          "hints": [
+            "Stołówka",
+            "Taca",
+            "Uczniowie"
+          ]
+        },
+        {
+          "hint": "Profesor",
+          "word": "Wykład akademicki",
+          "hints": [
+            "Profesor",
+            "Audytorium",
+            "Notatki"
+          ]
+        },
+        {
+          "hint": "Uczelnia",
+          "word": "Seminarium dyplomowe",
+          "hints": [
+            "Uczelnia",
+            "Praca",
+            "Prowadzący"
+          ]
+        },
+        {
+          "hint": "Studia",
+          "word": "Wybór specjalizacji",
+          "hints": [
+            "Studia",
+            "Kierunek",
+            "Decyzja"
+          ]
+        },
+        {
+          "hint": "Książki",
+          "word": "Karta biblioteczna",
+          "hints": [
+            "Książki",
+            "Wypożyczanie",
+            "Student"
+          ]
+        },
+        {
+          "hint": "Wymiana",
+          "word": "Erasmus",
+          "hints": [
+            "Wymiana",
+            "Europa",
+            "Studia"
+          ]
+        },
+        {
+          "hint": "Studenci",
+          "word": "Juwenalia",
+          "hints": [
+            "Studenci",
+            "Koncert",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Pytania",
+          "word": "Egzamin ustny",
+          "hints": [
+            "Pytania",
+            "Komisja",
+            "Odpowiedzi"
+          ]
+        },
+        {
+          "hint": "Kartki",
+          "word": "Pisemne zaliczenie",
+          "hints": [
+            "Kartki",
+            "Ocena",
+            "Student"
+          ]
         }
       ]
     },
@@ -9020,6 +14600,186 @@
             "Morze",
             "Piasek",
             "Pamiątka"
+          ]
+        },
+        {
+          "hint": "Spacer",
+          "word": "Nadmorska promenada",
+          "hints": [
+            "Spacer",
+            "Sklepy",
+            "Plaża"
+          ]
+        },
+        {
+          "hint": "Linki",
+          "word": "Chwila na hamaku",
+          "hints": [
+            "Linki",
+            "Relaks",
+            "Drzewa"
+          ]
+        },
+        {
+          "hint": "Hotel",
+          "word": "Wycieczka fakultatywna",
+          "hints": [
+            "Hotel",
+            "Zwiedzanie",
+            "Dodatkowa"
+          ]
+        },
+        {
+          "hint": "Zwierzęta",
+          "word": "Safari fotograficzne",
+          "hints": [
+            "Zwierzęta",
+            "Aparat",
+            "Teren"
+          ]
+        },
+        {
+          "hint": "Rurka",
+          "word": "Nurkowanie z maską",
+          "hints": [
+            "Rurka",
+            "Rafa",
+            "Woda"
+          ]
+        },
+        {
+          "hint": "Wiosło",
+          "word": "Kajak morski",
+          "hints": [
+            "Wiosło",
+            "Woda",
+            "Wybrzeże"
+          ]
+        },
+        {
+          "hint": "Maszt",
+          "word": "Żeglowanie po jeziorze",
+          "hints": [
+            "Maszt",
+            "Wiatr",
+            "Łódź"
+          ]
+        },
+        {
+          "hint": "Namiot",
+          "word": "Pobudka na kempingu",
+          "hints": [
+            "Namiot",
+            "Poranek",
+            "Śpiwór"
+          ]
+        },
+        {
+          "hint": "Drewno",
+          "word": "Wakacyjne ognisko",
+          "hints": [
+            "Drewno",
+            "Gitara",
+            "Wieczór"
+          ]
+        },
+        {
+          "hint": "Piasek",
+          "word": "Noc na plaży",
+          "hints": [
+            "Piasek",
+            "Gwiazdy",
+            "Morze"
+          ]
+        },
+        {
+          "hint": "Brzeg",
+          "word": "Zbieranie muszelek",
+          "hints": [
+            "Brzeg",
+            "Morze",
+            "Spacer"
+          ]
+        },
+        {
+          "hint": "Słońce",
+          "word": "Opalanie na ręczniku",
+          "hints": [
+            "Słońce",
+            "Plaża",
+            "Leżenie"
+          ]
+        },
+        {
+          "hint": "Palmy",
+          "word": "Tropikalna wyspa",
+          "hints": [
+            "Palmy",
+            "Morze",
+            "Piasek"
+          ]
+        },
+        {
+          "hint": "Koc",
+          "word": "Piknik nad jeziorem",
+          "hints": [
+            "Koc",
+            "Jedzenie",
+            "Woda"
+          ]
+        },
+        {
+          "hint": "Historia",
+          "word": "Zwiedzanie ruin",
+          "hints": [
+            "Historia",
+            "Skały",
+            "Starożytność"
+          ]
+        },
+        {
+          "hint": "Wafelek",
+          "word": "Lody włoskie",
+          "hints": [
+            "Wafelek",
+            "Lato",
+            "Maszyna"
+          ]
+        },
+        {
+          "hint": "Trasa",
+          "word": "Rowerowy objazd wyspy",
+          "hints": [
+            "Trasa",
+            "Pedały",
+            "Morze"
+          ]
+        },
+        {
+          "hint": "Piasek",
+          "word": "Poranna joga na plaży",
+          "hints": [
+            "Piasek",
+            "Ćwiczenia",
+            "Wschód"
+          ]
+        },
+        {
+          "hint": "Szczyty",
+          "word": "Cisza w górach",
+          "hints": [
+            "Szczyty",
+            "Las",
+            "Spokój"
+          ]
+        },
+        {
+          "hint": "Horyzont",
+          "word": "Zdjęcie przy zachodzie słońca",
+          "hints": [
+            "Horyzont",
+            "Aparat",
+            "Wakacje"
           ]
         }
       ]
@@ -9317,6 +15077,186 @@
             "Bank",
             "Rachunek"
           ]
+        },
+        {
+          "hint": "Losowanie",
+          "word": "Loteria paragonowa",
+          "hints": [
+            "Losowanie",
+            "Zakup",
+            "Nagroda"
+          ]
+        },
+        {
+          "hint": "Punkty",
+          "word": "Program lojalnościowy",
+          "hints": [
+            "Punkty",
+            "Sklep",
+            "Karta"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Zakupy przez aplikację",
+          "hints": [
+            "Telefon",
+            "Koszyk",
+            "Płatność"
+          ]
+        },
+        {
+          "hint": "Paczka",
+          "word": "Dostawa kurierska",
+          "hints": [
+            "Paczka",
+            "Drzwi",
+            "Kierowca"
+          ]
+        },
+        {
+          "hint": "Metka",
+          "word": "Przecena sezonowa",
+          "hints": [
+            "Metka",
+            "Taniej",
+            "Promocja"
+          ]
+        },
+        {
+          "hint": "Kolejka",
+          "word": "Przedświąteczny tłok",
+          "hints": [
+            "Kolejka",
+            "Sklepy",
+            "Grudzień"
+          ]
+        },
+        {
+          "hint": "Rękodzieło",
+          "word": "Targ rzemieślniczy",
+          "hints": [
+            "Rękodzieło",
+            "Stragany",
+            "Wyroby"
+          ]
+        },
+        {
+          "hint": "Bank",
+          "word": "Przelew natychmiastowy",
+          "hints": [
+            "Bank",
+            "Sekundy",
+            "Pieniądze"
+          ]
+        },
+        {
+          "hint": "Konto",
+          "word": "Karta debetowa",
+          "hints": [
+            "Konto",
+            "Płatność",
+            "Plastik"
+          ]
+        },
+        {
+          "hint": "Kwota",
+          "word": "Limit karty",
+          "hints": [
+            "Kwota",
+            "Bank",
+            "Ograniczenie"
+          ]
+        },
+        {
+          "hint": "Monety",
+          "word": "Skarbonka na podróż",
+          "hints": [
+            "Monety",
+            "Cel",
+            "Oszczędzanie"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Płatność kodem BLIK",
+          "hints": [
+            "Telefon",
+            "Cyfry",
+            "Terminal"
+          ]
+        },
+        {
+          "hint": "Zamówienie",
+          "word": "Zakupy grupowe",
+          "hints": [
+            "Zamówienie",
+            "Razem",
+            "Rabat"
+          ]
+        },
+        {
+          "hint": "Kantor",
+          "word": "Wymiana walut",
+          "hints": [
+            "Kantor",
+            "Kurs",
+            "Banknoty"
+          ]
+        },
+        {
+          "hint": "Legitymacja",
+          "word": "Rabat studencki",
+          "hints": [
+            "Legitymacja",
+            "Zniżka",
+            "Kasa"
+          ]
+        },
+        {
+          "hint": "Aplikacja",
+          "word": "Kupon elektroniczny",
+          "hints": [
+            "Aplikacja",
+            "Kod",
+            "Cena"
+          ]
+        },
+        {
+          "hint": "Uchwyty",
+          "word": "Torba na zakupy",
+          "hints": [
+            "Uchwyty",
+            "Sklep",
+            "Produkty"
+          ]
+        },
+        {
+          "hint": "Ekran",
+          "word": "Wirtualna przymierzalnia",
+          "hints": [
+            "Ekran",
+            "Ubrania",
+            "Technologia"
+          ]
+        },
+        {
+          "hint": "Paragon",
+          "word": "Kasa fiskalna",
+          "hints": [
+            "Paragon",
+            "Sprzedawca",
+            "Sklep"
+          ]
+        },
+        {
+          "hint": "Waga",
+          "word": "Cena za kilogram",
+          "hints": [
+            "Waga",
+            "Etykieta",
+            "Produkt"
+          ]
         }
       ]
     },
@@ -9604,12 +15544,192 @@
             "Przed treningiem",
             "Mięśnie"
           ]
+        },
+        {
+          "hint": "Ćwiczenia",
+          "word": "Rozciąganie pleców",
+          "hints": [
+            "Ćwiczenia",
+            "Mięśnie",
+            "Ruch"
+          ]
+        },
+        {
+          "hint": "Kręgosłup",
+          "word": "Kontrola postawy",
+          "hints": [
+            "Kręgosłup",
+            "Plecy",
+            "Stanie"
+          ]
+        },
+        {
+          "hint": "Woda",
+          "word": "Nawadnianie organizmu",
+          "hints": [
+            "Woda",
+            "Picie",
+            "Upał"
+          ]
+        },
+        {
+          "hint": "Regeneracja",
+          "word": "Odpoczynek po treningu",
+          "hints": [
+            "Regeneracja",
+            "Ćwiczenia",
+            "Mięśnie"
+          ]
+        },
+        {
+          "hint": "Nordic walking",
+          "word": "Spacer z kijkami",
+          "hints": [
+            "Nordic walking",
+            "Ruch",
+            "Las"
+          ]
+        },
+        {
+          "hint": "Pedały",
+          "word": "Jazda na rowerze stacjonarnym",
+          "hints": [
+            "Pedały",
+            "Siłownia",
+            "Trening"
+          ]
+        },
+        {
+          "hint": "Termometr",
+          "word": "Pomiar temperatury",
+          "hints": [
+            "Termometr",
+            "Gorączka",
+            "Stopnie"
+          ]
+        },
+        {
+          "hint": "Unieruchomienie",
+          "word": "Szyna na palec",
+          "hints": [
+            "Unieruchomienie",
+            "Dłoń",
+            "Opatrunek"
+          ]
+        },
+        {
+          "hint": "Stanie",
+          "word": "Ćwiczenia równowagi",
+          "hints": [
+            "Stanie",
+            "Stabilizacja",
+            "Ruch"
+          ]
+        },
+        {
+          "hint": "Dźwięki",
+          "word": "Badanie słuchu",
+          "hints": [
+            "Dźwięki",
+            "Audiometr",
+            "Uszy"
+          ]
+        },
+        {
+          "hint": "Oprawki",
+          "word": "Okulary korekcyjne",
+          "hints": [
+            "Oprawki",
+            "Soczewki",
+            "Wzrok"
+          ]
+        },
+        {
+          "hint": "Profilaktyka",
+          "word": "Kalendarz szczepień",
+          "hints": [
+            "Profilaktyka",
+            "Terminy",
+            "Zdrowie"
+          ]
+        },
+        {
+          "hint": "Rehabilitacja",
+          "word": "Wizyta u fizjoterapeuty",
+          "hints": [
+            "Rehabilitacja",
+            "Plecy",
+            "Ćwiczenia"
+          ]
+        },
+        {
+          "hint": "Próbka",
+          "word": "Badanie krwi",
+          "hints": [
+            "Próbka",
+            "Laboratorium",
+            "Igła"
+          ]
+        },
+        {
+          "hint": "Mięśnie",
+          "word": "Białko w diecie",
+          "hints": [
+            "Mięśnie",
+            "Jedzenie",
+            "Odżywianie"
+          ]
+        },
+        {
+          "hint": "Wdech",
+          "word": "Świadome oddychanie",
+          "hints": [
+            "Wdech",
+            "Wydech",
+            "Spokój"
+          ]
+        },
+        {
+          "hint": "Oczy",
+          "word": "Przerwa od ekranu",
+          "hints": [
+            "Oczy",
+            "Komputer",
+            "Odpoczynek"
+          ]
+        },
+        {
+          "hint": "Noc",
+          "word": "Regularny sen",
+          "hints": [
+            "Noc",
+            "Odpoczynek",
+            "Rutyna"
+          ]
+        },
+        {
+          "hint": "Palec",
+          "word": "Pulsoksymetr",
+          "hints": [
+            "Palec",
+            "Tlen",
+            "Pomiar"
+          ]
+        },
+        {
+          "hint": "Obraz",
+          "word": "Badanie USG",
+          "hints": [
+            "Obraz",
+            "Głowica",
+            "Diagnostyka"
+          ]
         }
       ]
     },
     {
       "id": "dla_doroslych",
-      "desc": "Flirt, niezręczne randki i dwuznaczny humor – wybierz świadomie",
+      "desc": "Odważne, dwuznaczne i pikantne żarty dla dorosłych. Wybierz świadomie.",
       "icon": "fa-martini-glass",
       "name": "18+ • Tylko dla dorosłych",
       "words": [
@@ -10088,6 +16208,906 @@
             "Telefon",
             "Sekret",
             "Kontakt"
+          ]
+        },
+        {
+          "hint": "Wiadomości",
+          "word": "Seksting",
+          "hints": [
+            "Wiadomości",
+            "Flirt",
+            "Telefon"
+          ]
+        },
+        {
+          "hint": "Przelotnie",
+          "word": "Seks bez zobowiązań",
+          "hints": [
+            "Przelotnie",
+            "Ustalenia",
+            "Bez związku"
+          ]
+        },
+        {
+          "hint": "Poranek",
+          "word": "One night stand",
+          "hints": [
+            "Poranek",
+            "Nieznajomy",
+            "Jedna noc"
+          ]
+        },
+        {
+          "hint": "Poranek",
+          "word": "Walk of shame",
+          "hints": [
+            "Poranek",
+            "Powrót",
+            "Te same ubrania"
+          ]
+        },
+        {
+          "hint": "Dorosły sklep",
+          "word": "Zabawka erotyczna",
+          "hints": [
+            "Dorosły sklep",
+            "Gadżet",
+            "Szuflada"
+          ]
+        },
+        {
+          "hint": "Bateria",
+          "word": "Wibrator",
+          "hints": [
+            "Bateria",
+            "Wibracje",
+            "Szuflada"
+          ]
+        },
+        {
+          "hint": "Poślizg",
+          "word": "Lubrykant",
+          "hints": [
+            "Poślizg",
+            "Tubka",
+            "Intymność"
+          ]
+        },
+        {
+          "hint": "Lateks",
+          "word": "Prezerwatywa",
+          "hints": [
+            "Lateks",
+            "Zabezpieczenie",
+            "Portfel"
+          ]
+        },
+        {
+          "hint": "Prześwit",
+          "word": "Bielizna koronkowa",
+          "hints": [
+            "Prześwit",
+            "Sypialnia",
+            "Zmysłowo"
+          ]
+        },
+        {
+          "hint": "Satyna",
+          "word": "Kuszący szlafrok",
+          "hints": [
+            "Satyna",
+            "Pasek",
+            "Sypialnia"
+          ]
+        },
+        {
+          "hint": "Upodobanie",
+          "word": "Fetysz",
+          "hints": [
+            "Upodobanie",
+            "Nietypowe",
+            "Fantazja"
+          ]
+        },
+        {
+          "hint": "Zasady",
+          "word": "BDSM",
+          "hints": [
+            "Zasady",
+            "Dominacja",
+            "Zgoda"
+          ]
+        },
+        {
+          "hint": "Kontrola",
+          "word": "Dominacja",
+          "hints": [
+            "Kontrola",
+            "Rola",
+            "Uzgodnienia"
+          ]
+        },
+        {
+          "hint": "Rola",
+          "word": "Uległość",
+          "hints": [
+            "Rola",
+            "Zaufanie",
+            "Granice"
+          ]
+        },
+        {
+          "hint": "Hasło",
+          "word": "Słowo bezpieczeństwa",
+          "hints": [
+            "Hasło",
+            "Granice",
+            "Zgoda"
+          ]
+        },
+        {
+          "hint": "Nadgarstki",
+          "word": "Kajdanki",
+          "hints": [
+            "Nadgarstki",
+            "Kluczyk",
+            "Rekwizyt"
+          ]
+        },
+        {
+          "hint": "Ciemność",
+          "word": "Opaska na oczy",
+          "hints": [
+            "Ciemność",
+            "Zmysły",
+            "Tkanina"
+          ]
+        },
+        {
+          "hint": "Dotyk",
+          "word": "Piórko do łaskotania",
+          "hints": [
+            "Dotyk",
+            "Śmiech",
+            "Delikatne"
+          ]
+        },
+        {
+          "hint": "Rekwizyt",
+          "word": "Bicz z frędzlami",
+          "hints": [
+            "Rekwizyt",
+            "Skóra",
+            "Ustalenia"
+          ]
+        },
+        {
+          "hint": "Wyobraźnia",
+          "word": "Zmysłowa fantazja",
+          "hints": [
+            "Wyobraźnia",
+            "Sekret",
+            "Pragnienie"
+          ]
+        },
+        {
+          "hint": "Słowa",
+          "word": "Dirty talk",
+          "hints": [
+            "Słowa",
+            "Szept",
+            "Flirt"
+          ]
+        },
+        {
+          "hint": "Muzyka",
+          "word": "Striptease",
+          "hints": [
+            "Muzyka",
+            "Ubrania",
+            "Taniec"
+          ]
+        },
+        {
+          "hint": "Siła",
+          "word": "Taniec na rurze",
+          "hints": [
+            "Siła",
+            "Obroty",
+            "Pole dance"
+          ]
+        },
+        {
+          "hint": "Recepcja",
+          "word": "Hotel na godziny",
+          "hints": [
+            "Recepcja",
+            "Prywatność",
+            "Pokój"
+          ]
+        },
+        {
+          "hint": "Karta",
+          "word": "Tajemniczy pokój hotelowy",
+          "hints": [
+            "Karta",
+            "Noc",
+            "Przygoda"
+          ]
+        },
+        {
+          "hint": "Aparat",
+          "word": "Nagie selfie",
+          "hints": [
+            "Aparat",
+            "Odważnie",
+            "Wysłane"
+          ]
+        },
+        {
+          "hint": "Ekran",
+          "word": "Przypadkowy screenshot",
+          "hints": [
+            "Ekran",
+            "Wpadka",
+            "Telefon"
+          ]
+        },
+        {
+          "hint": "Wiadomość",
+          "word": "Pikantne zdjęcie na złym czacie",
+          "hints": [
+            "Wiadomość",
+            "Grupa",
+            "Panika"
+          ]
+        },
+        {
+          "hint": "Spojrzenie",
+          "word": "Flirt z barmanem",
+          "hints": [
+            "Spojrzenie",
+            "Lada",
+            "Koktajl"
+          ]
+        },
+        {
+          "hint": "Trzy osoby",
+          "word": "Trójkąt miłosny",
+          "hints": [
+            "Trzy osoby",
+            "Zazdrość",
+            "Relacja"
+          ]
+        },
+        {
+          "hint": "Ustalenia",
+          "word": "Otwarty związek",
+          "hints": [
+            "Ustalenia",
+            "Partnerzy",
+            "Granice"
+          ]
+        },
+        {
+          "hint": "Spotkanie",
+          "word": "Randka w trójkę",
+          "hints": [
+            "Spotkanie",
+            "Zaproszenie",
+            "Niecodziennie"
+          ]
+        },
+        {
+          "hint": "Wieczór",
+          "word": "Przygoda z nieznajomym",
+          "hints": [
+            "Wieczór",
+            "Sekret",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Połączenie",
+          "word": "Gorący telefon",
+          "hints": [
+            "Połączenie",
+            "Szept",
+            "Noc"
+          ]
+        },
+        {
+          "hint": "Przebranie",
+          "word": "Seksowny kostium",
+          "hints": [
+            "Przebranie",
+            "Zmysłowo",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Kostium",
+          "word": "Królicze uszy",
+          "hints": [
+            "Kostium",
+            "Zabawnie",
+            "Opaska"
+          ]
+        },
+        {
+          "hint": "Kuchnia",
+          "word": "Fartuszek bez spodni",
+          "hints": [
+            "Kuchnia",
+            "Żart",
+            "Odważnie"
+          ]
+        },
+        {
+          "hint": "Płatki",
+          "word": "Róża na łóżku",
+          "hints": [
+            "Płatki",
+            "Nastrój",
+            "Hotel"
+          ]
+        },
+        {
+          "hint": "Meble",
+          "word": "Sypialnia ze skrzypiącym łóżkiem",
+          "hints": [
+            "Meble",
+            "Hałas",
+            "Sąsiedzi"
+          ]
+        },
+        {
+          "hint": "Podsłuchiwanie",
+          "word": "Cienkie ściany w hotelu",
+          "hints": [
+            "Podsłuchiwanie",
+            "Noc",
+            "Niezręcznie"
+          ]
+        },
+        {
+          "hint": "Ślad",
+          "word": "Ugryzienie w szyję",
+          "hints": [
+            "Ślad",
+            "Flirt",
+            "Kołnierzyk"
+          ]
+        },
+        {
+          "hint": "Ślad",
+          "word": "Malinka na szyi",
+          "hints": [
+            "Ślad",
+            "Rumieniec",
+            "Szalik"
+          ]
+        },
+        {
+          "hint": "Oliwka",
+          "word": "Nieudany masaż dla dwojga",
+          "hints": [
+            "Oliwka",
+            "Śmiech",
+            "Dłonie"
+          ]
+        },
+        {
+          "hint": "Kostka",
+          "word": "Gra erotyczna",
+          "hints": [
+            "Kostka",
+            "Wyzwania",
+            "Dorośli"
+          ]
+        },
+        {
+          "hint": "Rzucanie",
+          "word": "Kości miłości",
+          "hints": [
+            "Rzucanie",
+            "Wyzwania",
+            "Para"
+          ]
+        },
+        {
+          "hint": "Dym",
+          "word": "Romantyczna awaria świec",
+          "hints": [
+            "Dym",
+            "Nastrój",
+            "Zapałki"
+          ]
+        },
+        {
+          "hint": "Łazienka",
+          "word": "Wpadka z ręcznikiem",
+          "hints": [
+            "Łazienka",
+            "Drzwi",
+            "Rumieniec"
+          ]
+        },
+        {
+          "hint": "Nastrój",
+          "word": "Czerwony pokój",
+          "hints": [
+            "Nastrój",
+            "Światło",
+            "Tajemnica"
+          ]
+        },
+        {
+          "hint": "Plusz",
+          "word": "Różowa kajdankowa maskotka",
+          "hints": [
+            "Plusz",
+            "Rekwizyt",
+            "Żart"
+          ]
+        },
+        {
+          "hint": "Granice",
+          "word": "Zabawna rozmowa o preferencjach",
+          "hints": [
+            "Granice",
+            "Śmiech",
+            "Para"
+          ]
+        },
+        {
+          "hint": "Noc",
+          "word": "Flirt po północy",
+          "hints": [
+            "Noc",
+            "Wiadomość",
+            "Telefon"
+          ]
+        },
+        {
+          "hint": "Muzyka",
+          "word": "Pocałunek na imprezie",
+          "hints": [
+            "Muzyka",
+            "Tłum",
+            "Zbliżenie"
+          ]
+        },
+        {
+          "hint": "Sekret",
+          "word": "Odważne wyznanie",
+          "hints": [
+            "Sekret",
+            "Rumieniec",
+            "Szczerość"
+          ]
+        },
+        {
+          "hint": "Korytarz",
+          "word": "Romans w biurze",
+          "hints": [
+            "Korytarz",
+            "Sekret",
+            "Praca"
+          ]
+        },
+        {
+          "hint": "Hotel",
+          "word": "Romans wakacyjny",
+          "hints": [
+            "Hotel",
+            "Plaża",
+            "Pożegnanie"
+          ]
+        },
+        {
+          "hint": "Kołnierzyk",
+          "word": "Tajemniczy zapach perfum",
+          "hints": [
+            "Kołnierzyk",
+            "Podejrzenie",
+            "Spotkanie"
+          ]
+        },
+        {
+          "hint": "Szczerość",
+          "word": "Naga prawda",
+          "hints": [
+            "Szczerość",
+            "Bez filtrów",
+            "Rozmowa"
+          ]
+        },
+        {
+          "hint": "Taniec",
+          "word": "Podryw na parkiecie",
+          "hints": [
+            "Taniec",
+            "Kontakt",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Kolejka",
+          "word": "Flirt w kolejce do toalety",
+          "hints": [
+            "Kolejka",
+            "Impreza",
+            "Spojrzenie"
+          ]
+        },
+        {
+          "hint": "Poranek",
+          "word": "Ubranie znalezione na kanapie",
+          "hints": [
+            "Poranek",
+            "Domówka",
+            "Niespodzianka"
+          ]
+        },
+        {
+          "hint": "Pranie",
+          "word": "Zgubiona bielizna",
+          "hints": [
+            "Pranie",
+            "Łóżko",
+            "Poszukiwania"
+          ]
+        },
+        {
+          "hint": "Okienka",
+          "word": "Dorosły kalendarz adwentowy",
+          "hints": [
+            "Okienka",
+            "Niespodzianki",
+            "Grudzień"
+          ]
+        },
+        {
+          "hint": "Kręcenie",
+          "word": "Pikantna butelka",
+          "hints": [
+            "Kręcenie",
+            "Wyzwanie",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Oczekiwanie",
+          "word": "Dreszcz przed pocałunkiem",
+          "hints": [
+            "Oczekiwanie",
+            "Usta",
+            "Napięcie"
+          ]
+        },
+        {
+          "hint": "Urok",
+          "word": "Seksapil",
+          "hints": [
+            "Urok",
+            "Pewność siebie",
+            "Flirt"
+          ]
+        },
+        {
+          "hint": "Ochota",
+          "word": "Libido",
+          "hints": [
+            "Ochota",
+            "Pożądanie",
+            "Energia"
+          ]
+        },
+        {
+          "hint": "Przyciąganie",
+          "word": "Chemia między ludźmi",
+          "hints": [
+            "Przyciąganie",
+            "Spojrzenia",
+            "Iskra"
+          ]
+        },
+        {
+          "hint": "Granice",
+          "word": "Strefa komfortu",
+          "hints": [
+            "Granice",
+            "Poczucie",
+            "Bezpieczeństwo"
+          ]
+        },
+        {
+          "hint": "Pytanie",
+          "word": "Zgoda na flirt",
+          "hints": [
+            "Pytanie",
+            "Ustalenia",
+            "Szacunek"
+          ]
+        },
+        {
+          "hint": "Kartka",
+          "word": "Lista fantazji",
+          "hints": [
+            "Kartka",
+            "Marzenia",
+            "Sekret"
+          ]
+        },
+        {
+          "hint": "Słowa",
+          "word": "Odważny komplement",
+          "hints": [
+            "Słowa",
+            "Rumieniec",
+            "Uśmiech"
+          ]
+        },
+        {
+          "hint": "Dzwonek",
+          "word": "Niezapowiedziany gość rano",
+          "hints": [
+            "Dzwonek",
+            "Poranek",
+            "Wpadka"
+          ]
+        },
+        {
+          "hint": "Łazienka",
+          "word": "Gumka do włosów w obcym mieszkaniu",
+          "hints": [
+            "Łazienka",
+            "Tajemnica",
+            "Podejrzenie"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Ukryte powiadomienie z randek",
+          "hints": [
+            "Telefon",
+            "Wiadomość",
+            "Sekret"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Dziwne imię zapisane w kontaktach",
+          "hints": [
+            "Telefon",
+            "Pseudonim",
+            "Związek"
+          ]
+        },
+        {
+          "hint": "Karty",
+          "word": "Niegrzeczne bingo",
+          "hints": [
+            "Karty",
+            "Hasła",
+            "Dorośli"
+          ]
+        },
+        {
+          "hint": "Mikrofon",
+          "word": "Karaoke po trzech drinkach",
+          "hints": [
+            "Mikrofon",
+            "Wstyd",
+            "Noc"
+          ]
+        },
+        {
+          "hint": "Usta",
+          "word": "Namiętny pocałunek",
+          "hints": [
+            "Usta",
+            "Emocje",
+            "Bliskość"
+          ]
+        },
+        {
+          "hint": "Iskra",
+          "word": "Zbyt gorąca randka",
+          "hints": [
+            "Iskra",
+            "Noc",
+            "Temperatura"
+          ]
+        },
+        {
+          "hint": "Dzwonek",
+          "word": "Przerwana romantyczna chwila",
+          "hints": [
+            "Dzwonek",
+            "Rodzice",
+            "Wpadka"
+          ]
+        },
+        {
+          "hint": "Szczerość",
+          "word": "Wyznanie po imprezie",
+          "hints": [
+            "Szczerość",
+            "Rano",
+            "Telefon"
+          ]
+        },
+        {
+          "hint": "Poranek",
+          "word": "Niezręczna cisza przy śniadaniu",
+          "hints": [
+            "Poranek",
+            "Dwoje",
+            "Milczenie"
+          ]
+        },
+        {
+          "hint": "Poranek",
+          "word": "Zgubiona skarpetka po randce",
+          "hints": [
+            "Poranek",
+            "Łóżko",
+            "Poszukiwania"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Dwuznaczne emotikony",
+          "hints": [
+            "Telefon",
+            "Brzoskwinia",
+            "Wiadomość"
+          ]
+        },
+        {
+          "hint": "Emoji",
+          "word": "Bakłażan w wiadomości",
+          "hints": [
+            "Emoji",
+            "Warzywo",
+            "Aluzja"
+          ]
+        },
+        {
+          "hint": "Żart",
+          "word": "Seksualna aluzja",
+          "hints": [
+            "Żart",
+            "Dwuznaczność",
+            "Śmiech"
+          ]
+        },
+        {
+          "hint": "Hotel",
+          "word": "Wyjazd tylko dla par",
+          "hints": [
+            "Hotel",
+            "Weekend",
+            "Relaks"
+          ]
+        },
+        {
+          "hint": "Impreza",
+          "word": "Sekretny pseudonim w klubie",
+          "hints": [
+            "Impreza",
+            "Imię",
+            "Flirt"
+          ]
+        },
+        {
+          "hint": "Poranek",
+          "word": "Kac moralny",
+          "hints": [
+            "Poranek",
+            "Wspomnienia",
+            "Wstyd"
+          ]
+        },
+        {
+          "hint": "Kluczyk",
+          "word": "Żart z kajdankami",
+          "hints": [
+            "Kluczyk",
+            "Przyjaciele",
+            "Rekwizyt"
+          ]
+        },
+        {
+          "hint": "Kostium",
+          "word": "Przebranie pielęgniarki",
+          "hints": [
+            "Kostium",
+            "Fartuch",
+            "Impreza"
+          ]
+        },
+        {
+          "hint": "Mundur",
+          "word": "Przebranie policjanta",
+          "hints": [
+            "Mundur",
+            "Kajdanki",
+            "Kostium"
+          ]
+        },
+        {
+          "hint": "Suwak",
+          "word": "Zamknięty zamek od kostiumu",
+          "hints": [
+            "Suwak",
+            "Pomoc",
+            "Wpadka"
+          ]
+        },
+        {
+          "hint": "Bar",
+          "word": "Koktajl o nazwie Pokusa",
+          "hints": [
+            "Bar",
+            "Alkohol",
+            "Flirt"
+          ]
+        },
+        {
+          "hint": "Kołnierz",
+          "word": "Niespodziewane ślady szminki",
+          "hints": [
+            "Kołnierz",
+            "Usta",
+            "Podejrzenie"
+          ]
+        },
+        {
+          "hint": "Mikrofon",
+          "word": "Flirtująca wiadomość głosowa",
+          "hints": [
+            "Mikrofon",
+            "Szept",
+            "Telefon"
+          ]
+        },
+        {
+          "hint": "Plama",
+          "word": "Wino na białej koszuli",
+          "hints": [
+            "Plama",
+            "Randka",
+            "Kolacja"
+          ]
+        },
+        {
+          "hint": "Telefon",
+          "word": "Głupia wymówka po randce",
+          "hints": [
+            "Telefon",
+            "Kłamstwo",
+            "Poranek"
+          ]
+        },
+        {
+          "hint": "Flirt",
+          "word": "Pytanie o numer telefonu",
+          "hints": [
+            "Flirt",
+            "Cyfry",
+            "Kontakt"
+          ]
+        },
+        {
+          "hint": "Pudełko",
+          "word": "Niegrzeczny prezent na urodziny",
+          "hints": [
+            "Pudełko",
+            "Śmiech",
+            "Dorośli"
           ]
         }
       ]
