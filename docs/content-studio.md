@@ -60,3 +60,21 @@ npm run build:web
 npm run studio
 node tools/generate-content-seed.mjs --check
 ```
+
+## Dostęp do panelu przez przeglądarkę (Supabase Free)
+
+Panel jest już wdrożony jako **publiczna strona logowania** w darmowej Supabase Edge Function:
+
+https://astcatgvvliatokqalhd.supabase.co/functions/v1/partyjniak-studio/
+
+Funkcja serwuje wyłącznie statyczne pliki HTML, JS i CSS. Publiczny dostęp do samego formularza logowania **nie oznacza prawa do edycji bazy**: wszystkie zapisy i publikacje nadal przechodzą przez Supabase Auth oraz weryfikowaną w PostgreSQL listę adresów redaktorów.
+
+Po zmianie panelu uruchom:
+
+```bash
+node tools/generate-studio-edge.mjs
+# po zalogowaniu do Supabase CLI i powiązaniu projektu:
+supabase functions deploy partyjniak-studio --no-verify-jwt
+```
+
+Pliki `supabase/functions/partyjniak-studio/*.ts` są generowane z `admin/`. Sprawdź spójność poleceniem `node tools/generate-studio-edge.mjs --check`. `verify_jwt=false` dotyczy **tylko serwowania publicznego HTML/CSS/JS**, nie żadnej operacji na bazie.
