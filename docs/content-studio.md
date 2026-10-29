@@ -96,10 +96,17 @@ Priorytetem jest **grywalność przy stole**, nie liczba wyrazów. Hasła mają 
 Nowe hasła pobierane są przy uruchomieniu gry z internetem, po czym pozostają w pamięci podręcznej na rozgrywki bez sieci. **Sam import haseł nie wymaga nowego APK.** Na całkiem nowym urządzeniu, które nigdy nie pobrało opublikowanych treści, aplikacja nadal ma tylko niewielki lokalny pakiet startowy. Początkowe dane i automatycznie generowany seed opisane we wcześniejszych rozdziałach dotyczą właśnie tego pakietu, nie katalogu zdalnego.
 
 
-## Tykająca Bomba — rozszerzony zestaw zadań (2026-10-29)
+## Tykająca Bomba — 150 pytań na kategorię (2026-10-30)
 
-W opublikowanej bazie Supabase (`ticking-bomb/pl`, **rewizja 3**) jest **211 zadań w 8 kategoriach**. Rozszerzenie dodaje **96 nowych tematów** (po 12 na kategorię) i usuwa **7 niemal zdublowanych tematów** z poprzedniej wersji 122-zadaniowej. Każda kategoria zawiera od **25 do 28** zadań.
+- **1200 pytań w ośmiu kategoriach ogólnych** — wszystkie po 150, opublikowane w Supabase jako `ticking-bomb/pl`, **rewizja 11**.
+- **150 pytań w dziewiątej kategorii „18+ — Bez cenzury”** — tylko dla dorosłych, wyłącznie po indywidualnym włączeniu.
+- **Łącznie 1350 pytań** w `content/ticking-bomb-expanded.pl.json`. Brak identycznych pytań, wszystkie mieszczą się w limicie 80 znaków. Lokalne źródło jest kompletne i może działać przy pierwszym uruchomieniu nowej aplikacji offline.
+- Starszy plik `content/ticking-bomb.pl.json` (**96 pytań**) pozostaje niezmieniony jako historyczny seed i rezerwa.
 
-Tykająca Bomba wymaga tematów, na które gracze mogą szybko podawać **wiele różnych przykładów**, a nie odgadywania jednego hasła. Dodano proste, jednoznaczne zbiory typu „Wymieniajcie gady”, „Wymieniajcie potrawy z makaronem”, „Wymieniajcie rzeczy w sypialni”, „Wymieniajcie rzeczy na kółkach”. Nie dodano trudnych scenek ani wąskich kategorii z jedną poprawną odpowiedzią.
+**Zgodność ze starszym APK (ważne):** starsze wydania Tykającej Bomby wybierają wszystkie kategorie automatycznie i nie rozumieją ograniczenia 18+. Dlatego opublikowany dokument Supabase zawiera **wyłącznie osiem kategorii ogólnych**. Nowy klient dokłada osobno kategorię 18+ z zaufanego, lokalnie dostarczanego pliku (również gdy pobiera ogólne kategorie z Supabase). Stara aplikacja nie otrzymuje tych pytań. Aby zobaczyć 18+ należy użyć zaktualizowanej aplikacji.
 
-Kompletna, aktualna baza jest też w wersjonowanym pliku `content/ticking-bomb-expanded.pl.json` i wejdzie do kolejnej kompilacji APK jako pakiet lokalny. Pierwotny `content/ticking-bomb.pl.json` z 96 zadaniami pozostaje niezmieniony jako historyczny seed Supabase i awaryjna lokalna rezerwa. Dotychczasowe wydania pobierają aktualną wersję po uruchomieniu online i zapisują ją w pamięci podręcznej do grania offline. Test `tests/ticking-bomb-content.test.cjs` sprawdza liczbę kategorii, minimalną liczbę zadań na kategorię i brak zduplikowanych tematów.
+Nowy klient nie włącza 18+ przy starcie, resetowaniu gry, wznowieniu sesji bez tej kategorii ani wybieraniu „Wszystkie”. Jedynym sposobem aktywacji jest jawne dotknięcie jej kafelka. Ponowny zbiorczy wybór kategorii usuwa 18+ z aktywnego zestawu. Przeprowadzić test na fizycznym telefonie przed wypuszczeniem nowego APK.
+
+Tematy projektowano pod szybką grę: każde pytanie powinno mieć wiele sensownych, różnych odpowiedzi. Przykłady: „Zwierzęta mieszkające w norach”, „Dania z ryżem”, „Rzeczy w hotelu” i „Rzeczy, które trudno wymówić”. Kategoria 18+ zawiera randki, relacje, dwuznaczny humor i pikantne sytuacje, ale nie wymaga od graczy osobistych zwierzeń.
+
+Testy w `tests/ticking-bomb-content.test.cjs` oraz `tests/ticking-bomb-state.test.cjs` pilnują liczebności, unikalności i bezpiecznego wyboru kategorii.
