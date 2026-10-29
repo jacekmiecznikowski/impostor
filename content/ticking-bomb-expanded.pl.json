@@ -1323,6 +1323,506 @@
         {
           "hint": "",
           "word": "Wymieniajcie rzeczy wielokolorowe."
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze turkusowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze granatowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze beżowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze bordowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze kremowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze miętowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze oliwkowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze błękitnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze malinowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze miedzianym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze limonkowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze lawendowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze karmelowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze łososiowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze ceglastym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kolorze khaki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy jasne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ciemne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy pastelowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy neonowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy jaskrawe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy matowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy błyszczące na słońcu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy odbijające światło.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ze złotymi dodatkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ze srebrnymi dodatkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z kolorowym nadrukiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy dwukolorowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy trójkolorowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w biało-czerwonych barwach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w czarno-białe pasy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy we wzory kwiatowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w grochy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kratę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w paski pionowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w paski poziome.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy we wzór zwierzęcy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy we wzór moro.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z tęczowym wzorem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy pokryte kropkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy pokryte plamami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ozdobione gwiazdkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ozdobione sercami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ozdobione kwiatami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ozdobione liśćmi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ozdobione literami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy ozdobione cyframi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z napisem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z logo.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z obrazkiem zwierzęcia.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z nadrukowaną twarzą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie koła.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie kwadratu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie prostokąta.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie owalu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie walca.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie kuli.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie sześcianu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie stożka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie spirali.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie półksiężyca.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie litery „L”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie litery „U”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie litery „S”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie pierścienia.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie kropli.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie strzałki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie krzyża.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie rombu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie łuku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie zygzaka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie fali.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie jajka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kształcie tuby.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają ostre krawędzie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają zaokrąglone rogi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają dziurki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają kratkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają kropki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają symetryczny kształt.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają nieregularny kształt.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają pięć rogów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają trzy boki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają cztery boki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są płaskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są wypukłe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są wklęsłe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są długie i cienkie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są krótkie i grube.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są małe i okrągłe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są duże i okrągłe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są wysokie i wąskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które są niskie i szerokie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zwijać w rulon.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można składać na pół.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z drewna.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z metalu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z plastiku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane ze szkła.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z gumy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z papieru.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z kartonu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane ze skóry.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z materiału.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z kamienia.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z ceramiki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z porcelany.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z betonu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z lodu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy wykonane z piasku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z przezroczystego szkła.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z kolorowego szkła.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z przezroczystego plastiku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z błyszczącego metalu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z naturalnego drewna.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z miękkiej tkaniny.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy z grubego papieru.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają metalowe elementy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają drewniane elementy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają plastikowe elementy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają gumowe elementy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mają kolorowe guziki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które świecą na czerwono.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które świecą na zielono.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które świecą na niebiesko.",
+          "hint": ""
         }
       ]
     },
@@ -1435,6 +1935,502 @@
         {
           "hint": "",
           "word": "Wymieniajcie dania kuchni włoskiej."
+        },
+        {
+          "word": "Wymieniajcie rodzaje makaronu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje pierogów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z ryżu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z kaszy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z jajek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z kurczaka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z wołowiny.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z wieprzowiny.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z ryb.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania z owoców morza.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania wegetariańskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania wegańskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania jednogarnkowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania smażone na patelni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania pieczone w piekarniku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania gotowane na parze.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania podawane na zimno.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dania podawane na gorąco.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy na Wielkanoc.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy na Wigilię.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy na Boże Narodzenie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy na grilla.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy na ognisko.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z grzybami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z serem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z pomidorami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z cebulą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z czosnkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z papryką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z dynią.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z ziemniaków.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z fasoli.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z soczewicy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z jabłek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z bananów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z czekoladą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z miodem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z mlekiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z kukurydzą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z kapustą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z marchewką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z burakami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z brokułami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z ryżem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z jajkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z pieczarkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z ciasta francuskiego.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z ciasta drożdżowego.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z ciasta naleśnikowego.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z twarogiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z mozzarellą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z boczkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z kiełbasą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z tuńczykiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z łososiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z truskawkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z malinami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z cytryną.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z ogórkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z awokado.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie potrawy z pieczywem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje burgerów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje pizzy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje sałatek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje sosów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dipów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje bułek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje ciastek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje czekolady.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje batonów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje cukierków.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje lodów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje gofrów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje naleśników.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje placków.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje zup kremów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje pierników.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje serników.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje ciastek świątecznych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje orzechów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje pestek i nasion.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje warzyw korzeniowych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje owoców cytrusowych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje owoców leśnych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje owoców egzotycznych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje jadalnych grzybów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje ziół.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje przypraw do mięsa.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje przypraw do ciast.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje produktów z mleka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje jogurtów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje serów żółtych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje serów białych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje napojów gazowanych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje herbat.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje kaw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje soków.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje koktajli owocowych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje lemoniad.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje napojów zimowych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje napojów letnich.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje śniadań.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje kolacji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje deserów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje przekąsek na imprezę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje przekąsek do filmu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje przekąsek do szkoły.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje potraw do lunchboxa.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje jedzenia ulicznego.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje jedzenia na wynos.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje jedzenia z puszki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje mrożonek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje przetworów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje kiszonek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dżemów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje konfitur.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje past kanapkowych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do sałatek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do hamburgerów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do hot doga.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do naleśników.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do owsianki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do jogurtu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rodzaje dodatków do kawy.",
+          "hint": ""
         }
       ]
     },
