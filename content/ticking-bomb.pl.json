@@ -1,168 +1,916 @@
 {
-  "schemaVersion": 1,
   "game": "ticking-bomb",
   "locale": "pl",
   "categories": [
     {
       "id": "animals",
-      "name": "Zwierzęta",
       "desc": "Gatunki, cechy i zwierzęce skojarzenia.",
       "icon": "fa-paw",
+      "name": "Zwierzęta",
       "words": [
-        {"word": "Wymieniajcie ssaki.", "hint": ""},
-        {"word": "Wymieniajcie ptaki.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta żyjące w wodzie.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta spotykane w Polsce.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta domowe.", "hint": ""},
-        {"word": "Wymieniajcie drapieżniki.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta, które składają jaja.", "hint": ""},
-        {"word": "Wymieniajcie owady.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta mniejsze od kota.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta w paski lub cętki.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta z czterema łapami.", "hint": ""},
-        {"word": "Wymieniajcie zwierzęta żyjące w Afryce.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie ssaki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie ptaki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta żyjące w wodzie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta spotykane w Polsce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta domowe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie drapieżniki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta, które składają jaja."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie owady."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta mniejsze od kota."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta w paski lub cętki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta z czterema łapami."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta żyjące w Afryce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta żyjące nocą."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta z rogami."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta, które potrafią latać."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta spotykane na farmie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie gady."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie płazy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie ryby."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta żyjące w lesie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta, które mają ogon."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta z futrem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta, które skaczą."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta, które dobrze pływają."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta żyjące na pustyni."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta żyjące na sawannie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta zapadające w sen zimowy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zwierzęta, które można zobaczyć w zoo."
+        }
       ]
     },
     {
       "id": "words",
-      "name": "Słowa i język",
       "desc": "Końcówki, litery, rymy i szybkie słowne wyzwania.",
       "icon": "fa-font",
+      "name": "Słowa i język",
       "words": [
-        {"word": "Mówcie słowa kończące się na „-aba”.", "hint": ""},
-        {"word": "Mówcie słowa zaczynające się na „prz-”.", "hint": ""},
-        {"word": "Mówcie słowa zawierające „sz”.", "hint": ""},
-        {"word": "Mówcie słowa kończące się na „-ka”.", "hint": ""},
-        {"word": "Mówcie pięcioliterowe słowa.", "hint": ""},
-        {"word": "Mówcie czasowniki.", "hint": ""},
-        {"word": "Mówcie przymiotniki.", "hint": ""},
-        {"word": "Mówcie słowa z literą „ó”.", "hint": ""},
-        {"word": "Mówcie słowa zaczynające się na „K”.", "hint": ""},
-        {"word": "Mówcie słowa bez litery „a”.", "hint": ""},
-        {"word": "Mówcie słowa rymujące się z „kot”.", "hint": ""},
-        {"word": "Mówcie słowa, które mają co najmniej trzy sylaby.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Mówcie słowa kończące się na „-aba”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zaczynające się na „prz-”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zawierające „sz”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa kończące się na „-ka”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie pięcioliterowe słowa."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie czasowniki."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie przymiotniki."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa z literą „ó”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zaczynające się na „K”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa bez litery „a”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa rymujące się z „kot”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa, które mają co najmniej trzy sylaby."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zaczynające się na „za-”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa kończące się na „-ek”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie imiona zaczynające się na „M”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zaczynające się na „B”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zaczynające się na „S”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa kończące się na „-owy”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa kończące się na „-nik”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zawierające „cz”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zawierające „rz”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa z dwiema literami „a”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie nazwy zawodów."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie nazwy miesięcy."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie zdrobnienia imion."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa kończące się na „-anie”."
+        },
+        {
+          "hint": "",
+          "word": "Mówcie słowa zaczynające się na „nie-”."
+        }
       ]
     },
     {
       "id": "colors",
-      "name": "Kolory i kształty",
       "desc": "Rzeczy o wspólnym kolorze, formie lub wyglądzie.",
       "icon": "fa-palette",
+      "name": "Kolory i kształty",
       "words": [
-        {"word": "Wymieniajcie rzeczy w kolorze żółtym.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w kolorze czerwonym.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w kolorze zielonym.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w kolorze niebieskim.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które bywają białe.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które bywają czarne.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy przezroczyste.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy błyszczące.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy okrągłe.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy prostokątne.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w paski.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które świecą.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze żółtym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze czerwonym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze zielonym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze niebieskim."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które bywają białe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które bywają czarne."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy przezroczyste."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy błyszczące."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy okrągłe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy prostokątne."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w paski."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które świecą."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze fioletowym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze pomarańczowym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze różowym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze brązowym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze szarym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze złotym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kolorze srebrnym."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kropki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kratkę."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kształcie trójkąta."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kształcie gwiazdy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kształcie serca."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy wielokolorowe."
+        }
       ]
     },
     {
       "id": "food",
-      "name": "Jedzenie i napoje",
       "desc": "Produkty, dania, smaki i kuchenne skojarzenia.",
       "icon": "fa-utensils",
+      "name": "Jedzenie i napoje",
       "words": [
-        {"word": "Wymieniajcie owoce.", "hint": ""},
-        {"word": "Wymieniajcie warzywa.", "hint": ""},
-        {"word": "Wymieniajcie dodatki do pizzy.", "hint": ""},
-        {"word": "Wymieniajcie słodycze.", "hint": ""},
-        {"word": "Wymieniajcie napoje.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy jedzone na śniadanie.", "hint": ""},
-        {"word": "Wymieniajcie zupy.", "hint": ""},
-        {"word": "Wymieniajcie przyprawy.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy z piekarni.", "hint": ""},
-        {"word": "Wymieniajcie produkty trzymane w lodówce.", "hint": ""},
-        {"word": "Wymieniajcie potrawy, które można jeść rękami.", "hint": ""},
-        {"word": "Wymieniajcie jedzenie zaczynające się na „P”.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie owoce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie warzywa."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie dodatki do pizzy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie słodycze."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie napoje."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy jedzone na śniadanie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zupy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie przyprawy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy z piekarni."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie produkty trzymane w lodówce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie potrawy, które można jeść rękami."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie jedzenie zaczynające się na „P”."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie smaki lodów."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie napoje bezalkoholowe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rodzaje serów."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie potrawy z makaronem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie dania z ziemniaków."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rodzaje ciast."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie produkty mleczne."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rodzaje pieczywa."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie potrawy z grilla."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie zielone warzywa."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie czerwone owoce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie fast foody."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rodzaje kanapek."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie dania kuchni włoskiej."
+        }
       ]
     },
     {
       "id": "world",
-      "name": "Świat",
       "desc": "Państwa, miasta, języki i miejsca.",
       "icon": "fa-earth-europe",
+      "name": "Świat",
       "words": [
-        {"word": "Wymieniajcie państwa Europy.", "hint": ""},
-        {"word": "Wymieniajcie miasta w Polsce.", "hint": ""},
-        {"word": "Wymieniajcie stolice państw.", "hint": ""},
-        {"word": "Wymieniajcie języki świata.", "hint": ""},
-        {"word": "Wymieniajcie wyspy.", "hint": ""},
-        {"word": "Wymieniajcie morza i oceany.", "hint": ""},
-        {"word": "Wymieniajcie pasma górskie lub góry.", "hint": ""},
-        {"word": "Wymieniajcie państwa leżące nad morzem.", "hint": ""},
-        {"word": "Wymieniajcie kraje zaczynające się na „S”.", "hint": ""},
-        {"word": "Wymieniajcie miejsca, do których jedzie się na wakacje.", "hint": ""},
-        {"word": "Wymieniajcie waluty.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy kojarzące się z lotniskiem.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie państwa Europy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie miasta w Polsce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie stolice państw."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie języki świata."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie wyspy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie morza i oceany."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie pasma górskie lub góry."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie państwa leżące nad morzem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie kraje zaczynające się na „S”."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie miejsca, do których jedzie się na wakacje."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie waluty."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy kojarzące się z lotniskiem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie polskie rzeki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie państwa Afryki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie państwa Azji."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie państwa Ameryki Południowej."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie miasta w Europie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie polskie miejscowości nad morzem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie polskie województwa."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie polskie góry i pasma górskie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie znane zabytki świata."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie miasta w Niemczech."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie miasta we Włoszech."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeki Europy."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie słynne miejsca w Polsce."
+        }
       ]
     },
     {
       "id": "everyday",
-      "name": "Codzienność",
       "desc": "Dom, praca, szkoła i rzeczy z najbliższego otoczenia.",
       "icon": "fa-house",
+      "name": "Codzienność",
       "words": [
-        {"word": "Wymieniajcie rzeczy w kuchni.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w łazience.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w szkolnym plecaku.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które są w samochodzie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy w biurze.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy zabierane na plażę.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy pakowane do walizki.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy kupowane w aptece.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy trzymane w szafie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy używane na siłowni.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy działające na baterie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które łatwo zgubić.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w kuchni."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w łazience."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w szkolnym plecaku."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są w samochodzie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w biurze."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy zabierane na plażę."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy pakowane do walizki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy kupowane w aptece."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy trzymane w szafie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy używane na siłowni."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy działające na baterie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które łatwo zgubić."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które znajdziesz w apteczce."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie przedmioty używane zimą."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w sypialni."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w salonie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w garażu."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy w ogrodzie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy na biurku."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy na balkonie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które trzeba prać."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które trzeba ładować."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można naprawić."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie czynności wykonywane rano."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie czynności przed snem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można znaleźć na poczcie."
+        }
       ]
     },
     {
       "id": "fun",
-      "name": "Rozrywka",
       "desc": "Sport, muzyka, gry i rzeczy robione dla zabawy.",
       "icon": "fa-icons",
+      "name": "Rozrywka",
       "words": [
-        {"word": "Wymieniajcie sporty.", "hint": ""},
-        {"word": "Wymieniajcie instrumenty muzyczne.", "hint": ""},
-        {"word": "Wymieniajcie gry planszowe.", "hint": ""},
-        {"word": "Wymieniajcie rodzaje tańca.", "hint": ""},
-        {"word": "Wymieniajcie hobby.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które robi się na imprezie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy kojarzące się z koncertem.", "hint": ""},
-        {"word": "Wymieniajcie gatunki filmowe.", "hint": ""},
-        {"word": "Wymieniajcie dyscypliny olimpijskie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które można kolekcjonować.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które można robić w weekend.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy potrzebne do gry w piłkę.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie sporty."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie instrumenty muzyczne."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie gry planszowe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rodzaje tańca."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie hobby."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które robi się na imprezie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy kojarzące się z koncertem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie gatunki filmowe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie dyscypliny olimpijskie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można kolekcjonować."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można robić w weekend."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy potrzebne do gry w piłkę."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie atrakcje w lunaparku."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie gry karciane."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie gry komputerowe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie postacie z bajek."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie bohaterów filmowych."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie gry na telefon."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie sporty zimowe."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie sporty z piłką."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które robi się na weselu."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie piosenki do karaoke."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy kojarzące się z cyrkiem."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie sposoby na spędzenie wieczoru."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie postacie z gier komputerowych."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie atrakcje w parku wodnym."
+        }
       ]
     },
     {
       "id": "associations",
-      "name": "Szybkie skojarzenia",
       "desc": "Proste, szerokie tematy idealne pod presję czasu.",
       "icon": "fa-bolt",
+      "name": "Szybkie skojarzenia",
       "words": [
-        {"word": "Wymieniajcie rzeczy, które są zimne.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które są gorące.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które są głośne.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które są miękkie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które są lepkie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które łatwo stłuc.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które są drogie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które ładnie pachną.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które unoszą się na wodzie.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, które potrafią latać.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy mieszczące się w kieszeni.", "hint": ""},
-        {"word": "Wymieniajcie rzeczy, których nie chcecie zapomnieć przed wyjściem z domu.", "hint": ""}
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są zimne."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są gorące."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są głośne."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są miękkie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są lepkie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które łatwo stłuc."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które są drogie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które ładnie pachną."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które unoszą się na wodzie."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które potrafią latać."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy mieszczące się w kieszeni."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, których nie chcecie zapomnieć przed wyjściem z domu."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które mogą pęknąć."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które się topią."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które pachną."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które budzą ze snu."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które brzydko pachną."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można złożyć."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy na kółkach."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które piszczą."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można nadmuchać."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które mają guziki."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które trzeba myć."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które się rozlewają."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które mają zamek."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy widoczne z daleka."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które można schować."
+        },
+        {
+          "hint": "",
+          "word": "Wymieniajcie rzeczy, które trudno otworzyć."
+        }
       ]
     }
   ],
+  "schemaVersion": 1,
   "discussionTips": []
 }
