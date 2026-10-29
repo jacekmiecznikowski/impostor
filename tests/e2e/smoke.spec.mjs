@@ -216,10 +216,13 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     if (adultCount) {
       const adultCard = allCards.filter({ hasText: '18+' });
       await expect(adultCard).not.toHaveClass(/is-selected/);
-      await adultCard.click();
-      await expect(adultCard).toHaveClass(/is-selected/);
-      await options.getByRole('button', { name: 'Wszystkie' }).click();
-      await expect(adultCard).not.toHaveClass(/is-selected/);
+      // Impostor has a separate adult-content consent flow; Bomb selects directly.
+      if (name === 'Tykająca Bomba') {
+        await adultCard.click();
+        await expect(adultCard).toHaveClass(/is-selected/);
+        await options.getByRole('button', { name: 'Wszystkie' }).click();
+        await expect(adultCard).not.toHaveClass(/is-selected/);
+      }
     }
 
     const search = options.getByRole('searchbox', { name: 'Szukaj kategorii' });
