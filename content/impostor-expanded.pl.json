@@ -15734,12 +15734,12 @@
       "name": "18+ • Tylko dla dorosłych",
       "words": [
         {
-          "hint": "Przesuwanie",
-          "word": "Randka z aplikacji",
+          "word": "Tinder",
+          "hint": "Profil",
           "hints": [
-            "Przesuwanie",
-            "Spotkanie",
-            "Profil"
+            "Profil",
+            "Swipe",
+            "Randki"
           ]
         },
         {
@@ -15761,15 +15761,6 @@
           ]
         },
         {
-          "hint": "Telefon",
-          "word": "Pikantna wiadomość",
-          "hints": [
-            "Telefon",
-            "Flirt",
-            "Rumieniec"
-          ]
-        },
-        {
           "hint": "Spojrzenia",
           "word": "Flirt przy barze",
           "hints": [
@@ -15779,12 +15770,12 @@
           ]
         },
         {
+          "word": "Niezręczna cisza",
           "hint": "Milczenie",
-          "word": "Niezręczna cisza po randce",
           "hints": [
             "Milczenie",
-            "Spotkanie",
-            "Zawstydzenie"
+            "Wstyd",
+            "Spotkanie"
           ]
         },
         {
@@ -15797,12 +15788,12 @@
           ]
         },
         {
-          "hint": "Futro",
-          "word": "Kajdanki z pluszu",
+          "word": "Pluszowe kajdanki",
+          "hint": "Różowe",
           "hints": [
-            "Futro",
-            "Rekwizyt",
-            "Żart"
+            "Różowe",
+            "Nadgarstki",
+            "Rekwizyt"
           ]
         },
         {
@@ -15824,15 +15815,6 @@
           ]
         },
         {
-          "hint": "Chemia",
-          "word": "Ognista randka",
-          "hints": [
-            "Chemia",
-            "Spotkanie",
-            "Rumieniec"
-          ]
-        },
-        {
           "hint": "Plecy",
           "word": "Tajemniczy masaż",
           "hints": [
@@ -15851,38 +15833,29 @@
           ]
         },
         {
+          "word": "Cienkie ściany",
           "hint": "Hałas",
-          "word": "Sąsiedzi za cienką ścianą",
           "hints": [
             "Hałas",
-            "Blok",
+            "Sąsiedzi",
             "Noc"
           ]
         },
         {
-          "hint": "Świece",
-          "word": "Romantyczna kolacja z mikrofalówki",
+          "word": "Pęknięty kondom",
+          "hint": "Panika",
           "hints": [
-            "Świece",
-            "Gotowiec",
-            "Randka"
+            "Panika",
+            "Lateks",
+            "Zabezpieczenie"
           ]
         },
         {
-          "hint": "Pomyłka",
-          "word": "Wpadka na pierwszej randce",
+          "word": "Pomyłka imion",
+          "hint": "Wstyd",
           "hints": [
-            "Pomyłka",
-            "Spotkanie",
-            "Wstyd"
-          ]
-        },
-        {
-          "hint": "Randka",
-          "word": "Pomylenie imion",
-          "hints": [
+            "Wstyd",
             "Randka",
-            "Niezręczność",
             "Zapomnienie"
           ]
         },
@@ -15914,29 +15887,20 @@
           ]
         },
         {
-          "hint": "Impreza",
-          "word": "Miłość po dwóch drinkach",
+          "word": "Pijany podryw",
+          "hint": "Bar",
           "hints": [
-            "Impreza",
-            "Sympatia",
-            "Szybko"
+            "Bar",
+            "Flirt",
+            "Alkohol"
           ]
         },
         {
-          "hint": "Słowa",
-          "word": "Niefortunny komplement",
+          "word": "Głupi komplement",
+          "hint": "Wstyd",
           "hints": [
+            "Wstyd",
             "Słowa",
-            "Wpadka",
-            "Rumieniec"
-          ]
-        },
-        {
-          "hint": "Muzyka",
-          "word": "Romantyczny playlist",
-          "hints": [
-            "Muzyka",
-            "Nastrój",
             "Randka"
           ]
         },
@@ -15947,24 +15911,6 @@
             "Kaplica",
             "Kasyno",
             "Impuls"
-          ]
-        },
-        {
-          "hint": "Restauracja",
-          "word": "Flirtujący kelner",
-          "hints": [
-            "Restauracja",
-            "Spojrzenie",
-            "Obsługa"
-          ]
-        },
-        {
-          "hint": "Wspomnienie",
-          "word": "Wstydliwa historia z imprezy",
-          "hints": [
-            "Wspomnienie",
-            "Wpadka",
-            "Domówka"
           ]
         },
         {
@@ -15995,39 +15941,21 @@
           ]
         },
         {
+          "word": "Telefon do eksa",
           "hint": "Noc",
-          "word": "Telefon do byłego o trzeciej rano",
           "hints": [
             "Noc",
-            "Impuls",
+            "Rozstanie",
             "Numer"
           ]
         },
         {
-          "hint": "Żart",
-          "word": "Śmieszne hasło bezpieczeństwa",
+          "word": "Feromony",
+          "hint": "Zapach",
           "hints": [
-            "Żart",
-            "Słowo",
-            "Ustalenie"
-          ]
-        },
-        {
-          "hint": "Zabawka",
-          "word": "Gumowa kaczuszka w sypialni",
-          "hints": [
-            "Zabawka",
-            "Kąpiel",
-            "Niespodzianka"
-          ]
-        },
-        {
-          "hint": "Flakon",
-          "word": "Kuszący zapach perfum",
-          "hints": [
-            "Flakon",
-            "Szyja",
-            "Flirt"
+            "Zapach",
+            "Chemia",
+            "Przyciąganie"
           ]
         },
         {
@@ -16040,30 +15968,12 @@
           ]
         },
         {
-          "hint": "Ślad",
-          "word": "Czerwona szminka na kołnierzyku",
+          "word": "Ślad po szmince",
+          "hint": "Kołnierzyk",
           "hints": [
-            "Ślad",
-            "Koszula",
-            "Podejrzenie"
-          ]
-        },
-        {
-          "hint": "Para",
-          "word": "Serduszka na lustrze",
-          "hints": [
-            "Para",
-            "Łazienka",
-            "Romantycznie"
-          ]
-        },
-        {
-          "hint": "Łóżko",
-          "word": "Poduszka w kształcie serca",
-          "hints": [
-            "Łóżko",
-            "Prezent",
-            "Walentynki"
+            "Kołnierzyk",
+            "Usta",
+            "Podejrzenia"
           ]
         },
         {
@@ -16103,12 +16013,12 @@
           ]
         },
         {
+          "word": "Oświadczyny",
           "hint": "Pierścionek",
-          "word": "Oświadczyny po imprezie",
           "hints": [
             "Pierścionek",
-            "Impuls",
-            "Rano"
+            "Pytanie",
+            "Ślub"
           ]
         },
         {
@@ -16121,11 +16031,11 @@
           ]
         },
         {
+          "word": "Pikantne pytania",
           "hint": "Dorośli",
-          "word": "Pikantna gra w pytania",
           "hints": [
             "Dorośli",
-            "Zadania",
+            "Gra",
             "Impreza"
           ]
         },
@@ -16139,71 +16049,26 @@
           ]
         },
         {
-          "hint": "Piętra",
-          "word": "Niewygodny flirt w windzie",
+          "word": "Flirt w windzie",
+          "hint": "Spojrzenia",
           "hints": [
-            "Piętra",
             "Spojrzenia",
-            "Niezręcznie"
+            "Piętra",
+            "Podryw"
           ]
         },
         {
+          "word": "Romantyczny weekend",
           "hint": "Hotel",
-          "word": "Romantyczny weekend bez zasięgu",
           "hints": [
             "Hotel",
             "Para",
-            "Telefon"
+            "Wyjazd"
           ]
         },
         {
-          "hint": "Czat",
-          "word": "Prywatna wiadomość wysłana na grupę",
-          "hints": [
-            "Czat",
-            "Wpadka",
-            "Powiadomienie"
-          ]
-        },
-        {
-          "hint": "Kwiaty",
-          "word": "Tajemniczy bukiet róż",
-          "hints": [
-            "Kwiaty",
-            "Nadawca",
-            "Miłość"
-          ]
-        },
-        {
-          "hint": "Noc",
-          "word": "Zbyt głośny śmiech w hotelu",
-          "hints": [
-            "Noc",
-            "Recepcja",
-            "Goście"
-          ]
-        },
-        {
-          "hint": "Pudełko",
-          "word": "Zawstydzający prezent walentynkowy",
-          "hints": [
-            "Pudełko",
-            "Para",
-            "Żart"
-          ]
-        },
-        {
-          "hint": "Recepcja",
-          "word": "Zgubiony klucz do pokoju hotelowego",
-          "hints": [
-            "Recepcja",
-            "Noc",
-            "Para"
-          ]
-        },
-        {
+          "word": "Fałszywe imię",
           "hint": "Telefon",
-          "word": "Zapisany numer pod fałszywym imieniem",
           "hints": [
             "Telefon",
             "Sekret",
@@ -16292,12 +16157,12 @@
           ]
         },
         {
-          "hint": "Satyna",
-          "word": "Kuszący szlafrok",
+          "word": "Satynowy szlafrok",
+          "hint": "Sypialnia",
           "hints": [
-            "Satyna",
-            "Pasek",
-            "Sypialnia"
+            "Sypialnia",
+            "Błysk",
+            "Pasek"
           ]
         },
         {
@@ -16364,29 +16229,29 @@
           ]
         },
         {
+          "word": "Łaskotki",
           "hint": "Dotyk",
-          "word": "Piórko do łaskotania",
           "hints": [
             "Dotyk",
             "Śmiech",
-            "Delikatne"
+            "Piórko"
           ]
         },
         {
-          "hint": "Rekwizyt",
-          "word": "Bicz z frędzlami",
+          "word": "Pejcz",
+          "hint": "Rzemienie",
           "hints": [
+            "Rzemienie",
             "Rekwizyt",
-            "Skóra",
-            "Ustalenia"
+            "Skóra"
           ]
         },
         {
-          "hint": "Wyobraźnia",
-          "word": "Zmysłowa fantazja",
+          "word": "Fantazja erotyczna",
+          "hint": "Sekret",
           "hints": [
-            "Wyobraźnia",
             "Sekret",
+            "Wyobraźnia",
             "Pragnienie"
           ]
         },
@@ -16409,12 +16274,12 @@
           ]
         },
         {
-          "hint": "Siła",
-          "word": "Taniec na rurze",
+          "word": "Pole dance",
+          "hint": "Rura",
           "hints": [
-            "Siła",
-            "Obroty",
-            "Pole dance"
+            "Rura",
+            "Taniec",
+            "Akrobacje"
           ]
         },
         {
@@ -16427,39 +16292,12 @@
           ]
         },
         {
-          "hint": "Karta",
-          "word": "Tajemniczy pokój hotelowy",
-          "hints": [
-            "Karta",
-            "Noc",
-            "Przygoda"
-          ]
-        },
-        {
           "hint": "Aparat",
           "word": "Nagie selfie",
           "hints": [
             "Aparat",
             "Odważnie",
             "Wysłane"
-          ]
-        },
-        {
-          "hint": "Ekran",
-          "word": "Przypadkowy screenshot",
-          "hints": [
-            "Ekran",
-            "Wpadka",
-            "Telefon"
-          ]
-        },
-        {
-          "hint": "Wiadomość",
-          "word": "Pikantne zdjęcie na złym czacie",
-          "hints": [
-            "Wiadomość",
-            "Grupa",
-            "Panika"
           ]
         },
         {
@@ -16499,12 +16337,12 @@
           ]
         },
         {
-          "hint": "Wieczór",
-          "word": "Przygoda z nieznajomym",
+          "word": "Jednonocna przygoda",
+          "hint": "Hotel",
           "hints": [
-            "Wieczór",
-            "Sekret",
-            "Impreza"
+            "Hotel",
+            "Poranek",
+            "Obcy"
           ]
         },
         {
@@ -16535,66 +16373,21 @@
           ]
         },
         {
-          "hint": "Kuchnia",
-          "word": "Fartuszek bez spodni",
+          "word": "Skrzypiące łóżko",
+          "hint": "Hałas",
           "hints": [
-            "Kuchnia",
-            "Żart",
-            "Odważnie"
-          ]
-        },
-        {
-          "hint": "Płatki",
-          "word": "Róża na łóżku",
-          "hints": [
-            "Płatki",
-            "Nastrój",
-            "Hotel"
-          ]
-        },
-        {
-          "hint": "Meble",
-          "word": "Sypialnia ze skrzypiącym łóżkiem",
-          "hints": [
-            "Meble",
             "Hałas",
-            "Sąsiedzi"
+            "Sprężyny",
+            "Sypialnia"
           ]
         },
         {
-          "hint": "Podsłuchiwanie",
-          "word": "Cienkie ściany w hotelu",
+          "word": "Malinka",
+          "hint": "Pocałunek",
           "hints": [
-            "Podsłuchiwanie",
-            "Noc",
-            "Niezręcznie"
-          ]
-        },
-        {
-          "hint": "Ślad",
-          "word": "Ugryzienie w szyję",
-          "hints": [
+            "Pocałunek",
             "Ślad",
-            "Flirt",
-            "Kołnierzyk"
-          ]
-        },
-        {
-          "hint": "Ślad",
-          "word": "Malinka na szyi",
-          "hints": [
-            "Ślad",
-            "Rumieniec",
-            "Szalik"
-          ]
-        },
-        {
-          "hint": "Oliwka",
-          "word": "Nieudany masaż dla dwojga",
-          "hints": [
-            "Oliwka",
-            "Śmiech",
-            "Dłonie"
+            "Szyja"
           ]
         },
         {
@@ -16607,33 +16400,6 @@
           ]
         },
         {
-          "hint": "Rzucanie",
-          "word": "Kości miłości",
-          "hints": [
-            "Rzucanie",
-            "Wyzwania",
-            "Para"
-          ]
-        },
-        {
-          "hint": "Dym",
-          "word": "Romantyczna awaria świec",
-          "hints": [
-            "Dym",
-            "Nastrój",
-            "Zapałki"
-          ]
-        },
-        {
-          "hint": "Łazienka",
-          "word": "Wpadka z ręcznikiem",
-          "hints": [
-            "Łazienka",
-            "Drzwi",
-            "Rumieniec"
-          ]
-        },
-        {
           "hint": "Nastrój",
           "word": "Czerwony pokój",
           "hints": [
@@ -16643,30 +16409,12 @@
           ]
         },
         {
-          "hint": "Plusz",
-          "word": "Różowa kajdankowa maskotka",
+          "word": "Nocny flirt",
+          "hint": "Północ",
           "hints": [
-            "Plusz",
-            "Rekwizyt",
-            "Żart"
-          ]
-        },
-        {
-          "hint": "Granice",
-          "word": "Zabawna rozmowa o preferencjach",
-          "hints": [
-            "Granice",
-            "Śmiech",
-            "Para"
-          ]
-        },
-        {
-          "hint": "Noc",
-          "word": "Flirt po północy",
-          "hints": [
-            "Noc",
+            "Północ",
             "Wiadomość",
-            "Telefon"
+            "Spojrzenia"
           ]
         },
         {
@@ -16688,12 +16436,12 @@
           ]
         },
         {
-          "hint": "Korytarz",
-          "word": "Romans w biurze",
+          "word": "Biurowy romans",
+          "hint": "Firma",
           "hints": [
-            "Korytarz",
+            "Firma",
             "Sekret",
-            "Praca"
+            "Związek"
           ]
         },
         {
@@ -16706,15 +16454,6 @@
           ]
         },
         {
-          "hint": "Kołnierzyk",
-          "word": "Tajemniczy zapach perfum",
-          "hints": [
-            "Kołnierzyk",
-            "Podejrzenie",
-            "Spotkanie"
-          ]
-        },
-        {
           "hint": "Szczerość",
           "word": "Naga prawda",
           "hints": [
@@ -16724,30 +16463,12 @@
           ]
         },
         {
+          "word": "Podryw",
           "hint": "Taniec",
-          "word": "Podryw na parkiecie",
           "hints": [
             "Taniec",
-            "Kontakt",
+            "Flirt",
             "Impreza"
-          ]
-        },
-        {
-          "hint": "Kolejka",
-          "word": "Flirt w kolejce do toalety",
-          "hints": [
-            "Kolejka",
-            "Impreza",
-            "Spojrzenie"
-          ]
-        },
-        {
-          "hint": "Poranek",
-          "word": "Ubranie znalezione na kanapie",
-          "hints": [
-            "Poranek",
-            "Domówka",
-            "Niespodzianka"
           ]
         },
         {
@@ -16760,30 +16481,12 @@
           ]
         },
         {
-          "hint": "Okienka",
-          "word": "Dorosły kalendarz adwentowy",
+          "word": "Pierwszy pocałunek",
+          "hint": "Usta",
           "hints": [
-            "Okienka",
-            "Niespodzianki",
-            "Grudzień"
-          ]
-        },
-        {
-          "hint": "Kręcenie",
-          "word": "Pikantna butelka",
-          "hints": [
-            "Kręcenie",
-            "Wyzwanie",
-            "Impreza"
-          ]
-        },
-        {
-          "hint": "Oczekiwanie",
-          "word": "Dreszcz przed pocałunkiem",
-          "hints": [
-            "Oczekiwanie",
             "Usta",
-            "Napięcie"
+            "Stres",
+            "Bliskość"
           ]
         },
         {
@@ -16814,24 +16517,6 @@
           ]
         },
         {
-          "hint": "Granice",
-          "word": "Strefa komfortu",
-          "hints": [
-            "Granice",
-            "Poczucie",
-            "Bezpieczeństwo"
-          ]
-        },
-        {
-          "hint": "Pytanie",
-          "word": "Zgoda na flirt",
-          "hints": [
-            "Pytanie",
-            "Ustalenia",
-            "Szacunek"
-          ]
-        },
-        {
           "hint": "Kartka",
           "word": "Lista fantazji",
           "hints": [
@@ -16841,66 +16526,21 @@
           ]
         },
         {
-          "hint": "Słowa",
-          "word": "Odważny komplement",
+          "word": "Seksowny komplement",
+          "hint": "Flirt",
           "hints": [
-            "Słowa",
+            "Flirt",
             "Rumieniec",
-            "Uśmiech"
+            "Słowa"
           ]
         },
         {
-          "hint": "Dzwonek",
-          "word": "Niezapowiedziany gość rano",
-          "hints": [
-            "Dzwonek",
-            "Poranek",
-            "Wpadka"
-          ]
-        },
-        {
-          "hint": "Łazienka",
-          "word": "Gumka do włosów w obcym mieszkaniu",
-          "hints": [
-            "Łazienka",
-            "Tajemnica",
-            "Podejrzenie"
-          ]
-        },
-        {
-          "hint": "Telefon",
-          "word": "Ukryte powiadomienie z randek",
-          "hints": [
-            "Telefon",
-            "Wiadomość",
-            "Sekret"
-          ]
-        },
-        {
-          "hint": "Telefon",
-          "word": "Dziwne imię zapisane w kontaktach",
-          "hints": [
-            "Telefon",
-            "Pseudonim",
-            "Związek"
-          ]
-        },
-        {
-          "hint": "Karty",
-          "word": "Niegrzeczne bingo",
-          "hints": [
-            "Karty",
-            "Hasła",
-            "Dorośli"
-          ]
-        },
-        {
+          "word": "Pijane karaoke",
           "hint": "Mikrofon",
-          "word": "Karaoke po trzech drinkach",
           "hints": [
             "Mikrofon",
-            "Wstyd",
-            "Noc"
+            "Alkohol",
+            "Impreza"
           ]
         },
         {
@@ -16913,66 +16553,21 @@
           ]
         },
         {
-          "hint": "Iskra",
-          "word": "Zbyt gorąca randka",
+          "word": "Niegrzeczne emoji",
+          "hint": "Bakłażan",
           "hints": [
-            "Iskra",
-            "Noc",
-            "Temperatura"
-          ]
-        },
-        {
-          "hint": "Dzwonek",
-          "word": "Przerwana romantyczna chwila",
-          "hints": [
-            "Dzwonek",
-            "Rodzice",
-            "Wpadka"
-          ]
-        },
-        {
-          "hint": "Szczerość",
-          "word": "Wyznanie po imprezie",
-          "hints": [
-            "Szczerość",
-            "Rano",
-            "Telefon"
-          ]
-        },
-        {
-          "hint": "Poranek",
-          "word": "Niezręczna cisza przy śniadaniu",
-          "hints": [
-            "Poranek",
-            "Dwoje",
-            "Milczenie"
-          ]
-        },
-        {
-          "hint": "Poranek",
-          "word": "Zgubiona skarpetka po randce",
-          "hints": [
-            "Poranek",
-            "Łóżko",
-            "Poszukiwania"
-          ]
-        },
-        {
-          "hint": "Telefon",
-          "word": "Dwuznaczne emotikony",
-          "hints": [
-            "Telefon",
+            "Bakłażan",
             "Brzoskwinia",
-            "Wiadomość"
+            "Wiadomości"
           ]
         },
         {
-          "hint": "Emoji",
-          "word": "Bakłażan w wiadomości",
+          "word": "Emoji bakłażana",
+          "hint": "Wiadomości",
           "hints": [
-            "Emoji",
-            "Warzywo",
-            "Aluzja"
+            "Wiadomości",
+            "Aluzja",
+            "Warzywo"
           ]
         },
         {
@@ -16985,24 +16580,6 @@
           ]
         },
         {
-          "hint": "Hotel",
-          "word": "Wyjazd tylko dla par",
-          "hints": [
-            "Hotel",
-            "Weekend",
-            "Relaks"
-          ]
-        },
-        {
-          "hint": "Impreza",
-          "word": "Sekretny pseudonim w klubie",
-          "hints": [
-            "Impreza",
-            "Imię",
-            "Flirt"
-          ]
-        },
-        {
           "hint": "Poranek",
           "word": "Kac moralny",
           "hints": [
@@ -17012,17 +16589,8 @@
           ]
         },
         {
-          "hint": "Kluczyk",
-          "word": "Żart z kajdankami",
-          "hints": [
-            "Kluczyk",
-            "Przyjaciele",
-            "Rekwizyt"
-          ]
-        },
-        {
+          "word": "Strój pielęgniarki",
           "hint": "Kostium",
-          "word": "Przebranie pielęgniarki",
           "hints": [
             "Kostium",
             "Fartuch",
@@ -17030,84 +16598,12 @@
           ]
         },
         {
+          "word": "Strój policjanta",
           "hint": "Mundur",
-          "word": "Przebranie policjanta",
           "hints": [
             "Mundur",
-            "Kajdanki",
-            "Kostium"
-          ]
-        },
-        {
-          "hint": "Suwak",
-          "word": "Zamknięty zamek od kostiumu",
-          "hints": [
-            "Suwak",
-            "Pomoc",
-            "Wpadka"
-          ]
-        },
-        {
-          "hint": "Bar",
-          "word": "Koktajl o nazwie Pokusa",
-          "hints": [
-            "Bar",
-            "Alkohol",
-            "Flirt"
-          ]
-        },
-        {
-          "hint": "Kołnierz",
-          "word": "Niespodziewane ślady szminki",
-          "hints": [
-            "Kołnierz",
-            "Usta",
-            "Podejrzenie"
-          ]
-        },
-        {
-          "hint": "Mikrofon",
-          "word": "Flirtująca wiadomość głosowa",
-          "hints": [
-            "Mikrofon",
-            "Szept",
-            "Telefon"
-          ]
-        },
-        {
-          "hint": "Plama",
-          "word": "Wino na białej koszuli",
-          "hints": [
-            "Plama",
-            "Randka",
-            "Kolacja"
-          ]
-        },
-        {
-          "hint": "Telefon",
-          "word": "Głupia wymówka po randce",
-          "hints": [
-            "Telefon",
-            "Kłamstwo",
-            "Poranek"
-          ]
-        },
-        {
-          "hint": "Flirt",
-          "word": "Pytanie o numer telefonu",
-          "hints": [
-            "Flirt",
-            "Cyfry",
-            "Kontakt"
-          ]
-        },
-        {
-          "hint": "Pudełko",
-          "word": "Niegrzeczny prezent na urodziny",
-          "hints": [
-            "Pudełko",
-            "Śmiech",
-            "Dorośli"
+            "Kostium",
+            "Kajdanki"
           ]
         }
       ]
