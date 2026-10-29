@@ -4850,12 +4850,12 @@
           ]
         },
         {
+          "word": "Latający zamek",
           "hint": "Niebo",
-          "word": "Zamek w chmurach",
           "hints": [
             "Niebo",
-            "Baśń",
-            "Wieże"
+            "Wieże",
+            "Magia"
           ]
         },
         {
@@ -4940,12 +4940,12 @@
           ]
         },
         {
-          "hint": "Światło",
-          "word": "Czarodziejska różdżka z kryształem",
+          "word": "Magiczna różdżka",
+          "hint": "Zaklęcie",
           "hints": [
-            "Światło",
-            "Zaklęcia",
-            "Mag"
+            "Zaklęcie",
+            "Czarodziej",
+            "Drewno"
           ]
         },
         {
@@ -4976,12 +4976,12 @@
           ]
         },
         {
+          "word": "Magiczny portal",
           "hint": "Przejście",
-          "word": "Portal między światami",
           "hints": [
             "Przejście",
-            "Wymiary",
-            "Brama"
+            "Brama",
+            "Wymiary"
           ]
         },
         {
@@ -6071,12 +6071,12 @@
           ]
         },
         {
-          "hint": "Biwak",
-          "word": "Nocleg pod namiotem",
+          "word": "Nocowanie w namiocie",
+          "hint": "Śpiwór",
           "hints": [
-            "Biwak",
             "Śpiwór",
-            "Ognisko"
+            "Kemping",
+            "Biwak"
           ]
         },
         {
@@ -6305,12 +6305,12 @@
           ]
         },
         {
-          "hint": "Noclegi",
-          "word": "Wędrówka z plecakiem",
+          "word": "Wędrówka",
+          "hint": "Szlak",
           "hints": [
-            "Noclegi",
-            "Trasa",
-            "Przygoda"
+            "Szlak",
+            "Buty",
+            "Wyprawa"
           ]
         },
         {
@@ -7454,12 +7454,12 @@
           ]
         },
         {
-          "hint": "Koreczki",
-          "word": "Przekąski na patyku",
+          "word": "Koreczki",
+          "hint": "Ser",
           "hints": [
-            "Koreczki",
             "Ser",
-            "Talerz"
+            "Wykałaczka",
+            "Impreza"
           ]
         },
         {
@@ -7544,21 +7544,21 @@
           ]
         },
         {
-          "hint": "Hasła",
-          "word": "Imprezowa gra w skojarzenia",
+          "word": "Skojarzenia",
+          "hint": "Hasło",
           "hints": [
-            "Hasła",
-            "Towarzystwo",
+            "Hasło",
+            "Pomysł",
             "Zabawa"
           ]
         },
         {
-          "hint": "Przekąski",
-          "word": "Pusta miska chipsów",
+          "word": "Nachosy z dipem",
+          "hint": "Chrupanie",
           "hints": [
-            "Przekąski",
-            "Goście",
-            "Koniec"
+            "Chrupanie",
+            "Sos",
+            "Przekąska"
           ]
         },
         {
@@ -7598,11 +7598,11 @@
           ]
         },
         {
-          "hint": "Drzwi",
-          "word": "Gość bez zaproszenia",
+          "word": "Nieproszony gość",
+          "hint": "Domówka",
           "hints": [
+            "Domówka",
             "Drzwi",
-            "Impreza",
             "Niespodzianka"
           ]
         },
@@ -7616,12 +7616,12 @@
           ]
         },
         {
+          "word": "Lampki LED",
           "hint": "Światło",
-          "word": "Kolorowe lampki LED",
           "hints": [
             "Światło",
-            "Salon",
-            "Nastrój"
+            "Kolory",
+            "Dekoracje"
           ]
         },
         {
@@ -7688,12 +7688,12 @@
           ]
         },
         {
-          "hint": "Pokazywanie",
-          "word": "Gry w kalambury",
+          "word": "Pokazywanie haseł",
+          "hint": "Gesty",
           "hints": [
-            "Pokazywanie",
-            "Zgaduj",
-            "Grupa"
+            "Gesty",
+            "Zabawa",
+            "Zgadywanie"
           ]
         },
         {
@@ -7706,12 +7706,12 @@
           ]
         },
         {
-          "hint": "Melodia",
-          "word": "Karaoke bez słów",
+          "word": "Playback",
+          "hint": "Udawanie",
           "hints": [
-            "Melodia",
-            "Scena",
-            "Wpadka"
+            "Udawanie",
+            "Występ",
+            "Usta"
           ]
         },
         {
@@ -7724,21 +7724,21 @@
           ]
         },
         {
-          "hint": "Sprzątanie",
-          "word": "Rano po domówce",
+          "word": "Kac",
+          "hint": "Poranek",
           "hints": [
-            "Sprzątanie",
-            "Kanapa",
-            "Bałagan"
+            "Poranek",
+            "Impreza",
+            "Ból głowy"
           ]
         },
         {
-          "hint": "Impreza",
-          "word": "Głośna rozmowa w kuchni",
+          "word": "Plotkowanie",
+          "hint": "Szept",
           "hints": [
-            "Impreza",
-            "Goście",
-            "Noc"
+            "Szept",
+            "Znajomi",
+            "Sekret"
           ]
         },
         {
@@ -8478,12 +8478,12 @@
           ]
         },
         {
-          "hint": "Logowanie",
-          "word": "Hasło do konta",
+          "word": "Logowanie",
+          "hint": "Użytkownik",
           "hints": [
-            "Logowanie",
-            "Bezpieczeństwo",
-            "Znaki"
+            "Użytkownik",
+            "Hasło",
+            "Konto"
           ]
         },
         {
@@ -8496,12 +8496,12 @@
           ]
         },
         {
-          "hint": "Ekran",
-          "word": "Przewijanie bez końca",
+          "word": "Scrollowanie",
+          "hint": "Telefon",
           "hints": [
+            "Telefon",
             "Ekran",
-            "Feed",
-            "Czas"
+            "Palec"
           ]
         },
         {
@@ -8550,12 +8550,12 @@
           ]
         },
         {
+          "word": "Cyfrowa przerwa",
           "hint": "Offline",
-          "word": "Dzień bez internetu",
           "hints": [
             "Offline",
             "Telefon",
-            "Przerwa"
+            "Odpoczynek"
           ]
         },
         {
@@ -8703,10 +8703,10 @@
           ]
         },
         {
-          "hint": "Twarz",
-          "word": "Emotka płacząca ze śmiechu",
+          "word": "Śmiejąca emotka",
+          "hint": "Emoji",
           "hints": [
-            "Twarz",
+            "Emoji",
             "Reakcja",
             "Łzy"
           ]
@@ -9951,12 +9951,12 @@
           ]
         },
         {
+          "word": "Zwrot akcji",
           "hint": "Niespodzianka",
-          "word": "Filmowy zwrot akcji",
           "hints": [
             "Niespodzianka",
             "Fabuła",
-            "Zaskoczenie"
+            "Film"
           ]
         },
         {
@@ -10068,12 +10068,12 @@
           ]
         },
         {
-          "hint": "Statuetka",
-          "word": "Oscar za scenariusz",
+          "word": "Scenariusz filmowy",
+          "hint": "Tekst",
           "hints": [
-            "Statuetka",
-            "Dialog",
-            "Hollywood"
+            "Tekst",
+            "Film",
+            "Dialogi"
           ]
         },
         {
@@ -10131,11 +10131,11 @@
           ]
         },
         {
+          "word": "Napisy filmowe",
           "hint": "Tekst",
-          "word": "Oglądanie z napisami",
           "hints": [
             "Tekst",
-            "Film",
+            "Ekran",
             "Język"
           ]
         }
@@ -10481,12 +10481,12 @@
           ]
         },
         {
-          "hint": "Skórka",
-          "word": "Obierak do jabłek",
+          "word": "Drylownica",
+          "hint": "Jabłko",
           "hints": [
-            "Skórka",
-            "Owoc",
-            "Ostrze"
+            "Jabłko",
+            "Gniazdo nasienne",
+            "Kuchnia"
           ]
         },
         {
@@ -10499,30 +10499,30 @@
           ]
         },
         {
-          "hint": "Chleb",
-          "word": "Kamień do pieczenia",
+          "word": "Kamień do pizzy",
+          "hint": "Pieczenie",
           "hints": [
-            "Chleb",
-            "Piekarnik",
-            "Rozgrzewanie"
+            "Pieczenie",
+            "Ciasto",
+            "Piekarnik"
           ]
         },
         {
-          "hint": "Spaghetti",
-          "word": "Szczypce do makaronu",
+          "word": "Widelec do spaghetti",
+          "hint": "Makaron",
           "hints": [
-            "Spaghetti",
-            "Chwytanie",
-            "Garnek"
+            "Makaron",
+            "Obracanie",
+            "Porcja"
           ]
         },
         {
-          "hint": "Warzywa",
-          "word": "Kosz do gotowania na parze",
+          "word": "Parowar",
+          "hint": "Para",
           "hints": [
-            "Warzywa",
             "Para",
-            "Pojemnik"
+            "Warzywa",
+            "Gotowanie"
           ]
         },
         {
@@ -10562,12 +10562,12 @@
           ]
         },
         {
+          "word": "Woreczek strunowy",
           "hint": "Zamrażarka",
-          "word": "Woreczek do mrożenia",
           "hints": [
             "Zamrażarka",
-            "Jedzenie",
-            "Przechowywanie"
+            "Żywność",
+            "Plastik"
           ]
         },
         {
@@ -12286,8 +12286,8 @@
           ]
         },
         {
+          "word": "Shinkansen",
           "hint": "Japonia",
-          "word": "Pociąg ekspresowy Shinkansen",
           "hints": [
             "Japonia",
             "Szybkość",
@@ -12924,12 +12924,12 @@
           ]
         },
         {
-          "hint": "Skakanie",
-          "word": "Wyścig w workach",
+          "word": "Skoki w workach",
+          "hint": "Zawody",
           "hints": [
-            "Skakanie",
-            "Worek",
-            "Zabawa"
+            "Zawody",
+            "Zabawa",
+            "Dzieci"
           ]
         }
       ]
@@ -13184,12 +13184,12 @@
           ]
         },
         {
+          "word": "Nocne rozmowy",
           "hint": "Telefon",
-          "word": "Długa rozmowa nocą",
           "hints": [
             "Telefon",
-            "Sekret",
-            "Przyjaźń"
+            "Północ",
+            "Zwierzanie"
           ]
         },
         {
@@ -13220,20 +13220,20 @@
           ]
         },
         {
-          "hint": "Papier",
-          "word": "Długi list miłosny",
+          "word": "List miłosny",
+          "hint": "Koperta",
           "hints": [
-            "Papier",
+            "Koperta",
             "Uczucia",
-            "Słowa"
+            "Papier"
           ]
         },
         {
-          "hint": "Para",
-          "word": "Pierwszy wspólny pies",
+          "word": "Adopcja psa",
+          "hint": "Schronisko",
           "hints": [
+            "Schronisko",
             "Para",
-            "Adopcja",
             "Zwierzak"
           ]
         },
@@ -13301,21 +13301,21 @@
           ]
         },
         {
+          "word": "Wspólne mieszkanie",
           "hint": "Klucze",
-          "word": "Pierwsze wspólne mieszkanie",
           "hints": [
             "Klucze",
             "Para",
-            "Dom"
+            "Przeprowadzka"
           ]
         },
         {
+          "word": "Miłość od pierwszego wejrzenia",
           "hint": "Spojrzenie",
-          "word": "Zakochanie od pierwszego wejrzenia",
           "hints": [
             "Spojrzenie",
-            "Miłość",
-            "Spotkanie"
+            "Iskra",
+            "Pierwsza chwila"
           ]
         },
         {
@@ -13328,21 +13328,21 @@
           ]
         },
         {
-          "hint": "Wsparcie",
-          "word": "Przyjaciel od serca",
+          "word": "Najlepszy przyjaciel",
+          "hint": "Zaufanie",
           "hints": [
-            "Wsparcie",
             "Zaufanie",
-            "Znajomy"
+            "Wsparcie",
+            "Bliskość"
           ]
         },
         {
+          "word": "Obiad rodzinny",
           "hint": "Stół",
-          "word": "Niezręczne spotkanie rodzinne",
           "hints": [
             "Stół",
-            "Rodzina",
-            "Milczenie"
+            "Krewni",
+            "Rozmowy"
           ]
         },
         {
@@ -13364,21 +13364,21 @@
           ]
         },
         {
+          "word": "Pożegnanie",
           "hint": "Pociąg",
-          "word": "Pożegnanie na dworcu",
           "hints": [
             "Pociąg",
             "Uścisk",
-            "Podróż"
+            "Rozstanie"
           ]
         },
         {
+          "word": "Wspomnienia",
           "hint": "Zdjęcia",
-          "word": "Wspomnienia z wakacji",
           "hints": [
             "Zdjęcia",
-            "Podróż",
-            "Razem"
+            "Przeszłość",
+            "Nostalgia"
           ]
         },
         {
@@ -13714,12 +13714,12 @@
           ]
         },
         {
-          "hint": "Kalendarz",
-          "word": "Dzień bez spotkań",
+          "word": "Wolny kalendarz",
+          "hint": "Terminy",
           "hints": [
-            "Kalendarz",
-            "Spokój",
-            "Praca"
+            "Terminy",
+            "Praca",
+            "Spokój"
           ]
         },
         {
@@ -13741,12 +13741,12 @@
           ]
         },
         {
-          "hint": "Hałas",
-          "word": "Biuro na open space",
+          "word": "Coworking",
+          "hint": "Biurka",
           "hints": [
-            "Hałas",
             "Biurka",
-            "Zespół"
+            "Wspólna przestrzeń",
+            "Praca"
           ]
         },
         {
@@ -13759,12 +13759,12 @@
           ]
         },
         {
-          "hint": "Deadline",
-          "word": "Termin oddania projektu",
+          "word": "Oddanie projektu",
+          "hint": "Raport",
           "hints": [
-            "Deadline",
-            "Zadanie",
-            "Kalendarz"
+            "Raport",
+            "Termin",
+            "Praca"
           ]
         },
         {
@@ -13786,11 +13786,11 @@
           ]
         },
         {
-          "hint": "Sieć",
-          "word": "Hasło do Wi-Fi w biurze",
+          "word": "Hasło Wi-Fi",
+          "hint": "Internet",
           "hints": [
-            "Sieć",
             "Internet",
+            "Router",
             "Dostęp"
           ]
         },
@@ -13813,21 +13813,21 @@
           ]
         },
         {
-          "hint": "Biuro",
-          "word": "Drukarka bez papieru",
+          "word": "Awaria drukarki",
+          "hint": "Papier",
           "hints": [
+            "Papier",
             "Biuro",
-            "Awaria",
-            "Wydruk"
+            "Zacięcie"
           ]
         },
         {
-          "hint": "Zegar",
-          "word": "Przeciągające się spotkanie",
+          "word": "Długie zebranie",
+          "hint": "Sala",
           "hints": [
+            "Sala",
             "Zegar",
-            "Dyskusja",
-            "Sala"
+            "Dyskusja"
           ]
         },
         {
@@ -14118,20 +14118,20 @@
           ]
         },
         {
-          "hint": "Równania",
-          "word": "Klasówka z matematyki",
+          "word": "Klasówka",
+          "hint": "Ocena",
           "hints": [
-            "Równania",
-            "Oceny",
-            "Klasa"
+            "Ocena",
+            "Test",
+            "Szkoła"
           ]
         },
         {
-          "hint": "Klasa",
-          "word": "Głosowanie na przewodniczącego",
+          "word": "Wybory klasowe",
+          "hint": "Kandydat",
           "hints": [
-            "Klasa",
-            "Wybory",
+            "Kandydat",
+            "Głos",
             "Uczeń"
           ]
         },
@@ -14181,12 +14181,12 @@
           ]
         },
         {
-          "hint": "Klasa",
-          "word": "Wycieczka do muzeum",
+          "word": "Wycieczka klasowa",
+          "hint": "Autokar",
           "hints": [
-            "Klasa",
-            "Eksponaty",
-            "Zwiedzanie"
+            "Autokar",
+            "Uczniowie",
+            "Opiekun"
           ]
         },
         {
@@ -14226,10 +14226,10 @@
           ]
         },
         {
-          "hint": "Figura",
-          "word": "Zadanie z geometrii",
+          "word": "Geometria",
+          "hint": "Figury",
           "hints": [
-            "Figura",
+            "Figury",
             "Kąty",
             "Matematyka"
           ]
@@ -14253,12 +14253,12 @@
           ]
         },
         {
-          "hint": "Doświadczenie",
-          "word": "Fizyka w laboratorium",
+          "word": "Doświadczenie",
+          "hint": "Eksperyment",
           "hints": [
-            "Doświadczenie",
-            "Wahadło",
-            "Uczniowie"
+            "Eksperyment",
+            "Próbówki",
+            "Nauka"
           ]
         },
         {
@@ -14513,12 +14513,12 @@
           ]
         },
         {
-          "hint": "Plaża",
-          "word": "Piasek w butach",
+          "word": "Piasek",
+          "hint": "Ziarna",
           "hints": [
+            "Ziarna",
             "Plaża",
-            "Spacer",
-            "Ziarna"
+            "Stopy"
           ]
         },
         {
@@ -14585,12 +14585,12 @@
           ]
         },
         {
-          "hint": "Rano",
-          "word": "Wschód słońca nad morzem",
+          "word": "Wschód słońca",
+          "hint": "Poranek",
           "hints": [
-            "Rano",
+            "Poranek",
             "Horyzont",
-            "Plaża"
+            "Światło"
           ]
         },
         {
@@ -14612,12 +14612,12 @@
           ]
         },
         {
-          "hint": "Linki",
-          "word": "Chwila na hamaku",
+          "word": "Drzemka",
+          "hint": "Odpoczynek",
           "hints": [
-            "Linki",
-            "Relaks",
-            "Drzewa"
+            "Odpoczynek",
+            "Popołudnie",
+            "Sen"
           ]
         },
         {
@@ -14666,12 +14666,12 @@
           ]
         },
         {
+          "word": "Śpiwór",
           "hint": "Namiot",
-          "word": "Pobudka na kempingu",
           "hints": [
             "Namiot",
-            "Poranek",
-            "Śpiwór"
+            "Zamek",
+            "Nocleg"
           ]
         },
         {
@@ -14702,12 +14702,12 @@
           ]
         },
         {
+          "word": "Opalanie",
           "hint": "Słońce",
-          "word": "Opalanie na ręczniku",
           "hints": [
             "Słońce",
-            "Plaża",
-            "Leżenie"
+            "Skóra",
+            "Plaża"
           ]
         },
         {
@@ -14747,39 +14747,39 @@
           ]
         },
         {
-          "hint": "Trasa",
-          "word": "Rowerowy objazd wyspy",
+          "word": "Wycieczka rowerowa",
+          "hint": "Pedały",
           "hints": [
-            "Trasa",
             "Pedały",
-            "Morze"
+            "Trasa",
+            "Wyprawa"
           ]
         },
         {
-          "hint": "Piasek",
-          "word": "Poranna joga na plaży",
+          "word": "Joga na plaży",
+          "hint": "Ćwiczenia",
           "hints": [
-            "Piasek",
             "Ćwiczenia",
-            "Wschód"
+            "Piasek",
+            "Rano"
           ]
         },
         {
+          "word": "Górski spokój",
           "hint": "Szczyty",
-          "word": "Cisza w górach",
           "hints": [
             "Szczyty",
-            "Las",
-            "Spokój"
+            "Odpoczynek",
+            "Widok"
           ]
         },
         {
-          "hint": "Horyzont",
-          "word": "Zdjęcie przy zachodzie słońca",
+          "word": "Fotografia krajobrazu",
+          "hint": "Aparat",
           "hints": [
-            "Horyzont",
             "Aparat",
-            "Wakacje"
+            "Widok",
+            "Plener"
           ]
         }
       ]
@@ -15573,12 +15573,12 @@
           ]
         },
         {
-          "hint": "Regeneracja",
-          "word": "Odpoczynek po treningu",
+          "word": "Regeneracja",
+          "hint": "Mięśnie",
           "hints": [
-            "Regeneracja",
-            "Ćwiczenia",
-            "Mięśnie"
+            "Mięśnie",
+            "Odpoczynek",
+            "Ćwiczenia"
           ]
         },
         {
@@ -15591,8 +15591,8 @@
           ]
         },
         {
+          "word": "Rower stacjonarny",
           "hint": "Pedały",
-          "word": "Jazda na rowerze stacjonarnym",
           "hints": [
             "Pedały",
             "Siłownia",
@@ -15654,8 +15654,8 @@
           ]
         },
         {
+          "word": "Fizjoterapia",
           "hint": "Rehabilitacja",
-          "word": "Wizyta u fizjoterapeuty",
           "hints": [
             "Rehabilitacja",
             "Plecy",
@@ -15672,12 +15672,12 @@
           ]
         },
         {
-          "hint": "Mięśnie",
-          "word": "Białko w diecie",
+          "word": "Odżywka białkowa",
+          "hint": "Proszek",
           "hints": [
-            "Mięśnie",
-            "Jedzenie",
-            "Odżywianie"
+            "Proszek",
+            "Trening",
+            "Szejk"
           ]
         },
         {
