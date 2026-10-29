@@ -205,13 +205,13 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     expect(total).toBeGreaterThan(1);
     const secondLines = await grid.locator('.party-category-card .party-category-copy small').allTextContents();
     expect(secondLines).toHaveLength(total);
-    expect(secondLines.every(text => /^\d+ (haseł|pytań|kart|skal)$/.test(text.trim()))).toBe(true);
+    expect(secondLines.every(text => /^\d+ (haseł|pytań|kart|skal)$/.test(text.trim()) || /^18\+ • \d+ pytań • wybierz świadomie$/.test(text.trim()))).toBe(true);
 
     await options.getByRole('button', { name: 'Wyczyść' }).click();
     await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(1);
     await options.getByRole('button', { name: 'Wszystkie' }).click();
-    // Impostor 18+ is opt-in, never selected by the bulk action.
-    const adultCount = name === 'Impostor' ? await allCards.filter({ hasText: '18+' }).count() : 0;
+    // Mature content is opt-in in Impostor and Tykająca Bomba.
+    const adultCount = ['Impostor', 'Tykająca Bomba'].includes(name) ? await allCards.filter({ hasText: '18+' }).count() : 0;
     await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total - adultCount);
     if (adultCount) await expect(allCards.filter({ hasText: '18+' })).not.toHaveClass(/is-selected/);
 
