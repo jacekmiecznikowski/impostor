@@ -5,6 +5,9 @@ const vm = require('node:vm');
 
 const source = fs.readFileSync(path.join(__dirname, '../assets/js/games/ticking-bomb/content-provider.js'), 'utf8');
 const content = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/ticking-bomb.pl.json'), 'utf8'));
+const expanded = JSON.parse(fs.readFileSync(path.join(__dirname, '../content/ticking-bomb-expanded.pl.json'), 'utf8'));
+assert.match(source, /ticking-bomb-expanded\.pl\.json/);
+
 
 const sandbox = {
   console,
@@ -32,12 +35,16 @@ assert.deepEqual(normalized.categories[0].words.map(entry => entry.word), ['OWOC
 assert.equal(content.game, 'ticking-bomb');
 assert.equal(content.locale, 'pl');
 assert.equal(content.categories.length, 8);
-assert.equal(content.categories.reduce((sum, category) => sum + category.words.length, 0), 211);
-assert.equal(content.categories.every(category => category.id && category.name && Array.isArray(category.words) && category.words.length >= 25), true);
-const prompts = content.categories.flatMap(category => category.words.map(entry => entry.word));
+assert.equal(content.categories.reduce((sum, category) => sum + category.words.length, 0), 96);
+assert.equal(content.categories.every(category => category.id && category.name && Array.isArray(category.words) && category.words.length > 0), true);
+assert.equal(expanded.categories.length, 8);
+assert.equal(expanded.categories.reduce((sum, category) => sum + category.words.length, 0), 211);
+assert.ok(expanded.categories.every(category => category.id && category.name && category.words.length >= 25));
+assert.deepEqual(expanded.categories.map(c => c.id), content.categories.map(c => c.id));
+const prompts = expanded.categories.flatMap(category => category.words.map(entry => entry.word));
 const normalizedPrompts = prompts.map(prompt => prompt.trim().replace(/[.!?]+$/g, '').toLocaleLowerCase('pl-PL'));
 assert.equal(new Set(normalizedPrompts).size, prompts.length, 'Each prompt should be unique');
-assert.ok(content.categories.every(category => category.words.every(entry =>
+assert.ok(expanded.categories.every(category => category.words.every(entry =>
   typeof entry.word === 'string' &&
   /^(Wymieniajcie|Mówcie) /.test(entry.word) &&
   typeof entry.hint === 'string'
