@@ -481,7 +481,7 @@ function bootstrap(){
       showToast('Nie udało się zalogować. '+error.message,true);
     });
   });
-  $('connect-form').addEventListener('submit',sendMagicLink);
+  $$('connect-form').addEventListener('submit',sendMagicLink);
   $$('logout').addEventListener('click',logout);
   $$('game-picker').addEventListener('change',e=>chooseGame(e.target.value));
   $$('group-search').addEventListener('input',renderGroups);
