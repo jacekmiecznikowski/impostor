@@ -55,6 +55,14 @@ async function initializeCoMamNaMysliContent() {
         console.warn('Nie udało się załadować pełnej bazy Co mam na myśli?. Używam paczki awaryjnej.', error);
     }
 
+    // Published remote content is optional. A missing server never breaks offline games.
+    try {
+        const published = await contentRepository.loadRemote('co-mam-na-mysli', 'pl');
+        if (published) content = published;
+    } catch (error) {
+        console.warn('Nie udało się pobrać opublikowanej bazy co-mam-na-mysli.', error);
+    }
+
     try {
         CO_MAM_NA_MYSLI_CATEGORIES = normalizeCoMamNaMysliContent(content).categories;
     } catch (error) {

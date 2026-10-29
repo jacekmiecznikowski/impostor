@@ -64,6 +64,14 @@ async function initializeThreeFiveContent() {
         console.warn('Nie udało się załadować pełnej bazy Trzy w Pięć. Używam paczki awaryjnej.', error);
     }
 
+    // Published remote content is optional. A missing server never breaks offline games.
+    try {
+        const published = await contentRepository.loadRemote('trzy-w-piec', 'pl');
+        if (published) content = published;
+    } catch (error) {
+        console.warn('Nie udało się pobrać opublikowanej bazy trzy-w-piec.', error);
+    }
+
     try {
         THREE_FIVE_CATEGORIES = normalizeThreeFiveContent(content).categories;
     } catch (error) {
