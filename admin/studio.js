@@ -45,9 +45,9 @@ function setBusy(state) {
   }
 }
 function getConfig() {
-  const url = safeString($$('project-url').value).replace(/\/+$/,'');
-  const key = safeString($$('publishable-key').value);
-  const email = safeString($$('editor-email').value).toLowerCase();
+  const url = safeString($$$('project-url').value).replace(/\/+$/,'');
+  const key = safeString($$$('publishable-key').value);
+  const email = safeString($$$('editor-email').value).toLowerCase();
   // Prevent accidental sending of credentials to random endpoints.
   if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url))
     throw new Error('Wpisz adres HTTPS swojego projektu *.supabase.co.');
@@ -444,9 +444,9 @@ function bootstrap(){
   try{
     const stored=JSON.parse(localStorage.getItem(STORE_CONFIG)||'null');
     config={...STUDIO_DEFAULTS,...(stored && typeof stored==='object'?stored:{})};
-    $('project-url').value=config.url;
-    $('publishable-key').value=config.key;
-    $('editor-email').value=config.email;
+    $$('project-url').value=config.url;
+    $$('publishable-key').value=config.key;
+    $$('editor-email').value=config.email;
     session=JSON.parse(sessionStorage.getItem(STORE_SESSION)||'null');
     if(session&&config.url&&config.key)openStudio().catch(error=>{
       sessionStorage.removeItem(STORE_SESSION);session=null;showToast(error.message,true);
@@ -459,8 +459,8 @@ function bootstrap(){
   $$('group-search').addEventListener('input',renderGroups);
   $$('add-category').addEventListener('click',addCategory);
   $$('remove-category').addEventListener('click',removeCategory);
-  $('add-item').addEventListener('click',addEntry);
-  $('add-tip').addEventListener('click',addTip);
+  $$('add-item').addEventListener('click',addEntry);
+  $$('add-tip').addEventListener('click',addTip);
   $$('save-btn').addEventListener('click',saveDraft);
   $$('publish-btn').addEventListener('click',publish);
   $$('export-btn').addEventListener('click',exportJson);

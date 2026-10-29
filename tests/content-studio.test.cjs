@@ -96,3 +96,4 @@ assert.match(allowlistSql,/enable row level security/);
 assert.match(read('admin/config.js'),/sb_publishable_/);
 assert.doesNotMatch(read('admin/config.js'),/sb_secret_|service_role/);
 assert.match(read('admin/studio.js'),/STUDIO_DEFAULTS/);
+assert.doesNotMatch(read('admin/studio.js'),/(?<!\$)\$\('(project-url|publishable-key|editor-email|add-item|add-tip)'\)/);
