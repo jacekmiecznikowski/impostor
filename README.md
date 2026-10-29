@@ -13,7 +13,7 @@ npm run studio # lokalny podgląd panelu: http://127.0.0.1:4174
 node tools/generate-content-seed.mjs --check
 ```
 
-**Wymagane zewnętrzne uruchomienie:** projekt Supabase z zastosowaną migracją `supabase/migrations/20261029_content_studio.sql`, importem `supabase/seed.sql` i kontem redaktora. Bez połączenia chmury aplikacja nadal działa na pakietach lokalnych (offline).
+**Baza Supabase Free działa i zawiera wszystkie 663 pozycje siedmiu gier.** Dostęp redaktora przygotowano dla `contact@swawole.studio`. Trzeba jeszcze zaprosić użytkownika przez Authentication i zweryfikować logowanie oraz publikowanie. PR #49 pozostaje weryfikowany i niescalony z `main`.
 
 ## Uruchomienie lokalne
 

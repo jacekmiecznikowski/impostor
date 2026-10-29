@@ -18,15 +18,10 @@ Panel: `admin/`. Baza: PostgreSQL w Supabase. Obecna aplikacja ma siedem różny
 
 1. Utwórz projekt w [Supabase](https://supabase.com/dashboard), najlepiej w regionie UE. Hasła bazy oraz klucze `sb_secret_` i `service_role` trzymaj wyłącznie po stronie serwera.
 2. Uruchom w **SQL Editor** `supabase/migrations/20261029_content_studio.sql`, a następnie `supabase/seed.sql`. Import jest bezpieczny przy ponownym wykonaniu — nie nadpisze edytowanych dokumentów. Seed można odtworzyć przez `node tools/generate-content-seed.mjs`.
-3. W **Authentication** wyłącz otwartą rejestrację, skonfiguruj dostarczanie poczty i szablon kodu OTP z `{{ .Token }}`. Utwórz konto redaktora w **Authentication → Users**.
-4. Dodaj redaktora przez SQL (po zastąpieniu przykładowego adresu):
-   ```sql
-   insert into private.party_editors(user_id)
-   select id from auth.users where email = 'redaktor@example.com'
-   on conflict do nothing;
-   ```
-5. W Supabase **Connect** znajdź adres `https://…supabase.co` i wyłącznie **publishable key** `sb_publishable_…`. To dane publiczne, nie klucze administracyjne.
-6. Uruchom `npm run studio` i otwórz `http://127.0.0.1:4174`. Zaloguj się przez OTP. Panel nie przyzna praw edycji kontu nieobecnemu w `private.party_editors`.
+3. Zastosuj drugą migrację `supabase/migrations/20261029_editor_email_allowlist.sql`. Na działającej bazie Partyjniak już jest zastosowana: dopuszcza wyłącznie potwierdzone konto z adresem **`contact@swawole.studio`**. Nie trzeba znać UUID użytkownika.
+4. W [Supabase Dashboard → Authentication → Users](https://supabase.com/dashboard/project/astcatgvvliatokqalhd/auth/users) wybierz **Add user → Send invitation** i zaproś `contact@swawole.studio`. Zaproszenie konta Auth to jedyny konieczny ręczny krok — podłączona integracja nie ma uprawnień do zarządzania kontami Authentication. Nie twórz użytkownika bezpośrednio przez SQL.
+5. Wyłącz publiczną rejestrację (Authentication → Providers / Signups). W szablonie **Magic Link** zastąp domyślny link kodem `{{ .Token }}`; skonfiguruj też wysyłkę e-mail, aby docierały wiadomości OTP.
+6. Uruchom `npm run studio` i wejdź na `http://127.0.0.1:4174`. Adres bazy, publiczny klucz i adres e-mail są już wypełnione. Kliknij **Wyślij kod logowania** i wpisz kod z e-maila. Uprawnienia do zapisu i publikacji wymagają potwierdzonego adresu z listy.
 
 ## Hosting panelu
 
@@ -38,7 +33,7 @@ Wybierz grę, kategorię albo talię, zmieniaj pola i sprawdzaj podgląd. **Zapi
 
 ## Podłączenie APK do bazy
 
-Po utworzeniu Supabase w `assets/js/shared/content-config.js` wpisz:
+Projekt Supabase jest już skonfigurowany w `assets/js/shared/content-config.js`. Przykład formatu połączenia:
 ```js
 window.PARTYJNIAK_CONTENT_SUPABASE = Object.freeze({
   url: 'https://identyfikator.supabase.co',
@@ -55,7 +50,7 @@ Klucz publishable można bezpiecznie umieścić w APK — sam nie daje praw do s
 - Nie przechowujemy danych osobowych graczy, tylko treści imprezowych gier.
 - Konto Dashboard warto chronić MFA i włączyć backupy bazy.
 
-**Stan prac:** schema, seed i panel są w repozytorium, ale rzeczywisty projekt Supabase nie został jeszcze podłączony. Konieczny będzie test na prawdziwej bazie: anonimowy odczyt, odrzucenie zapisu przez niezalogowanego, logowanie redaktora, publikacja i rollback.
+**Stan prac:** Supabase Free `astcatgvvliatokqalhd` jest uruchomiony. Migracje i 663 pozycji siedmiu gier są wdrożone, a uprawnienia adresu redaktora skonfigurowane. Brakuje jeszcze utworzenia konta przez zaproszenie Auth i przeprowadzenia testu rzeczywistego logowania, zapisu, publikacji i przywrócenia wersji.
 
 ## Weryfikacja
 
