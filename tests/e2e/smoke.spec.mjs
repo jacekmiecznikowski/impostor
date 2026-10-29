@@ -213,7 +213,14 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     // Mature content is opt-in in Impostor and Tykająca Bomba.
     const adultCount = ['Impostor', 'Tykająca Bomba'].includes(name) ? await allCards.filter({ hasText: '18+' }).count() : 0;
     await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total - adultCount);
-    if (adultCount) await expect(allCards.filter({ hasText: '18+' })).not.toHaveClass(/is-selected/);
+    if (adultCount) {
+      const adultCard = allCards.filter({ hasText: '18+' });
+      await expect(adultCard).not.toHaveClass(/is-selected/);
+      await adultCard.click();
+      await expect(adultCard).toHaveClass(/is-selected/);
+      await options.getByRole('button', { name: 'Wszystkie' }).click();
+      await expect(adultCard).not.toHaveClass(/is-selected/);
+    }
 
     const search = options.getByRole('searchbox', { name: 'Szukaj kategorii' });
     const firstTitle = await allCards.first().locator('.party-category-copy').textContent();
