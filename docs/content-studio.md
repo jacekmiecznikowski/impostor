@@ -83,8 +83,14 @@ Rozbudowany zestaw jest publicznie dostępny po odświeżeniu gry z internetem. 
 
 ## Baza Impostora — aktualna rewizja (2026-10-29)
 
-W opublikowanym dokumencie Supabase (`impostor/pl`, rewizja **32**) jest **1870 unikalnych haseł w 35 kategoriach**. Każde hasło ma dokładnie **trzy różne podpowiedzi**; najmniejsza kategoria ma 47 haseł. Rozszerzony, wersjonowany eksport zgodny z formatem Content Studio znajduje się w `content/impostor-expanded.pl.json`.
+W opublikowanym dokumencie Supabase (`impostor/pl`, rewizja **36**) jest **1868 unikalnych haseł w 35 kategoriach**. Każde hasło ma dokładnie **trzy różne podpowiedzi**; najmniejsza kategoria ma 47 haseł. Rozszerzony, wersjonowany eksport zgodny z formatem Content Studio znajduje się w `content/impostor-expanded.pl.json`.
 
-Kategoria `dla_doroslych` zawiera **153 hasła 18+**, w tym 100 odważniejszych skojarzeń dla dorosłych. Nie jest włączana przez zbiorcze „Wszystkie”; w grze wymagane jest osobne potwierdzenie włączenia.
+Kategoria `dla_doroslych` zawiera **151 haseł 18+**, w tym 100 odważniejszych skojarzeń dla dorosłych. Nie jest włączana przez zbiorcze „Wszystkie”; w grze wymagane jest osobne potwierdzenie włączenia.
 
 **Istotne rozróżnienie:** powyższe liczby dotyczą *opublikowanej bazy zdalnej*, a tabela na początku dokumentu opisuje nadal pierwotny, niewielki seed i lokalny pakiet w APK. Po uruchomieniu z internetem aplikacja pobiera aktualny katalog i przechowuje go w pamięci podręcznej na użytek gry offline. Na świeżym urządzeniu bez wcześniejszej synchronizacji pozostaje mniejszy lokalny zestaw. W celu przeniesienia całości do nowej bazy użyj wersjonowanego eksportu JSON zamiast ponownie uruchamiać stary skrypt rozszerzający rewizję 2.
+
+## Redakcja pod kątem grywalności
+
+Hasło w Impostorze powinno być **łatwo rozpoznawalnym pojęciem**, a nie opowieścią do odtworzenia słowo w słowo. Nie wprowadzamy sztywnego ograniczenia do dwóch wyrazów: np. „Ślad po szmince” lub znany tytuł są pełnoprawnymi hasłami. Odrzucamy za to sztuczne scenki i niejednoznaczne konstrukcje. Zmieniono 61 sformułowań w zwykłych kategoriach oraz rozpoczęto redakcję 18+, w tym „Niezręczna cisza”, „Feromony”, „Ślad po szmince”; usunięto dwie wyjątkowo nienaturalne pozycje.
+
+**Kontynuacja redakcji 18+:** nadal wymaga pełnego ręcznego przeglądu. Zbiorcza operacja porządkująca pozostałe hasła nie została zastosowana; GitHub i Supabase pozostają zsynchronizowane na opublikowanej wersji.
