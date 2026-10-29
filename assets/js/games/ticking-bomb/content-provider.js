@@ -57,6 +57,12 @@ async function initializeTickingBombContent() {
             if (!response.ok) continue;
             const payload = await response.json();
             localContent = contentRepository.validate(payload, 'ticking-bomb', 'pl');
+            // Validation drops unknown CMS metadata. Restore the trusted opt-in
+            // marker from the bundled file only; remote documents cannot enable it.
+            if (payload.categories?.some(category => category.id === 'adult' && category.adult === true)) {
+                const adult = localContent.categories.find(category => category.id === 'adult');
+                if (adult) adult.adult = true;
+            }
             break;
         } catch (error) {
             console.warn('Nie udało się wczytać lokalnej bazy Tykającej Bomby:', source, error);
