@@ -12,9 +12,9 @@ test('Content Studio renders a mobile-friendly secure login page', async ({ page
   await expect(page.locator('#project-url')).toBeVisible();
   await expect(page.locator('#project-url')).toHaveValue('https://astcatgvvliatokqalhd.supabase.co');
   await expect(page.locator('#publishable-key')).toBeVisible();
-  await expect(page.locator('#otp-code')).toBeVisible();
-  await expect(page.locator('#send-code')).toBeVisible();
-  await expect(page.locator('#verify-code')).toBeVisible();
+  await expect(page.locator('#send-code')).toHaveText(/Wyślij link logowania/);
+  await expect(page.locator('#otp-code')).toHaveCount(0);
+  await expect(page.locator('#verify-code')).toHaveCount(0);
   await expect(page.locator('#connection')).toContainText('Niepołączono');
   const isWideEnough = await page.locator('#connect-form').evaluate(
     element => element.getBoundingClientRect().width >= 275
@@ -22,7 +22,7 @@ test('Content Studio renders a mobile-friendly secure login page', async ({ page
   expect(isWideEnough).toBe(true);
 });
 
-test('Content Studio sends OTP, signs in and opens seven game editors', async ({ page }) => {
+test('Content Studio sends a free Magic Link, handles callback and opens seven game editors', async ({ page }) => {
   const requests = [];
   const gameIds = ['impostor', 'ticking-bomb', 'co-mam-na-mysli', 'naokolo', 'synchronizacja', 'trzy-w-piec', 'dzika-karta'];
   const word = { word: 'Jabłko', hint: 'Owoc' };
@@ -43,12 +43,10 @@ test('Content Studio sends OTP, signs in and opens seven game editors', async ({
   await page.route('https://astcatgvvliatokqalhd.supabase.co/**', async route => {
     const url = new URL(route.request().url());
     const payload = route.request().postDataJSON() || {};
-    requests.push({ path: url.pathname, payload });
+    requests.push({ path: url.pathname, redirectTo: url.searchParams.get('redirect_to'), payload });
     let data;
     if (url.pathname === '/auth/v1/otp') {
       data = {};
-    } else if (url.pathname === '/auth/v1/verify') {
-      data = {access_token:'mock-jwt',refresh_token:'mock-refresh',expires_in:3600};
     } else if (url.pathname === '/rest/v1/rpc/party_editor_list') {
       data = docs;
     } else {
@@ -58,17 +56,31 @@ test('Content Studio sends OTP, signs in and opens seven game editors', async ({
   });
   await page.goto('/admin/');
   await page.locator('#send-code').click();
-  await expect(page.locator('#toast')).toContainText('Kod został wysłany');
-  expect(requests.find(x=>x.path==='/auth/v1/otp')?.payload).toEqual({
+  await expect(page.locator('#toast')).toContainText('Wysłano link logowania');
+  const linkRequest=requests.find(x=>x.path==='/auth/v1/otp');
+  expect(linkRequest?.payload).toEqual({
     email:'contact@swawole.studio',create_user:false
   });
-  await page.locator('#otp-code').fill('123456');
-  await page.locator('#verify-code').click();
+  expect(linkRequest.redirectTo).toBe('https://jacekmiecznikowski.github.io/impostor/');
+
+  // Supabase follows the email link and redirects to the site's URL with
+  // access/refresh tokens in #... . Browser JS must remove them immediately.
+  await page.goto('/admin/#access_token=mock-jwt&refresh_token=mock-refresh&token_type=bearer&expires_in=3600&type=magiclink');
   await expect(page.locator('#studio-view')).toBeVisible();
+  expect(page.url()).not.toContain('access_token');
+  expect(page.url()).not.toContain('refresh_token');
+  expect(await page.evaluate(()=>sessionStorage.getItem('partyjniak.studio.session.v1'))).toContain('mock-jwt');
   await expect(page.locator('#total-games')).toHaveText('7');
   await page.locator('#game-picker').selectOption('impostor');
   await expect(page.locator('#extra-settings')).toBeVisible();
   await expect(page.locator('#extra-list .item-row')).toHaveCount(1);
   await page.locator('#add-tip').click();
   await expect(page.locator('#extra-list .item-row')).toHaveCount(2);
+});
+
+test('Content Studio rejects expired Magic Links and clears URL errors', async ({ page }) => {
+  await page.goto('/admin/#error=access_denied&error_description=otp_expired');
+  await expect(page.locator('#toast')).toContainText('Link logowania wygasł');
+  expect(page.url()).not.toContain('error=');
+  await expect(page.locator('#login-view')).toBeVisible();
 });
