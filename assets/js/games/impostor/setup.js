@@ -191,7 +191,7 @@ function toggleCategory(key) {
 
 function toggleAllCategories(select) {
     const available = getAvailableCategoryIds();
-    state.activeCategories = select ? available : available.slice(0, 1);
+    state.activeCategories = select ? available.filter(id => id !== 'dla_doroslych') : available.filter(id => id !== 'dla_doroslych').slice(0, 1);
     playSound('click');
     renderCategoriesGrid();
     persistSession();
