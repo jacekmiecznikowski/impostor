@@ -1,0 +1,67 @@
+-- Content Studio 2026-10: carefully reviewed additions to seven games.
+-- Back up original content in private.party_content_history before publication.
+-- Single atomic transaction, guarded against repeated or concurrent execution.
+begin;
+do $party_expansion$
+declare
+    pack jsonb := $party_pack${"schemaVersion":1,"locale":"pl","pack":"Pakiet imprezowy 2026-10","additions":{"impostor":{"jedzenie":[{"word":"Bigos","hint":"Kapusta"},{"word":"Barszcz","hint":"Buraki"},{"word":"Zapiekanka","hint":"Bagietka"}],"zwierzeta":[{"word":"Lama","hint":"Andy"},{"word":"Wydra","hint":"Rzeka"},{"word":"Jeż","hint":"Kolce"}],"miejsca":[{"word":"Muzeum","hint":"Wystawa"},{"word":"Dworzec","hint":"Peron"},{"word":"Wesołe miasteczko","hint":"Karuzela"}],"przedmioty":[{"word":"Termos","hint":"Ciepło"},{"word":"Kłódka","hint":"Klucz"},{"word":"Długopis","hint":"Atrament"}],"zawody":[{"word":"Architekt","hint":"Projekt"},{"word":"Ratownik","hint":"Pomoc"},{"word":"Piekarz","hint":"Chleb"}],"popkultura":[{"word":"Pokémon","hint":"Pikachu"},{"word":"Król Lew","hint":"Sawanna"},{"word":"Wednesday","hint":"Warkocze"}],"technologia":[{"word":"Powerbank","hint":"Ładowanie"},{"word":"Kod QR","hint":"Skanowanie"},{"word":"Drukarka 3D","hint":"Filament"}],"sport":[{"word":"Łyżwiarstwo","hint":"Lód"},{"word":"Szermierka","hint":"Szpada"},{"word":"Wspinaczka","hint":"Ściana"}],"muzyka":[{"word":"Akordeon","hint":"Miech"},{"word":"Flet","hint":"Oddech"},{"word":"Wiolonczela","hint":"Smyczek"}],"historia":[{"word":"Faraon","hint":"Egipt"},{"word":"Cesarz","hint":"Imperium"},{"word":"Bitwa pod Grunwaldem","hint":"1410"}],"fantasy":[{"word":"Feniks","hint":"Odrodzenie"},{"word":"Troll","hint":"Most"},{"word":"Krasnolud","hint":"Kopalnia"}],"nauka":[{"word":"Fotosynteza","hint":"Rośliny"},{"word":"Galaktyka","hint":"Gwiazdy"},{"word":"Komórka","hint":"Biologia"}],"motoryzacja":[{"word":"Tramwaj","hint":"Szyny"},{"word":"Skuter","hint":"Kask"},{"word":"Autobus","hint":"Przystanek"}],"podroze":[{"word":"Rejs","hint":"Statek"},{"word":"Pensjonat","hint":"Nocleg"},{"word":"Wycieczka","hint":"Zwiedzanie"}],"kosmos":[{"word":"Księżyc","hint":"Srebrny glob"},{"word":"Rakieta","hint":"Start"},{"word":"Meteoryt","hint":"Krater"}],"natura":[{"word":"Jezioro","hint":"Woda"},{"word":"Wydma","hint":"Piasek"},{"word":"Bagno","hint":"Mokradła"}]},"co-mam-na-mysli":{"zwierzeta":[{"word":"Alpaka"},{"word":"Leniwiec"},{"word":"Krokodyl"},{"word":"Ośmiornica"}],"zawody":[{"word":"Hydraulik"}],"jedzenie":[{"word":"Tort"},{"word":"Gofr"},{"word":"Budyń"},{"word":"Kiszone ogórki"}],"miejsca":[{"word":"Akwarium"},{"word":"Zoo"},{"word":"Dworzec kolejowy"}],"przedmioty":[{"word":"Mikser"},{"word":"Śpiwór"},{"word":"Szczoteczka do zębów"},{"word":"Lornetka"},{"word":"Deskorolka"}],"czynnosci":[{"word":"Ziewanie"},{"word":"Wspinanie się"},{"word":"Prasowanie"},{"word":"Żonglowanie"},{"word":"Wiosłowanie"}]},"naokolo":{"codziennosc":[{"word":"Termos","forbidden":["herbata","ciepło","butelka","napój","rączka"]},{"word":"Szczoteczka","forbidden":["zęby","pasta","łazienka","myć","włosie"]}],"jedzenie":[{"word":"Lemoniada","forbidden":["cytryna","napój","kwaśny","lód","dzbanek"]},{"word":"Ravioli","forbidden":["makaron","włoski","farsz","ciasto","pierogi"]}],"miejsca":[{"word":"Latarnia morska","forbidden":["morze","światło","statek","brzeg","wieża"]},{"word":"Planetarium","forbidden":["gwiazdy","kosmos","niebo","kopuła","pokaz"]}],"rozrywka":[{"word":"Festiwal","forbidden":["muzyka","koncert","tłum","bilety","plener"]}],"dziwne":[{"word":"Skarpetka bez pary","forbidden":["stopa","pralka","zagubiona","para","ubranie"]},{"word":"Spóźniony pociąg","forbidden":["dworzec","peron","opóźnienie","tory","odjazd"]},{"word":"Tańcząca lodówka","forbidden":["kuchnia","chłodzić","ruch","muzyka","jedzenie"]}]},"synchronizacja":{"codziennosc":[{"id":"cod-09","left":"Minimalistyczny","right":"Przeładowany"},{"id":"cod-10","left":"Do kieszeni","right":"Wymaga ciężarówki"},{"id":"cod-11","left":"Na jedną chwilę","right":"Na całe życie"}],"ludzie":[{"id":"lud-09","left":"Dusza towarzystwa","right":"Samotny wilk"},{"id":"lud-10","left":"Punktualny","right":"Wiecznie spóźniony"},{"id":"lud-11","left":"Urodzony organizator","right":"Król improwizacji"}],"rozrywka":[{"id":"roz-09","left":"Na jeden wieczór","right":"Na sto godzin"},{"id":"roz-10","left":"Wywołuje salwy śmiechu","right":"Śmiertelnie poważny"},{"id":"roz-11","left":"Do oglądania w grupie","right":"Do przeżycia w samotności"}],"miejsca":[{"id":"mie-09","left":"Ukryte przed światem","right":"Oblegane przez turystów"},{"id":"mie-10","left":"Romantyczne","right":"Kompletnie nieromantyczne"},{"id":"mie-11","left":"Idealne latem","right":"Idealne zimą"}],"jedzenie":[{"id":"jed-09","left":"Proste trzy składniki","right":"Kulinarna alchemia"},{"id":"jed-10","left":"Doskonałe na śniadanie","right":"Doskonałe na kolację"},{"id":"jed-11","left":"Na jeden kęs","right":"Na wielką ucztę"}],"absurd":[{"id":"abs-09","left":"Zasługuje na pomnik","right":"Zasługuje na zakaz"},{"id":"abs-10","left":"Zadziała tylko w bajce","right":"Zadziała w prawdziwym świecie"},{"id":"abs-11","left":"Pomysł za milion","right":"Pomysł za grosz"}]},"ticking-bomb":{"animals":[{"word":"Wymieniajcie zwierzęta żyjące nocą.","hint":""},{"word":"Wymieniajcie zwierzęta z rogami.","hint":""},{"word":"Wymieniajcie zwierzęta, które potrafią latać.","hint":""},{"word":"Wymieniajcie zwierzęta spotykane na farmie.","hint":""}],"words":[{"word":"Mówcie słowa zaczynające się na „za-”.","hint":""},{"word":"Mówcie słowa kończące się na „-ek”.","hint":""},{"word":"Mówcie imiona zaczynające się na „M”.","hint":""}],"colors":[{"word":"Wymieniajcie rzeczy w kolorze fioletowym.","hint":""},{"word":"Wymieniajcie przedmioty okrągłe.","hint":""}],"food":[{"word":"Wymieniajcie smaki lodów.","hint":""},{"word":"Wymieniajcie rodzaje zup.","hint":""},{"word":"Wymieniajcie napoje bezalkoholowe.","hint":""}],"world":[{"word":"Wymieniajcie polskie rzeki.","hint":""},{"word":"Wymieniajcie europejskie stolice.","hint":""},{"word":"Wymieniajcie pasma górskie.","hint":""}],"everyday":[{"word":"Wymieniajcie rzeczy, które można zgubić.","hint":""},{"word":"Wymieniajcie rzeczy, które zabierasz na plażę.","hint":""},{"word":"Wymieniajcie rzeczy, które znajdziesz w apteczce.","hint":""},{"word":"Wymieniajcie przedmioty używane zimą.","hint":""}],"fun":[{"word":"Wymieniajcie gatunki filmów.","hint":""},{"word":"Wymieniajcie atrakcje w lunaparku.","hint":""},{"word":"Wymieniajcie gry karciane.","hint":""}],"associations":[{"word":"Wymieniajcie rzeczy, które mogą pęknąć.","hint":""},{"word":"Wymieniajcie rzeczy, które się topią.","hint":""},{"word":"Wymieniajcie rzeczy, które pachną.","hint":""},{"word":"Wymieniajcie rzeczy, które budzą ze snu.","hint":""}]},"trzy-w-piec":{"codziennosc":[{"id":"codziennosc-21","text":"Wymień 3 rzeczy, które pakujesz na weekend."},{"id":"codziennosc-22","text":"Wymień 3 powody, dla których telefon może się rozładować."},{"id":"codziennosc-23","text":"Wymień 3 przedmioty, które można znaleźć w szufladzie."},{"id":"codziennosc-25","text":"Wymień 3 czynności wykonywane przed snem."}],"ludzie":[{"id":"ludzie-21","text":"Wymień 3 sposoby, aby kogoś pocieszyć."},{"id":"ludzie-22","text":"Wymień 3 powody do świętowania."},{"id":"ludzie-23","text":"Wymień 3 rzeczy, które zdradzają zdenerwowanie."},{"id":"ludzie-24","text":"Wymień 3 cechy dobrego przyjaciela."},{"id":"ludzie-25","text":"Wymień 3 zabawne wymówki za spóźnienie."}],"rozrywka":[{"id":"rozrywka-21","text":"Wymień 3 rzeczy, które zabierasz na koncert."},{"id":"rozrywka-22","text":"Wymień 3 gry, do których nie potrzeba prądu."},{"id":"rozrywka-23","text":"Wymień 3 rodzaje filmów."},{"id":"rozrywka-24","text":"Wymień 3 rzeczy, które można wygrać w konkursie."},{"id":"rozrywka-25","text":"Wymień 3 aktywności na deszczowy wieczór."}],"swiat":[{"id":"swiat-22","text":"Wymień 3 miejsca, w których trzeba kupić bilet."},{"id":"swiat-23","text":"Wymień 3 rzeczy potrzebne na kempingu."},{"id":"swiat-24","text":"Wymień 3 przedmioty na pokładzie samolotu."},{"id":"swiat-25","text":"Wymień 3 zwierzęta żyjące w morzu."}],"absurd":[{"id":"absurd-21","text":"Wymień 3 rzeczy, które powiedziałaby obrażona lodówka."},{"id":"absurd-22","text":"Wymień 3 kiepskie nazwy dla restauracji."},{"id":"absurd-23","text":"Wymień 3 przedmioty, które nie powinny latać."},{"id":"absurd-24","text":"Wymień 3 problemy superbohatera bez peleryny."},{"id":"absurd-25","text":"Wymień 3 rzeczy, które mógłby sprzedawać kosmita."}]},"dzika-karta":{"prompts":["Nowy obowiązkowy przedmiot w szkole: ____.","Wszyscy bali się tego, co ukrywała piwnica: ____.","Mój talent, o którym nikt nie wie, to ____.","Najgorsze hasło reklamowe dla hotelu: ____.","Babcia zamiast ciastek podała ____.","Mój kot potajemnie prowadzi biznes: ____.","Na ceremonii wręczenia nagród pojawiło się ____.","Nieoczekiwany powód zamknięcia basenu: ____.","Najnowszy trend w internecie polega na ____.","Jedyne, czego nie spakowano na Marsa, to ____.","Moje wymarzone zwierzątko domowe to ____.","Nowe prawo zakazuje używania ____.","Sekret idealnej domówki? ____.","W muzeum przyszłości wystawiono ____.","Zwycięzca konkursu dostał w nagrodę ____.","W mojej szafie portal prowadzi do ____.","Na pierwszej lekcji tańca ćwiczyliśmy ____.","Najdziwniejsza usługa dostawy to ____.","Gdy zgasło światło, usłyszeliśmy ____.","Mój zegarek zamiast godziny pokazuje ____."],"answers":["milczący akordeon","tajemniczy ogórek","piżama z peleryną","zestresowany jednorożec","paragon z przyszłości","nieśmiały dinozaur","słoik powietrza z gór","zawieszony budzik","zbyt ambitna marchewka","deskorolka dla ślimaka","fotografia pustego talerza","królestwo mokrych skarpet","zapach wtorkowego poranka","taniec obrażonego pingwina","pamiętnik robota sprzątającego","kanapka o smaku przygody","dyplom z odkładania spraw","hałaśliwa paprotka","czapka zrobiona z mapy","przemówienie gołębia","egzamin z nicnierobienia","własnoręcznie hodowany chaos","szczotka do zamiatania chmur","bilet na podróż do kuchni","odkurzacz z aspiracjami","srebrny medal za drzemkę","zaginione instrukcje do życia","teleportujący się kalafior","mały słoń w windzie","podejrzanie cichy blender"]}}}$party_pack$::jsonb;
+    doc public.party_content_documents%rowtype;
+    content jsonb;
+    categories jsonb;
+    key_name text;
+    added_count integer;
+begin
+    if (pack->>'schemaVersion')::int <> 1 or pack->>'locale' <> 'pl' then
+       raise exception 'Invalid expansion format';
+    end if;
+    if (select count(*) from public.party_content_documents where locale = 'pl') <> 7 then
+       raise exception 'Expected all seven Polish games before expansion';
+    end if;
+    for doc in select * from public.party_content_documents where locale = 'pl'
+               order by game_id for update loop
+       if doc.revision <> 1 or doc.published_revision is distinct from 1 then
+          raise exception 'Refusing to overwrite edited document % revision %',doc.game_id,doc.revision;
+       end if;
+       if not pack->'additions' ? doc.game_id then
+          raise exception 'Missing expansion for game %',doc.game_id;
+       end if;
+       if doc.game_id = 'dzika-karta' then
+          content := jsonb_set(
+                jsonb_set(doc.draft,'{prompts}',doc.draft->'prompts'||pack->'additions'->doc.game_id->'prompts'),
+                '{answers}',doc.draft->'answers'||pack->'additions'->doc.game_id->'answers'
+          );
+       else
+          key_name := case doc.game_id
+             when 'naokolo' then 'cards'
+             when 'synchronizacja' then 'scales'
+             when 'trzy-w-piec' then 'prompts'
+             else 'words' end;
+          select jsonb_agg(
+              jsonb_set(category, array[key_name],
+                 (category->key_name)||coalesce(pack->'additions'->doc.game_id->(category->>'id'),'[]'::jsonb)
+              ) order by ord
+          ) into categories
+          from jsonb_array_elements(doc.draft->'categories') with ordinality as c(category,ord);
+          if categories is null then raise exception 'No categories for %',doc.game_id; end if;
+          content := jsonb_set(doc.draft,'{categories}',categories);
+       end if;
+       perform private.party_validate_document(doc.game_id,doc.locale,content);
+       if content=doc.draft then raise exception 'No additions for %',doc.game_id; end if;
+
+       -- Revision 1 remains restorable even if it had no prior history.
+       insert into private.party_content_history(game_id,locale,revision,action,snapshot,changed_by)
+       values(doc.game_id,doc.locale,1,'publish',doc.published,null);
+
+       update public.party_content_documents
+          set draft=content, published=content,
+              revision=2, published_revision=2,
+              updated_at=now(), published_at=now(), updated_by=null
+          where game_id=doc.game_id and locale=doc.locale and revision=1;
+
+       insert into private.party_content_history(game_id,locale,revision,action,snapshot,changed_by)
+       values (doc.game_id,doc.locale,2,'save',content,null),
+              (doc.game_id,doc.locale,2,'publish',content,null);
+    end loop;
+end;
+$party_expansion$;
+commit;

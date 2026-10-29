@@ -113,3 +113,47 @@ assert.match(editor,/auth\/v1\/otp\?redirect_to=/);
 assert.doesNotMatch(html,/id="otp-code"|id="verify-code"/);
 
 assert.match(editor,/addEventListener\('hashchange'/);
+
+// Expansion should not duplicate original content and should remain valid for all games.
+const expansion=JSON.parse(read('content/expansions/20261029-party-pack.pl.json'));
+assert.equal(expansion.schemaVersion,1);
+const gameIds=['impostor',...packs];
+assert.deepEqual(Object.keys(expansion.additions).sort(),gameIds.sort());
+let added=0;
+for(const gameId of gameIds){
+  const addition=expansion.additions[gameId];
+  if(gameId==='dzika-karta'){
+    for(const key of ['prompts','answers']){
+      const seen=new Set(JSON.parse(read('content/dzika-karta.pl.json'))[key].map(s=>s.trim().toLocaleLowerCase('pl')));
+      for(const x of addition[key]){
+        assert.ok(x.trim());
+        assert.ok(!seen.has(x.toLocaleLowerCase('pl')),'Duplicate '+gameId+' '+x);
+        seen.add(x.toLocaleLowerCase('pl'));
+        added++;
+      }
+    }
+    continue;
+  }
+  if(gameId==='impostor'){
+    for(const values of Object.values(addition)){
+      for(const item of values){assert.ok(item.word&&item.hint);added++;}
+    }
+    continue;
+  }
+  const doc=JSON.parse(read('content/'+gameId+'.pl.json'));
+  const field={naokolo:'cards',synchronizacja:'scales','trzy-w-piec':'prompts'}[gameId]||'words';
+  for(const cat of doc.categories){
+    assert.ok(Array.isArray(addition[cat.id]),'Unknown category '+gameId+'/'+cat.id);
+    const label=x=>field==='scales'?x.left+'|'+x.right:field==='prompts'?x.text:x.word;
+    const seen=new Set(cat[field].map(x=>label(x).toLocaleLowerCase('pl').trim()));
+    for(const item of addition[cat.id]){
+      const key=label(item).toLocaleLowerCase('pl').trim();
+      assert.ok(key.length>0);
+      assert.ok(!seen.has(key),'Duplicate '+gameId+'/'+cat.id+': '+key);
+      seen.add(key);
+      if(field==='cards')assert.ok(item.forbidden?.length>=3&&item.forbidden.length<=6);
+      added++;
+    }
+  }
+}
+assert.equal(added,197,'Unexpected expansion cardinality');

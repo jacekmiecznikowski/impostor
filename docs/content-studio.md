@@ -74,3 +74,9 @@ Gałąź `gh-pages` zawiera tylko cztery statyczne pliki edytora i `.nojekyll`. 
 
 Stary adres Supabase Edge Function przekierowuje na GitHub Pages, ponieważ Supabase na domyślnej domenie celowo zastępuje `text/html` przez `text/plain`.
 
+
+## Pakiet rozszerzony: 2026-10
+
+Wersja początkowa to 663 karty, pytania, hasła i skale. Plik `content/expansions/20261029-party-pack.pl.json` dodaje 197 nowych, ręcznie dobranych pozycji do wszystkich siedmiu gier, bez usuwania wcześniejszych wpisów (razem **860**). Skrypt `supabase/data/20261029_party_pack.sql` zapisuje wersję startową w historii, waliduje nowe dane w PostgreSQL i publikuje je atomowo jako rewizję 2. Jego ponowne wykonanie zostaje świadomie zablokowane — zapobiega to zdublowaniu zawartości.
+
+Rozbudowany zestaw jest publicznie dostępny po odświeżeniu gry z internetem. Pierwszy start całkowicie offline korzysta z oryginalnego pakietu 663 pozycji zapisanych w APK.
