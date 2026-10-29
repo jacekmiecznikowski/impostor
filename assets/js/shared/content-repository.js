@@ -24,9 +24,9 @@ class ContentRepository {
     getSupabaseConfig() {
         const data = window.PARTYJNIAK_CONTENT_SUPABASE;
         if (!data || typeof data !== 'object') return null;
-        const url = String(data.url || '').replace(/\\/+$/, '');
+        const url = String(data.url || '').replace(/\/+$/, '');
         const key = String(data.publishableKey || '');
-        if (!/^https:\\/\\/[a-z0-9-]+\\.supabase\\.co$/i.test(url) || !key || key.length > 1500)
+        if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url) || !key || key.length > 1500)
             return null;
         return { url, key };
     }
