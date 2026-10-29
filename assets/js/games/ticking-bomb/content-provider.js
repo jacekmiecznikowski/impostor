@@ -68,7 +68,15 @@ async function initializeTickingBombContent() {
         remoteContent = await contentRepository.loadRemote('ticking-bomb', 'pl');
     } catch (_) {}
 
-    BOMB_CONTENT = normalizeBombPromptContent(remoteContent || localContent);
+    // Ship adult prompts only with app builds that explicitly support opt-in.
+    // Older installed clients still consume the safe, eight-category remote document.
+    const chosen = remoteContent || localContent;
+    const safeCategories = chosen.categories.filter(category => category.adult !== true && category.id !== 'adult');
+    const localAdult = localContent.categories.find(category => category.id === 'adult' && category.adult === true);
+    BOMB_CONTENT = normalizeBombPromptContent({
+        ...chosen,
+        categories: localAdult ? [...safeCategories, localAdult] : safeCategories
+    });
     BOMB_CATEGORIES = BOMB_CONTENT.categories || [];
     normalizeBombActiveCategories?.();
 }
