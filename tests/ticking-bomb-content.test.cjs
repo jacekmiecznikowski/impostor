@@ -77,3 +77,32 @@ const setupSource = fs.readFileSync(path.join(__dirname, '../assets/js/games/tic
 assert.match(stateSource, /getBombDefaultCategoryIds\(\)/);
 assert.match(setupSource, /const allIds = getBombDefaultCategoryIds\(\)/);
 assert.match(setupSource, /category\.adult === true/);
+
+// Verify the actual loader on a remote-first startup: CMS normalization strips
+// unknown fields, but the locally bundled adult flag must be restored.
+(async () => {
+  const remoteSafe = { ...expanded, categories: expanded.categories.filter(c => c.id !== 'adult') };
+  const app = {
+    console,
+    fetch: async url => ({
+      ok: url.endsWith('ticking-bomb-expanded.pl.json'),
+      json: async () => expanded
+    }),
+    contentRepository: {
+      validate: value => ({
+        ...value,
+        categories: value.categories.map(({ adult, ...category }) => ({ ...category }))
+      }),
+      loadRemote: async () => remoteSafe
+    },
+    normalizeBombActiveCategories() {}
+  };
+  vm.createContext(app);
+  vm.runInContext(source, app);
+  await vm.runInContext('initializeTickingBombContent()', app);
+  const categories = JSON.parse(vm.runInContext('JSON.stringify(BOMB_CATEGORIES)', app));
+  assert.equal(categories.length, 9, 'Local adult pack must be merged with normal remote content');
+  assert.equal(categories.filter(c => c.adult === true).length, 1);
+  assert.equal(categories.find(c => c.id === 'adult')?.words.length, 150);
+  assert.equal(categories.filter(c => c.id !== 'adult').reduce((n,c) => n + c.words.length, 0), 1200);
+})().catch(error => { console.error(error); process.exitCode = 1; });
