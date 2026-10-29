@@ -1,8 +1,0 @@
-{
-  "appId": "pl.partyjniak.app",
-  "appName": "Partyjniak",
-  "webDir": "dist",
-  "server": {
-    "androidScheme": "https"
-  }
-}

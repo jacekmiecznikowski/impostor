@@ -1,43 +1,87 @@
-<!DOCTYPE html>
-<html lang="pl" class="h-full">
+<!doctype html>
+<html lang="pl">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Partyjniak – gry imprezowe</title><meta name="theme-color" content="#950f26"><meta name="description" content="Partyjniak – mobilne gry imprezowe na jeden telefon.">
-  <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icons/icon.svg" type="image/svg+xml"><link rel="icon" href="./assets/icons/icon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
-  <link rel="modulepreload" href="./assets/js/shared/game-registry.js?v=2"><link rel="modulepreload" href="./assets/js/games/index.js?v=9">
-  <link rel="stylesheet" href="./assets/css/runtime.css"><script src="./assets/js/phaser.min.js"></script>
-  <link rel="stylesheet" href="./assets/css/styles.css"><link rel="stylesheet" href="./assets/css/partyjniak.css"><link rel="stylesheet" href="./assets/css/navigation.css"><link rel="stylesheet" href="./assets/css/navigation-android.css"><link rel="stylesheet" href="./assets/css/brand-theme.css"><link rel="stylesheet" href="./assets/css/game-color-system.css"><link rel="stylesheet" href="./assets/css/game-menu.css"><link rel="stylesheet" href="./assets/css/player-setup.css"><link rel="stylesheet" href="./assets/css/category-setup.css"><link rel="stylesheet" href="./assets/css/settings.css"><link rel="stylesheet" href="./assets/css/screen-layout-system.css?v=1">
-  <style>
-    #runtime-build-error{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:24px;background:#020617;color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center}
-    #runtime-build-error>div{max-width:640px;padding:24px;border:1px solid #334155;border-radius:18px;background:#0f172a;box-shadow:0 20px 60px rgba(0,0,0,.45)}
-    #runtime-build-error h1{margin:0 0 12px;font-size:22px}
-    #runtime-build-error p{margin:8px 0;color:#cbd5e1;line-height:1.5}
-    #runtime-build-error code{display:block;margin-top:16px;padding:12px;border-radius:10px;background:#020617;color:#5eead4;font-size:14px;white-space:pre-wrap}
-    html.partyjniak-runtime-missing #runtime-build-error{display:flex}
-  </style>
-  <script>
-    (() => {
-      const checkPartyjniakRuntime = () => {
-        const ready = getComputedStyle(document.documentElement)
-          .getPropertyValue('--partyjniak-runtime-bundle')
-          .trim() === 'ready';
-        document.documentElement.classList.toggle('partyjniak-runtime-missing', !ready);
-      };
-      window.addEventListener('DOMContentLoaded', () => setTimeout(checkPartyjniakRuntime, 0), { once: true });
-      window.addEventListener('load', checkPartyjniakRuntime, { once: true });
-    })();
-  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#09111f">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https://astcatgvvliatokqalhd.supabase.co; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Content Studio • Partyjniak</title>
+  <link rel="stylesheet" href="./studio.css">
+  <script src="./studio.js" type="module"></script>
 </head>
-<body class="h-full bg-slate-950 text-slate-100 overflow-x-hidden relative flex flex-col antialiased">
-<div id="runtime-build-error" role="alert">
-  <div>
-    <h1>Brakuje wygenerowanych assetów Partyjniaka</h1>
-    <p>Ta kopia repozytorium została uruchomiona bez zbudowania Tailwinda, Font Awesome, Intera i Phasera.</p>
-    <p>Uruchom aplikację przez skrypt projektu zamiast bezpośrednio przez <code>python -m http.server</code>.</p>
-    <code>npm ci
-npm run serve</code>
-  </div>
-</div>
-<div id="phaser-bg" class="fixed inset-0 pointer-events-auto z-0 opacity-70"></div><header id="app-shell" class="app-shell"></header><main id="app-main" class="relative z-10 flex-1 flex flex-col max-w-lg w-full mx-auto p-4 md:p-6 overflow-y-auto"></main><div id="modal-root"></div>
-<script src="./assets/js/shared/view-loader.js" defer></script><script src="./assets/js/shared/asset-loader.js" defer></script><script src="./assets/js/shared/app-settings.js" defer></script><script src="./assets/js/shared/audio.js" defer></script><script src="./assets/js/shared/player-setup.js" defer></script><script src="./assets/js/shared/category-setup.js" defer></script><script src="./assets/js/shared/outcome-audio.js?v=10" defer></script><script src="./assets/js/shared/background.js" defer></script><script src="./assets/js/shared/platform.js" defer></script><script src="./assets/js/shared/content-repository.js" defer></script><script src="./assets/js/shared/ui.js" defer></script><script src="./assets/js/shared/hub.js" defer></script><script src="./assets/js/shared/game-menu.js" defer></script><script src="./assets/js/shared/navigation-behavior.js" defer></script><script src="./assets/js/shared/game-themes.js" defer></script><script src="./assets/js/shared/native-android.js" defer></script><script type="module" src="./assets/js/app.js?v=12"></script>
-</body></html>
+<body>
+  <div class="background-glow" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">P</span><span><strong>Partyjniak</strong><small>CONTENT STUDIO</small></span></div>
+    <div class="top-right"><span id="connection" class="pill muted">Niepołączono</span><button id="logout" class="quiet" hidden>Wyloguj</button></div>
+  </header>
+
+  <main id="login-view" class="login-shell">
+    <div class="login-copy"><span class="eyebrow">STREFA REDAKCYJNA</span><h1>Treści wszystkich gier w jednym miejscu.</h1><p>Twórz kategorie, edytuj hasła, sprawdzaj podgląd i publikuj nową bazę bez aktualizacji aplikacji. Projekt i klucz publiczny są bezpieczne do użycia w przeglądarce. Nie wklejaj tutaj klucza <code>service_role</code>.</p><div class="benefits"><span>7 gier</span><span>Historia zmian</span><span>Wersje robocze</span><span>Dane offline w grze</span></div></div>
+    <form id="connect-form" class="glass sign-in">
+      <div class="panel-top"><span class="panel-icon">✳</span><div><h2>Zaloguj się do panelu</h2><p>Bez hasła, jednorazowym kodem e-mail</p></div></div>
+      <label>Adres e-mail redaktora<input id="editor-email" type="email" required placeholder="contact@swawole.studio" autocomplete="email"></label>
+      <details class="advanced-connection">
+        <summary>Zaawansowane ustawienia połączenia</summary>
+        <label>Adres projektu Supabase<input id="project-url" type="url" required placeholder="https://xxxxx.supabase.co" autocomplete="url"></label>
+        <label>Klucz publiczny publishable / anon<input id="publishable-key" type="password" required placeholder="sb_publishable_…" autocomplete="off"></label>
+      </details>
+      <button class="primary" id="send-code" type="submit">Wyślij kod logowania <span aria-hidden="true">↗</span></button>
+      <div class="divider-label">PO OTRZYMANIU E-MAILA</div>
+      <label>Jednorazowy kod OTP<input id="otp-code" inputmode="numeric" pattern="[0-9]{6,8}" placeholder="000000" autocomplete="one-time-code"></label>
+      <button type="button" class="secondary" id="verify-code">Zaloguj się kodem</button>
+      <p class="form-note">Dostęp do edycji otrzymuje tylko zweryfikowany adres znajdujący się na liście redaktorów. Dane sesji są przechowywane tylko w bieżącej karcie przeglądarki.</p>
+    </form>
+  </main>
+
+  <main id="studio-view" class="studio-shell" hidden>
+    <section class="hero">
+      <div><span class="eyebrow">ZARZĄDZANIE TREŚCIĄ</span><h1>Biblioteka gier <span class="accent">Partyjniak</span></h1><p>Przygotuj zestaw, zapisz szkic, a dopiero potem opublikuj go dla graczy.</p></div>
+      <div class="hero-stats"><div><strong id="total-categories">0</strong><small>KATEGORIE</small></div><div><strong id="total-items">0</strong><small>KARTY I HASŁA</small></div><div><strong id="total-games">0</strong><small>GRY</small></div></div>
+    </section>
+    <div class="controlbar glass">
+      <label class="game-select">Gra<select id="game-picker"></select></label>
+      <div class="status-area"><span id="published-pill" class="pill">Szkic</span><span id="revision-label" class="meta"></span></div>
+      <div class="control-actions">
+        <button type="button" class="quiet" id="import-btn">Import JSON</button>
+        <button type="button" class="quiet" id="export-btn">Eksport JSON</button>
+        <button type="button" class="secondary" id="history-btn">Historia</button>
+        <button type="button" class="secondary" id="save-btn">Zapisz szkic</button>
+        <button type="button" class="primary" id="publish-btn">Opublikuj <span aria-hidden="true">↗</span></button>
+      </div>
+      <input type="file" id="import-file" accept=".json,application/json" hidden>
+    </div>
+
+    <div class="studio-grid">
+      <aside class="glass category-column">
+        <div class="section-heading"><div><h2 id="groups-title">Kategorie</h2><p id="groups-subtitle">Wybierz zestaw do edycji</p></div><button id="add-category" class="square" title="Dodaj kategorię" aria-label="Dodaj kategorię">+</button></div>
+        <input id="group-search" class="search" type="search" placeholder="Szukaj kategorii…" aria-label="Filtruj kategorie">
+        <div id="category-list" class="category-list" role="list"></div>
+      </aside>
+
+      <section class="glass editor-column">
+        <div class="section-heading"><div><span class="eyebrow">EDYTOR</span><h2 id="editor-title">Wybierz kategorię</h2><p id="editor-subtitle">Zmiany zostaną zapisane dopiero po naciśnięciu Zapisz szkic.</p></div><button id="remove-category" type="button" class="danger-outline" hidden>Usuń</button></div>
+        <div id="category-fields" class="category-fields"></div>
+        <div class="items-toolbar"><div><h3 id="items-title">Zawartość</h3><p id="items-subtitle"></p></div><button id="add-item" type="button" class="secondary">+ Dodaj pozycję</button></div>
+        <div id="items-list" class="items-list"></div>
+        <section id="extra-settings" class="extra-settings" hidden>
+          <div class="items-toolbar"><div><h3>Wskazówki do rozmowy</h3><p>Opcjonalne teksty używane przez grę</p></div><button id="add-tip" type="button" class="secondary">+ Wskazówka</button></div>
+          <div id="extra-list" class="items-list"></div>
+        </section>
+      </section>
+
+      <aside class="glass preview-column">
+        <div class="section-heading"><div><span class="eyebrow">PODGLĄD</span><h2>Tak zobaczą to gracze</h2></div></div>
+        <div id="preview" class="device-preview"></div>
+        <p class="preview-note">Podgląd odzwierciedla treść kart, nie wszystkie animacje gry.</p>
+        <div class="publish-info"><span class="info-symbol">i</span><p><strong>Bezpieczne publikowanie</strong><span>Zapisywanie szkicu nie zmienia zawartości w telefonach. Dopiero przycisk „Opublikuj” udostępnia ją aplikacji.</span></p></div>
+      </aside>
+    </div>
+  </main>
+
+  <dialog id="history-dialog" class="glass modal"><div class="modal-head"><h2>Historia wersji</h2><button id="close-history" class="square" aria-label="Zamknij">×</button></div><p>Przywrócenie tworzy nowy szkic. Nie zmienia automatycznie opublikowanej wersji.</p><div id="history-list"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
