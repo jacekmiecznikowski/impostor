@@ -27,8 +27,8 @@ begin
        end if;
        if doc.game_id = 'dzika-karta' then
           content := jsonb_set(
-                jsonb_set(doc.draft,'{prompts}',doc.draft->'prompts'||pack->'additions'->doc.game_id->'prompts'),
-                '{answers}',doc.draft->'answers'||pack->'additions'->doc.game_id->'answers'
+                jsonb_set(doc.draft,'{prompts}',(doc.draft->'prompts')||(pack->'additions'->doc.game_id->'prompts')),
+                '{answers}',(doc.draft->'answers')||(pack->'additions'->doc.game_id->'answers')
           );
        else
           key_name := case doc.game_id
