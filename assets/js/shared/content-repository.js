@@ -42,8 +42,7 @@ class ContentRepository {
                 headers:{
                     'Content-Type':'application/json',
                     'Accept':'application/json',
-                    apikey:config.key,
-                    Authorization:'Bearer ' + config.key
+                    apikey: config.key // Public key identifies the app; it is NOT a JWT.
                 },
                 body:JSON.stringify({p_game:gameId,p_locale:locale})
             });

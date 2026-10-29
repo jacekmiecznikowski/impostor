@@ -73,7 +73,7 @@ const repo=sandbox.window.PartyjniakContent.repository;
   assert.equal(requested.length,7);
   assert.ok(requested.every(r=>r.url.endsWith('/rest/v1/rpc/party_get_published')));
   assert.ok(requested.every(r=>r.options.headers.apikey==='sb_publishable_demo'));
-  assert.ok(requested.every(r=>!r.options.headers.Authorization.includes('service_role')));
+  assert.ok(requested.every(r=>!Object.hasOwn(r.options.headers,'Authorization')), 'Publishable keys must never be sent as bearer JWTs');
   networkEnabled=false;
   const stale=await repo.loadRemote('impostor','pl',{force:true});
   assert.equal(stale.categories.length,16,'Cached published data should survive offline');
