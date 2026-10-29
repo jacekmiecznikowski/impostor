@@ -15,7 +15,8 @@ const sandbox = {
   TickingBombRules,
   BOMB_CATEGORIES: [
     { id: 'animals', name: 'Zwierzęta' },
-    { id: 'food', name: 'Jedzenie' }
+    { id: 'food', name: 'Jedzenie' },
+    { id: 'adult', name: '18+ — Bez cenzury', adult: true }
   ],
   localStorage: {
     getItem: key => storage.get(key) ?? null,
@@ -78,6 +79,12 @@ const fallback = snapshot();
 assert.equal(fallback.playerCount, 4);
 assert.equal(fallback.players.length, 4);
 assert.deepEqual(fallback.activeCategories, ['animals', 'food']);
+assert.ok(!fallback.activeCategories.includes('adult'), 'New sessions may not enable adult content by default');
+run("bombState.activeCategories = ['food', 'adult']; normalizeBombActiveCategories()");
+assert.deepEqual(snapshot().activeCategories, ['food', 'adult'], 'Adult consent persists when selected explicitly');
+run("bombState.activeCategories = []");
+run("normalizeBombActiveCategories()");
+assert.deepEqual(snapshot().activeCategories, ['animals', 'food'], 'Empty selection must not re-enable adult content');
 assert.equal(fallback.hasSavedSession, false);
 
 run("bombState.currentPrompt = 'TEST'; bombState.currentCategoryId = 'food'; bombState.lastLoserId = 'x'; bombState.manualLoserId = 'y';");
