@@ -16,7 +16,8 @@ async function initializeImpostorRemoteContent() {
         };
         nextWordDatabase[category.id] = category.words.map(entry => ({
             word: entry.word,
-            hint: entry.hint || 'Brak podpowiedzi'
+            hint: entry.hint || entry.hints?.[0] || 'Brak podpowiedzi',
+            hints: entry.hints || [entry.hint || 'Brak podpowiedzi']
         }));
     });
 
