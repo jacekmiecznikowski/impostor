@@ -210,7 +210,10 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     await options.getByRole('button', { name: 'Wyczyść' }).click();
     await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(1);
     await options.getByRole('button', { name: 'Wszystkie' }).click();
-    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total);
+    // Impostor 18+ is opt-in, never selected by the bulk action.
+    const adultCount = name === 'Impostor' ? await allCards.filter({ hasText: '18+' }).count() : 0;
+    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total - adultCount);
+    if (adultCount) await expect(allCards.filter({ hasText: '18+' })).not.toHaveClass(/is-selected/);
 
     const search = options.getByRole('searchbox', { name: 'Szukaj kategorii' });
     const firstTitle = await allCards.first().locator('.party-category-copy').textContent();
