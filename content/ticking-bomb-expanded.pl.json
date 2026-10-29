@@ -2539,6 +2539,506 @@
         {
           "hint": "",
           "word": "Wymieniajcie słynne miejsca w Polsce."
+        },
+        {
+          "word": "Wymieniajcie państwa Ameryki Północnej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „A”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „B”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „C”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „D”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „E”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „F”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „G”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „I”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „K”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „M”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „N”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „P”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „R”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „T”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa na literę „W”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa zaczynające się na samogłoskę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa mające wyspy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa bez dostępu do morza.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, w których mówi się po angielsku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, w których mówi się po hiszpańsku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, w których mówi się po francusku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, w których mówi się po arabsku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa leżące nad Morzem Śródziemnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa leżące nad Oceanem Atlantyckim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa leżące nad Pacyfikiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, których flaga ma kolor czerwony.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, których flaga ma kolor zielony.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, których flaga ma kolor biały.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa, których flaga ma kolor niebieski.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa z górami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa z pustyniami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa z lasami tropikalnymi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa popularne wśród turystów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa kojarzone z piłką nożną.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa kojarzone z zimą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa kojarzone z upałem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa kojarzone z wyspami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie państwa znane z dobrej kuchni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice europejskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice azjatyckie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice afrykańskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice Ameryki Południowej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice na literę „B”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice na literę „P”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice na literę „M”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice na literę „L”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice nad rzeką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie stolice nad morzem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „K”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „W”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „P”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „S”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „G”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „B”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „L”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „T”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce na literę „Z”.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce nad Wisłą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce nad Odrą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce nad morzem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce w górach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce ze starym rynkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce ze znanym zamkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce z uniwersytetem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce z lotniskiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Polsce znane z turystyki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta we Francji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Hiszpanii.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Wielkiej Brytanii.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Czechach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Austrii.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Szwajcarii.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Grecji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Turcji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Stanach Zjednoczonych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Kanadzie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Brazylii.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Japonii.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Chinach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta w Indiach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta znane z piłki nożnej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z muzeów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z zabytków.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z wieżowców.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z portów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z plaż.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z kanałów.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miasta słynące z festiwali.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeki w Polsce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeki w Niemczech.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeki w Europie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeki w Afryce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeki w Ameryce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeki w Azji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie jeziora w Polsce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie jeziora w Europie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie jeziora w Ameryce Północnej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie morza w Europie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie oceany.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pustynie świata.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie góry w Polsce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie góry w Europie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie góry w Azji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie góry w Ameryce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wyspy na Morzu Śródziemnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wyspy w Europie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wyspy na Karaibach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wyspy na Pacyfiku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wyspy kojarzone z wakacjami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wulkany świata.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne wodospady.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne mosty.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne wieże.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne zamki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne pałace.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne muzea.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne parki narodowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne stadiony.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne świątynie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne pomniki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne place miejskie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne plaże.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne góry.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie słynne jeziora.",
+          "hint": ""
         }
       ]
     },
@@ -2651,6 +3151,502 @@
         {
           "hint": "",
           "word": "Wymieniajcie rzeczy, które można znaleźć na poczcie."
+        },
+        {
+          "word": "Wymieniajcie rzeczy w przedpokoju.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na tarasie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w piwnicy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na strychu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w spiżarni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w szufladzie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w apteczce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w lodówce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w zamrażarce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w piekarniku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w zmywarce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w pralce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w szafie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy pod łóżkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na stoliku nocnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na półce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w torebce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w portfelu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w plecaku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w torbie sportowej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w bagażniku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w schowku samochodowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w warsztacie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w sklepie spożywczym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w piekarni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w cukierni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w restauracji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kawiarni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w pubie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kinie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w bibliotece.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w księgarni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na poczcie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w banku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w szpitalu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w przychodni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w aptece.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w gabinecie dentysty.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w szkole.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w przedszkolu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w sali gimnastycznej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na siłowni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na boisku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na basenie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na placu zabaw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w parku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na przystanku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w autobusie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w tramwaju.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w pociągu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na dworcu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na lotnisku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w samolocie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w hotelu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w recepcji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na kempingu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w namiocie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na plaży.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w górach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w lesie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w zoo.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w muzeum.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w teatrze.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kościele.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na weselu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na urodzinach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na grillu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na pikniku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na targu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na budowie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy u fryzjera.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy u mechanika.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na stacji benzynowej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w windzie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kuchennym zlewie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w szafce łazienkowej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na parapecie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy na stole wigilijnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w koszu na śmieci.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy w kieszeni kurtki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które zakłada się na głowę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które zakłada się na stopy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które zakłada się na dłonie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które zakłada się na szyję.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które zakłada się na zimę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które zakłada się latem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na spacer.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na rower.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na basen.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się do pracy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się do szkoły.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na wycieczkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się do kina.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na koncert.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na piknik.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się pod namiot.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na narty.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na siłownię.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na imprezę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się na wakacje.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które bierze się do samolotu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się co tydzień.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się raz na rok.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się w aptece.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się w kiosku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się w sklepie budowlanym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się u ogrodnika.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które kupuje się w sklepie zoologicznym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które dostaje się w prezencie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można pożyczyć sąsiadowi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można oddać do naprawy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które trzeba czyścić.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które trzeba prasować.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które trzeba podlewać.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które trzeba wymieniać.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które trzeba wyrzucać.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które trzeba segregować.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które łatwo zapomnieć.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które łatwo zepsuć.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można rozbić.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można stłuc.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można rozłożyć.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zamknąć.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można otworzyć.",
+          "hint": ""
         }
       ]
     },
