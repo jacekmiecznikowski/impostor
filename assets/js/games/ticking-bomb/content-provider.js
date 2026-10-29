@@ -49,14 +49,18 @@ function normalizeBombPromptContent(content) {
 async function initializeTickingBombContent() {
     let localContent = BOMB_FALLBACK_CONTENT;
 
-    try {
-        const response = await fetch('./content/ticking-bomb.pl.json', { cache: 'no-store' });
-        if (response.ok) {
+    // The complete curated pack ships with new builds. Keep the small original
+    // pack as a fallback and as the unchanged historical Supabase seed.
+    for (const source of ['./content/ticking-bomb-expanded.pl.json', './content/ticking-bomb.pl.json']) {
+        try {
+            const response = await fetch(source, { cache: 'no-store' });
+            if (!response.ok) continue;
             const payload = await response.json();
             localContent = contentRepository.validate(payload, 'ticking-bomb', 'pl');
+            break;
+        } catch (error) {
+            console.warn('Nie udało się wczytać lokalnej bazy Tykającej Bomby:', source, error);
         }
-    } catch (error) {
-        console.warn('Nie udało się wczytać lokalnej bazy Tykającej Bomby.', error);
     }
 
     let remoteContent = null;
