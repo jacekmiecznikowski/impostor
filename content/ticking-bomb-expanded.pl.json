@@ -4865,6 +4865,615 @@
           "hint": ""
         }
       ]
+    },
+    {
+      "id": "adult",
+      "name": "18+ — Bez cenzury",
+      "desc": "Pikantne skojarzenia, randki i humor tylko dla dorosłych. Włącz świadomie.",
+      "icon": "fa-fire",
+      "adult": true,
+      "words": [
+        {
+          "word": "Wymieniajcie miejsca na randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na pierwszą randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na drugą randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na romantyczny wieczór.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na pikantną randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na randkę w domu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na randkę poza domem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na randkę bez wydawania pieniędzy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na nietypową randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie pomysły na randkę w podróży.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miejsca, w których ludzie flirtują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miejsca, w których ludzie się całują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miejsca, w których można poznać kogoś na randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miejsca, do których para jedzie na weekend.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miejsca na romantyczny pocałunek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie miejsca, w których lepiej nie całować się publicznie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie sposoby na rozpoczęcie flirtu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie sposoby na zaproszenie kogoś na randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie sposoby na okazanie zainteresowania.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie sposoby na udany podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie sposoby na nieudany podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie głupie teksty na podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie śmieszne teksty na podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie żenujące teksty na podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie odważne teksty na podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie dwuznaczne komplementy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie komplementy na randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie komplementy, które brzmią podejrzanie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wymówki odwołujące randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wymówki po nieudanej randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wymówki, żeby zakończyć randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wymówki na szybkie wyjście z klubu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie wymówki, żeby zostać na noc.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których nie mówić na pierwszej randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których nie robić na pierwszej randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które psują pierwszą randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które budują napięcie na randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można przynieść na randkę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi na randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi w kinie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi w restauracji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi na wakacjach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi w hotelu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi w domu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi w łóżku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi po imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi na kanapie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi pod prysznicem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które para robi w wannie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z seksem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z grą wstępną.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z romantyczną nocą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z namiętnością.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z pożądaniem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z flirtem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z pocałunkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z randką w ciemno.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z wieczorem kawalerskim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z wieczorem panieńskim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z klubem nocnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z seks-shopem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy kojarzące się z romantycznym hotelem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w sypialni dorosłych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w szufladzie nocnej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w seks-shopie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w pokoju hotelowym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w romantycznym apartamencie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w damskiej torebce po imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w kieszeniach po imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć pod łóżkiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć między poduszkami.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć po domówce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć rano po randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć po nieudanej randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć na stoliku nocnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w łazience po imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w torbie na romantyczny weekend.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w walizce na wyjazd we dwoje.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć w barze.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć na dyskotece.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć przy barze w klubie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć na wieczorze panieńskim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można znaleźć na wieczorze kawalerskim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą przerwać romantyczną chwilę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą przerwać pocałunek.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą przerwać seks.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zepsuć atmosferę w sypialni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą rozśmieszyć w łóżku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą wywołać rumieniec.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą wywołać zazdrość.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą wywołać kłótnię pary.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zawstydzić na randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zawstydzić w hotelu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zawstydzić w aptece.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zawstydzić na imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zawstydzić w klubie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zdradzić romans.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zdradzić nocną przygodę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zdradzić flirt.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą zostać po namiętnej nocy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zgubić na imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zgubić podczas randki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zgubić w hotelu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zgubić w klubie nocnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można usłyszeć przez cienkie ściany.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć podczas pocałunku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć po pocałunku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć rano po randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć przed randką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć po nieudanej randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć podczas flirtu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć w sypialni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć w seks-shopie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć w klubie nocnym.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć na wieczorze kawalerskim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć na wieczorze panieńskim.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można powiedzieć przy romantycznej kolacji.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które brzmią dwuznacznie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które brzmią jak tekst na podryw.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które brzmią pikantnie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie wysyłać byłemu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie wysyłać byłej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie pisać na Tinderze.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie publikować po imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie mówić na randce w ciemno.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie mówić rodzicom partnera.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których lepiej nie mówić rano po imprezie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, których nie warto robić po alkoholu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie ukrywają przed byłymi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie robią na Tinderze.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie piszą na portalach randkowych.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie wrzucają na swoje profile randkowe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie ukrywają na randkach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, o których pary rozmawiają w sypialni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, o które można zapytać na randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, o które można zapytać partnera.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, o które można zapytać przyjaciela po randce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie uważają za seksowne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które ludzie uważają za mało seksowne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą być afrodyzjakiem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można wykorzystać podczas romantycznego masażu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zrobić przy świecach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można zrobić podczas weekendu we dwoje.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą być romantycznym prezentem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą być pikantnym prezentem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które mogą być niezręcznym prezentem na walentynki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można kupić na wieczór panieński.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można kupić na wieczór kawalerski.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można kupić do sypialni.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie rzeczy, które można kupić w seks-shopie.",
+          "hint": ""
+        }
+      ]
     }
   ],
   "schemaVersion": 1,
