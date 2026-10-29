@@ -1,3 +1,5 @@
+import { STUDIO_DEFAULTS } from './config.js';
+
 // Partyjniak Content Studio — dependency-free, strictly authenticated editor.
 // Only the public Supabase publishable key is stored locally.
 // Bearer access/refresh tokens are kept in sessionStorage, never in the game.
@@ -13,7 +15,7 @@ const TYPE = Object.freeze({
 const $$ = id => document.getElementById(id);
 const STORE_CONFIG = 'partyjniak.studio.public-config.v1';
 const STORE_SESSION = 'partyjniak.studio.session.v1';
-let config = { url:'', key:'', email:'' };
+let config = { ...STUDIO_DEFAULTS };
 let session = null;
 let documents = [];
 let record = null;
@@ -441,7 +443,10 @@ async function restore(id){
 function bootstrap(){
   try{
     const stored=JSON.parse(localStorage.getItem(STORE_CONFIG)||'null');
-    if(stored){config=stored;$$('project-url').value=stored.url||'';$$('publishable-key').value=stored.key||'';$$('editor-email').value=stored.email||'';}
+    config={...STUDIO_DEFAULTS,...(stored && typeof stored==='object'?stored:{})};
+    $('project-url').value=config.url;
+    $('publishable-key').value=config.key;
+    $('editor-email').value=config.email;
     session=JSON.parse(sessionStorage.getItem(STORE_SESSION)||'null');
     if(session&&config.url&&config.key)openStudio().catch(error=>{
       sessionStorage.removeItem(STORE_SESSION);session=null;showToast(error.message,true);

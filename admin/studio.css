@@ -19,3 +19,8 @@ input,select,textarea{width:100%;border-radius:10px;border:1px solid #34465b;bac
 
 .extra-settings{border-top:1px solid #2a3e56;margin-top:26px;padding-top:2px}
 .extra-settings .items-toolbar{border-top:0}
+
+.advanced-connection{border:1px solid #2c455a;border-radius:10px;background:#0c192b;padding:10px 13px}
+.advanced-connection summary{cursor:pointer;color:#91b7c1;font-size:.7rem;font-weight:750}
+.advanced-connection[open]{display:grid;gap:12px}
+.advanced-connection[open] summary{margin-bottom:5px}

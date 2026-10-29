@@ -88,3 +88,11 @@ const repo=sandbox.window.PartyjniakContent.repository;
 assert.match(read('admin/index.html'), /id="extra-settings"/);
 assert.match(read('admin/studio.js'), /function renderExtra\(/);
 assert.match(sql, /'restore',restored,auth\.uid\(\)/);
+
+const allowlistSql=read('supabase/migrations/20261029_editor_email_allowlist.sql');
+assert.match(allowlistSql,/contact@swawole\.studio/);
+assert.match(allowlistSql,/email_confirmed_at is not null/);
+assert.match(allowlistSql,/enable row level security/);
+assert.match(read('admin/config.js'),/sb_publishable_/);
+assert.doesNotMatch(read('admin/config.js'),/sb_secret_|service_role/);
+assert.match(read('admin/studio.js'),/STUDIO_DEFAULTS/);
