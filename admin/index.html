@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#09111f">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src https:; font-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Content Studio • Partyjniak</title>
+  <link rel="stylesheet" href="./studio.css">
+  <script src="./studio.js" type="module"></script>
+</head>
+<body>
+  <div class="background-glow" aria-hidden="true"></div>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">P</span><span><strong>Partyjniak</strong><small>CONTENT STUDIO</small></span></div>
+    <div class="top-right"><span id="connection" class="pill muted">Niepołączono</span><button id="logout" class="quiet" hidden>Wyloguj</button></div>
+  </header>
+
+  <main id="login-view" class="login-shell">
+    <div class="login-copy"><span class="eyebrow">STREFA REDAKCYJNA</span><h1>Treści wszystkich gier w jednym miejscu.</h1><p>Twórz kategorie, edytuj hasła, sprawdzaj podgląd i publikuj nową bazę bez aktualizacji aplikacji. Projekt i klucz publiczny są bezpieczne do użycia w przeglądarce. Nie wklejaj tutaj klucza <code>service_role</code>.</p><div class="benefits"><span>7 gier</span><span>Historia zmian</span><span>Wersje robocze</span><span>Dane offline w grze</span></div></div>
+    <form id="connect-form" class="glass sign-in">
+      <div class="panel-top"><span class="panel-icon">✳</span><div><h2>Połącz Supabase</h2><p>Autoryzacja jednorazowym kodem e-mail</p></div></div>
+      <label>Adres projektu Supabase<input id="project-url" type="url" required placeholder="https://xxxxx.supabase.co" autocomplete="url"></label>
+      <label>Klucz publishable / anon<input id="publishable-key" type="password" required placeholder="sb_publishable_…" autocomplete="off"></label>
+      <label>Adres e-mail redaktora<input id="editor-email" type="email" required placeholder="redaktor@firma.pl" autocomplete="email"></label>
+      <button class="primary" id="send-code" type="submit">Wyślij kod logowania <span aria-hidden="true">↗</span></button>
+      <div class="divider-label">PO OTRZYMANIU E-MAILA</div>
+      <label>Jednorazowy kod OTP<input id="otp-code" inputmode="numeric" pattern="[0-9]{6,8}" placeholder="000000" autocomplete="one-time-code"></label>
+      <button type="button" class="secondary" id="verify-code">Zaloguj się kodem</button>
+      <p class="form-note">Dostęp do edycji mają wyłącznie użytkownicy dodani do <code>party_editors</code>. Dane sesji są przechowywane tylko w bieżącej karcie przeglądarki.</p>
+    </form>
+  </main>
+
+  <main id="studio-view" class="studio-shell" hidden>
+    <section class="hero">
+      <div><span class="eyebrow">ZARZĄDZANIE TREŚCIĄ</span><h1>Biblioteka gier <span class="accent">Partyjniak</span></h1><p>Przygotuj zestaw, zapisz szkic, a dopiero potem opublikuj go dla graczy.</p></div>
+      <div class="hero-stats"><div><strong id="total-categories">0</strong><small>KATEGORIE</small></div><div><strong id="total-items">0</strong><small>KARTY I HASŁA</small></div><div><strong id="total-games">0</strong><small>GRY</small></div></div>
+    </section>
+    <div class="controlbar glass">
+      <label class="game-select">Gra<select id="game-picker"></select></label>
+      <div class="status-area"><span id="published-pill" class="pill">Szkic</span><span id="revision-label" class="meta"></span></div>
+      <div class="control-actions">
+        <button type="button" class="quiet" id="import-btn">Import JSON</button>
+        <button type="button" class="quiet" id="export-btn">Eksport JSON</button>
+        <button type="button" class="secondary" id="history-btn">Historia</button>
+        <button type="button" class="secondary" id="save-btn">Zapisz szkic</button>
+        <button type="button" class="primary" id="publish-btn">Opublikuj <span aria-hidden="true">↗</span></button>
+      </div>
+      <input type="file" id="import-file" accept=".json,application/json" hidden>
+    </div>
+
+    <div class="studio-grid">
+      <aside class="glass category-column">
+        <div class="section-heading"><div><h2 id="groups-title">Kategorie</h2><p id="groups-subtitle">Wybierz zestaw do edycji</p></div><button id="add-category" class="square" title="Dodaj kategorię" aria-label="Dodaj kategorię">+</button></div>
+        <input id="group-search" class="search" type="search" placeholder="Szukaj kategorii…" aria-label="Filtruj kategorie">
+        <div id="category-list" class="category-list" role="list"></div>
+      </aside>
+
+      <section class="glass editor-column">
+        <div class="section-heading"><div><span class="eyebrow">EDYTOR</span><h2 id="editor-title">Wybierz kategorię</h2><p id="editor-subtitle">Zmiany zostaną zapisane dopiero po naciśnięciu Zapisz szkic.</p></div><button id="remove-category" type="button" class="danger-outline" hidden>Usuń</button></div>
+        <div id="category-fields" class="category-fields"></div>
+        <div class="items-toolbar"><div><h3 id="items-title">Zawartość</h3><p id="items-subtitle"></p></div><button id="add-item" type="button" class="secondary">+ Dodaj pozycję</button></div>
+        <div id="items-list" class="items-list"></div>
+      </section>
+
+      <aside class="glass preview-column">
+        <div class="section-heading"><div><span class="eyebrow">PODGLĄD</span><h2>Tak zobaczą to gracze</h2></div></div>
+        <div id="preview" class="device-preview"></div>
+        <p class="preview-note">Podgląd odzwierciedla treść kart, nie wszystkie animacje gry.</p>
+        <div class="publish-info"><span class="info-symbol">i</span><p><strong>Bezpieczne publikowanie</strong><span>Zapisywanie szkicu nie zmienia zawartości w telefonach. Dopiero przycisk „Opublikuj” udostępnia ją aplikacji.</span></p></div>
+      </aside>
+    </div>
+  </main>
+
+  <dialog id="history-dialog" class="glass modal"><div class="modal-head"><h2>Historia wersji</h2><button id="close-history" class="square" aria-label="Zamknij">×</button></div><p>Przywrócenie tworzy nowy szkic. Nie zmienia automatycznie opublikowanej wersji.</p><div id="history-list"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
