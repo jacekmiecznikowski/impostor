@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const game=fs.readFileSync('assets/js/games/impostor/game.js','utf8');
+const provider=fs.readFileSync('assets/js/games/impostor/content-provider.js','utf8');
+assert.match(game,/Array\.isArray\(word\?\.hints\)/);
+assert.match(game,/Math\.floor\(Math\.random\(\) \* hints\.length\)/);
+assert.match(provider,/partyjniakMultiHints/);
+assert.match(provider,/entry\.hints/);
+const sandbox={state:{activeCategories:['a']},WORD_DATABASE:{a:[{word:'Test',hint:'Pierwsza',hints:['Pierwsza','Druga','Trzecia']}]},normalizeActiveCategories(){},Math:Object.create(Math)};
+sandbox.Math.random=()=>0.51;
+vm.createContext(sandbox);
+vm.runInContext(game.slice(game.indexOf('function getRoundWord()'),game.indexOf('function startGameRound()')),sandbox);
+assert.equal(sandbox.getRoundWord().hint,'Druga');
+console.log('Impostor randomized hints: OK');
