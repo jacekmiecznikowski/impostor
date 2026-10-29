@@ -892,7 +892,7 @@
         },
         {
           "hint": "Sezam",
-          "word": "Chalva",
+          "word": "Chałwa",
           "hints": [
             "Sezam",
             "Słodycz",
@@ -7937,7 +7937,7 @@
           "word": "Piotruś Pan",
           "hints": [
             "Latanie",
-            "Nibel",
+            "Nibylandia",
             "Bajki"
           ]
         },
@@ -13870,7 +13870,7 @@
         },
         {
           "hint": "Statek",
-          "word": "Wikingów drakkar",
+          "word": "Drakkar",
           "hints": [
             "Statek",
             "Skandynawia",
@@ -24410,7 +24410,7 @@
         },
         {
           "hint": "Samemu",
-          "word": "Oszamotnienie",
+          "word": "Osamotnienie",
           "hints": [
             "Samemu",
             "Bez wsparcia",
@@ -32981,7 +32981,7 @@
         },
         {
           "hint": "Drobne krople",
-          "word": "Kapusniaczek",
+          "word": "Kapuśniaczek",
           "hints": [
             "Drobne krople",
             "Deszcz",
@@ -38808,15 +38808,6 @@
           ]
         },
         {
-          "hint": "Symbole",
-          "word": "Doble",
-          "hints": [
-            "Symbole",
-            "Refleks",
-            "Karty"
-          ]
-        },
-        {
           "hint": "Skakanie",
           "word": "Klasy",
           "hints": [
@@ -39813,6 +39804,15 @@
             "Opaska",
             "Jedzenie",
             "Impreza"
+          ]
+        },
+        {
+          "hint": "Ptak",
+          "word": "Flappy Bird",
+          "hints": [
+            "Ptak",
+            "Przeszkody",
+            "Telefon"
           ]
         }
       ]
@@ -49196,8 +49196,8 @@
           ]
         },
         {
-          "word": "Głośne igraszki",
           "hint": "Hałas",
+          "word": "Głośne igraszki",
           "hints": [
             "Hałas",
             "Sypialnia",
@@ -49250,8 +49250,8 @@
           ]
         },
         {
-          "word": "Pijany podryw",
           "hint": "Bar",
+          "word": "Pijany podryw",
           "hints": [
             "Bar",
             "Flirt",
@@ -49295,8 +49295,8 @@
           ]
         },
         {
-          "word": "Pijacka wpadka",
           "hint": "Poranek",
+          "word": "Pijacka wpadka",
           "hints": [
             "Poranek",
             "Wstyd",
@@ -49340,8 +49340,8 @@
           ]
         },
         {
-          "word": "Hasło stop",
           "hint": "Granice",
+          "word": "Hasło stop",
           "hints": [
             "Granice",
             "Ustalenia",
@@ -49385,8 +49385,8 @@
           ]
         },
         {
-          "word": "Czerwona bielizna",
           "hint": "Zmysłowo",
+          "word": "Czerwona bielizna",
           "hints": [
             "Zmysłowo",
             "Szuflada",
@@ -49448,8 +49448,8 @@
           ]
         },
         {
-          "word": "Pikantne pytania",
           "hint": "Dorośli",
+          "word": "Pikantne pytania",
           "hints": [
             "Dorośli",
             "Impreza",
@@ -49466,8 +49466,8 @@
           ]
         },
         {
-          "word": "Flirt w windzie",
           "hint": "Piętra",
+          "word": "Flirt w windzie",
           "hints": [
             "Piętra",
             "Spojrzenia",
@@ -49475,8 +49475,8 @@
           ]
         },
         {
-          "word": "Romantyczny weekend",
           "hint": "Hotel",
+          "word": "Romantyczny weekend",
           "hints": [
             "Hotel",
             "Para",
@@ -49484,8 +49484,8 @@
           ]
         },
         {
-          "word": "Nudes na grupie",
           "hint": "Czat",
+          "word": "Nudes na grupie",
           "hints": [
             "Czat",
             "Wpadka",
@@ -49502,8 +49502,8 @@
           ]
         },
         {
-          "word": "Krzyk rozkoszy",
           "hint": "Głos",
+          "word": "Krzyk rozkoszy",
           "hints": [
             "Głos",
             "Sypialnia",
@@ -49511,8 +49511,8 @@
           ]
         },
         {
-          "word": "Seksowny prezent",
           "hint": "Pudełko",
+          "word": "Seksowny prezent",
           "hints": [
             "Pudełko",
             "Walentynki",
@@ -49520,8 +49520,8 @@
           ]
         },
         {
-          "word": "Noc w hotelu",
           "hint": "Recepcja",
+          "word": "Noc w hotelu",
           "hints": [
             "Recepcja",
             "Pokój",
@@ -49529,8 +49529,8 @@
           ]
         },
         {
-          "word": "Tajny kochanek",
           "hint": "Telefon",
+          "word": "Tajny kochanek",
           "hints": [
             "Telefon",
             "Sekret",
@@ -49781,8 +49781,8 @@
           ]
         },
         {
-          "word": "Nudes na czacie",
           "hint": "Zdjęcie",
+          "word": "Nudes na czacie",
           "hints": [
             "Zdjęcie",
             "Telefon",
@@ -49889,8 +49889,8 @@
           ]
         },
         {
-          "word": "Stłumione jęki",
           "hint": "Hotel",
+          "word": "Stłumione jęki",
           "hints": [
             "Hotel",
             "Sąsiedzi",
@@ -49916,8 +49916,8 @@
           ]
         },
         {
-          "word": "Masaż erotyczny",
           "hint": "Oliwka",
+          "word": "Masaż erotyczny",
           "hints": [
             "Oliwka",
             "Dotyk",
@@ -49979,8 +49979,8 @@
           ]
         },
         {
-          "word": "Fantazje erotyczne",
           "hint": "Sekret",
+          "word": "Fantazje erotyczne",
           "hints": [
             "Sekret",
             "Pragnienia",
@@ -50060,8 +50060,8 @@
           ]
         },
         {
-          "word": "Podryw w klubie",
           "hint": "Impreza",
+          "word": "Podryw w klubie",
           "hints": [
             "Impreza",
             "Taniec",
@@ -50069,8 +50069,8 @@
           ]
         },
         {
-          "word": "Porzucona bielizna",
           "hint": "Kanapa",
+          "word": "Porzucona bielizna",
           "hints": [
             "Kanapa",
             "Poranek",
@@ -50087,8 +50087,8 @@
           ]
         },
         {
-          "word": "Erotyczne gadżety",
           "hint": "Szuflada",
+          "word": "Erotyczne gadżety",
           "hints": [
             "Szuflada",
             "Prezent",
@@ -50186,8 +50186,8 @@
           ]
         },
         {
-          "word": "Ślady zdrady",
           "hint": "Podejrzenia",
+          "word": "Ślady zdrady",
           "hints": [
             "Podejrzenia",
             "Partner",
@@ -50195,8 +50195,8 @@
           ]
         },
         {
-          "word": "Tinder w związku",
           "hint": "Aplikacja",
+          "word": "Tinder w związku",
           "hints": [
             "Aplikacja",
             "Zazdrość",
@@ -50204,8 +50204,8 @@
           ]
         },
         {
-          "word": "Ukryty romans",
           "hint": "Telefon",
+          "word": "Ukryty romans",
           "hints": [
             "Telefon",
             "Sekret",
@@ -50222,8 +50222,8 @@
           ]
         },
         {
-          "word": "Pijane karaoke",
           "hint": "Mikrofon",
+          "word": "Pijane karaoke",
           "hints": [
             "Mikrofon",
             "Śpiew",
@@ -50249,8 +50249,8 @@
           ]
         },
         {
-          "word": "Przerwany seks",
           "hint": "Dzwonek",
+          "word": "Przerwany seks",
           "hints": [
             "Dzwonek",
             "Sypialnia",
@@ -50267,8 +50267,8 @@
           ]
         },
         {
-          "word": "Niezręczne śniadanie",
           "hint": "Poranek",
+          "word": "Niezręczne śniadanie",
           "hints": [
             "Poranek",
             "Randka",
@@ -50276,8 +50276,8 @@
           ]
         },
         {
-          "word": "Skarpetka w łóżku",
           "hint": "Noc",
+          "word": "Skarpetka w łóżku",
           "hints": [
             "Noc",
             "Pościel",
@@ -50312,8 +50312,8 @@
           ]
         },
         {
-          "word": "Hotel dla par",
           "hint": "Nocleg",
+          "word": "Hotel dla par",
           "hints": [
             "Nocleg",
             "Weekend",
@@ -50321,8 +50321,8 @@
           ]
         },
         {
-          "word": "Fałszywe imię",
           "hint": "Klub",
+          "word": "Fałszywe imię",
           "hints": [
             "Klub",
             "Flirt",
@@ -50366,8 +50366,8 @@
           ]
         },
         {
-          "word": "Zepsuty suwak",
           "hint": "Kostium",
+          "word": "Zepsuty suwak",
           "hints": [
             "Kostium",
             "Zamek",
@@ -50375,8 +50375,8 @@
           ]
         },
         {
-          "word": "Seks on the Beach",
           "hint": "Drink",
+          "word": "Seks on the Beach",
           "hints": [
             "Drink",
             "Bar",
@@ -50384,8 +50384,8 @@
           ]
         },
         {
-          "word": "Szminka na koszuli",
           "hint": "Usta",
+          "word": "Szminka na koszuli",
           "hints": [
             "Usta",
             "Podejrzenia",
@@ -50393,8 +50393,8 @@
           ]
         },
         {
-          "word": "Głosówka od eksa",
           "hint": "Telefon",
+          "word": "Głosówka od eksa",
           "hints": [
             "Telefon",
             "Rozstanie",
@@ -50402,8 +50402,8 @@
           ]
         },
         {
-          "word": "Rozlany drink",
           "hint": "Impreza",
+          "word": "Rozlany drink",
           "hints": [
             "Impreza",
             "Plama",
@@ -50411,8 +50411,8 @@
           ]
         },
         {
-          "word": "Wymówka na randce",
           "hint": "Tekst",
+          "word": "Wymówka na randce",
           "hints": [
             "Tekst",
             "Odmowa",
@@ -50420,8 +50420,8 @@
           ]
         },
         {
-          "word": "Numer telefonu",
           "hint": "Kontakt",
+          "word": "Numer telefonu",
           "hints": [
             "Kontakt",
             "Cyfry",
@@ -50429,8 +50429,8 @@
           ]
         },
         {
-          "word": "Gadżet erotyczny",
           "hint": "Prezent",
+          "word": "Gadżet erotyczny",
           "hints": [
             "Prezent",
             "Szuflada",
