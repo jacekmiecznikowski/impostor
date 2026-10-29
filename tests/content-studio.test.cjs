@@ -84,3 +84,7 @@ const repo=sandbox.window.PartyjniakContent.repository;
   assert.equal((read('supabase/seed.sql').match(/on conflict \(game_id, locale\) do nothing/g)||[]).length,7);
   console.log('Content Studio schemas, seven-game import, Supabase public API and offline caching: OK');
 })().catch(error=>{console.error(error);process.exitCode=1;});
+
+assert.match(read('admin/index.html'), /id="extra-settings"/);
+assert.match(read('admin/studio.js'), /function renderExtra\(/);
+assert.match(sql, /'restore',restored,auth\.uid\(\)/);

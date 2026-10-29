@@ -163,7 +163,7 @@ function selectedList(){
 function listOf(cat) {return cat[TYPE[data.game]]||[];}
 function render(){
   if(!data)return;
-  renderGroups();renderEditor();renderPreview();
+  renderGroups();renderEditor();renderExtra();renderPreview();
 }
 function renderGroups(){
   const isDeck=data.game==='dzika-karta';
@@ -254,6 +254,31 @@ function renderEditor(){
     holder.append(row);
   });
 }
+function renderExtra(){
+  const view=$('extra-settings');view.hidden=!Array.isArray(data.discussionTips);
+  if(view.hidden)return;
+  const list=$('extra-list');list.replaceChildren();
+  data.discussionTips.forEach((tip,index)=>{
+    const row=create('div','item-row');
+    row.append(create('span','row-index',String(index+1).padStart(2,'0')));
+    const fields=create('div','item-fields');
+    fields.append(field('Tekst wskazówki',tip,value=>{data.discussionTips[index]=value;},{wide:true,multiline:true,maxlength:160}));
+    row.append(fields);
+    const actions=create('div','row-actions');
+    const button=create('button','remove','×');
+    button.type='button';button.title='Usuń wskazówkę';
+    button.addEventListener('click',()=>{
+      data.discussionTips.splice(index,1);markDirty();renderExtra();
+    });
+    actions.append(button);row.append(actions);list.append(row);
+  });
+}
+function addTip(){
+  if(!Array.isArray(data?.discussionTips))return;
+  if(data.discussionTips.length>=100)return showToast('Maksymalnie 100 wskazówek.',true);
+  data.discussionTips.push('Nowa wskazówka');markDirty();renderExtra();
+}
+
 function makeEntry(){
   const list=selectedList(),category=data.categories[activeCategory];
   if(data.game==='dzika-karta')return activeDeck==='prompts'?'Nowe pytanie: ____.' :'Nowa odpowiedź';
@@ -429,7 +454,8 @@ function bootstrap(){
   $$('group-search').addEventListener('input',renderGroups);
   $$('add-category').addEventListener('click',addCategory);
   $$('remove-category').addEventListener('click',removeCategory);
-  $$('add-item').addEventListener('click',addEntry);
+  $('add-item').addEventListener('click',addEntry);
+  $('add-tip').addEventListener('click',addTip);
   $$('save-btn').addEventListener('click',saveDraft);
   $$('publish-btn').addEventListener('click',publish);
   $$('export-btn').addEventListener('click',exportJson);

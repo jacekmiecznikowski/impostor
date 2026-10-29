@@ -255,13 +255,22 @@ create or replace function public.party_editor_restore(
 as $$
 declare
   restored jsonb;
+  next_revision integer;
 begin
   if not private.party_is_editor() then raise exception 'Brak uprawnień.' using errcode = '42501'; end if;
   select snapshot into restored from private.party_content_history
     where id=p_history_id and game_id=p_game and locale=p_locale;
   if restored is null then raise exception 'Nie znaleziono wersji archiwalnej.'; end if;
+  perform private.party_validate_document(p_game,p_locale,restored);
+  update public.party_content_documents
+    set draft=restored, revision=revision+1, updated_at=now(), updated_by=auth.uid()
+    where game_id=p_game and locale=p_locale and revision=p_revision
+    returning revision into next_revision;
+  if next_revision is null then raise exception 'Konflikt wersji. Odśwież szkic przed przywróceniem.'; end if;
+  insert into private.party_content_history(game_id,locale,revision,action,snapshot,changed_by)
+    values(p_game,p_locale,next_revision,'restore',restored,auth.uid());
   -- Restoring changes only the draft, never the live published content.
-  return public.party_editor_save(p_game,p_locale,restored,p_revision);
+  return next_revision;
 end;
 $$;
 revoke all on function public.party_editor_restore(text,text,bigint,integer) from public, anon, authenticated;
