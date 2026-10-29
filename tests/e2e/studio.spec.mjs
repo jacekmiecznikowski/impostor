@@ -66,6 +66,13 @@ test('Content Studio sends a free Magic Link, handles callback and opens seven g
   // Supabase follows the email link and redirects to the site's URL with
   // access/refresh tokens in #... . Browser JS must remove them immediately.
   await page.goto('/admin/#access_token=mock-jwt&refresh_token=mock-refresh&token_type=bearer&expires_in=3600&type=magiclink');
+  const callbackDiagnostics=await page.evaluate(()=>({
+    sessionExists: !!sessionStorage.getItem('partyjniak.studio.session.v1'),
+    hashCleared: !location.hash.includes('access_token'),
+    toast: document.querySelector('#toast')?.textContent,
+    studioHidden: document.querySelector('#studio-view')?.hidden
+  }));
+  console.log('Magic Link callback diagnostic:',JSON.stringify(callbackDiagnostics),'API routes:',JSON.stringify(requests.map(r=>r.path)));
   await expect(page.locator('#studio-view')).toBeVisible();
   expect(page.url()).not.toContain('access_token');
   expect(page.url()).not.toContain('refresh_token');
