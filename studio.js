@@ -256,7 +256,8 @@ function renderEditor(){
         field('Treść pytania',entry.text,value=>update('text',value),{wide:true,multiline:true,maxlength:180}));
     }else{
       fields.append(field(data.game==='ticking-bomb'?'Pytanie / polecenie':'Hasło',entry.word,value=>update('word',value),{wide:true,maxlength:80}));
-      if(data.game==='impostor'||data.game==='ticking-bomb')fields.append(field('Podpowiedź',entry.hint||'',value=>update('hint',value),{wide:true,maxlength:80}));
+      if(data.game==='impostor')fields.append(field('Podpowiedzi (rozdziel znakiem |)',(entry.hints||[entry.hint||'']).join(' | '),value=>{const hs=value.split('|').map(s=>s.trim()).filter(Boolean).slice(0,8);entry.hints=hs;entry.hint=hs[0]||'';},{wide:true,multiline:true,maxlength:640}));
+      if(data.game==='ticking-bomb')fields.append(field('Podpowiedź',entry.hint||'',value=>update('hint',value),{wide:true,maxlength:80}));
     }
     row.append(fields);
     const actions=create('div','row-actions');
