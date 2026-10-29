@@ -94,3 +94,12 @@ Priorytetem jest **grywalność przy stole**, nie liczba wyrazów. Hasła mają 
 ### Aktualizacja APK i offline
 
 Nowe hasła pobierane są przy uruchomieniu gry z internetem, po czym pozostają w pamięci podręcznej na rozgrywki bez sieci. **Sam import haseł nie wymaga nowego APK.** Na całkiem nowym urządzeniu, które nigdy nie pobrało opublikowanych treści, aplikacja nadal ma tylko niewielki lokalny pakiet startowy. Początkowe dane i automatycznie generowany seed opisane we wcześniejszych rozdziałach dotyczą właśnie tego pakietu, nie katalogu zdalnego.
+
+
+## Tykająca Bomba — rozszerzony zestaw zadań (2026-10-29)
+
+W opublikowanej bazie Supabase (`ticking-bomb/pl`, **rewizja 3**) jest **211 zadań w 8 kategoriach**. Rozszerzenie dodaje **96 nowych tematów** (po 12 na kategorię) i usuwa **7 niemal zdublowanych tematów** z poprzedniej wersji 122-zadaniowej. Każda kategoria zawiera od **25 do 28** zadań.
+
+Tykająca Bomba wymaga tematów, na które gracze mogą szybko podawać **wiele różnych przykładów**, a nie odgadywania jednego hasła. Dodano proste, jednoznaczne zbiory typu „Wymieniajcie gady”, „Wymieniajcie potrawy z makaronem”, „Wymieniajcie rzeczy w sypialni”, „Wymieniajcie rzeczy na kółkach”. Nie dodano trudnych scenek ani wąskich kategorii z jedną poprawną odpowiedzią.
+
+Kompletna, aktualna baza jest też w wersjonowanym pliku `content/ticking-bomb.pl.json` i wejdzie do kolejnej kompilacji APK jako pakiet lokalny. Dotychczasowe wydania pobierają aktualną wersję po uruchomieniu online i zapisują ją w pamięci podręcznej do grania offline. Test `tests/ticking-bomb-content.test.cjs` sprawdza liczbę kategorii, minimalną liczbę zadań na kategorię i brak zduplikowanych tematów.
