@@ -13,3 +13,17 @@ vm.createContext(sandbox);
 vm.runInContext(game.slice(game.indexOf('function getRoundWord()'),game.indexOf('function startGameRound()')),sandbox);
 assert.equal(sandbox.getRoundWord().hint,'Druga');
 console.log('Impostor randomized hints: OK');
+
+
+const expanded=JSON.parse(fs.readFileSync('content/impostor-expanded.pl.json','utf8'));
+assert.equal(expanded.categories.length,35);
+const all=expanded.categories.flatMap(c=>c.words);
+assert.ok(all.length>=1000);
+assert.ok(expanded.categories.every(c=>c.words.length>=25));
+assert.ok(all.every(w=>Array.isArray(w.hints)&&w.hints.length===3));
+assert.equal(new Set(all.map(w=>w.word.toLocaleLowerCase('pl'))).size,all.length);
+assert.ok(expanded.categories.some(c=>c.id==='dla_doroslych'&&c.words.length>=40));
+const setup=fs.readFileSync('assets/js/games/impostor/setup.js','utf8');
+assert.match(setup,/available\.filter\(id => id !== 'dla_doroslych'\)/);
+assert.match(setup,/window\.confirm\('Ta kategoria zawiera humor/);
+console.log('Expanded 18+ opt-in catalog: OK');
