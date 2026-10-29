@@ -30,10 +30,15 @@ function createBombPlayers(count, previousPlayers = bombState.players) {
     });
 }
 
+function getBombDefaultCategoryIds() {
+    // Adult prompts are strictly opt-in, including on fresh installs and reset.
+    return BOMB_CATEGORIES.filter(category => category.adult !== true).map(category => category.id);
+}
+
 function normalizeBombActiveCategories() {
     const available = new Set(BOMB_CATEGORIES.map(category => category.id));
     bombState.activeCategories = bombState.activeCategories.filter(id => available.has(id));
-    if (bombState.activeCategories.length === 0) bombState.activeCategories = [...available];
+    if (bombState.activeCategories.length === 0) bombState.activeCategories = getBombDefaultCategoryIds();
 }
 
 function persistBombSession() {
@@ -95,7 +100,7 @@ function resetBombSession() {
     bombState.players = [];
     bombState.mode = 'tracked';
     bombState.fusePreset = 'unstable';
-    bombState.activeCategories = BOMB_CATEGORIES.map(category => category.id);
+    bombState.activeCategories = getBombDefaultCategoryIds();
     bombState.roundNumber = 0;
     bombState.hasSavedSession = false;
     createBombPlayers(BOMB_DEFAULT_PLAYER_COUNT, []);
