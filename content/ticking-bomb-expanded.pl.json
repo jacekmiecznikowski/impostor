@@ -119,6 +119,494 @@
         {
           "hint": "",
           "word": "Wymieniajcie zwierzęta, które można zobaczyć w zoo."
+        },
+        {
+          "word": "Wymieniajcie zwierzęta roślinożerne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta wszystkożerne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta mięsożerne.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w stadach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące samotnie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta chronione w Polsce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta zagrożone wyginięciem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta występujące w bajkach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta występujące w filmach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta występujące w przysłowiach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z Australią.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z Azją.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z Ameryką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z Arktyką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z Antarktydą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w górach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące nad rzeką.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w jeziorach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w morzu.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na rafie koralowej.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na łące.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na drzewach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące pod ziemią.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na wsi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w miastach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w dżungli.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w tropikach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na stepach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na bagnach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące w zimnym klimacie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta żyjące na wyspach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta mieszkające w norach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta mieszkające w jaskiniach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta mieszkające w gniazdach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które budują gniazda.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które kopią nory.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które migrują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które polują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które jedzą owady.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które jedzą ryby.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które jedzą trawę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które jedzą owoce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają pióra.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają łuski.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają skorupę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają rogi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają kopyta.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają długie uszy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają długie szyje.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają długie ogony.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają krótkie nogi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają wielkie zęby.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają ostre pazury.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają wąsy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają kolce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają skrzydła.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają wielkie oczy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają duże nosy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają czułki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają płetwy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają szczypce.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają żądło.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają kły.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które są jadowite.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które są niebezpieczne dla człowieka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które są szybkie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które poruszają się powoli.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które dobrze się wspinają.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które dobrze nurkują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które umieją pływać.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które nie potrafią latać.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które umieją skakać.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które pełzają.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które biegają.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które latają w nocy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które żyją w parach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które wychowują młode.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które opiekują się potomstwem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które hibernują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które zmieniają kolor.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które zrzucają skórę.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które zrzucają poroże.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które wydają głośne dźwięki.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które piszczą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które warczą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które wyją.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które ćwierkają.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które syczą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które brzęczą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które szczekają.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mruczą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które śpiewają.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, których ludzie się boją.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które ludzie hodują.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można spotkać w parku.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można spotkać w ogrodzie.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można spotkać w lesie zimą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta aktywne latem.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które polują nocą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które jedzą nektar.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które zapylają kwiaty.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które żyją w koloniach.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które tworzą stada.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które budują tamy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które gromadzą zapasy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają futro.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają pancerz.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które potrafią udawać martwe.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które potrafią się kamuflować.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają pręgi.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają plamy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają białe futro.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają czarne futro.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które mają kolorowe pióra.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które są większe od człowieka.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które są mniejsze od myszy.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można trzymać w akwarium.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można trzymać w terrarium.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można zobaczyć na safari.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta, które można zobaczyć w oceanarium.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z farmą.",
+          "hint": ""
+        },
+        {
+          "word": "Wymieniajcie zwierzęta kojarzone z puszczą.",
+          "hint": ""
         }
       ]
     },
@@ -235,6 +723,498 @@
         {
           "hint": "",
           "word": "Mówcie słowa zaczynające się na „nie-”."
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „A”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „C”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „D”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „E”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „F”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „G”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „H”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „I”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „J”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „L”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „N”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „O”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „R”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „T”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „U”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „W”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „Z”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „Ł”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „Ś”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „Ż”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „Ć”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-ski”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-owa”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-enie”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-arka”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-ić”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-acz”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-ać”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-ość”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-ista”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-stwo”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-usz”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-ica”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa kończące się na „-isko”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ch”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „dz”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „dż”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „dź”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „szcz”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ż”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ą”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ę”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ł”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ń”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ć”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ó”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ś”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające „ź”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające podwójne „l”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające podwójne „n”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające dwie litery „o”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające dwie litery „e”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zawierające dwie litery „i”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „po-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „pod-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „nad-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „bez-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „od-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „wy-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „roz-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „prze-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „do-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „ob-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „przy-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „współ-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „naj-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „auto-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa zaczynające się na „super-”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z jedną sylabą.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z dwiema sylabami.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z czterema sylabami.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z pięcioma sylabami.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które mają dokładnie trzy litery.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które mają dokładnie cztery litery.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które mają dokładnie sześć liter.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które mają dokładnie siedem liter.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które mają więcej niż osiem liter.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z literą „a” na końcu.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z literą „o” na końcu.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa z literą „y” na końcu.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa bez litery „e”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa bez litery „i”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa bez litery „o”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, w których są dwie samogłoski.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, w których są trzy samogłoski.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które można powiedzieć na powitanie.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które można powiedzieć na pożegnanie.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które można powiedzieć z radości.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które można powiedzieć ze złości.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, którymi można kogoś pochwalić.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które opisują pogodę.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące kolory.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące smak.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące zapach.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące prędkość.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące wielkość.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące osobowość.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące wygląd.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące uczucia.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące dźwięk.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące ruch.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa opisujące temperaturę.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa, które mają przeciwieństwo.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „ładny”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „szybki”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „duży”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „mały”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „śmieszny”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „mądry”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o podobnym znaczeniu do „szczęśliwy”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o przeciwstawnym znaczeniu do „ciepły”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o przeciwstawnym znaczeniu do „głośny”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie słowa o przeciwstawnym znaczeniu do „łatwy”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie polskie przysłowia.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie polskie powiedzenia.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie zdrobnienia imion żeńskich.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie zdrobnienia imion męskich.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie imiona zaczynające się na „A”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie imiona zaczynające się na „J”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie imiona zaczynające się na „K”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie imiona zaczynające się na „P”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie imiona zaczynające się na „Z”.",
+          "hint": ""
+        },
+        {
+          "word": "Mówcie nazwiska znanych aktorów.",
+          "hint": ""
         }
       ]
     },
