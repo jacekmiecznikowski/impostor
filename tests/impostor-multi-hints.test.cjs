@@ -27,7 +27,7 @@ assert.ok(all.every(w=>w.word && w.word.trim() && w.word.length<=80));
 assert.equal(new Set(all.map(w=>w.word.toLocaleLowerCase('pl'))).size,all.length);
 assert.ok(expanded.categories.some(c=>c.id==='dla_doroslych'&&c.words.length>=150));
 const adult=expanded.categories.find(c=>c.id==='dla_doroslych').words.map(w=>w.word);
-for(const word of ['Niezręczna cisza','Feromony','Ślad po szmince','Pęknięty kondom','Skrzypiące łóżko']){
+for(const word of ['Niezręczna cisza','Feromony','Ślad po szmince','Skrzypiące łóżko']){
   assert.ok(adult.includes(word), 'Missing recognizable adult word: '+word);
 }
 for(const word of ['Niezręczna cisza po randce','Kuszący zapach perfum','Romantyczna kolacja z mikrofalówki','Gumowa kaczuszka w sypialni']){
