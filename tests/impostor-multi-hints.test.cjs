@@ -18,13 +18,15 @@ console.log('Impostor randomized hints: OK');
 const expanded=JSON.parse(fs.readFileSync('content/impostor-expanded.pl.json','utf8'));
 assert.equal(expanded.categories.length,35);
 const all=expanded.categories.flatMap(c=>c.words);
-assert.equal(all.length,1868);
-assert.ok(expanded.categories.every(c=>c.words.length>=45));
+assert.ok(all.length>=5250, 'Expected at least 150 words in each of 35 categories');
+assert.ok(expanded.categories.every(c=>c.words.length>=150));
 assert.ok(all.every(w=>Array.isArray(w.hints)&&w.hints.length===3));
 assert.ok(all.every(w=>w.hints.every(h=>typeof h==='string' && h.trim().length>0 && h.length<=80)));
 assert.ok(all.every(w=>new Set(w.hints.map(h=>h.trim().toLocaleLowerCase('pl'))).size===3));
 assert.ok(all.every(w=>w.word && w.word.trim() && w.word.length<=80));
-assert.equal(new Set(all.map(w=>w.word.toLocaleLowerCase('pl'))).size,all.length);
+assert.equal(new Set(all.map(w=>w.word.trim().toLocaleLowerCase('pl'))).size,all.length);
+assert.ok(all.every(w=>w.hints.every(h=>h.trim().toLocaleLowerCase('pl')!==w.word.trim().toLocaleLowerCase('pl'))));
+assert.equal(new Set(expanded.categories.map(c=>c.id)).size,expanded.categories.length);
 assert.ok(expanded.categories.some(c=>c.id==='dla_doroslych'&&c.words.length>=150));
 const adult=expanded.categories.find(c=>c.id==='dla_doroslych').words.map(w=>w.word);
 for(const word of ['Niezręczna cisza','Feromony','Ślad po szmince','Skrzypiące łóżko']){
