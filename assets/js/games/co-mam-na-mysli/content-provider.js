@@ -47,12 +47,32 @@ function normalizeCoMamNaMysliContent(payload) {
 
 async function initializeCoMamNaMysliContent() {
     let content = CO_MAM_NA_MYSLI_FALLBACK_CONTENT;
+    // The historical 90-card file is preserved for the original seed.
+    // A new build ships all nine curated categories as smaller, editable files.
+    const offlineCategoryIds = [
+        'zwierzeta', 'zawody', 'jedzenie', 'miejsca', 'przedmioty',
+        'czynnosci', 'bohaterowie', 'sport_hobby', 'transport'
+    ];
     try {
-        const response = await fetch('./content/co-mam-na-mysli.pl.json', { cache: 'no-store' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        content = await response.json();
+        const categories = await Promise.all(offlineCategoryIds.map(async id => {
+            const response = await fetch(`./content/cmm-pack/${id}.json`, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}: ${id}`);
+            const category = await response.json();
+            if (category?.id !== id || !Array.isArray(category.words) || category.words.length < 150) {
+                throw new Error(`Nieprawidłowy pakiet lokalny: ${id}`);
+            }
+            return category;
+        }));
+        content = { schemaVersion: 1, game: 'co-mam-na-mysli', locale: 'pl', categories };
     } catch (error) {
-        console.warn('Nie udało się załadować pełnej bazy Co mam na myśli?. Używam paczki awaryjnej.', error);
+        console.warn('Nie udało się wczytać rozszerzonej paczki Co mam na myśli?.', error);
+        try {
+            const response = await fetch('./content/co-mam-na-mysli.pl.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            content = await response.json();
+        } catch (fallbackError) {
+            console.warn('Korzystam z awaryjnego zestawu 8 haseł.', fallbackError);
+        }
     }
 
     // Published remote content is optional. A missing server never breaks offline games.
