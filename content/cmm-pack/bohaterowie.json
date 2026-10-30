@@ -1,0 +1,458 @@
+{
+  "id": "bohaterowie",
+  "desc": "Kultowe postacie z bajek, filmów, książek i gier.",
+  "icon": "fa-wand-magic-sparkles",
+  "name": "Bajki i bohaterowie",
+  "words": [
+    {
+      "word": "Shrek"
+    },
+    {
+      "word": "Fiona"
+    },
+    {
+      "word": "Kot w Butach"
+    },
+    {
+      "word": "Osioł ze Shreka"
+    },
+    {
+      "word": "Ciastek ze Shreka"
+    },
+    {
+      "word": "Lord Farquaad"
+    },
+    {
+      "word": "Harry Potter"
+    },
+    {
+      "word": "Elsa"
+    },
+    {
+      "word": "Anna z Krainy Lodu"
+    },
+    {
+      "word": "Olaf"
+    },
+    {
+      "word": "Kristoff"
+    },
+    {
+      "word": "Sven"
+    },
+    {
+      "word": "Simba"
+    },
+    {
+      "word": "Mufasa"
+    },
+    {
+      "word": "Skaza"
+    },
+    {
+      "word": "Timon"
+    },
+    {
+      "word": "Pumba"
+    },
+    {
+      "word": "Hermiona Granger"
+    },
+    {
+      "word": "Ron Weasley"
+    },
+    {
+      "word": "Myszka Miki"
+    },
+    {
+      "word": "Myszka Minnie"
+    },
+    {
+      "word": "Kaczor Donald"
+    },
+    {
+      "word": "Kaczka Daisy"
+    },
+    {
+      "word": "Goofy"
+    },
+    {
+      "word": "Pluto"
+    },
+    {
+      "word": "Sknerus McKwacz"
+    },
+    {
+      "word": "Albus Dumbledore"
+    },
+    {
+      "word": "Lord Voldemort"
+    },
+    {
+      "word": "Kubuś Puchatek"
+    },
+    {
+      "word": "Prosiaczek"
+    },
+    {
+      "word": "Tygrysek"
+    },
+    {
+      "word": "Kłapouchy"
+    },
+    {
+      "word": "Gandalf"
+    },
+    {
+      "word": "Krzyś"
+    },
+    {
+      "word": "SpongeBob"
+    },
+    {
+      "word": "Patryk Rozgwiazda"
+    },
+    {
+      "word": "Skalmar"
+    },
+    {
+      "word": "Pan Krab"
+    },
+    {
+      "word": "Sandy"
+    },
+    {
+      "word": "Tom"
+    },
+    {
+      "word": "Jerry"
+    },
+    {
+      "word": "Scooby-Doo"
+    },
+    {
+      "word": "Kudłaty"
+    },
+    {
+      "word": "Frodo"
+    },
+    {
+      "word": "Darth Vader"
+    },
+    {
+      "word": "Yoda"
+    },
+    {
+      "word": "Bugs Bunny"
+    },
+    {
+      "word": "Kaczor Daffy"
+    },
+    {
+      "word": "Tweety"
+    },
+    {
+      "word": "Kot Sylwester"
+    },
+    {
+      "word": "Struś Pędziwiatr"
+    },
+    {
+      "word": "Kojot"
+    },
+    {
+      "word": "Spider-Man"
+    },
+    {
+      "word": "Garfield"
+    },
+    {
+      "word": "Batman"
+    },
+    {
+      "word": "Smerf Papa"
+    },
+    {
+      "word": "Smerfetka"
+    },
+    {
+      "word": "Gargamel"
+    },
+    {
+      "word": "Klakier"
+    },
+    {
+      "word": "Asteriks"
+    },
+    {
+      "word": "Obeliks"
+    },
+    {
+      "word": "Panoramiks"
+    },
+    {
+      "word": "Idefiks"
+    },
+    {
+      "word": "Kajko"
+    },
+    {
+      "word": "Kokosz"
+    },
+    {
+      "word": "Superman"
+    },
+    {
+      "word": "Pikachu"
+    },
+    {
+      "word": "Reksio"
+    },
+    {
+      "word": "Bolek"
+    },
+    {
+      "word": "Lolek"
+    },
+    {
+      "word": "Miś Uszatek"
+    },
+    {
+      "word": "Geralt z Rivii"
+    },
+    {
+      "word": "Krecik"
+    },
+    {
+      "word": "Pszczółka Maja"
+    },
+    {
+      "word": "Iron Man"
+    },
+    {
+      "word": "Tabaluga"
+    },
+    {
+      "word": "Baltazar Gąbka"
+    },
+    {
+      "word": "Smok Wawelski"
+    },
+    {
+      "word": "Czerwony Kapturek"
+    },
+    {
+      "word": "Hulk"
+    },
+    {
+      "word": "Kopciuszek"
+    },
+    {
+      "word": "Królewna Śnieżka"
+    },
+    {
+      "word": "Śpiąca Królewna"
+    },
+    {
+      "word": "Roszpunka"
+    },
+    {
+      "word": "Jaś"
+    },
+    {
+      "word": "Małgosia"
+    },
+    {
+      "word": "Pinokio"
+    },
+    {
+      "word": "Dżepetto"
+    },
+    {
+      "word": "Calineczka"
+    },
+    {
+      "word": "Mała Syrenka"
+    },
+    {
+      "word": "Ariel"
+    },
+    {
+      "word": "Mario"
+    },
+    {
+      "word": "Dżin z Aladyna"
+    },
+    {
+      "word": "Aladyn"
+    },
+    {
+      "word": "Dżasmina"
+    },
+    {
+      "word": "Dumbo"
+    },
+    {
+      "word": "Bambi"
+    },
+    {
+      "word": "Stitch"
+    },
+    {
+      "word": "Lilo"
+    },
+    {
+      "word": "Moana"
+    },
+    {
+      "word": "Maui"
+    },
+    {
+      "word": "Sonic"
+    },
+    {
+      "word": "Mulan"
+    },
+    {
+      "word": "Pocahontas"
+    },
+    {
+      "word": "Tarzan"
+    },
+    {
+      "word": "Piotruś Pan"
+    },
+    {
+      "word": "Dzwoneczek"
+    },
+    {
+      "word": "Kapitan Hak"
+    },
+    {
+      "word": "Wendy"
+    },
+    {
+      "word": "Alicja z Krainy Czarów"
+    },
+    {
+      "word": "Szalony Kapelusznik"
+    },
+    {
+      "word": "Królowa Kier"
+    },
+    {
+      "word": "Herkules z Disneya"
+    },
+    {
+      "word": "Loki"
+    },
+    {
+      "word": "Zeus"
+    },
+    {
+      "word": "Megara"
+    },
+    {
+      "word": "Merida Waleczna"
+    },
+    {
+      "word": "Ralph Demolka"
+    },
+    {
+      "word": "Wednesday Addams"
+    },
+    {
+      "word": "Baymax"
+    },
+    {
+      "word": "Hiro"
+    },
+    {
+      "word": "Chudy z Toy Story"
+    },
+    {
+      "word": "Buzz Astral"
+    },
+    {
+      "word": "Jessie z Toy Story"
+    },
+    {
+      "word": "Kapitan Ameryka"
+    },
+    {
+      "word": "Luigi"
+    },
+    {
+      "word": "Joker"
+    },
+    {
+      "word": "Nemo"
+    },
+    {
+      "word": "Marlin"
+    },
+    {
+      "word": "Dory"
+    },
+    {
+      "word": "Chewbacca"
+    },
+    {
+      "word": "Zygzak McQueen"
+    },
+    {
+      "word": "Złomek"
+    },
+    {
+      "word": "Sally Carrera"
+    },
+    {
+      "word": "Hagrid"
+    },
+    {
+      "word": "Miguel z Coco"
+    },
+    {
+      "word": "Hector z Coco"
+    },
+    {
+      "word": "Po"
+    },
+    {
+      "word": "Mistrz Shifu"
+    },
+    {
+      "word": "Tygrysica"
+    },
+    {
+      "word": "Kratos"
+    },
+    {
+      "word": "Gru"
+    },
+    {
+      "word": "Minionek Kevin"
+    },
+    {
+      "word": "Minionek Bob"
+    },
+    {
+      "word": "Minionek Stuart"
+    },
+    {
+      "word": "Ciri"
+    },
+    {
+      "word": "Sherlock Holmes"
+    },
+    {
+      "word": "Dobby"
+    },
+    {
+      "word": "Alex z Madagaskaru"
+    },
+    {
+      "word": "Marty z Madagaskaru"
+    }
+  ]
+}
