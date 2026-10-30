@@ -110,3 +110,16 @@ Nowy klient nie włącza 18+ przy starcie, resetowaniu gry, wznowieniu sesji bez
 Tematy projektowano pod szybką grę: każde pytanie powinno mieć wiele sensownych, różnych odpowiedzi. Przykłady: „Zwierzęta mieszkające w norach”, „Dania z ryżem”, „Rzeczy w hotelu” i „Rzeczy, które trudno wymówić”. Kategoria 18+ zawiera randki, relacje, dwuznaczny humor i pikantne sytuacje, ale nie wymaga od graczy osobistych zwierzeń.
 
 Testy w `tests/ticking-bomb-content.test.cjs` oraz `tests/ticking-bomb-state.test.cjs` pilnują liczebności, unikalności i bezpiecznego wyboru kategorii.
+
+
+## Co mam na myśli? — rozszerzona baza (2026-10-30)
+
+Gra używa krótkich haseł, które widzi reszta ekipy, a osoba z telefonem na czole musi odgadnąć. Nie używa automatycznych podpowiedzi z CMS — wskazówki opisują lub pokazują inni gracze.
+
+- **1350 unikalnych haseł w 9 kategoriach**, po 150 w każdej. Sześć istniejących kategorii rozbudowano, dodano trzy: **Bajki i bohaterowie**, **Sport i hobby**, **Transport i podróże**.
+- Baza opublikowana w Supabase jako `co-mam-na-mysli/pl` (rewizja **12**). Żaden wpis nie jest pusty ani dłuższy niż 80 znaków; hasła nie powtarzają się między kategoriami.
+- Nowy pakiet offline jest podzielony na `content/cmm-pack/<id>.json` (9 plików), ładowanych równolegle. **Nowe APK ma wszystkie 1350 haseł także przy pierwszym uruchomieniu bez internetu.**
+- Historyczny `content/co-mam-na-mysli.pl.json` ma nadal 90 haseł i pozostaje niezmieniony do generowania starego seeda Supabase oraz jako lokalny fallback. Awaryjna baza zawiera 8 haseł.
+- Stare APK, które nie mają nowego lokalnego pakietu, pobiorą 1350 haseł przy synchronizacji online i zachowają je w cache.
+
+Przy selekcji wymagamy łatwo rozpoznawalnych zwierząt, zawodów, dań, miejsc, przedmiotów, czynności, kultowych postaci oraz popularnych sportów i pojazdów. Unikamy wielowyrazowych historyjek i zbyt specjalistycznych terminów, które byłyby trudne do odgadnięcia przy grze na czas. Test `tests/co-mam-na-mysli-content.test.cjs` sprawdza 9×150, unikalność haseł, podstawową odgadywalność i obecność źródeł offline.
