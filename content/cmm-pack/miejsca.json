@@ -1,0 +1,458 @@
+{
+  "id": "miejsca",
+  "desc": "Miejsca, które łatwo pokazać lub opisać.",
+  "icon": "fa-location-dot",
+  "name": "Miejsca",
+  "words": [
+    {
+      "word": "Lotnisko"
+    },
+    {
+      "word": "Plaża"
+    },
+    {
+      "word": "Biblioteka"
+    },
+    {
+      "word": "Wesołe miasteczko"
+    },
+    {
+      "word": "Szpital"
+    },
+    {
+      "word": "Stadion"
+    },
+    {
+      "word": "Kino"
+    },
+    {
+      "word": "Las"
+    },
+    {
+      "word": "Restauracja"
+    },
+    {
+      "word": "Dworzec"
+    },
+    {
+      "word": "Siłownia"
+    },
+    {
+      "word": "Muzeum"
+    },
+    {
+      "word": "Kemping"
+    },
+    {
+      "word": "Basen"
+    },
+    {
+      "word": "Supermarket"
+    },
+    {
+      "word": "Akwarium"
+    },
+    {
+      "word": "Zoo"
+    },
+    {
+      "word": "Dworzec kolejowy"
+    },
+    {
+      "word": "Park"
+    },
+    {
+      "word": "Plac zabaw"
+    },
+    {
+      "word": "Ogród zoologiczny"
+    },
+    {
+      "word": "Ogród botaniczny"
+    },
+    {
+      "word": "Ogród"
+    },
+    {
+      "word": "Sad"
+    },
+    {
+      "word": "Łąka"
+    },
+    {
+      "word": "Pole"
+    },
+    {
+      "word": "Góra"
+    },
+    {
+      "word": "Szczyt góry"
+    },
+    {
+      "word": "Dolina"
+    },
+    {
+      "word": "Wodospad"
+    },
+    {
+      "word": "Jaskinia"
+    },
+    {
+      "word": "Pustynia"
+    },
+    {
+      "word": "Dżungla"
+    },
+    {
+      "word": "Bagno"
+    },
+    {
+      "word": "Rzeka"
+    },
+    {
+      "word": "Jezioro"
+    },
+    {
+      "word": "Morze"
+    },
+    {
+      "word": "Ocean"
+    },
+    {
+      "word": "Wyspa"
+    },
+    {
+      "word": "Półwysep"
+    },
+    {
+      "word": "Klif"
+    },
+    {
+      "word": "Wulkan"
+    },
+    {
+      "word": "Lodowiec"
+    },
+    {
+      "word": "Lodowisko"
+    },
+    {
+      "word": "Stok narciarski"
+    },
+    {
+      "word": "Wyciąg narciarski"
+    },
+    {
+      "word": "Schronisko górskie"
+    },
+    {
+      "word": "Schronisko dla zwierząt"
+    },
+    {
+      "word": "Gospodarstwo rolne"
+    },
+    {
+      "word": "Farma"
+    },
+    {
+      "word": "Stajnia"
+    },
+    {
+      "word": "Obora"
+    },
+    {
+      "word": "Kurnik"
+    },
+    {
+      "word": "Pasieka"
+    },
+    {
+      "word": "Winnica"
+    },
+    {
+      "word": "Plantacja herbaty"
+    },
+    {
+      "word": "Szklarnia"
+    },
+    {
+      "word": "Altana"
+    },
+    {
+      "word": "Domek letniskowy"
+    },
+    {
+      "word": "Namiot"
+    },
+    {
+      "word": "Pole namiotowe"
+    },
+    {
+      "word": "Hotel"
+    },
+    {
+      "word": "Hostel"
+    },
+    {
+      "word": "Pensjonat"
+    },
+    {
+      "word": "Apartament"
+    },
+    {
+      "word": "Dom"
+    },
+    {
+      "word": "Mieszkanie"
+    },
+    {
+      "word": "Willa"
+    },
+    {
+      "word": "Blok mieszkalny"
+    },
+    {
+      "word": "Kamienica"
+    },
+    {
+      "word": "Pałac"
+    },
+    {
+      "word": "Zamek"
+    },
+    {
+      "word": "Twierdza"
+    },
+    {
+      "word": "Latarnia morska"
+    },
+    {
+      "word": "Port"
+    },
+    {
+      "word": "Marina"
+    },
+    {
+      "word": "Molo"
+    },
+    {
+      "word": "Targowisko"
+    },
+    {
+      "word": "Bazar"
+    },
+    {
+      "word": "Piekarnia"
+    },
+    {
+      "word": "Cukiernia"
+    },
+    {
+      "word": "Kawiarnia"
+    },
+    {
+      "word": "Pizzeria"
+    },
+    {
+      "word": "Bar"
+    },
+    {
+      "word": "Pub"
+    },
+    {
+      "word": "Klub nocny"
+    },
+    {
+      "word": "Dyskoteka"
+    },
+    {
+      "word": "Teatr"
+    },
+    {
+      "word": "Opera"
+    },
+    {
+      "word": "Filharmonia"
+    },
+    {
+      "word": "Galeria sztuki"
+    },
+    {
+      "word": "Sala koncertowa"
+    },
+    {
+      "word": "Sala kinowa"
+    },
+    {
+      "word": "Studio nagrań"
+    },
+    {
+      "word": "Studio telewizyjne"
+    },
+    {
+      "word": "Cyrk"
+    },
+    {
+      "word": "Amfiteatr"
+    },
+    {
+      "word": "Park linowy"
+    },
+    {
+      "word": "Park trampolin"
+    },
+    {
+      "word": "Kręgielnia"
+    },
+    {
+      "word": "Escape room"
+    },
+    {
+      "word": "Salon gier"
+    },
+    {
+      "word": "Kasyno"
+    },
+    {
+      "word": "Kort tenisowy"
+    },
+    {
+      "word": "Boisko piłkarskie"
+    },
+    {
+      "word": "Hala sportowa"
+    },
+    {
+      "word": "Skatepark"
+    },
+    {
+      "word": "Tor wyścigowy"
+    },
+    {
+      "word": "Tor gokartowy"
+    },
+    {
+      "word": "Tor saneczkowy"
+    },
+    {
+      "word": "Rampa skate"
+    },
+    {
+      "word": "Szkoła"
+    },
+    {
+      "word": "Przedszkole"
+    },
+    {
+      "word": "Uniwersytet"
+    },
+    {
+      "word": "Akademik"
+    },
+    {
+      "word": "Sala lekcyjna"
+    },
+    {
+      "word": "Stołówka"
+    },
+    {
+      "word": "Kantyna"
+    },
+    {
+      "word": "Gabinet lekarski"
+    },
+    {
+      "word": "Gabinet dentystyczny"
+    },
+    {
+      "word": "Apteka"
+    },
+    {
+      "word": "Laboratorium"
+    },
+    {
+      "word": "Posterunek policji"
+    },
+    {
+      "word": "Remiza strażacka"
+    },
+    {
+      "word": "Ratusz"
+    },
+    {
+      "word": "Urząd pocztowy"
+    },
+    {
+      "word": "Bank"
+    },
+    {
+      "word": "Bankomat"
+    },
+    {
+      "word": "Sąd"
+    },
+    {
+      "word": "Więzienie"
+    },
+    {
+      "word": "Koszary"
+    },
+    {
+      "word": "Kościół"
+    },
+    {
+      "word": "Katedra"
+    },
+    {
+      "word": "Kaplica"
+    },
+    {
+      "word": "Cmentarz"
+    },
+    {
+      "word": "Rynek miejski"
+    },
+    {
+      "word": "Plac miejski"
+    },
+    {
+      "word": "Rondo"
+    },
+    {
+      "word": "Skrzyżowanie"
+    },
+    {
+      "word": "Tunel"
+    },
+    {
+      "word": "Most"
+    },
+    {
+      "word": "Wiadukt"
+    },
+    {
+      "word": "Przejście podziemne"
+    },
+    {
+      "word": "Parking"
+    },
+    {
+      "word": "Stacja benzynowa"
+    },
+    {
+      "word": "Myjnia samochodowa"
+    },
+    {
+      "word": "Warsztat samochodowy"
+    },
+    {
+      "word": "Salon samochodowy"
+    },
+    {
+      "word": "Przystanek autobusowy"
+    },
+    {
+      "word": "Stacja metra"
+    }
+  ]
+}
