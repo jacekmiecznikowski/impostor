@@ -1,0 +1,458 @@
+{
+  "id": "jedzenie",
+  "desc": "Dania, przekąski i produkty.",
+  "icon": "fa-utensils",
+  "name": "Jedzenie",
+  "words": [
+    {
+      "word": "Pizza"
+    },
+    {
+      "word": "Pierogi"
+    },
+    {
+      "word": "Sushi"
+    },
+    {
+      "word": "Arbuz"
+    },
+    {
+      "word": "Popcorn"
+    },
+    {
+      "word": "Rosół"
+    },
+    {
+      "word": "Naleśniki"
+    },
+    {
+      "word": "Lody"
+    },
+    {
+      "word": "Kebab"
+    },
+    {
+      "word": "Ogórek"
+    },
+    {
+      "word": "Pączek"
+    },
+    {
+      "word": "Spaghetti"
+    },
+    {
+      "word": "Ser"
+    },
+    {
+      "word": "Tost"
+    },
+    {
+      "word": "Czekolada"
+    },
+    {
+      "word": "Tort"
+    },
+    {
+      "word": "Gofr"
+    },
+    {
+      "word": "Budyń"
+    },
+    {
+      "word": "Kiszone ogórki"
+    },
+    {
+      "word": "Hamburger"
+    },
+    {
+      "word": "Cheeseburger"
+    },
+    {
+      "word": "Hot dog"
+    },
+    {
+      "word": "Frytki"
+    },
+    {
+      "word": "Zapiekanka"
+    },
+    {
+      "word": "Lasagne"
+    },
+    {
+      "word": "Risotto"
+    },
+    {
+      "word": "Ravioli"
+    },
+    {
+      "word": "Tortellini"
+    },
+    {
+      "word": "Carbonara"
+    },
+    {
+      "word": "Pesto"
+    },
+    {
+      "word": "Gnocchi"
+    },
+    {
+      "word": "Bruschetta"
+    },
+    {
+      "word": "Calzone"
+    },
+    {
+      "word": "Focaccia"
+    },
+    {
+      "word": "Bagietka"
+    },
+    {
+      "word": "Croissant"
+    },
+    {
+      "word": "Drożdżówka"
+    },
+    {
+      "word": "Rogalik"
+    },
+    {
+      "word": "Bułka"
+    },
+    {
+      "word": "Chleb"
+    },
+    {
+      "word": "Chleb żytni"
+    },
+    {
+      "word": "Chleb tostowy"
+    },
+    {
+      "word": "Tortilla"
+    },
+    {
+      "word": "Burrito"
+    },
+    {
+      "word": "Taco"
+    },
+    {
+      "word": "Nachos"
+    },
+    {
+      "word": "Quesadilla"
+    },
+    {
+      "word": "Guacamole"
+    },
+    {
+      "word": "Hummus"
+    },
+    {
+      "word": "Falafel"
+    },
+    {
+      "word": "Shawarma"
+    },
+    {
+      "word": "Gyros"
+    },
+    {
+      "word": "Szaszłyk"
+    },
+    {
+      "word": "Grillowany kurczak"
+    },
+    {
+      "word": "Kurczak z rożna"
+    },
+    {
+      "word": "Kotlety mielone"
+    },
+    {
+      "word": "Kotlet schabowy"
+    },
+    {
+      "word": "Kotlety z kurczaka"
+    },
+    {
+      "word": "Gulasz"
+    },
+    {
+      "word": "Gołąbki"
+    },
+    {
+      "word": "Bigos"
+    },
+    {
+      "word": "Żurek"
+    },
+    {
+      "word": "Barszcz czerwony"
+    },
+    {
+      "word": "Zupa pomidorowa"
+    },
+    {
+      "word": "Zupa ogórkowa"
+    },
+    {
+      "word": "Zupa grzybowa"
+    },
+    {
+      "word": "Zupa dyniowa"
+    },
+    {
+      "word": "Chłodnik"
+    },
+    {
+      "word": "Flaki"
+    },
+    {
+      "word": "Kapuśniak"
+    },
+    {
+      "word": "Krupnik"
+    },
+    {
+      "word": "Grochówka"
+    },
+    {
+      "word": "Fasolka po bretońsku"
+    },
+    {
+      "word": "Placki ziemniaczane"
+    },
+    {
+      "word": "Kopytka"
+    },
+    {
+      "word": "Kluski śląskie"
+    },
+    {
+      "word": "Pyzy"
+    },
+    {
+      "word": "Leniwe pierogi"
+    },
+    {
+      "word": "Pierogi ruskie"
+    },
+    {
+      "word": "Pierogi z mięsem"
+    },
+    {
+      "word": "Racuchy"
+    },
+    {
+      "word": "Omlet"
+    },
+    {
+      "word": "Jajecznica"
+    },
+    {
+      "word": "Jajko sadzone"
+    },
+    {
+      "word": "Jajko na miękko"
+    },
+    {
+      "word": "Owsianka"
+    },
+    {
+      "word": "Kasza manna"
+    },
+    {
+      "word": "Płatki kukurydziane"
+    },
+    {
+      "word": "Granola"
+    },
+    {
+      "word": "Jogurt"
+    },
+    {
+      "word": "Kefir"
+    },
+    {
+      "word": "Maślanka"
+    },
+    {
+      "word": "Twaróg"
+    },
+    {
+      "word": "Oscypek"
+    },
+    {
+      "word": "Camembert"
+    },
+    {
+      "word": "Mozzarella"
+    },
+    {
+      "word": "Parmezan"
+    },
+    {
+      "word": "Feta"
+    },
+    {
+      "word": "Masło"
+    },
+    {
+      "word": "Śmietana"
+    },
+    {
+      "word": "Majonez"
+    },
+    {
+      "word": "Ketchup"
+    },
+    {
+      "word": "Musztarda"
+    },
+    {
+      "word": "Chrzan"
+    },
+    {
+      "word": "Dżem"
+    },
+    {
+      "word": "Miód"
+    },
+    {
+      "word": "Masło orzechowe"
+    },
+    {
+      "word": "Nutella"
+    },
+    {
+      "word": "Marmolada"
+    },
+    {
+      "word": "Burak"
+    },
+    {
+      "word": "Marchewka"
+    },
+    {
+      "word": "Pietruszka"
+    },
+    {
+      "word": "Cebula"
+    },
+    {
+      "word": "Czosnek"
+    },
+    {
+      "word": "Papryka"
+    },
+    {
+      "word": "Pomidor"
+    },
+    {
+      "word": "Sałata"
+    },
+    {
+      "word": "Rzodkiewka"
+    },
+    {
+      "word": "Kalafior"
+    },
+    {
+      "word": "Brokuł"
+    },
+    {
+      "word": "Cukinia"
+    },
+    {
+      "word": "Bakłażan"
+    },
+    {
+      "word": "Dynia"
+    },
+    {
+      "word": "Ziemniak"
+    },
+    {
+      "word": "Batat"
+    },
+    {
+      "word": "Kukurydza"
+    },
+    {
+      "word": "Groszek"
+    },
+    {
+      "word": "Fasola"
+    },
+    {
+      "word": "Soczewica"
+    },
+    {
+      "word": "Ciecierzyca"
+    },
+    {
+      "word": "Szpinak"
+    },
+    {
+      "word": "Awokado"
+    },
+    {
+      "word": "Banan"
+    },
+    {
+      "word": "Jabłko"
+    },
+    {
+      "word": "Gruszka"
+    },
+    {
+      "word": "Pomarańcza"
+    },
+    {
+      "word": "Mandarynka"
+    },
+    {
+      "word": "Cytryna"
+    },
+    {
+      "word": "Limonka"
+    },
+    {
+      "word": "Truskawka"
+    },
+    {
+      "word": "Malina"
+    },
+    {
+      "word": "Borówka"
+    },
+    {
+      "word": "Jagoda"
+    },
+    {
+      "word": "Winogrona"
+    },
+    {
+      "word": "Ananas"
+    },
+    {
+      "word": "Mango"
+    },
+    {
+      "word": "Kiwi"
+    },
+    {
+      "word": "Brzoskwinia"
+    },
+    {
+      "word": "Morela"
+    },
+    {
+      "word": "Śliwka"
+    }
+  ]
+}
