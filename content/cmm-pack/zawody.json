@@ -1,0 +1,458 @@
+{
+  "id": "zawody",
+  "desc": "Kto robi co na co dzień?",
+  "icon": "fa-user-tie",
+  "name": "Zawody",
+  "words": [
+    {
+      "word": "Strażak"
+    },
+    {
+      "word": "Dentysta"
+    },
+    {
+      "word": "Kucharz"
+    },
+    {
+      "word": "Fotograf"
+    },
+    {
+      "word": "Pilot"
+    },
+    {
+      "word": "Fryzjer"
+    },
+    {
+      "word": "Nauczyciel"
+    },
+    {
+      "word": "Ratownik"
+    },
+    {
+      "word": "Mechanik"
+    },
+    {
+      "word": "Piekarz"
+    },
+    {
+      "word": "Ogrodnik"
+    },
+    {
+      "word": "Weterynarz"
+    },
+    {
+      "word": "Architekt"
+    },
+    {
+      "word": "Listonosz"
+    },
+    {
+      "word": "Aktor"
+    },
+    {
+      "word": "Hydraulik"
+    },
+    {
+      "word": "Lekarz"
+    },
+    {
+      "word": "Pielęgniarka"
+    },
+    {
+      "word": "Farmaceuta"
+    },
+    {
+      "word": "Policjant"
+    },
+    {
+      "word": "Żołnierz"
+    },
+    {
+      "word": "Sędzia"
+    },
+    {
+      "word": "Adwokat"
+    },
+    {
+      "word": "Prawnik"
+    },
+    {
+      "word": "Prokurator"
+    },
+    {
+      "word": "Notariusz"
+    },
+    {
+      "word": "Psycholog"
+    },
+    {
+      "word": "Psychiatra"
+    },
+    {
+      "word": "Fizjoterapeuta"
+    },
+    {
+      "word": "Położna"
+    },
+    {
+      "word": "Chirurg"
+    },
+    {
+      "word": "Kardiolog"
+    },
+    {
+      "word": "Okulista"
+    },
+    {
+      "word": "Laryngolog"
+    },
+    {
+      "word": "Dermatolog"
+    },
+    {
+      "word": "Logopeda"
+    },
+    {
+      "word": "Dietetyk"
+    },
+    {
+      "word": "Trener personalny"
+    },
+    {
+      "word": "Instruktor pływania"
+    },
+    {
+      "word": "Instruktor jazdy"
+    },
+    {
+      "word": "Taksówkarz"
+    },
+    {
+      "word": "Kierowca autobusu"
+    },
+    {
+      "word": "Kierowca ciężarówki"
+    },
+    {
+      "word": "Motorniczy"
+    },
+    {
+      "word": "Maszynista"
+    },
+    {
+      "word": "Konduktor"
+    },
+    {
+      "word": "Stewardesa"
+    },
+    {
+      "word": "Kontroler lotów"
+    },
+    {
+      "word": "Kapitan statku"
+    },
+    {
+      "word": "Marynarz"
+    },
+    {
+      "word": "Rybak"
+    },
+    {
+      "word": "Nurek"
+    },
+    {
+      "word": "Kurier"
+    },
+    {
+      "word": "Dostawca pizzy"
+    },
+    {
+      "word": "Kelner"
+    },
+    {
+      "word": "Barman"
+    },
+    {
+      "word": "Barista"
+    },
+    {
+      "word": "Cukiernik"
+    },
+    {
+      "word": "Rzeźnik"
+    },
+    {
+      "word": "Sprzedawca"
+    },
+    {
+      "word": "Kasjer"
+    },
+    {
+      "word": "Księgowy"
+    },
+    {
+      "word": "Bankier"
+    },
+    {
+      "word": "Ekonomista"
+    },
+    {
+      "word": "Analityk"
+    },
+    {
+      "word": "Programista"
+    },
+    {
+      "word": "Informatyk"
+    },
+    {
+      "word": "Administrator sieci"
+    },
+    {
+      "word": "Grafik"
+    },
+    {
+      "word": "Ilustrator"
+    },
+    {
+      "word": "Projektant wnętrz"
+    },
+    {
+      "word": "Projektant mody"
+    },
+    {
+      "word": "Krawiec"
+    },
+    {
+      "word": "Szewc"
+    },
+    {
+      "word": "Jubiler"
+    },
+    {
+      "word": "Zegarmistrz"
+    },
+    {
+      "word": "Stolarz"
+    },
+    {
+      "word": "Cieśla"
+    },
+    {
+      "word": "Murarz"
+    },
+    {
+      "word": "Elektryk"
+    },
+    {
+      "word": "Spawacz"
+    },
+    {
+      "word": "Ślusarz"
+    },
+    {
+      "word": "Malarz pokojowy"
+    },
+    {
+      "word": "Dekarz"
+    },
+    {
+      "word": "Kominiarz"
+    },
+    {
+      "word": "Operator koparki"
+    },
+    {
+      "word": "Budowlaniec"
+    },
+    {
+      "word": "Geodeta"
+    },
+    {
+      "word": "Geolog"
+    },
+    {
+      "word": "Górnik"
+    },
+    {
+      "word": "Rolnik"
+    },
+    {
+      "word": "Hodowca"
+    },
+    {
+      "word": "Pszczelarz"
+    },
+    {
+      "word": "Leśniczy"
+    },
+    {
+      "word": "Drwal"
+    },
+    {
+      "word": "Florysta"
+    },
+    {
+      "word": "Kwiaciarz"
+    },
+    {
+      "word": "Opiekun zwierząt"
+    },
+    {
+      "word": "Treser psów"
+    },
+    {
+      "word": "Dziennikarz"
+    },
+    {
+      "word": "Reporter"
+    },
+    {
+      "word": "Prezenter telewizyjny"
+    },
+    {
+      "word": "Spiker radiowy"
+    },
+    {
+      "word": "Pisarz"
+    },
+    {
+      "word": "Poeta"
+    },
+    {
+      "word": "Redaktor"
+    },
+    {
+      "word": "Tłumacz"
+    },
+    {
+      "word": "Lektor"
+    },
+    {
+      "word": "Bibliotekarz"
+    },
+    {
+      "word": "Archiwista"
+    },
+    {
+      "word": "Historyk"
+    },
+    {
+      "word": "Archeolog"
+    },
+    {
+      "word": "Astronom"
+    },
+    {
+      "word": "Biolog"
+    },
+    {
+      "word": "Chemik"
+    },
+    {
+      "word": "Fizyk"
+    },
+    {
+      "word": "Matematyk"
+    },
+    {
+      "word": "Naukowiec"
+    },
+    {
+      "word": "Laborant"
+    },
+    {
+      "word": "Polityk"
+    },
+    {
+      "word": "Dyplomata"
+    },
+    {
+      "word": "Samorządowiec"
+    },
+    {
+      "word": "Burmistrz"
+    },
+    {
+      "word": "Prezydent miasta"
+    },
+    {
+      "word": "Radny"
+    },
+    {
+      "word": "Dyrektor szkoły"
+    },
+    {
+      "word": "Pedagog"
+    },
+    {
+      "word": "Wykładowca"
+    },
+    {
+      "word": "Profesor"
+    },
+    {
+      "word": "Trener piłki nożnej"
+    },
+    {
+      "word": "Sędzia piłkarski"
+    },
+    {
+      "word": "Piłkarz"
+    },
+    {
+      "word": "Koszykarz"
+    },
+    {
+      "word": "Tenisista"
+    },
+    {
+      "word": "Bokser"
+    },
+    {
+      "word": "Tancerz"
+    },
+    {
+      "word": "Choreograf"
+    },
+    {
+      "word": "Piosenkarz"
+    },
+    {
+      "word": "Muzyk"
+    },
+    {
+      "word": "Perkusista"
+    },
+    {
+      "word": "Skrzypek"
+    },
+    {
+      "word": "Pianista"
+    },
+    {
+      "word": "Gitarzysta"
+    },
+    {
+      "word": "Kompozytor"
+    },
+    {
+      "word": "Dyrygent"
+    },
+    {
+      "word": "Reżyser"
+    },
+    {
+      "word": "Producent filmowy"
+    },
+    {
+      "word": "Operator kamery"
+    },
+    {
+      "word": "Dźwiękowiec"
+    },
+    {
+      "word": "Scenarzysta"
+    }
+  ]
+}
