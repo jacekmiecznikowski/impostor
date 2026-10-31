@@ -2,6 +2,21 @@
 
 **Partyjniak** to mobilna aplikacja webowa/PWA z grami imprezowymi na jeden telefon. Aktualna wersja zawiera siedem pełnych trybów: **Impostor**, **Tykająca Bomba**, **Naokoło**, **Co mam na myśli?**, **Trzy w Pięć**, **Synchronizacja** i **Dzika Karta**.
 
+## Content Studio (Supabase)
+
+Projekt zawiera również **panel webowy do zarządzania treścią wszystkich siedmiu gier** — `admin/`. Umożliwia edycję kategorii, kart, haseł, pytań, podpowiedzi, wersji roboczych, podglądu i publikowanie nowych zestawów. Baza to PostgreSQL w Supabase, z dostępem dla uprawnionych redaktorów i oddzielnym publicznym odczytem tylko opublikowanych danych.
+
+Pełna instrukcja: [docs/content-studio.md](docs/content-studio.md).
+
+**Panel online:** [Partyjniak Content Studio](https://jacekmiecznikowski.github.io/impostor/) — bezpłatny hosting GitHub Pages, baza Supabase Free.
+
+```bash
+npm run studio # lokalny podgląd panelu: http://127.0.0.1:4174
+node tools/generate-content-seed.mjs --check
+```
+
+**Baza Supabase Free działa i zawiera wszystkie 663 pozycje siedmiu gier.** Dostęp redaktora przygotowano dla `contact@swawole.studio`. Trzeba jeszcze zaprosić użytkownika przez Authentication i zweryfikować logowanie oraz publikowanie. PR #49 pozostaje weryfikowany i niescalony z `main`.
+
 ## Uruchomienie lokalne
 
 Wymagany jest Node 22+.

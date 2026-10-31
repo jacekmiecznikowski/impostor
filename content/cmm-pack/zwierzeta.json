@@ -1,0 +1,458 @@
+{
+  "id": "zwierzeta",
+  "desc": "Od domowych pupili po dzikie stworzenia.",
+  "icon": "fa-paw",
+  "name": "Zwierzęta",
+  "words": [
+    {
+      "word": "Pingwin"
+    },
+    {
+      "word": "Żyrafa"
+    },
+    {
+      "word": "Delfin"
+    },
+    {
+      "word": "Jeż"
+    },
+    {
+      "word": "Kangur"
+    },
+    {
+      "word": "Papuga"
+    },
+    {
+      "word": "Rekin"
+    },
+    {
+      "word": "Wiewiórka"
+    },
+    {
+      "word": "Panda"
+    },
+    {
+      "word": "Bocian"
+    },
+    {
+      "word": "Kameleon"
+    },
+    {
+      "word": "Foka"
+    },
+    {
+      "word": "Koala"
+    },
+    {
+      "word": "Sowa"
+    },
+    {
+      "word": "Hipopotam"
+    },
+    {
+      "word": "Alpaka"
+    },
+    {
+      "word": "Leniwiec"
+    },
+    {
+      "word": "Krokodyl"
+    },
+    {
+      "word": "Ośmiornica"
+    },
+    {
+      "word": "Kot"
+    },
+    {
+      "word": "Pies"
+    },
+    {
+      "word": "Koń"
+    },
+    {
+      "word": "Krowa"
+    },
+    {
+      "word": "Świnia"
+    },
+    {
+      "word": "Owca"
+    },
+    {
+      "word": "Koza"
+    },
+    {
+      "word": "Kura"
+    },
+    {
+      "word": "Kogut"
+    },
+    {
+      "word": "Kaczka"
+    },
+    {
+      "word": "Gęś"
+    },
+    {
+      "word": "Indyk"
+    },
+    {
+      "word": "Królik"
+    },
+    {
+      "word": "Chomik"
+    },
+    {
+      "word": "Świnka morska"
+    },
+    {
+      "word": "Mysz"
+    },
+    {
+      "word": "Szczur"
+    },
+    {
+      "word": "Osioł"
+    },
+    {
+      "word": "Muł"
+    },
+    {
+      "word": "Wielbłąd"
+    },
+    {
+      "word": "Lama"
+    },
+    {
+      "word": "Słoń"
+    },
+    {
+      "word": "Lew"
+    },
+    {
+      "word": "Tygrys"
+    },
+    {
+      "word": "Gepard"
+    },
+    {
+      "word": "Lampart"
+    },
+    {
+      "word": "Jaguar"
+    },
+    {
+      "word": "Pantera"
+    },
+    {
+      "word": "Ryś"
+    },
+    {
+      "word": "Wilk"
+    },
+    {
+      "word": "Lis"
+    },
+    {
+      "word": "Niedźwiedź"
+    },
+    {
+      "word": "Niedźwiedź polarny"
+    },
+    {
+      "word": "Łoś"
+    },
+    {
+      "word": "Jeleń"
+    },
+    {
+      "word": "Sarna"
+    },
+    {
+      "word": "Daniel"
+    },
+    {
+      "word": "Dzik"
+    },
+    {
+      "word": "Bizon"
+    },
+    {
+      "word": "Żubr"
+    },
+    {
+      "word": "Bawół"
+    },
+    {
+      "word": "Borsuk"
+    },
+    {
+      "word": "Wydra"
+    },
+    {
+      "word": "Bóbr"
+    },
+    {
+      "word": "Kuna"
+    },
+    {
+      "word": "Tchórz"
+    },
+    {
+      "word": "Szop pracz"
+    },
+    {
+      "word": "Skunks"
+    },
+    {
+      "word": "Nietoperz"
+    },
+    {
+      "word": "Kret"
+    },
+    {
+      "word": "Zając"
+    },
+    {
+      "word": "Lis polarny"
+    },
+    {
+      "word": "Rosomak"
+    },
+    {
+      "word": "Mors"
+    },
+    {
+      "word": "Orka"
+    },
+    {
+      "word": "Wieloryb"
+    },
+    {
+      "word": "Kaszalot"
+    },
+    {
+      "word": "Meduza"
+    },
+    {
+      "word": "Konik morski"
+    },
+    {
+      "word": "Rozgwiazda"
+    },
+    {
+      "word": "Krab"
+    },
+    {
+      "word": "Homar"
+    },
+    {
+      "word": "Krewetka"
+    },
+    {
+      "word": "Małż"
+    },
+    {
+      "word": "Ostryga"
+    },
+    {
+      "word": "Ślimak"
+    },
+    {
+      "word": "Żółw"
+    },
+    {
+      "word": "Żółw morski"
+    },
+    {
+      "word": "Jaszczurka"
+    },
+    {
+      "word": "Legwan"
+    },
+    {
+      "word": "Wąż"
+    },
+    {
+      "word": "Kobra"
+    },
+    {
+      "word": "Pyton"
+    },
+    {
+      "word": "Anakonda"
+    },
+    {
+      "word": "Aligator"
+    },
+    {
+      "word": "Żaba"
+    },
+    {
+      "word": "Ropucha"
+    },
+    {
+      "word": "Salamandra"
+    },
+    {
+      "word": "Traszka"
+    },
+    {
+      "word": "Płaszczka"
+    },
+    {
+      "word": "Murena"
+    },
+    {
+      "word": "Tuńczyk"
+    },
+    {
+      "word": "Łosoś"
+    },
+    {
+      "word": "Karp"
+    },
+    {
+      "word": "Szczupak"
+    },
+    {
+      "word": "Sum"
+    },
+    {
+      "word": "Pstrąg"
+    },
+    {
+      "word": "Śledź"
+    },
+    {
+      "word": "Dorsz"
+    },
+    {
+      "word": "Błazenek"
+    },
+    {
+      "word": "Pirania"
+    },
+    {
+      "word": "Jesiotr"
+    },
+    {
+      "word": "Świstak"
+    },
+    {
+      "word": "Suseł"
+    },
+    {
+      "word": "Świstak alpejski"
+    },
+    {
+      "word": "Szynszyla"
+    },
+    {
+      "word": "Kapibara"
+    },
+    {
+      "word": "Tapir"
+    },
+    {
+      "word": "Mrówkojad"
+    },
+    {
+      "word": "Lemur"
+    },
+    {
+      "word": "Goryl"
+    },
+    {
+      "word": "Szympans"
+    },
+    {
+      "word": "Orangutan"
+    },
+    {
+      "word": "Pawian"
+    },
+    {
+      "word": "Makak"
+    },
+    {
+      "word": "Gibon"
+    },
+    {
+      "word": "Zebra"
+    },
+    {
+      "word": "Antylopa"
+    },
+    {
+      "word": "Gazela"
+    },
+    {
+      "word": "Renifer"
+    },
+    {
+      "word": "Nosorożec"
+    },
+    {
+      "word": "Flaming"
+    },
+    {
+      "word": "Pelikan"
+    },
+    {
+      "word": "Tukan"
+    },
+    {
+      "word": "Dzięcioł"
+    },
+    {
+      "word": "Wróbel"
+    },
+    {
+      "word": "Gołąb"
+    },
+    {
+      "word": "Wrona"
+    },
+    {
+      "word": "Kruk"
+    },
+    {
+      "word": "Sroka"
+    },
+    {
+      "word": "Orzeł"
+    },
+    {
+      "word": "Jastrząb"
+    },
+    {
+      "word": "Sokół"
+    },
+    {
+      "word": "Kondor"
+    },
+    {
+      "word": "Łabędź"
+    },
+    {
+      "word": "Mewa"
+    },
+    {
+      "word": "Albatros"
+    },
+    {
+      "word": "Paw"
+    },
+    {
+      "word": "Bażant"
+    },
+    {
+      "word": "Kuropatwa"
+    },
+    {
+      "word": "Przepiórka"
+    }
+  ]
+}

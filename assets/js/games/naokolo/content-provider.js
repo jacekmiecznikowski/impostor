@@ -62,6 +62,14 @@ async function initializeNaokoloContent() {
         console.warn('Nie udało się załadować pełnej bazy Naokoło. Używam paczki awaryjnej.', error);
     }
 
+    // Published remote content is optional. A missing server never breaks offline games.
+    try {
+        const published = await contentRepository.loadRemote('naokolo', 'pl');
+        if (published) content = published;
+    } catch (error) {
+        console.warn('Nie udało się pobrać opublikowanej bazy naokolo.', error);
+    }
+
     try {
         NAOKOLO_CATEGORIES = normalizeNaokoloContent(content).categories;
     } catch (error) {

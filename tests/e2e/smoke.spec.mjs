@@ -205,12 +205,25 @@ test('all category screens share Impostor layout, filtering and bulk selection',
     expect(total).toBeGreaterThan(1);
     const secondLines = await grid.locator('.party-category-card .party-category-copy small').allTextContents();
     expect(secondLines).toHaveLength(total);
-    expect(secondLines.every(text => /^\d+ (haseł|pytań|kart|skal)$/.test(text.trim()))).toBe(true);
+    expect(secondLines.every(text => /^\d+ (haseł|pytań|kart|skal)$/.test(text.trim()) || /^18\+ • \d+ (pytań|haseł) • wybierz świadomie$/.test(text.trim()))).toBe(true);
 
     await options.getByRole('button', { name: 'Wyczyść' }).click();
     await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(1);
     await options.getByRole('button', { name: 'Wszystkie' }).click();
-    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total);
+    // Mature content is opt-in in Impostor, Tykająca Bomba and Co mam na myśli?.
+    const adultCount = ['Impostor', 'Tykająca Bomba', 'Co mam na myśli?'].includes(name) ? await allCards.filter({ hasText: '18+' }).count() : 0;
+    await expect(grid.locator('.party-category-card.is-selected')).toHaveCount(total - adultCount);
+    if (adultCount) {
+      const adultCard = allCards.filter({ hasText: '18+' });
+      await expect(adultCard).not.toHaveClass(/is-selected/);
+      // Impostor has a separate adult-content consent flow; Bomb selects directly.
+      if (name === 'Tykająca Bomba' || name === 'Co mam na myśli?') {
+        await adultCard.click();
+        await expect(adultCard).toHaveClass(/is-selected/);
+        await options.getByRole('button', { name: 'Wszystkie' }).click();
+        await expect(adultCard).not.toHaveClass(/is-selected/);
+      }
+    }
 
     const search = options.getByRole('searchbox', { name: 'Szukaj kategorii' });
     const firstTitle = await allCards.first().locator('.party-category-copy').textContent();

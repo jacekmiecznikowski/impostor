@@ -61,6 +61,14 @@ async function initializeSynchronizacjaContent() {
         console.warn('Nie udało się załadować pełnej bazy Synchronizacji. Używam paczki awaryjnej.', error);
     }
 
+    // Published remote content is optional. A missing server never breaks offline games.
+    try {
+        const published = await contentRepository.loadRemote('synchronizacja', 'pl');
+        if (published) content = published;
+    } catch (error) {
+        console.warn('Nie udało się pobrać opublikowanej bazy synchronizacja.', error);
+    }
+
     try {
         SYNCHRONIZACJA_CATEGORIES = normalizeSynchronizacjaContent(content).categories;
     } catch (error) {

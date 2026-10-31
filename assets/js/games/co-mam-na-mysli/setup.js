@@ -85,6 +85,7 @@ function selectCoMamNaMysliRoundTime(seconds) {
 
 function toggleCoMamNaMysliCategory(categoryId) {
     const id = String(categoryId || '');
+    if (!CO_MAM_NA_MYSLI_CATEGORIES.some(category => category.id === id)) return;
     const active = new Set(coMamNaMysliState.activeCategories);
     if (active.has(id)) {
         if (active.size <= 1) {
@@ -101,7 +102,7 @@ function toggleCoMamNaMysliCategory(categoryId) {
 }
 
 function setAllCoMamNaMysliCategories(select) {
-    const ids = CO_MAM_NA_MYSLI_CATEGORIES.map(category => category.id);
+    const ids = getDefaultCoMamNaMysliCategories();
     if (!ids.length) return;
     coMamNaMysliState.activeCategories = select ? ids : ids.slice(0, 1);
     renderCoMamNaMysliOptions();
@@ -135,7 +136,9 @@ function renderCoMamNaMysliOptions() {
         const title = document.createElement('strong');
         title.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.words.length} haseł`;
+        desc.textContent = category.adult === true
+            ? `18+ • ${category.words.length} haseł • wybierz świadomie`
+            : `${category.words.length} haseł`;
         copy.append(title, desc);
         const check = document.createElement('span');
         check.className = 'party-category-check cmm-category-check';

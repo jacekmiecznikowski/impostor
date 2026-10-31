@@ -1,6 +1,25 @@
 async function initializeImpostorRemoteContent() {
     const repository = window.PartyjniakContent?.repository;
     if (!repository) return false;
+    if (!repository.partyjniakMultiHints) {
+        const validate = repository.validate.bind(repository);
+        repository.validate = (source, game, locale) => {
+            const result = validate(source, game, locale);
+            if (game === 'impostor' && Array.isArray(source?.categories)) {
+                result.categories.forEach((category, index) => {
+                    const entries = source.categories[index]?.words || [];
+                    category.words.forEach((entry, entryIndex) => {
+                        const hints = entries[entryIndex]?.hints;
+                        entry.hints = Array.isArray(hints) && hints.length
+                            ? hints.filter(value => typeof value === 'string' && value.trim()).slice(0, 8)
+                            : [entry.hint].filter(Boolean);
+                    });
+                });
+            }
+            return result;
+        };
+        repository.partyjniakMultiHints = true;
+    }
 
     const payload = await repository.loadRemote('impostor', 'pl');
     if (!payload) return false;
@@ -16,7 +35,8 @@ async function initializeImpostorRemoteContent() {
         };
         nextWordDatabase[category.id] = category.words.map(entry => ({
             word: entry.word,
-            hint: entry.hint || 'Brak podpowiedzi'
+            hint: entry.hint || entry.hints?.[0] || 'Brak podpowiedzi',
+            hints: entry.hints || [entry.hint || 'Brak podpowiedzi']
         }));
     });
 

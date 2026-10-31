@@ -40,7 +40,9 @@ function getRoundWord() {
     if (available.length === 0) return null;
     const category = available[Math.floor(Math.random() * available.length)];
     const word = category.words[Math.floor(Math.random() * category.words.length)];
-    return word?.word ? { categoryKey: category.key, word: word.word, hint: word.hint || 'Brak podpowiedzi' } : null;
+    const hints = Array.isArray(word?.hints) ? word.hints.filter(h => typeof h === 'string' && h.trim()) : [];
+    const hint = hints.length ? hints[Math.floor(Math.random() * hints.length)] : (word?.hint || 'Brak podpowiedzi');
+    return word?.word ? { categoryKey: category.key, word: word.word, hint } : null;
 }
 
 function startGameRound() {

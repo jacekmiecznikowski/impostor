@@ -1,0 +1,458 @@
+{
+  "id": "transport",
+  "desc": "Pojazdy, środki transportu i rzeczy z podróży.",
+  "icon": "fa-car",
+  "name": "Transport i podróże",
+  "words": [
+    {
+      "word": "Samochód"
+    },
+    {
+      "word": "Samochód elektryczny"
+    },
+    {
+      "word": "Samochód sportowy"
+    },
+    {
+      "word": "Samochód terenowy"
+    },
+    {
+      "word": "Samochód wyścigowy"
+    },
+    {
+      "word": "Samochód dostawczy"
+    },
+    {
+      "word": "Samochód policyjny"
+    },
+    {
+      "word": "Samochód strażacki"
+    },
+    {
+      "word": "Karetka"
+    },
+    {
+      "word": "Taksówka"
+    },
+    {
+      "word": "Limuzyna"
+    },
+    {
+      "word": "Kabriolet"
+    },
+    {
+      "word": "Minivan"
+    },
+    {
+      "word": "Kamper"
+    },
+    {
+      "word": "Przyczepa kempingowa"
+    },
+    {
+      "word": "Przyczepa towarowa"
+    },
+    {
+      "word": "Ciężarówka"
+    },
+    {
+      "word": "Tir"
+    },
+    {
+      "word": "Cysterna"
+    },
+    {
+      "word": "Wywrotka"
+    },
+    {
+      "word": "Betoniarka"
+    },
+    {
+      "word": "Śmieciarka"
+    },
+    {
+      "word": "Laweta"
+    },
+    {
+      "word": "Dźwig samochodowy"
+    },
+    {
+      "word": "Pług śnieżny"
+    },
+    {
+      "word": "Traktor"
+    },
+    {
+      "word": "Kombajn"
+    },
+    {
+      "word": "Koparka"
+    },
+    {
+      "word": "Spychacz"
+    },
+    {
+      "word": "Walec drogowy"
+    },
+    {
+      "word": "Wózek widłowy"
+    },
+    {
+      "word": "Buldożer"
+    },
+    {
+      "word": "Autobus"
+    },
+    {
+      "word": "Autobus szkolny"
+    },
+    {
+      "word": "Autobus piętrowy"
+    },
+    {
+      "word": "Autokar"
+    },
+    {
+      "word": "Bus"
+    },
+    {
+      "word": "Minibus"
+    },
+    {
+      "word": "Trolejbus"
+    },
+    {
+      "word": "Tramwaj"
+    },
+    {
+      "word": "Metro"
+    },
+    {
+      "word": "Pociąg"
+    },
+    {
+      "word": "Pociąg osobowy"
+    },
+    {
+      "word": "Pociąg towarowy"
+    },
+    {
+      "word": "Pociąg ekspresowy"
+    },
+    {
+      "word": "Pociąg piętrowy"
+    },
+    {
+      "word": "Lokomotywa"
+    },
+    {
+      "word": "Wagon sypialny"
+    },
+    {
+      "word": "Kolejka górska"
+    },
+    {
+      "word": "Kolejka linowa"
+    },
+    {
+      "word": "Wyciąg krzesełkowy"
+    },
+    {
+      "word": "Rower"
+    },
+    {
+      "word": "Rower górski"
+    },
+    {
+      "word": "Rower szosowy"
+    },
+    {
+      "word": "Rower elektryczny"
+    },
+    {
+      "word": "Rower dziecięcy"
+    },
+    {
+      "word": "Rower tandem"
+    },
+    {
+      "word": "Rower cargo"
+    },
+    {
+      "word": "Rower wodny"
+    },
+    {
+      "word": "Hulajnoga"
+    },
+    {
+      "word": "Hulajnoga elektryczna"
+    },
+    {
+      "word": "Deskorolka elektryczna"
+    },
+    {
+      "word": "Rolki"
+    },
+    {
+      "word": "Wrotki"
+    },
+    {
+      "word": "Monocykl"
+    },
+    {
+      "word": "Motocykl"
+    },
+    {
+      "word": "Skuter"
+    },
+    {
+      "word": "Motorower"
+    },
+    {
+      "word": "Motocykl crossowy"
+    },
+    {
+      "word": "Motocykl sportowy"
+    },
+    {
+      "word": "Quad"
+    },
+    {
+      "word": "Gokart"
+    },
+    {
+      "word": "Segway"
+    },
+    {
+      "word": "Riksza"
+    },
+    {
+      "word": "Bryczka"
+    },
+    {
+      "word": "Dorożka"
+    },
+    {
+      "word": "Karoca"
+    },
+    {
+      "word": "Sanie"
+    },
+    {
+      "word": "Kulig"
+    },
+    {
+      "word": "Powóz"
+    },
+    {
+      "word": "Wóz drabiniasty"
+    },
+    {
+      "word": "Wózek dziecięcy"
+    },
+    {
+      "word": "Wózek inwalidzki"
+    },
+    {
+      "word": "Łódź"
+    },
+    {
+      "word": "Łódź wiosłowa"
+    },
+    {
+      "word": "Motorówka"
+    },
+    {
+      "word": "Żaglówka"
+    },
+    {
+      "word": "Jacht"
+    },
+    {
+      "word": "Katamaran"
+    },
+    {
+      "word": "Kajak"
+    },
+    {
+      "word": "Kanu"
+    },
+    {
+      "word": "Ponton"
+    },
+    {
+      "word": "Tratwa"
+    },
+    {
+      "word": "Prom"
+    },
+    {
+      "word": "Prom pasażerski"
+    },
+    {
+      "word": "Prom samochodowy"
+    },
+    {
+      "word": "Statek"
+    },
+    {
+      "word": "Statek wycieczkowy"
+    },
+    {
+      "word": "Kontenerowiec"
+    },
+    {
+      "word": "Tankowiec"
+    },
+    {
+      "word": "Lodołamacz"
+    },
+    {
+      "word": "Holownik"
+    },
+    {
+      "word": "Żaglowiec"
+    },
+    {
+      "word": "Okręt podwodny"
+    },
+    {
+      "word": "Skuter wodny"
+    },
+    {
+      "word": "Deska SUP"
+    },
+    {
+      "word": "Deska surfingowa"
+    },
+    {
+      "word": "Hydroplan"
+    },
+    {
+      "word": "Poduszkowiec"
+    },
+    {
+      "word": "Samolot"
+    },
+    {
+      "word": "Samolot pasażerski"
+    },
+    {
+      "word": "Samolot cargo"
+    },
+    {
+      "word": "Samolot odrzutowy"
+    },
+    {
+      "word": "Dwupłatowiec"
+    },
+    {
+      "word": "Szybowiec"
+    },
+    {
+      "word": "Helikopter"
+    },
+    {
+      "word": "Śmigłowiec ratunkowy"
+    },
+    {
+      "word": "Balon na gorące powietrze"
+    },
+    {
+      "word": "Sterowiec"
+    },
+    {
+      "word": "Dron"
+    },
+    {
+      "word": "Motolotnia"
+    },
+    {
+      "word": "Lotnia"
+    },
+    {
+      "word": "Paralotnia"
+    },
+    {
+      "word": "Spadochron"
+    },
+    {
+      "word": "Prom kosmiczny"
+    },
+    {
+      "word": "Satelita"
+    },
+    {
+      "word": "Łazik marsjański"
+    },
+    {
+      "word": "Fotel pasażera"
+    },
+    {
+      "word": "Pas bezpieczeństwa"
+    },
+    {
+      "word": "Poduszka powietrzna"
+    },
+    {
+      "word": "Kierownica"
+    },
+    {
+      "word": "Skrzynia biegów"
+    },
+    {
+      "word": "Pedał gazu"
+    },
+    {
+      "word": "Pedał hamulca"
+    },
+    {
+      "word": "Sprzęgło"
+    },
+    {
+      "word": "Bagażnik"
+    },
+    {
+      "word": "Maska samochodu"
+    },
+    {
+      "word": "Klapa bagażnika"
+    },
+    {
+      "word": "Szyba przednia"
+    },
+    {
+      "word": "Lusterko wsteczne"
+    },
+    {
+      "word": "Opona"
+    },
+    {
+      "word": "Koło zapasowe"
+    },
+    {
+      "word": "Felga"
+    },
+    {
+      "word": "Reflektor"
+    },
+    {
+      "word": "Kierunkowskaz"
+    },
+    {
+      "word": "Klakson"
+    },
+    {
+      "word": "Wycieraczka"
+    },
+    {
+      "word": "Silnik"
+    },
+    {
+      "word": "Akumulator"
+    },
+    {
+      "word": "Tłumik"
+    }
+  ]
+}

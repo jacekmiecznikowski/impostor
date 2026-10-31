@@ -49,6 +49,14 @@ async function initializeDzikaKartaContent() {
         console.warn('Nie udało się załadować pełnej bazy Dzikiej Karty. Używam paczki awaryjnej.', error);
     }
 
+    // Published remote content is optional. A missing server never breaks offline games.
+    try {
+        const published = await contentRepository.loadRemote('dzika-karta', 'pl');
+        if (published) payload = published;
+    } catch (error) {
+        console.warn('Nie udało się pobrać opublikowanej bazy dzika-karta.', error);
+    }
+
     try {
         const normalized = normalizeDzikaKartaContent(payload);
         DZIKA_KARTA_PROMPTS = normalized.prompts;

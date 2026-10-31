@@ -1,0 +1,459 @@
+{
+  "id": "adult",
+  "name": "18+ — Bez cenzury",
+  "desc": "Odważne hasła, pikantny humor i sytuacje tylko dla dorosłych. Wybierz świadomie.",
+  "icon": "fa-fire",
+  "adult": true,
+  "words": [
+    {
+      "word": "Seks"
+    },
+    {
+      "word": "Gra wstępna"
+    },
+    {
+      "word": "Orgazm"
+    },
+    {
+      "word": "Seks oralny"
+    },
+    {
+      "word": "Szybki numerek"
+    },
+    {
+      "word": "Pierwszy raz"
+    },
+    {
+      "word": "Namiętny pocałunek"
+    },
+    {
+      "word": "Francuski pocałunek"
+    },
+    {
+      "word": "Pieszczoty"
+    },
+    {
+      "word": "Malinka na szyi"
+    },
+    {
+      "word": "Prezerwatywa"
+    },
+    {
+      "word": "Pęknięty kondom"
+    },
+    {
+      "word": "Test ciążowy"
+    },
+    {
+      "word": "Antykoncepcja"
+    },
+    {
+      "word": "Tabletka dzień po"
+    },
+    {
+      "word": "Lubrykant"
+    },
+    {
+      "word": "Żel intymny"
+    },
+    {
+      "word": "Spóźniony okres"
+    },
+    {
+      "word": "Dwie kreski"
+    },
+    {
+      "word": "Nieplanowana ciąża"
+    },
+    {
+      "word": "Skrzypiące łóżko"
+    },
+    {
+      "word": "Pęknięte łóżko"
+    },
+    {
+      "word": "Łóżko wodne"
+    },
+    {
+      "word": "Kajdanki"
+    },
+    {
+      "word": "Opaska na oczy"
+    },
+    {
+      "word": "Świeca do masażu"
+    },
+    {
+      "word": "Olejek do masażu"
+    },
+    {
+      "word": "Masaż erotyczny"
+    },
+    {
+      "word": "Lustro w sypialni"
+    },
+    {
+      "word": "Cienkie ściany"
+    },
+    {
+      "word": "Stringi"
+    },
+    {
+      "word": "Pończochy"
+    },
+    {
+      "word": "Podwiązki"
+    },
+    {
+      "word": "Gorset"
+    },
+    {
+      "word": "Bielizna koronkowa"
+    },
+    {
+      "word": "Seksowna bielizna"
+    },
+    {
+      "word": "Rozpięty stanik"
+    },
+    {
+      "word": "Rozpięty rozporek"
+    },
+    {
+      "word": "Zgubiony stanik"
+    },
+    {
+      "word": "Bielizna na podłodze"
+    },
+    {
+      "word": "Wibrator"
+    },
+    {
+      "word": "Dildo"
+    },
+    {
+      "word": "Korek analny"
+    },
+    {
+      "word": "Pierścień wibracyjny"
+    },
+    {
+      "word": "Gadżet erotyczny"
+    },
+    {
+      "word": "Seks-shop"
+    },
+    {
+      "word": "Kamasutra"
+    },
+    {
+      "word": "Pejcz"
+    },
+    {
+      "word": "Bicz"
+    },
+    {
+      "word": "Lateks"
+    },
+    {
+      "word": "BDSM"
+    },
+    {
+      "word": "Dominacja"
+    },
+    {
+      "word": "Uległość"
+    },
+    {
+      "word": "Słowo bezpieczeństwa"
+    },
+    {
+      "word": "Fetysz"
+    },
+    {
+      "word": "Fetysz stóp"
+    },
+    {
+      "word": "Odgrywanie ról"
+    },
+    {
+      "word": "Erotyczna fantazja"
+    },
+    {
+      "word": "Taniec erotyczny"
+    },
+    {
+      "word": "Klaps w pupę"
+    },
+    {
+      "word": "Tinder"
+    },
+    {
+      "word": "Grindr"
+    },
+    {
+      "word": "Badoo"
+    },
+    {
+      "word": "OnlyFans"
+    },
+    {
+      "word": "Sexting"
+    },
+    {
+      "word": "Nudesy"
+    },
+    {
+      "word": "Nagie zdjęcie"
+    },
+    {
+      "word": "Pikantny SMS"
+    },
+    {
+      "word": "Przypadkowy nudes"
+    },
+    {
+      "word": "Seks przez telefon"
+    },
+    {
+      "word": "Zdrada"
+    },
+    {
+      "word": "Romans"
+    },
+    {
+      "word": "Kochanek"
+    },
+    {
+      "word": "Kochanka"
+    },
+    {
+      "word": "Sekretny romans"
+    },
+    {
+      "word": "Otwarty związek"
+    },
+    {
+      "word": "Swingersi"
+    },
+    {
+      "word": "Trójkąt miłosny"
+    },
+    {
+      "word": "Seks we troje"
+    },
+    {
+      "word": "Przygoda na jedną noc"
+    },
+    {
+      "word": "Flirt"
+    },
+    {
+      "word": "Podryw"
+    },
+    {
+      "word": "Tekst na podryw"
+    },
+    {
+      "word": "Randka w ciemno"
+    },
+    {
+      "word": "Speed dating"
+    },
+    {
+      "word": "Gorąca randka"
+    },
+    {
+      "word": "Niezręczna randka"
+    },
+    {
+      "word": "Pijany podryw"
+    },
+    {
+      "word": "Nieudany podryw"
+    },
+    {
+      "word": "Randka z aplikacji"
+    },
+    {
+      "word": "Wieczór kawalerski"
+    },
+    {
+      "word": "Wieczór panieński"
+    },
+    {
+      "word": "Striptiz"
+    },
+    {
+      "word": "Striptizer"
+    },
+    {
+      "word": "Striptizerka"
+    },
+    {
+      "word": "Taniec na rurze"
+    },
+    {
+      "word": "Klub go-go"
+    },
+    {
+      "word": "Lap dance"
+    },
+    {
+      "word": "Gra w butelkę"
+    },
+    {
+      "word": "Prawda czy wyzwanie"
+    },
+    {
+      "word": "Wpadka w sypialni"
+    },
+    {
+      "word": "Wpadka na randce"
+    },
+    {
+      "word": "Przerwany seks"
+    },
+    {
+      "word": "Rodzice za drzwiami"
+    },
+    {
+      "word": "SMS do byłej"
+    },
+    {
+      "word": "Pijacki SMS"
+    },
+    {
+      "word": "Kac moralny"
+    },
+    {
+      "word": "Wiadomość do złej osoby"
+    },
+    {
+      "word": "Drzwi bez zamka"
+    },
+    {
+      "word": "Sąsiedzi za ścianą"
+    },
+    {
+      "word": "Seks w samochodzie"
+    },
+    {
+      "word": "Seks pod prysznicem"
+    },
+    {
+      "word": "Seks na plaży"
+    },
+    {
+      "word": "Seks w hotelu"
+    },
+    {
+      "word": "Seks w windzie"
+    },
+    {
+      "word": "Seks w namiocie"
+    },
+    {
+      "word": "Hotel na godziny"
+    },
+    {
+      "word": "Plaża nudystów"
+    },
+    {
+      "word": "Klub swingersów"
+    },
+    {
+      "word": "Sauna dla nudystów"
+    },
+    {
+      "word": "Pożądanie"
+    },
+    {
+      "word": "Feromony"
+    },
+    {
+      "word": "Kuszące spojrzenie"
+    },
+    {
+      "word": "Szept do ucha"
+    },
+    {
+      "word": "Pocałunek w szyję"
+    },
+    {
+      "word": "Zmysłowy dotyk"
+    },
+    {
+      "word": "Zazdrość"
+    },
+    {
+      "word": "Scena zazdrości"
+    },
+    {
+      "word": "Miłosna wiadomość"
+    },
+    {
+      "word": "Sekretne wyznanie"
+    },
+    {
+      "word": "Film porno"
+    },
+    {
+      "word": "Pornografia"
+    },
+    {
+      "word": "Gwiazdor porno"
+    },
+    {
+      "word": "Trójkąt erotyczny"
+    },
+    {
+      "word": "Seksowny taniec"
+    },
+    {
+      "word": "Perfumy z feromonami"
+    },
+    {
+      "word": "Kąpiel we dwoje"
+    },
+    {
+      "word": "Romantyczna kąpiel"
+    },
+    {
+      "word": "Kolacja przy świecach"
+    },
+    {
+      "word": "Płatki róż"
+    },
+    {
+      "word": "Ślad po szmince"
+    },
+    {
+      "word": "Krzyk rozkoszy"
+    },
+    {
+      "word": "Stłumione jęki"
+    },
+    {
+      "word": "Klaps w tyłek"
+    },
+    {
+      "word": "Pijany telefon"
+    },
+    {
+      "word": "Zgubiona bielizna"
+    },
+    {
+      "word": "Niegrzeczna wiadomość"
+    },
+    {
+      "word": "Wstydliwa historia"
+    },
+    {
+      "word": "Czerwone policzki"
+    },
+    {
+      "word": "Przerwany pocałunek"
+    }
+  ]
+}

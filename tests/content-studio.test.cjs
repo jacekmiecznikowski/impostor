@@ -1,0 +1,159 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const { execFileSync } = require('node:child_process');
+const root = path.join(__dirname,'..');
+const read = p => fs.readFileSync(path.join(root,p),'utf8');
+const packs = ['co-mam-na-mysli','dzika-karta','naokolo','synchronizacja','ticking-bomb','trzy-w-piec'];
+const counts = { 'co-mam-na-mysli':90,'dzika-karta':165,impostor:114,naokolo:50,synchronizacja:48,'ticking-bomb':96,'trzy-w-piec':100 };
+const html=read('admin/index.html');
+const editor=read('admin/studio.js');
+const sql=read('supabase/migrations/20261029_content_studio.sql');
+for (const f of ['admin/studio.js','assets/js/shared/content-repository.js','assets/js/shared/content-config.js','tools/generate-content-seed.mjs']) {
+  execFileSync(process.execPath,['--check',path.join(root,f)],{stdio:'pipe'});
+}
+for (const text of ['party_editor_save','party_editor_publish','party_editor_restore','party_get_published','party_editor_history']) {
+  assert.ok(sql.includes('function public.'+text), 'Database RPC missing: '+text);
+}
+assert.match(sql,/enable row level security/g);
+assert.match(sql,/revoke all on table public\.party_content_documents from public, anon, authenticated/);
+assert.match(sql,/security definer set search_path = ''/);
+assert.match(sql,/private\.party_is_editor\(\)/);
+assert.doesNotMatch(html,/https?:\/\/.*(?:script|stylesheet)/);
+assert.match(html,/Content-Security-Policy/);
+assert.match(editor,/textContent =/);
+assert.doesNotMatch(editor,/\.innerHTML\s*=/);
+assert.doesNotMatch(editor,/service_role.*Authorization/i);
+
+let requested = [];
+let networkEnabled = true;
+const storage = new Map();
+const sandbox = {
+  window: {
+    location:{origin:'https://partyjniak.test'},
+    PARTYJNIAK_CONTENT_SUPABASE:{url:'https://test-project.supabase.co',publishableKey:'sb_publishable_demo'}
+  },
+  localStorage: {
+    getItem:k=>storage.get(k)||null,
+    setItem:(k,v)=>storage.set(k,v),
+    removeItem:k=>storage.delete(k)
+  },
+  URL, console, AbortController, setTimeout, clearTimeout,
+  fetch: async (url,opts) => {
+    if (!networkEnabled) throw new Error('offline');
+    requested.push({url,options:opts});
+    const {p_game}=JSON.parse(opts.body);
+    const payload=p_game==='impostor'?impostor:JSON.parse(read('content/'+p_game+'.pl.json'));
+    return {ok:true,json:async()=>payload};
+  }
+};
+const dataSrc=read('assets/js/games/impostor/data.js');
+const impre=vm.runInNewContext(dataSrc+'\n({WORD_DATABASE,CATEGORY_NAMES,DISCUSSION_TIPS})');
+const impostor={
+  schemaVersion:1,game:'impostor',locale:'pl',
+  categories:Object.entries(impre.WORD_DATABASE).map(([id,words])=>({id,name:impre.CATEGORY_NAMES[id].name,icon:impre.CATEGORY_NAMES[id].icon,desc:impre.CATEGORY_NAMES[id].desc,words})),
+  discussionTips:impre.DISCUSSION_TIPS
+};
+vm.createContext(sandbox);
+vm.runInContext(read('assets/js/shared/content-repository.js'),sandbox);
+const repo=sandbox.window.PartyjniakContent.repository;
+(async()=>{
+  for(const game of ['impostor',...packs]){
+    const data=game==='impostor'?impostor:JSON.parse(read('content/'+game+'.pl.json'));
+    const validated=repo.validate(data,game,'pl');
+    assert.equal(validated.game,game);
+    const count=validated.categories
+      ? validated.categories.reduce((n,c)=>n+(c.words||c.cards||c.scales||c.prompts).length,0)
+      : validated.prompts.length+validated.answers.length;
+    assert.equal(count,counts[game],game);
+    const remote=await repo.loadRemote(game,'pl',{force:true});
+    assert.ok(remote,game+' did not load remote document');
+  }
+  assert.equal(requested.length,7);
+  assert.ok(requested.every(r=>r.url.endsWith('/rest/v1/rpc/party_get_published')));
+  assert.ok(requested.every(r=>r.options.headers.apikey==='sb_publishable_demo'));
+  assert.ok(requested.every(r=>!Object.hasOwn(r.options.headers,'Authorization')), 'Publishable keys must never be sent as bearer JWTs');
+  networkEnabled=false;
+  const stale=await repo.loadRemote('impostor','pl',{force:true});
+  assert.equal(stale.categories.length,16,'Cached published data should survive offline');
+  assert.throws(()=>repo.validate({...impostor,categories:[]},'impostor','pl'));
+  assert.throws(()=>repo.validate({...impostor,game:'naokolo'},'impostor','pl'));
+  assert.throws(()=>repo.validate({...impostor,categories:[{id:'x',name:'X',icon:'fa-x" onclick',words:[{word:'a'}]}]},'impostor','pl'));
+  execFileSync(process.execPath,[path.join(root,'tools/generate-content-seed.mjs'),'--check'],{stdio:'pipe'});
+  assert.equal((read('supabase/seed.sql').match(/on conflict \(game_id, locale\) do nothing/g)||[]).length,7);
+  console.log('Content Studio schemas, seven-game import, Supabase public API and offline caching: OK');
+})().catch(error=>{console.error(error);process.exitCode=1;});
+
+assert.match(read('admin/index.html'), /id="extra-settings"/);
+assert.match(read('admin/studio.js'), /function renderExtra\(/);
+assert.match(sql, /'restore',restored,auth\.uid\(\)/);
+
+const allowlistSql=read('supabase/migrations/20261029_editor_email_allowlist.sql');
+assert.match(allowlistSql,/contact@swawole\.studio/);
+assert.match(allowlistSql,/email_confirmed_at is not null/);
+assert.match(allowlistSql,/enable row level security/);
+assert.match(read('admin/config.js'),/sb_publishable_/);
+assert.doesNotMatch(read('admin/config.js'),/sb_secret_|service_role/);
+assert.match(read('admin/studio.js'),/STUDIO_DEFAULTS/);
+assert.doesNotMatch(read('admin/studio.js'),/(?<!\$)\$\('(project-url|publishable-key|editor-email|add-item|add-tip)'\)/);
+
+
+
+// Prevent repeating the production '$$$ is not defined' login bug.
+assert.doesNotMatch(editor,/\$\$\$\(/, 'Only the defined $$ DOM lookup helper may be used');
+assert.doesNotMatch(editor,/(?<!\$)\$\('[a-z-]+'\)/, 'Bare $ helper is not defined');
+
+// Free Supabase mailer sends Magic Links. Tokens must be read from the URL
+// fragment and immediately removed, never left in browser history.
+assert.match(editor,/STUDIO_REDIRECT_URL = 'https:\/\/jacekmiecznikowski\.github\.io\/impostor\/'/);
+assert.match(editor,/function consumeMagicLinkCallback\(/);
+assert.match(editor,/history\.replaceState\(null,'',window\.location\.pathname\+window\.location\.search\)/);
+assert.match(editor,/auth\/v1\/otp\?redirect_to=/);
+assert.doesNotMatch(html,/id="otp-code"|id="verify-code"/);
+
+assert.match(editor,/addEventListener\('hashchange'/);
+
+// Expansion should not duplicate original content and should remain valid for all games.
+const expansion=JSON.parse(read('content/expansions/20261029-party-pack.pl.json'));
+assert.equal(expansion.schemaVersion,1);
+const gameIds=['impostor',...packs];
+assert.deepEqual(Object.keys(expansion.additions).sort(),gameIds.sort());
+let added=0;
+for(const gameId of gameIds){
+  const addition=expansion.additions[gameId];
+  if(gameId==='dzika-karta'){
+    for(const key of ['prompts','answers']){
+      const seen=new Set(JSON.parse(read('content/dzika-karta.pl.json'))[key].map(s=>s.trim().toLocaleLowerCase('pl')));
+      for(const x of addition[key]){
+        assert.ok(x.trim());
+        assert.ok(!seen.has(x.toLocaleLowerCase('pl')),'Duplicate '+gameId+' '+x);
+        seen.add(x.toLocaleLowerCase('pl'));
+        added++;
+      }
+    }
+    continue;
+  }
+  if(gameId==='impostor'){
+    for(const values of Object.values(addition)){
+      for(const item of values){assert.ok(item.word&&item.hint);added++;}
+    }
+    continue;
+  }
+  const doc=JSON.parse(read('content/'+gameId+'.pl.json'));
+  const field={naokolo:'cards',synchronizacja:'scales','trzy-w-piec':'prompts'}[gameId]||'words';
+  for(const cat of doc.categories){
+    assert.ok(Array.isArray(addition[cat.id]),'Unknown category '+gameId+'/'+cat.id);
+    const label=x=>field==='scales'?x.left+'|'+x.right:field==='prompts'?x.text:x.word;
+    const seen=new Set(cat[field].map(x=>label(x).toLocaleLowerCase('pl').trim()));
+    for(const item of addition[cat.id]){
+      const key=label(item).toLocaleLowerCase('pl').trim();
+      assert.ok(key.length>0);
+      assert.ok(!seen.has(key),'Duplicate '+gameId+'/'+cat.id+': '+key);
+      seen.add(key);
+      if(field==='cards')assert.ok(item.forbidden?.length>=3&&item.forbidden.length<=6);
+      added++;
+    }
+  }
+}
+assert.equal(added,197,'Unexpected expansion cardinality');

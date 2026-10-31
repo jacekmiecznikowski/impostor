@@ -1,0 +1,458 @@
+{
+  "id": "czynnosci",
+  "desc": "Ruchy i sytuacje idealne do zgadywania.",
+  "icon": "fa-person-running",
+  "name": "Czynności",
+  "words": [
+    {
+      "word": "Kichanie"
+    },
+    {
+      "word": "Tańczenie"
+    },
+    {
+      "word": "Gotowanie"
+    },
+    {
+      "word": "Pływanie"
+    },
+    {
+      "word": "Robienie selfie"
+    },
+    {
+      "word": "Pakowanie walizki"
+    },
+    {
+      "word": "Mycie zębów"
+    },
+    {
+      "word": "Jazda na rowerze"
+    },
+    {
+      "word": "Zasypianie"
+    },
+    {
+      "word": "Otwieranie prezentu"
+    },
+    {
+      "word": "Łowienie ryb"
+    },
+    {
+      "word": "Malowanie ściany"
+    },
+    {
+      "word": "Granie na gitarze"
+    },
+    {
+      "word": "Bieganie"
+    },
+    {
+      "word": "Robienie zakupów"
+    },
+    {
+      "word": "Ziewanie"
+    },
+    {
+      "word": "Wspinanie się"
+    },
+    {
+      "word": "Prasowanie"
+    },
+    {
+      "word": "Żonglowanie"
+    },
+    {
+      "word": "Wiosłowanie"
+    },
+    {
+      "word": "Skakanie"
+    },
+    {
+      "word": "Podskakiwanie"
+    },
+    {
+      "word": "Kucanie"
+    },
+    {
+      "word": "Klaskanie"
+    },
+    {
+      "word": "Machanie ręką"
+    },
+    {
+      "word": "Witanie się"
+    },
+    {
+      "word": "Żegnanie się"
+    },
+    {
+      "word": "Przytulanie"
+    },
+    {
+      "word": "Całowanie"
+    },
+    {
+      "word": "Uśmiechanie się"
+    },
+    {
+      "word": "Śmianie się"
+    },
+    {
+      "word": "Płakanie"
+    },
+    {
+      "word": "Krzyczenie"
+    },
+    {
+      "word": "Szeptanie"
+    },
+    {
+      "word": "Śpiewanie"
+    },
+    {
+      "word": "Gwizdanie"
+    },
+    {
+      "word": "Chrapanie"
+    },
+    {
+      "word": "Oddychanie"
+    },
+    {
+      "word": "Czkawka"
+    },
+    {
+      "word": "Kaszel"
+    },
+    {
+      "word": "Drapanie się"
+    },
+    {
+      "word": "Przeciąganie się"
+    },
+    {
+      "word": "Budzenie się"
+    },
+    {
+      "word": "Wstawanie z łóżka"
+    },
+    {
+      "word": "Ścielenie łóżka"
+    },
+    {
+      "word": "Mycie rąk"
+    },
+    {
+      "word": "Branie prysznica"
+    },
+    {
+      "word": "Kąpiel w wannie"
+    },
+    {
+      "word": "Czesanie włosów"
+    },
+    {
+      "word": "Golenie brody"
+    },
+    {
+      "word": "Malowanie paznokci"
+    },
+    {
+      "word": "Nakładanie makijażu"
+    },
+    {
+      "word": "Wiązanie butów"
+    },
+    {
+      "word": "Zapinanie kurtki"
+    },
+    {
+      "word": "Zakładanie skarpetek"
+    },
+    {
+      "word": "Wieszanie prania"
+    },
+    {
+      "word": "Pranie ubrań"
+    },
+    {
+      "word": "Składanie ubrań"
+    },
+    {
+      "word": "Odkurzanie"
+    },
+    {
+      "word": "Zamiatanie"
+    },
+    {
+      "word": "Mycie podłogi"
+    },
+    {
+      "word": "Mycie okien"
+    },
+    {
+      "word": "Ścieranie kurzu"
+    },
+    {
+      "word": "Wyrzucanie śmieci"
+    },
+    {
+      "word": "Zmywanie naczyń"
+    },
+    {
+      "word": "Wkładanie naczyń do zmywarki"
+    },
+    {
+      "word": "Nakrywanie do stołu"
+    },
+    {
+      "word": "Krojenie chleba"
+    },
+    {
+      "word": "Obieranie ziemniaków"
+    },
+    {
+      "word": "Krojenie cebuli"
+    },
+    {
+      "word": "Mieszanie zupy"
+    },
+    {
+      "word": "Smażenie jajek"
+    },
+    {
+      "word": "Pieczenie ciasta"
+    },
+    {
+      "word": "Ubijanie śmietany"
+    },
+    {
+      "word": "Wyciskanie cytryny"
+    },
+    {
+      "word": "Robienie kanapek"
+    },
+    {
+      "word": "Jedzenie zupy"
+    },
+    {
+      "word": "Picie herbaty"
+    },
+    {
+      "word": "Picie przez słomkę"
+    },
+    {
+      "word": "Próbowanie jedzenia"
+    },
+    {
+      "word": "Dmuchanie na gorącą zupę"
+    },
+    {
+      "word": "Otwieranie puszki"
+    },
+    {
+      "word": "Otwieranie słoika"
+    },
+    {
+      "word": "Nalewanie wody"
+    },
+    {
+      "word": "Wycieranie stołu"
+    },
+    {
+      "word": "Ostrzenie noża"
+    },
+    {
+      "word": "Przyprawianie obiadu"
+    },
+    {
+      "word": "Rozpalanie grilla"
+    },
+    {
+      "word": "Pieczenie kiełbasek"
+    },
+    {
+      "word": "Rozbijanie jajka"
+    },
+    {
+      "word": "Robienie naleśników"
+    },
+    {
+      "word": "Karmienie dziecka"
+    },
+    {
+      "word": "Przewijanie niemowlęcia"
+    },
+    {
+      "word": "Usypianie dziecka"
+    },
+    {
+      "word": "Kołysanie dziecka"
+    },
+    {
+      "word": "Spacerowanie"
+    },
+    {
+      "word": "Prowadzenie psa"
+    },
+    {
+      "word": "Karmienie kota"
+    },
+    {
+      "word": "Wyprowadzanie psa"
+    },
+    {
+      "word": "Głaskanie psa"
+    },
+    {
+      "word": "Rzucanie piłki"
+    },
+    {
+      "word": "Łapanie piłki"
+    },
+    {
+      "word": "Kopanie piłki"
+    },
+    {
+      "word": "Odbijanie piłki"
+    },
+    {
+      "word": "Rzucanie do kosza"
+    },
+    {
+      "word": "Gra w tenisa"
+    },
+    {
+      "word": "Gra w siatkówkę"
+    },
+    {
+      "word": "Gra w koszykówkę"
+    },
+    {
+      "word": "Jazda na hulajnodze"
+    },
+    {
+      "word": "Jazda na rolkach"
+    },
+    {
+      "word": "Jazda na łyżwach"
+    },
+    {
+      "word": "Jazda na nartach"
+    },
+    {
+      "word": "Jazda na snowboardzie"
+    },
+    {
+      "word": "Wspinaczka górska"
+    },
+    {
+      "word": "Skakanie na trampolinie"
+    },
+    {
+      "word": "Skakanie na skakance"
+    },
+    {
+      "word": "Kręcenie hula-hop"
+    },
+    {
+      "word": "Robienie pompek"
+    },
+    {
+      "word": "Robienie przysiadów"
+    },
+    {
+      "word": "Podnoszenie ciężarów"
+    },
+    {
+      "word": "Rozciąganie"
+    },
+    {
+      "word": "Medytowanie"
+    },
+    {
+      "word": "Uprawianie jogi"
+    },
+    {
+      "word": "Boksowanie"
+    },
+    {
+      "word": "Dopingowanie"
+    },
+    {
+      "word": "Kibicowanie"
+    },
+    {
+      "word": "Pompowanie roweru"
+    },
+    {
+      "word": "Naprawianie roweru"
+    },
+    {
+      "word": "Mycie samochodu"
+    },
+    {
+      "word": "Tankowanie samochodu"
+    },
+    {
+      "word": "Prowadzenie samochodu"
+    },
+    {
+      "word": "Parkowanie"
+    },
+    {
+      "word": "Cofanie samochodem"
+    },
+    {
+      "word": "Zmiana koła"
+    },
+    {
+      "word": "Pchanie samochodu"
+    },
+    {
+      "word": "Otwieranie parasola"
+    },
+    {
+      "word": "Zamykanie parasola"
+    },
+    {
+      "word": "Przechodzenie przez ulicę"
+    },
+    {
+      "word": "Czekanie na autobus"
+    },
+    {
+      "word": "Kupowanie biletu"
+    },
+    {
+      "word": "Kasowanie biletu"
+    },
+    {
+      "word": "Wsiadanie do pociągu"
+    },
+    {
+      "word": "Odprawa na lotnisku"
+    },
+    {
+      "word": "Zapinanie pasów"
+    },
+    {
+      "word": "Pakowanie plecaka"
+    },
+    {
+      "word": "Noszenie walizki"
+    },
+    {
+      "word": "Robienie zdjęć"
+    },
+    {
+      "word": "Nagrywanie filmu"
+    },
+    {
+      "word": "Pisanie SMS-a"
+    },
+    {
+      "word": "Rozmawianie przez telefon"
+    }
+  ]
+}

@@ -49,14 +49,24 @@ function normalizeBombPromptContent(content) {
 async function initializeTickingBombContent() {
     let localContent = BOMB_FALLBACK_CONTENT;
 
-    try {
-        const response = await fetch('./content/ticking-bomb.pl.json', { cache: 'no-store' });
-        if (response.ok) {
+    // The complete curated pack ships with new builds. Keep the small original
+    // pack as a fallback and as the unchanged historical Supabase seed.
+    for (const source of ['./content/ticking-bomb-expanded.pl.json', './content/ticking-bomb.pl.json']) {
+        try {
+            const response = await fetch(source, { cache: 'no-store' });
+            if (!response.ok) continue;
             const payload = await response.json();
             localContent = contentRepository.validate(payload, 'ticking-bomb', 'pl');
+            // Validation drops unknown CMS metadata. Restore the trusted opt-in
+            // marker from the bundled file only; remote documents cannot enable it.
+            if (payload.categories?.some(category => category.id === 'adult' && category.adult === true)) {
+                const adult = localContent.categories.find(category => category.id === 'adult');
+                if (adult) adult.adult = true;
+            }
+            break;
+        } catch (error) {
+            console.warn('Nie udało się wczytać lokalnej bazy Tykającej Bomby:', source, error);
         }
-    } catch (error) {
-        console.warn('Nie udało się wczytać lokalnej bazy Tykającej Bomby.', error);
     }
 
     let remoteContent = null;
@@ -64,7 +74,15 @@ async function initializeTickingBombContent() {
         remoteContent = await contentRepository.loadRemote('ticking-bomb', 'pl');
     } catch (_) {}
 
-    BOMB_CONTENT = normalizeBombPromptContent(remoteContent || localContent);
+    // Ship adult prompts only with app builds that explicitly support opt-in.
+    // Older installed clients still consume the safe, eight-category remote document.
+    const chosen = remoteContent || localContent;
+    const safeCategories = chosen.categories.filter(category => category.adult !== true && category.id !== 'adult');
+    const localAdult = localContent.categories.find(category => category.id === 'adult' && category.adult === true);
+    BOMB_CONTENT = normalizeBombPromptContent({
+        ...chosen,
+        categories: localAdult ? [...safeCategories, localAdult] : safeCategories
+    });
     BOMB_CATEGORIES = BOMB_CONTENT.categories || [];
     normalizeBombActiveCategories?.();
 }

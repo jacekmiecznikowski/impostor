@@ -1,0 +1,458 @@
+{
+  "id": "sport_hobby",
+  "desc": "Dyscypliny sportowe, gry i popularne zainteresowania.",
+  "icon": "fa-medal",
+  "name": "Sport i hobby",
+  "words": [
+    {
+      "word": "Piłka nożna"
+    },
+    {
+      "word": "Koszykówka"
+    },
+    {
+      "word": "Siatkówka"
+    },
+    {
+      "word": "Piłka ręczna"
+    },
+    {
+      "word": "Tenis"
+    },
+    {
+      "word": "Tenis stołowy"
+    },
+    {
+      "word": "Badminton"
+    },
+    {
+      "word": "Squash"
+    },
+    {
+      "word": "Padel"
+    },
+    {
+      "word": "Golf"
+    },
+    {
+      "word": "Minigolf"
+    },
+    {
+      "word": "Baseball"
+    },
+    {
+      "word": "Softball"
+    },
+    {
+      "word": "Futbol amerykański"
+    },
+    {
+      "word": "Rugby"
+    },
+    {
+      "word": "Hokej"
+    },
+    {
+      "word": "Hokej na trawie"
+    },
+    {
+      "word": "Hokej na lodzie"
+    },
+    {
+      "word": "Curling"
+    },
+    {
+      "word": "Łyżwiarstwo figurowe"
+    },
+    {
+      "word": "Łyżwiarstwo szybkie"
+    },
+    {
+      "word": "Short track"
+    },
+    {
+      "word": "Narciarstwo alpejskie"
+    },
+    {
+      "word": "Narciarstwo biegowe"
+    },
+    {
+      "word": "Skoki narciarskie"
+    },
+    {
+      "word": "Snowboard"
+    },
+    {
+      "word": "Biathlon"
+    },
+    {
+      "word": "Biegi narciarskie"
+    },
+    {
+      "word": "Saneczkarstwo"
+    },
+    {
+      "word": "Bobsleje"
+    },
+    {
+      "word": "Skeleton"
+    },
+    {
+      "word": "Kolarstwo"
+    },
+    {
+      "word": "Kolarstwo górskie"
+    },
+    {
+      "word": "Kolarstwo szosowe"
+    },
+    {
+      "word": "BMX"
+    },
+    {
+      "word": "Motocross"
+    },
+    {
+      "word": "Formuła 1"
+    },
+    {
+      "word": "Rajdy samochodowe"
+    },
+    {
+      "word": "Karting"
+    },
+    {
+      "word": "Żużel"
+    },
+    {
+      "word": "Bieganie maratonu"
+    },
+    {
+      "word": "Sprint"
+    },
+    {
+      "word": "Biegi przez płotki"
+    },
+    {
+      "word": "Bieg z przeszkodami"
+    },
+    {
+      "word": "Bieg na orientację"
+    },
+    {
+      "word": "Sztafeta"
+    },
+    {
+      "word": "Chód sportowy"
+    },
+    {
+      "word": "Skok w dal"
+    },
+    {
+      "word": "Skok wzwyż"
+    },
+    {
+      "word": "Trójskok"
+    },
+    {
+      "word": "Skok o tyczce"
+    },
+    {
+      "word": "Bieg górski"
+    },
+    {
+      "word": "Rzut dyskiem"
+    },
+    {
+      "word": "Pchnięcie kulą"
+    },
+    {
+      "word": "Wyścig na rolkach"
+    },
+    {
+      "word": "Gimnastyka artystyczna"
+    },
+    {
+      "word": "Gimnastyka sportowa"
+    },
+    {
+      "word": "Akrobatyka"
+    },
+    {
+      "word": "Parkour"
+    },
+    {
+      "word": "Trampolina sportowa"
+    },
+    {
+      "word": "Pływanie synchroniczne"
+    },
+    {
+      "word": "Skoki do wody"
+    },
+    {
+      "word": "Nurkowanie"
+    },
+    {
+      "word": "Żeglarstwo"
+    },
+    {
+      "word": "Windsurfing"
+    },
+    {
+      "word": "Kitesurfing"
+    },
+    {
+      "word": "Surfing"
+    },
+    {
+      "word": "Paddleboarding"
+    },
+    {
+      "word": "Kajakarstwo"
+    },
+    {
+      "word": "Wioślarstwo"
+    },
+    {
+      "word": "Rafting"
+    },
+    {
+      "word": "Wędkarstwo"
+    },
+    {
+      "word": "Kolarstwo torowe"
+    },
+    {
+      "word": "Piłka plażowa"
+    },
+    {
+      "word": "Piłka wodna"
+    },
+    {
+      "word": "Judo"
+    },
+    {
+      "word": "Karate"
+    },
+    {
+      "word": "Taekwondo"
+    },
+    {
+      "word": "Kickboxing"
+    },
+    {
+      "word": "Boks"
+    },
+    {
+      "word": "Zapasy"
+    },
+    {
+      "word": "Sumo"
+    },
+    {
+      "word": "MMA"
+    },
+    {
+      "word": "Capoeira"
+    },
+    {
+      "word": "Jiu-jitsu"
+    },
+    {
+      "word": "Aikido"
+    },
+    {
+      "word": "Kendo"
+    },
+    {
+      "word": "Kung-fu"
+    },
+    {
+      "word": "Jeździectwo"
+    },
+    {
+      "word": "Skoki przez przeszkody"
+    },
+    {
+      "word": "Polo"
+    },
+    {
+      "word": "Wyścigi konne"
+    },
+    {
+      "word": "Woltyżerka"
+    },
+    {
+      "word": "Wspinaczka sportowa"
+    },
+    {
+      "word": "Bouldering"
+    },
+    {
+      "word": "Wspinaczka skałkowa"
+    },
+    {
+      "word": "Wspinaczka na ściance"
+    },
+    {
+      "word": "Bieganie z psem"
+    },
+    {
+      "word": "Taniec towarzyski"
+    },
+    {
+      "word": "Taniec nowoczesny"
+    },
+    {
+      "word": "Balet"
+    },
+    {
+      "word": "Hip-hop"
+    },
+    {
+      "word": "Breakdance"
+    },
+    {
+      "word": "Salsa"
+    },
+    {
+      "word": "Tango"
+    },
+    {
+      "word": "Walc"
+    },
+    {
+      "word": "Zumba"
+    },
+    {
+      "word": "Aerobik"
+    },
+    {
+      "word": "Fitness"
+    },
+    {
+      "word": "Crossfit"
+    },
+    {
+      "word": "Pilates"
+    },
+    {
+      "word": "Joga"
+    },
+    {
+      "word": "Tai-chi"
+    },
+    {
+      "word": "Medytacja"
+    },
+    {
+      "word": "Nordic walking"
+    },
+    {
+      "word": "Trekking"
+    },
+    {
+      "word": "Hiking"
+    },
+    {
+      "word": "Turystyka górska"
+    },
+    {
+      "word": "Geocaching"
+    },
+    {
+      "word": "Skateboarding"
+    },
+    {
+      "word": "Jazda na deskorolce"
+    },
+    {
+      "word": "Jazda na wrotkach"
+    },
+    {
+      "word": "Jazda konna"
+    },
+    {
+      "word": "Szachy"
+    },
+    {
+      "word": "Warcaby"
+    },
+    {
+      "word": "Domino"
+    },
+    {
+      "word": "Brydż"
+    },
+    {
+      "word": "Poker"
+    },
+    {
+      "word": "Makao"
+    },
+    {
+      "word": "Remik"
+    },
+    {
+      "word": "Pasjans"
+    },
+    {
+      "word": "Scrabble"
+    },
+    {
+      "word": "Monopoly"
+    },
+    {
+      "word": "Catan"
+    },
+    {
+      "word": "Carcassonne"
+    },
+    {
+      "word": "Dixit"
+    },
+    {
+      "word": "Dobble"
+    },
+    {
+      "word": "Jenga"
+    },
+    {
+      "word": "Kalambury"
+    },
+    {
+      "word": "Twister"
+    },
+    {
+      "word": "Kółko i krzyżyk"
+    },
+    {
+      "word": "Państwa-miasta"
+    },
+    {
+      "word": "Gra w statki"
+    },
+    {
+      "word": "Kręgle"
+    },
+    {
+      "word": "Bilard"
+    },
+    {
+      "word": "Dart"
+    },
+    {
+      "word": "Rzutki"
+    },
+    {
+      "word": "Bule"
+    },
+    {
+      "word": "Kapsle"
+    },
+    {
+      "word": "Gra w klasy"
+    }
+  ]
+}

@@ -1,0 +1,458 @@
+{
+  "id": "przedmioty",
+  "desc": "Rzeczy z domu, ulicy i plecaka.",
+  "icon": "fa-box-open",
+  "name": "Przedmioty",
+  "words": [
+    {
+      "word": "Parasol"
+    },
+    {
+      "word": "Lodówka"
+    },
+    {
+      "word": "Odkurzacz"
+    },
+    {
+      "word": "Walizka"
+    },
+    {
+      "word": "Latarka"
+    },
+    {
+      "word": "Lustro"
+    },
+    {
+      "word": "Kask"
+    },
+    {
+      "word": "Pilot do telewizora"
+    },
+    {
+      "word": "Budzik"
+    },
+    {
+      "word": "Drabina"
+    },
+    {
+      "word": "Poduszka"
+    },
+    {
+      "word": "Nożyczki"
+    },
+    {
+      "word": "Plecak"
+    },
+    {
+      "word": "Suszarka"
+    },
+    {
+      "word": "Czajnik"
+    },
+    {
+      "word": "Mikser"
+    },
+    {
+      "word": "Śpiwór"
+    },
+    {
+      "word": "Szczoteczka do zębów"
+    },
+    {
+      "word": "Lornetka"
+    },
+    {
+      "word": "Deskorolka"
+    },
+    {
+      "word": "Telefon"
+    },
+    {
+      "word": "Smartfon"
+    },
+    {
+      "word": "Tablet"
+    },
+    {
+      "word": "Laptop"
+    },
+    {
+      "word": "Komputer"
+    },
+    {
+      "word": "Monitor"
+    },
+    {
+      "word": "Telewizor"
+    },
+    {
+      "word": "Radio"
+    },
+    {
+      "word": "Głośnik"
+    },
+    {
+      "word": "Słuchawki"
+    },
+    {
+      "word": "Mikrofon"
+    },
+    {
+      "word": "Kamera"
+    },
+    {
+      "word": "Aparat fotograficzny"
+    },
+    {
+      "word": "Statyw"
+    },
+    {
+      "word": "Konsola do gier"
+    },
+    {
+      "word": "Pad do konsoli"
+    },
+    {
+      "word": "Klawiatura"
+    },
+    {
+      "word": "Mysz komputerowa"
+    },
+    {
+      "word": "Drukarka"
+    },
+    {
+      "word": "Skaner"
+    },
+    {
+      "word": "Router"
+    },
+    {
+      "word": "Pendrive"
+    },
+    {
+      "word": "Dysk twardy"
+    },
+    {
+      "word": "Ładowarka"
+    },
+    {
+      "word": "Powerbank"
+    },
+    {
+      "word": "Kabel USB"
+    },
+    {
+      "word": "Przedłużacz"
+    },
+    {
+      "word": "Listwa zasilająca"
+    },
+    {
+      "word": "Lampka biurkowa"
+    },
+    {
+      "word": "Lampa podłogowa"
+    },
+    {
+      "word": "Żyrandol"
+    },
+    {
+      "word": "Żarówka"
+    },
+    {
+      "word": "Świeca"
+    },
+    {
+      "word": "Zapałki"
+    },
+    {
+      "word": "Zapalniczka"
+    },
+    {
+      "word": "Pochodnia"
+    },
+    {
+      "word": "Wentylator"
+    },
+    {
+      "word": "Klimatyzator"
+    },
+    {
+      "word": "Grzejnik"
+    },
+    {
+      "word": "Kaloryfer"
+    },
+    {
+      "word": "Termostat"
+    },
+    {
+      "word": "Termometr"
+    },
+    {
+      "word": "Waga łazienkowa"
+    },
+    {
+      "word": "Waga kuchenna"
+    },
+    {
+      "word": "Zegar ścienny"
+    },
+    {
+      "word": "Stoper"
+    },
+    {
+      "word": "Kalendarz"
+    },
+    {
+      "word": "Notes"
+    },
+    {
+      "word": "Długopis"
+    },
+    {
+      "word": "Ołówek"
+    },
+    {
+      "word": "Kredka"
+    },
+    {
+      "word": "Flamaster"
+    },
+    {
+      "word": "Marker"
+    },
+    {
+      "word": "Zakreślacz"
+    },
+    {
+      "word": "Gumka do mazania"
+    },
+    {
+      "word": "Temperówka"
+    },
+    {
+      "word": "Linijka"
+    },
+    {
+      "word": "Ekierka"
+    },
+    {
+      "word": "Cyrkiel"
+    },
+    {
+      "word": "Klej"
+    },
+    {
+      "word": "Taśma klejąca"
+    },
+    {
+      "word": "Zszywacz"
+    },
+    {
+      "word": "Dziurkacz"
+    },
+    {
+      "word": "Spinacz"
+    },
+    {
+      "word": "Segregator"
+    },
+    {
+      "word": "Koperta"
+    },
+    {
+      "word": "Znaczek pocztowy"
+    },
+    {
+      "word": "Pocztówka"
+    },
+    {
+      "word": "Książka"
+    },
+    {
+      "word": "Gazeta"
+    },
+    {
+      "word": "Czasopismo"
+    },
+    {
+      "word": "Plakat"
+    },
+    {
+      "word": "Mapa"
+    },
+    {
+      "word": "Globus"
+    },
+    {
+      "word": "Kompas"
+    },
+    {
+      "word": "Lupa"
+    },
+    {
+      "word": "Mikroskop"
+    },
+    {
+      "word": "Teleskop"
+    },
+    {
+      "word": "Stetoskop"
+    },
+    {
+      "word": "Strzykawka"
+    },
+    {
+      "word": "Bandaż"
+    },
+    {
+      "word": "Plaster"
+    },
+    {
+      "word": "Apteczka"
+    },
+    {
+      "word": "Maseczka"
+    },
+    {
+      "word": "Rękawiczki"
+    },
+    {
+      "word": "Okulary"
+    },
+    {
+      "word": "Okulary przeciwsłoneczne"
+    },
+    {
+      "word": "Okulary pływackie"
+    },
+    {
+      "word": "Czapka"
+    },
+    {
+      "word": "Kapelusz"
+    },
+    {
+      "word": "Szalik"
+    },
+    {
+      "word": "Krawat"
+    },
+    {
+      "word": "Muszka"
+    },
+    {
+      "word": "Pasek"
+    },
+    {
+      "word": "Portfel"
+    },
+    {
+      "word": "Torebka"
+    },
+    {
+      "word": "Portmonetka"
+    },
+    {
+      "word": "Biżuteria"
+    },
+    {
+      "word": "Naszyjnik"
+    },
+    {
+      "word": "Bransoletka"
+    },
+    {
+      "word": "Pierścionek"
+    },
+    {
+      "word": "Kolczyki"
+    },
+    {
+      "word": "Zegarek"
+    },
+    {
+      "word": "Spinka do włosów"
+    },
+    {
+      "word": "Gumka do włosów"
+    },
+    {
+      "word": "Szczotka do włosów"
+    },
+    {
+      "word": "Grzebień"
+    },
+    {
+      "word": "Maszynka do golenia"
+    },
+    {
+      "word": "Golarka"
+    },
+    {
+      "word": "Prostownica"
+    },
+    {
+      "word": "Lokówka"
+    },
+    {
+      "word": "Perfumy"
+    },
+    {
+      "word": "Dezodorant"
+    },
+    {
+      "word": "Mydło"
+    },
+    {
+      "word": "Szampon"
+    },
+    {
+      "word": "Pasta do zębów"
+    },
+    {
+      "word": "Ręcznik"
+    },
+    {
+      "word": "Szlafrok"
+    },
+    {
+      "word": "Kapcie"
+    },
+    {
+      "word": "Buty"
+    },
+    {
+      "word": "Trampki"
+    },
+    {
+      "word": "Kalosze"
+    },
+    {
+      "word": "Sandały"
+    },
+    {
+      "word": "Rękawiczki zimowe"
+    },
+    {
+      "word": "Płaszcz"
+    },
+    {
+      "word": "Kurtka"
+    },
+    {
+      "word": "Bluza"
+    },
+    {
+      "word": "Spodnie"
+    },
+    {
+      "word": "Spódnica"
+    },
+    {
+      "word": "Sukienka"
+    }
+  ]
+}

@@ -110,7 +110,7 @@ function toggleBombCategory(categoryId) {
 }
 
 function toggleAllBombCategories(select = null) {
-    const allIds = BOMB_CATEGORIES.map(category => category.id);
+    const allIds = getBombDefaultCategoryIds();
     const allSelected = allIds.length > 0 && allIds.every(id => bombState.activeCategories.includes(id));
     const selectAll = select === null ? !allSelected : Boolean(select);
     bombState.activeCategories = selectAll ? allIds : allIds.slice(0, 1);
@@ -165,7 +165,9 @@ function renderBombCategories() {
         const name = document.createElement('strong');
         name.textContent = category.name;
         const desc = document.createElement('small');
-        desc.textContent = `${category.words.length} pytań`;
+        desc.textContent = category.adult === true
+            ? `18+ • ${category.words.length} pytań • wybierz świadomie`
+            : `${category.words.length} pytań`;
         copy.append(name, desc);
 
         const check = document.createElement('span');
@@ -177,7 +179,8 @@ function renderBombCategories() {
 
     const allButton = document.getElementById('bomb-toggle-all-categories');
     if (allButton) {
-        const allSelected = BOMB_CATEGORIES.length > 0 && BOMB_CATEGORIES.every(category => bombState.activeCategories.includes(category.id));
+        const defaultIds = getBombDefaultCategoryIds();
+        const allSelected = defaultIds.length > 0 && defaultIds.every(id => bombState.activeCategories.includes(id));
         allButton.textContent = allSelected ? 'Zostaw jedną' : 'Wybierz wszystkie';
     }
     syncPartyCategoryGrid('bomb-category-grid');
