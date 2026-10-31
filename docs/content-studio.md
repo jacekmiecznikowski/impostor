@@ -123,3 +123,12 @@ Gra używa krótkich haseł, które widzi reszta ekipy, a osoba z telefonem na c
 - Stare APK, które nie mają nowego lokalnego pakietu, pobiorą 1350 haseł przy synchronizacji online i zachowają je w cache.
 
 Przy selekcji wymagamy łatwo rozpoznawalnych zwierząt, zawodów, dań, miejsc, przedmiotów, czynności, kultowych postaci oraz popularnych sportów i pojazdów. Unikamy wielowyrazowych historyjek i zbyt specjalistycznych terminów, które byłyby trudne do odgadnięcia przy grze na czas. Test `tests/co-mam-na-mysli-content.test.cjs` sprawdza 9×150, unikalność haseł, podstawową odgadywalność i obecność źródeł offline.
+
+
+## Co mam na myśli? — kategoria 18+ (2026-10-31)
+
+- **150 krótkich i rozpoznawalnych haseł dla dorosłych** w `content/cmm-pack/adult.json` (np. „Pęknięty kondom”, „Malinka na szyi”, „Kajdanki”, „Masaż erotyczny”). Po dodaniu liczba haseł w nowej aplikacji to **1500 w 10 kategoriach**, po 150 w każdej.
+- Kafelek `18+ — Bez cenzury` jest wyraźnie oznaczony, **domyślnie wyłączony**. „Wszystkie”, „Wyczyść”, pierwsze uruchomienie i reset wykluczają 18+. Można go włączyć wyłącznie bezpośrednim kliknięciem; zapisana sesja przywraca wcześniej świadomie wybrany zestaw.
+- **Kompatybilność:** `co-mam-na-mysli/pl` w Supabase **pozostaje na 1350 zwykłych hasłach**. Starsze APK nie posiadają filtrowania treści 18+ i automatycznie wybierają wszystkie pobrane zdalnie kategorie. Dlatego 18+ nie wolno publikować w tej samej zdalnej liście, dopóki starsze wersje nie zostaną bezpiecznie obsłużone. Aktualny klient dokłada wyłącznie własną, wersjonowaną kategorię lokalną do standardowych kategorii z sieci.
+- Na nowym APK cały pakiet 18+ działa offline. Aktualny kod ładowania ignoruje zdalną kategorię `adult` i uznaje wyłącznie lokalny plik oznaczony `adult: true`.
+- Testy `tests/co-mam-na-mysli-content.test.cjs`, `tests/co-mam-na-mysli-state.test.cjs` i scenariusz kategorii w `tests/e2e/smoke.spec.mjs` pilnują liczby kart, rozdzielenia danych i świadomego wyboru.
