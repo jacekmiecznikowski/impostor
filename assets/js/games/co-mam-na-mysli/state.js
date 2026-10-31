@@ -13,7 +13,8 @@ const coMamNaMysliState = {
 };
 
 function getDefaultCoMamNaMysliCategories() {
-    return CO_MAM_NA_MYSLI_CATEGORIES.map(category => category.id);
+    // Adult-only content must be explicitly selected by the player.
+    return CO_MAM_NA_MYSLI_CATEGORIES.filter(category => category.adult !== true && category.id !== 'adult').map(category => category.id);
 }
 
 function createCoMamNaMysliPlayers(count, previousPlayers = coMamNaMysliState.players) {
@@ -38,7 +39,7 @@ function normalizeCoMamNaMysliActiveCategories() {
     const available = new Set(CO_MAM_NA_MYSLI_CATEGORIES.map(category => category.id));
     coMamNaMysliState.activeCategories = (Array.isArray(coMamNaMysliState.activeCategories) ? coMamNaMysliState.activeCategories : [])
         .filter(id => available.has(id));
-    if (!coMamNaMysliState.activeCategories.length) coMamNaMysliState.activeCategories = [...available];
+    if (!coMamNaMysliState.activeCategories.length) coMamNaMysliState.activeCategories = getDefaultCoMamNaMysliCategories();
 }
 
 function persistCoMamNaMysliSession() {
