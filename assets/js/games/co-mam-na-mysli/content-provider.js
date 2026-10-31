@@ -75,6 +75,23 @@ async function initializeCoMamNaMysliContent() {
         }
     }
 
+    // 18+ is delivered only inside builds that support conscious selection.
+    // NEVER append it to the public Supabase document: older clients select
+    // all remote categories automatically and have no adult opt-in support.
+    let bundledAdult = null;
+    try {
+        const response = await fetch('./content/cmm-pack/adult.json', { cache: 'no-store' });
+        if (response.ok) {
+            const category = await response.json();
+            if (category?.id === 'adult' && category.adult === true &&
+                Array.isArray(category.words) && category.words.length >= 150) {
+                bundledAdult = category;
+            }
+        }
+    } catch (error) {
+        console.warn('Pakiet kategorii 18+ Co mam na myśli? jest niedostępny.', error);
+    }
+
     // Published remote content is optional. A missing server never breaks offline games.
     try {
         const published = await contentRepository.loadRemote('co-mam-na-mysli', 'pl');
@@ -84,7 +101,19 @@ async function initializeCoMamNaMysliContent() {
     }
 
     try {
-        CO_MAM_NA_MYSLI_CATEGORIES = normalizeCoMamNaMysliContent(content).categories;
+        const chosen = normalizeCoMamNaMysliContent(content);
+        // Do not trust category metadata received from remote content.
+        // Only this application's bundled adult.json can mark a category 18+.
+        const safeCategories = chosen.categories.filter(category => category.id !== 'adult');
+        if (bundledAdult) {
+            const adult = normalizeCoMamNaMysliContent({
+                schemaVersion: 1, game: 'co-mam-na-mysli', locale: 'pl',
+                categories: [bundledAdult]
+            }).categories[0];
+            adult.adult = true;
+            safeCategories.push(adult);
+        }
+        CO_MAM_NA_MYSLI_CATEGORIES = safeCategories;
     } catch (error) {
         console.warn('Baza Co mam na myśli? ma nieprawidłowy format. Używam paczki awaryjnej.', error);
         CO_MAM_NA_MYSLI_CATEGORIES = normalizeCoMamNaMysliContent(CO_MAM_NA_MYSLI_FALLBACK_CONTENT).categories;
