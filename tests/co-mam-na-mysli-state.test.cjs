@@ -58,4 +58,26 @@ assert.equal(api.coMamNaMysliState.players.length, 0);
 assert.equal(api.coMamNaMysliState.hasSavedSession, false);
 assert.equal(store.has('partyjniak.co-mam-na-mysli.session.v1'), false);
 
+// New apps may expose an 18+ category, but must never opt into it by default.
+sandbox.CO_MAM_NA_MYSLI_CATEGORIES.push({ id: 'adult', adult: true });
+api.resetCoMamNaMysliSession();
+assert.deepEqual(Array.from(api.coMamNaMysliState.activeCategories), ['a', 'b']);
+api.coMamNaMysliState.activeCategories = [];
+vm.runInContext('normalizeCoMamNaMysliActiveCategories()', sandbox);
+assert.deepEqual(Array.from(api.coMamNaMysliState.activeCategories), ['a', 'b']);
+
+const setupSource = fs.readFileSync(path.join(__dirname, '../assets/js/games/co-mam-na-mysli/setup.js'), 'utf8');
+sandbox.playSound = () => {};
+vm.runInContext(setupSource, sandbox);
+vm.runInContext('renderCoMamNaMysliOptions = () => {}', sandbox);
+vm.runInContext('toggleCoMamNaMysliCategory("adult")', sandbox);
+assert.deepEqual(Array.from(api.coMamNaMysliState.activeCategories), ['a', 'b', 'adult']);
+api.persistCoMamNaMysliSession();
+api.loadCoMamNaMysliSession();
+assert.ok(api.coMamNaMysliState.activeCategories.includes('adult'), 'Explicit opt-in must survive resume');
+vm.runInContext('setAllCoMamNaMysliCategories(true)', sandbox);
+assert.deepEqual(Array.from(api.coMamNaMysliState.activeCategories), ['a', 'b'], 'Bulk selection excludes 18+');
+vm.runInContext('setAllCoMamNaMysliCategories(false)', sandbox);
+assert.deepEqual(Array.from(api.coMamNaMysliState.activeCategories), ['a'], 'Clear selects only a safe category');
+
 console.log('Co mam na myśli session state tests: OK');
